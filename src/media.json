@@ -190,5 +190,27 @@
       "h": 487,
       "kb": 21
     }
+  },
+  "ai-signal": {
+    "640": {
+      "src": "/assets/media/ai-signal-640.webp",
+      "w": 640,
+      "h": 533,
+      "kb": 28
+    },
+    "1200": {
+      "src": "/assets/media/ai-signal-1200.webp",
+      "w": 1200,
+      "h": 1000,
+      "kb": 62
+    }
+  },
+  "ai-signal-m": {
+    "720": {
+      "src": "/assets/media/ai-signal-m-720.webp",
+      "w": 720,
+      "h": 540,
+      "kb": 25
+    }
   }
 }

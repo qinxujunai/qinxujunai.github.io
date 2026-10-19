@@ -2,6 +2,7 @@
 // Writes screenshots and a JSON summary to .qa/.
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
+import { CASES } from '../src/cases.mjs';
 
 const require = createRequire(import.meta.url);
 let playwright;
@@ -58,11 +59,17 @@ for (const path of ['/', '/en/']) for (const scheme of ['light', 'dark']) {
   matrix.push({ path, scheme, width: 360, height: 780, ua: WECHAT_ANDROID, tag: 'android-wechat' });
   matrix.push({ path, scheme, width: 1440, height: 900, mobile: false, tag: 'desktop' });
 }
+// Case pages: phone in light, desktop in dark, both languages.
+for (const c of CASES) for (const path of [`/work/${c.slug}/`, `/en/work/${c.slug}/`]) {
+  matrix.push({ path, scheme: 'light', width: 390, height: 844, ua: WECHAT_IOS, tag: 'iphone-wechat' });
+  matrix.push({ path, scheme: 'dark', width: 1440, height: 900, mobile: false, tag: 'desktop' });
+}
 for (const cfg of matrix) {
   const { ctx, page, errors, foreign } = await open(cfg);
   await page.goto(BASE + cfg.path, { waitUntil: 'load' });
   await page.waitForTimeout(2400);
-  const name = `${cfg.path === '/' ? 'zh' : 'en'}-${cfg.tag}-${cfg.scheme}`;
+  const slug = cfg.path.replace(/^\/(en\/)?/, '').replace(/\/$/, '').replace(/\//g, '-') || 'home';
+  const name = `${cfg.path.startsWith('/en/') ? 'en' : 'zh'}-${slug}-${cfg.tag}-${cfg.scheme}`;
   await page.screenshot({ path: `${OUT}/${name}.png` });
   await scrollThrough(page);
   await page.waitForTimeout(400);
@@ -157,6 +164,13 @@ for (const [ua, tag, expectSave] of [[WECHAT_IOS, 'wechat', false], [SAFARI, 'ph
   const png = PNG.sync.read(Buffer.from(await res.arrayBuffer()));
   const code = jsQR(new Uint8ClampedArray(png.data), png.width, png.height);
   check(Boolean(code && code.data.startsWith('https://u.wechat.com/')), 'QR on the site decodes to a WeChat contact link');
+  // The downloadable name cards carry the same code.
+  for (const lang of ['zh', 'en']) {
+    const r = await fetch(`${BASE}/assets/card-${lang}.png`);
+    const card = PNG.sync.read(Buffer.from(await r.arrayBuffer()));
+    const c2 = jsQR(new Uint8ClampedArray(card.data), card.width, card.height);
+    check(Boolean(c2 && code && c2.data === code.data), `name card (${lang}) decodes to the same WeChat link`);
+  }
 }
 
 await browser.close();
