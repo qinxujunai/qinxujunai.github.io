@@ -28,15 +28,15 @@
   color-scheme: dark;
   --page: #000000;
   --plain: #000000;
-  --soft: #101012;
-  --dark: #1c1c1e;
+  --soft: #161617;
+  --dark: #000000;
   --ink: #f5f5f7;
   --muted: #a1a1a6;
   --link: #2997ff;
   --pill: #0071e3;
   --pill-hover: #0077ed;
   --hairline: #3a3a3c;
-  --card: #1c1c1e;
+  --card: #000000;
   --nav: rgba(22, 22, 23, 0.72);
   --nav-line: rgba(255, 255, 255, 0.1);
   --shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 60px rgba(0, 0, 0, 0.6);
@@ -93,6 +93,10 @@ ol {
   list-style: none;
 }
 
+picture {
+  display: contents;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -127,7 +131,6 @@ a:hover {
 
 /* Links inside sentences are underlined so they never rely on color alone. */
 .decision a,
-.more a,
 .thought figcaption a {
   text-decoration: underline;
   text-underline-offset: 0.18em;
@@ -218,7 +221,7 @@ a:hover {
   color: var(--ink);
   opacity: 0.8;
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0;
   cursor: pointer;
 }
@@ -235,7 +238,16 @@ a:hover {
 }
 
 .nav-tools .pill {
+  position: relative;
   margin-left: 6px;
+  font-size: 14px;
+}
+
+/* The pill looks compact but its tap area is 44px tall. */
+.nav-tools .pill::after {
+  content: '';
+  position: absolute;
+  inset: -6px -4px;
 }
 
 .theme-light,
@@ -335,8 +347,13 @@ main {
   color: var(--ink);
 }
 
+.tile h2,
+.hero h1 {
+  text-wrap: balance;
+}
+
 .tile h2 {
-  font-size: 40px;
+  font-size: min(40px, 8.6vw);
   line-height: 1.1;
   font-weight: 600;
   letter-spacing: -0.005em;
@@ -371,25 +388,23 @@ main {
 /* Hero */
 
 .hero {
-  padding-top: 48px;
-  padding-bottom: 32px;
+  padding-top: 32px;
+  padding-bottom: 44px;
   background: var(--plain);
 }
 
 .avatar {
-  width: 88px;
-  height: 88px;
-  margin: 0 auto 16px;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 10px;
   border-radius: 50%;
   object-fit: cover;
   background: var(--soft);
   box-shadow: 0 0 0 1px var(--hairline), 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
-.hero .eyebrow {
-  margin-bottom: 6px;
-  color: var(--ink);
-  font-size: 19px;
+.hero .sig-line {
+  margin-bottom: 10px;
 }
 
 .hero h1 {
@@ -417,9 +432,9 @@ main {
 
 .hero .sig {
   display: block;
-  height: 104px;
+  height: 56px;
   width: auto;
-  margin: 40px auto 0;
+  margin: 0 auto;
   fill: var(--sig);
   overflow: visible;
 }
@@ -555,11 +570,12 @@ main {
 .facts div {
   display: flex;
   flex-direction: column-reverse;
+  justify-content: flex-end;
   gap: 4px;
 }
 
 .facts dd {
-  font-size: 30px;
+  font-size: clamp(34px, 9vw, 56px);
   line-height: 1.1;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -567,14 +583,15 @@ main {
 }
 
 .facts dt {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
   color: var(--muted);
 }
 
-.facts small {
-  display: block;
-  font-size: 12px;
+.footnote {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .decision {
@@ -588,12 +605,6 @@ main {
 .pair {
   display: grid;
   gap: 12px;
-}
-
-.works > .more {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  color: var(--muted);
 }
 
 /* Path */
@@ -657,16 +668,11 @@ main {
 }
 
 .thought blockquote p {
-  max-width: 34em;
+  max-width: 30em;
   margin: 24px auto 0;
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.85;
-  text-align: left;
-}
-
-.thought blockquote .pull + p {
-  margin-top: 40px;
+  font-size: 19px;
+  line-height: 1.6;
 }
 
 .thought figcaption {
@@ -790,9 +796,10 @@ main {
 /* Footer */
 
 .foot {
-  background: var(--soft);
+  background: var(--plain);
+  border-top: 1px solid var(--hairline);
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .foot-inner {
@@ -853,8 +860,12 @@ main {
   }
 
   .hero {
-    padding-top: 72px;
-    padding-bottom: 40px;
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+
+  .hero .sig {
+    height: 68px;
   }
 
   .hero h1 {
@@ -875,11 +886,7 @@ main {
   }
 
   .facts dd {
-    font-size: 44px;
-  }
-
-  .facts dt {
-    font-size: 14px;
+    font-size: 56px;
   }
 
   .thought .pull {
@@ -913,7 +920,7 @@ main {
     padding: 0 10px;
     color: var(--ink);
     opacity: 0.8;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 0;
   }
 
@@ -957,7 +964,7 @@ main {
   }
 
   .hero .sig {
-    height: 128px;
+    height: 76px;
   }
 
   .pair {
@@ -973,7 +980,15 @@ main {
   }
 
   .pair .shot {
+    display: grid;
+    place-items: center;
     max-width: 520px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .pair .shot img {
+    max-height: 100%;
+    width: auto;
   }
 
   .gallery {

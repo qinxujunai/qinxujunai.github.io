@@ -41,10 +41,14 @@ const css = fs
   .trim();
 
 // Responsive image from src/media.json: 1x as src, every size in srcset.
-function img(key, alt, { sizes = '(min-width: 1024px) 560px, 100vw', eager = false, cls = '' } = {}) {
+function img(key, alt, { sizes = '(min-width: 1024px) 560px, 100vw', eager = false, cls = '', mobile = '' } = {}) {
   const set = Object.values(media[key]).sort((a, b) => a.w - b.w);
   const base = set[0];
-  return `<img${cls ? ` class="${cls}"` : ''} src="${base.src}" srcset="${set.map((s) => `${s.src} ${s.w}w`).join(', ')}" sizes="${sizes}" width="${base.w}" height="${base.h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+  const tag = `<img${cls ? ` class="${cls}"` : ''} src="${base.src}" srcset="${set.map((s) => `${s.src} ${s.w}w`).join(', ')}" sizes="${sizes}" width="${base.w}" height="${base.h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+  if (!mobile) return tag;
+  // Phones get a closer crop so interface text stays readable.
+  const m = Object.values(media[mobile])[0];
+  return `<picture><source media="(max-width: 733px)" srcset="${m.src}" width="${m.w}" height="${m.h}">${tag}</picture>`;
 }
 
 // Runs before first paint so the theme never flashes.
@@ -54,9 +58,19 @@ const themeScript =
   "document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name=theme-color]');" +
   "if(m)m.setAttribute('content',t==='dark'?'#000000':'#ffffff');" +
   // Hide the signature before first paint only when it is about to be written; never leave it hidden.
-  "var r=document.documentElement,s=null;r.classList.add('js');try{s=sessionStorage.getItem('qxj.signed')}catch(e){}" +
+  "var r=document.documentElement,s=null;r.classList.add('js');" +
+  // If site.js never arrives, show everything instead of leaving faded tiles invisible.
+  "setTimeout(function(){if(!window.qxjReady)r.classList.remove('js')},2500);" +
+  "try{s=sessionStorage.getItem('qxj.signed')}catch(e){}" +
   "if(s!=='1'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){r.classList.add('sig-pending');" +
   "setTimeout(function(){r.classList.remove('sig-pending')},3000)}})()</script>";
+
+// Starts the signature right after it is parsed, so it never waits for site.js on a slow network.
+const sigStart =
+  "(function(){var r=document.documentElement;if(!r.classList.contains('sig-pending'))return;" +
+  "var p=document.querySelectorAll('.hero .sig path');for(var i=0;i<p.length;i++)p[i].style.setProperty('--at',0.15+i*0.45+'s');" +
+  "document.querySelector('.hero .sig').classList.add('write');r.classList.remove('sig-pending');" +
+  "try{sessionStorage.setItem('qxj.signed','1')}catch(e){}})()";
 
 const icons = {
   sunMoon: `<svg class="theme-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="theme-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>`,
@@ -117,12 +131,12 @@ ${SECTIONS.map((id) => `<a href="#${id}" data-nav="${id}">${c.nav[id]}</a>`).joi
 
 function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
-${img('avatar', c.portraitAlt, { sizes: '88px', eager: true, cls: 'avatar' })}
-<p class="eyebrow">${esc(c.name)}</p>
+${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar' })}
+<p class="eyebrow sig-line"><span class="visually-hidden">${esc(c.name)}</span>${signature('sig').replace('<path', '<g id="sig-paths"><path').replace('</svg>', '</g></svg>')}</p>
+<script>${sigStart}</script>
 <h1 id="hero-title">${T(c, c.lede)}</h1>
 <p class="sub">${T(c, c.now)}</p>
 <p class="cta"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
-${signature('sig').replace('<path', '<g id="sig-paths"><path').replace('</svg>', '</g></svg>')}
 </section>`;
 }
 
@@ -140,7 +154,7 @@ function voiceflow(c) {
 ${tileLinks(c, f)}
 </div>
 <figure class="device">
-${img(f.image.key, f.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw', cls: 'app' })}
+${img(f.image.key, f.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw', cls: 'app', mobile: f.image.mobile })}
 <div class="demo" aria-hidden="true">
 <kbd>${esc(f.key)}</kbd>
 <div class="capsule"><span class="bars"><i></i><i></i><i></i></span><span class="typed" data-lines="${esc(JSON.stringify(f.lines))}">${esc(f.lines[0])}</span><span class="caret"></span></div>
@@ -150,8 +164,9 @@ ${img(f.image.key, f.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw', cls:
 <div class="reveal">
 <p class="body">${T(c, f.desc)}</p>
 <dl class="facts">
-${f.facts.map(([v, k, n]) => `<div><dt>${T(c, k)}${n ? `<small>${T(c, n)}</small>` : ''}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
+${f.facts.map(([v, k]) => `<div><dt>${T(c, k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
 </dl>
+${f.facts.filter((x) => x[2]).map((x) => `<p class="footnote">${T(c, x[2])}</p>`).join('')}
 <p class="body decision">${T(c, f.decision)} <a href="${f.decisionLink.href}" ${ext}>${esc(f.decisionLink.label)}</a></p>
 </div>
 </article>`;
@@ -164,13 +179,12 @@ function product(c, item, tone) {
 <p class="sub">${T(c, item.tagline)}</p>
 ${tileLinks(c, item)}
 </div>
-<figure class="shot">${img(item.image.key, item.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw' })}</figure>
+<figure class="shot">${img(item.image.key, item.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw', mobile: item.image.mobile })}</figure>
 <p class="body reveal">${T(c, item.desc)}</p>
 </article>`;
 }
 
 function page(c) {
-  const [m1, m2, m3] = c.more;
   const [s1, s2, s3] = c.thinkingSource;
   const [wanxiang, vibe, method] = c.work;
   return `${head(c, { canonical: c.path })}
@@ -188,7 +202,6 @@ ${product(c, wanxiang, 'plain')}
 ${product(c, vibe, 'dark')}
 ${product(c, method, 'soft')}
 </div>
-<p class="tile plain more">${esc(m1)}<a href="${GITHUB}" ${ext}>${m2}</a>${esc(m3)}</p>
 </div>
 
 <section class="tile soft" id="path" aria-labelledby="path-title">
@@ -219,7 +232,7 @@ ${c.thinking.map((p) => `<p>${T(c, p)}</p>`).join('\n')}
 <p class="sub">${T(c, c.photosIntro)}</p>
 </div>
 <ul class="gallery" data-gallery tabindex="0" aria-label="${esc(c.photosTitle)}">
-${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}>${img(p.key, p.alt, { sizes: '(min-width: 1068px) 640px, 80vw' })}</li>`).join('\n')}
+${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}</li>`).join('\n')}
 </ul>
 <p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
 </section>

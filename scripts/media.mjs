@@ -22,12 +22,21 @@ fs.mkdirSync(OUT, { recursive: true });
 
 const manifest = {};
 
-async function emit(name, input, { width, crop, quality = 74, square = false } = {}) {
+async function emit(name, input, { width, widths, crop, quality = 74, square = false } = {}) {
   let base = sharp(input).rotate();
-  if (crop) base = base.extract(crop);
+  if (crop) {
+    // Crops given as fractions (0–1) are relative to the source size.
+    const src = await sharp(input).metadata();
+    const abs = crop.width <= 1
+      ? { left: Math.round(crop.left * src.width), top: Math.round(crop.top * src.height), width: Math.round(crop.width * src.width), height: Math.round(crop.height * src.height) }
+      : crop;
+    base = base.extract(abs);
+  }
   const buf = await base.toBuffer();
   const meta = await sharp(buf).metadata();
-  const sizes = [...new Set([width, Math.min(width * 2, meta.width)])].filter((w) => w >= width);
+  const sizes = widths
+    ? widths.map((w) => Math.min(w, meta.width))
+    : [...new Set([width, Math.min(width * 2, meta.width)])].filter((w) => w >= width);
   const out = {};
   for (const w of sizes) {
     const file = path.join(OUT, `${name}-${w}.webp`);
@@ -52,11 +61,13 @@ await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80,
 
 // Products
 await emit('voiceflow-app', find(/^voiceflow-app\./), { width: 640 });
+await emit('voiceflow-app-m', find(/^voiceflow-app\./), { widths: [720], crop: { left: 300, top: 110, width: 760, height: 570 } });
 await emit('wanxiang', find(/^wanxiang-result\./), { width: 640, crop: { left: 220, top: 100, width: 1000, height: 720 } });
+await emit('wanxiang-m', find(/^wanxiang-result\./), { widths: [600], crop: { left: 758, top: 300, width: 460, height: 500 } });
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
 const PHOTOS = ['photo-aerial', 'photo-pagoda', 'photo-gate', 'photo-wall', 'photo-dusk', 'photo-buddha', 'photo-sky', 'photo-autumn'];
-for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { width: 480, quality: 62 });
+for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 56 });
 
 // Live captures
 const executablePath = fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
@@ -93,16 +104,12 @@ async function capture(url, locate, minWidth, keep = 1) {
   return buf;
 }
 
-await emit(
-  'vibecoding',
-  await capture('https://qinxujunai.github.io/qinxujun-ai-vibecoding/', (p) => p.locator('div', { hasText: 'Update Todos' }).filter({ has: p.locator('text=claude') }).last(), 900),
-  { width: 640 },
-);
-await emit(
-  'work-method',
-  await capture('https://qinxujunai.github.io/ai-work-method/', (p) => p.getByText('强模型负责想', { exact: false }).first(), 1100, 0.4),
-  { width: 640 },
-);
+const vibe = await capture('https://qinxujunai.github.io/qinxujun-ai-vibecoding/', (p) => p.locator('div', { hasText: 'Update Todos' }).filter({ has: p.locator('text=claude') }).last(), 900);
+await emit('vibecoding', vibe, { width: 640 });
+await emit('vibecoding-m', vibe, { widths: [720], crop: { left: 0, top: 0, width: 0.5, height: 1 } });
+const method = await capture('https://qinxujunai.github.io/ai-work-method/', (p) => p.getByText('强模型负责想', { exact: false }).first(), 1100, 0.4);
+await emit('work-method', method, { width: 640 });
+await emit('work-method-m', method, { widths: [720], crop: { left: 0.07, top: 0.04, width: 0.86, height: 0.96 } });
 
 await browser.close();
 fs.writeFileSync('src/media.json', JSON.stringify(manifest, null, 2) + '\n');
