@@ -31,6 +31,15 @@ const signatureRef = (cls) => `<svg class="${cls}" viewBox="${sigViewBox}" aria-
 
 const ext = 'rel="noopener"';
 
+// The stylesheet is inlined so the first screen needs no extra round trip on slow networks.
+const css = fs
+  .readFileSync(new URL('../assets/site.css', import.meta.url), 'utf8')
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/\s+/g, ' ')
+  .replace(/\s*([{}:;,>])\s*/g, '$1')
+  .replace(/;}/g, '}')
+  .trim();
+
 // Responsive image from src/media.json: 1x as src, every size in srcset.
 function img(key, alt, { sizes = '(min-width: 1024px) 560px, 100vw', eager = false, cls = '' } = {}) {
   const set = Object.values(media[key]).sort((a, b) => a.w - b.w);
@@ -65,7 +74,7 @@ function head(c, { canonical, title = c.title, noindex = false }) {
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 ${themeScript}
-<link rel="stylesheet" href="/assets/site.css">
+<style>${css}</style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${SITE}${canonical}">
@@ -188,7 +197,7 @@ ${product(c, method, 'soft')}
 <h2 id="path-title">${T(c, c.pathHeadline)}</h2>
 </div>
 <ol class="path reveal">
-${c.path.map((p) => `<li><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
+${c.journey.map((p) => `<li><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
 </ol>
 </section>
 

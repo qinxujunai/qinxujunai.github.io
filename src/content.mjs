@@ -100,7 +100,7 @@ export const content = {
 
     pathTitle: '经历',
     pathHeadline: '从拍片、写脚本，到把 AI 接进真实的工作。',
-    path: [
+    journey: [
       { when: '现在', role: '云 AI 项目经理', org: '奥普智能', desc: '' },
       { when: '2025', role: 'AI 解决方案架构', org: '比智科技', desc: '为企业客户做 AI 方案：从需求诊断、方案设计到产品演示，围绕数据平台、智能分析和 AI 问数。' },
       { when: '2024', role: 'AI 项目负责人', org: '一念智能', desc: '把 AI 接进内容生产：拆解了 50 多个爆款案例，在飞书搭了脚本生成智能体，写一条脚本从 3 小时缩到 20 分钟。' },
@@ -222,7 +222,7 @@ export const content = {
 
     pathTitle: 'Path',
     pathHeadline: 'From shooting video and writing scripts to putting AI into real work.',
-    path: [
+    journey: [
       { when: 'Now', role: 'Cloud AI Project Manager', org: 'Aopu Intelligent Technology', desc: '' },
       { when: '2025', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Designed AI solutions for business clients, from needs diagnosis and solution design to product demos, around data platforms, analytics and natural-language data queries.' },
       { when: '2024', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Brought AI into content production: studied more than 50 hit videos and built a script-writing agent in Feishu that cut a script from three hours to twenty minutes.' },
