@@ -45,7 +45,9 @@ async function open({ path = '/', width = 390, height = 844, ua = WECHAT_IOS, sc
 
 async function scrollThrough(page) {
   const h = await page.evaluate(() => document.body.scrollHeight);
-  for (let y = 0; y < h; y += 500) { await page.evaluate((v) => window.scrollTo(0, v), y); await page.waitForTimeout(60); }
+  for (let y = 0; y < h; y += 400) { await page.evaluate((v) => window.scrollTo(0, v), y); await page.waitForTimeout(140); }
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(400);
   await page.evaluate(() => window.scrollTo(0, 0));
 }
 
@@ -66,6 +68,7 @@ for (const cfg of matrix) {
   await page.waitForTimeout(400);
   await page.screenshot({ path: `${OUT}/${name}-full.png`, fullPage: true });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  const hiddenReveals = await page.evaluate(() => [...document.querySelectorAll('.reveal')].filter((r) => !r.classList.contains('in')).length);
   await page.addScriptTag({ content: axeSource });
   const axe = await page.evaluate(async () => {
     const r = await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] });
@@ -75,6 +78,7 @@ for (const cfg of matrix) {
   check(foreign.length === 0, `${name}: requests to other origins ${foreign.length} ${foreign.join(' ')}`);
   check(axe.length === 0, `${name}: axe WCAG AA violations ${axe.length} ${axe.join(' ; ')}`);
   check(overflow <= 0, `${name}: horizontal overflow ${overflow}px`);
+  check(hiddenReveals === 0, `${name}: tiles still hidden after scrolling ${hiddenReveals}`);
   results.push({ name, errors, foreign, axe, overflow });
   await ctx.close();
 }
@@ -93,7 +97,7 @@ for (const cfg of matrix) {
   });
   const t0 = Date.now();
   await page.goto(BASE + '/', { waitUntil: 'commit' });
-  await page.locator('.lede').waitFor({ state: 'visible' });
+  await page.locator('.hero h1').waitFor({ state: 'visible' });
   const lede = Date.now() - t0;
   await page.waitForLoadState('load');
   const load = Date.now() - t0;
@@ -127,7 +131,7 @@ for (const [ua, tag, expectSave] of [[WECHAT_IOS, 'wechat', false], [SAFARI, 'ph
 {
   const { ctx, page } = await open({ js: false });
   await page.goto(BASE + '/', { waitUntil: 'load' });
-  const fill = await page.evaluate(() => getComputedStyle(document.querySelector('.sig path')).fill);
+  const fill = await page.evaluate(() => getComputedStyle(document.querySelector('.hero .sig path')).fill);
   const qr = await page.locator('.qr').isVisible();
   check(fill !== 'none' && fill !== 'rgba(0, 0, 0, 0)' && fill !== 'transparent', `no JS: signature fill ${fill}`);
   check(qr, 'no JS: QR code present');
@@ -139,8 +143,8 @@ for (const [ua, tag, expectSave] of [[WECHAT_IOS, 'wechat', false], [SAFARI, 'ph
 {
   const { ctx, page } = await open({ motion: 'reduce' });
   await page.goto(BASE + '/', { waitUntil: 'load' });
-  const fill = await page.evaluate(() => getComputedStyle(document.querySelector('.sig path')).fill);
-  const anim = await page.evaluate(() => getComputedStyle(document.querySelector('.sig path')).animationName);
+  const fill = await page.evaluate(() => getComputedStyle(document.querySelector('.hero .sig path')).fill);
+  const anim = await page.evaluate(() => getComputedStyle(document.querySelector('.hero .sig path')).animationName);
   check(anim === 'none' && fill !== 'transparent' && fill !== 'rgba(0, 0, 0, 0)', `reduced motion: no animation, fill ${fill}`);
   await ctx.close();
 }
