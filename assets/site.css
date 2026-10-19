@@ -130,8 +130,7 @@ a:hover {
 }
 
 /* Links inside sentences are underlined so they never rely on color alone. */
-.decision a,
-.thought figcaption a {
+.decision a {
   text-decoration: underline;
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1px;
@@ -611,11 +610,6 @@ main {
   white-space: nowrap;
 }
 
-.pair {
-  display: grid;
-  gap: 12px;
-}
-
 /* Path */
 
 .path {
@@ -660,34 +654,6 @@ main {
   margin-top: 8px;
   font-size: 15px;
   line-height: 1.7;
-}
-
-/* Thinking: Apple's black statement tile */
-
-.thought {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.thought .pull {
-  margin: 0 auto;
-  max-width: 13em;
-  font-size: 36px;
-  line-height: 1.18;
-}
-
-.thought blockquote p {
-  max-width: 30em;
-  margin: 24px auto 0;
-  color: var(--muted);
-  font-size: 19px;
-  line-height: 1.6;
-}
-
-.thought figcaption {
-  margin-top: 28px;
-  font-size: 14px;
-  color: var(--muted);
 }
 
 /* Photos: Apple-style gallery, swipe on phones, paddles everywhere */
@@ -754,6 +720,10 @@ main {
 }
 
 /* Contact */
+
+.plain .card {
+  background: var(--soft);
+}
 
 .card {
   display: grid;
@@ -902,10 +872,6 @@ main {
     font-size: 56px;
   }
 
-  .thought .pull {
-    font-size: 48px;
-  }
-
   .gallery img {
     height: 420px;
   }
@@ -980,30 +946,6 @@ main {
     height: 76px;
   }
 
-  .pair {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .pair .tile h2 {
-    font-size: 40px;
-  }
-
-  .pair .sub {
-    font-size: 21px;
-  }
-
-  .pair .shot {
-    display: grid;
-    place-items: center;
-    max-width: 520px;
-    aspect-ratio: 16 / 10;
-  }
-
-  .pair .shot img {
-    max-height: 100%;
-    width: auto;
-  }
-
   .gallery {
     padding-left: max(var(--gutter), calc((100vw - 980px) / 2));
     padding-right: max(var(--gutter), calc((100vw - 980px) / 2));
@@ -1043,6 +985,210 @@ main {
   }
 
   .pill {
+    transition: none;
+  }
+}
+
+/* ---------- Flagship: VoiceFlow on black ---------- */
+
+.flagship {
+  background:
+    radial-gradient(60% 40% at 50% 58%, rgba(41, 151, 255, 0.16), transparent 70%),
+    var(--dark);
+}
+
+.flagship .device .app {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 40px 90px rgba(0, 0, 0, 0.7);
+}
+
+.flagship .demo kbd {
+  color: #f5f5f7;
+  background: #1c1c1e;
+  border-color: #3a3a3c;
+}
+
+.flagship .capsule {
+  background: #1d1d1f;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 60px rgba(41, 151, 255, 0.2);
+}
+
+.flagship .facts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 28px;
+  max-width: 760px;
+  margin-top: 48px;
+}
+
+.flagship .facts dd,
+:lang(en) .flagship .facts dd {
+  font-size: clamp(40px, 12vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.flagship .footnote {
+  margin-top: 22px;
+}
+
+.flagship .decision {
+  margin-top: 36px;
+  color: var(--ink);
+}
+
+/* ---------- Values ---------- */
+
+.values {
+  display: grid;
+  gap: 12px;
+}
+
+/* The statement lights up character by character as it scrolls through the screen. */
+.statement {
+  padding-top: 96px;
+  padding-bottom: 104px;
+}
+
+.statement .pull {
+  max-width: 12em;
+  margin: 0 auto;
+  font-size: min(44px, 10vw);
+  line-height: 1.15;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.js .statement .pull span {
+  color: #636366;
+  transition: color 0.35s ease;
+}
+
+.js .statement .pull span.lit {
+  color: #f5f5f7;
+}
+
+.statement .said {
+  max-width: 30em;
+  margin: 32px auto 0;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.statement .source {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.statement .source a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.value-grid {
+  display: grid;
+  gap: 14px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+}
+
+.value {
+  padding: 32px 26px 34px;
+  border-radius: 28px;
+  background: var(--card);
+  text-align: left;
+}
+
+:root[data-theme='dark'] .value {
+  background: #1c1c1e;
+}
+
+.value-icon svg {
+  display: block;
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: var(--link);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.value-icon .fill {
+  fill: var(--link);
+  stroke: none;
+}
+
+.value-name {
+  margin-top: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.value h3 {
+  margin-top: 4px;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.value h3 + p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+@media (min-width: 734px) {
+  .flagship .facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .flagship .facts dd,
+  :lang(en) .flagship .facts dd {
+    font-size: clamp(36px, 5.6vw, 56px);
+  }
+
+  .statement {
+    padding-top: 140px;
+    padding-bottom: 150px;
+  }
+
+  .statement .pull {
+    font-size: 64px;
+    line-height: 1.1;
+  }
+}
+
+@media (min-width: 1068px) {
+  .value-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .statement .pull {
+    font-size: 80px;
+    line-height: 1.06;
+  }
+
+  .flagship .facts {
+    max-width: 900px;
+  }
+
+  .flagship .facts dd,
+  :lang(en) .flagship .facts dd {
+    font-size: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .statement .pull span {
+    color: #f5f5f7;
     transition: none;
   }
 }

@@ -190,27 +190,5 @@
       "h": 487,
       "kb": 21
     }
-  },
-  "work-method": {
-    "640": {
-      "src": "/assets/media/work-method-640.webp",
-      "w": 640,
-      "h": 372,
-      "kb": 13
-    },
-    "1280": {
-      "src": "/assets/media/work-method-1280.webp",
-      "w": 1280,
-      "h": 745,
-      "kb": 32
-    }
-  },
-  "work-method-m": {
-    "720": {
-      "src": "/assets/media/work-method-m-720.webp",
-      "w": 720,
-      "h": 468,
-      "kb": 18
-    }
   }
 }
