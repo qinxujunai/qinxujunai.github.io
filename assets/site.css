@@ -29,7 +29,7 @@
   --page: #000000;
   --plain: #000000;
   --soft: #161617;
-  --dark: #000000;
+  --dark: #0f0f10;
   --ink: #f5f5f7;
   --muted: #a1a1a6;
   --link: #2997ff;
@@ -421,7 +421,7 @@ main {
 .hero h1 {
   max-width: 11em;
   margin: 0 auto;
-  font-size: min(44px, 9.4vw);
+  font-size: min(48px, 11vw);
   line-height: 1.12;
   font-weight: 600;
   letter-spacing: -0.005em;
@@ -433,8 +433,9 @@ main {
 
 .hero .sub {
   max-width: 24em;
+  margin-top: 16px;
   color: var(--muted);
-  font-size: 19px;
+  font-size: 17px;
 }
 
 .hero .cta {
@@ -646,7 +647,7 @@ main {
 }
 
 .path li:first-child .when {
-  color: var(--link);
+  color: var(--ink);
   font-weight: 600;
 }
 
@@ -812,12 +813,12 @@ main {
 .sig.write path.seal {
   clip-path: none;
   opacity: 0;
-  animation: stamp 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) forwards;
+  animation: stamp 0.4s ease-out forwards;
   animation-delay: var(--at);
 }
 
 @keyframes stamp {
-  from { opacity: 0; transform: scale(1.6) rotate(-8deg); }
+  from { opacity: 0; transform: scale(1.12); }
   to { opacity: 1; transform: none; }
 }
 
@@ -992,11 +993,7 @@ main {
 
 /* ---------- Flagship: VoiceFlow on black ---------- */
 
-.flagship {
-  background:
-    radial-gradient(60% 40% at 50% 58%, rgba(41, 151, 255, 0.16), transparent 70%),
-    var(--dark);
-}
+
 
 .flagship .device .app {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 40px 90px rgba(0, 0, 0, 0.7);
@@ -1010,7 +1007,7 @@ main {
 
 .flagship .capsule {
   background: #1d1d1f;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 60px rgba(41, 151, 255, 0.2);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 .flagship .facts {
@@ -1025,10 +1022,7 @@ main {
   font-size: clamp(40px, 12vw, 72px);
   font-weight: 600;
   letter-spacing: -0.02em;
-  background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #f5f5f7;
 }
 
 .flagship .footnote {
@@ -1085,10 +1079,7 @@ main {
   color: var(--muted);
 }
 
-.statement .source a {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-}
+
 
 .value-grid {
   display: grid;
@@ -1181,7 +1172,8 @@ main {
 /* ---------- Work: section intro, product cards, solution cards ---------- */
 
 .intro {
-  padding-bottom: 24px;
+  padding-top: 32px;
+  padding-bottom: 28px;
 }
 
 .intro .sub {
@@ -1329,7 +1321,7 @@ main {
   font-size: 44px;
   line-height: 1;
   font-weight: 600;
-  color: var(--link);
+  color: var(--muted);
 }
 
 .proof {
@@ -1358,7 +1350,7 @@ main {
   display: block;
   font-size: 15px;
   font-weight: 600;
-  color: var(--link);
+  color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -1397,7 +1389,7 @@ main {
 
 .namecard {
   display: grid;
-  gap: 28px;
+  gap: 20px;
   padding: 26px 24px 24px;
   border-radius: 24px;
   background: #1d1d1f;
@@ -1409,7 +1401,7 @@ main {
 }
 
 :root[data-theme='dark'] .namecard {
-  background: #1c1c1e;
+  background: #2c2c2e;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 30px 60px -20px rgba(0, 0, 0, 0.8);
 }
 
@@ -1442,21 +1434,20 @@ main {
 }
 
 .nc-name {
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 1.2;
 }
 
 .nc-role {
-  margin-top: 4px;
-  font-size: 13px;
-  color: #a1a1a6;
+  margin-top: 6px;
+  font-size: 15px;
 }
 
-.nc-line {
-  margin-top: 14px;
+.nc-org {
+  margin-top: 2px;
   font-size: 15px;
-  line-height: 1.4;
+  color: #a1a1a6;
 }
 
 .nc-qr {
@@ -1556,6 +1547,7 @@ main {
 }
 
 .results .facts {
+  align-items: start;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   row-gap: 28px;
   max-width: 900px;
@@ -1591,6 +1583,24 @@ main {
 .case-facts dl div {
   padding: 12px 0;
   border-bottom: 1px solid var(--hairline);
+}
+
+/* On phones and tablets the facts sit in two columns so the story starts sooner. */
+@media (max-width: 1067px) {
+  .case-facts dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+  }
+
+  .case-facts dl div:last-child {
+    grid-column: 1 / -1;
+    padding-bottom: 0;
+  }
+
+  .case-facts dl div:nth-last-child(2) {
+    border-bottom: 1px solid var(--hairline);
+  }
 }
 
 .case-facts dl div:last-child {
@@ -1655,7 +1665,7 @@ main {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--link);
+  background: var(--muted);
 }
 
 .flow {
@@ -1679,8 +1689,7 @@ main {
   top: -22px;
   width: 2px;
   height: 22px;
-  background: var(--link);
-  opacity: 0.5;
+  background: var(--hairline);
 }
 
 .flow-t {
@@ -1697,7 +1706,7 @@ main {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--link);
+  background: var(--ink);
   color: var(--page);
   font-size: 14px;
   font-weight: 600;
@@ -1783,7 +1792,7 @@ main {
 
 .scope .yes li::before {
   content: '✓';
-  color: var(--link);
+  color: var(--ink);
 }
 
 .scope .no li::before {
@@ -1948,4 +1957,19 @@ main {
   .metrics:has(li:nth-child(3):last-child) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.facts dt {
+  text-wrap: balance;
+}
+
+/* Dark tiles in dark mode: a hairline keeps their edge against the black page. */
+:root[data-theme='dark'] .tile.dark {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* A link inside a sentence is underlined so it never relies on colour alone. */
+.statement .source a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
 }
