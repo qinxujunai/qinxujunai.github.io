@@ -184,21 +184,23 @@ a:hover {
   overflow: visible;
 }
 
-/* Chinese breaks only at punctuation and spaces here, so no phrase is split. */
-.lede {
-  font-size: 22px;
-  line-height: 1.6;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+/* Chinese text carries <wbr> between words (added at build time); keep-all forbids breaks elsewhere. */
+:lang(zh-CN) p,
+:lang(zh-CN) h3 {
   word-break: keep-all;
   overflow-wrap: anywhere;
+}
+
+.lede {
+  font-size: 28px;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   max-width: 30em;
 }
 
 :lang(en) .lede {
   letter-spacing: -0.012em;
-  word-break: normal;
-  overflow-wrap: normal;
 }
 
 .now {
@@ -477,8 +479,8 @@ footer a {
   }
 
   .lede {
-    font-size: 26px;
-    line-height: 1.5;
+    font-size: 36px;
+    line-height: 1.4;
   }
 
   section {
@@ -492,18 +494,7 @@ footer a {
   }
 
   .work {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-  }
-
-  .work li {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .work .links {
-    margin-top: auto;
-    padding-top: 8px;
+    gap: 40px;
   }
 }
 
