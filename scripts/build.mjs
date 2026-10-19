@@ -6,6 +6,18 @@ import { content, SITE, GITHUB } from '../src/content.mjs';
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
+// then CSS (word-break: keep-all) forbids breaks anywhere else. Names are kept whole.
+const KEEP = ['秦徐俊', '奥普智能', '万象成文', '云 AI 项目经理', '可运行的作品', '离线', '在线识别', '智能体', '内容生产', '自然语言', '上下文'];
+const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
+function zhText(s) {
+  let out = [...segmenter.segment(String(s))].map((x) => esc(x.segment)).join('<wbr>');
+  for (const k of KEEP) out = out.replace(new RegExp([...k].map((ch) => ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('(?:<wbr>)?'), 'g'), k.replace(/ /g, '\u00a0'));
+  return out.replace(/<wbr>([，。、；：！？）」』])/g, '$1').replace(/<wbr>\s<wbr>/g, ' ');
+}
+
+const T = (c, s) => (c.lang === 'zh-CN' ? zhText(s) : esc(s));
+
 const signature = fs
   .readFileSync(new URL('../src/signature.svg', import.meta.url), 'utf8')
   .trim()
@@ -82,10 +94,10 @@ function links(c, item) {
 function featured(c, item) {
   return `<article class="feature" id="${item.id}">
 <h3>${esc(item.name)}</h3>
-<p class="tagline">${esc(item.tagline)}</p>
+<p class="tagline">${T(c, item.tagline)}</p>
 ${voiceStage(item)}
-<p class="desc">${esc(item.desc)}</p>
-<p class="decision">${esc(item.decision)} <a href="${item.decisionLink.href}" ${ext}>${esc(item.decisionLink.label)}</a></p>
+<p class="desc">${T(c, item.desc)}</p>
+<p class="decision">${T(c, item.decision)} <a href="${item.decisionLink.href}" ${ext}>${esc(item.decisionLink.label)}</a></p>
 ${links(c, item)}
 </article>`;
 }
@@ -93,8 +105,8 @@ ${links(c, item)}
 function entry(c, item) {
   return `<li id="${item.id}">
 <h3>${esc(item.name)}</h3>
-<p class="tagline">${esc(item.tagline)}</p>
-<p class="desc">${esc(item.desc)}</p>
+<p class="tagline">${T(c, item.tagline)}</p>
+<p class="desc">${T(c, item.desc)}</p>
 ${links(c, item)}
 </li>`;
 }
@@ -110,8 +122,8 @@ ${bar(c)}
 <main id="main">
 <header class="intro">
 <h1>${signature}<span class="visually-hidden">${esc(c.name)}</span></h1>
-<p class="lede">${esc(c.lede)}</p>
-<p class="now">${esc(c.now)}</p>
+<p class="lede">${T(c, c.lede)}</p>
+<p class="now">${T(c, c.now)}</p>
 <p class="actions"><a class="button primary" href="#contact">${c.addWechat}</a><a class="button" href="#work">${c.seeWork}</a></p>
 </header>
 
@@ -126,12 +138,12 @@ ${rest.map((w) => entry(c, w)).join('\n')}
 
 <section id="about" class="about" aria-labelledby="about-title">
 <h2 id="about-title">${c.aboutTitle}</h2>
-${c.about.map((p) => `<p>${esc(p)}</p>`).join('\n')}
+${c.about.map((p) => `<p>${T(c, p)}</p>`).join('\n')}
 </section>
 
 <section id="contact" class="contact" aria-labelledby="contact-title">
 <h2 id="contact-title">${c.contactTitle}</h2>
-<p>${esc(c.contactLead)}</p>
+<p>${T(c, c.contactLead)}</p>
 <img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async">
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(c.hint.wechat)}" data-hint-phone="${esc(c.hint.phone)}" data-hint-desktop="${esc(c.hint.desktop)}">${esc(c.hint.default)}</p>
 <p class="actions"><a class="button" href="/assets/wechat-qr.png" download="qin-xujun-wechat.png" data-qr-save>${c.save}</a><a class="button" href="${GITHUB}" ${ext}>${c.github}</a></p>
