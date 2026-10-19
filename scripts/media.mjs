@@ -3,7 +3,7 @@
 // <source-dir> holds the originals that are not kept in this repository:
 //   avatar.jpg|webp            portrait
 //   voiceflow-app.png          VoiceFlow docs/design-implementation-v031.png
-//   wanxiang-result.png        Audio2Text docs/assets/result-video-desktop.png
+//   wanxiang-home.png          Audio2Text docs/assets/home-desktop.png
 //   photo-*.webp|jpg           the owner's own photographs (see PHOTOS below)
 // Two screens are captured live: the ai.vibecoding terminal and an AI Work Method panel.
 import { createRequire } from 'node:module';
@@ -62,12 +62,12 @@ await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80,
 // Products
 await emit('voiceflow-app', find(/^voiceflow-app\./), { width: 640 });
 await emit('voiceflow-app-m', find(/^voiceflow-app\./), { widths: [720], crop: { left: 300, top: 110, width: 760, height: 570 } });
-await emit('wanxiang', find(/^wanxiang-result\./), { width: 640, crop: { left: 220, top: 100, width: 1000, height: 720 } });
-await emit('wanxiang-m', find(/^wanxiang-result\./), { widths: [600], crop: { left: 758, top: 300, width: 460, height: 500 } });
+await emit('wanxiang', find(/^wanxiang-home\./), { width: 640, crop: { left: 120, top: 46, width: 1200, height: 584 } });
+await emit('wanxiang-m', find(/^wanxiang-home\./), { widths: [720], crop: { left: 250, top: 46, width: 940, height: 544 } });
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
 const PHOTOS = ['photo-aerial', 'photo-pagoda', 'photo-gate', 'photo-wall', 'photo-dusk', 'photo-buddha', 'photo-sky', 'photo-autumn'];
-for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 56 });
+for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 50 });
 
 // Live captures
 const executablePath = fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
