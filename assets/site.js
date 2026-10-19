@@ -100,6 +100,53 @@
   }, { rootMargin: '0px 0px -8% 0px' });
   for (var q = 0; q < reveals.length; q++) revealObserver.observe(reveals[q]);
 
+  // Numbers count up once when they come into view. The real value is already in the HTML.
+  var counters = document.querySelectorAll('[data-count]');
+  if (!still) {
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        countObserver.unobserve(entry.target);
+        var el = entry.target;
+        var to = Number(el.getAttribute('data-count'));
+        var start = null;
+        var tick = function (t) {
+          if (start === null) start = t;
+          var p = Math.min(1, (t - start) / 1400);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(to * eased).toLocaleString('en-US');
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    for (var n = 0; n < counters.length; n++) countObserver.observe(counters[n]);
+  }
+
+  // The statement lights up, character by character, as it scrolls through the middle of the screen.
+  var statement = document.querySelector('[data-statement]');
+  if (statement) {
+    var chars = statement.querySelectorAll('.pull span');
+    var lit = -1;
+    var paint = function () {
+      var r = statement.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = (vh * 0.85 - r.top) / (vh * 0.55);
+      var count = still ? chars.length : Math.max(0, Math.min(chars.length, Math.round(p * chars.length)));
+      if (count === lit) return;
+      lit = count;
+      for (var i = 0; i < chars.length; i++) chars[i].classList.toggle('lit', i < count);
+    };
+    var queued = false;
+    window.addEventListener('scroll', function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; paint(); });
+    }, { passive: true });
+    window.addEventListener('resize', paint);
+    paint();
+  }
+
   // Section tracking for the nav.
   var navLinks = document.querySelectorAll('[data-nav]');
   var current = null;
@@ -114,7 +161,7 @@
   var sectionObserver = new IntersectionObserver(function (entries) {
     for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) setCurrent(entries[e].target.id);
   }, { rootMargin: '-40% 0px -55% 0px' });
-  ['work', 'path', 'thinking', 'photos', 'contact'].forEach(function (id) {
+  ['work', 'values', 'path', 'photos', 'contact'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });

@@ -107,10 +107,6 @@ async function capture(url, locate, minWidth, keep = 1) {
 const vibe = await capture('https://qinxujunai.github.io/qinxujun-ai-vibecoding/', (p) => p.locator('div', { hasText: 'Update Todos' }).filter({ has: p.locator('text=claude') }).last(), 900);
 await emit('vibecoding', vibe, { width: 640 });
 await emit('vibecoding-m', vibe, { widths: [720], crop: { left: 0, top: 0, width: 0.5, height: 1 } });
-const method = await capture('https://qinxujunai.github.io/ai-work-method/', (p) => p.getByText('强模型负责想', { exact: false }).first(), 1100, 0.4);
-await emit('work-method', method, { width: 640 });
-await emit('work-method-m', method, { widths: [720], crop: { left: 0.07, top: 0.04, width: 0.86, height: 0.96 } });
-
 await browser.close();
 fs.writeFileSync('src/media.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log('wrote src/media.json');

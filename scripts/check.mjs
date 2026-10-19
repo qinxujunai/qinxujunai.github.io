@@ -56,7 +56,7 @@ for (const [name, html] of [['index.html', zh], ['en/index.html', en], ['404.htm
 
 // Size budget
 const kb = (f) => fs.statSync(f).size / 1024;
-const budget = { 'index.html': 48, 'en/index.html': 48, 'assets/site.css': 18, 'assets/site.js': 6 };
+const budget = { 'index.html': 52, 'en/index.html': 52, 'assets/site.css': 22, 'assets/site.js': 9 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }

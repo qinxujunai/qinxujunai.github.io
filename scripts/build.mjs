@@ -3,6 +3,8 @@
 import fs from 'node:fs';
 import { content, SITE, GITHUB } from '../src/content.mjs';
 
+const stats = JSON.parse(fs.readFileSync(new URL('../src/stats.json', import.meta.url), 'utf8'));
+
 const media = JSON.parse(fs.readFileSync(new URL('../src/media.json', import.meta.url), 'utf8'));
 
 const esc = (s) =>
@@ -13,7 +15,7 @@ const esc = (s) =>
 const KEEP = [
   '做云 AI 项目经理', '秦徐俊', '奥普智能', '万象成文', '云 AI 项目经理', '可运行的作品', '播客', '能用', '视频', '离线', '在线识别',
   '智能体', '内容生产', '自然语言', '上下文', '老本行', '爆款案例', '信息流', '数据平台', '智能分析', '公益项目',
-  '创造可运行的作品', '不联网', '迭代至今',
+  '创造可运行的作品', '不联网', '迭代至今', '只属于你的电脑', '都要能被验证', '不做什么', '发布与验证记录',
 ];
 const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
 function zhText(s) {
@@ -72,6 +74,12 @@ const sigStart =
   "document.querySelector('.hero .sig').classList.add('write');r.classList.remove('sig-pending');" +
   "try{sessionStorage.setItem('qxj.signed','1')}catch(e){}})()";
 
+const valueIcons = {
+  lock: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="11" y="21" width="26" height="19" rx="5"/><path d="M16 21v-5a8 8 0 0 1 16 0v5"/><circle cx="24" cy="30.5" r="2.4" class="fill"/></svg>',
+  check: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="m16.5 24.5 5 5 10-11"/></svg>',
+  minus: '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M16 24h16"/></svg>',
+};
+
 const icons = {
   sunMoon: `<svg class="theme-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="theme-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>`,
   github: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>`,
@@ -109,7 +117,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 </head>`;
 }
 
-const SECTIONS = ['work', 'path', 'thinking', 'photos', 'contact'];
+const SECTIONS = ['work', 'values', 'path', 'photos', 'contact'];
 const chevron = '<span class="chev" aria-hidden="true">›</span>';
 
 // Apple-style local nav: signature on the left, sections in the middle, one blue action on the right.
@@ -140,6 +148,11 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar' })}
 </section>`;
 }
 
+function statement(c, text) {
+  const parts = c.lang === 'zh-CN' ? [...text] : text.split(/(\s+)/);
+  return parts.map((p) => (/^\s+$/.test(p) ? p : `<span>${esc(p)}</span>`)).join('');
+}
+
 function tileLinks(c, item) {
   return `<p class="cta"><a class="more-link" href="${item.site}" ${ext}>${c.siteLabel}${chevron}<span class="visually-hidden"> ${esc(item.name)}</span></a><a class="more-link" href="${item.repo}" ${ext}>${c.repoLabel}${chevron}<span class="visually-hidden"> ${esc(item.name)}</span></a></p>`;
 }
@@ -147,7 +160,7 @@ function tileLinks(c, item) {
 // VoiceFlow: the capsule types real lines from the product's own demo, over its real app window.
 function voiceflow(c) {
   const f = c.feature;
-  return `<article class="tile soft product" id="${f.id}" aria-labelledby="${f.id}-title">
+  return `<article class="tile dark product flagship" id="${f.id}" aria-labelledby="${f.id}-title">
 <div class="reveal">
 <h2 id="${f.id}-title">${esc(f.name)}</h2>
 <p class="sub">${T(c, f.tagline)}</p>
@@ -164,9 +177,13 @@ ${img(f.image.key, f.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw', cls:
 <div class="reveal">
 <p class="body">${T(c, f.desc)}</p>
 <dl class="facts">
-${f.facts.map(([v, k]) => `<div><dt>${T(c, k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
+${['stars', 'downloads', 'forks', 'version'].map((k) => {
+  const v = stats.voiceflow[k];
+  const num = typeof v === 'number' ? ` data-count="${v}"` : '';
+  return `<div><dt>${T(c, f.facts[k])}</dt><dd${num}>${esc(typeof v === 'number' ? v.toLocaleString('en-US') : v)}</dd></div>`;
+}).join('\n')}
 </dl>
-${f.facts.filter((x) => x[2]).map((x) => `<p class="footnote">${T(c, x[2])}</p>`).join('')}
+<p class="footnote">${T(c, f.factsNote(stats.voiceflow.updated))}</p>
 <p class="body decision">${T(c, f.decision)} <a href="${f.decisionLink.href}" ${ext}>${esc(f.decisionLink.label)}</a></p>
 </div>
 </article>`;
@@ -186,7 +203,7 @@ ${tileLinks(c, item)}
 
 function page(c) {
   const [s1, s2, s3] = c.thinkingSource;
-  const [wanxiang, vibe, method] = c.work;
+  const [wanxiang, vibe] = c.work;
   return `${head(c, { canonical: c.path })}
 <body>
 <a class="skip" href="#main">${c.skip}</a>
@@ -197,14 +214,29 @@ ${hero(c)}
 <div id="work" class="works">
 <h2 class="visually-hidden">${c.workTitle}</h2>
 ${voiceflow(c)}
-${product(c, wanxiang, 'plain')}
-<div class="pair">
-${product(c, vibe, 'dark')}
-${product(c, method, 'soft')}
-</div>
+${product(c, wanxiang, 'soft')}
+${product(c, vibe, 'plain')}
 </div>
 
-<section class="tile soft" id="path" aria-labelledby="path-title">
+<section id="values" class="values" aria-labelledby="values-title">
+<div class="tile dark statement" data-statement>
+<p class="eyebrow">${c.thinkingTitle}</p>
+<h2 class="pull" id="thinking-title">${statement(c, c.thinkingQuote)}</h2>
+${c.thinking.map((p) => `<p class="said">${T(c, p)}</p>`).join('\n')}
+<p class="source">${esc(s1)}<a href="${vibe.site}" ${ext}>${s2}</a>${esc(s3)}</p>
+</div>
+<div class="tile soft">
+<div class="reveal">
+<p class="eyebrow">${c.valuesTitle}</p>
+<h2 id="values-title">${T(c, c.valuesHeadline)}</h2>
+</div>
+<ul class="value-grid">
+${c.values.map((v) => `<li class="value reveal"><span class="value-icon">${valueIcons[v.icon]}</span><p class="value-name">${esc(v.name)}</p><h3>${T(c, v.title)}</h3><p>${T(c, v.body)}</p></li>`).join('\n')}
+</ul>
+</div>
+</section>
+
+<section class="tile plain" id="path" aria-labelledby="path-title">
 <div class="reveal">
 <p class="eyebrow">${c.pathTitle}</p>
 <h2 id="path-title">${T(c, c.pathHeadline)}</h2>
@@ -214,18 +246,8 @@ ${c.journey.map((p) => `<li><span class="when">${esc(p.when)}</span><div><h3>${T
 </ol>
 </section>
 
-<section class="tile dark" id="thinking" aria-labelledby="thinking-title">
-<figure class="thought reveal">
-<p class="eyebrow">${c.thinkingTitle}</p>
-<blockquote>
-<h2 id="thinking-title" class="pull">${T(c, c.thinkingQuote)}</h2>
-${c.thinking.map((p) => `<p>${T(c, p)}</p>`).join('\n')}
-</blockquote>
-<figcaption>${esc(s1)}<a href="${vibe.site}" ${ext}>${s2}</a>${esc(s3)}</figcaption>
-</figure>
-</section>
 
-<section class="tile plain" id="photos" aria-labelledby="photos-title">
+<section class="tile soft" id="photos" aria-labelledby="photos-title">
 <div class="reveal">
 <p class="eyebrow">${c.photosTitle}</p>
 <h2 id="photos-title">${T(c, c.photosHeadline)}</h2>
@@ -237,7 +259,7 @@ ${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}>${img(p.key, p.alt, {
 <p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
 </section>
 
-<section class="tile soft" id="contact" aria-labelledby="contact-title">
+<section class="tile plain" id="contact" aria-labelledby="contact-title">
 <div class="reveal">
 <p class="eyebrow">${c.contactTitle}</p>
 <h2 id="contact-title">${T(c, c.contactHeadline)}</h2>

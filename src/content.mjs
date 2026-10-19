@@ -11,7 +11,6 @@ const links = {
     site: 'https://qinxujunai.github.io/qinxujun-ai-vibecoding/',
     repo: 'https://github.com/qinxujunai/qinxujun-ai-vibecoding',
   },
-  workMethod: { site: 'https://qinxujunai.github.io/ai-work-method/', repo: 'https://github.com/qinxujunai/ai-work-method' },
 };
 
 const VOICEFLOW_DECISIONS = 'https://github.com/qinxujunai/VoiceFlow/blob/master/docs/feedback-review-2026-07-28.md';
@@ -47,7 +46,7 @@ export const content = {
     addWechat: '加我微信',
     seeWork: '看看作品',
     navLabel: '章节',
-    nav: { work: '作品', path: '经历', thinking: '想法', photos: '影像', contact: '联系' },
+    nav: { work: '作品', values: '在意', path: '经历', photos: '影像', contact: '联系' },
 
     workTitle: '作品',
     siteLabel: '访问官网',
@@ -61,11 +60,8 @@ export const content = {
       hint: '按一下开始，再按一下完成',
       lines: ['请比较这两份方案的成本与风险，再给出你的建议。', '明早十点，把方案同步给团队。', '这周的方案已经整理好了，明天一起看看。'],
       image: { key: 'voiceflow-app', mobile: 'voiceflow-app-m', alt: 'VoiceFlow 的主界面：已就绪、快捷键、试说一句和最近听写' },
-      facts: [
-        ['离线', '听写不联网'],
-        ['v0.3.8', '从 v0.1 迭代至今'],
-        ['100', 'GitHub star', 'star 数截至 2026 年 10 月。'],
-      ],
+      facts: { stars: 'GitHub Star', downloads: '次下载', forks: 'Fork', version: '最新版本' },
+      factsNote: (date) => `数据每天从 GitHub 自动更新，最近一次：${date}。`,
       decision: '用户提过 12 条反馈，我逐条写下处理结论和理由。比如没有加在线识别：它会打破离线这个承诺。',
       decisionLink: { href: VOICEFLOW_DECISIONS, label: '看反馈与决策记录（英文）' },
       ...links.voiceflow,
@@ -87,14 +83,6 @@ export const content = {
         image: { key: 'vibecoding', mobile: 'vibecoding-m', alt: 'ai.vibecoding 首屏的 Claude Code 终端：先访谈、再计划、最后实现并验证' },
         ...links.vibecoding,
       },
-      {
-        id: 'work-method',
-        name: 'AI Work Method',
-        tagline: '把 AI 用成能力。',
-        desc: '给职场人的 AI 实战课程，八章：从高质量对话、智能体协作，到可验收的交付。',
-        image: { key: 'work-method', mobile: 'work-method-m', alt: 'AI Work Method 第三章：强模型负责想，合适工具负责做，五个步骤从原始想法到验收' },
-        ...links.workMethod,
-      },
     ],
 
     pathTitle: '经历',
@@ -108,6 +96,28 @@ export const content = {
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '' },
     ],
 
+    valuesTitle: '在意',
+    valuesHeadline: '我在意的事。',
+    values: [
+      {
+        icon: 'lock',
+        name: '隐私',
+        title: '你的声音，只属于你的电脑。',
+        body: 'VoiceFlow 离线运行、无需登录，录音和识别都不上传。万象成文本地优先，不做账号体系。',
+      },
+      {
+        icon: 'check',
+        name: '诚实',
+        title: '说出口的，都要能被验证。',
+        body: '从 0.3.2 起，VoiceFlow 每个版本都附一份发布与验证记录；README 里写明：没有完整证据之前，不宣称优于其他产品。',
+      },
+      {
+        icon: 'minus',
+        name: '克制',
+        title: '先想清楚不做什么。',
+        body: '万象成文只做三件事：转文字、提取图文、下载原始媒体。README 里专门列了一份「当前不做」：账号、支付、多工作台。',
+      },
+    ],
     thinkingTitle: '想法',
     thinkingQuote: 'AI 进化得越快，我们越需要慢下来。',
     thinking: ['当机器拥有了越来越强的执行能力，生而为人的美感、品味、判断、共情与长期热爱，反而会变得更加珍贵。'],
@@ -163,7 +173,7 @@ export const content = {
     addWechat: 'Add me on WeChat',
     seeWork: 'See my work',
     navLabel: 'Sections',
-    nav: { work: 'Work', path: 'Path', thinking: 'Thinking', photos: 'Photos', contact: 'Contact' },
+    nav: { work: 'Work', values: 'Values', path: 'Path', photos: 'Photos', contact: 'Contact' },
 
     workTitle: 'Work',
     siteLabel: 'Visit the website',
@@ -177,11 +187,8 @@ export const content = {
       hint: 'Press to start, press again to finish',
       lines: ['Compare the costs and risks of these two proposals, then recommend an approach.', 'Share the plan with the team at ten.', 'The proposal is ready. Let us take a look tomorrow.'],
       image: { key: 'voiceflow-app', mobile: 'voiceflow-app-m', alt: 'VoiceFlow main window (in Chinese): ready state, hotkeys, a test dictation box and recent history' },
-      facts: [
-        ['Offline', 'No network needed'],
-        ['v0.3.8', 'Iterated from v0.1'],
-        ['100', 'GitHub stars', 'Star count as of October 2026.'],
-      ],
+      facts: { stars: 'GitHub stars', downloads: 'Downloads', forks: 'Forks', version: 'Latest release' },
+      factsNote: (date) => `Pulled from GitHub automatically every day. Last update: ${date}.`,
       decision: 'Users sent 12 pieces of feedback, and I wrote down a decision and the reason for each. One example: no online recognition, because it would break the promise of working offline.',
       decisionLink: { href: VOICEFLOW_DECISIONS, label: 'Read the feedback log' },
       ...links.voiceflow,
@@ -204,14 +211,6 @@ export const content = {
         image: { key: 'vibecoding', mobile: 'vibecoding-m', alt: 'The Claude Code terminal on ai.vibecoding: interview first, then plan, then build and verify' },
         ...links.vibecoding,
       },
-      {
-        id: 'work-method',
-        name: 'AI Work Method',
-        tagline: 'Turn AI into a real skill.',
-        desc: 'A hands-on AI course for working professionals in eight chapters, from better conversations and agent collaboration to work you can sign off on. In Chinese.',
-        image: { key: 'work-method', mobile: 'work-method-m', alt: 'AI Work Method chapter three (in Chinese): strong models think, the right tools do, in five steps from a raw idea to sign-off' },
-        ...links.workMethod,
-      },
     ],
 
     pathTitle: 'Path',
@@ -225,6 +224,28 @@ export const content = {
       { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: '' },
     ],
 
+    valuesTitle: 'Values',
+    valuesHeadline: 'What I care about.',
+    values: [
+      {
+        icon: 'lock',
+        name: 'Privacy',
+        title: 'Your voice belongs to your computer.',
+        body: 'VoiceFlow runs offline with no sign-in; audio and recognition are never uploaded. Wanxiang is local-first, with no accounts.',
+      },
+      {
+        icon: 'check',
+        name: 'Honesty',
+        title: 'Every promise should be verifiable.',
+        body: 'Since 0.3.2, every VoiceFlow release ships with a release and verification record, and the README says it makes no claim to beat other products without full evidence.',
+      },
+      {
+        icon: 'minus',
+        name: 'Restraint',
+        title: 'Decide what not to build first.',
+        body: 'Wanxiang does three things: transcribe, extract articles, download the original media. Its README keeps a list of what it does not do: accounts, payments, multiple workspaces.',
+      },
+    ],
     thinkingTitle: 'Thinking',
     thinkingQuote: 'The faster AI evolves, the more we need to slow down.',
     thinking: ['As machines gain stronger execution power, human taste, judgment, empathy, beauty, and long-term devotion become more precious.'],

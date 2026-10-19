@@ -1,0 +1,54 @@
+name: Refresh VoiceFlow numbers
+
+# Every six hours: read VoiceFlow's stars, forks, downloads and latest version from GitHub,
+# rebuild the pages, and commit only if something changed. Then ask GitHub Pages to rebuild.
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch numbers and rebuild
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/stats.mjs
+          node scripts/build.mjs
+      - name: Commit if changed
+        id: commit
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/stats.json index.html en/index.html
+          git commit -m "更新 VoiceFlow 的 GitHub 数据"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Rebuild GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || echo "Pages build request failed; the push will still trigger a build if Pages allows it."
