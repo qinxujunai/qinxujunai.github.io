@@ -1,9 +1,11 @@
 // Builds every image on the site into assets/media/ as WebP at 1x and 2x.
-// Usage: node scripts/media.mjs <source-dir>
+// Usage: node scripts/media.mjs <source-dir> [name ...]
+//   With names, only those images are rebuilt and merged into the existing src/media.json.
 // <source-dir> holds the originals that are not kept in this repository:
 //   avatar.jpg|webp            portrait
 //   voiceflow-app.png          VoiceFlow docs/design-implementation-v031.png
 //   wanxiang-home.png          Audio2Text docs/assets/home-desktop.png
+//   ai-signal.png              https://qinxujunai.github.io/ai-signal/ at 760px wide, 2x (top of the page)
 //   photo-*.webp|jpg           the owner's own photographs (see PHOTOS below)
 // Two screens are captured live: the ai.vibecoding terminal and an AI Work Method panel.
 import { createRequire } from 'node:module';
@@ -20,7 +22,9 @@ if (!SRC) { console.error('usage: node scripts/media.mjs <source-dir>'); process
 const OUT = 'assets/media';
 fs.mkdirSync(OUT, { recursive: true });
 
-const manifest = {};
+const only = process.argv.slice(3);
+const want = (name) => !only.length || only.includes(name);
+const manifest = only.length ? JSON.parse(fs.readFileSync('src/media.json', 'utf8')) : {};
 
 async function emit(name, input, { width, widths, crop, quality = 74, square = false } = {}) {
   let base = sharp(input).rotate();
@@ -32,6 +36,7 @@ async function emit(name, input, { width, widths, crop, quality = 74, square = f
       : crop;
     base = base.extract(abs);
   }
+  if (!want(name)) return;
   const buf = await base.toBuffer();
   const meta = await sharp(buf).metadata();
   const sizes = widths
@@ -65,11 +70,15 @@ await emit('voiceflow-app-m', find(/^voiceflow-app\./), { widths: [720], crop: {
 await emit('wanxiang', find(/^wanxiang-home\./), { width: 640, crop: { left: 120, top: 46, width: 1200, height: 584 } });
 await emit('wanxiang-m', find(/^wanxiang-home\./), { widths: [720], crop: { left: 250, top: 46, width: 940, height: 544 } });
 
+await emit('ai-signal', find(/^ai-signal\./), { width: 640, crop: { left: 160, top: 48, width: 1200, height: 1000 } });
+await emit('ai-signal-m', find(/^ai-signal\./), { widths: [720], crop: { left: 160, top: 48, width: 1200, height: 900 } });
+
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
 const PHOTOS = ['photo-aerial', 'photo-pagoda', 'photo-gate', 'photo-wall', 'photo-dusk', 'photo-buddha', 'photo-sky', 'photo-autumn'];
 for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 50 });
 
-// Live captures
+// Live capture: the ai.vibecoding terminal.
+if (want('vibecoding')) {
 const executablePath = fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
   ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
   : undefined;
@@ -108,5 +117,6 @@ const vibe = await capture('https://qinxujunai.github.io/qinxujun-ai-vibecoding/
 await emit('vibecoding', vibe, { width: 640 });
 await emit('vibecoding-m', vibe, { widths: [720], crop: { left: 0, top: 0, width: 0.5, height: 1 } });
 await browser.close();
+}
 fs.writeFileSync('src/media.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log('wrote src/media.json');

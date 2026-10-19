@@ -1,8 +1,9 @@
 // Static checks that must pass before every push:
-// 1. built pages are up to date with src/content.mjs
-// 2. zh and en pages have the same structure
+// 1. built pages are up to date with src/
+// 2. every zh page and its en twin have the same structure
 // 3. no private data anywhere in the repository
-// 4. no resource is loaded from another origin
+// 4. no resource is loaded from another origin; every internal link points at a real file
+// 5. size budgets
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
@@ -11,15 +12,20 @@ const fail = (msg) => { failed++; console.error('✗', msg); };
 const ok = (msg) => console.log('✓', msg);
 
 // 1. Up to date
-const before = ['index.html', 'en/index.html', '404.html'].map((f) => fs.readFileSync(f, 'utf8'));
+import { CASES } from '../src/cases.mjs';
+const PAGES = ['index.html', 'en/index.html', '404.html', ...CASES.flatMap((c) => [`work/${c.slug}/index.html`, `en/work/${c.slug}/index.html`])];
+const readAll = () => Object.fromEntries(PAGES.map((f) => [f, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '']));
+const before = readAll();
 execSync('node scripts/build.mjs', { stdio: 'ignore' });
-const after = ['index.html', 'en/index.html', '404.html'].map((f) => fs.readFileSync(f, 'utf8'));
-before.every((b, i) => b === after[i]) ? ok('built pages match src/content.mjs') : fail('pages were stale; rebuilt, commit them');
+const html = readAll();
+PAGES.every((f) => before[f] === html[f]) ? ok(`${PAGES.length} built pages match src/`) : fail('pages were stale; rebuilt, commit them');
 
 // 2. Same structure
-const ids = (html) => [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]).join(',');
-const [zh, en] = after;
-ids(zh) === ids(en) ? ok(`zh/en share ids: ${ids(zh)}`) : fail(`zh/en ids differ:\n  ${ids(zh)}\n  ${ids(en)}`);
+const ids = (h) => [...h.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]).join(',');
+for (const f of PAGES.filter((p) => !p.startsWith('en/') && p !== '404.html')) {
+  const en = `en/${f}`;
+  ids(html[f]) === ids(html[en]) ? ok(`${f} and ${en} share ids`) : fail(`ids differ:\n  ${f}: ${ids(html[f])}\n  ${en}: ${ids(html[en])}`);
+}
 
 // 3. Privacy: tracked text files only
 const files = execSync('git ls-files --cached --others --exclude-standard', { encoding: 'utf8' })
@@ -43,27 +49,41 @@ if (fs.readdirSync('.').some((f) => /resume|简历|cv\.(pdf|docx?)$/i.test(f))) 
 ok(`privacy scan over ${files.length} files`);
 
 // 4. Same-origin resources only (links to other sites are fine; loading from them is not)
-for (const [name, html] of [['index.html', zh], ['en/index.html', en], ['404.html', after[2]]]) {
-  const loads = [...html.matchAll(/<(?:script|img|link|source|iframe)\b[^>]*?\s(?:src|href)="([^"]+)"/g)]
+const exists = (url) => {
+  const p = decodeURI(url.split('#')[0].split('?')[0]).replace(/^\//, '');
+  return p === '' || fs.existsSync(p.endsWith('/') ? `${p}index.html` : p) || fs.existsSync(`${p}/index.html`);
+};
+for (const [name, h] of Object.entries(html)) {
+  const loads = [...h.matchAll(/<(?:script|img|link|source|iframe)\b[^>]*?\s(?:src|href)="([^"]+)"/g)]
     .map((m) => m[0].startsWith('<link') && /rel="(canonical|alternate)"/.test(m[0]) ? null : m[1])
     .filter((u) => u && /^(https?:)?\/\//.test(u));
-  loads.length ? fail(`${name} loads from another origin: ${loads.join(', ')}`) : ok(`${name}: same-origin resources only`);
-  const blank = [...html.matchAll(/<a\b[^>]*href="https?:[^"]+"[^>]*>/g)].filter((m) => !/rel="noopener"/.test(m[0]));
-  blank.length ? fail(`${name}: external links without rel="noopener"`) : ok(`${name}: external links carry rel="noopener"`);
-  const sizeless = [...html.matchAll(/<img\b[^>]*>/g)].filter((m) => !/width="/.test(m[0]) || !/height="/.test(m[0]));
-  sizeless.length ? fail(`${name}: images without width/height`) : ok(`${name}: every image has width and height`);
+  if (loads.length) fail(`${name} loads from another origin: ${loads.join(', ')}`);
+  const blank = [...h.matchAll(/<a\b[^>]*href="https?:[^"]+"[^>]*>/g)].filter((m) => !/rel="noopener"/.test(m[0]));
+  if (blank.length) fail(`${name}: external links without rel="noopener"`);
+  const sizeless = [...h.matchAll(/<img\b[^>]*>/g)].filter((m) => !/width="/.test(m[0]) || !/height="/.test(m[0]));
+  if (sizeless.length) fail(`${name}: images without width/height`);
+  const internal = [...h.matchAll(/\s(?:href|src|srcset)="(\/[^"]*)"/g)].flatMap((m) => m[1].split(', ').map((u) => u.split(' ')[0]));
+  const broken = [...new Set(internal.filter((u) => !exists(u)))];
+  if (broken.length) fail(`${name}: internal links to missing files: ${broken.join(', ')}`);
+  const anchors = [...h.matchAll(/\shref="#([^"]+)"/g)].map((m) => m[1]).filter((id) => !h.includes(`id="${id}"`));
+  if (anchors.length) fail(`${name}: anchors without a target: ${anchors.join(', ')}`);
 }
+ok(`${PAGES.length} pages: same-origin resources, noopener, sized images, internal links resolve`);
 
-// Size budget
+// 5. Size budget. Pages inline the stylesheet and the signature, which compress well: budget the gzip size.
+import zlib from 'node:zlib';
 const kb = (f) => fs.statSync(f).size / 1024;
-const budget = { 'index.html': 52, 'en/index.html': 52, 'assets/site.css': 22, 'assets/site.js': 9 };
+const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
+const heavy = PAGES.filter((f) => gz(f) > 24);
+heavy.length ? fail(`over 24KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 24KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
+const budget = { 'assets/site.css': 40, 'assets/site.js': 10 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
-const total = ['index.html', 'assets/site.css', 'assets/site.js', 'assets/media/avatar-320.webp'].reduce((s, f) => s + kb(f), 0);
-total <= 90 ? ok(`first screen ${total.toFixed(0)}KB uncompressed ≤ 90KB`) : fail(`first screen ${total.toFixed(0)}KB > 90KB`);
+const first = gz('index.html') + gz('assets/site.js') + kb('assets/media/avatar-160.webp');
+first <= 40 ? ok(`first screen ${first.toFixed(0)}KB over the wire ≤ 40KB`) : fail(`first screen ${first.toFixed(0)}KB > 40KB`);
 const media = fs.readdirSync('assets/media').reduce((s, f) => s + kb(`assets/media/${f}`), 0);
-media <= 1100 ? ok(`all images ${media.toFixed(0)}KB ≤ 1100KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 1100KB`);
+media <= 1300 ? ok(`all images ${media.toFixed(0)}KB ≤ 1300KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 1300KB`);
 
 if (failed) { console.error(`\n${failed} check(s) failed`); process.exit(1); }
 console.log('\nall checks passed');

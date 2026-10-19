@@ -2,4 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <url><loc>https://qinxujunai.github.io/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/"/></url>
 <url><loc>https://qinxujunai.github.io/en/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://qinxujunai.github.io/"/></url>
+<url><loc>https://qinxujunai.github.io/work/voiceflow/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/voiceflow/"/></url>
+<url><loc>https://qinxujunai.github.io/en/work/voiceflow/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://qinxujunai.github.io/work/voiceflow/"/></url>
+<url><loc>https://qinxujunai.github.io/work/ai-signal/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/ai-signal/"/></url>
+<url><loc>https://qinxujunai.github.io/en/work/ai-signal/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://qinxujunai.github.io/work/ai-signal/"/></url>
+<url><loc>https://qinxujunai.github.io/work/wanxiang/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/wanxiang/"/></url>
+<url><loc>https://qinxujunai.github.io/en/work/wanxiang/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://qinxujunai.github.io/work/wanxiang/"/></url>
+<url><loc>https://qinxujunai.github.io/work/enterprise-ai/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/enterprise-ai/"/></url>
+<url><loc>https://qinxujunai.github.io/en/work/enterprise-ai/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://qinxujunai.github.io/work/enterprise-ai/"/></url>
+<url><loc>https://qinxujunai.github.io/work/script-agent/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/script-agent/"/></url>
+<url><loc>https://qinxujunai.github.io/en/work/script-agent/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://qinxujunai.github.io/work/script-agent/"/></url>
+<url><loc>https://qinxujunai.github.io/work/webank-rescue/</loc><xhtml:link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/webank-rescue/"/></url>
+<url><loc>https://qinxujunai.github.io/en/work/webank-rescue/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://qinxujunai.github.io/work/webank-rescue/"/></url>
 </urlset>

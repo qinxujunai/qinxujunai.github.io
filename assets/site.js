@@ -1,4 +1,4 @@
-// Theme, contact hint, the VoiceFlow capsule, gallery paddles, tile reveals and nav tracking.
+// Theme, contact hint, the VoiceFlow capsule, gallery paddles, tile reveals, the name card and nav tracking.
 // The signature is started by a tiny inline script in the hero (see scripts/build.mjs).
 (function () {
   window.qxjReady = true;
@@ -36,6 +36,22 @@
   if (text) target.textContent = text;
   var save = document.querySelector('[data-qr-save]');
   if (save && where === 'wechat') save.hidden = true;
+
+  // Name card: a slight tilt toward the pointer on desktop.
+  var card = document.querySelector('[data-tilt]');
+  if (card && !still && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--ry', (x * 10).toFixed(2) + 'deg');
+      card.style.setProperty('--rx', (-y * 10).toFixed(2) + 'deg');
+    });
+    card.addEventListener('pointerleave', function () {
+      card.style.removeProperty('--ry');
+      card.style.removeProperty('--rx');
+    });
+  }
 
   // VoiceFlow capsule: confirmed characters appear at a fixed 48 ms rhythm, as in the product.
   var typed = document.querySelector('.typed');
@@ -161,7 +177,7 @@
   var sectionObserver = new IntersectionObserver(function (entries) {
     for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) setCurrent(entries[e].target.id);
   }, { rootMargin: '-40% 0px -55% 0px' });
-  ['work', 'values', 'path', 'photos', 'contact'].forEach(function (id) {
+  ['top', 'work', 'thinking', 'method', 'path', 'contact'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });
