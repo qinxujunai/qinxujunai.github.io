@@ -4,7 +4,6 @@
 // 3. no private data anywhere in the repository
 // 4. no resource is loaded from another origin
 import fs from 'node:fs';
-import path from 'node:path';
 import { execSync } from 'node:child_process';
 
 let failed = 0;
@@ -61,9 +60,8 @@ const budget = { 'index.html': 24, 'en/index.html': 24, 'assets/site.css': 10, '
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
-const images = fs.readdirSync('assets/work').map((f) => path.join('assets/work', f));
-const total = images.reduce((s, f) => s + kb(f), 0);
-total <= 160 ? ok(`work images ${total.toFixed(0)}KB ≤ 160KB`) : fail(`work images ${total.toFixed(0)}KB > 160KB`);
+const total = ['index.html', 'assets/site.css', 'assets/site.js', 'assets/wechat-qr.png'].reduce((s, f) => s + kb(f), 0);
+total <= 40 ? ok(`first visit ${total.toFixed(0)}KB uncompressed ≤ 40KB`) : fail(`first visit ${total.toFixed(0)}KB > 40KB`);
 
 if (failed) { console.error(`\n${failed} check(s) failed`); process.exit(1); }
 console.log('\nall checks passed');

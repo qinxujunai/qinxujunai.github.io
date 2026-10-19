@@ -7,7 +7,6 @@
   --muted: #5e6570;
   --hairline: #e7e9ec;
   --stage: #f3f4f6;
-  --link: #0060f0;
   --sig: #1d2b4f;
   --press: rgba(22, 24, 28, 0.06);
   --capsule: #1b1b1d;
@@ -21,7 +20,6 @@
   --muted: #a3a9b3;
   --hairline: #2a2d33;
   --stage: #1b1d21;
-  --link: #5aa2ff;
   --sig: #c9d6f2;
   --press: rgba(236, 238, 241, 0.08);
   --capsule: #000000;
@@ -68,9 +66,7 @@ body:lang(en) {
 p,
 h1,
 h2,
-h3,
-figure,
-blockquote {
+h3 {
   margin: 0;
 }
 
@@ -78,28 +74,23 @@ p {
   text-wrap: pretty;
 }
 
+/* Links read as text with a quiet underline; the page has no separate accent color. */
 a {
-  color: var(--link);
-  text-decoration: none;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
   border-radius: 4px;
+  transition: text-decoration-color 0.2s ease;
 }
 
 a:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
-}
-
-.more a,
-.quote figcaption a {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
-  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-decoration-color: currentColor;
 }
 
 :focus-visible {
-  outline: 2px solid var(--link);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -150,11 +141,12 @@ a:hover {
   color: var(--muted);
   font: inherit;
   font-size: 15px;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.bar a:hover {
-  text-decoration: none;
+.bar a:hover,
+.bar button:hover {
   color: var(--ink);
 }
 
@@ -180,29 +172,33 @@ a:hover {
 /* Intro */
 
 .intro {
-  padding: 56px 0 88px;
+  padding: 48px 0 88px;
 }
 
 .sig {
   display: block;
   width: auto;
-  height: 96px;
+  height: 92px;
   margin: 0 0 32px -6px;
   fill: var(--sig);
   overflow: visible;
 }
 
+/* Chinese breaks only at punctuation and spaces here, so no phrase is split. */
 .lede {
-  text-wrap: balance;
   font-size: 22px;
   line-height: 1.6;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.01em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
   max-width: 30em;
 }
 
 :lang(en) .lede {
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .now {
@@ -226,11 +222,11 @@ a:hover {
   border: 1px solid var(--hairline);
   color: var(--ink);
   font-weight: 500;
+  text-decoration: none;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .button:hover {
-  text-decoration: none;
   border-color: var(--muted);
 }
 
@@ -262,45 +258,34 @@ h2 {
   margin-bottom: 24px;
 }
 
-/* Work */
+/* Work: one featured piece, then a quiet list */
 
-.work {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 64px;
+.feature h3 {
+  font-size: 26px;
+  line-height: 1.3;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  margin-top: 4px;
+}
+
+.feature .tagline {
+  font-size: 19px;
 }
 
 .stage {
-  position: relative;
   display: grid;
   place-items: center;
-  margin: 0 -20px 24px;
-  padding: 32px 20px;
+  gap: 14px;
+  margin: 24px -20px;
+  padding: 52px 20px 60px;
   background: var(--stage);
   overflow: hidden;
 }
 
-.stage img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
-}
-
-:root[data-theme='dark'] .stage img {
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 12px 32px rgba(0, 0, 0, 0.4);
-}
-
-/* VoiceFlow, drawn in HTML from its own capsule design */
-.stage.voice {
-  padding: 56px 20px 64px;
-  gap: 14px;
-}
-
-.voice kbd {
+.stage kbd {
   font: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -312,12 +297,13 @@ h2 {
   box-shadow: 0 1px 0 var(--hairline);
 }
 
-.voice .hint {
+.stage .hint {
   font-size: 13px;
   color: var(--muted);
   margin-bottom: 10px;
 }
 
+/* VoiceFlow's capsule, drawn from the product's own design */
 .capsule {
   display: flex;
   align-items: center;
@@ -361,28 +347,31 @@ h2 {
   vertical-align: -3px;
 }
 
-.work h3 {
-  font-size: 20px;
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-.tagline {
-  margin-top: 6px;
-  font-size: 17px;
-}
-
 .desc {
   margin-top: 6px;
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.75;
+}
+
+.feature .desc {
+  margin-top: 0;
+}
+
+.decision {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.decision a {
+  white-space: nowrap;
 }
 
 .links {
   display: flex;
-  gap: 20px;
-  margin-top: 10px;
+  gap: 4px;
+  margin: 8px 0 0 -10px;
   font-size: 15px;
 }
 
@@ -390,10 +379,25 @@ h2 {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+  padding: 0 10px;
+}
+
+.work {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 36px;
+}
+
+.work h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
 }
 
 .more {
-  margin-top: 48px;
+  margin-top: 40px;
   color: var(--muted);
   font-size: 15px;
 }
@@ -402,38 +406,6 @@ h2 {
 
 .about p + p {
   margin-top: 16px;
-}
-
-/* Quote: the line to remember */
-
-.quote {
-  padding: 8px 0 96px;
-}
-
-.quote blockquote p {
-  font-size: 28px;
-  line-height: 1.45;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-:lang(en) .quote blockquote p {
-  letter-spacing: -0.015em;
-}
-
-.quote blockquote p + p {
-  margin-top: 14px;
-  font-size: 17px;
-  line-height: 1.75;
-  font-weight: 400;
-  color: var(--muted);
-  letter-spacing: 0;
-}
-
-.quote figcaption {
-  margin-top: 16px;
-  font-size: 15px;
-  color: var(--muted);
 }
 
 /* Contact */
@@ -479,46 +451,25 @@ footer a {
   color: var(--muted);
 }
 
-/* The one orchestrated moment: the signature is written once, then inked. */
+/* The one orchestrated moment: each character is revealed left to right, like a pen moving. */
 
 .sig-pending .sig:not(.write) path {
-  fill: transparent;
+  clip-path: inset(-20% 100% -20% -20%);
 }
 
 .sig.write path {
-  fill: transparent;
-  stroke: var(--sig);
-  stroke-width: 0.7;
-  stroke-linejoin: round;
-  stroke-dasharray: var(--len);
-  stroke-dashoffset: var(--len);
-  animation: write 0.62s cubic-bezier(0.45, 0, 0.2, 1) forwards, ink 0.5s ease forwards;
-  animation-delay: var(--at), calc(var(--at) + 0.5s);
+  clip-path: inset(-20% 100% -20% -20%);
+  animation: write 0.7s cubic-bezier(0.55, 0.1, 0.3, 1) forwards;
+  animation-delay: var(--at);
 }
 
 @keyframes write {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes ink {
-  to { fill: var(--sig); stroke-width: 0; }
+  to { clip-path: inset(-20% -20% -20% -20%); }
 }
 
 @media (min-width: 720px) {
-  body {
-    font-size: 17px;
-  }
-
   .intro {
     padding: 96px 0 120px;
-  }
-
-  section {
-    padding-bottom: 112px;
-  }
-
-  .work {
-    gap: 88px;
   }
 
   .sig {
@@ -526,31 +477,44 @@ footer a {
   }
 
   .lede {
-    font-size: 24px;
+    font-size: 26px;
+    line-height: 1.5;
+  }
+
+  section {
+    padding-bottom: 112px;
   }
 
   .stage {
-    margin: 0 0 24px;
-    padding: 40px;
+    margin: 28px 0;
+    padding: 72px 40px 80px;
     border-radius: 16px;
   }
 
-  .stage.voice {
-    padding: 72px 40px 80px;
+  .work {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
   }
 
-  .quote blockquote p {
-    font-size: 34px;
+  .work li {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .work .links {
+    margin-top: auto;
+    padding-top: 8px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sig.write path {
+  .sig.write path,
+  .sig-pending .sig:not(.write) path {
     animation: none;
-    fill: var(--sig);
-    stroke-width: 0;
+    clip-path: none;
   }
 
+  a,
   .button {
     transition: none;
   }
