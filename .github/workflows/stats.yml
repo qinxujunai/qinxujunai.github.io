@@ -39,7 +39,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/stats.json index.html en/index.html
+          git add src/stats.json index.html en work sitemap.xml
           git commit -m "更新 VoiceFlow 的 GitHub 数据"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"

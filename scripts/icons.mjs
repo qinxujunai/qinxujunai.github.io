@@ -1,5 +1,6 @@
-// Builds favicon.svg, apple-touch-icon.png, share.png (WeChat/social thumbnail) and og.png
-// from the signature, so every icon carries the same hand.
+// Builds favicon.svg, apple-touch-icon.png, share.png (WeChat/social thumbnail), og.png and the
+// downloadable name cards (assets/card-zh.png, assets/card-en.png) from the signature, so every
+// image carries the same hand. The cards embed assets/wechat-qr.png; npm run qa checks they still scan.
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import { content } from '../src/content.mjs';
@@ -60,5 +61,32 @@ await render(
       <div style="margin-top:20px;font-size:28px;color:#5e6570">qinxujunai.github.io</div>
     </div></div>`,
 );
+
+// Name card, portrait for a phone album: the same card as the contact section, QR large enough to scan.
+const dataUri = (f, type) => `data:${type};base64,${fs.readFileSync(f).toString('base64')}`;
+const qr = dataUri('assets/wechat-qr.png', 'image/png');
+const avatar = dataUri('assets/media/avatar-320.webp', 'image/webp');
+for (const lang of ['zh', 'en']) {
+  const c = content[lang];
+  await render(
+    `assets/card-${lang}.png`,
+    1080,
+    1350,
+    `<div style="box-sizing:border-box;width:1080px;height:1350px;padding:96px;background:#f5f5f7;display:flex;flex-direction:column;justify-content:center">
+      <div style="border-radius:56px;background:#1d1d1f;color:#f5f5f7;padding:72px 68px 64px;box-shadow:0 40px 80px -30px rgba(0,0,0,.45)">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          ${svg.replace('<svg', '<svg style="height:120px;width:auto;fill:#f5f5f7"')}
+          <img src="${avatar}" style="width:128px;height:128px;border-radius:50%">
+        </div>
+        <div style="margin-top:72px;font-size:56px;font-weight:600">${c.name}</div>
+        <div style="margin-top:10px;font-size:30px;color:#a1a1a6">${c.role} · ${c.org}</div>
+        <div style="margin-top:40px;font-size:38px;line-height:1.35">${c.lede}</div>
+        <div style="margin-top:56px;display:flex;align-items:center;gap:40px">
+          <img src="${qr}" style="width:300px;height:300px;padding:16px;background:#fff;border-radius:28px">
+          <div style="font-size:28px;line-height:1.5;color:#a1a1a6">${lang === 'zh' ? '微信扫一扫<br>加我微信' : 'Scan with WeChat<br>to add me'}<br><br>qinxujunai.github.io</div>
+        </div>
+      </div></div>`,
+  );
+}
 
 await browser.close();
