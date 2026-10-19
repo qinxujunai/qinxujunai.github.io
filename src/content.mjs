@@ -76,7 +76,7 @@ export const content = {
         name: '万象成文',
         tagline: '把视频、播客和图文，直接变成可用的文字与媒体。',
         desc: 'Windows 本地优先，当前版本 v2.1.0。只做三件事：音视频转文字、提取图文、下载原始媒体；账号和支付都不做。',
-        image: { key: 'wanxiang', mobile: 'wanxiang-m', alt: '万象成文的结果页：左边是整理好的正文，右边是视频预览与下载按钮' },
+        image: { key: 'wanxiang', mobile: 'wanxiang-m', alt: '万象成文首页：把链接或文件，直接变成文字。下面是粘贴链接的输入框，可以从剪贴板粘贴或上传本地文件' },
         ...links.wanxiang,
       },
       {
@@ -193,7 +193,7 @@ export const content = {
         name: 'Wanxiang',
         tagline: 'Turn videos, podcasts, and visual articles into usable text and media.',
         desc: 'Local-first, for Windows, now at v2.1.0. It does three things: transcribe audio and video, extract articles, and download the original media. No accounts, no payments.',
-        image: { key: 'wanxiang', mobile: 'wanxiang-m', alt: 'Wanxiang result screen (in Chinese): the cleaned-up transcript on the left, video preview and downloads on the right' },
+        image: { key: 'wanxiang', mobile: 'wanxiang-m', alt: 'Wanxiang home screen (in Chinese): turn a link or a file straight into text, with a box to paste a link or upload a local file' },
         ...links.wanxiang,
       },
       {

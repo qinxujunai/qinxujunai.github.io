@@ -11,7 +11,7 @@ const esc = (s) =>
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names are kept whole.
 const KEEP = [
-  '秦徐俊', '奥普智能', '万象成文', '云 AI 项目经理', '可运行的作品', '播客', '能用', '视频', '离线', '在线识别',
+  '做云 AI 项目经理', '秦徐俊', '奥普智能', '万象成文', '云 AI 项目经理', '可运行的作品', '播客', '能用', '视频', '离线', '在线识别',
   '智能体', '内容生产', '自然语言', '上下文', '老本行', '爆款案例', '信息流', '数据平台', '智能分析', '公益项目',
   '创造可运行的作品', '不联网', '迭代至今',
 ];
@@ -154,7 +154,7 @@ function voiceflow(c) {
 ${tileLinks(c, f)}
 </div>
 <figure class="device">
-${img(f.image.key, f.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw', cls: 'app', mobile: f.image.mobile })}
+${img(f.image.key, f.image.alt, { sizes: '(min-width: 1068px) 860px, 92vw', cls: 'app', mobile: f.image.mobile, eager: true })}
 <div class="demo" aria-hidden="true">
 <kbd>${esc(f.key)}</kbd>
 <div class="capsule"><span class="bars"><i></i><i></i><i></i></span><span class="typed" data-lines="${esc(JSON.stringify(f.lines))}">${esc(f.lines[0])}</span><span class="caret"></span></div>
