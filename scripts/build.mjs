@@ -65,34 +65,43 @@ function bar(c) {
 </nav>`;
 }
 
-function visual(item) {
-  if (item.voice) {
-    const v = item.voice;
-    return `<div class="stage voice" role="img" aria-label="${esc(`${item.name}: ${v.hint}. ${v.text}`)}">
+function voiceStage(item) {
+  const v = item.voice;
+  return `<div class="stage voice" role="img" aria-label="${esc(`${item.name}: ${v.hint}. ${v.text}`)}">
 <kbd aria-hidden="true">${esc(v.key)}</kbd>
 <p class="hint" aria-hidden="true">${esc(v.hint)}</p>
 <div class="capsule" aria-hidden="true"><span class="bars"><i></i><i></i><i></i></span><span>${esc(v.text)}<span class="caret"></span></span></div>
 </div>`;
-  }
-  const i = item.image;
-  return `<div class="stage"><img src="${i.src}" width="${i.w / 2}" height="${i.h / 2}" alt="${esc(i.alt)}" loading="lazy" decoding="async"></div>`;
 }
 
-function workItem(c, item) {
+function links(c, item) {
+  return `<p class="links"><a href="${item.site}" ${ext}>${c.siteLabel}<span class="visually-hidden">: ${esc(item.name)}</span></a><a href="${item.repo}" ${ext}>${c.repoLabel}<span class="visually-hidden">: ${esc(item.name)}</span></a></p>`;
+}
+
+// The featured piece: name first, then the product itself, then one decision behind it.
+function featured(c, item) {
+  return `<article class="feature" id="${item.id}">
+<h3>${esc(item.name)}</h3>
+<p class="tagline">${esc(item.tagline)}</p>
+${voiceStage(item)}
+<p class="desc">${esc(item.desc)}</p>
+<p class="decision">${esc(item.decision)} <a href="${item.decisionLink.href}" ${ext}>${esc(item.decisionLink.label)}</a></p>
+${links(c, item)}
+</article>`;
+}
+
+function entry(c, item) {
   return `<li id="${item.id}">
-${visual(item)}
 <h3>${esc(item.name)}</h3>
 <p class="tagline">${esc(item.tagline)}</p>
 <p class="desc">${esc(item.desc)}</p>
-<p class="links"><a href="${item.site}" ${ext}>${c.siteLabel}<span class="visually-hidden">: ${esc(item.name)}</span></a><a href="${item.repo}" ${ext}>${c.repoLabel}<span class="visually-hidden">: ${esc(item.name)}</span></a></p>
+${links(c, item)}
 </li>`;
 }
 
 function page(c) {
   const [m1, m2, m3] = c.more;
-  const [q1, q2] = c.quote;
-  const [s1, s2, s3] = c.quoteSource;
-  const vibe = c.work.find((w) => w.id === 'vibecoding');
+  const [first, ...rest] = c.work;
   return `${head(c, { canonical: c.path })}
 <body>
 <a class="skip" href="#main">${c.skip}</a>
@@ -108,8 +117,9 @@ ${bar(c)}
 
 <section id="work" aria-labelledby="work-title">
 <h2 id="work-title">${c.workTitle}</h2>
+${featured(c, first)}
 <ul class="work">
-${c.work.map((w) => workItem(c, w)).join('\n')}
+${rest.map((w) => entry(c, w)).join('\n')}
 </ul>
 <p class="more">${esc(m1)}<a href="${GITHUB}" ${ext}>${m2}</a>${esc(m3)}</p>
 </section>
@@ -119,15 +129,10 @@ ${c.work.map((w) => workItem(c, w)).join('\n')}
 ${c.about.map((p) => `<p>${esc(p)}</p>`).join('\n')}
 </section>
 
-<figure class="quote">
-<blockquote><p>${esc(q1)}</p><p>${esc(q2)}</p></blockquote>
-<figcaption>${esc(s1)}<a href="${vibe.site}" ${ext}>${s2}</a>${esc(s3)}</figcaption>
-</figure>
-
 <section id="contact" class="contact" aria-labelledby="contact-title">
 <h2 id="contact-title">${c.contactTitle}</h2>
 <p>${esc(c.contactLead)}</p>
-<img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" loading="lazy" decoding="async">
+<img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async">
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(c.hint.wechat)}" data-hint-phone="${esc(c.hint.phone)}" data-hint-desktop="${esc(c.hint.desktop)}">${esc(c.hint.default)}</p>
 <p class="actions"><a class="button" href="/assets/wechat-qr.png" download="qin-xujun-wechat.png" data-qr-save>${c.save}</a><a class="button" href="${GITHUB}" ${ext}>${c.github}</a></p>
 </section>

@@ -34,7 +34,7 @@
   var save = document.querySelector('[data-qr-save]');
   if (save && where === 'wechat') save.hidden = true;
 
-  // Signature: write each glyph in turn, once per visit.
+  // Signature: reveal each character in turn, once per visit.
   var sig = document.querySelector('.sig');
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var seen = false;
@@ -42,13 +42,7 @@
   if (!(sig && !still && !seen && sig.querySelectorAll)) root.classList.remove('sig-pending');
   else {
     var paths = sig.querySelectorAll('path');
-    var at = 0.15;
-    for (var i = 0; i < paths.length; i++) {
-      var len = Math.ceil(paths[i].getTotalLength());
-      paths[i].style.setProperty('--len', len);
-      paths[i].style.setProperty('--at', at + 's');
-      at += 0.42;
-    }
+    for (var i = 0; i < paths.length; i++) paths[i].style.setProperty('--at', 0.2 + i * 0.5 + 's');
     sig.classList.add('write');
     root.classList.remove('sig-pending');
     try { sessionStorage.setItem('qxj.signed', '1'); } catch (e) {}
