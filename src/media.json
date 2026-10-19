@@ -31,30 +31,30 @@
     "720": {
       "src": "/assets/media/voiceflow-app-m-720.webp",
       "w": 720,
-      "h": 540,
-      "kb": 11
+      "h": 341,
+      "kb": 8
     }
   },
   "wanxiang": {
     "640": {
       "src": "/assets/media/wanxiang-640.webp",
       "w": 640,
-      "h": 311,
-      "kb": 8
+      "h": 394,
+      "kb": 11
     },
-    "1200": {
-      "src": "/assets/media/wanxiang-1200.webp",
-      "w": 1200,
-      "h": 584,
-      "kb": 20
+    "1040": {
+      "src": "/assets/media/wanxiang-1040.webp",
+      "w": 1040,
+      "h": 640,
+      "kb": 24
     }
   },
   "wanxiang-m": {
     "720": {
       "src": "/assets/media/wanxiang-m-720.webp",
       "w": 720,
-      "h": 417,
-      "kb": 13
+      "h": 375,
+      "kb": 12
     }
   },
   "photo-aerial": {
