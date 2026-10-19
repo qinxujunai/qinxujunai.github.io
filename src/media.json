@@ -1,0 +1,184 @@
+{
+  "avatar": {
+    "160": {
+      "src": "/assets/media/avatar-160.webp",
+      "w": 160,
+      "h": 160,
+      "kb": 2
+    },
+    "320": {
+      "src": "/assets/media/avatar-320.webp",
+      "w": 320,
+      "h": 320,
+      "kb": 6
+    }
+  },
+  "voiceflow-app": {
+    "640": {
+      "src": "/assets/media/voiceflow-app-640.webp",
+      "w": 640,
+      "h": 431,
+      "kb": 8
+    },
+    "1280": {
+      "src": "/assets/media/voiceflow-app-1280.webp",
+      "w": 1280,
+      "h": 862,
+      "kb": 25
+    }
+  },
+  "wanxiang": {
+    "640": {
+      "src": "/assets/media/wanxiang-640.webp",
+      "w": 640,
+      "h": 461,
+      "kb": 14
+    },
+    "1000": {
+      "src": "/assets/media/wanxiang-1000.webp",
+      "w": 1000,
+      "h": 720,
+      "kb": 30
+    }
+  },
+  "photo-aerial": {
+    "480": {
+      "src": "/assets/media/photo-aerial-480.webp",
+      "w": 480,
+      "h": 270,
+      "kb": 26
+    },
+    "960": {
+      "src": "/assets/media/photo-aerial-960.webp",
+      "w": 960,
+      "h": 540,
+      "kb": 104
+    }
+  },
+  "photo-pagoda": {
+    "480": {
+      "src": "/assets/media/photo-pagoda-480.webp",
+      "w": 480,
+      "h": 320,
+      "kb": 11
+    },
+    "960": {
+      "src": "/assets/media/photo-pagoda-960.webp",
+      "w": 960,
+      "h": 640,
+      "kb": 36
+    }
+  },
+  "photo-gate": {
+    "480": {
+      "src": "/assets/media/photo-gate-480.webp",
+      "w": 480,
+      "h": 309,
+      "kb": 36
+    },
+    "960": {
+      "src": "/assets/media/photo-gate-960.webp",
+      "w": 960,
+      "h": 618,
+      "kb": 129
+    }
+  },
+  "photo-wall": {
+    "480": {
+      "src": "/assets/media/photo-wall-480.webp",
+      "w": 480,
+      "h": 285,
+      "kb": 29
+    },
+    "960": {
+      "src": "/assets/media/photo-wall-960.webp",
+      "w": 960,
+      "h": 570,
+      "kb": 86
+    }
+  },
+  "photo-dusk": {
+    "480": {
+      "src": "/assets/media/photo-dusk-480.webp",
+      "w": 480,
+      "h": 320,
+      "kb": 13
+    },
+    "960": {
+      "src": "/assets/media/photo-dusk-960.webp",
+      "w": 960,
+      "h": 640,
+      "kb": 35
+    }
+  },
+  "photo-buddha": {
+    "480": {
+      "src": "/assets/media/photo-buddha-480.webp",
+      "w": 480,
+      "h": 719,
+      "kb": 29
+    },
+    "960": {
+      "src": "/assets/media/photo-buddha-960.webp",
+      "w": 960,
+      "h": 1439,
+      "kb": 82
+    }
+  },
+  "photo-sky": {
+    "480": {
+      "src": "/assets/media/photo-sky-480.webp",
+      "w": 480,
+      "h": 320,
+      "kb": 7
+    },
+    "960": {
+      "src": "/assets/media/photo-sky-960.webp",
+      "w": 960,
+      "h": 640,
+      "kb": 18
+    }
+  },
+  "photo-autumn": {
+    "480": {
+      "src": "/assets/media/photo-autumn-480.webp",
+      "w": 480,
+      "h": 270,
+      "kb": 22
+    },
+    "960": {
+      "src": "/assets/media/photo-autumn-960.webp",
+      "w": 960,
+      "h": 540,
+      "kb": 83
+    }
+  },
+  "vibecoding": {
+    "640": {
+      "src": "/assets/media/vibecoding-640.webp",
+      "w": 640,
+      "h": 216,
+      "kb": 7
+    },
+    "1280": {
+      "src": "/assets/media/vibecoding-1280.webp",
+      "w": 1280,
+      "h": 433,
+      "kb": 19
+    }
+  },
+  "work-method": {
+    "640": {
+      "src": "/assets/media/work-method-640.webp",
+      "w": 640,
+      "h": 372,
+      "kb": 13
+    },
+    "1280": {
+      "src": "/assets/media/work-method-1280.webp",
+      "w": 1280,
+      "h": 745,
+      "kb": 32
+    }
+  }
+}
