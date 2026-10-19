@@ -66,9 +66,9 @@ await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80,
 
 // Products
 await emit('voiceflow-app', find(/^voiceflow-app\./), { width: 640 });
-await emit('voiceflow-app-m', find(/^voiceflow-app\./), { widths: [720], crop: { left: 300, top: 110, width: 760, height: 570 } });
-await emit('wanxiang', find(/^wanxiang-home\./), { width: 640, crop: { left: 120, top: 46, width: 1200, height: 584 } });
-await emit('wanxiang-m', find(/^wanxiang-home\./), { widths: [720], crop: { left: 250, top: 46, width: 940, height: 544 } });
+await emit('voiceflow-app-m', find(/^voiceflow-app\./), { widths: [720], crop: { left: 300, top: 120, width: 1140, height: 540 } });
+await emit('wanxiang', find(/^wanxiang-home\./), { width: 640, crop: { left: 200, top: 70, width: 1040, height: 640 } });
+await emit('wanxiang-m', find(/^wanxiang-home\./), { widths: [720], crop: { left: 230, top: 80, width: 980, height: 510 } });
 
 await emit('ai-signal', find(/^ai-signal\./), { width: 640, crop: { left: 160, top: 48, width: 1200, height: 1000 } });
 await emit('ai-signal-m', find(/^ai-signal\./), { widths: [720], crop: { left: 160, top: 48, width: 1200, height: 900 } });

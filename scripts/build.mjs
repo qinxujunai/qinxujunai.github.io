@@ -20,7 +20,7 @@ const KEEP = [
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', 'AI 项目经理', '能用的 AI', 'AI 问数', 'AI 赋能课程',
   '智能体', '上下文', '自然语言', '许愿池', '爆款案例', '信息流', '回款率', '采购评估', '招投标', '剪贴板', '终稿', '离线',
   '受监督', '子进程', '原生绘制', '浏览器验收', '构建自愈', '原子修改', '计划闸门', '上下文装载', '访谈对话', '想用 AI',
-  '到能用的 AI', '再让 AI 动手', '再把概率压成确定性', '终极浪漫', '数据智能', '数据平台', '智能分析', '金融控股集团', '乡村英才计划', '未来星计划', '冒烟测试', '代码签名', '安全提示',
+  '到能用的 AI', '再让 AI 动手', '第一行代码', '创造者', '无需登录', '不声明完成', '都跑', '一个字都不丢', '逐字回读', '再把概率压成确定性', '终极浪漫', '数据智能', '数据平台', '智能分析', '金融控股集团', '乡村英才计划', '未来星计划', '冒烟测试', '代码签名', '安全提示',
 ];
 const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
 const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -30,6 +30,7 @@ function zhText(s) {
   for (const [re, k] of KEEP_RE) out = out.replace(re, k);
   return out
     .replace(/(\d[\d.,]*[%+]?)<wbr> <wbr>(?=[一-鿿A-Za-z])/g, '$1 ') // "3 小时", "10.5 万元"
+    .replace(/(\d)<wbr>([–\-./:→])/g, '$1$2').replace(/([–\-./:])<wbr>(\d)/g, '$1$2') // "2026-10-19", "0–10"
     .replace(/<wbr>([，。、；：！？）」』”])/g, '$1')
     .replace(/([（「『“])<wbr>/g, '$1')
     .replace(/<wbr>\s<wbr>/g, ' ');
@@ -44,8 +45,10 @@ const signature = (cls) =>
   signatureSvg
     .replace('<svg xmlns="http://www.w3.org/2000/svg"', `<svg class="${cls}" aria-hidden="true" focusable="false"`)
     .replace('<path', '<g id="sig-paths"><path')
+    .replace('<path class="seal"', '</g><g id="sig-seal"><path class="seal"')
     .replace('</svg>', '</g></svg>');
-const signatureRef = (cls) => `<svg class="${cls}" viewBox="${sigViewBox}" aria-hidden="true" focusable="false"><use href="#sig-paths"/></svg>`;
+// Small signatures leave the seal out: below ~20px it reads as a red dot.
+const signatureRef = (cls, { seal = true } = {}) => `<svg class="${cls}" viewBox="${sigViewBox}" aria-hidden="true" focusable="false"><use href="#sig-paths"/>${seal ? '<use href="#sig-seal"/>' : ''}</svg>`;
 
 const ext = 'rel="noopener"';
 const chevron = '<span class="chev" aria-hidden="true">›</span>';
@@ -144,14 +147,14 @@ function nav(c, { switchHref, onHome }) {
   const base = onHome ? '' : home(c);
   return `<header class="nav">
 <div class="nav-inner">
-<a class="nav-sig" href="${onHome ? '#top' : home(c)}" aria-label="${esc(c.name)} · ${esc(c.home)}">${onHome ? signatureRef('sig-mini') : signature('sig-mini')}</a>
+<a class="nav-sig" href="${onHome ? '#top' : home(c)}" aria-label="${esc(c.name)} · ${esc(c.home)}">${onHome ? signatureRef('sig-mini', { seal: false }) : signature('sig-mini')}</a>
 <nav class="nav-links" aria-label="${esc(c.navLabel)}">
 ${SECTIONS.map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a>`).join('\n')}
 </nav>
 <div class="nav-tools">
 <a href="${switchHref}" hreflang="${c.switchLang}" lang="${c.switchLang}">${c.switchLabel}</a>
 <button type="button" data-theme-toggle aria-label="${esc(c.themeLabel)}">${icons.sunMoon}</button>
-<a class="pill" href="${base}#contact">${c.addWechat}</a>
+<a class="pill" href="${base}#contact">${c.navWechat}</a>
 </div>
 </div>
 </header>`;
@@ -275,8 +278,8 @@ function thinking(c) {
 <div class="tile dark statement" data-statement>
 <p class="eyebrow">${c.thinkingTitle}</p>
 <h2 class="pull" id="thinking-title">${statement(c, c.thinkingHeadline)}</h2>
-<blockquote class="said"><p>“${T(c, c.thinkingQuote)}”</p></blockquote>
-<p class="source">${esc(s1)}<a href="${VIBECODING}" ${ext}>${s2}</a>${esc(s3)}</p>
+<blockquote class="said"><p>${c.lang === 'zh-CN' ? `「${T(c, c.thinkingQuote)}」` : `“${esc(c.thinkingQuote)}”`}</p></blockquote>
+<p class="source">${esc(s1)}<a href="${VIBECODING}" ${ext}>${s2}${chevron}</a>${esc(s3)}</p>
 </div>
 <div class="tile soft">
 <h2 class="reveal">${T(c, c.abilitiesHeadline)}</h2>
@@ -343,7 +346,7 @@ function contact(c) {
 <div class="namecard" role="group" aria-label="${esc(c.cardLabel)}" data-tilt>
 <div class="nc-top">${signatureRef('nc-sig')}${img('avatar', '', { sizes: '56px', cls: 'nc-avatar' })}</div>
 <div class="nc-bottom">
-<div class="nc-id"><p class="nc-name">${esc(c.name)}</p><p class="nc-role">${T(c, `${c.role} · ${c.org}`)}</p><p class="nc-line">${T(c, c.lede)}</p></div>
+<div class="nc-id"><p class="nc-name">${esc(c.name)}</p><p class="nc-role">${T(c, c.role)}</p><p class="nc-org">${T(c, c.org)}</p></div>
 <div class="nc-qr"><img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async"></div>
 </div>
 </div>
@@ -351,7 +354,6 @@ function contact(c) {
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(c.hint.wechat)}" data-hint-phone="${esc(c.hint.phone)}" data-hint-desktop="${esc(c.hint.desktop)}">${esc(c.hint.default)}</p>
 <p class="cta"><a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a><a class="more-link" href="${GITHUB}" ${ext}>${c.github}${chevron}</a></p>
 <p class="closing-line reveal">${T(c, c.closing)}</p>
-${signatureRef('sig sig-end')}
 </section>`;
 }
 
