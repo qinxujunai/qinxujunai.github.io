@@ -76,7 +76,7 @@ export const CASES = [
           table: {
             head: ['决定', '原因', '放弃的方案'],
             rows: [
-              ['默认只带 SenseVoice 一个终稿模型', '同机实测它又快又准；Qwen3-ASR 输出了繁体，Whisper 多出约 1 GB 却没有更好', '让用户在设置里自己挑模型'],
+              ['默认只带 SenseVoice 一个终稿模型', '同机、中英各一条公开样本上，它最快，也没有输；Qwen3-ASR 输出了繁体，Whisper 多出约 1 GB 却没有更好', '让用户在设置里自己挑模型'],
               ['预览和终稿分开', '流式模型负责“快”，完整音频负责“准”，预览永远不能覆盖终稿', '一个模型同时管两件事'],
               ['不接在线识别', '它会打破“离线”这个承诺', '更多模型、更高的上限'],
               ['成功时不弹“已完成”', '文字已经出现在输入框里，再确认一次只会显得更慢', '每次都播一段确认动画'],
@@ -86,7 +86,7 @@ export const CASES = [
         },
         {
           h: '怎么证明它可靠',
-          p: ['发布机实测（Windows 11 · Ryzen 7 5800H），每一档 20 个样本，取 P95：'],
+          p: ['v0.3.1 发布机实测（Windows 11 · Ryzen 7 5800H），每一档 20 个样本，取 P95：'],
           metrics: [
             { v: '6 ms', l: '按下 F2 到第一帧反馈', g: '门槛 ≤ 50 ms' },
             { v: '427 ms', l: '0–10 秒录音，停止到粘贴', g: '门槛 ≤ 500 ms' },
@@ -184,7 +184,7 @@ export const CASES = [
           table: {
             head: ['Decision', 'Why', 'Given up'],
             rows: [
-              ['Ship one final model: SenseVoice', 'On the same machine it was both fastest and most accurate; Qwen3-ASR returned Traditional Chinese, Whisper added about 1 GB without doing better', 'A model picker in settings'],
+              ['Ship one final model: SenseVoice', 'On one public Chinese and one English sample on the same machine, it was fastest and lost nothing; Qwen3-ASR returned Traditional Chinese, Whisper added about 1 GB without doing better', 'A model picker in settings'],
               ['Separate preview from final text', 'The streaming model is for speed, the full recording is for accuracy, and the preview may never overwrite the final', 'One model doing both jobs'],
               ['No online recognition', 'It would break the promise of working offline', 'More models and a higher ceiling'],
               ['No “Done” on success', 'The text is already in the box; confirming it again only makes it feel slower', 'A confirmation animation every time'],
@@ -194,7 +194,7 @@ export const CASES = [
         },
         {
           h: 'How I know it holds up',
-          p: ['Measured on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:'],
+          p: ['Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:'],
           metrics: [
             { v: '6 ms', l: 'F2 to first feedback', g: 'Gate ≤ 50 ms' },
             { v: '427 ms', l: 'Stop to paste, 0–10 s clips', g: 'Gate ≤ 500 ms' },
@@ -322,7 +322,7 @@ export const CASES = [
           list: [
             '推文、播客和博客依赖第三方的 follow-builders feed，它一停，这几类就会断。',
             '按兴趣过滤的函数写好了，还没接进流程；目前兴趣只作为提示词里的偏好。',
-            '👍 / 👎 的反馈只做了统计，还没有反过来调整筛选标准。',
+            '👍 / 👎 的反馈还没有反过来调整筛选标准。',
           ],
         },
       ],
@@ -408,7 +408,7 @@ export const CASES = [
           list: [
             'Posts, podcasts and blogs depend on the third-party follow-builders feed. If it stops, those sections stop.',
             'The interest filter is written but not yet wired in; interests are only passed to the prompt as a preference.',
-            '👍 / 👎 feedback is counted but does not yet tune the selection.',
+            '👍 / 👎 feedback does not yet tune the selection.',
           ],
         },
       ],
@@ -438,7 +438,7 @@ export const CASES = [
       links: [['官网', 'https://qinxujunai.github.io/Audio2Text/'], ['源码', A2T], ['下载', `${A2T}/releases/latest`]],
       results: [
         { v: '6 个', l: '平台：B 站、小宇宙、抖音、小红书、公众号、YouTube' },
-        { v: '0.035', l: 'CPU 转写实时率 RTF（越小越快）' },
+        { v: '0.035', l: 'CPU 转写实时率 RTF，单样本探测（越小越快）' },
         { v: '521 KB → 2 KB', l: '小红书单次提取的传输量' },
         { v: '3 件事', l: '只做转文字、提图文、下原件' },
       ],
@@ -522,7 +522,7 @@ export const CASES = [
       links: [['Website', 'https://qinxujunai.github.io/Audio2Text/'], ['Source', A2T], ['Download', `${A2T}/releases/latest`]],
       results: [
         { v: '6', l: 'Platforms: Bilibili, Xiaoyuzhou, Douyin, Xiaohongshu, WeChat articles, YouTube' },
-        { v: '0.035', l: 'Real-time factor on CPU (lower is faster)' },
+        { v: '0.035', l: 'Real-time factor on CPU, single-sample probe (lower is faster)' },
         { v: '521 → 2 KB', l: 'Transfer per Xiaohongshu extraction' },
         { v: '3', l: 'Jobs: transcribe, extract, download' },
       ],
@@ -614,9 +614,8 @@ export const CASES = [
       ],
       results: [
         { v: '5+', l: '客户进入采购评估' },
-        { v: '100%', l: '回款率' },
+        { v: '100%', l: '负责项目的回款率' },
         { v: '3 万–10 万+', l: '项目规模，全链路闭环' },
-        { v: '4 个维度', l: '选型评估：能力、成本、交付周期、ROI' },
       ],
       sections: [
         {
@@ -651,10 +650,10 @@ export const CASES = [
     en: {
       name: 'Enterprise AI solutions',
       kind: 'Solution · Bizhi Technology',
-      title: 'From the first requirements meeting to 100% collected.',
+      title: 'From first meeting to full payment.',
       sub: 'As an AI solution architect at Bizhi Technology, I helped finance and government clients turn “we want AI” into projects that could be bought, delivered and paid for.',
       card: 'Data-intelligence and natural-language-query solutions, followed from diagnosis to payment.',
-      bigLabel: 'Collected on ¥30,000–100,000+ projects',
+      bigLabel: 'Payment collected on ¥30k–100k+ projects',
       facts: [
         ['Role', 'AI Solution Architect'],
         ['When', 'From Nov 2025'],
@@ -664,9 +663,8 @@ export const CASES = [
       ],
       results: [
         { v: '5+', l: 'Clients moved into procurement evaluation' },
-        { v: '100%', l: 'Of project revenue collected' },
+        { v: '100%', l: 'Payment collected on my projects' },
         { v: '¥30k–100k+', l: 'Projects run end to end' },
-        { v: '4', l: 'Selection criteria: capability, cost, delivery time, ROI' },
       ],
       sections: [
         {
@@ -722,7 +720,6 @@ export const CASES = [
       results: [
         { v: '50+', l: '个爆款案例，逐条拆解' },
         { v: '3 小时 → 20 分钟', l: '单条脚本的创作时间' },
-        { v: '800%', l: '效率提升' },
         { v: '第一个', l: '公司 AI 驱动的内容工作流' },
       ],
       sections: [
@@ -736,7 +733,7 @@ export const CASES = [
             { t: '拆解', n: ['找来 50+ 个爆款案例', '逐条拆出背后的逻辑'] },
             { t: '沉淀', n: ['把这些逻辑整理成智能体的规则和上下文'] },
             { t: '搭建', n: ['在飞书搭出“爆款脚本生成智能体”'] },
-            { t: '进入流程', n: ['接进创始人 IP 的选题和脚本生产', '团队用它写，人来把关'] },
+            { t: '进入流程', n: ['接进创始人 IP 的选题和脚本生产'] },
           ],
           after: ['这就是“组织上下文的能力”：模型写得好不好，很大程度上取决于你喂给它的东西有多结构化。'],
         },
@@ -745,7 +742,6 @@ export const CASES = [
           list: [
             '单条脚本从 3 小时缩到 20 分钟。',
             '成为公司第一个“AI 驱动”的内容生产工作流。',
-            '同一时期，我带队用 5 天完成方正证券活动开场 AI 宣传片，从创意策划到最终交付。',
           ],
         },
       ],
@@ -766,7 +762,6 @@ export const CASES = [
       results: [
         { v: '50+', l: 'Hit videos broken down, one by one' },
         { v: '3h → 20min', l: 'Time to write one script' },
-        { v: '800%', l: 'Efficiency gain' },
         { v: 'First', l: 'AI-driven content workflow at the company' },
       ],
       sections: [
@@ -780,7 +775,7 @@ export const CASES = [
             { t: 'Break down', n: ['Collect 50+ hit videos', 'Extract the logic behind each one'] },
             { t: 'Distill', n: ['Turn that logic into the agent’s rules and context'] },
             { t: 'Build', n: ['A “hit script” agent in Feishu'] },
-            { t: 'Put it to work', n: ['Wire it into topic planning and script production', 'The team drafts with it; people sign off'] },
+            { t: 'Put it to work', n: ['Wire it into topic planning and script production'] },
           ],
           after: ['This is what organizing context means in practice: how well a model writes depends largely on how structured its inputs are.'],
         },
@@ -789,7 +784,6 @@ export const CASES = [
           list: [
             'One script went from three hours to twenty minutes.',
             'It became the company’s first AI-driven content production workflow.',
-            'In the same period I led a team that delivered an AI opening film for a Founder Securities event in five days, from concept to final cut.',
           ],
         },
       ],
@@ -804,8 +798,8 @@ export const CASES = [
     big: { zh: '5 天', en: '5 days' },
     zh: {
       name: '微众银行 AI 课程',
-      kind: '方案 · 一念智能',
-      title: '48 小时，把一个快要违约的项目救回来。',
+      kind: '项目交付 · 一念智能',
+      title: '48 小时找到病因，5 天交完 30 天的量。',
       sub: '一个 10.5 万元的 AI 课程项目，因为前期交付质量出了问题，客户信任受损、濒临违约。我临时接手。',
       card: '10.5 万元的项目濒临违约。接手后 48 小时诊断，5 天交完 30 天的量。',
       bigLabel: '完成原定 30 天的交付量',
@@ -818,7 +812,7 @@ export const CASES = [
       results: [
         { v: '48 小时', l: '完成诊断，拿出补救方案' },
         { v: '5 天', l: '完成原定 30 天的交付量' },
-        { v: '3 节', l: 'AI 赋能课程，高标准交付' },
+        { v: '3 节', l: 'AI 赋能课程，全部交付' },
         { v: '20–30 万', l: '级别的后续合作意向' },
       ],
       sections: [
@@ -840,15 +834,14 @@ export const CASES = [
           list: [
             '客户点名要我继续负责项目剩下的部分。',
             '项目从潜在亏损，变成 20–30 万级别的后续合作意向。',
-            '团队成员的信任，也是在这次一起扛下来的。',
           ],
         },
       ],
     },
     en: {
       name: 'WeBank AI course',
-      kind: 'Solution · Yinian Intelligence',
-      title: 'Forty-eight hours to pull a failing project back.',
+      kind: 'Delivery · Yinian Intelligence',
+      title: '48 hours to find the problem. Five days to deliver a month of work.',
       sub: 'A ¥105,000 AI training project for WeBank was close to default after early delivery problems had cost the client’s trust. I was brought in to take it over.',
       card: 'A ¥105,000 project close to default: diagnosed in 48 hours, 30 days of work delivered in five.',
       bigLabel: 'To deliver 30 days of planned work',
@@ -861,7 +854,7 @@ export const CASES = [
       results: [
         { v: '48 h', l: 'To diagnose and propose a recovery plan' },
         { v: '5 days', l: 'To deliver 30 days of planned work' },
-        { v: '3', l: 'AI training sessions delivered' },
+        { v: '3', l: 'AI training sessions, all delivered' },
         { v: '¥200k–300k', l: 'Follow-on work under discussion' },
       ],
       sections: [
@@ -883,7 +876,6 @@ export const CASES = [
           list: [
             'The client asked for me by name to run the rest of the project.',
             'A likely loss became talks on ¥200,000–300,000 of follow-on work.',
-            'It is also where my team’s trust in me was earned.',
           ],
         },
       ],

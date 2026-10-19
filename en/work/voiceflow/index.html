@@ -102,11 +102,11 @@
 </section>
 <section class="case-sec" id="s5" aria-labelledby="s5-title">
 <h2 id="s5-title">What I gave up</h2>
-<ul class="choices"><li><h3>Ship one final model: SenseVoice</h3><p><span class="k">Why</span>On the same machine it was both fastest and most accurate; Qwen3-ASR returned Traditional Chinese, Whisper added about 1 GB without doing better</p><p><span class="k">Given up</span>A model picker in settings</p></li><li><h3>Separate preview from final text</h3><p><span class="k">Why</span>The streaming model is for speed, the full recording is for accuracy, and the preview may never overwrite the final</p><p><span class="k">Given up</span>One model doing both jobs</p></li><li><h3>No online recognition</h3><p><span class="k">Why</span>It would break the promise of working offline</p><p><span class="k">Given up</span>More models and a higher ceiling</p></li><li><h3>No “Done” on success</h3><p><span class="k">Why</span>The text is already in the box; confirming it again only makes it feel slower</p><p><span class="k">Given up</span>A confirmation animation every time</p></li><li><h3>Paint the capsule natively in Qt</h3><p><span class="k">Why</span>A 34-pixel capsule should not carry a whole Chromium runtime</p><p><span class="k">Given up</span>The convenience of web rendering</p></li></ul>
+<ul class="choices"><li><h3>Ship one final model: SenseVoice</h3><p><span class="k">Why</span>On one public Chinese and one English sample on the same machine, it was fastest and lost nothing; Qwen3-ASR returned Traditional Chinese, Whisper added about 1 GB without doing better</p><p><span class="k">Given up</span>A model picker in settings</p></li><li><h3>Separate preview from final text</h3><p><span class="k">Why</span>The streaming model is for speed, the full recording is for accuracy, and the preview may never overwrite the final</p><p><span class="k">Given up</span>One model doing both jobs</p></li><li><h3>No online recognition</h3><p><span class="k">Why</span>It would break the promise of working offline</p><p><span class="k">Given up</span>More models and a higher ceiling</p></li><li><h3>No “Done” on success</h3><p><span class="k">Why</span>The text is already in the box; confirming it again only makes it feel slower</p><p><span class="k">Given up</span>A confirmation animation every time</p></li><li><h3>Paint the capsule natively in Qt</h3><p><span class="k">Why</span>A 34-pixel capsule should not carry a whole Chromium runtime</p><p><span class="k">Given up</span>The convenience of web rendering</p></li></ul>
 </section>
 <section class="case-sec" id="s6" aria-labelledby="s6-title">
 <h2 id="s6-title">How I know it holds up</h2>
-<p>Measured on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:</p>
+<p>Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:</p>
 <ul class="metrics"><li><span class="m-v">6 ms</span><span class="m-l">F2 to first feedback</span><span class="m-g">Gate ≤ 50 ms</span></li><li><span class="m-v">427 ms</span><span class="m-l">Stop to paste, 0–10 s clips</span><span class="m-g">Gate ≤ 500 ms</span></li><li><span class="m-v">541 ms</span><span class="m-l">Stop to paste, two-minute clips</span><span class="m-g">Gate ≤ 2.5 s</span></li><li><span class="m-v">1,024 MB</span><span class="m-l">Resident memory after install</span><span class="m-g">Earlier 1,324.6 MB</span></li></ul>
 <ul class="bullets"><li>796 automated tests, up from 396 at v0.3.3.</li><li>500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.</li><li>Since v0.3.2, every release ships with a release and verification record.</li><li>Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.</li></ul>
 <p>This is evidence about latency and mechanics, not accuracy. The repository’s rule: no accuracy claims without enough authorized real speech.</p>
@@ -142,8 +142,8 @@
 <article class="card-tile solution-card reveal">
 <p class="eyebrow">Solution · Bizhi Technology</p>
 <p class="big">100%</p>
-<p class="big-label">Collected on ¥30,000–100,000+ projects</p>
-<h3><a href="/en/work/enterprise-ai/">From the first requirements meeting to 100% collected.</a></h3>
+<p class="big-label">Payment collected on ¥30k–100k+ projects</p>
+<h3><a href="/en/work/enterprise-ai/">From first meeting to full payment.</a></h3>
 <p class="card-more" aria-hidden="true">Read the case<span class="chev" aria-hidden="true">›</span></p>
 </article>
 </div>

@@ -4,7 +4,8 @@
 
 export const SITE = 'https://qinxujunai.github.io';
 export const GITHUB = 'https://github.com/qinxujunai';
-export const VIBECODING = 'https://qinxujunai.github.io/qinxujun-ai-vibecoding/';
+// His May 2026 version, which the quotes come from. The live site was rewritten later and no longer carries them.
+export const VIBECODING = 'https://github.com/qinxujunai/qinxujun-ai-vibecoding/blob/367e746/src/content/site.tsx';
 
 // Photographs: his own. Landscapes, buildings and objects only.
 const photos = (alt) => [
@@ -34,7 +35,7 @@ export const content = {
     portraitAlt: '秦徐俊的照片',
     eyebrow: '秦徐俊 · 奥普智能 AI 项目经理',
     lede: '从一句话，到能用的 AI。',
-    now: '我把模糊的业务问题，变成能落地、能验证、能交付的 AI 方案——有时为客户，有时为自己。',
+    now: '我把模糊的业务问题，变成能落地、能验证、能交付的 AI 方案。为金融、政企客户设计过 AI 问数方案，也一个人做出了三个开源 AI 产品。',
     addWechat: '加我微信',
     seeWork: '看案例',
     navLabel: '章节',
@@ -43,9 +44,9 @@ export const content = {
 
     workTitle: '案例',
     workHeadline: '不是 Demo，是交付。',
-    workIntro: '三个我亲手做出来的产品，三个为客户交付的方案。每一个都能展开看：为什么做，难在哪，怎么拆，放弃了什么。',
+    workIntro: '三个我亲手做出来的产品，三个为客户交付的项目。每一个都能展开看：为什么做，难在哪，怎么拆，放弃了什么。',
     productsLabel: '我做的产品',
-    solutionsLabel: '我交付的方案',
+    solutionsLabel: '我交付的项目',
     readCase: '读案例',
     siteLabel: '官网',
     flagship: {
@@ -60,7 +61,7 @@ export const content = {
     thinkingTitle: '思考',
     thinkingHeadline: 'AI 越强，人越要想清楚。',
     thinkingQuote: '让 AI 负责拆解、生成与验证，让你守住目标、边界与品味。', // his words
-    thinkingSource: ['摘自我 2026 年 5 月写的 ', 'ai.vibecoding'],
+    thinkingSource: ['摘自我 2026 年 5 月写的 ', 'ai.vibecoding 原文'],
     abilitiesHeadline: '先想清楚，再让 AI 动手。',
     abilities: [
       {
@@ -95,7 +96,7 @@ export const content = {
       { name: '浏览器验收', en: 'Ship Review', body: '用真实浏览器检查页面、移动端宽度、复制、弹窗、外链与控制台日志，再提交、推送和部署。' },
     ],
     methodClosing: '这个网站也是这样做出来的：AI Agent 执行，我定方向、做验收。',
-    methodLink: '完整的方法和七段指令',
+    methodLink: '读 5 月版原文（GitHub）',
     vibecodingAlt: 'ai.vibecoding 首屏的 Claude Code 终端：先访谈、再计划、最后实现并验证',
 
     pathTitle: '经历',
@@ -172,7 +173,7 @@ export const content = {
     portraitAlt: 'Photo of Qin Xujun',
     eyebrow: 'Qin Xujun · AI Project Manager at Aopu',
     lede: 'From a sentence to AI that works.',
-    now: 'I turn vague business problems into AI that can be built, verified and delivered. Sometimes for clients. Sometimes for myself.',
+    now: 'I turn vague business problems into AI that can be built, verified and delivered. I’ve designed natural-language data-query solutions for finance and government clients, and built three open-source AI products on my own.',
     addWechat: 'Add me on WeChat',
     seeWork: 'See the work',
     navLabel: 'Sections',
@@ -180,16 +181,16 @@ export const content = {
     home: 'Home',
 
     workTitle: 'Work',
-    workHeadline: 'Not demos. Deliveries.',
-    workIntro: 'Three products I built with my own hands, three solutions I delivered for clients. Open any of them: why it exists, what was hard, how I broke it down, what I gave up.',
+    workHeadline: 'Not demos. Shipped work.',
+    workIntro: 'Three products I built myself, three projects I delivered for clients. Open any of them: why it exists, what was hard, how I broke it down, what I gave up.',
     productsLabel: 'Products I built',
-    solutionsLabel: 'Solutions I delivered',
+    solutionsLabel: 'Projects I delivered',
     readCase: 'Read the case',
     siteLabel: 'Website',
     flagship: {
       key: 'F2',
       hint: 'Press to start, press again to finish',
-      lines: ['Compare the costs and risks of these two proposals, then recommend an approach.', 'Share the plan with the team at ten.', 'The proposal is ready. Let us take a look tomorrow.'],
+      lines: ['Compare the costs and risks of these two proposals, then recommend an approach.', 'Share the plan with the team at ten.', 'The proposal is ready. Let’s go over it tomorrow.'],
       body: 'Offline voice typing for Windows. I took it alone from the first line of code to v0.3.8: three supervised recognition processes, and a final text that is written to the clipboard and read back before anything is pasted.',
       facts: { stars: 'GitHub stars', downloads: 'Downloads', forks: 'Forks', version: 'Latest release' },
       factsNote: (date) => `Pulled from GitHub every six hours. Last update: ${date}.`,
@@ -198,7 +199,7 @@ export const content = {
     thinkingTitle: 'Thinking',
     thinkingHeadline: 'The stronger AI gets, the clearer we have to think.',
     thinkingQuote: 'Let AI decompose, generate, and verify, while you protect the goal, boundaries, and taste.', // his words
-    thinkingSource: ['From ', 'ai.vibecoding', ', which I wrote in May 2026'],
+    thinkingSource: ['From the May 2026 text of ', 'ai.vibecoding', ', which I wrote'],
     abilitiesHeadline: 'Think it through. Then let AI do the work.',
     abilities: [
       {
@@ -233,7 +234,7 @@ export const content = {
       { name: 'Ship Review', en: '', body: 'Check the real browser, mobile width, copy actions, modals, links, and console logs before committing or deploying.' },
     ],
     methodClosing: 'This site was made the same way: an AI agent did the work; I set the direction and signed off on it.',
-    methodLink: 'The full method and seven prompts',
+    methodLink: 'Read the May 2026 original on GitHub',
     vibecodingAlt: 'The Claude Code terminal on ai.vibecoding: interview first, then plan, then build and verify',
 
     pathTitle: 'Path',
@@ -242,7 +243,7 @@ export const content = {
       { when: 'Now', role: 'AI Project Manager', org: 'Aopu Intelligent Technology', desc: '' },
       { when: '2025.11', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Designed data-intelligence and natural-language-query solutions for finance and government clients, from the first requirements meeting to the final payment. 5+ clients moved into procurement evaluation; 100% of project revenue collected.', case: 'enterprise-ai' },
       { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Built the company’s first AI-driven content workflow in Feishu; took over and rescued a WeBank AI course project; delivered an AI film for Founder Securities in five days.', case: 'script-agent' },
-      { when: '2023.04', role: 'Commercial Content Delivery', org: 'Zhuanzhi Network', desc: 'Led a ¥60,000 promotional film for ICBC at a margin above 40%, and stepped in front of the camera when the lead actor dropped out; wrote 150+ feed-ad scripts behind ¥100,000+ of monthly ad spend.' },
+      { when: '2023.04', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: 'Led a ¥60,000 promotional film for ICBC at a margin above 40%, and stepped in front of the camera when the lead actor dropped out; wrote 150+ feed-ad scripts behind ¥100,000+ of monthly ad spend.' },
       { when: '2022.06', role: 'Community Operations (intern)', org: 'Douyin Digital Academy', desc: 'Ran community and outreach content for public-interest programs, and did the on-camera work, shooting and editing myself.' },
       { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: '' },
     ],
@@ -265,7 +266,7 @@ export const content = {
 
     contactTitle: 'Contact',
     contactHeadline: 'Got a problem you want AI to solve?',
-    contactLead: 'Let’s talk about natural-language programming, AI agent workflows, or a project problem you want to bring into the room.',
+    contactLead: 'Let’s talk about natural-language programming and AI agent workflows, or bring me a problem you’re stuck on.',
     cardLabel: 'Qin Xujun’s card',
     qrAlt: 'Qin Xujun’s WeChat QR code',
     hint: {
