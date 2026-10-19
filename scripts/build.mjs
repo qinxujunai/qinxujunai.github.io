@@ -8,7 +8,7 @@ const esc = (s) =>
 
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names are kept whole.
-const KEEP = ['秦徐俊', '奥普智能', '万象成文', '云 AI 项目经理', '可运行的作品', '离线', '在线识别', '智能体', '内容生产', '自然语言', '上下文'];
+const KEEP = ['秦徐俊', '奥普智能', '万象成文', '云 AI 项目经理', '可运行的作品', '播客', '能用', '视频', '离线', '在线识别', '智能体', '内容生产', '自然语言', '上下文'];
 const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
 function zhText(s) {
   let out = [...segmenter.segment(String(s))].map((x) => esc(x.segment)).join('<wbr>');
