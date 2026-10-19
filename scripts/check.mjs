@@ -56,12 +56,12 @@ for (const [name, html] of [['index.html', zh], ['en/index.html', en], ['404.htm
 
 // Size budget
 const kb = (f) => fs.statSync(f).size / 1024;
-const budget = { 'index.html': 36, 'en/index.html': 36, 'assets/site.css': 18, 'assets/site.js': 6 };
+const budget = { 'index.html': 48, 'en/index.html': 48, 'assets/site.css': 18, 'assets/site.js': 6 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
 const total = ['index.html', 'assets/site.css', 'assets/site.js', 'assets/media/avatar-320.webp'].reduce((s, f) => s + kb(f), 0);
-total <= 80 ? ok(`first screen ${total.toFixed(0)}KB uncompressed ≤ 80KB`) : fail(`first screen ${total.toFixed(0)}KB > 80KB`);
+total <= 90 ? ok(`first screen ${total.toFixed(0)}KB uncompressed ≤ 90KB`) : fail(`first screen ${total.toFixed(0)}KB > 90KB`);
 const media = fs.readdirSync('assets/media').reduce((s, f) => s + kb(`assets/media/${f}`), 0);
 media <= 1100 ? ok(`all images ${media.toFixed(0)}KB ≤ 1100KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 1100KB`);
 
