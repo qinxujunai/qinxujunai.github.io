@@ -60,11 +60,11 @@ export const content = {
       key: 'F2',
       hint: '按一下开始，再按一下完成',
       lines: ['请比较这两份方案的成本与风险，再给出你的建议。', '明早十点，把方案同步给团队。', '这周的方案已经整理好了，明天一起看看。'],
-      image: { key: 'voiceflow-app', alt: 'VoiceFlow 的主界面：已就绪、快捷键、试说一句和最近听写' },
+      image: { key: 'voiceflow-app', mobile: 'voiceflow-app-m', alt: 'VoiceFlow 的主界面：已就绪、快捷键、试说一句和最近听写' },
       facts: [
         ['离线', '听写不联网'],
         ['v0.3.8', '从 v0.1 迭代至今'],
-        ['100+', 'GitHub star', '截至 2026 年 10 月'],
+        ['100', 'GitHub star', 'star 数截至 2026 年 10 月。'],
       ],
       decision: '用户提过 12 条反馈，我逐条写下处理结论和理由。比如没有加在线识别：它会打破离线这个承诺。',
       decisionLink: { href: VOICEFLOW_DECISIONS, label: '看反馈与决策记录（英文）' },
@@ -76,7 +76,7 @@ export const content = {
         name: '万象成文',
         tagline: '把视频、播客和图文，直接变成可用的文字与媒体。',
         desc: 'Windows 本地优先，当前版本 v2.1.0。只做三件事：音视频转文字、提取图文、下载原始媒体；账号和支付都不做。',
-        image: { key: 'wanxiang', alt: '万象成文的结果页：左边是整理好的正文，右边是视频预览与下载按钮' },
+        image: { key: 'wanxiang', mobile: 'wanxiang-m', alt: '万象成文的结果页：左边是整理好的正文，右边是视频预览与下载按钮' },
         ...links.wanxiang,
       },
       {
@@ -84,7 +84,7 @@ export const content = {
         name: 'ai.vibecoding',
         tagline: '自然语言编程的工程化实践。',
         desc: '我写下的一套方法：先访谈，再计划，实现之后拿证据验证。十章内容，附七段可以直接复制的指令。',
-        image: { key: 'vibecoding', alt: 'ai.vibecoding 首屏的 Claude Code 终端：先访谈、再计划、最后实现并验证' },
+        image: { key: 'vibecoding', mobile: 'vibecoding-m', alt: 'ai.vibecoding 首屏的 Claude Code 终端：先访谈、再计划、最后实现并验证' },
         ...links.vibecoding,
       },
       {
@@ -92,14 +92,13 @@ export const content = {
         name: 'AI Work Method',
         tagline: '把 AI 用成能力。',
         desc: '给职场人的 AI 实战课程，八章：从高质量对话、智能体协作，到可验收的交付。',
-        image: { key: 'work-method', alt: 'AI Work Method 第三章：强模型负责想，合适工具负责做，五个步骤从原始想法到验收' },
+        image: { key: 'work-method', mobile: 'work-method-m', alt: 'AI Work Method 第三章：强模型负责想，合适工具负责做，五个步骤从原始想法到验收' },
         ...links.workMethod,
       },
     ],
-    more: ['更多作品在 ', 'GitHub', '。'],
 
     pathTitle: '经历',
-    pathHeadline: '从拍片、写脚本，到把 AI 接进真实的工作。',
+    pathHeadline: '从拍片写稿，到把 AI 接进工作。',
     journey: [
       { when: '现在', role: '云 AI 项目经理', org: '奥普智能', desc: '' },
       { when: '2025', role: 'AI 解决方案架构', org: '比智科技', desc: '为企业客户做 AI 方案：从需求诊断、方案设计到产品演示，围绕数据平台、智能分析和 AI 问数。' },
@@ -111,11 +110,7 @@ export const content = {
 
     thinkingTitle: '想法',
     thinkingQuote: 'AI 进化得越快，我们越需要慢下来。',
-    thinking: [
-      '工具最终只是双手的延伸。它可以帮你更快地试错、更快地抵达、更快地把模糊的想法变成可触碰的东西；却不能替你决定，什么值得创造，什么值得热爱，什么值得用时间去交换。',
-      '你可以复制一份强大的 Prompt，也可以调用最先进的模型组合；但永远无法被复制的，是你读过的书、经历过的事、你对世界的独立理解，以及你敏锐感知并精确定义痛点的能力。',
-      '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。',
-    ],
+    thinking: ['当机器拥有了越来越强的执行能力，生而为人的美感、品味、判断、共情与长期热爱，反而会变得更加珍贵。'],
     thinkingSource: ['摘自 ', 'ai.vibecoding', ' 的「写在最后」'],
 
     photosTitle: '影像',
@@ -181,11 +176,11 @@ export const content = {
       key: 'F2',
       hint: 'Press to start, press again to finish',
       lines: ['Compare the costs and risks of these two proposals, then recommend an approach.', 'Share the plan with the team at ten.', 'The proposal is ready. Let us take a look tomorrow.'],
-      image: { key: 'voiceflow-app', alt: 'VoiceFlow main window (in Chinese): ready state, hotkeys, a test dictation box and recent history' },
+      image: { key: 'voiceflow-app', mobile: 'voiceflow-app-m', alt: 'VoiceFlow main window (in Chinese): ready state, hotkeys, a test dictation box and recent history' },
       facts: [
         ['Offline', 'No network needed'],
         ['v0.3.8', 'Iterated from v0.1'],
-        ['100+', 'GitHub stars', 'As of October 2026'],
+        ['100', 'GitHub stars', 'Star count as of October 2026.'],
       ],
       decision: 'Users sent 12 pieces of feedback, and I wrote down a decision and the reason for each. One example: no online recognition, because it would break the promise of working offline.',
       decisionLink: { href: VOICEFLOW_DECISIONS, label: 'Read the feedback log' },
@@ -198,7 +193,7 @@ export const content = {
         name: 'Wanxiang',
         tagline: 'Turn videos, podcasts, and visual articles into usable text and media.',
         desc: 'Local-first, for Windows, now at v2.1.0. It does three things: transcribe audio and video, extract articles, and download the original media. No accounts, no payments.',
-        image: { key: 'wanxiang', alt: 'Wanxiang result screen (in Chinese): the cleaned-up transcript on the left, video preview and downloads on the right' },
+        image: { key: 'wanxiang', mobile: 'wanxiang-m', alt: 'Wanxiang result screen (in Chinese): the cleaned-up transcript on the left, video preview and downloads on the right' },
         ...links.wanxiang,
       },
       {
@@ -206,7 +201,7 @@ export const content = {
         name: 'ai.vibecoding',
         tagline: 'Natural-language programming, done as engineering.',
         desc: 'My method, written down: interview first, then plan, then verify with evidence. Ten chapters and seven prompts you can copy as they are.',
-        image: { key: 'vibecoding', alt: 'The Claude Code terminal on ai.vibecoding: interview first, then plan, then build and verify' },
+        image: { key: 'vibecoding', mobile: 'vibecoding-m', alt: 'The Claude Code terminal on ai.vibecoding: interview first, then plan, then build and verify' },
         ...links.vibecoding,
       },
       {
@@ -214,14 +209,13 @@ export const content = {
         name: 'AI Work Method',
         tagline: 'Turn AI into a real skill.',
         desc: 'A hands-on AI course for working professionals in eight chapters, from better conversations and agent collaboration to work you can sign off on. In Chinese.',
-        image: { key: 'work-method', alt: 'AI Work Method chapter three (in Chinese): strong models think, the right tools do, in five steps from a raw idea to sign-off' },
+        image: { key: 'work-method', mobile: 'work-method-m', alt: 'AI Work Method chapter three (in Chinese): strong models think, the right tools do, in five steps from a raw idea to sign-off' },
         ...links.workMethod,
       },
     ],
-    more: ['More of my work is on ', 'GitHub', '.'],
 
     pathTitle: 'Path',
-    pathHeadline: 'From shooting video and writing scripts to putting AI into real work.',
+    pathHeadline: 'From shooting and scripting to putting AI to work.',
     journey: [
       { when: 'Now', role: 'Cloud AI Project Manager', org: 'Aopu Intelligent Technology', desc: '' },
       { when: '2025', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Designed AI solutions for business clients, from needs diagnosis and solution design to product demos, around data platforms, analytics and natural-language data queries.' },
@@ -233,11 +227,7 @@ export const content = {
 
     thinkingTitle: 'Thinking',
     thinkingQuote: 'The faster AI evolves, the more we need to slow down.',
-    thinking: [
-      'Tools are only extensions of our hands. They can help you test faster, arrive faster, and turn a vague idea into something tangible; they cannot decide what is worth creating, what is worth loving, or what deserves your time.',
-      'You can copy a powerful prompt and combine the strongest models; what cannot be copied is what you have read, lived through, understood independently, and learned to perceive with precision.',
-      'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.',
-    ],
+    thinking: ['As machines gain stronger execution power, human taste, judgment, empathy, beauty, and long-term devotion become more precious.'],
     thinkingSource: ['From the epilogue of ', 'ai.vibecoding', ''],
 
     photosTitle: 'Photos',

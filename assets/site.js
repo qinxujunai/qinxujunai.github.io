@@ -1,5 +1,7 @@
-// Theme, contact hint, signature writing, the VoiceFlow capsule, gallery paddles, tile reveals and nav tracking.
+// Theme, contact hint, the VoiceFlow capsule, gallery paddles, tile reveals and nav tracking.
+// The signature is started by a tiny inline script in the hero (see scripts/build.mjs).
 (function () {
+  window.qxjReady = true;
   var root = document.documentElement;
   var KEY = 'qxj.theme';
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -34,19 +36,6 @@
   if (text) target.textContent = text;
   var save = document.querySelector('[data-qr-save]');
   if (save && where === 'wechat') save.hidden = true;
-
-  // Signature: reveal each character in turn, once per visit.
-  var sig = document.querySelector('.hero .sig');
-  var seen = false;
-  try { seen = sessionStorage.getItem('qxj.signed') === '1'; } catch (e) {}
-  if (!(sig && !still && !seen)) root.classList.remove('sig-pending');
-  else {
-    var paths = sig.querySelectorAll('path');
-    for (var i = 0; i < paths.length; i++) paths[i].style.setProperty('--at', 0.2 + i * 0.5 + 's');
-    sig.classList.add('write');
-    root.classList.remove('sig-pending');
-    try { sessionStorage.setItem('qxj.signed', '1'); } catch (e) {}
-  }
 
   // VoiceFlow capsule: confirmed characters appear at a fixed 48 ms rhythm, as in the product.
   var typed = document.querySelector('.typed');
