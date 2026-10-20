@@ -142,7 +142,7 @@
   // The statement lights up, character by character, as it scrolls through the middle of the screen.
   var statement = document.querySelector('[data-statement]');
   if (statement) {
-    var chars = statement.querySelectorAll('.pull span');
+    var chars = statement.querySelectorAll('.pull span:not(.clause)');
     var lit = -1;
     var paint = function () {
       var r = statement.getBoundingClientRect();
