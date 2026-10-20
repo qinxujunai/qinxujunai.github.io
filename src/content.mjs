@@ -8,8 +8,22 @@ export const GITHUB = 'https://github.com/qinxujunai';
 // Links go to the project's live site, not its source (his request, 2026-10-20).
 export const VIBECODING = 'https://qinxujunai.github.io/qinxujun-ai-vibecoding/';
 
-// Photographs: his own. Landscapes, buildings and objects only.
-const photos = (alt) => [
+// Visual work. First his AI-generated work, from the portfolio linked on his resume (AI faces are not real
+// people; no brand logos or licensed characters). Then his photographs: landscapes, buildings and objects only.
+const aiWork = (t) => [
+  { key: 'ai-hat', alt: t[0], caption: t[1] },
+  { key: 'ai-vest', alt: t[2], caption: t[3], tall: true },
+  { key: 'ai-shirt', alt: t[4], caption: t[5], tall: true },
+  { key: 'ai-cup', alt: t[6], caption: t[7] },
+  { key: 'ai-tin', alt: t[8], caption: t[9], tall: true },
+  { key: 'ai-bag', alt: t[10], caption: t[11], tall: true },
+  { key: 'ai-portrait', alt: t[12], caption: t[13], tall: true },
+  { key: 'ai-lips', alt: t[14], caption: t[13], tall: true },
+  { key: 'ai-leaves', alt: t[15], caption: t[13], tall: true },
+  { key: 'ai-studio', alt: t[16], caption: t[17] },
+];
+const photos = (alt, ai) => [
+  ...aiWork(ai),
   { key: 'photo-aerial', alt: alt[0] },
   { key: 'photo-pagoda', alt: alt[1] },
   { key: 'photo-buddha', alt: alt[2], tall: true },
@@ -36,12 +50,12 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
     lede: '我用 AI 做东西，也把做法分享出来。',
-    now: '以前拍片，现在做 AI。这里有一个离线的语音输入法、一封每天早上的 AI 简报、一个把视频变成文字的工具，还有我做这些东西的方法。',
+    now: '学新媒体出身，做过内容和运营，现在用 AI 做东西。这里有一个离线的语音输入法、一封每天早上的 AI 简报、一个把视频变成文字的工具，还有我做这些东西的方法。',
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
     navLabel: '章节',
-    nav: { work: '作品', share: '分享', path: '经历', photos: '照片', contact: '联系' },
+    nav: { work: '作品', share: '分享', path: '经历', photos: '影像', contact: '联系' },
     home: '首页',
 
     workTitle: '作品',
@@ -73,18 +87,18 @@ export const content = {
     },
 
     pathTitle: '经历',
-    pathHeadline: '先拍片，后来做 AI。',
+    pathHeadline: '内容和运营出身，现在做 AI。',
     journey: [
       { when: '2025.11', role: 'AI 解决方案架构', org: '比智科技', desc: '给金融、政企客户做 AI 问数，从第一次聊需求到上线。' },
-      { when: '2024.08', role: 'AI 项目负责人', org: '一念智能', desc: '在飞书搭了写脚本的智能体，一条脚本从 3 小时变成 20 分钟；也接手做完了微众银行的 AI 课程。' },
-      { when: '2023.04', role: '商业内容项目交付', org: '专致网络', desc: '拍商业片，写了 150 多条广告脚本；拍工商银行宣传片那次，演员没来，我自己上了。' },
+      { when: '2024.08', role: 'AI 项目负责人', org: '一念智能', desc: '在飞书搭了写脚本的智能体，一条脚本从 3 小时变成 20 分钟；用 AI 做了方正证券活动的开场片，5 天做完；也接手做完了微众银行的 AI 课程。' },
+      { when: '2023.04', role: '商业内容项目交付', org: '专致网络', desc: '运营抖音文旅号「云南妙妙屋」，3 个月涨粉 2000 多；写了 150 多条信息流广告脚本，撑起每月 10 万以上的投放；拍工商银行宣传片那次，演员没来，我自己上了。' },
       { when: '2022.06', role: '社区运营（实习）', org: '抖音数字学堂', desc: '做公益项目的社群和宣传，出镜、拍摄、剪辑都自己来。' },
-      { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '' },
+      { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。' },
     ],
 
-    photosTitle: '照片',
-    photosHeadline: '我拍的照片。',
-    photosIntro: '拍片、剪辑、航拍，是我最早的手艺。',
+    photosTitle: '影像',
+    photosHeadline: '会拍，也会用 AI 做画面。',
+    photosIntro: '新媒体专业出身，拍摄、剪辑、航拍都自己来；现在也用 Midjourney 和 AI 视频工具做画面。',
     prev: '上一张',
     next: '下一张',
     photos: photos([
@@ -96,6 +110,17 @@ export const content = {
       '黄昏时湖边的建筑和喷泉',
       '日落时金色的云层',
       '航拍：被群山围住的城市',
+    ], [
+      '左边是人台戴着草编帽，右边是 AI 生成的模特戴着同一顶帽子', '人台照 → AI 模特图',
+      '一件刺绣马甲，生成多位模特的上身图', '一件衣服，生成一组上身图',
+      '一件蓝色刺绣上衣，生成不同模特和场景的上身图', '同一件衣服，换模特、换场景',
+      '印着猫头形象的咖啡杯', '一个形象，延展成杯套',
+      '印着同一猫头形象的茶罐', '……茶罐',
+      '印着同一猫头形象的红白手提袋', '……和手提袋',
+      'AI 生成的人像：白衣女子，光影落在脸上', 'AI 人像',
+      'AI 生成的人像：红唇特写',
+      'AI 生成的人像：树叶下仰头的女孩',
+      'AI 生成的场景：洒满阳光的工作室', 'AI 场景',
     ]),
 
     contactTitle: '联系',
@@ -143,12 +168,12 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
     lede: 'I build things with AI, and share how I do it.',
-    now: 'I used to make films; now I build with AI. Here you’ll find an offline voice keyboard, a morning AI briefing, a tool that turns videos into text, and the way I make all of them.',
+    now: 'I studied new media and worked in content and growth; now I build with AI. Here you’ll find an offline voice keyboard, a morning AI briefing, a tool that turns videos into text, and the way I make all of them.',
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
     navLabel: 'Sections',
-    nav: { work: 'Work', share: 'Sharing', path: 'Path', photos: 'Photos', contact: 'Contact' },
+    nav: { work: 'Work', share: 'Sharing', path: 'Path', photos: 'Visuals', contact: 'Contact' },
     home: 'Home',
 
     workTitle: 'Work',
@@ -179,18 +204,18 @@ export const content = {
     },
 
     pathTitle: 'Path',
-    pathHeadline: 'Film first, then AI.',
+    pathHeadline: 'Content and growth first, now AI.',
     journey: [
       { when: '2025.11', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Natural-language data queries for finance and government clients, from the first conversation to launch.' },
-      { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Built a script-writing agent in Feishu that took one script from three hours to twenty minutes, and took over and finished an AI course for WeBank.' },
-      { when: '2023.04', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: 'Shot commercial films and wrote 150-odd ad scripts. On an ICBC film, the actor didn’t show up, so I stepped in.' },
+      { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Built a script-writing agent in Feishu that took one script from three hours to twenty minutes, made the AI opening film for a Founder Securities event in five days, and took over and finished an AI course for WeBank.' },
+      { when: '2023.04', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: 'Ran a Douyin travel account, “Yunnan Miaomiao House”, and grew it by 2,000+ followers in three months; wrote 150-odd in-feed ad scripts behind more than ¥100k of monthly ad spend. On an ICBC film, the actor didn’t show up, so I stepped in.' },
       { when: '2022.06', role: 'Community Operations (intern)', org: 'Douyin Digital Academy', desc: 'Community and outreach for public-interest programs; I did the on-camera work, shooting and editing myself.' },
-      { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: '' },
+      { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How to make content, and how to get it seen.' },
     ],
 
-    photosTitle: 'Photos',
-    photosHeadline: 'Photos I’ve taken.',
-    photosIntro: 'Shooting, editing and flying drones were my first craft.',
+    photosTitle: 'Visuals',
+    photosHeadline: 'I shoot, and I make images with AI.',
+    photosIntro: 'I studied new media and do my own shooting, editing and drone work; now I also make images with Midjourney and AI video tools.',
     prev: 'Previous photo',
     next: 'Next photo',
     photos: photos([
@@ -202,6 +227,17 @@ export const content = {
       'Lakeside buildings and a fountain at dusk',
       'Golden clouds at sunset',
       'Aerial view of a city surrounded by hills',
+    ], [
+      'Left, a straw visor on a mannequin; right, an AI-generated model wearing the same visor', 'Mannequin shot → AI model',
+      'An embroidered vest, generated on several models', 'One garment, a full set of on-model shots',
+      'A blue embroidered top, generated on different models and settings', 'Same top, new models and settings',
+      'A coffee cup printed with a cat mascot', 'One mascot, a cup sleeve…',
+      'A tea tin printed with the same cat mascot', '…a tea tin…',
+      'Red and white shopping bags with the same cat mascot', '…and shopping bags',
+      'AI-generated portrait: a woman in white, light across her face', 'AI portrait',
+      'AI-generated portrait: a close-up of red lips',
+      'AI-generated portrait: a girl looking up under leaves',
+      'AI-generated scene: a sunlit studio', 'AI scene',
     ]),
 
     contactTitle: 'Contact',
