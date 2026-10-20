@@ -19,7 +19,7 @@ export const CASES = [
       name: 'VoiceFlow',
       kind: '',
       title: '按一下，说话，文字就出现在光标处。',
-      sub: 'Windows 上的语音输入。全部在你自己的电脑上完成，不联网，不登录。我写它，是因为和 AI 说的话常常比打的字多。',
+      sub: 'Windows 上的语音输入。全部在你自己的电脑上完成，不联网，不登录。我写它，是因为要跟 AI 交代的话，常常比我愿意打的字多。',
       card: 'Windows 上的语音输入，全部在自己的电脑上完成。',
       note: 'Windows · 离线 · 免登录',
       imageAlt: 'VoiceFlow 的官网：让想法成文。按一下，说出你的话。',
@@ -32,7 +32,7 @@ export const CASES = [
       links: [['官网', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
-        { v: '427 ms', l: '停止到粘贴，P95（0–10 秒录音）' },
+        { v: '427 ms', l: '停止到发出粘贴，P95（0–10 秒录音，v0.3.1 实测）' },
         { v: '796 项', l: '自动化测试，每次发布都跑' },
         { v: '14 次', l: '发布，从 v0.1.0 到 v0.3.8' },
       ],
@@ -90,9 +90,9 @@ export const CASES = [
           p: ['v0.3.1 发布机实测（Windows 11 · Ryzen 7 5800H），每一档 20 个样本，取 P95：'],
           metrics: [
             { v: '6 ms', l: '按下 F2 到第一帧反馈', g: '门槛 ≤ 50 ms' },
-            { v: '427 ms', l: '0–10 秒录音，停止到粘贴', g: '门槛 ≤ 500 ms' },
-            { v: '541 ms', l: '两分钟录音，停止到粘贴', g: '门槛 ≤ 2.5 s' },
-            { v: '1,024 MB', l: '安装后常驻内存', g: '早期 1,324.6 MB' },
+            { v: '427 ms', l: '0–10 秒录音，停止到发出粘贴', g: '门槛 ≤ 500 ms' },
+            { v: '541 ms', l: '两分钟录音，停止到发出粘贴', g: '门槛 ≤ 2.5 s' },
+            { v: '1,024 MB', l: '安装后私有内存（v0.3.1）', g: '早期 1,324.6 MB' },
           ],
           list: [
             '796 项自动化测试，v0.3.3 时是 396 项。',
@@ -119,7 +119,8 @@ export const CASES = [
             '安装包还没有代码签名，Windows 会弹出安全提示。',
             '正式版只支持 Windows 10 / 11。',
             '中文、英文和混说的准确率还没有公开结论，要等足够的真实语料。',
-            '两个识别模型常驻，内存约 1 GB，仍然是一笔不小的成本。',
+            '两个识别模型常驻，私有内存约 1 GB，仍然是一笔不小的成本。',
+            '它只能核对剪贴板，确认不了文字真的进了输入框；部分应用里还得手动按 Ctrl+V。',
           ],
         },
       ],
@@ -128,7 +129,7 @@ export const CASES = [
       name: 'VoiceFlow',
       kind: '',
       title: 'Press a key, talk, and the words appear at your cursor.',
-      sub: 'Voice typing for Windows. Everything happens on your own computer: no internet, no account. I built it because I say more to AI than I type.',
+      sub: 'Voice typing for Windows. Everything happens on your own computer: no internet, no account. I built it because what I need to tell an AI is usually longer than I want to type.',
       card: 'Voice typing for Windows, entirely on your own computer.',
       note: 'Windows · Offline · No account',
       imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
@@ -141,7 +142,7 @@ export const CASES = [
       links: [['Website', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
-        { v: '427 ms', l: 'Stop to paste, P95 (0–10 s clips)' },
+        { v: '427 ms', l: 'Stop to paste sent, P95 (0–10 s clips, measured on v0.3.1)' },
         { v: '796', l: 'Automated tests on every release' },
         { v: '14', l: 'Releases, v0.1.0 to v0.3.8' },
       ],
@@ -199,9 +200,9 @@ export const CASES = [
           p: ['Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:'],
           metrics: [
             { v: '6 ms', l: 'F2 to first feedback', g: 'Gate ≤ 50 ms' },
-            { v: '427 ms', l: 'Stop to paste, 0–10 s clips', g: 'Gate ≤ 500 ms' },
-            { v: '541 ms', l: 'Stop to paste, two-minute clips', g: 'Gate ≤ 2.5 s' },
-            { v: '1,024 MB', l: 'Resident memory after install', g: 'Earlier 1,324.6 MB' },
+            { v: '427 ms', l: 'Stop to paste sent, 0–10 s clips', g: 'Gate ≤ 500 ms' },
+            { v: '541 ms', l: 'Stop to paste sent, two-minute clips', g: 'Gate ≤ 2.5 s' },
+            { v: '1,024 MB', l: 'Private memory after install (v0.3.1)', g: 'Earlier 1,324.6 MB' },
           ],
           list: [
             '796 automated tests, up from 396 at v0.3.3.',
@@ -228,7 +229,8 @@ export const CASES = [
             'The installer is not code-signed yet, so Windows shows a warning.',
             'The release supports Windows 10 and 11 only.',
             'No public accuracy figures for Chinese, English or mixed speech until there is enough real speech to measure.',
-            'Keeping two recognizers resident costs about 1 GB of memory.',
+            'Keeping two recognizers resident costs about 1 GB of private memory.',
+            'It verifies the clipboard, not the target box; some apps still need a manual Ctrl+V.',
           ],
         },
       ],
@@ -246,8 +248,8 @@ export const CASES = [
     zh: {
       name: 'AI Signal',
       kind: '',
-      title: '每天早上一封邮件，3 分钟读完今天的 AI。',
-      sub: '它每天替我读 X、Hacker News、论文和各家实验室的博客，只留下值得看的，早上十点发到邮箱。',
+      title: '每天早上一封邮件，几分钟读完今天的 AI。',
+      sub: '它每天替我读 X、Hacker News、论文和各家实验室的博客，只留下值得看的，早上十点发到我的邮箱，同一期也放到网上。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
       note: '每天 10:00 · 七类信源 · 每条都附原文',
       imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
@@ -268,8 +270,8 @@ export const CASES = [
         {
           h: '为什么做',
           p: [
-            'AI 的信息太多了：推文、播客、博客、论文、GitHub，每天几百条，真正值得看的不到 5 条。刷信息流费时间，还容易被情绪和噪音带着走。',
-            '我想要一位靠谱的编辑：每天替我读一遍，只留下会改变判断的东西，3 分钟读完。',
+            'AI 的信息太多了：推文、播客、博客、论文、GitHub，每天几百条，真正重要的也就二十来条。刷信息流费时间，还容易被情绪和噪音带着走。',
+            '我想要一位靠谱的编辑：每天替我读一遍，只留下会改变判断的东西，几分钟就能读完。',
           ],
         },
         {
@@ -307,7 +309,7 @@ export const CASES = [
           table: {
             head: ['决定', '原因', '放弃的方案'],
             rows: [
-              ['模型只引用编号，不写链接', '链接和数字最容易被编造；由代码回填，就不可能出错', '让模型直接写，再事后校验'],
+              ['模型只引用编号，不写链接', '链接和数字最容易被编造；由代码回填，至少保证它们真实存在', '让模型直接写，再事后校验'],
               ['每天发布一期网页版', '既是存档，也让定时任务不会因为 60 天无活动被暂停', '只发邮件，不留痕迹'],
               ['去掉 👍 / 👎 和追踪像素', '接收反馈的服务早已返回 404，留着就是坏链接', '假装有反馈回路'],
               ['Hacker News 改用 Algolia，按整词匹配', '旧做法只看首页 30 条，按子串匹配，「said」也会被当成 AI', '首页接口'],
@@ -340,6 +342,7 @@ export const CASES = [
             'Reddit 拒绝自动化请求，社区讨论目前只有 Hacker News。',
             '中文来源只有量子位。',
             '没有读者反馈回路；编辑标准只能靠人读了再改。',
+            '模型可能引错编号：链接是真的，但不一定配对。第一期里也还有「正面挑战」「标志性」这类编辑标准不允许的评语。',
           ],
         },
       ],
@@ -347,8 +350,8 @@ export const CASES = [
     en: {
       name: 'AI Signal',
       kind: '',
-      title: 'One email each morning: today’s AI in three minutes.',
-      sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, and sends it at 10 a.m.',
+      title: 'One email each morning: today’s AI in a few minutes.',
+      sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, emails it to me at 10 a.m. and posts the same issue on the web.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
       note: 'Daily at 10:00 · Seven kinds of sources · Every item linked',
       imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
@@ -369,8 +372,8 @@ export const CASES = [
         {
           h: 'Why I built it',
           p: [
-            'There is too much AI news: posts, podcasts, blogs, papers, GitHub. Hundreds of items a day, and fewer than five worth reading. Scrolling a feed costs time and lets noise set the mood.',
-            'I wanted a dependable editor: someone who reads everything each day and keeps only what would change a decision, in three minutes.',
+            'There is too much AI news: posts, podcasts, blogs, papers, GitHub. Hundreds of items a day, and maybe twenty that matter. Scrolling a feed costs time and lets noise set the mood.',
+            'I wanted a dependable editor: someone who reads everything each day and keeps only what would change a decision, readable in a few minutes.',
           ],
         },
         {
@@ -408,7 +411,7 @@ export const CASES = [
           table: {
             head: ['Decision', 'Why', 'Given up'],
             rows: [
-              ['The model cites IDs, never links', 'Links and numbers are the easiest things to invent; filled in by code, they cannot be wrong', 'Let the model write them and check afterwards'],
+              ['The model cites IDs, never links', 'Links and numbers are the easiest things to invent; filled in by code, they at least always exist', 'Let the model write them and check afterwards'],
               ['Publish a web edition every day', 'It is the archive, and it keeps the schedule from being paused after 60 quiet days', 'Email only, no trace'],
               ['Remove 👍 / 👎 and the tracking pixel', 'The feedback service had been returning 404; keeping them meant broken links', 'Pretending there is a feedback loop'],
               ['Hacker News through Algolia, whole-word matching', 'The old code read 30 front-page stories and matched substrings, so “said” counted as AI', 'The front-page API'],
@@ -441,6 +444,7 @@ export const CASES = [
             'Reddit refuses automated requests, so community discussion comes only from Hacker News.',
             'QbitAI is the only Chinese source.',
             'There is no reader feedback loop; the editorial brief improves only when someone reads and edits it.',
+            'The model can cite the wrong ID: the link is real but may not match the item. The first issue still had phrases the brief forbids, like “a head-on challenge”.',
           ],
         },
       ],
@@ -470,7 +474,7 @@ export const CASES = [
       ],
       links: [['官网', 'https://qinxujunai.github.io/Audio2Text/'], ['下载', `${A2T}/releases/latest`]],
       results: [
-        { v: '6 个', l: '平台：B 站、小宇宙、抖音、小红书、公众号、YouTube' },
+        { v: '3 + 3', l: 'B 站、小宇宙、公众号已验证；抖音、小红书、YouTube 时好时坏' },
         { v: '0.035', l: 'CPU 转写实时率 RTF，单样本探测（越小越快）' },
         { v: '521 KB → 2 KB', l: '小红书单次提取的传输量' },
         { v: '3 件事', l: '只做转文字、提图文、下原件' },
@@ -513,7 +517,7 @@ export const CASES = [
           table: {
             head: ['决定', '原因', '放弃的方案'],
             rows: [
-              ['默认用 SenseVoice', 'CPU 上 RTF 约 0.035，Faster-Whisper medium 在 CPU 上约 2.01；一段 989 秒的课程，SenseVoice 用 48 秒，RTX 3060 上的 Whisper 用 97 秒', '默认上更大的模型'],
+              ['默认用 SenseVoice', 'CPU 上 RTF 约 0.035，Faster-Whisper medium 在 CPU 上约 2.01；一段 989 秒的课程，SenseVoice 用 48 秒（这段 RTF 0.049），RTX 3060 上的 Whisper 用 97 秒', '默认上更大的模型'],
               ['能读字幕和正文，就不转写', '最快的转写，是不用转写', '所有内容统一走转写'],
               ['小红书直接读页面里的结构化数据', '不再传整页 HTML：传输量从 521 KB 降到 2 KB，总耗时少 30–40%', '先抓整页，再解析'],
               ['只做三件事', '账号、支付、工作台，会把一个工具变成一个平台', '做成平台'],
@@ -526,12 +530,12 @@ export const CASES = [
             '2026-08-11 用真实样本跑了一轮线上冒烟测试：B 站、小宇宙、抖音、公众号通过；小红书一篇 15 张图、14 个 Live 片段的图文通过。',
             '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
             '安装包、运行包和发布产物都提供 SHA-256；GitHub Actions 同时生成 SBOM 和构建来源证明。',
-            '换转写模型之前，先要过 60 个样本、3 小时音频的评测门槛。',
           ],
         },
         {
           h: '还没做好的',
           list: [
+            '60 个样本、3 小时音频的准确率评测还没跑；跑完之前不换转写模型。',
             '安装包还没有代码签名，Windows 会弹出安全提示。',
             '小红书的视频样本目前会触发平台的会话验证；YouTube 在国内网络下经常超时。',
             '准确率还没有大样本结论。现在的模型选择，是速度和安装体积的取舍。',
@@ -555,7 +559,7 @@ export const CASES = [
       ],
       links: [['Website', 'https://qinxujunai.github.io/Audio2Text/'], ['Download', `${A2T}/releases/latest`]],
       results: [
-        { v: '6', l: 'Platforms: Bilibili, Xiaoyuzhou, Douyin, Xiaohongshu, WeChat articles, YouTube' },
+        { v: '3 + 3', l: 'Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu, YouTube' },
         { v: '0.035', l: 'Real-time factor on CPU, single-sample probe (lower is faster)' },
         { v: '521 → 2 KB', l: 'Transfer per Xiaohongshu extraction' },
         { v: '3', l: 'Jobs: transcribe, extract, download' },
@@ -598,7 +602,7 @@ export const CASES = [
           table: {
             head: ['Decision', 'Why', 'Given up'],
             rows: [
-              ['SenseVoice by default', 'RTF about 0.035 on CPU versus about 2.01 for Faster-Whisper medium; a 989-second lecture took SenseVoice 48 s and Whisper on an RTX 3060 97 s', 'A bigger default model'],
+              ['SenseVoice by default', 'RTF about 0.035 on CPU versus about 2.01 for Faster-Whisper medium; a 989-second lecture took SenseVoice 48 s (RTF 0.049 on that one) and Whisper on an RTX 3060 97 s', 'A bigger default model'],
               ['Use subtitles and page text when they exist', 'The fastest transcription is the one you skip', 'Transcribe everything'],
               ['Read Xiaohongshu’s structured page data directly', 'No full-page HTML: transfer fell from 521 KB to 2 KB and total time by 30–40%', 'Fetch the page, then parse it'],
               ['Do three things only', 'Accounts, payments and workspaces turn a tool into a platform', 'Becoming a platform'],
@@ -611,12 +615,12 @@ export const CASES = [
             'A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.',
             'Each platform’s status is published with the date of its last check, not as a permanent promise.',
             'Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.',
-            'Replacing the transcription model requires passing a 60-sample, three-hour benchmark first.',
           ],
         },
         {
           h: 'Not done yet',
           list: [
+            'The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.',
             'The installer is not code-signed yet, so Windows shows a warning.',
             'Xiaohongshu video samples currently trigger session checks; YouTube often times out on networks in mainland China.',
             'No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.',

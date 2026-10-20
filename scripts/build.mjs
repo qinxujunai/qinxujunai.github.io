@@ -16,6 +16,7 @@ const esc = (s) =>
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names and fixed phrases stay whole.
 const KEEP = [
+  'AI 进化得越快', '我们越需要慢下来',
   '秦徐俊', '比智科技', '一念智能', '专致网络', '抖音数字学堂', '云南民族大学', '微众银行', '方正证券', '工商银行',
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
   '智能体', '上下文', '自然语言', '许愿池', '爆款案例', '信息流', '回款率', '采购评估', '招投标', '剪贴板', '终稿', '离线',
@@ -36,6 +37,8 @@ function zhText(s) {
     .replace(/<wbr>\s<wbr>/g, ' ');
 }
 const T = (c, s) => (c.lang === 'zh-CN' ? zhText(s) : esc(s));
+// Keep a date such as 2026-10-19 on one line.
+const dates = (html) => html.replace(/\d{4}-\d{2}-\d{2}/g, '<span class="nw">$&</span>');
 
 // ---------- Signature ----------
 // One page holds the real paths (inside <g id="sig-paths">); every other signature on it is a <use>.
@@ -176,9 +179,9 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' 
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
 <p class="visually-hidden">${esc(c.name)}</p>
-<h1 id="hero-title" class="rise" style="--d:.25s">${T(c, c.lede)}</h1>
-<p class="sub rise" style="--d:.45s">${T(c, c.now)}</p>
-<p class="cta rise" style="--d:.6s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
+<h1 id="hero-title" class="rise" style="--d:.4s">${T(c, c.lede)}</h1>
+<p class="sub rise" style="--d:.6s">${T(c, c.now)}</p>
+<p class="cta rise" style="--d:.75s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
 </section>`;
 }
 
@@ -201,15 +204,16 @@ function frame(c, { key, mobile, alt, url, name }) {
   return `<a class="frame${key === 'site-ai-signal' ? ' narrow' : ''}" href="${url}" ${ext}>
 <span class="visually-hidden">${esc(c.openSite(name))}</span>
 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">${esc(hostPath(url))}</span></span>
-<span class="frame-view">${img(key, alt, { sizes: '(max-width: 733px) 300px, 1000px', mobile, cls: 'frame-img' })}</span>
+<span class="frame-view">${img(key, alt, { sizes: '(max-width: 733px) 250px, 1040px', mobile, cls: 'frame-img' })}</span>
 </a>`;
 }
 
 // One project, Apple product-page style: name, one line, two links, then its website in a window.
 // With motion allowed, the stage pins while the page inside the window scrolls.
-function showcase(c, { id, tone, name, line, note, site, siteLabel, caseUrl, image, alt, extra = '' }) {
+// Only the flagship pins (data-show); the others leaf through their page as they pass (data-scrollshot).
+function showcase(c, { id, tone, name, line, note, site, siteLabel, caseUrl, image, alt, extra = '', pin = false }) {
   return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
-<div class="show-track" data-show>
+<div class="show-track" ${pin ? 'data-show' : 'data-scrollshot'}>
 <div class="show-stage">
 <div class="show-head">
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
@@ -239,7 +243,7 @@ ${['stars', 'downloads', 'forks', 'version'].map((k) => {
   return `<div><dt>${T(c, f.facts[k])}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${statText(v)}</dd></div>`;
 }).join('\n')}
 </dl>
-<p class="footnote">${T(c, f.factsNote(stats.voiceflow.updated))}</p>
+<p class="footnote">${dates(T(c, f.factsNote(stats.voiceflow.updated)))}</p>
 </div>`;
 }
 
@@ -259,6 +263,7 @@ function projectShow(c, cs) {
     image: cs.image,
     alt: t.imageAlt,
     extra: cs.slug === 'voiceflow' ? voiceflowExtra(c) : '',
+    pin: cs.slug === 'voiceflow',
   });
 }
 
@@ -340,7 +345,7 @@ function contact(c) {
 </div>
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(c.hint.wechat)}" data-hint-phone="${esc(c.hint.phone)}" data-hint-desktop="${esc(c.hint.desktop)}">${esc(c.hint.default)}</p>
 <p class="cta"><a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
-<p class="closing-line reveal">${T(c, c.closing)}</p>
+<p class="closing-line reveal"><span class="closing-lead">${T(c, c.closing[0])}</span>${T(c, c.closing[1])}</p>
 </section>`;
 }
 
@@ -438,7 +443,7 @@ ${t.results.map((r) => {
   return `<div><dt>${T(c, r.l)}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${statText(v)}</dd></div>`;
 }).join('\n')}
 </dl>
-${live ? `<p class="footnote">${T(c, L.liveNote(stats.voiceflow.updated))}</p>` : ''}
+${live ? `<p class="footnote">${dates(T(c, L.liveNote(stats.voiceflow.updated)))}</p>` : ''}
 </section>
 <div class="case-body">
 <aside class="case-facts" aria-labelledby="facts-title">
