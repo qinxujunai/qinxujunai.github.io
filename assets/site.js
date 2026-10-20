@@ -101,6 +101,7 @@
 
   var reveals = document.querySelectorAll('.reveal');
   if (!canObserve) {
+    root.classList.remove('motion');
     for (var r = 0; r < reveals.length; r++) reveals[r].classList.add('in');
     return;
   }
@@ -163,6 +164,54 @@
     paint();
   }
 
+  // Home: once the big signature scrolls away, the small one in the nav fades in.
+  var heroSig = document.querySelector('.home .hero .sig');
+  if (heroSig) {
+    new IntersectionObserver(function (entries) {
+      root.classList.toggle('sig-docked', !entries[0].isIntersecting);
+    }, { rootMargin: '-52px 0px 0px 0px' }).observe(heroSig);
+  }
+
+  // Project windows: the website inside scrolls from top to bottom as its section passes.
+  // Pinned stages ([data-show]) use their track; plain windows ([data-scrollshot]) use their own position.
+  var shows = [].slice.call(document.querySelectorAll('[data-show], [data-scrollshot]')).map(function (el) {
+    return { el: el, pinned: el.hasAttribute('data-show'), img: el.querySelector('.frame-img'), view: el.querySelector('.frame-view'), on: false };
+  });
+  if (shows.length && root.classList.contains('motion')) {
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+    var layout = function () {
+      var vh = window.innerHeight;
+      shows.forEach(function (s) {
+        if (!s.on || !s.img) return;
+        var r = s.el.getBoundingClientRect();
+        var p = s.pinned ? clamp(-r.top / Math.max(1, r.height - vh)) : clamp((vh - r.top) / (vh + r.height));
+        // Hold the top of the page for a moment, then leaf through it, then rest at the end.
+        p = ease(clamp((p - 0.1) / 0.8));
+        var travel = Math.max(0, s.img.offsetHeight - s.view.clientHeight);
+        s.img.style.setProperty('--shift', (-travel * p).toFixed(1) + 'px');
+      });
+    };
+    var ticking = false;
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; layout(); });
+    };
+    var watch = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        shows.forEach(function (s) { if (s.el === e.target) s.on = e.isIntersecting; });
+      });
+      layout();
+    });
+    shows.forEach(function (s) {
+      watch.observe(s.el);
+      if (s.img) s.img.addEventListener('load', layout);
+    });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  }
+
   // Section tracking for the nav.
   var navLinks = document.querySelectorAll('[data-nav]');
   var current = null;
@@ -177,7 +226,7 @@
   var sectionObserver = new IntersectionObserver(function (entries) {
     for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) setCurrent(entries[e].target.id);
   }, { rootMargin: '-40% 0px -55% 0px' });
-  ['top', 'work', 'thinking', 'method', 'path', 'contact'].forEach(function (id) {
+  ['top', 'work', 'share', 'path', 'photos', 'contact'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });

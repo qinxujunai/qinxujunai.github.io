@@ -3,11 +3,8 @@
 //   With names, only those images are rebuilt and merged into the existing src/media.json.
 // <source-dir> holds the originals that are not kept in this repository:
 //   avatar.jpg|webp            portrait
-//   voiceflow-app.png          VoiceFlow docs/design-implementation-v031.png
-//   wanxiang-home.png          Audio2Text docs/assets/home-desktop.png
-//   ai-signal.png              https://qinxujunai.github.io/ai-signal/ at 700px wide, 2x (top of the page)
+//   site-<name>-d.png / -m.png project websites, captured by scripts/capture-sites.cjs
 //   photo-*.webp|jpg           the owner's own photographs (see PHOTOS below)
-// Two screens are captured live: the ai.vibecoding terminal and an AI Work Method panel.
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -65,58 +62,27 @@ const find = (re) => {
 await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80, crop: { left: 152, top: 70, width: 720, height: 720 } });
 
 // Products
-await emit('voiceflow-app', find(/^voiceflow-app\./), { width: 640 });
-await emit('voiceflow-app-m', find(/^voiceflow-app\./), { widths: [720], crop: { left: 300, top: 120, width: 1140, height: 540 } });
-await emit('wanxiang', find(/^wanxiang-home\./), { width: 640, crop: { left: 200, top: 70, width: 1040, height: 640 } });
-await emit('wanxiang-m', find(/^wanxiang-home\./), { widths: [720], crop: { left: 230, top: 80, width: 980, height: 510 } });
-
-await emit('ai-signal', find(/^ai-signal\./), { width: 640, crop: { left: 60, top: 40, width: 1280, height: 1060 } });
-await emit('ai-signal-m', find(/^ai-signal\./), { widths: [720], crop: { left: 60, top: 40, width: 1280, height: 960 } });
+// Project websites, captured full-page from qinxujunai.github.io (same origin) by scripts/capture-sites.cjs.
+//   site-<name>-d.png: 1280px wide, 1x · site-<name>-m.png: 390px wide, 2x
+// Shown inside a browser or phone frame that scrolls through the page as you scroll past it.
+const SITES = {
+  voiceflow: { d: { height: 4000 }, m: { height: 9000 } },
+  wanxiang: { d: { height: 4161 }, m: { height: 8832 } },
+  'ai-signal': { d: { left: 260, width: 760, height: 3700 }, m: { height: 8000 } },
+  vibecoding: { d: { height: 4600 }, m: { height: 9000 } },
+};
+for (const [name, crop] of Object.entries(SITES)) {
+  const d = find(new RegExp(`^site-${name}-d\\.`));
+  const dm = await sharp(d).metadata();
+  await emit(`site-${name}`, d, { widths: [1280], quality: 60, crop: { left: crop.d.left || 0, top: 0, width: crop.d.width || dm.width, height: Math.min(crop.d.height, dm.height) } });
+  const m = find(new RegExp(`^site-${name}-m\\.`));
+  const mm = await sharp(m).metadata();
+  await emit(`site-${name}-m`, m, { widths: [560], quality: 62, crop: { left: 0, top: 0, width: mm.width, height: Math.min(crop.m.height, mm.height) } });
+}
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
 const PHOTOS = ['photo-aerial', 'photo-pagoda', 'photo-gate', 'photo-wall', 'photo-dusk', 'photo-buddha', 'photo-sky', 'photo-autumn'];
 for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 50 });
 
-// Live capture: the ai.vibecoding terminal.
-if (want('vibecoding')) {
-const executablePath = fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
-  ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
-  : undefined;
-const browser = await playwright.chromium.launch({
-  executablePath,
-  proxy: process.env.HTTPS_PROXY ? { server: process.env.HTTPS_PROXY } : undefined,
-});
-
-async function capture(url, locate, minWidth, keep = 1) {
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 1100 }, deviceScaleFactor: 2 });
-  const page = await ctx.newPage();
-  await page.goto(url, { waitUntil: 'load', timeout: 60000 });
-  await page.waitForTimeout(2000);
-  const target = locate(page);
-  await target.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(800);
-  const handle = await target.evaluateHandle((el, minW) => {
-    let n = el;
-    while (n && n.getBoundingClientRect().width < minW) n = n.parentElement;
-    n.scrollIntoView({ block: 'center' });
-    return n;
-  }, minWidth);
-  await page.waitForTimeout(5000); // let reveal animations and scripted terminals finish
-  await page.addStyleTag({ content: 'body > header, body > div > header, nav[class*="fixed"], header[class*="fixed"], header[class*="sticky"] { display: none !important; }' });
-  await page.waitForTimeout(300);
-  const box = await handle.evaluate((el) => {
-    const r = el.getBoundingClientRect();
-    return { x: r.x + window.scrollX, y: r.y + window.scrollY, width: r.width, height: r.height };
-  });
-  const buf = await page.screenshot({ clip: { x: box.x, y: box.y, width: box.width, height: Math.round(box.height * keep) }, fullPage: true });
-  await ctx.close();
-  return buf;
-}
-
-const vibe = await capture('https://qinxujunai.github.io/qinxujun-ai-vibecoding/', (p) => p.locator('div', { hasText: 'Update Todos' }).filter({ has: p.locator('text=claude') }).last(), 900);
-await emit('vibecoding', vibe, { width: 640 });
-await emit('vibecoding-m', vibe, { widths: [720], crop: { left: 0, top: 0, width: 0.5, height: 1 } });
-await browser.close();
-}
 fs.writeFileSync('src/media.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log('wrote src/media.json');
