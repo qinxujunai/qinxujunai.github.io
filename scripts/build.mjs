@@ -184,9 +184,10 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar' })}
 }
 
 // Splits a line into spans so it can light up as it scrolls by.
+// Chinese clauses (split after ，) never break inside, so the line breaks only at the comma.
 function statement(c, text) {
-  const parts = c.lang === 'zh-CN' ? [...text] : text.split(/(\s+)/);
-  return parts.map((p) => (/^\s+$/.test(p) ? p : `<span>${esc(p)}</span>`)).join('');
+  if (c.lang !== 'zh-CN') return text.split(/(\s+)/).map((p) => (/^\s+$/.test(p) ? p : `<span>${esc(p)}</span>`)).join('');
+  return text.split(/(?<=，)/).map((clause) => `<span class="clause">${[...clause].map((ch) => (ch === ' ' ? ' ' : `<span>${esc(ch)}</span>`)).join('')}</span>`).join('');
 }
 
 const statValue = (k) => stats.voiceflow[k];
