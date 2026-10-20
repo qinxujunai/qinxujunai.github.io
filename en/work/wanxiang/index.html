@@ -54,7 +54,7 @@
 
 <h1 id="case-title">Paste a link, get the text back.</h1>
 <p class="sub">Videos, podcasts and articles all work, and so do local recordings. A Windows app that does the work on your own computer.</p>
-<p class="cta"><a class="more-link" href="https://qinxujunai.github.io/Audio2Text/" rel="noopener">Website<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> Wanxiang</span></a><a class="more-link" href="https://github.com/qinxujunai/Audio2Text/releases/latest" rel="noopener">Download<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> Wanxiang</span></a></p>
+<p class="cta"><a class="more-link" href="https://qinxujunai.github.io/Audio2Text/" rel="noopener">Visit the site<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> Wanxiang</span></a><a class="more-link" href="https://github.com/qinxujunai/Audio2Text/releases/latest" rel="noopener">Download for Windows<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> Wanxiang</span></a></p>
 <div class="case-frame" data-scrollshot><a class="frame" href="https://qinxujunai.github.io/Audio2Text/" rel="noopener">
 <span class="visually-hidden">Open the Wanxiang website</span>
 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">qinxujunai.github.io/Audio2Text</span></span>
@@ -65,7 +65,7 @@
 <h2 class="visually-hidden" id="results-title">Key results</h2>
 <dl class="facts">
 <div><dt>Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu, YouTube</dt><dd>3 + 3</dd></div>
-<div><dt>Real-time factor on CPU, single-sample probe (lower is faster)</dt><dd>0.035</dd></div>
+<div><dt>To transcribe an hour of audio on an ordinary CPU (single-sample probe, real-time factor 0.035)</dt><dd>~2 min</dd></div>
 <div><dt>Transfer per Xiaohongshu extraction</dt><dd>521 → 2 KB</dd></div>
 <div><dt>Jobs: transcribe, extract, download</dt><dd>3</dd></div>
 </dl>
@@ -83,16 +83,16 @@
 </aside>
 <div class="case-main">
 <section class="case-sec" id="s1" aria-labelledby="s1-title">
-<h2 id="s1-title">Why I built it</h2>
+<h2 id="s1-title">Why</h2>
 <p>Good material lives in videos, podcasts and articles, but work runs on text: something you can search, quote and hand to an AI. Getting it usually means several tools and a lot of copying between them.</p>
 <p>Wanxiang does one thing: give it a link or a file, and get usable text and the original media back.</p>
 </section>
 <section class="case-sec" id="s2" aria-labelledby="s2-title">
-<h2 id="s2-title">The hard parts</h2>
+<h2 id="s2-title">Hard parts</h2>
 <ul class="bullets"><li>Every platform is structured differently and changes often; Douyin and Xiaohongshu block requests when a session or network looks wrong.</li><li>Transcription is slow and hardware-hungry, and not everyone has a GPU.</li><li>The desktop app has to run on a computer without Python, without exposing its local API to other programs.</li></ul>
 </section>
 <section class="case-sec" id="s3" aria-labelledby="s3-title">
-<h2 id="s3-title">What it does, and doesn’t</h2>
+<h2 id="s3-title">Scope</h2>
 <div class="scope"><div><h3>Does</h3><ul class="yes"><li>Transcribe audio and video</li><li>Extract article text and images</li><li>Preview and download original video, audio, images and text</li></ul></div><div><h3>Does not</h3><ul class="no"><li>Accounts</li><li>Payments, plans or credits</li><li>Workspaces or an agent console</li><li>A platform-style settings center</li></ul></div></div>
 </section>
 <section class="case-sec" id="s4" aria-labelledby="s4-title">
@@ -106,15 +106,15 @@
 <p>The same service can also run as a web preview; the Windows app is the complete product.</p>
 </section>
 <section class="case-sec" id="s5" aria-labelledby="s5-title">
-<h2 id="s5-title">What I gave up</h2>
-<ul class="choices"><li><h3>SenseVoice by default</h3><p><span class="k">Why</span>RTF about 0.035 on CPU versus about 2.01 for Faster-Whisper medium; a 989-second lecture took SenseVoice 48 s (RTF 0.049 on that one) and Whisper on an RTX 3060 97 s</p><p><span class="k">Given up</span>A bigger default model</p></li><li><h3>Use subtitles and page text when they exist</h3><p><span class="k">Why</span>The fastest transcription is the one you skip</p><p><span class="k">Given up</span>Transcribe everything</p></li><li><h3>Read Xiaohongshu’s structured page data directly</h3><p><span class="k">Why</span>No full-page HTML: transfer fell from 521 KB to 2 KB and total time by 30–40%</p><p><span class="k">Given up</span>Fetch the page, then parse it</p></li><li><h3>Do three things only</h3><p><span class="k">Why</span>Accounts, payments and workspaces turn a tool into a platform</p><p><span class="k">Given up</span>Becoming a platform</p></li></ul>
+<h2 id="s5-title">Trade-offs</h2>
+<ul class="choices"><li><h3>SenseVoice by default</h3><p><span class="k">Why</span>On a CPU, SenseVoice runs at a real-time factor of about 0.035 (an hour of audio in about two minutes) versus about 2.01 for Faster-Whisper medium; a 989-second lecture took SenseVoice 48 s and Whisper on an RTX 3060 GPU 97 s</p><p><span class="k">Given up</span>A bigger default model</p></li><li><h3>Use subtitles and page text when they exist</h3><p><span class="k">Why</span>The fastest transcription is the one you skip</p><p><span class="k">Given up</span>Transcribe everything</p></li><li><h3>Read Xiaohongshu’s structured page data directly</h3><p><span class="k">Why</span>No full-page HTML: transfer fell from 521 KB to 2 KB and total time by 30–40%</p><p><span class="k">Given up</span>Fetch the page, then parse it</p></li><li><h3>Do three things only</h3><p><span class="k">Why</span>Accounts, payments and workspaces turn a tool into a platform</p><p><span class="k">Given up</span>Becoming a platform</p></li></ul>
 </section>
 <section class="case-sec" id="s6" aria-labelledby="s6-title">
-<h2 id="s6-title">How I know it works</h2>
+<h2 id="s6-title">Evidence</h2>
 <ul class="bullets"><li>A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.</li><li>Each platform’s status is published with the date of its last check, not as a permanent promise.</li><li>Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.</li></ul>
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
-<h2 id="s7-title">Not done yet</h2>
+<h2 id="s7-title">Still missing</h2>
 <ul class="bullets"><li>The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.</li><li>The installer is not code-signed yet, so Windows shows a warning.</li><li>Xiaohongshu video samples currently trigger session checks; YouTube often times out on networks in mainland China.</li><li>No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.</li></ul>
 </section>
 </div>
@@ -127,13 +127,13 @@
 <p class="eyebrow">VoiceFlow</p>
 <h3><a href="/en/work/voiceflow/">Press a key, talk, and the words appear at your cursor.</a></h3>
 <p class="card-line">Windows · Offline · No account</p>
-<p class="card-more" aria-hidden="true">How it works<span class="chev" aria-hidden="true">›</span></p>
+<p class="card-more" aria-hidden="true">Learn more<span class="chev" aria-hidden="true">›</span></p>
 </article>
 <article class="card-tile product-card reveal">
 <p class="eyebrow">AI Signal</p>
-<h3><a href="/en/work/ai-signal/">One email each morning: today’s AI in a few minutes.</a></h3>
+<h3><a href="/en/work/ai-signal/">One email each morning. Today’s AI, understood.</a></h3>
 <p class="card-line">Daily at 10:00 · Seven kinds of sources · Every item linked</p>
-<p class="card-more" aria-hidden="true">How it works<span class="chev" aria-hidden="true">›</span></p>
+<p class="card-more" aria-hidden="true">Learn more<span class="chev" aria-hidden="true">›</span></p>
 </article>
 </div>
 </section>
