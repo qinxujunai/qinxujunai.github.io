@@ -722,6 +722,16 @@ main {
   width: 200px;
 }
 
+/* A one-line note under AI work; the image sets the width. */
+.gallery figcaption {
+  width: 0;
+  min-width: 100%;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
 .paddles {
   display: flex;
   justify-content: flex-end;

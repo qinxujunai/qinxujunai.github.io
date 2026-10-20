@@ -212,5 +212,145 @@
       "h": 1333,
       "kb": 32
     }
+  },
+  "ai-hat": {
+    "540": {
+      "src": "/assets/media/ai-hat-540.webp",
+      "w": 540,
+      "h": 405,
+      "kb": 6
+    },
+    "860": {
+      "src": "/assets/media/ai-hat-860.webp",
+      "w": 860,
+      "h": 645,
+      "kb": 12
+    }
+  },
+  "ai-vest": {
+    "540": {
+      "src": "/assets/media/ai-vest-540.webp",
+      "w": 540,
+      "h": 720,
+      "kb": 22
+    },
+    "860": {
+      "src": "/assets/media/ai-vest-860.webp",
+      "w": 860,
+      "h": 1147,
+      "kb": 41
+    }
+  },
+  "ai-shirt": {
+    "540": {
+      "src": "/assets/media/ai-shirt-540.webp",
+      "w": 540,
+      "h": 720,
+      "kb": 17
+    },
+    "860": {
+      "src": "/assets/media/ai-shirt-860.webp",
+      "w": 860,
+      "h": 1147,
+      "kb": 32
+    }
+  },
+  "ai-cup": {
+    "540": {
+      "src": "/assets/media/ai-cup-540.webp",
+      "w": 540,
+      "h": 400,
+      "kb": 5
+    },
+    "860": {
+      "src": "/assets/media/ai-cup-860.webp",
+      "w": 860,
+      "h": 637,
+      "kb": 11
+    }
+  },
+  "ai-tin": {
+    "540": {
+      "src": "/assets/media/ai-tin-540.webp",
+      "w": 540,
+      "h": 810,
+      "kb": 12
+    },
+    "860": {
+      "src": "/assets/media/ai-tin-860.webp",
+      "w": 860,
+      "h": 1290,
+      "kb": 22
+    }
+  },
+  "ai-bag": {
+    "540": {
+      "src": "/assets/media/ai-bag-540.webp",
+      "w": 540,
+      "h": 810,
+      "kb": 18
+    },
+    "860": {
+      "src": "/assets/media/ai-bag-860.webp",
+      "w": 860,
+      "h": 1290,
+      "kb": 73
+    }
+  },
+  "ai-portrait": {
+    "540": {
+      "src": "/assets/media/ai-portrait-540.webp",
+      "w": 540,
+      "h": 964,
+      "kb": 17
+    },
+    "816": {
+      "src": "/assets/media/ai-portrait-816.webp",
+      "w": 816,
+      "h": 1456,
+      "kb": 46
+    }
+  },
+  "ai-lips": {
+    "540": {
+      "src": "/assets/media/ai-lips-540.webp",
+      "w": 540,
+      "h": 964,
+      "kb": 23
+    },
+    "816": {
+      "src": "/assets/media/ai-lips-816.webp",
+      "w": 816,
+      "h": 1456,
+      "kb": 53
+    }
+  },
+  "ai-leaves": {
+    "540": {
+      "src": "/assets/media/ai-leaves-540.webp",
+      "w": 540,
+      "h": 720,
+      "kb": 20
+    },
+    "768": {
+      "src": "/assets/media/ai-leaves-768.webp",
+      "w": 768,
+      "h": 1024,
+      "kb": 37
+    }
+  },
+  "ai-studio": {
+    "540": {
+      "src": "/assets/media/ai-studio-540.webp",
+      "w": 540,
+      "h": 303,
+      "kb": 15
+    },
+    "860": {
+      "src": "/assets/media/ai-studio-860.webp",
+      "w": 860,
+      "h": 482,
+      "kb": 32
+    }
   }
 }
