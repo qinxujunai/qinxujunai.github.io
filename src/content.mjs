@@ -48,7 +48,8 @@ export const content = {
     portraitAlt: '秦徐俊的照片',
     // First screen (his choice, 2026-10-20): avatar, signature, this headline, the product list, two actions.
     lede: '我用 AI 做东西，也把做法分享出来。',
-    now: '一个离线的语音输入法，一封每天早上的 AI 简报，一个把视频变成文字的工具，还有一套用 AI 做东西的方法。',
+    // his words: ai.vibecoding hero.subtitle (May 2026). The headline says what; this says why.
+    now: '让 AI 负责拆解、生成与验证，让你守住目标、边界与品味。',
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
@@ -71,8 +72,8 @@ export const content = {
     share: {
       title: '分享',
       name: 'ai.vibecoding',
-      // his words: the subtitle of ai.vibecoding (May 2026)
-      quote: '让 AI 负责拆解、生成与验证，让你守住目标、边界与品味。',
+      // his words: the hero title of ai.vibecoding (May 2026)
+      quote: '用自然语言，创造可运行的作品。',
       intro: '这套做法，我写成了一个网站。零基础、产品经理、工程师各有一条路线，每条读完，都有一件马上能做的事。',
       note: '10 章 · 约 18 分钟读完',
       link: '开始阅读',
@@ -166,7 +167,7 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
     lede: 'I build things with AI, and share how I do it.',
-    now: 'An offline voice keyboard, a morning AI briefing, a tool that turns videos into text, and a written-down way of building with AI.',
+    now: 'Let AI decompose, generate, and verify, while you protect the goal, boundaries, and taste.', // his words
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
@@ -189,7 +190,7 @@ export const content = {
     share: {
       title: 'Sharing',
       name: 'ai.vibecoding',
-      quote: 'Let AI decompose, generate, and verify, while you protect the goal, boundaries, and taste.', // his words
+      quote: 'Use natural language to create working products.', // his words
       intro: 'I wrote the method down as a website. There’s a track each for beginners, product managers and engineers, and every track ends with one thing you can do right away.',
       note: '10 chapters · about 18 minutes',
       link: 'Start reading',
