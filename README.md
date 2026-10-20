@@ -60,6 +60,6 @@ GitHub Pages 直接从 `main` 的根目录发布。
 `.github/workflows/stats.yml` 每 6 小时做一次这些事：拉取 VoiceFlow 的 star、下载、fork 和最新版本，重建页面；只在有变化时提交，然后触发 Pages 重新构建。
 
 ## 致谢
-- 签名字形来自 [Long Cang](https://github.com/googlefonts/longcang)，印章字形来自 [Noto Serif SC](https://github.com/notofonts/noto-cjk)，两者都是 SIL Open Font License 1.1。构建时把字形转成路径，网页不加载字体文件。
+- 签名字形来自 [Ma Shan Zheng](https://github.com/googlefonts/mashanzheng)，印章字形来自 [Noto Serif SC](https://github.com/notofonts/noto-cjk)，两者都是 SIL Open Font License 1.1。构建时把字形转成路径，网页不加载字体文件。
 - 产品画面来自 [VoiceFlow](https://github.com/qinxujunai/VoiceFlow)、[万象成文](https://github.com/qinxujunai/Audio2Text)、[AI Signal](https://github.com/qinxujunai/ai-signal)、[ai.vibecoding](https://github.com/qinxujunai/qinxujun-ai-vibecoding)。
 - 照片都是他本人拍的。

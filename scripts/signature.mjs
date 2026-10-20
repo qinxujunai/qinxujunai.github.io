@@ -5,6 +5,7 @@
 // Usage:
 //   node scripts/signature.mjs <fonts-dir> <NotoSerifSC-Bold.otf> [layout]
 //   <fonts-dir> holds unpacked @fontsource packages (fontsource-long-cang-*/package, ...).
+//   Final: Ma Shan Zheng (regular script) with the vermilion seal — his choice, 2026-10-20.
 //   Fonts are SIL OFL 1.1; only their outlines end up in the page, never the font files.
 //   [layout] is one of the presets below (default: "final"). "sheet" writes a comparison sheet instead.
 import fs from 'node:fs';
@@ -111,16 +112,24 @@ const LAYOUTS = {
   zhimang: { glyphs: [['zhi-mang-xing', '秦', 58, 64, 116, -3], ['zhi-mang-xing', '徐', 144, 76, 90, -1], ['zhi-mang-xing', '俊', 220, 72, 90, 2]], seal: [266, 92, 28] },
   mixed: { glyphs: [['zhi-mang-xing', '秦', 58, 64, 120, -4], ['long-cang', '徐', 148, 78, 90, -2], ['long-cang', '俊', 222, 72, 90, 3]], seal: [266, 92, 28] },
   cursive: { glyphs: [['liu-jian-mao-cao', '秦', 56, 64, 120, -3], ['liu-jian-mao-cao', '徐', 140, 74, 96, 0], ['liu-jian-mao-cao', '俊', 214, 70, 96, 2]], seal: [262, 92, 28] },
+  // Straighter variants (2026-10-20 review): one baseline, little rotation, seal optional.
+  cursive2: { glyphs: [['liu-jian-mao-cao', '秦', 56, 64, 112, -2], ['liu-jian-mao-cao', '徐', 136, 70, 100, 0], ['liu-jian-mao-cao', '俊', 212, 68, 100, 1]], seal: [258, 88, 26] },
+  zhimang2: { glyphs: [['zhi-mang-xing', '秦', 56, 64, 108, 0], ['zhi-mang-xing', '徐', 150, 66, 104, 0], ['zhi-mang-xing', '俊', 244, 66, 104, 0]], seal: null },
+  kai: { glyphs: [['ma-shan-zheng', '秦', 56, 62, 106, 0], ['ma-shan-zheng', '徐', 148, 66, 98, 0], ['ma-shan-zheng', '俊', 238, 66, 98, 0]], seal: [286, 82, 32] },
 };
-LAYOUTS.final = LAYOUTS.longcang;
+LAYOUTS.final = LAYOUTS.kai;
 
 function compose(name) {
   const L = LAYOUTS[name];
   const paths = L.glyphs.map(([font, ch, x, y, size, rot]) => placed(font, ch, { x, y, size, rotate: rot }));
   const box = paths.map((p) => p.getBoundingBox()).reduce((a, b) => ({ x1: Math.min(a.x1, b.x1), y1: Math.min(a.y1, b.y1), x2: Math.max(a.x2, b.x2), y2: Math.max(a.y2, b.y2) }));
-  const [sx, sy, sw] = L.seal;
+  const [sx, sy, sw] = L.seal || [box.x2, box.y1, 0];
   const vb = [Math.floor(box.x1) - 2, Math.floor(Math.min(box.y1, sy)) - 2, Math.ceil(Math.max(box.x2, sx + sw) - box.x1) + 4, Math.ceil(Math.max(box.y2, sy + sw) - Math.min(box.y1, sy)) + 4];
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.join(' ')}">${paths.map((p) => `<path d="${p.toPathData(1)}"/>`).join('')}<path class="seal" fill="#c8102e" fill-rule="evenodd" d="${seal(sx, sy, sw)}"/></svg>\n`;
+  // The seal's characters are cut out of the red block; a paper-coloured backing shows through them,
+  // so they read as white on any page colour, as a real stamp does.
+  const sealD = L.seal ? seal(sx, sy, sw) : '';
+  const sealPath = L.seal ? `<path class="seal" fill="#fbf8f1" d="${sealD.slice(0, sealD.indexOf('Z') + 1)}"/><path class="seal" fill="#c8102e" fill-rule="evenodd" d="${sealD}"/>` : '';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.join(' ')}">${paths.map((p) => `<path d="${p.toPathData(1)}"/>`).join('')}${sealPath}</svg>\n`;
 }
 
 if (layout === 'sheet') {
