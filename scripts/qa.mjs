@@ -74,7 +74,7 @@ for (const cfg of matrix) {
   await scrollThrough(page);
   await page.waitForTimeout(400);
   await page.screenshot({ path: `${OUT}/${name}-full.png`, fullPage: true });
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  const overflow = await page.evaluate((w) => Math.max(document.documentElement.scrollWidth, window.innerWidth) - w, cfg.width);
   const hiddenReveals = await page.evaluate(() => [...document.querySelectorAll('.reveal')].filter((r) => !r.classList.contains('in')).length);
   await page.addScriptTag({ content: axeSource });
   const axe = await page.evaluate(async () => {

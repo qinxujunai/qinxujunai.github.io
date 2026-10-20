@@ -13,50 +13,6 @@
       "kb": 6
     }
   },
-  "voiceflow-app": {
-    "640": {
-      "src": "/assets/media/voiceflow-app-640.webp",
-      "w": 640,
-      "h": 431,
-      "kb": 8
-    },
-    "1280": {
-      "src": "/assets/media/voiceflow-app-1280.webp",
-      "w": 1280,
-      "h": 862,
-      "kb": 25
-    }
-  },
-  "voiceflow-app-m": {
-    "720": {
-      "src": "/assets/media/voiceflow-app-m-720.webp",
-      "w": 720,
-      "h": 341,
-      "kb": 8
-    }
-  },
-  "wanxiang": {
-    "640": {
-      "src": "/assets/media/wanxiang-640.webp",
-      "w": 640,
-      "h": 394,
-      "kb": 11
-    },
-    "1040": {
-      "src": "/assets/media/wanxiang-1040.webp",
-      "w": 1040,
-      "h": 640,
-      "kb": 24
-    }
-  },
-  "wanxiang-m": {
-    "720": {
-      "src": "/assets/media/wanxiang-m-720.webp",
-      "w": 720,
-      "h": 375,
-      "kb": 12
-    }
-  },
   "photo-aerial": {
     "540": {
       "src": "/assets/media/photo-aerial-540.webp",
@@ -169,48 +125,68 @@
       "kb": 58
     }
   },
-  "vibecoding": {
-    "640": {
-      "src": "/assets/media/vibecoding-640.webp",
-      "w": 640,
-      "h": 216,
-      "kb": 7
-    },
+  "site-voiceflow": {
     "1280": {
-      "src": "/assets/media/vibecoding-1280.webp",
+      "src": "/assets/media/site-voiceflow-1280.webp",
       "w": 1280,
-      "h": 433,
-      "kb": 19
+      "h": 4000,
+      "kb": 90
     }
   },
-  "vibecoding-m": {
-    "720": {
-      "src": "/assets/media/vibecoding-m-720.webp",
-      "w": 720,
-      "h": 487,
-      "kb": 21
+  "site-voiceflow-m": {
+    "560": {
+      "src": "/assets/media/site-voiceflow-m-560.webp",
+      "w": 560,
+      "h": 6462,
+      "kb": 111
     }
   },
-  "ai-signal": {
-    "640": {
-      "src": "/assets/media/ai-signal-640.webp",
-      "w": 640,
-      "h": 530,
-      "kb": 29
-    },
+  "site-wanxiang": {
     "1280": {
-      "src": "/assets/media/ai-signal-1280.webp",
+      "src": "/assets/media/site-wanxiang-1280.webp",
       "w": 1280,
-      "h": 1060,
-      "kb": 64
+      "h": 4161,
+      "kb": 91
     }
   },
-  "ai-signal-m": {
-    "720": {
-      "src": "/assets/media/ai-signal-m-720.webp",
-      "w": 720,
-      "h": 540,
-      "kb": 27
+  "site-wanxiang-m": {
+    "560": {
+      "src": "/assets/media/site-wanxiang-m-560.webp",
+      "w": 560,
+      "h": 6341,
+      "kb": 100
+    }
+  },
+  "site-ai-signal": {
+    "760": {
+      "src": "/assets/media/site-ai-signal-760.webp",
+      "w": 760,
+      "h": 3700,
+      "kb": 190
+    }
+  },
+  "site-ai-signal-m": {
+    "560": {
+      "src": "/assets/media/site-ai-signal-m-560.webp",
+      "w": 560,
+      "h": 5744,
+      "kb": 255
+    }
+  },
+  "site-vibecoding": {
+    "1280": {
+      "src": "/assets/media/site-vibecoding-1280.webp",
+      "w": 1280,
+      "h": 4600,
+      "kb": 164
+    }
+  },
+  "site-vibecoding-m": {
+    "560": {
+      "src": "/assets/media/site-vibecoding-m-560.webp",
+      "w": 560,
+      "h": 6462,
+      "kb": 149
     }
   }
 }

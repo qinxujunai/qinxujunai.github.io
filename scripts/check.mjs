@@ -83,7 +83,7 @@ for (const [f, max] of Object.entries(budget)) {
 const first = gz('index.html') + gz('assets/site.js') + kb('assets/media/avatar-160.webp');
 first <= 40 ? ok(`first screen ${first.toFixed(0)}KB over the wire ≤ 40KB`) : fail(`first screen ${first.toFixed(0)}KB > 40KB`);
 const media = fs.readdirSync('assets/media').reduce((s, f) => s + kb(`assets/media/${f}`), 0);
-media <= 1300 ? ok(`all images ${media.toFixed(0)}KB ≤ 1300KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 1300KB`);
+media <= 2200 ? ok(`all images ${media.toFixed(0)}KB ≤ 2200KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 2200KB`);
 
 if (failed) { console.error(`\n${failed} check(s) failed`); process.exit(1); }
 console.log('\nall checks passed');

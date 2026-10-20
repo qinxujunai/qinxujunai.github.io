@@ -20,7 +20,7 @@ const KEEP = [
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
   '智能体', '上下文', '自然语言', '许愿池', '爆款案例', '信息流', '回款率', '采购评估', '招投标', '剪贴板', '终稿', '离线',
   '受监督', '子进程', '原生绘制', '浏览器验收', '构建自愈', '原子修改', '计划闸门', '上下文装载', '访谈对话', '想用 AI',
-  '到能用的 AI', '光标处', '每天在用', '再让 AI 动手', '第一行代码', '创造者', '无需登录', '不声明完成', '都跑', '一个字都不丢', '逐字回读', '再把概率压成确定性', '终极浪漫', '数据智能', '数据平台', '智能分析', '金融控股集团', '乡村英才计划', '未来星计划', '冒烟测试', '代码签名', '安全提示',
+  '我用 AI 做东西', '也把做法分享出来', '都能直接用', '到能用的 AI', '光标处', '每天在用', '再让 AI 动手', '第一行代码', '创造者', '无需登录', '不声明完成', '都跑', '一个字都不丢', '逐字回读', '再把概率压成确定性', '终极浪漫', '数据智能', '数据平台', '智能分析', '金融控股集团', '乡村英才计划', '未来星计划', '冒烟测试', '代码签名', '安全提示',
 ];
 const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
 const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -62,10 +62,10 @@ const css = read('assets/site.css')
   .trim();
 
 // Responsive image from src/media.json: smallest as src, every size in srcset.
-function img(key, alt, { sizes = '(min-width: 1024px) 560px, 100vw', eager = false, cls = '', mobile = '' } = {}) {
+function img(key, alt, { sizes = '(min-width: 1024px) 560px, 100vw', eager = false, cls = '', mobile = '', priority = '' } = {}) {
   const set = Object.values(media[key]).sort((a, b) => a.w - b.w);
   const base = set[0];
-  const tag = `<img${cls ? ` class="${cls}"` : ''} src="${base.src}" srcset="${set.map((s) => `${s.src} ${s.w}w`).join(', ')}" sizes="${sizes}" width="${base.w}" height="${base.h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+  const tag = `<img${cls ? ` class="${cls}"` : ''} src="${base.src}" srcset="${set.map((s) => `${s.src} ${s.w}w`).join(', ')}" sizes="${sizes}" width="${base.w}" height="${base.h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : priority ? ` fetchpriority="${priority}"` : ' loading="lazy"'} decoding="async">`;
   if (!mobile) return tag;
   // Phones get a closer crop so interface text stays readable.
   const m = Object.values(media[mobile])[0];
@@ -79,20 +79,20 @@ const themeScript =
   "document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name=theme-color]');" +
   "if(m)m.setAttribute('content',t==='dark'?'#000000':'#ffffff');" +
   "var r=document.documentElement,s=null;r.classList.add('js');" +
+  // Scroll-linked motion only when the reader has not asked for less motion.
+  "if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))r.classList.add('motion');" +
   // If site.js never arrives, show everything instead of leaving faded tiles invisible.
-  "setTimeout(function(){if(!window.qxjReady)r.classList.remove('js')},2500);" +
+  "setTimeout(function(){if(!window.qxjReady){r.classList.remove('js');r.classList.remove('motion')}},2500);" +
   // Hide the signature before first paint only when it is about to be written; never leave it hidden.
   "try{s=sessionStorage.getItem('qxj.signed')}catch(e){}" +
   "if(s!=='1'&&document.location.pathname.indexOf('/work/')<0&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){r.classList.add('sig-pending');" +
   "setTimeout(function(){r.classList.remove('sig-pending')},3000)}})()</script>";
 
 // Starts the signature right after it is parsed, so it never waits for site.js on a slow network.
-// Characters are written one after another; then the seal is pressed.
+// Ink spreads across the name from left to right, out of a soft blur; then the seal is pressed.
 const sigStart =
   "(function(){var r=document.documentElement;if(!r.classList.contains('sig-pending'))return;" +
-  "var g=document.querySelector('.hero .sig'),p=g.querySelectorAll('path'),i;" +
-  "var n=0;for(i=0;i<p.length;i++){var s=p[i].classList.contains('seal');p[i].style.setProperty('--at',(s?0.35:0.15)+(s?n:i)*0.45+'s');if(!s)n=i+1}" +
-  "g.classList.add('write');r.classList.remove('sig-pending');" +
+  "document.querySelector('.hero .sig').classList.add('ink');r.classList.remove('sig-pending');" +
   "try{sessionStorage.setItem('qxj.signed','1')}catch(e){}})()";
 
 const icons = {
@@ -139,7 +139,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 </head>`;
 }
 
-const SECTIONS = ['work', 'thinking', 'method', 'path', 'contact'];
+const SECTIONS = ['work', 'share', 'path', 'photos', 'contact'];
 
 // Apple-style local nav: signature on the left, sections in the middle, one blue action on the right.
 // On the home page the signature here is a reference to the hero's; case pages hold the paths here.
@@ -172,13 +172,13 @@ function footer(c) {
 
 function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
-${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar' })}
+${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' })}
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
-${c.eyebrow ? `<p class="eyebrow">${T(c, c.eyebrow)}</p>` : `<p class="visually-hidden">${esc(c.name)}</p>`}
-<h1 id="hero-title">${T(c, c.lede)}</h1>
-<p class="sub">${T(c, c.now)}</p>
-<p class="cta"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
+<p class="visually-hidden">${esc(c.name)}</p>
+<h1 id="hero-title" class="rise" style="--d:.25s">${T(c, c.lede)}</h1>
+<p class="sub rise" style="--d:.45s">${T(c, c.now)}</p>
+<p class="cta rise" style="--d:.6s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
 </section>`;
 }
 
@@ -191,115 +191,105 @@ function statement(c, text) {
 
 const statValue = (k) => stats.voiceflow[k];
 const statText = (v) => esc(typeof v === 'number' ? v.toLocaleString('en-US') : v);
+const hostPath = (url) => url.replace(/^https?:\/\//, '').replace(/\?.*$/, '').replace(/\/$/, '');
 
-// VoiceFlow on black: the capsule types real lines over the real app window, with live GitHub numbers.
-function flagship(c) {
-  const cs = caseOf('voiceflow');
-  const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
-  const f = c.flagship;
-  return `<article class="tile dark product flagship" id="voiceflow" aria-labelledby="voiceflow-title">
-<div class="reveal">
-${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
-<h3 id="voiceflow-title" class="tile-title">${esc(t.name)}</h3>
-<p class="sub">${T(c, t.title)}</p>
-<p class="cta"><a class="more-link" href="${casePath(c, 'voiceflow')}">${c.readCase}${chevron}</a><a class="more-link" href="${t.links[0][1]}" ${ext}>${c.siteLabel}${chevron}<span class="visually-hidden"> VoiceFlow</span></a></p>
+// A project's own website inside a browser window (a phone on small screens). As the section scrolls
+// past, the page inside scrolls from top to bottom, as if someone were leafing through it for you.
+// The whole window is a link to the live site.
+// Narrow windows (AI Signal) show a page that is itself narrow, like an email.
+function frame(c, { key, mobile, alt, url, name }) {
+  return `<a class="frame${key === 'site-ai-signal' ? ' narrow' : ''}" href="${url}" ${ext}>
+<span class="visually-hidden">${esc(c.openSite(name))}</span>
+<span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">${esc(hostPath(url))}</span></span>
+<span class="frame-view">${img(key, alt, { sizes: '(max-width: 733px) 300px, 1000px', mobile, cls: 'frame-img' })}</span>
+</a>`;
+}
+
+// One project, Apple product-page style: name, one line, two links, then its website in a window.
+// With motion allowed, the stage pins while the page inside the window scrolls.
+function showcase(c, { id, tone, name, line, note, site, siteLabel, caseUrl, image, alt, extra = '' }) {
+  return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
+<div class="show-track" data-show>
+<div class="show-stage">
+<div class="show-head">
+<h3 id="${id}-title" class="show-name">${esc(name)}</h3>
+${line ? `<p class="show-line">${T(c, line)}</p>` : ''}
+${note ? `<p class="show-note">${T(c, note)}</p>` : ''}
+<p class="cta"><a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}</p>
 </div>
-<figure class="device">
-${img(cs.image.key, t.imageAlt, { sizes: '(min-width: 1068px) 860px, 92vw', cls: 'app', mobile: cs.image.mobile })}
+${frame(c, { key: image.key, mobile: image.mobile, alt, url: site, name })}
+</div>
+</div>
+${extra}
+</article>`;
+}
+
+// VoiceFlow's extra: the capsule types real lines at the product's own rhythm, and live GitHub numbers.
+function voiceflowExtra(c) {
+  const f = c.flagship;
+  return `<div class="show-extra">
 <div class="demo" aria-hidden="true">
 <kbd>${esc(f.key)}</kbd>
 <div class="capsule"><span class="bars"><i></i><i></i><i></i></span><span class="typed" data-lines="${esc(JSON.stringify(f.lines))}">${esc(f.lines[0])}</span><span class="caret"></span></div>
 <p class="hint">${esc(f.hint)}</p>
 </div>
-</figure>
-<div class="reveal">
-<p class="body">${T(c, f.body)}</p>
-<dl class="facts">
+<dl class="facts reveal">
 ${['stars', 'downloads', 'forks', 'version'].map((k) => {
   const v = statValue(k);
   return `<div><dt>${T(c, f.facts[k])}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${statText(v)}</dd></div>`;
 }).join('\n')}
 </dl>
 <p class="footnote">${T(c, f.factsNote(stats.voiceflow.updated))}</p>
-</div>
-</article>`;
+</div>`;
 }
 
-// A card that links to a case. The title holds the link; the whole card is clickable through it.
-function caseCard(c, cs, { image = true, level = 3 } = {}) {
+const TONES = { voiceflow: 'dark flagship', 'ai-signal': 'soft', wanxiang: 'plain' };
+
+function projectShow(c, cs) {
   const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
-  const h = `h${level}`;
-  if (cs.kind === 'product') {
-    return `<article class="card-tile product-card reveal">
-<p class="eyebrow">${esc(t.name)}</p>
-<${h}><a href="${casePath(c, cs.slug)}">${T(c, t.title)}</a></${h}>
-<p class="card-line">${T(c, t.card)}</p>
-<p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
-${image ? `<figure class="card-shot">${img(cs.image.key, t.imageAlt, { sizes: '(min-width: 1068px) 480px, 90vw', mobile: cs.image.mobile })}</figure>` : ''}
-</article>`;
-  }
-  return `<article class="card-tile solution-card reveal">
-${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
-<${h}><a href="${casePath(c, cs.slug)}">${T(c, t.title)}</a></${h}>
-<p class="card-line">${T(c, t.card)}</p>
-<p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
-</article>`;
+  return showcase(c, {
+    id: cs.slug,
+    tone: TONES[cs.slug],
+    name: t.name,
+    line: t.title,
+    note: t.note,
+    site: t.links[0][1],
+    siteLabel: cs.slug === 'ai-signal' ? t.links[0][0] : c.visit,
+    caseUrl: casePath(c, cs.slug),
+    image: cs.image,
+    alt: t.imageAlt,
+    extra: cs.slug === 'voiceflow' ? voiceflowExtra(c) : '',
+  });
 }
 
 function work(c) {
-  const products = CASES.filter((x) => x.kind === 'product' && x.slug !== 'voiceflow');
-  const solutions = CASES.filter((x) => x.kind === 'solution');
   return `<section id="work" class="works" aria-labelledby="work-title">
 <div class="tile plain intro">
-<div>
 <p class="eyebrow">${c.workTitle}</p>
 <h2 id="work-title">${T(c, c.workHeadline)}</h2>
-${c.workIntro ? `<p class="sub">${T(c, c.workIntro)}</p>` : ''}
 </div>
-</div>
-<h3 class="visually-hidden">${esc(c.productsLabel)}</h3>
-${flagship(c)}
-<div class="card-grid two">
-${products.map((x) => caseCard(c, x)).join('\n')}
-</div>
-<div class="tile soft solutions">
-<p class="eyebrow reveal">${esc(c.solutionsLabel)}</p>
-<div class="card-grid three">
-${solutions.map((x) => caseCard(c, x)).join('\n')}
-</div>
-</div>
+${CASES.map((cs) => projectShow(c, cs)).join('\n')}
 </section>`;
 }
 
-function thinking(c) {
-  const [s1, s2, s3 = ''] = c.thinkingSource;
-  return `<section id="thinking" class="values" aria-labelledby="thinking-title">
+// Sharing: his own words light up as you scroll, what you get from ai.vibecoding, and the site itself.
+function share(c) {
+  const s = c.share;
+  return `<section id="share" class="share" aria-labelledby="share-title">
 <div class="tile dark statement" data-statement>
-<p class="eyebrow">${c.thinkingTitle}</p>
-<h2 class="pull" id="thinking-title">${statement(c, c.thinkingHeadline)}</h2>
-<p class="source">${esc(s1)}<a href="${VIBECODING}" ${ext}>${s2}${chevron}</a>${esc(s3)}</p>
-</div>
-<div class="tile soft">
-<ul class="value-grid">
-${c.abilities.map((a, i) => `<li class="value reveal"><span class="value-num" aria-hidden="true">${i + 1}</span><h3>${T(c, a.title)}</h3><p>${T(c, a.body)}</p></li>`).join('\n')}
+<p class="eyebrow">${s.title}</p>
+<h2 class="pull" id="share-title">${statement(c, s.quote)}</h2>
+<p class="share-intro reveal">${T(c, s.intro)}</p>
+<ul class="principles reveal">
+${s.principles.map((p) => `<li><h3>${T(c, p.title)}</h3><p>${T(c, p.body)}</p></li>`).join('\n')}
 </ul>
 </div>
-</section>`;
-}
-
-function method(c) {
-  return `<section class="tile plain" id="method" aria-labelledby="method-title">
-<div class="reveal">
-<p class="eyebrow">${c.methodTitle}</p>
-<h2 id="method-title">${T(c, c.methodHeadline)}</h2>
-<p class="sub">${T(c, c.methodIntro)}</p>
-</div>
-<ol class="steps">
-${c.steps.map((s, i) => `<li class="reveal"><span class="step-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><h3>${T(c, s.name)}${s.en ? ` <span class="step-en" lang="en">${esc(s.en)}</span>` : ''}</h3><p>${T(c, s.body)}</p></li>`).join('\n')}
-</ol>
-<figure class="shot reveal">${img('vibecoding', c.vibecodingAlt, { sizes: '(min-width: 1068px) 860px, 92vw', mobile: 'vibecoding-m' })}</figure>
-<p class="body closing reveal">${T(c, c.methodClosing)}</p>
-<p class="cta reveal"><a class="more-link" href="${VIBECODING}" ${ext}>${c.methodLink}${chevron}</a></p>
+${showcase(c, {
+  id: 'vibecoding', tone: 'dark', name: s.name, line: '', note: s.note,
+  site: VIBECODING, siteLabel: s.link, caseUrl: '',
+  image: { key: 'site-vibecoding', mobile: 'site-vibecoding-m' },
+  alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products',
+})}
 </section>`;
 }
 
@@ -310,11 +300,12 @@ function journey(c) {
 <h2 id="path-title">${T(c, c.pathHeadline)}</h2>
 </div>
 <ol class="path reveal">
-${c.journey.map((p) => `<li><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}${p.case ? `<p class="what"><a href="${casePath(c, p.case)}">${c.readCase}${chevron}<span class="visually-hidden"> · ${esc(p.org)}</span></a></p>` : ''}</div></li>`).join('\n')}
+${c.journey.map((p) => `<li><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
 </ol>
 </section>`;
 }
 
+// Photos load early and at low priority: inside a horizontal scroller, lazy images could stay blank in WeChat.
 function photos(c) {
   return `<section class="tile plain" id="photos" aria-labelledby="photos-title">
 <div class="reveal">
@@ -323,19 +314,18 @@ function photos(c) {
 <p class="sub">${T(c, c.photosIntro)}</p>
 </div>
 <ul class="gallery" data-gallery tabindex="0" aria-label="${esc(c.photosTitle)}">
-${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}</li>`).join('\n')}
+${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px', priority: 'low' })}</li>`).join('\n')}
 </ul>
 <p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
 </section>`;
 }
 
-// The contact is a name card: signature and seal, portrait, title, and the QR code as a real image
-// that WeChat can long-press. "Save" downloads the same card as a PNG (built by scripts/icons.mjs).
+// The ending: a thank-you, one action, and his own last line. The QR code is a real image WeChat can
+// long-press; "Save" downloads the same card as a PNG (built by scripts/icons.mjs).
 function contact(c) {
   const lang = c.lang === 'zh-CN' ? 'zh' : 'en';
-  return `<section class="tile soft" id="contact" aria-labelledby="contact-title">
+  return `<section class="tile soft ending" id="contact" aria-labelledby="contact-title">
 <div class="reveal">
-<p class="eyebrow">${c.contactTitle}</p>
 <h2 id="contact-title">${T(c, c.contactHeadline)}</h2>
 <p class="sub">${T(c, c.contactLead)}</p>
 </div>
@@ -354,17 +344,27 @@ function contact(c) {
 </section>`;
 }
 
+// Used on project pages for "other work".
+function caseCard(c, cs) {
+  const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
+  return `<article class="card-tile product-card reveal">
+<p class="eyebrow">${esc(t.name)}</p>
+<h3><a href="${casePath(c, cs.slug)}">${T(c, t.title)}</a></h3>
+<p class="card-line">${T(c, t.note)}</p>
+<p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
+</article>`;
+}
+
 function homePage(c) {
   const o = other(c);
   return `${head(c, { url: c.path, alt: { zh: '/', en: '/en/' }, title: c.title })}
-<body>
+<body class="home">
 <a class="skip" href="#main">${c.skip}</a>
 ${nav(c, { switchHref: o.path, onHome: true })}
 <main id="main">
 ${hero(c)}
 ${work(c)}
-${thinking(c)}
-${method(c)}
+${share(c)}
 ${journey(c)}
 ${photos(c)}
 ${contact(c)}
@@ -410,8 +410,7 @@ function casePage(c, cs) {
   const o = other(c);
   const url = casePath(c, cs.slug);
   const live = t.results.some((r) => r.stat);
-  // Related: the other cases of the same kind first, then the rest; three in all.
-  const related = [...CASES.filter((x) => x.slug !== cs.slug && x.kind === cs.kind), ...CASES.filter((x) => x.kind !== cs.kind)].slice(0, 3);
+  const related = CASES.filter((x) => x.slug !== cs.slug);
   return `${head(c, {
     url,
     alt: { zh: casePath(content.zh, cs.slug), en: casePath(content.en, cs.slug) },
@@ -429,7 +428,7 @@ ${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
 <h1 id="case-title">${T(c, t.title)}</h1>
 <p class="sub">${T(c, t.sub)}</p>
 ${t.links ? `<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${chevron}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
-${cs.image ? `<figure class="shot">${img(cs.image.key, t.imageAlt, { sizes: '(min-width: 1068px) 860px, 92vw', mobile: cs.image.mobile, eager: true })}</figure>` : ''}
+${cs.image ? `<div class="case-frame" data-scrollshot>${frame(c, { key: cs.image.key, mobile: cs.image.mobile, alt: t.imageAlt, url: t.links[0][1], name: t.name })}</div>` : ''}
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
 <h2 class="visually-hidden" id="results-title">${L.results}</h2>
@@ -455,13 +454,13 @@ ${t.sections.map((s, i) => block(c, s, i)).join('\n')}
 </article>
 <section class="tile soft more-cases" aria-labelledby="more-title">
 <h2 id="more-title">${L.more}</h2>
-<div class="card-grid three">
-${related.map((x) => caseCard(c, x, { image: false })).join('\n')}
+<div class="card-grid two">
+${related.map((x) => caseCard(c, x)).join('\n')}
 </div>
 </section>
 <section class="tile dark case-cta" aria-labelledby="cta-title">
 <h2 id="cta-title">${T(c, L.contactHeadline)}</h2>
-<p class="sub">${T(c, L.contactBody)}</p>
+${L.contactBody ? `<p class="sub">${T(c, L.contactBody)}</p>` : ''}
 <p class="cta"><a class="pill pill-lg" href="${home(c)}#contact">${c.addWechat}</a></p>
 </section>
 </main>

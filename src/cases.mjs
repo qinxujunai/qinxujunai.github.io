@@ -14,14 +14,15 @@ export const CASES = [
   {
     slug: 'voiceflow',
     kind: 'product',
-    image: { key: 'voiceflow-app', mobile: 'voiceflow-app-m' },
+    image: { key: 'site-voiceflow', mobile: 'site-voiceflow-m' },
     zh: {
       name: 'VoiceFlow',
       kind: '',
       title: '按一下，说话，文字就出现在光标处。',
       sub: 'Windows 上的语音输入。全部在你自己的电脑上完成，不联网，不登录。我写它，是因为和 AI 说的话常常比打的字多。',
       card: 'Windows 上的语音输入，全部在自己的电脑上完成。',
-      imageAlt: 'VoiceFlow 的主界面：已就绪、快捷键、试说一句和最近听写',
+      note: 'Windows · 离线 · 免登录',
+      imageAlt: 'VoiceFlow 的官网：让想法成文。按一下，说出你的话。',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
         ['时间', '2026.05 至今'],
@@ -129,7 +130,8 @@ export const CASES = [
       title: 'Press a key, talk, and the words appear at your cursor.',
       sub: 'Voice typing for Windows. Everything happens on your own computer: no internet, no account. I built it because I say more to AI than I type.',
       card: 'Voice typing for Windows, entirely on your own computer.',
-      imageAlt: 'VoiceFlow main window (in Chinese): ready state, hotkeys, a test dictation box and recent history',
+      note: 'Windows · Offline · No account',
+      imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
       facts: [
         ['Role', 'Solo: product, design, engineering, release'],
         ['When', 'May 2026 to now'],
@@ -240,13 +242,14 @@ export const CASES = [
   {
     slug: 'ai-signal',
     kind: 'product',
-    image: { key: 'ai-signal', mobile: 'ai-signal-m' },
+    image: { key: 'site-ai-signal', mobile: 'site-ai-signal-m' },
     zh: {
       name: 'AI Signal',
       kind: '',
       title: '每天早上一封邮件，3 分钟读完今天的 AI。',
       sub: '它每天替我读 X、Hacker News、论文和各家实验室的博客，只留下值得看的，早上十点发到邮箱。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
+      note: '每天 10:00 · 七类信源 · 每条都附原文',
       imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
       facts: [
         ['角色', '独立开发'],
@@ -347,6 +350,7 @@ export const CASES = [
       title: 'One email each morning: today’s AI in three minutes.',
       sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, and sends it at 10 a.m.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
+      note: 'Daily at 10:00 · Seven kinds of sources · Every item linked',
       imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
       facts: [
         ['Role', 'Built solo'],
@@ -449,14 +453,15 @@ export const CASES = [
   {
     slug: 'wanxiang',
     kind: 'product',
-    image: { key: 'wanxiang', mobile: 'wanxiang-m' },
+    image: { key: 'site-wanxiang', mobile: 'site-wanxiang-m' },
     zh: {
       name: '万象成文',
       kind: '',
       title: '贴一个链接，拿回一篇文字。',
       sub: '视频、播客、图文都行，本地的音视频也可以。Windows 版，在你自己的电脑上处理。',
       card: '视频、播客、图文都行。',
-      imageAlt: '万象成文首页：把链接或文件，直接变成文字。下面是粘贴链接的输入框',
+      note: '视频 · 播客 · 图文 · 在你自己的电脑上处理',
+      imageAlt: '万象成文的官网：把视频、播客和图文，直接变成可用的文字与媒体。',
       facts: [
         ['角色', '独立开发'],
         ['时间', '2026'],
@@ -540,7 +545,8 @@ export const CASES = [
       title: 'Paste a link, get the text back.',
       sub: 'Videos, podcasts and articles all work, and so do local recordings. A Windows app that does the work on your own computer.',
       card: 'Videos, podcasts and articles all work.',
-      imageAlt: 'Wanxiang home screen (in Chinese): turn a link or a file straight into text, with a box to paste a link',
+      note: 'Video · Podcasts · Articles · Processed on your own PC',
+      imageAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media.',
       facts: [
         ['Role', 'Built solo'],
         ['When', '2026'],
@@ -620,284 +626,4 @@ export const CASES = [
     },
   },
 
-  // ───────────────────────── 企业 AI 方案（比智科技） ─────────────────────────
-  // Source: resume, 杭州比智科技 · AI 解决方案架构 · 2025.11 起. Client names are not in the resume: keep them generic.
-  {
-    slug: 'enterprise-ai',
-    kind: 'solution',
-    zh: {
-      name: '企业 AI 方案',
-      kind: '工作 · 比智科技',
-      title: '给金融和政企客户做 AI 问数方案。',
-      sub: '在比智科技，我陪客户把“想用 AI”这件事想清楚：问题是什么，值不值得做，怎么采购，怎么上线。',
-      card: '从第一次聊需求，到项目上线和回款。',
-      facts: [
-        ['角色', 'AI 解决方案架构'],
-        ['时间', '2025.11 起'],
-        ['公司', '比智科技'],
-        ['客户', '金融控股集团、通信与政企客户'],
-        ['方向', '数据平台 · 智能分析 · AI 问数'],
-      ],
-      results: [
-        { v: '5+', l: '客户进入采购评估' },
-        { v: '100%', l: '负责项目的回款率' },
-        { v: '3 万–10 万+', l: '项目规模，从方案跟到回款' },
-      ],
-      sections: [
-        {
-          h: '客户的问题',
-          p: [
-            '“想用 AI”离“能采购”很远。中间隔着一串问题：业务痛点到底是什么，ROI 算不算得过来，交付边界在哪里，采购和合规怎么走。',
-            '我做的，就是陪客户把这些问题一个个想清楚，再一起把项目做出来。',
-          ],
-        },
-        {
-          h: '我怎么做',
-          flow: [
-            { t: '找到对的人', n: ['从公开招投标、行业信息、客户画像和会议交流里筛线索', '识别关键人、预算和采购路径'] },
-            { t: '诊断', n: ['需求挖掘', '梳理业务痛点、ROI、交付边界'] },
-            { t: '方案', n: ['围绕数据平台、智能分析、AI 问数设计方案', '产品演示'] },
-            { t: '选型', n: ['自研方案和外采产品一起评估', '能力 · 成本 · 交付周期 · ROI', '输出选型建议，推动决策链'] },
-            { t: '招投标', n: ['材料梳理、资质准备', '政企采购准入与合规'] },
-            { t: '收尾', n: ['方案 → 合同 → 开票 → 回款', '协同销管、财务、法务'] },
-          ],
-        },
-        {
-          h: '关键时刻',
-          list: [
-            '统筹一家金融控股集团的高层来访：协调生态伙伴和售前资源，围绕数据治理与 AI 应用场景做诊断和演示，之后进入商务沟通。',
-            '主导通信、政企客户的招投标全流程：材料、资质、跨部门协同，以及采购准入与合规要求。',
-            '准备政企、金融、制造客户的接待材料和交流话术，把 ROI、交付边界和 AI 融合场景讲清楚。',
-            '把线索筛选和客户跟进沉淀成一套 SOP。',
-          ],
-        },
-      ],
-    },
-    en: {
-      name: 'Enterprise AI solutions',
-      kind: 'Work · Bizhi Technology',
-      title: 'Data-query AI for finance and government clients.',
-      sub: 'At Bizhi Technology I helped clients think “we want AI” through: what the problem is, whether it’s worth it, how to buy it, how to launch it.',
-      card: 'From the first conversation to launch and payment.',
-      facts: [
-        ['Role', 'AI Solution Architect'],
-        ['When', 'From Nov 2025'],
-        ['Company', 'Bizhi Technology'],
-        ['Clients', 'A financial holding group; telecom and government clients'],
-        ['Focus', 'Data platforms · analytics · natural-language data queries'],
-      ],
-      results: [
-        { v: '5+', l: 'Clients moved into procurement evaluation' },
-        { v: '100%', l: 'Payment collected on my projects' },
-        { v: '¥30k–100k+', l: 'Projects run end to end' },
-      ],
-      sections: [
-        {
-          h: 'The client’s problem',
-          p: [
-            '“We want AI” is a long way from a purchase order. In between sit the real questions: what the business pain is, whether the ROI adds up, where delivery ends, and how procurement and compliance work.',
-            'My part was to think those questions through with the client, one by one, and then build the project together.',
-          ],
-        },
-        {
-          h: 'How I worked',
-          flow: [
-            { t: 'Find the right people', n: ['Screen leads from public tenders, industry news, client profiles and events', 'Identify decision makers, budget and buying path'] },
-            { t: 'Diagnose', n: ['Requirements discovery', 'Map the pain points, ROI and delivery boundary'] },
-            { t: 'Propose', n: ['Design around data platforms, analytics and natural-language queries', 'Product demos'] },
-            { t: 'Select', n: ['Weigh in-house against bought-in products', 'Capability · cost · delivery time · ROI', 'Recommend, and move the decision chain'] },
-            { t: 'Tender', n: ['Documents and qualifications', 'Government procurement and compliance'] },
-            { t: 'Close the loop', n: ['Proposal → contract → invoice → payment', 'With sales ops, finance and legal'] },
-          ],
-        },
-        {
-          h: 'Key moments',
-          list: [
-            'Organized an executive visit from a financial holding group: brought in ecosystem partners and presales, and ran a diagnosis and demo on data governance and AI use cases that moved into commercial talks.',
-            'Led full tender processes for telecom and government clients: documents, qualifications, cross-team coordination, and procurement and compliance rules.',
-            'Prepared briefing material for government, finance and manufacturing clients that made ROI, delivery boundaries and AI use cases concrete.',
-            'Turned lead screening and client follow-up into a repeatable SOP.',
-          ],
-        },
-      ],
-    },
-  },
-
-  // ───────────────────────── 飞书脚本智能体（一念智能） ─────────────────────────
-  // Source: resume, 杭州一念智能 · AI 项目负责人 · 2024.08–2025.10.
-  {
-    slug: 'script-agent',
-    kind: 'solution',
-    zh: {
-      name: '飞书脚本智能体',
-      kind: '工作 · 一念智能',
-      title: '在飞书搭了一个写脚本的智能体。',
-      sub: '在一念智能，我把 50 多个爆款视频拆开，写成智能体的规则，团队用它写短视频脚本。',
-      card: '一条脚本从 3 小时变成 20 分钟。',
-      facts: [
-        ['角色', 'AI 项目负责人，AI 内容工作流负责人'],
-        ['时间', '2024.08 – 2025.10'],
-        ['公司', '一念智能'],
-        ['平台', '飞书智能体'],
-      ],
-      results: [
-        { v: '50+', l: '个爆款案例，逐条拆解' },
-        { v: '3 小时 → 20 分钟', l: '单条脚本的创作时间' },
-        { v: '第一个', l: '公司 AI 驱动的内容工作流' },
-      ],
-      sections: [
-        {
-          h: '为什么做',
-          p: ['创始人 IP 要持续出内容，可一条脚本要写 3 个小时。靠人堆，产量上不去，质量也不稳定。'],
-        },
-        {
-          h: '我怎么做',
-          flow: [
-            { t: '拆解', n: ['找来 50+ 个爆款案例', '逐条拆出背后的逻辑'] },
-            { t: '沉淀', n: ['把这些逻辑整理成智能体的规则和上下文'] },
-            { t: '搭建', n: ['在飞书搭出“爆款脚本生成智能体”'] },
-            { t: '进入流程', n: ['接进创始人 IP 的选题和脚本生产'] },
-          ],
-          after: ['这就是“组织上下文的能力”：模型写得好不好，很大程度上取决于你喂给它的东西有多结构化。'],
-        },
-        {
-          h: '结果',
-          list: [
-            '单条脚本从 3 小时缩到 20 分钟。',
-            '成为公司第一个“AI 驱动”的内容生产工作流。',
-          ],
-        },
-      ],
-    },
-    en: {
-      name: 'Feishu script agent',
-      kind: 'Work · Yinian Intelligence',
-      title: 'A script-writing agent in Feishu.',
-      sub: 'At Yinian Intelligence I broke down 50-odd hit videos and turned them into an agent’s rules, so the team could write short-video scripts with it.',
-      card: 'One script went from three hours to twenty minutes.',
-      facts: [
-        ['Role', 'AI Project Lead; owner of the AI content workflow'],
-        ['When', 'Aug 2024 – Oct 2025'],
-        ['Company', 'Yinian Intelligence'],
-        ['Platform', 'Feishu (Lark) agents'],
-      ],
-      results: [
-        { v: '50+', l: 'Hit videos broken down, one by one' },
-        { v: '3h → 20min', l: 'Time to write one script' },
-        { v: 'First', l: 'AI-driven content workflow at the company' },
-      ],
-      sections: [
-        {
-          h: 'Why I built it',
-          p: ['The founder’s brand needed a steady stream of content, and one script took three hours. More people would not fix the volume or the uneven quality.'],
-        },
-        {
-          h: 'How I worked',
-          flow: [
-            { t: 'Break down', n: ['Collect 50+ hit videos', 'Extract the logic behind each one'] },
-            { t: 'Distill', n: ['Turn that logic into the agent’s rules and context'] },
-            { t: 'Build', n: ['A “hit script” agent in Feishu'] },
-            { t: 'Put it to work', n: ['Wire it into topic planning and script production'] },
-          ],
-          after: ['This is what organizing context means in practice: how well a model writes depends largely on how structured its inputs are.'],
-        },
-        {
-          h: 'Results',
-          list: [
-            'One script went from three hours to twenty minutes.',
-            'It became the company’s first AI-driven content production workflow.',
-          ],
-        },
-      ],
-    },
-  },
-
-  // ───────────────────────── 微众银行 AI 课程（一念智能） ─────────────────────────
-  // Source: resume, 杭州一念智能 · 项目管理/危机处理.
-  {
-    slug: 'webank-rescue',
-    kind: 'solution',
-    zh: {
-      name: '微众银行 AI 课程',
-      kind: '工作 · 一念智能',
-      title: '接手一个快要出问题的 AI 课程项目。',
-      sub: '一个 10.5 万元的微众银行 AI 课程项目，前期交付出了问题，客户不满意。我中途接手。',
-      card: '两个人，五天，把剩下的课交完。',
-      facts: [
-        ['角色', '项目负责人，临时接手'],
-        ['时间', '一念智能期间（2024.08 – 2025.10）'],
-        ['客户', '微众银行'],
-        ['团队', '2 人小组'],
-      ],
-      results: [
-        { v: '48 小时', l: '完成诊断，拿出补救方案' },
-        { v: '5 天', l: '做完原定 30 天的量' },
-        { v: '3 节', l: 'AI 课程，全部上完' },
-        { v: '20–30 万', l: '级别的后续合作意向' },
-      ],
-      sections: [
-        {
-          h: '接手的时候',
-          p: ['项目价值 10.5 万元。前期交付质量出了问题，客户的信任已经受损，项目随时可能违约，公司面临亏损。'],
-        },
-        {
-          h: '我怎么做',
-          flow: [
-            { t: '48 小时内', n: ['诊断问题出在哪里', '制定补救方案'] },
-            { t: '重建信任', n: ['开线上会议，把问题和方案摆到桌面上', '重建沟通节奏'] },
-            { t: '上课', n: ['带 2 人小组', '5 天完成原定 30 天的量', '3 节 AI 赋能课程'] },
-            { t: '之后', n: ['修复客户关系', '推动企业 AI 化陪跑的后续合作'] },
-          ],
-        },
-        {
-          h: '结果',
-          list: [
-            '客户点名要我继续负责项目剩下的部分。',
-            '项目从潜在亏损，变成 20–30 万级别的后续合作意向。',
-          ],
-        },
-      ],
-    },
-    en: {
-      name: 'WeBank AI course',
-      kind: 'Work · Yinian Intelligence',
-      title: 'Taking over an AI course project that was going wrong.',
-      sub: 'A ¥105,000 AI course for WeBank had run into delivery problems and an unhappy client. I took it over midway.',
-      card: 'Two people, five days, and the remaining sessions were done.',
-      facts: [
-        ['Role', 'Project lead, brought in mid-project'],
-        ['When', 'At Yinian Intelligence (Aug 2024 – Oct 2025)'],
-        ['Client', 'WeBank'],
-        ['Team', 'Two people'],
-      ],
-      results: [
-        { v: '48 h', l: 'To diagnose and propose a recovery plan' },
-        { v: '5 days', l: 'To deliver 30 days of planned work' },
-        { v: '3', l: 'AI training sessions, all delivered' },
-        { v: '¥200k–300k', l: 'Follow-on work under discussion' },
-      ],
-      sections: [
-        {
-          h: 'When I took over',
-          p: ['The project was worth ¥105,000. Early delivery had gone wrong, the client’s trust was damaged, and the project could default at any moment, at a loss to the company.'],
-        },
-        {
-          h: 'How I worked',
-          flow: [
-            { t: 'Within 48 hours', n: ['Find what actually went wrong', 'Write the recovery plan'] },
-            { t: 'Rebuild trust', n: ['An online meeting with the problems and the plan on the table', 'A new rhythm of communication'] },
-            { t: 'Deliver', n: ['A team of two', '30 days of planned work in five', 'Three AI training sessions'] },
-            { t: 'After', n: ['A repaired relationship', 'Talks on ongoing AI adoption support'] },
-          ],
-        },
-        {
-          h: 'Results',
-          list: [
-            'The client asked for me by name to run the rest of the project.',
-            'A likely loss became talks on ¥200,000–300,000 of follow-on work.',
-          ],
-        },
-      ],
-    },
-  },
 ];
