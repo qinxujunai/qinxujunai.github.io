@@ -311,7 +311,8 @@ ${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when"
 </section>`;
 }
 
-// Photos load early and at low priority: inside a horizontal scroller, lazy images could stay blank in WeChat.
+// Gallery images are lazy so they never compete with the first screen; site.js switches them all to eager
+// once the section is near, because lazy images inside a horizontal scroller could stay blank in WeChat.
 function photos(c) {
   return `<section class="tile plain" id="photos" aria-labelledby="photos-title">
 <div class="reveal">
@@ -320,7 +321,7 @@ function photos(c) {
 <p class="sub">${T(c, c.photosIntro)}</p>
 </div>
 <ul class="gallery" data-gallery tabindex="0" aria-label="${esc(c.photosTitle)}">
-${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px', priority: 'low' })}${p.caption ? `<figcaption>${T(c, p.caption)}</figcaption>` : ''}</figure></li>`).join('\n')}
+${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}${p.caption ? `<figcaption>${T(c, p.caption)}</figcaption>` : ''}</figure></li>`).join('\n')}
 </ul>
 <p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
 </section>`;

@@ -81,8 +81,18 @@
     }, { threshold: 0.4 }).observe(capsule);
   }
 
-  // Gallery paddles
+  // Gallery: load every image once the section is near, so none stays blank off to the side.
   var gallery = document.querySelector('[data-gallery]');
+  if (gallery && canObserve) {
+    var near = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      [].forEach.call(gallery.querySelectorAll('img'), function (im) { im.loading = 'eager'; });
+      near.disconnect();
+    }, { rootMargin: '1500px 0px' });
+    near.observe(gallery);
+  }
+
+  // Gallery paddles
   var prev = document.querySelector('[data-prev]');
   var next = document.querySelector('[data-next]');
   if (gallery && prev && next) {
