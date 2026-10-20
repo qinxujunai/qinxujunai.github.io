@@ -65,6 +65,7 @@
       if (pos <= chars.length) {
         typed.textContent = chars.slice(0, pos).join('');
         typed.scrollLeft = typed.scrollWidth;
+        typed.classList.toggle('long', typed.scrollLeft > 0);
         capsule.classList.add('listening');
         pos++;
         timer = setTimeout(step, 48);
@@ -172,22 +173,36 @@
     }, { rootMargin: '-52px 0px 0px 0px' }).observe(heroSig);
   }
 
+  // The nav turns dark while a black tile is under it.
+  var darks = [].slice.call(document.querySelectorAll('main .dark'));
+  if (canObserve) {
+    var darkWatch = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.target.under = e.isIntersecting; });
+      root.classList.toggle('nav-dark', darks.some(function (d) { return d.under; }));
+    }, { rootMargin: '0px 0px -94% 0px' });
+    darks.forEach(function (el) { darkWatch.observe(el); });
+  }
+
   // Project windows: the website inside scrolls from top to bottom as its section passes.
-  // Pinned stages ([data-show]) use their track; plain windows ([data-scrollshot]) use their own position.
+  // The pinned flagship ([data-show]) gets a track just long enough for the page to move with the scroll.
   var shows = [].slice.call(document.querySelectorAll('[data-show], [data-scrollshot]')).map(function (el) {
     return { el: el, pinned: el.hasAttribute('data-show'), img: el.querySelector('.frame-img'), view: el.querySelector('.frame-view'), on: false };
   });
   if (shows.length && root.classList.contains('motion')) {
     var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-    var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+    var size = function () {
+      shows.forEach(function (s) {
+        if (s.pinned && s.img) s.el.style.height = Math.round(window.innerHeight + Math.max(0, s.img.offsetHeight - s.view.clientHeight) * 1.15) + 'px';
+      });
+    };
     var layout = function () {
       var vh = window.innerHeight;
       shows.forEach(function (s) {
         if (!s.on || !s.img) return;
-        var r = s.el.getBoundingClientRect();
-        var p = s.pinned ? clamp(-r.top / Math.max(1, r.height - vh)) : clamp((vh - r.top) / (vh + r.height));
-        // Hold the top of the page for a moment, then leaf through it, then rest at the end.
-        p = ease(clamp((p - 0.1) / 0.8));
+        var r = (s.pinned ? s.el : s.view).getBoundingClientRect();
+        var p = s.pinned ? -r.top / Math.max(1, r.height - vh) : (vh - r.top) / (vh + r.height);
+        // A short rest at the top and at the end; in between the page moves evenly.
+        p = s.pinned ? clamp((p - 0.06) / 0.88) : clamp((p - 0.2) / 0.6);
         var travel = Math.max(0, s.img.offsetHeight - s.view.clientHeight);
         s.img.style.setProperty('--shift', (-travel * p).toFixed(1) + 'px');
       });
@@ -206,10 +221,11 @@
     });
     shows.forEach(function (s) {
       watch.observe(s.el);
-      if (s.img) s.img.addEventListener('load', layout);
+      if (s.img) s.img.addEventListener('load', function () { size(); layout(); });
     });
+    size();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', function () { size(); onScroll(); });
   }
 
   // Section tracking for the nav.

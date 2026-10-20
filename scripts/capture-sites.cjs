@@ -6,7 +6,7 @@ const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': '
 (async () => {
   const b = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', proxy: { server: process.env.HTTPS_PROXY } });
   for (const [name, path] of Object.entries(sites)) {
-    for (const [tag, vp, dpr, mobile] of [['d', { width: 1280, height: 800 }, 1, false], ['m', { width: 390, height: 844 }, 2, true]]) {
+    for (const [tag, vp, dpr, mobile] of [['d', { width: 1280, height: 800 }, 2, false], ['m', { width: 390, height: 844 }, 2, true]]) {
       const ctx = await b.newContext({ viewport: vp, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile, reducedMotion: 'reduce', colorScheme: 'light', locale: 'zh-CN' });
       const p = await ctx.newPage();
       await p.goto('https://qinxujunai.github.io/' + path, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => {});

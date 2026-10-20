@@ -36,7 +36,7 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
     lede: '我用 AI 做东西，也把做法分享出来。',
-    now: '一个离线的语音输入法，一份每天早上的 AI 简报，一个把视频变成文字的工具，还有一套用 AI 做东西的方法。都能直接用。',
+    now: '以前拍片，现在做 AI。这里有一个离线的语音输入法、一封每天早上的 AI 简报、一个把视频变成文字的工具，还有我做这些东西的方法。',
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
@@ -45,7 +45,7 @@ export const content = {
     home: '首页',
 
     workTitle: '作品',
-    workHeadline: '我做的东西，都能直接用。',
+    workHeadline: '我做的东西，点开就能看。',
     visit: '访问网站',
     readCase: '怎么做的',
     openSite: (name) => `打开 ${name} 的网站`,
@@ -62,12 +62,12 @@ export const content = {
       name: 'ai.vibecoding',
       // his words: the subtitle of ai.vibecoding (May 2026)
       quote: '让 AI 负责拆解、生成与验证，让你守住目标、边界与品味。',
-      intro: '我把自己用 AI 做东西的方法写成了一个网站。10 章，约 18 分钟读完；零基础、产品经理、工程师各有一条路线，每章读完都有一件马上能做的事。',
+      intro: '如果你也想用 AI 做出自己的东西，可以从这里开始。我把做法整理成了一个网站：10 章，约 18 分钟；零基础、产品经理、工程师各有一条路线，每条读完都有一件马上能做的事。',
       note: '10 章 · 约 18 分钟 · 三条路线',
       link: '去读 ai.vibecoding',
       principles: [ // his words
-        { title: '提出问题', body: '问题定义得越清楚，模型越像工程伙伴，而不是许愿池。' },
-        { title: '组织上下文', body: '上下文越结构化，输出越接近你的真实意图。' },
+        { title: '提出问题', body: '自然语言编程的起点不是“写个页面”，而是把模糊想法采访成目标、用户、边界与验收标准。' },
+        { title: '组织上下文', body: 'README、AGENTS.md、Skills、MCP、截图、日志和历史决策都不是附件，它们是模型的工作记忆。' },
         { title: '交付确定性', body: '模型负责执行，人负责边界。' },
       ],
     },
@@ -110,7 +110,8 @@ export const content = {
       desktop: '打开手机微信，用「扫一扫」扫这张二维码。',
     },
     save: '保存名片',
-    closing: '这不仅是自然语言编程的边界，也是创造者的终极浪漫。', // his words
+    // his words: the manifesto of ai.vibecoding (May 2026)
+    closing: ['AI 进化得越快，我们越需要慢下来。', '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。'],
     notFound: { title: '这一页不存在', body: '链接可能写错了，或者页面已经搬走。', back: '回到首页' },
 
     // Project page chrome
@@ -142,7 +143,7 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
     lede: 'I build things with AI, and share how I do it.',
-    now: 'An offline voice keyboard, a morning AI briefing, a tool that turns videos into text, and a written-down way of building with AI. All ready to use.',
+    now: 'I used to make films; now I build with AI. Here you’ll find an offline voice keyboard, a morning AI briefing, a tool that turns videos into text, and the way I make all of them.',
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
@@ -151,7 +152,7 @@ export const content = {
     home: 'Home',
 
     workTitle: 'Work',
-    workHeadline: 'Things I’ve made. All ready to use.',
+    workHeadline: 'Things I’ve made. Open any of them.',
     visit: 'Visit the site',
     readCase: 'How it works',
     openSite: (name) => `Open the ${name} website`,
@@ -167,7 +168,7 @@ export const content = {
       title: 'Sharing',
       name: 'ai.vibecoding',
       quote: 'Let AI decompose, generate, and verify, while you protect the goal, boundaries, and taste.', // his words
-      intro: 'I wrote down how I build with AI as a website: ten chapters, about eighteen minutes. There are tracks for beginners, product managers and engineers, and every chapter ends with one thing you can do right away.',
+      intro: 'If you want to make something of your own with AI, start here. I put the way I work into a website: ten chapters, about eighteen minutes, with one track each for beginners, product managers and engineers. Every track ends with one thing you can do right away.',
       note: '10 chapters · about 18 minutes · three tracks',
       link: 'Read ai.vibecoding',
       principles: [ // his words
@@ -205,7 +206,7 @@ export const content = {
 
     contactTitle: 'Contact',
     contactHeadline: 'Thanks for reading this far.',
-    contactLead: 'Add me on WeChat. Let’s get to know each other.',
+    contactLead: 'Say hi on WeChat.',
     cardLabel: 'Qin Xujun’s card',
     qrAlt: 'Qin Xujun’s WeChat QR code',
     hint: {
@@ -215,7 +216,7 @@ export const content = {
       desktop: 'Open WeChat on your phone and use Scan on this code.',
     },
     save: 'Save the card',
-    closing: 'This is not only the frontier of natural-language programming. It is also the creator’s ultimate romance.', // his words
+    closing: ['The faster AI evolves, the more we need to slow down.', 'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.'], // his words
     notFound: { title: 'This page doesn’t exist', body: 'The link may be mistyped, or the page has moved.', back: 'Back to home' },
 
     caseLabels: {
@@ -226,7 +227,7 @@ export const content = {
       doLabel: 'Does',
       dontLabel: 'Does not',
       more: 'Other work',
-      contactHeadline: 'Add me on WeChat. Let’s get to know each other.',
+      contactHeadline: 'Say hi on WeChat.',
       contactBody: '',
       liveNote: (date) => `GitHub numbers refresh every six hours. Last update: ${date}.`,
     },

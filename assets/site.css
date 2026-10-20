@@ -15,7 +15,7 @@
   --pill-hover: #0077ed;
   --hairline: #d2d2d7;
   --card: #ffffff;
-  --nav: rgba(255, 255, 255, 0.72);
+  --nav: rgba(255, 255, 255, 0.86);
   --nav-line: rgba(0, 0, 0, 0.08);
   --shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 20px 50px rgba(0, 0, 0, 0.12);
   --sig: #1d1d1f;
@@ -37,7 +37,7 @@
   --pill-hover: #0077ed;
   --hairline: #3a3a3c;
   --card: #000000;
-  --nav: rgba(22, 22, 23, 0.72);
+  --nav: rgba(22, 22, 23, 0.86);
   --nav-line: rgba(255, 255, 255, 0.1);
   --shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 60px rgba(0, 0, 0, 0.6);
   --sig: #f5f5f7;
@@ -172,6 +172,7 @@ a:hover {
 /* ---------- Local nav ---------- */
 
 .nav {
+  transition: background-color 0.3s ease;
   position: sticky;
   top: 0;
   z-index: 40;
@@ -180,6 +181,15 @@ a:hover {
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--nav-line);
   padding-top: env(safe-area-inset-top);
+}
+
+/* Over a black tile the bar turns dark too, as on apple.com. */
+.nav-dark .nav {
+  --nav: rgba(22, 22, 23, 0.86);
+  --nav-line: rgba(255, 255, 255, 0.1);
+  --ink: #f5f5f7;
+  --muted: #a1a1a6;
+  --sig: #f5f5f7;
 }
 
 .nav-inner {
@@ -409,7 +419,7 @@ main {
 .avatar {
   width: 72px;
   height: 72px;
-  margin: 0 auto 10px;
+  margin: 0 auto 20px;
   border-radius: 50%;
   object-fit: cover;
   background: var(--soft);
@@ -417,7 +427,7 @@ main {
 }
 
 .hero .sig-line {
-  margin-bottom: 10px;
+  margin-bottom: 22px;
 }
 
 .hero h1 {
@@ -531,6 +541,16 @@ main {
   flex: 1;
   min-width: 0;
   overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Once the line is longer than the capsule, its start fades out instead of being cut mid-character. */
+.typed.long {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 28px);
+  mask-image: linear-gradient(to right, transparent, #000 28px);
+}
+
+.nw {
   white-space: nowrap;
 }
 
@@ -821,8 +841,8 @@ main {
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(16px); filter: blur(6px); }
-  to { opacity: 1; transform: none; filter: none; }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* Home: the small signature in the nav appears once the big one has scrolled away, as if it docked there. */
@@ -923,11 +943,6 @@ main {
 
   main,
   .works {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .works {
     padding: 0;
   }
 
@@ -936,8 +951,16 @@ main {
   }
 
   .hero h1 {
-    font-size: 80px;
-    line-height: 1.05;
+    font-size: 68px;
+    line-height: 1.06;
+  }
+
+  .hero .sub {
+    max-width: 31em;
+  }
+
+  .hero .sig-line {
+    margin-bottom: 32px;
   }
 
   .tile h2,
@@ -952,7 +975,7 @@ main {
   }
 
   .hero .sig {
-    height: 76px;
+    height: 92px;
   }
 
   .gallery {
@@ -1162,8 +1185,9 @@ main {
   }
 
   .statement .pull {
-    font-size: 80px;
-    line-height: 1.06;
+    max-width: 15em;
+    font-size: 72px;
+    line-height: 1.08;
   }
 
   .flagship .facts {
@@ -1483,6 +1507,16 @@ main {
   font-size: 19px;
   line-height: 1.5;
   color: var(--muted);
+}
+
+.closing-lead {
+  display: block;
+  text-wrap: balance;
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
 #contact .sig-end {
@@ -2083,12 +2117,13 @@ main {
   will-change: transform;
 }
 
-/* With motion: the stage pins while the page inside the window scrolls from top to bottom. */
-.motion .show-track {
-  height: 210vh;
+/* With motion, the flagship pins while the page inside its window scrolls from top to bottom.
+   site.js sizes the track so the page moves about as fast as the scroll. */
+.motion [data-show] {
+  height: 200vh;
 }
 
-.motion .show-stage {
+.motion [data-show] .show-stage {
   position: sticky;
   top: 52px;
   height: calc(100vh - 52px);
@@ -2098,7 +2133,7 @@ main {
   padding-bottom: 28px;
 }
 
-.motion .show-stage .frame {
+.motion [data-show] .frame {
   flex: 1 1 auto;
   height: auto;
   min-height: 0;
@@ -2177,10 +2212,11 @@ main {
 
 @media (max-width: 733px) {
   .frame {
-    width: min(76vw, 300px);
-    height: min(62vh, 560px);
-    border: 9px solid #1d1d1f;
-    border-radius: 36px;
+    width: min(62vw, 250px, calc((100svh - 330px) * 9 / 19));
+    height: auto;
+    aspect-ratio: 9 / 19;
+    border: 7px solid #1d1d1f;
+    border-radius: 38px;
   }
 
   .dark .frame {
@@ -2192,15 +2228,12 @@ main {
   }
 
   .frame-view {
-    border-radius: 27px;
+    border-radius: 31px;
   }
 
-  .motion .show-track {
-    height: 190vh;
-  }
-
-  .motion .show-stage .frame {
-    max-height: 580px;
+  .motion [data-show] .frame {
+    flex: none;
+    max-height: none;
   }
 }
 
@@ -2220,6 +2253,10 @@ main {
   .ending h2 {
     font-size: 56px;
   }
+}
+
+[data-theme='dark'] .frame-img {
+  filter: brightness(0.92);
 }
 
 @media (prefers-reduced-motion: reduce) {
