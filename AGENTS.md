@@ -40,8 +40,8 @@
   8. 加微信。
 - **VoiceFlow 数据**：star、下载、fork、最新版本来自 `src/stats.json`。`.github/workflows/stats.yml` 每 6 小时运行一次 `scripts/stats.mjs`，重建页面，只在数字有变化时提交。不要手改这些数字。
 - **签名**：
-  - `src/signature.svg` 由 `scripts/signature.mjs` 生成：把 OFL 字体 Long Cang 的字形转成路径，再按落款排布（「秦」大、「徐俊」小，略有欹侧）。
-  - 末尾有一方朱文底、白文字的「徐俊」印，用 Noto Serif SC 切出，边缘做了残破处理，带 `class="seal"`。
+  - `src/signature.svg` 由 `scripts/signature.mjs` 生成：把 OFL 字体 Ma Shan Zheng（马善政楷书）的字形转成路径，按落款排布（「秦」略大；布局 `kai`）。
+  - 末尾有一方红底白字的「徐俊」印（白字下垫纸色底），用 Noto Serif SC 切出，边缘做了残破处理，带 `class="seal"`。
   - 每页只有一处保留真实路径，放在 `<g id="sig-paths">` 里；其余位置用 `<use href="#sig-paths">` 引用。
   - 拿到本人手写签名后可以替换，但要保持每个字一个 `<path>`，印章单独一个 `path.seal`。
 - **图片**：
