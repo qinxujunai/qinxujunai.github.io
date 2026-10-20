@@ -122,7 +122,7 @@ function head(c, { url, alt, title, description = c.description, noindex = false
 <meta name="description" content="${esc(description)}">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
-${preload.map((k) => `<link rel="preload" as="image" href="${Object.values(media[k])[0].src}">`).join('\n')}
+${preload.map((k) => `<link rel="preload" as="image" href="${Object.values(media[k])[0].src}" media="(max-width: 733px)" fetchpriority="high">`).join('\n')}
 ${themeScript}
 <style>${css}</style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -145,7 +145,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 </head>`;
 }
 
-const SECTIONS = ['work', 'share', 'path', 'photos', 'contact'];
+const SECTIONS = ['work', 'share', 'path', 'contact'];
 
 // Apple-style local nav: signature on the left, sections in the middle, one blue action on the right.
 // On the home page the signature here is a reference to the hero's; case pages hold the paths here.
@@ -169,7 +169,7 @@ ${SECTIONS.map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a
 function footer(c) {
   return `<footer class="foot">
 <div class="foot-inner">
-<span>© ${new Date().getFullYear()} ${esc(c.name)}</span>
+<span>© ${new Date().getFullYear()}</span>
 <span class="colophon">${T(c, c.colophon)}</span>
 </div>
 </footer>`;
@@ -183,8 +183,8 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' 
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
 <p class="visually-hidden">${esc(c.name)}</p>
-<h1 id="hero-title" class="rise" style="--d:.5s">${T(c, c.lede)}</h1>
-<p class="sub rise" style="--d:.65s">${T(c, c.now)}</p>
+<h1 id="hero-title" class="rise" style="--d:.5s">${T(c, bare(c.lede))}</h1>
+<p class="sub rise" style="--d:.65s">${T(c, bare(c.now))}</p>
 <p class="cta rise" style="--d:.8s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
 </section>`;
 }
@@ -200,54 +200,49 @@ const statValue = (k) => stats.voiceflow[k];
 const statText = (v) => esc(typeof v === 'number' ? v.toLocaleString('en-US') : v);
 const hostPath = (url) => url.replace(/^https?:\/\//, '').replace(/\?.*$/, '').replace(/\/$/, '');
 
-// A project's own website inside a browser window (a phone on small screens). As the section scrolls
-// past, the page inside scrolls from top to bottom, as if someone were leafing through it for you.
+// Headlines and one-line copy carry no closing full stop (his rule: fewer marks, easier on the eye).
+const bare = (s) => String(s).replace(/[。.]\s*$/, '');
+
+// A project's own website in a browser window: a thin address bar with the real URL, then the page.
+// Phones get a fixed 16:10 crop of the same desktop page (no phone frame: these are not phone apps).
+// On wide screens the page inside leafs from top to bottom as the section passes.
 // The whole window is a link to the live site.
-// Narrow windows (AI Signal) show a page that is itself narrow, like an email.
-function frame(c, { key, mobile, alt, url, name }) {
+function frame(c, { key, alt, url, name, first = false }) {
   return `<a class="frame${key === 'site-ai-signal' ? ' narrow' : ''}" href="${url}" ${ext}>
 <span class="visually-hidden">${esc(c.openSite(name))}</span>
 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">${esc(hostPath(url))}</span></span>
-<span class="frame-view">${img(key, alt, { sizes: '(max-width: 733px) 250px, 1040px', mobile, cls: 'frame-img' })}</span>
+<span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: `${key}-card`, cls: 'frame-img', eager: first })}</span>
 </a>`;
 }
 
-// One project, Apple product-page style: name, one line, two links, then its website in a window.
-// With motion allowed, the stage pins while the page inside the window scrolls.
-// Only the flagship pins (data-show); the others leaf through their page as they pass (data-scrollshot).
-function showcase(c, { id, tone, name, line, note, site, siteLabel, caseUrl, image, alt, extra = '', pin = false }) {
+// One project, two levels of text above the picture (name, one plain line), the rest below it
+// (plain facts and links). Only the flagship pins on wide screens (data-show); the others leaf through
+// their page as they pass (data-scrollshot). Phones never pin.
+function showcase(c, { id, tone, name, line, note, site, siteLabel, caseUrl, image, alt, pin = false }) {
   return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
 <div class="show-track" ${pin ? 'data-show' : 'data-scrollshot'}>
 <div class="show-stage">
 <div class="show-head">
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
-${line ? `<p class="show-line">${T(c, line)}</p>` : ''}
-${note ? `<p class="show-note">${T(c, note)}</p>` : ''}
+${line ? `<p class="show-line">${T(c, bare(line))}</p>` : ''}
+</div>
+${frame(c, { key: image.key, alt, url: site, name, first: pin })}
+<div class="show-foot">
+${note ? `<p class="show-note">${T(c, bare(note))}</p>` : ''}
 <p class="cta"><a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}</p>
 </div>
-${frame(c, { key: image.key, mobile: image.mobile, alt, url: site, name })}
 </div>
 </div>
-${extra}
 </article>`;
 }
 
-// VoiceFlow's extra: the capsule types real lines at the product's own rhythm, and live GitHub numbers.
-function voiceflowExtra(c) {
+// VoiceFlow's demo, on its project page: the capsule types real lines at the product's own rhythm.
+function voiceflowDemo(c) {
   const f = c.flagship;
-  return `<div class="show-extra">
-<div class="demo" aria-hidden="true">
+  return `<div class="demo case-demo" aria-hidden="true">
 <kbd>${esc(f.key)}</kbd>
 <div class="capsule"><span class="bars"><i></i><i></i><i></i></span><span class="typed" data-lines="${esc(JSON.stringify(f.lines))}">${esc(f.lines[0])}</span><span class="caret"></span></div>
 <p class="hint">${esc(f.hint)}</p>
-</div>
-<dl class="facts reveal">
-${['stars', 'downloads', 'forks', 'version'].map((k) => {
-  const v = statValue(k);
-  return `<div><dt>${T(c, f.facts[k])}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${statText(v)}</dd></div>`;
-}).join('\n')}
-</dl>
-<p class="footnote">${dates(T(c, f.factsNote(stats.voiceflow.updated)))}</p>
 </div>`;
 }
 
@@ -259,43 +254,61 @@ function projectShow(c, cs) {
     id: cs.slug,
     tone: TONES[cs.slug],
     name: t.name,
-    line: t.title,
+    line: t.line,
     note: t.note,
     site: t.links[0][1],
     siteLabel: cs.slug === 'ai-signal' ? t.links[0][0] : c.visit,
     caseUrl: casePath(c, cs.slug),
     image: cs.image,
     alt: t.imageAlt,
-    extra: cs.slug === 'voiceflow' ? voiceflowExtra(c) : '',
     pin: cs.slug === 'voiceflow',
   });
+}
+
+// The fourth work: AI-made images (then a few of his photographs), as a swipeable gallery.
+// Gallery images are lazy so they never compete with the first screen; site.js switches them all to eager
+// once the section is near, because lazy images inside a horizontal scroller could stay blank in WeChat.
+function visual(c) {
+  const v = c.visual;
+  return `<article class="show soft visual" id="visual" aria-labelledby="visual-title">
+<div class="show-stage">
+<div class="show-head">
+<h3 id="visual-title" class="show-name">${esc(v.name)}</h3>
+<p class="show-line">${T(c, bare(v.line))}</p>
+</div>
+<ul class="gallery" data-gallery tabindex="0" aria-label="${esc(v.name)}">
+${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}${p.caption ? `<figcaption>${T(c, bare(p.caption))}</figcaption>` : ''}</figure></li>`).join('\n')}
+</ul>
+<div class="show-foot">
+<p class="show-note">${T(c, bare(v.note))}</p>
+<p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
+</div>
+</div>
+</article>`;
 }
 
 function work(c) {
   return `<section id="work" class="works" aria-labelledby="work-title">
 <h2 id="work-title" class="visually-hidden">${c.workTitle}</h2>
 ${CASES.map((cs) => projectShow(c, cs)).join('\n')}
+${visual(c)}
 </section>`;
 }
 
-// Sharing: his own words light up as you scroll, what you get from ai.vibecoding, and the site itself.
+// 想法: one block. His own line lights up as it scrolls by, one plain sentence, then the site itself.
 function share(c) {
   const s = c.share;
-  return `<section id="share" class="share" aria-labelledby="share-title">
-<div class="tile dark statement" data-statement>
+  return `<section id="share" class="tile dark share" aria-labelledby="share-title">
+<div class="statement" data-statement>
 <p class="eyebrow">${s.title}</p>
-<h2 class="pull" id="share-title">${statement(c, s.quote)}</h2>
-<p class="share-intro reveal">${T(c, s.intro)}</p>
-<ul class="principles reveal">
-${s.principles.map((p) => `<li><h3>${T(c, p.title)}</h3><p>${T(c, p.body)}</p></li>`).join('\n')}
-</ul>
+<h2 class="pull" id="share-title">${statement(c, bare(s.quote))}</h2>
+<p class="show-line">${T(c, bare(s.intro))}</p>
 </div>
-${showcase(c, {
-  id: 'vibecoding', tone: 'dark', name: s.name, line: '', note: s.note,
-  site: VIBECODING, siteLabel: s.link, caseUrl: '',
-  image: { key: 'site-vibecoding', mobile: 'site-vibecoding-m' },
-  alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products',
-})}
+${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', url: VIBECODING, name: s.name })}
+<div class="show-foot">
+<p class="show-note">${T(c, bare(s.note))}</p>
+<p class="cta"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.link)}${chevron}<span class="visually-hidden"> ${esc(s.name)}</span></a></p>
+</div>
 </section>`;
 }
 
@@ -303,7 +316,7 @@ function journey(c) {
   return `<section class="tile soft" id="path" aria-labelledby="path-title">
 <div class="reveal">
 <p class="eyebrow">${c.pathTitle}</p>
-<h2 id="path-title">${T(c, c.pathHeadline)}</h2>
+<h2 id="path-title">${T(c, bare(c.pathHeadline))}</h2>
 </div>
 <ol class="path reveal">
 ${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
@@ -311,43 +324,28 @@ ${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when"
 </section>`;
 }
 
-// Gallery images are lazy so they never compete with the first screen; site.js switches them all to eager
-// once the section is near, because lazy images inside a horizontal scroller could stay blank in WeChat.
-function photos(c) {
-  return `<section class="tile plain" id="photos" aria-labelledby="photos-title">
-<div class="reveal">
-<p class="eyebrow">${c.photosTitle}</p>
-<h2 id="photos-title">${T(c, c.photosHeadline)}</h2>
-<p class="sub">${T(c, c.photosIntro)}</p>
-</div>
-<ul class="gallery" data-gallery tabindex="0" aria-label="${esc(c.photosTitle)}">
-${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}${p.caption ? `<figcaption>${T(c, p.caption)}</figcaption>` : ''}</figure></li>`).join('\n')}
-</ul>
-<p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
-</section>`;
-}
-
-// The ending: a thank-you, one action, and his own last line. The QR code is a real image WeChat can
-// long-press; "Save" downloads the same card as a PNG (built by scripts/icons.mjs).
+// The ending: a thank-you, one action, and his own last line. The card carries his name once (the
+// signature), one line, and the QR code as a real image WeChat can long-press; it is not wrapped in a link.
+// Outside WeChat, phones get "copy my WeChat ID and open WeChat" when the ID is set, else "save the card".
 function contact(c) {
   const lang = c.lang === 'zh-CN' ? 'zh' : 'en';
   return `<section class="tile soft ending" id="contact" aria-labelledby="contact-title">
 <div class="reveal">
-<h2 id="contact-title">${T(c, c.contactHeadline)}</h2>
-<p class="sub">${T(c, c.contactLead)}</p>
+<h2 id="contact-title">${T(c, bare(c.contactHeadline))}</h2>
+<p class="sub">${T(c, bare(c.contactLead))}</p>
 </div>
 <div class="namecard-stage">
 <div class="namecard" role="group" aria-label="${esc(c.cardLabel)}" data-tilt>
 <div class="nc-top">${signatureRef('nc-sig')}${img('avatar', '', { sizes: '56px', cls: 'nc-avatar' })}</div>
 <div class="nc-bottom">
-<div class="nc-id"><p class="nc-name">${esc(c.name)}</p><p class="nc-role">${T(c, c.role)}</p><p class="nc-org">${T(c, c.org)}</p></div>
+<p class="nc-role">${T(c, bare(c.role))}</p>
 <div class="nc-qr"><img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async"></div>
 </div>
 </div>
 </div>
-<p class="qr-hint" data-qr-hint data-hint-wechat="${esc(c.hint.wechat)}" data-hint-phone="${esc(c.hint.phone)}" data-hint-desktop="${esc(c.hint.desktop)}">${esc(c.hint.default)}</p>
-<p class="cta"><a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
-<p class="closing-line reveal"><span class="closing-lead">${T(c, c.closing[0])}</span>${T(c, c.closing[1])}</p>
+<p class="qr-hint" data-qr-hint data-hint-wechat="${esc(bare(c.hint.wechat))}" data-hint-phone="${esc(bare(c.hint.phone))}" data-hint-desktop="${esc(bare(c.hint.desktop))}">${esc(bare(c.hint.default))}</p>
+<p class="cta">${c.wechatId ? `<button type="button" class="pill" data-wechat-id="${esc(c.wechatId)}" data-copied="${esc(bare(c.copied))}" hidden>${esc(c.copyWechat)}</button>` : ''}<a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
+<p class="closing-line reveal"><span class="closing-lead">${T(c, bare(c.closing[0]))}</span>${T(c, c.closing[1])}</p>
 </section>`;
 }
 
@@ -356,15 +354,15 @@ function caseCard(c, cs) {
   const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
   return `<article class="card-tile product-card reveal">
 <p class="eyebrow">${esc(t.name)}</p>
-<h3><a href="${casePath(c, cs.slug)}">${T(c, t.title)}</a></h3>
-<p class="card-line">${T(c, t.note)}</p>
+<h3><a href="${casePath(c, cs.slug)}">${T(c, bare(t.line))}</a></h3>
+<p class="card-line">${T(c, bare(t.note))}</p>
 <p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
 </article>`;
 }
 
 function homePage(c) {
   const o = other(c);
-  return `${head(c, { url: c.path, alt: { zh: '/', en: '/en/' }, title: c.title })}
+  return `${head(c, { url: c.path, alt: { zh: '/', en: '/en/' }, title: c.title, preload: ['site-voiceflow-card'] })}
 <body class="home">
 <a class="skip" href="#main">${c.skip}</a>
 ${nav(c, { switchHref: o.path, onHome: true })}
@@ -373,7 +371,6 @@ ${hero(c)}
 ${work(c)}
 ${share(c)}
 ${journey(c)}
-${photos(c)}
 ${contact(c)}
 </main>
 ${footer(c)}
@@ -432,10 +429,11 @@ ${nav(c, { switchHref: casePath(o, cs.slug), onHome: false })}
 <header class="tile plain case-head">
 <nav class="crumb" aria-label="${esc(L.crumb)}"><a href="${home(c)}#work">${L.crumb}</a>${chevron}<span aria-current="page">${esc(t.name)}</span></nav>
 ${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
-<h1 id="case-title">${T(c, t.title)}</h1>
-<p class="sub">${T(c, t.sub)}</p>
+<h1 id="case-title">${T(c, bare(t.title))}</h1>
+<p class="sub">${T(c, bare(t.sub))}</p>
 ${t.links ? `<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${chevron}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
-${cs.image ? `<div class="case-frame" data-scrollshot>${frame(c, { key: cs.image.key, mobile: cs.image.mobile, alt: t.imageAlt, url: t.links[0][1], name: t.name })}</div>` : ''}
+${cs.image ? `<div class="case-frame" data-scrollshot>${frame(c, { key: cs.image.key, alt: t.imageAlt, url: t.links[0][1], name: t.name })}</div>` : ''}
+${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
 <h2 class="visually-hidden" id="results-title">${L.results}</h2>
