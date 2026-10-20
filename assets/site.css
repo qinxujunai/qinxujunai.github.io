@@ -847,15 +847,17 @@ main {
 
 /* Home: one blue button per screen. The nav's WeChat button waits until the hero's has scrolled away. */
 .motion .home .nav-tools .pill {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+  display: none;
 }
 
 .motion.sig-docked .home .nav-tools .pill {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.45s ease;
+  display: inline-flex;
+  animation: dock 0.45s ease both;
+}
+
+@keyframes dock {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* What the reader can take away right now: his method, one tap from the first screen. */
@@ -875,11 +877,13 @@ main {
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
 }
 
 .motion.sig-docked .home .nav-sig {
   opacity: 1;
   transform: none;
+  pointer-events: auto;
 }
 
 /* ---------- Larger screens ---------- */

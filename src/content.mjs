@@ -49,7 +49,7 @@ export const content = {
     // Plain self-introduction, as the best personal sites open (rauno.me, karpathy.ai, paco.me).
     lede: '我是秦徐俊，做 AI 产品。',
     now: '做过几年内容和运营，所以做任何东西，我都先想：人为什么会用它。下面是我做的三个产品，还有我用 AI 做事的方法。',
-    hook: '我把这套做法写成了 ai.vibecoding，约 18 分钟读完，读完就能动手',
+    hook: '先读读我的方法：ai.vibecoding，约 18 分钟，读完就能动手',
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
@@ -85,11 +85,11 @@ export const content = {
     },
 
     pathTitle: '经历',
-    pathHeadline: '做 AI，也懂人。',
+    pathHeadline: '做 AI，先想人。',
     journey: [
       { when: '2025.11', role: 'AI 解决方案架构', org: '比智科技', desc: '给金融、政企客户做 AI 问数，从需求诊断到回款；主导通信、政企客户的招投标，5 家以上客户进入采购评估。' },
       { when: '2024.08', role: 'AI 项目负责人', org: '一念智能', desc: '拆了 50 多个爆款案例，在飞书搭了写脚本的智能体，一条脚本从 3 小时变成 20 分钟；用 AI 做了方正证券活动的开场片；接手微众银行的 AI 课程项目，48 小时找到问题，客户点名要我继续负责。' },
-      { when: '2023.04', role: '商业内容项目交付', org: '专致网络', desc: '运营抖音文旅号「云南妙妙屋」，3 个月涨粉 2000 多；写了 150 多条信息流广告脚本，撑起每月 10 万以上的投放；拍工商银行宣传片那次，演员没来，我自己上了。' },
+      { when: '2023.04', role: '商业内容项目交付', org: '专致网络', desc: '运营抖音文旅号云南妙妙屋，3 个月涨粉 2000 多；写了 150 多条信息流广告脚本，撑起每月 10 万以上的投放；拍工商银行宣传片那次，演员没来，我自己上了。' },
       { when: '2022.06', role: '社区运营（实习）', org: '抖音数字学堂', desc: '', light: true },
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是内容怎么被看见、被记住。', light: true },
     ],
@@ -168,7 +168,7 @@ export const content = {
     portraitAlt: 'Photo of Qin Xujun',
     lede: 'I’m Qin Xujun. I build AI products.',
     now: 'Years in content and growth taught me to start with one question: why would anyone use this? Below are three products I made, and the way I build with AI.',
-    hook: 'I wrote the method down as ai.vibecoding. About 18 minutes, and you can start right after',
+    hook: 'Start with my method: ai.vibecoding, an 18-minute read you can act on',
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
@@ -203,7 +203,7 @@ export const content = {
     },
 
     pathTitle: 'Path',
-    pathHeadline: 'I build AI, with a feel for people.',
+    pathHeadline: 'I build AI. I start with people.',
     journey: [
       { when: '2025.11', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Natural-language data queries for finance and government clients, from diagnosis to payment; led bids for telecom and government clients, with 5+ clients reaching procurement review.' },
       { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Broke down 50+ hit scripts and built a script-writing agent in Feishu: one script went from three hours to twenty minutes. Made the AI opening film for a Founder Securities event. Took over a WeBank AI course project, found the problem in 48 hours, and the client asked for me by name.' },
