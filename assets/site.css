@@ -9,6 +9,7 @@
   --soft: #f5f5f7;
   --dark: #000000;
   --ink: #1d1d1f;
+  --body: #424245;
   --muted: #6e6e73;
   --link: #0066cc;
   --pill: #0071e3;
@@ -31,6 +32,7 @@
   --soft: #161617;
   --dark: #0f0f10;
   --ink: #f5f5f7;
+  --body: #d2d2d7;
   --muted: #a1a1a6;
   --link: #2997ff;
   --pill: #0071e3;
@@ -188,6 +190,7 @@ a:hover {
   --nav: rgba(22, 22, 23, 0.86);
   --nav-line: rgba(255, 255, 255, 0.1);
   --ink: #f5f5f7;
+  --body: #d2d2d7;
   --muted: #a1a1a6;
   --sig: #f5f5f7;
 }
@@ -361,6 +364,7 @@ main {
 
 .dark {
   --ink: #f5f5f7;
+  --body: #d2d2d7;
   --muted: #a1a1a6;
   --link: #2997ff;
   background: var(--dark);
@@ -2140,43 +2144,29 @@ main {
   will-change: transform;
 }
 
-/* With motion, the flagship pins while the page inside its window scrolls from top to bottom.
-   site.js sizes the track so the page moves about as fast as the scroll. */
-.motion [data-show] {
-  height: 200vh;
-}
+@media (min-width: 734px) {
+  /* With motion, the flagship pins while the page inside its window scrolls from top to bottom.
+     site.js sizes the track so the page moves about as fast as the scroll. */
+  .motion [data-show] {
+    height: 200vh;
+  }
 
-.motion [data-show] .show-stage {
-  position: sticky;
-  top: 52px;
-  height: calc(100vh - 52px);
-  height: calc(100svh - 52px);
-  justify-content: center;
-  padding-top: 28px;
-  padding-bottom: 28px;
-}
+  .motion [data-show] .show-stage {
+    position: sticky;
+    top: 52px;
+    height: calc(100vh - 52px);
+    height: calc(100svh - 52px);
+    justify-content: center;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
 
-.motion [data-show] .frame {
-  flex: 1 1 auto;
-  height: auto;
-  min-height: 0;
-  max-height: 640px;
-}
-
-.show-extra {
-  padding: 8px var(--gutter) 64px;
-  text-align: center;
-}
-
-.show-extra .demo {
-  position: static;
-  width: min(92%, 460px);
-  margin: 0 auto;
-  transform: none;
-}
-
-.show-extra .facts {
-  margin-top: 48px;
+  .motion [data-show] .frame {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+    max-height: 640px;
+  }
 }
 
 .case-frame {
@@ -2191,80 +2181,45 @@ main {
 
 /* Sharing */
 
-.share-intro {
-  max-width: 30em;
-  margin: 40px auto 0;
-  font-size: 19px;
-  line-height: 1.6;
-}
-
-.principles {
-  display: grid;
-  gap: 24px;
-  max-width: 960px;
-  margin: 48px auto 0;
-  text-align: left;
-}
-
-.principles li {
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.principles h3 {
-  font-size: 17px;
-  font-weight: 600;
-}
-
-.principles p {
-  margin-top: 6px;
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--muted);
-}
-
-.share .show-stage {
-  padding-top: 0;
-}
-
 /* Ending */
 
 .ending h2 {
   font-size: min(44px, 10vw);
 }
 
+/* Phones: no phone frame (these are Windows apps and websites). A fixed 16:10 browser card with the
+   real address, showing the top of the page; nothing scrolls inside it. */
 @media (max-width: 733px) {
-  .frame {
-    width: max(200px, min(62vw, 250px, calc((100svh - 330px) * 9 / 19)));
+  .frame,
+  .frame.narrow {
+    width: 100%;
     height: auto;
-    aspect-ratio: 9 / 19;
-    border: 7px solid #1d1d1f;
-    border-radius: 38px;
-  }
-
-  .dark .frame {
-    border-color: #2c2c2e;
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
   }
 
   .frame-bar {
-    display: none;
+    height: 26px;
+    gap: 5px;
+    padding: 0 10px;
   }
 
-  .frame-view {
-    border-radius: 31px;
+  .frame-bar i {
+    width: 8px;
+    height: 8px;
   }
 
-  .motion [data-show] .frame {
-    flex: none;
-    max-height: none;
+  .frame-url {
+    margin-right: 0;
+    font-size: 11px;
+  }
+
+  .frame-img {
+    transform: none;
   }
 }
 
 @media (min-width: 734px) {
-  .principles {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .show-name {
     font-size: 56px;
   }
@@ -2305,4 +2260,154 @@ main {
   margin-left: auto;
   margin-right: auto;
   line-height: 1.5;
+}
+
+/* ---------- v7: two levels of text above the picture, plain facts and links below it ---------- */
+
+.show-line {
+  color: var(--body);
+}
+
+.dark .show-line,
+.share .show-line {
+  color: #d2d2d7;
+}
+
+.show-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.show-foot .show-note {
+  margin: 0;
+  max-width: 34em;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.show-foot .cta {
+  margin-top: 4px;
+}
+
+@media (max-width: 733px) {
+  .show-stage {
+    gap: 20px;
+    padding-top: 44px;
+    padding-bottom: 40px;
+  }
+
+  .show-name {
+    font-size: 36px;
+  }
+
+  .show-line {
+    font-size: 19px;
+  }
+}
+
+/* The fourth work: AI visuals, a swipeable gallery inside the same block shape, edge to edge. */
+.visual .gallery,
+.visual .gallery[data-gallery] {
+  align-self: stretch;
+  margin: 0 calc(-1 * var(--gutter));
+}
+
+.visual .show-foot .paddles {
+  margin: 0;
+}
+
+/* 想法: one block, his line, one sentence, the site, then the link. */
+.share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.share .statement {
+  padding: 0;
+}
+
+.share .statement .show-line {
+  max-width: 24em;
+  margin: 16px auto 0;
+}
+
+/* 经历: one focal point per row. Role is the heading; date, company and light rows step back. */
+.path li {
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+
+.when {
+  padding-top: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.path h3 {
+  font-size: 19px;
+}
+
+.org {
+  margin-top: 2px;
+  font-size: 15px;
+}
+
+.what {
+  margin-top: 10px;
+  color: var(--body);
+}
+
+.path li.light h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.path li.light .org,
+.path li.light .what {
+  font-size: 13px;
+}
+
+@media (min-width: 734px) {
+  .path li {
+    grid-template-columns: 96px 1fr;
+    gap: 24px;
+  }
+
+  .when {
+    padding-top: 4px;
+  }
+}
+
+/* Gallery paddles: only where there is a pointer; phones swipe. */
+.paddles button {
+  font: inherit;
+}
+
+@media (hover: none) {
+  .paddles {
+    display: none;
+  }
+}
+
+.gallery li {
+  scroll-snap-stop: always;
+}
+
+.cta [hidden] {
+  display: none;
+}
+
+/* The VoiceFlow demo now lives on its project page, under the website window. */
+.case-demo {
+  position: static;
+  width: min(92%, 460px);
+  margin: 40px auto 0;
+  transform: none;
 }

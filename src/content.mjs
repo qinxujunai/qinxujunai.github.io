@@ -23,12 +23,12 @@ const aiWork = (t) => [
   { key: 'ai-leaves', alt: t[15], caption: t[13], tall: true },
   { key: 'ai-studio', alt: t[16], caption: t[17] },
 ];
-const photos = (alt, ai) => [
+const photos = (alt, ai, shot) => [
   ...aiWork(ai),
-  { key: 'photo-aerial', alt: alt[0] },
-  { key: 'photo-pagoda', alt: alt[1] },
-  { key: 'photo-dusk', alt: alt[5] },
-  { key: 'photo-sky', alt: alt[6] },
+  { key: 'photo-aerial', alt: alt[0], caption: shot },
+  { key: 'photo-pagoda', alt: alt[1], caption: shot },
+  { key: 'photo-dusk', alt: alt[5], caption: shot },
+  { key: 'photo-sky', alt: alt[6], caption: shot },
 ];
 
 export const content = {
@@ -47,14 +47,14 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
     // First screen (his choice, 2026-10-20): avatar, signature, this headline, the product list, two actions.
-    lede: '我用 AI 做东西，也把想法分享出来。',
+    lede: '我用 AI 做东西，也把想法分享出来',
     // his words (ai.vibecoding hero.subtitle, May 2026), with 让你 → 让人 at his request: the home page speaks to everyone.
-    now: '让 AI 负责拆解、生成与验证，让人守住目标、边界与品味。',
+    now: '让 AI 负责拆解、生成与验证，让人守住目标、边界与品味',
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
     navLabel: '章节',
-    nav: { work: '作品', share: '分享', path: '经历', photos: '影像', contact: '联系' },
+    nav: { work: '作品', share: '想法', path: '经历', contact: '联系' },
     home: '首页',
 
     workTitle: '作品',
@@ -66,26 +66,21 @@ export const content = {
       hint: '按一下开始，再按一下完成',
       lines: ['请比较这两份方案的成本与风险，再给出你的建议。', '明早十点，把方案同步给团队。', '这周的方案已经整理好了，明天一起看看。'],
       facts: { stars: 'GitHub Star', downloads: '次下载', forks: 'Fork', version: '最新版本' },
-      factsNote: (date) => `数据每 6 小时从 GitHub 自动更新，最近一次：${date}。`,
+      factsNote: (date) => `数据每 6 小时从 GitHub 自动更新，最近一次 ${date}`,
     },
 
     share: {
-      title: '分享',
+      title: '想法',
       name: 'ai.vibecoding',
       // his words: the hero title of ai.vibecoding (May 2026)
-      quote: '用自然语言，创造可运行的作品。',
-      intro: '这套做法，我写成了一个网站。零基础、产品经理、工程师各有一条路线，每条读完，都有一件马上能做的事。',
-      note: '10 章 · 约 18 分钟读完',
+      quote: '用自然语言，创造可运行的作品',
+      intro: '我把用 AI 做产品的方法写成了一个网站，零基础也能读',
+      note: 'ai.vibecoding · 10 章 · 约 18 分钟',
       link: '开始阅读',
-      principles: [ // his words
-        { title: '提出问题', body: '自然语言编程的起点不是“写个页面”，而是把模糊想法采访成目标、用户、边界与验收标准。' },
-        { title: '组织上下文', body: 'README、AGENTS.md、Skills、MCP、截图、日志和历史决策都不是附件，它们是模型的工作记忆。' },
-        { title: '交付确定性', body: '模型负责执行，人负责边界。' },
-      ],
     },
 
     pathTitle: '经历',
-    pathHeadline: '为金融、政企客户做 AI 项目。',
+    pathHeadline: '为金融、政企客户做 AI 项目',
     journey: [
       { when: '2025.11', role: 'AI 解决方案架构', org: '比智科技', desc: 'AI 问数方案，从需求诊断到回款。主导通信、政企客户的招投标，5 家以上客户进入采购评估。' },
       { when: '2024.08', role: 'AI 项目负责人', org: '一念智能', desc: '在飞书搭了写脚本的智能体，一条脚本从 3 小时缩到 20 分钟。接手微众银行的 AI 课程项目，48 小时找到问题，客户点名要我继续负责。方正证券活动的开场片，用 AI 做成。' },
@@ -94,9 +89,11 @@ export const content = {
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是内容怎么被看见、被记住。', light: true },
     ],
 
-    photosTitle: '影像',
-    photosHeadline: '一张人台照，变成一组模特图。',
-    photosIntro: '用 Midjourney 和 AI 视频工具做商品图、人像和包装。拍摄、剪辑、航拍，也都自己来。',
+    visual: {
+      name: 'AI 视觉',
+      line: '用 Midjourney 和 AI 视频工具做商品图、人像和包装',
+      note: '左右滑动 · 最后几张是我的实拍',
+    },
     prev: '上一张',
     next: '下一张',
     photos: photos([
@@ -119,23 +116,27 @@ export const content = {
       'AI 生成的人像：红唇特写',
       'AI 生成的人像：树叶下仰头的女孩',
       'AI 生成的场景：洒满阳光的工作室', 'AI 场景',
-    ]),
+    ], '实拍'),
 
     contactTitle: '联系',
-    contactHeadline: '谢谢你看到这里。',
-    contactLead: '加个微信，交个朋友。',
+    contactHeadline: '谢谢你看到这里',
+    contactLead: '加个微信，交个朋友',
     cardLabel: '秦徐俊的名片',
     qrAlt: '秦徐俊的微信二维码',
     hint: {
-      default: '用微信扫一扫；在微信里打开时，长按二维码即可识别。',
-      wechat: '长按二维码，选择「识别图中的二维码」即可添加。',
-      phone: '先保存名片或截图，再在微信「扫一扫」里从相册选这张图。',
-      desktop: '打开手机微信，用「扫一扫」扫这张二维码。',
+      default: '用微信扫一扫，或在微信里长按二维码',
+      wechat: '长按二维码，直接加我',
+      phone: '保存名片，在微信扫一扫里从相册选它',
+      desktop: '用手机微信扫一扫',
     },
     save: '保存名片',
+    // His WeChat ID (他提供后填入). When set, phones outside WeChat get 「复制微信号，打开微信」.
+    wechatId: '',
+    copyWechat: '复制微信号，打开微信',
+    copied: '微信号已复制，去微信搜索里粘贴',
     // his words: the manifesto of ai.vibecoding (May 2026)
     closing: ['AI 进化得越快，我们越需要慢下来。', '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。'],
-    colophon: '纯 HTML 和 CSS，系统字体，不发任何外部请求，在微信里也打开得很快。',
+    colophon: '纯 HTML 和 CSS · 系统字体 · 不发任何外部请求',
     notFound: { title: '这一页不存在', body: '链接可能写错了，或者页面已经搬走。', back: '回到首页' },
 
     // Project page chrome
@@ -147,9 +148,9 @@ export const content = {
       doLabel: '做',
       dontLabel: '不做',
       more: '其他作品',
-      contactHeadline: '加个微信，交个朋友。',
+      contactHeadline: '加个微信，交个朋友',
       contactBody: '',
-      liveNote: (date) => `GitHub 数据每 6 小时自动更新，最近一次：${date}。`,
+      liveNote: (date) => `GitHub 数据每 6 小时自动更新，最近一次 ${date}`,
     },
   },
 
@@ -166,13 +167,13 @@ export const content = {
     role: 'I build AI products.',
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
-    lede: 'I build things with AI, and share what I think.',
-    now: 'Let AI decompose, generate, and verify, while people keep the goal, the boundaries, and the taste.', // his words, adapted
+    lede: 'I build things with AI, and share what I think',
+    now: 'Let AI decompose, generate, and verify, while people keep the goal, the boundaries, and the taste', // his words, adapted
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
     navLabel: 'Sections',
-    nav: { work: 'Work', share: 'Sharing', path: 'Path', photos: 'Visuals', contact: 'Contact' },
+    nav: { work: 'Work', share: 'Ideas', path: 'Path', contact: 'Contact' },
     home: 'Home',
 
     workTitle: 'Work',
@@ -184,25 +185,20 @@ export const content = {
       hint: 'Press to start, press again to finish',
       lines: ['Compare the costs and risks of these two proposals, then recommend an approach.', 'Share the plan with the team at ten.', 'The proposal is ready. Let’s go over it tomorrow.'],
       facts: { stars: 'GitHub stars', downloads: 'Downloads', forks: 'Forks', version: 'Latest release' },
-      factsNote: (date) => `Pulled from GitHub every six hours. Last update: ${date}.`,
+      factsNote: (date) => `Pulled from GitHub every six hours, last on ${date}`,
     },
 
     share: {
-      title: 'Sharing',
+      title: 'Ideas',
       name: 'ai.vibecoding',
-      quote: 'Use natural language to create working products.', // his words
-      intro: 'I wrote the method down as a website. There’s a track each for beginners, product managers and engineers, and every track ends with one thing you can do right away.',
-      note: '10 chapters · about 18 minutes',
+      quote: 'Use natural language to create working products', // his words
+      intro: 'I wrote down how I build products with AI, as a website anyone can read',
+      note: 'ai.vibecoding · 10 chapters · about 18 minutes',
       link: 'Start reading',
-      principles: [ // his words
-        { title: 'Asking better questions', body: 'Natural-language programming does not begin with “build a page.” It begins by interviewing a vague idea into goals, users, boundaries, and acceptance criteria.' },
-        { title: 'Organizing context', body: 'README, AGENTS.md, Skills, MCP, screenshots, logs, and decisions are not attachments. They are the model’s working memory.' },
-        { title: 'Delivering certainty', body: 'The model executes; the human guards the boundary.' },
-      ],
     },
 
     pathTitle: 'Path',
-    pathHeadline: 'AI projects for finance and government clients.',
+    pathHeadline: 'AI projects for finance and government clients',
     journey: [
       { when: '2025.11', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Natural-language data query solutions, from diagnosis to payment. Led bids for telecom and government clients; 5+ clients reached procurement review.' },
       { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Built a script-writing agent in Feishu that cut a script from three hours to twenty minutes. Took over a WeBank AI course project, found the problem in 48 hours, and the client asked for me by name. Made the opening film for a Founder Securities event with AI.' },
@@ -211,9 +207,11 @@ export const content = {
       { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How content gets seen, and remembered.', light: true },
     ],
 
-    photosTitle: 'Visuals',
-    photosHeadline: 'One mannequin shot, a full set of on-model images.',
-    photosIntro: 'Product shots, portraits and packaging, made with Midjourney and AI video tools. I also shoot, edit and fly the drone myself.',
+    visual: {
+      name: 'AI visuals',
+      line: 'Product shots, portraits and packaging, made with Midjourney and AI video tools',
+      note: 'Swipe · the last few are my own photographs',
+    },
     prev: 'Previous photo',
     next: 'Next photo',
     photos: photos([
@@ -236,22 +234,25 @@ export const content = {
       'AI-generated portrait: a close-up of red lips',
       'AI-generated portrait: a girl looking up under leaves',
       'AI-generated scene: a sunlit studio', 'AI scene',
-    ]),
+    ], 'Photograph'),
 
     contactTitle: 'Contact',
-    contactHeadline: 'Thanks for reading this far.',
-    contactLead: 'Say hi on WeChat.',
+    contactHeadline: 'Thanks for reading this far',
+    contactLead: 'Say hi on WeChat',
     cardLabel: 'Qin Xujun’s card',
     qrAlt: 'Qin Xujun’s WeChat QR code',
     hint: {
-      default: 'Scan with WeChat. Inside WeChat, long-press the code to add me.',
-      wechat: 'Long-press the code and choose “Scan QR code in image”.',
-      phone: 'Save the card or take a screenshot, then open WeChat’s Scan and pick it from your album.',
-      desktop: 'Open WeChat on your phone and use Scan on this code.',
+      default: 'Scan with WeChat, or long-press the code inside WeChat',
+      wechat: 'Long-press the code to add me',
+      phone: 'Save the card, then pick it in WeChat’s Scan',
+      desktop: 'Scan with WeChat on your phone',
     },
     save: 'Save the card',
+    wechatId: '',
+    copyWechat: 'Copy my WeChat ID and open WeChat',
+    copied: 'Copied. Paste it into WeChat search',
     closing: ['The faster AI evolves, the more we need to slow down.', 'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.'], // his words
-    colophon: 'Plain HTML and CSS, system fonts, no outside requests. Opens fast, even inside WeChat.',
+    colophon: 'Plain HTML and CSS · System fonts · No outside requests',
     notFound: { title: 'This page doesn’t exist', body: 'The link may be mistyped, or the page has moved.', back: 'Back to home' },
 
     caseLabels: {
@@ -262,9 +263,9 @@ export const content = {
       doLabel: 'Does',
       dontLabel: 'Does not',
       more: 'Other work',
-      contactHeadline: 'Say hi on WeChat.',
+      contactHeadline: 'Say hi on WeChat',
       contactBody: '',
-      liveNote: (date) => `GitHub numbers refresh every six hours. Last update: ${date}.`,
+      liveNote: (date) => `GitHub numbers refresh every six hours, last on ${date}`,
     },
   },
 };

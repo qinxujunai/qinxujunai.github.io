@@ -36,6 +36,18 @@
   if (text) target.textContent = text;
   var save = document.querySelector('[data-qr-save]');
   if (save && where === 'wechat') save.hidden = true;
+  // Outside WeChat on a phone: one tap copies his WeChat ID and opens WeChat (no app can add a personal
+  // contact from a browser). Shown only when the ID is set in src/content.mjs.
+  var copy = document.querySelector('[data-wechat-id]');
+  if (copy && where === 'phone') {
+    copy.hidden = false;
+    copy.addEventListener('click', function () {
+      var id = copy.getAttribute('data-wechat-id');
+      var done = function () { if (target) target.textContent = copy.getAttribute('data-copied'); window.location.href = 'weixin://'; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(id).then(done, done);
+      else done();
+    });
+  }
 
   // Name card: a slight tilt toward the pointer on desktop.
   var card = document.querySelector('[data-tilt]');
@@ -88,7 +100,7 @@
       if (!entries[0].isIntersecting) return;
       [].forEach.call(gallery.querySelectorAll('img'), function (im) { im.loading = 'eager'; });
       near.disconnect();
-    }, { rootMargin: '1500px 0px' });
+    }, { rootMargin: '600px 0px' });
     near.observe(gallery);
   }
 
@@ -96,8 +108,18 @@
   var prev = document.querySelector('[data-prev]');
   var next = document.querySelector('[data-next]');
   if (gallery && prev && next) {
+    // Step exactly one picture, so none is ever left half in view.
     var page = function (dir) {
-      gallery.scrollBy({ left: dir * gallery.clientWidth * 0.8, behavior: still ? 'auto' : 'smooth' });
+      var items = gallery.children;
+      var pad = parseFloat(getComputedStyle(gallery).scrollPaddingLeft) || 0;
+      var x = gallery.scrollLeft;
+      var to = null;
+      for (var k = 0; k < items.length; k++) {
+        var left = items[k].offsetLeft - gallery.offsetLeft - pad;
+        if (dir > 0 && left > x + 4) { to = left; break; }
+        if (dir < 0 && left < x - 4) to = left;
+      }
+      if (to !== null) gallery.scrollTo({ left: to, behavior: still ? 'auto' : 'smooth' });
     };
     var sync = function () {
       prev.disabled = gallery.scrollLeft <= 4;
@@ -200,15 +222,18 @@
   });
   if (shows.length && root.classList.contains('motion')) {
     var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    // Phones show a still 16:10 crop: nothing pins and nothing scrolls inside the window.
+    var wide = window.matchMedia('(min-width: 734px)');
     var size = function () {
       shows.forEach(function (s) {
-        if (s.pinned && s.img) s.el.style.height = Math.round(window.innerHeight + Math.max(0, s.img.offsetHeight - s.view.clientHeight) * 1.15) + 'px';
+        if (s.pinned && s.img) s.el.style.height = wide.matches ? Math.round(window.innerHeight + Math.max(0, s.img.offsetHeight - s.view.clientHeight) * 1.15) + 'px' : '';
       });
     };
     var layout = function () {
       var vh = window.innerHeight;
       shows.forEach(function (s) {
         if (!s.on || !s.img) return;
+        if (!wide.matches) { s.img.style.removeProperty('--shift'); return; }
         var r = (s.pinned ? s.el : s.view).getBoundingClientRect();
         var p = s.pinned ? -r.top / Math.max(1, r.height - vh) : (vh - r.top) / (vh + r.height);
         // A short rest at the top and at the end; in between the page moves evenly.
@@ -252,7 +277,7 @@
   var sectionObserver = new IntersectionObserver(function (entries) {
     for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) setCurrent(entries[e].target.id);
   }, { rootMargin: '-40% 0px -55% 0px' });
-  ['top', 'work', 'share', 'path', 'photos', 'contact'].forEach(function (id) {
+  ['top', 'work', 'share', 'path', 'contact'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });
