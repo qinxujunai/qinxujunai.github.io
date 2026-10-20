@@ -5,7 +5,7 @@
 //   avatar.jpg|webp            portrait
 //   voiceflow-app.png          VoiceFlow docs/design-implementation-v031.png
 //   wanxiang-home.png          Audio2Text docs/assets/home-desktop.png
-//   ai-signal.png              https://qinxujunai.github.io/ai-signal/ at 760px wide, 2x (top of the page)
+//   ai-signal.png              https://qinxujunai.github.io/ai-signal/ at 700px wide, 2x (top of the page)
 //   photo-*.webp|jpg           the owner's own photographs (see PHOTOS below)
 // Two screens are captured live: the ai.vibecoding terminal and an AI Work Method panel.
 import { createRequire } from 'node:module';
@@ -70,8 +70,8 @@ await emit('voiceflow-app-m', find(/^voiceflow-app\./), { widths: [720], crop: {
 await emit('wanxiang', find(/^wanxiang-home\./), { width: 640, crop: { left: 200, top: 70, width: 1040, height: 640 } });
 await emit('wanxiang-m', find(/^wanxiang-home\./), { widths: [720], crop: { left: 230, top: 80, width: 980, height: 510 } });
 
-await emit('ai-signal', find(/^ai-signal\./), { width: 640, crop: { left: 160, top: 48, width: 1200, height: 1000 } });
-await emit('ai-signal-m', find(/^ai-signal\./), { widths: [720], crop: { left: 160, top: 48, width: 1200, height: 900 } });
+await emit('ai-signal', find(/^ai-signal\./), { width: 640, crop: { left: 60, top: 40, width: 1280, height: 1060 } });
+await emit('ai-signal-m', find(/^ai-signal\./), { widths: [720], crop: { left: 60, top: 40, width: 1280, height: 960 } });
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
 const PHOTOS = ['photo-aerial', 'photo-pagoda', 'photo-gate', 'photo-wall', 'photo-dusk', 'photo-buddha', 'photo-sky', 'photo-autumn'];
