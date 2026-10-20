@@ -36,7 +36,7 @@ export const content = {
     lang: 'zh-CN',
     path: '/',
     title: '秦徐俊',
-    description: '秦徐俊。我用 AI 做东西，也把做法分享出来：VoiceFlow、AI Signal、万象成文，和 ai.vibecoding。',
+    description: '秦徐俊。我用 AI 做东西，也把想法分享出来：VoiceFlow、AI Signal、万象成文，和 ai.vibecoding。',
     skip: '跳到正文',
     switchLabel: 'English',
     switchLang: 'en',
@@ -47,7 +47,7 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
     // First screen (his choice, 2026-10-20): avatar, signature, this headline, the product list, two actions.
-    lede: '我用 AI 做东西，也把做法分享出来。',
+    lede: '我用 AI 做东西，也把想法分享出来。',
     // his words (ai.vibecoding hero.subtitle, May 2026), with 让你 → 让人 at his request: the home page speaks to everyone.
     now: '让 AI 负责拆解、生成与验证，让人守住目标、边界与品味。',
     addWechat: '加我微信',
@@ -157,7 +157,7 @@ export const content = {
     lang: 'en',
     path: '/en/',
     title: 'Qin Xujun',
-    description: 'Qin Xujun. I build things with AI, and share how I do it: VoiceFlow, AI Signal, Wanxiang and ai.vibecoding.',
+    description: 'Qin Xujun. I build things with AI, and share what I think: VoiceFlow, AI Signal, Wanxiang and ai.vibecoding.',
     skip: 'Skip to content',
     switchLabel: '中文',
     switchLang: 'zh-CN',
@@ -166,7 +166,7 @@ export const content = {
     role: 'I build AI products.',
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
-    lede: 'I build things with AI, and share how I do it.',
+    lede: 'I build things with AI, and share what I think.',
     now: 'Let AI decompose, generate, and verify, while people keep the goal, the boundaries, and the taste.', // his words, adapted
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
