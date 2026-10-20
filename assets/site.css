@@ -1455,13 +1455,6 @@ main {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 30px 60px -20px rgba(0, 0, 0, 0.8);
 }
 
-.nc-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
 .nc-sig {
   height: 44px;
   width: auto;
@@ -1469,35 +1462,9 @@ main {
   overflow: visible;
 }
 
-.nc-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.nc-bottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.nc-name {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
 .nc-role {
   margin-top: 6px;
   font-size: 15px;
-}
-
-.nc-org {
-  margin-top: 2px;
-  font-size: 15px;
-  color: #a1a1a6;
 }
 
 .nc-qr {
@@ -2485,4 +2452,83 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/* v7.1 name card: mark top left; role and WeChat ID bottom left; QR right with a small label. */
+.namecard {
+  padding: 24px;
+}
+
+.nc-id {
+  display: grid;
+  gap: 4px;
+}
+
+.nc-wx {
+  font-size: 13px;
+  color: #a1a1a6;
+  font-variant-numeric: tabular-nums;
+}
+
+.nc-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.nc-scan {
+  font-size: 11px;
+  color: #a1a1a6;
+}
+
+.contact-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 24px;
+}
+
+.at-contact .home .nav-tools .pill,
+.motion.sig-docked.at-contact .home .nav-tools .pill {
+  display: none;
+}
+
+.contact-cta button {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.contact-cta button.more-link {
+  padding: 0;
+  background: none;
+  color: var(--link);
+}
+
+/* 经历 on white, so it never sits grey-on-grey next to the contact tile. */
+#path {
+  background: var(--plain);
+}
+
+/* Even vertical rhythm on phones. */
+@media (max-width: 733px) {
+  .show-stage,
+  .tile:not(.hero) {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}
+
+/* Desktop gallery paddles sit at the right edge of the 1040 grid. */
+@media (min-width: 734px) {
+  .visual .show-foot {
+    align-self: stretch;
+  }
+
+  .visual .show-foot .paddles {
+    align-self: flex-end;
+    margin-right: max(0px, calc((100% - 1040px) / 2));
+  }
 }

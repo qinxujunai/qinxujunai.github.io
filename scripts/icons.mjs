@@ -77,6 +77,7 @@ for (const lang of ['zh', 'en']) {
           ${svg.replace('<svg', '<svg style="height:120px;width:auto;fill:#f5f5f7"')}
         </div>
         <div style="margin-top:72px;font-size:34px;line-height:1.35">${c.role}</div>
+        <div style="margin-top:10px;font-size:26px;color:#a1a1a6">${c.wechatLabel} ${c.wechatId}</div>
         <div style="margin-top:56px;display:flex;align-items:center;gap:40px">
           <img src="${qr}" style="width:300px;height:300px;padding:16px;background:#fff;border-radius:28px">
           <div style="font-size:28px;line-height:1.5;color:#a1a1a6">${lang === 'zh' ? '微信扫一扫<br>加我微信' : 'Scan with WeChat<br>to add me'}</div>

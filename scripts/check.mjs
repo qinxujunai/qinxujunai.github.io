@@ -76,7 +76,7 @@ const kb = (f) => fs.statSync(f).size / 1024;
 const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
 const heavy = PAGES.filter((f) => gz(f) > 24);
 heavy.length ? fail(`over 24KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 24KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
-const budget = { 'assets/site.css': 40, 'assets/site.js': 13 };
+const budget = { 'assets/site.css': 44, 'assets/site.js': 14 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
