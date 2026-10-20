@@ -68,10 +68,11 @@ await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80,
 // Crops in CSS pixels of the desktop capture (1280 wide, captured at 2x).
 // Each ends on a section edge of that site, short enough that the page moves about as fast as the scroll.
 const SITES = {
-  voiceflow: { d: { height: 2180 } },
-  wanxiang: { d: { height: 2250 } },
-  'ai-signal': { d: { left: 260, width: 760, height: 2100 } },
-  vibecoding: { d: { height: 2280 } },
+  // card: where the phone card ends, on blank space just under each site's first screen.
+  voiceflow: { d: { height: 2180 }, card: 600 },
+  wanxiang: { d: { height: 2250 }, card: 520 },
+  'ai-signal': { d: { left: 260, width: 760, height: 2100 }, card: 360 },
+  vibecoding: { d: { height: 2280 }, card: 680 },
 };
 for (const [name, crop] of Object.entries(SITES)) {
   const file = find(new RegExp(`^site-${name}-d\\.`));
@@ -82,8 +83,8 @@ for (const [name, crop] of Object.entries(SITES)) {
   const left = Math.round((c.left || 0) * k);
   // Wide screens: the page from the top to a section edge, scrolled inside the window.
   await emit(`site-${name}`, file, { widths: [1040, 2080].map((x) => Math.min(x, w)), quality: 58, crop: { left, top: 0, width: w, height: Math.min(Math.round(c.height * k), meta.height) } });
-  // Phones: just the top of the same page, 16:10, small enough for a weak network.
-  await emit(`site-${name}-card`, file, { widths: [720], quality: 60, crop: { left, top: 0, width: w, height: Math.round(w * 0.625) } });
+  // Phones: just the top of the same page, ending on blank space, small enough for a weak network.
+  await emit(`site-${name}-card`, file, { widths: [720], quality: 60, crop: { left, top: 0, width: w, height: Math.round(crop.card * k) } });
 }
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
