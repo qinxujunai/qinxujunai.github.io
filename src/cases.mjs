@@ -62,9 +62,9 @@ export const CASES = [
         {
           h: '架构',
           flow: [
-            { t: '界面进程（Qt）', n: ['AppController：所有操作的唯一入口', '全局热键 F2，先于模型启动', '原生绘制的录音胶囊', '交付与本地历史'] },
-            { t: '三个受监督的子进程', n: ['audio_worker：采集麦克风，写恢复日志', 'preview_worker：流式 Zipformer，边说边出字', 'asr_worker：SenseVoice + VAD，整段终稿'] },
-            { t: '交付链', n: ['写入剪贴板，逐字回读核对', '复核停止那一刻的前台窗口', '只发一次 Ctrl+V，不盲目重试', '写入本地历史 history.jsonl'] },
+            { t: '界面进程（Qt）', n: ['所有操作走同一个入口', '全局热键 F2，先于模型启动', '原生绘制的录音胶囊', '交付与本地历史'] },
+            { t: '三个受监督的子进程', n: ['录音进程：采集麦克风，同时留一份可恢复的录音', '预览进程：流式模型，边说边出字', '识别进程：SenseVoice 读完整段录音，出终稿'] },
+            { t: '交付链', n: ['写入剪贴板，逐字回读核对', '复核停止那一刻的前台窗口', '只发一次 Ctrl+V，不盲目重试', '写进本地历史'] },
           ],
           after: [
             '每个子进程都有心跳、有界队列和强制结束路径。驱动或模型卡死，只重启那一个进程，界面和热键照常响应。',
@@ -99,7 +99,7 @@ export const CASES = [
             '从 v0.3.2 起，每个版本都附一份发布与验证记录。',
             '用户提过的 12 条反馈，每条都写下结论和理由：采纳、按门槛暂缓，或者拒绝。',
           ],
-          after: ['这些是延迟和机制的证据，不是准确率。仓库里写明：没有足够的授权真实语料，就不对外宣称准确率。'],
+          after: ['这些是延迟和机制的证据，不是准确率。项目的规矩：没有足够的授权真实语料，就不对外宣称准确率。'],
         },
         {
           h: '时间线',
@@ -170,9 +170,9 @@ export const CASES = [
         {
           h: 'Architecture',
           flow: [
-            { t: 'UI process (Qt)', n: ['AppController: the single entry point', 'Global F2 hotkey, live before the models load', 'Natively painted recording capsule', 'Delivery and local history'] },
-            { t: 'Three supervised workers', n: ['audio_worker: microphone and recovery journal', 'preview_worker: streaming Zipformer, text as you speak', 'asr_worker: SenseVoice + VAD, the final text'] },
-            { t: 'Delivery chain', n: ['Write to the clipboard, read it back', 'Re-check the foreground window at stop', 'One Ctrl+V, never a blind retry', 'Append to local history.jsonl'] },
+            { t: 'UI process (Qt)', n: ['One entry point for every action', 'Global F2 hotkey, live before the models load', 'Natively painted recording capsule', 'Delivery and local history'] },
+            { t: 'Three supervised workers', n: ['Recording: the microphone, plus a recoverable copy', 'Preview: a streaming model, text as you speak', 'Recognition: SenseVoice reads the whole clip for the final text'] },
+            { t: 'Delivery chain', n: ['Write to the clipboard, read it back', 'Re-check the foreground window at stop', 'One Ctrl+V, never a blind retry', 'Save to local history'] },
           ],
           after: [
             'Every worker has a heartbeat, a bounded queue and a hard kill path. If a driver or model hangs, only that process restarts; the window and the hotkey keep responding.',
@@ -207,7 +207,7 @@ export const CASES = [
             'Since v0.3.2, every release ships with a release and verification record.',
             'Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.',
           ],
-          after: ['This is evidence about latency and mechanics, not accuracy. The repository’s rule: no accuracy claims without enough authorized real speech.'],
+          after: ['This is evidence about latency and mechanics, not accuracy. The project’s rule: no accuracy claims without enough authorized real speech.'],
         },
         {
           h: 'Timeline',
@@ -274,7 +274,7 @@ export const CASES = [
           list: [
             '模型会编。让它自己写链接和数字，迟早会出现一个看起来很真的假链接。',
             '同一件事会在博客、Hacker News 和推文里同时出现，不合并就是重复。',
-            '它会悄悄停掉。2026-07-22 之后，GitHub 因为仓库 60 天没有新提交，暂停了定时任务；简报停发了将近三个月，没有任何报错。',
+            '它会悄悄停掉。2026-07-22 之后，GitHub 因为项目 60 天没有更新，暂停了定时任务；简报停发了将近三个月，没有任何报错。',
             '旧的信源在烂：GitHub Trending 用的第三方接口失效了，机器之心的 RSS 也没了，旧的反馈按钮指向一个 404 的服务。',
           ],
         },
@@ -288,11 +288,11 @@ export const CASES = [
         {
           h: '架构',
           flow: [
-            { t: '收集 · prepare-digest', n: ['X 上的 builder、播客（follow-builders）', 'OpenAI、DeepMind、Google AI、Hugging Face 官方博客', 'Hacker News：36 小时内、60 分以上', 'Hugging Face 论文热榜、GitHub 今日趋势、量子位', '去掉 60 天内发过的'] },
+            { t: '收集', n: ['X 上的 builder、播客（follow-builders）', 'OpenAI、DeepMind、Google AI、Hugging Face 官方博客', 'Hacker News：36 小时内、60 分以上', 'Hugging Face 论文热榜、GitHub 今日趋势、量子位', '去掉 60 天内发过的'] },
             { t: '编号', n: ['每条素材一个编号：H3、P1、G2…'] },
             { t: '编辑 · DeepSeek', n: ['按「三问」挑选，多来源合并', '只输出 JSON，只能引用编号'] },
-            { t: '回填 · remix-digest', n: ['代码按编号填回链接、分数、star 数', '编号不存在，这条直接丢弃', '模型失败：按热度排出降级版'] },
-            { t: '送达 · deliver', n: ['邮件主题就是当天的标题', '网页版和已发列表提交回仓库'] },
+            { t: '回填', n: ['代码按编号填回链接、分数、star 数', '编号不存在，这条直接丢弃', '模型失败：按热度排出降级版'] },
+            { t: '送达', n: ['邮件主题就是当天的标题', '同时发布网页版和往期'] },
           ],
           after: [
             '编辑标准写在提示词里，每条内容必须过三问：读者会因为这条信息做出不同的决策吗？这是新的事实，还是噪音？有没有具体的数字或名字？',
@@ -305,7 +305,7 @@ export const CASES = [
             head: ['决定', '原因', '放弃的方案'],
             rows: [
               ['模型只引用编号，不写链接', '链接和数字最容易被编造；由代码回填，就不可能出错', '让模型直接写，再事后校验'],
-              ['每天把网页版提交回仓库', '既是存档，也让定时任务不会因为 60 天无活动被暂停', '只发邮件，不留痕迹'],
+              ['每天发布一期网页版', '既是存档，也让定时任务不会因为 60 天无活动被暂停', '只发邮件，不留痕迹'],
               ['去掉 👍 / 👎 和追踪像素', '接收反馈的服务早已返回 404，留着就是坏链接', '假装有反馈回路'],
               ['Hacker News 改用 Algolia，按整词匹配', '旧做法只看首页 30 条，按子串匹配，「said」也会被当成 AI', '首页接口'],
               ['用 DeepSeek 的 chat 模型', '每天约 $0.003', '更贵的推理模型'],
@@ -374,7 +374,7 @@ export const CASES = [
           list: [
             'Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.',
             'The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.',
-            'It can stop silently. After 2026-07-22, GitHub paused the schedule because the repository had no commits for 60 days. The briefing stopped for almost three months with no error anywhere.',
+            'It can stop silently. After 2026-07-22, GitHub paused the schedule because the project had not been updated for 60 days. The briefing stopped for almost three months with no error anywhere.',
             'Old sources rot: the third-party GitHub Trending API died, a Chinese media RSS feed disappeared, and the old feedback buttons pointed at a service returning 404.',
           ],
         },
@@ -388,11 +388,11 @@ export const CASES = [
         {
           h: 'Architecture',
           flow: [
-            { t: 'Collect · prepare-digest', n: ['Builders on X and podcasts (follow-builders)', 'OpenAI, DeepMind, Google AI, Hugging Face blogs', 'Hacker News: last 36 h, 60+ points', 'HF Daily Papers, GitHub Trending, QbitAI', 'Drop anything sent in the last 60 days'] },
+            { t: 'Collect', n: ['Builders on X and podcasts (follow-builders)', 'OpenAI, DeepMind, Google AI, Hugging Face blogs', 'Hacker News: last 36 h, 60+ points', 'HF Daily Papers, GitHub Trending, QbitAI', 'Drop anything sent in the last 60 days'] },
             { t: 'Number', n: ['Every item gets an ID: H3, P1, G2…'] },
             { t: 'Edit · DeepSeek', n: ['Select by three questions, merge sources', 'JSON only, IDs only'] },
-            { t: 'Resolve · remix-digest', n: ['Code fills in links, scores and stars by ID', 'Unknown ID: the item is dropped', 'Model down: a ranked fallback issue'] },
-            { t: 'Deliver · deliver', n: ['The subject line is the day’s headline', 'Web edition and sent list committed back'] },
+            { t: 'Resolve', n: ['Code fills in links, scores and stars by ID', 'Unknown ID: the item is dropped', 'Model down: a ranked fallback issue'] },
+            { t: 'Deliver', n: ['The subject line is the day’s headline', 'A web edition and archive go up the same day'] },
           ],
           after: [
             'The editorial standard lives in the prompt. Every item must pass three questions: Would the reader decide differently because of it? Is it a new fact or noise? Does it carry a concrete number or name?',
@@ -405,7 +405,7 @@ export const CASES = [
             head: ['Decision', 'Why', 'Given up'],
             rows: [
               ['The model cites IDs, never links', 'Links and numbers are the easiest things to invent; filled in by code, they cannot be wrong', 'Let the model write them and check afterwards'],
-              ['Commit the web edition every day', 'It is the archive, and it keeps the schedule from being paused after 60 quiet days', 'Email only, no trace'],
+              ['Publish a web edition every day', 'It is the archive, and it keeps the schedule from being paused after 60 quiet days', 'Email only, no trace'],
               ['Remove 👍 / 👎 and the tracking pixel', 'The feedback service had been returning 404; keeping them meant broken links', 'Pretending there is a feedback loop'],
               ['Hacker News through Algolia, whole-word matching', 'The old code read 30 front-page stories and matched substrings, so “said” counted as AI', 'The front-page API'],
               ['DeepSeek’s chat model', 'About $0.003 a day', 'A pricier reasoning model'],
@@ -519,7 +519,7 @@ export const CASES = [
           h: '怎么证明它可靠',
           list: [
             '2026-08-11 用真实样本跑了一轮线上冒烟测试：B 站、小宇宙、抖音、公众号通过；小红书一篇 15 张图、14 个 Live 片段的图文通过。',
-            '平台状态写在 README 的表格里，每一行标明最近一次验证，不当作永久承诺。',
+            '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
             '安装包、运行包和发布产物都提供 SHA-256；GitHub Actions 同时生成 SBOM 和构建来源证明。',
             '换转写模型之前，先要过 60 个样本、3 小时音频的评测门槛。',
           ],
@@ -603,7 +603,7 @@ export const CASES = [
           h: 'How I know it holds up',
           list: [
             'A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.',
-            'Platform status lives in a README table, each row with its last verification, not a permanent promise.',
+            'Each platform’s status is published with the date of its last check, not as a permanent promise.',
             'Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.',
             'Replacing the transcription model requires passing a 60-sample, three-hour benchmark first.',
           ],

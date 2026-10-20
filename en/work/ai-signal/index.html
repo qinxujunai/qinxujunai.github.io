@@ -84,7 +84,7 @@
 </section>
 <section class="case-sec" id="s2" aria-labelledby="s2-title">
 <h2 id="s2-title">What made it hard</h2>
-<ul class="bullets"><li>Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.</li><li>The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.</li><li>It can stop silently. After 2026-07-22, GitHub paused the schedule because the repository had no commits for 60 days. The briefing stopped for almost three months with no error anywhere.</li><li>Old sources rot: the third-party GitHub Trending API died, a Chinese media RSS feed disappeared, and the old feedback buttons pointed at a service returning 404.</li></ul>
+<ul class="bullets"><li>Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.</li><li>The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.</li><li>It can stop silently. After 2026-07-22, GitHub paused the schedule because the project had not been updated for 60 days. The briefing stopped for almost three months with no error anywhere.</li><li>Old sources rot: the third-party GitHub Trending API died, a Chinese media RSS feed disappeared, and the old feedback buttons pointed at a service returning 404.</li></ul>
 </section>
 <section class="case-sec" id="s3" aria-labelledby="s3-title">
 <h2 id="s3-title">Scope</h2>
@@ -93,18 +93,18 @@
 <section class="case-sec" id="s4" aria-labelledby="s4-title">
 <h2 id="s4-title">Architecture</h2>
 <ol class="flow">
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>Collect · prepare-digest</p><ul><li>Builders on X and podcasts (follow-builders)</li><li>OpenAI, DeepMind, Google AI, Hugging Face blogs</li><li>Hacker News: last 36 h, 60+ points</li><li>HF Daily Papers, GitHub Trending, QbitAI</li><li>Drop anything sent in the last 60 days</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>Collect</p><ul><li>Builders on X and podcasts (follow-builders)</li><li>OpenAI, DeepMind, Google AI, Hugging Face blogs</li><li>Hacker News: last 36 h, 60+ points</li><li>HF Daily Papers, GitHub Trending, QbitAI</li><li>Drop anything sent in the last 60 days</li></ul></li>
 <li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>Number</p><ul><li>Every item gets an ID: H3, P1, G2…</li></ul></li>
 <li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>Edit · DeepSeek</p><ul><li>Select by three questions, merge sources</li><li>JSON only, IDs only</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">4</span>Resolve · remix-digest</p><ul><li>Code fills in links, scores and stars by ID</li><li>Unknown ID: the item is dropped</li><li>Model down: a ranked fallback issue</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">5</span>Deliver · deliver</p><ul><li>The subject line is the day’s headline</li><li>Web edition and sent list committed back</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">4</span>Resolve</p><ul><li>Code fills in links, scores and stars by ID</li><li>Unknown ID: the item is dropped</li><li>Model down: a ranked fallback issue</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">5</span>Deliver</p><ul><li>The subject line is the day’s headline</li><li>A web edition and archive go up the same day</li></ul></li>
 </ol>
 <p>The editorial standard lives in the prompt. Every item must pass three questions: Would the reader decide differently because of it? Is it a new fact or noise? Does it carry a concrete number or name?</p>
 <p>The layout follows TLDR, The Rundown and Axios: one column, headlines that state facts, one source line under every item, and ranked two-column lists for papers and repositories.</p>
 </section>
 <section class="case-sec" id="s5" aria-labelledby="s5-title">
 <h2 id="s5-title">What I gave up</h2>
-<ul class="choices"><li><h3>The model cites IDs, never links</h3><p><span class="k">Why</span>Links and numbers are the easiest things to invent; filled in by code, they cannot be wrong</p><p><span class="k">Given up</span>Let the model write them and check afterwards</p></li><li><h3>Commit the web edition every day</h3><p><span class="k">Why</span>It is the archive, and it keeps the schedule from being paused after 60 quiet days</p><p><span class="k">Given up</span>Email only, no trace</p></li><li><h3>Remove 👍 / 👎 and the tracking pixel</h3><p><span class="k">Why</span>The feedback service had been returning 404; keeping them meant broken links</p><p><span class="k">Given up</span>Pretending there is a feedback loop</p></li><li><h3>Hacker News through Algolia, whole-word matching</h3><p><span class="k">Why</span>The old code read 30 front-page stories and matched substrings, so “said” counted as AI</p><p><span class="k">Given up</span>The front-page API</p></li><li><h3>DeepSeek’s chat model</h3><p><span class="k">Why</span>About $0.003 a day</p><p><span class="k">Given up</span>A pricier reasoning model</p></li></ul>
+<ul class="choices"><li><h3>The model cites IDs, never links</h3><p><span class="k">Why</span>Links and numbers are the easiest things to invent; filled in by code, they cannot be wrong</p><p><span class="k">Given up</span>Let the model write them and check afterwards</p></li><li><h3>Publish a web edition every day</h3><p><span class="k">Why</span>It is the archive, and it keeps the schedule from being paused after 60 quiet days</p><p><span class="k">Given up</span>Email only, no trace</p></li><li><h3>Remove 👍 / 👎 and the tracking pixel</h3><p><span class="k">Why</span>The feedback service had been returning 404; keeping them meant broken links</p><p><span class="k">Given up</span>Pretending there is a feedback loop</p></li><li><h3>Hacker News through Algolia, whole-word matching</h3><p><span class="k">Why</span>The old code read 30 front-page stories and matched substrings, so “said” counted as AI</p><p><span class="k">Given up</span>The front-page API</p></li><li><h3>DeepSeek’s chat model</h3><p><span class="k">Why</span>About $0.003 a day</p><p><span class="k">Given up</span>A pricier reasoning model</p></li></ul>
 </section>
 <section class="case-sec" id="s6" aria-labelledby="s6-title">
 <h2 id="s6-title">How I know it holds up</h2>
@@ -156,7 +156,6 @@
 <footer class="foot">
 <div class="foot-inner">
 <span>© 2026 Qin Xujun</span>
-<a href="https://github.com/qinxujunai/qinxujunai.github.io" rel="noopener">Source of this site</a>
 </div>
 </footer>
 </body>
