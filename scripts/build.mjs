@@ -20,7 +20,7 @@ const KEEP = [
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
   '智能体', '上下文', '自然语言', '许愿池', '爆款案例', '信息流', '回款率', '采购评估', '招投标', '剪贴板', '终稿', '离线',
   '受监督', '子进程', '原生绘制', '浏览器验收', '构建自愈', '原子修改', '计划闸门', '上下文装载', '访谈对话', '想用 AI',
-  '到能用的 AI', '再让 AI 动手', '第一行代码', '创造者', '无需登录', '不声明完成', '都跑', '一个字都不丢', '逐字回读', '再把概率压成确定性', '终极浪漫', '数据智能', '数据平台', '智能分析', '金融控股集团', '乡村英才计划', '未来星计划', '冒烟测试', '代码签名', '安全提示',
+  '到能用的 AI', '光标处', '每天在用', '再让 AI 动手', '第一行代码', '创造者', '无需登录', '不声明完成', '都跑', '一个字都不丢', '逐字回读', '再把概率压成确定性', '终极浪漫', '数据智能', '数据平台', '智能分析', '金融控股集团', '乡村英才计划', '未来星计划', '冒烟测试', '代码签名', '安全提示',
 ];
 const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
 const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -175,7 +175,7 @@ function hero(c) {
 ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar' })}
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
-<p class="eyebrow">${T(c, c.eyebrow)}</p>
+${c.eyebrow ? `<p class="eyebrow">${T(c, c.eyebrow)}</p>` : `<p class="visually-hidden">${esc(c.name)}</p>`}
 <h1 id="hero-title">${T(c, c.lede)}</h1>
 <p class="sub">${T(c, c.now)}</p>
 <p class="cta"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
@@ -183,10 +183,10 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar' })}
 }
 
 // Splits a line into spans so it can light up as it scrolls by.
-// Chinese clauses (split after ，) never break inside, so the line breaks only at the comma.
+// Chinese phrases (split after ，and 、) never break inside, so lines break only at punctuation.
 function statement(c, text) {
   if (c.lang !== 'zh-CN') return text.split(/(\s+)/).map((p) => (/^\s+$/.test(p) ? p : `<span>${esc(p)}</span>`)).join('');
-  return text.split(/(?<=，)/).map((clause) => `<span class="clause">${[...clause].map((ch) => (ch === ' ' ? ' ' : `<span>${esc(ch)}</span>`)).join('')}</span>`).join('');
+  return text.split(/(?<=[，、])/).map((clause) => `<span class="clause">${[...clause].map((ch) => (ch === ' ' ? ' ' : `<span>${esc(ch)}</span>`)).join('')}</span>`).join('');
 }
 
 const statValue = (k) => stats.voiceflow[k];
@@ -199,7 +199,7 @@ function flagship(c) {
   const f = c.flagship;
   return `<article class="tile dark product flagship" id="voiceflow" aria-labelledby="voiceflow-title">
 <div class="reveal">
-<p class="eyebrow">${T(c, t.kind)}</p>
+${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
 <h3 id="voiceflow-title" class="tile-title">${esc(t.name)}</h3>
 <p class="sub">${T(c, t.title)}</p>
 <p class="cta"><a class="more-link" href="${casePath(c, 'voiceflow')}">${c.readCase}${chevron}</a><a class="more-link" href="${t.links[0][1]}" ${ext}>${c.siteLabel}${chevron}<span class="visually-hidden"> VoiceFlow</span></a></p>
@@ -239,10 +239,9 @@ ${image ? `<figure class="card-shot">${img(cs.image.key, t.imageAlt, { sizes: '(
 </article>`;
   }
   return `<article class="card-tile solution-card reveal">
-<p class="eyebrow">${T(c, t.kind)}</p>
-<p class="big">${esc(cs.big[c.lang === 'zh-CN' ? 'zh' : 'en'])}</p>
-<p class="big-label">${T(c, t.bigLabel)}</p>
+${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
 <${h}><a href="${casePath(c, cs.slug)}">${T(c, t.title)}</a></${h}>
+<p class="card-line">${T(c, t.card)}</p>
 <p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
 </article>`;
 }
@@ -255,7 +254,7 @@ function work(c) {
 <div>
 <p class="eyebrow">${c.workTitle}</p>
 <h2 id="work-title">${T(c, c.workHeadline)}</h2>
-<p class="sub">${T(c, c.workIntro)}</p>
+${c.workIntro ? `<p class="sub">${T(c, c.workIntro)}</p>` : ''}
 </div>
 </div>
 <h3 class="visually-hidden">${esc(c.productsLabel)}</h3>
@@ -278,13 +277,11 @@ function thinking(c) {
 <div class="tile dark statement" data-statement>
 <p class="eyebrow">${c.thinkingTitle}</p>
 <h2 class="pull" id="thinking-title">${statement(c, c.thinkingHeadline)}</h2>
-<blockquote class="said"><p>${c.lang === 'zh-CN' ? `「${T(c, c.thinkingQuote)}」` : `“${esc(c.thinkingQuote)}”`}</p></blockquote>
 <p class="source">${esc(s1)}<a href="${VIBECODING}" ${ext}>${s2}${chevron}</a>${esc(s3)}</p>
 </div>
 <div class="tile soft">
-<h2 class="reveal">${T(c, c.abilitiesHeadline)}</h2>
 <ul class="value-grid">
-${c.abilities.map((a, i) => `<li class="value reveal"><span class="value-num" aria-hidden="true">${i + 1}</span><p class="value-name">${T(c, a.label)}</p><h3>${T(c, a.title)}</h3><p>${T(c, a.body)}</p><p class="proof"><a href="${casePath(c, a.proof.case)}">${T(c, a.proof.text)}${chevron}</a></p></li>`).join('\n')}
+${c.abilities.map((a, i) => `<li class="value reveal"><span class="value-num" aria-hidden="true">${i + 1}</span><h3>${T(c, a.title)}</h3><p>${T(c, a.body)}</p></li>`).join('\n')}
 </ul>
 </div>
 </section>`;
@@ -428,7 +425,7 @@ ${nav(c, { switchHref: casePath(o, cs.slug), onHome: false })}
 <article class="case" aria-labelledby="case-title">
 <header class="tile plain case-head">
 <nav class="crumb" aria-label="${esc(L.crumb)}"><a href="${home(c)}#work">${L.crumb}</a>${chevron}<span aria-current="page">${esc(t.name)}</span></nav>
-<p class="eyebrow">${T(c, t.kind)}</p>
+${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
 <h1 id="case-title">${T(c, t.title)}</h1>
 <p class="sub">${T(c, t.sub)}</p>
 ${t.links ? `<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${chevron}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
