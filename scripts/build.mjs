@@ -16,7 +16,7 @@ const esc = (s) =>
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names and fixed phrases stay whole.
 const KEEP = [
-  '云南妙妙屋', '先立边界', '约 18 分钟读完', '读完就能动手', '做 AI 产品', '为什么会用', '一个东西', '剪贴板没核对过', '不算送达', '完整录音', '链接由代码回填', '写不出假链接', '不用显卡', '人台照', '模特图', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
+  '云南妙妙屋', '我是秦徐俊', '做 AI 产品', '内容和运营', '人为什么会用它', '先立边界', '约 18 分钟读完', '读完就能动手', '做 AI 产品', '为什么会用', '一个东西', '剪贴板没核对过', '不算送达', '完整录音', '链接由代码回填', '写不出假链接', '不用显卡', '人台照', '模特图', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
   'AI 进化得越快', '我们越需要慢下来',
   '秦徐俊', '比智科技', '一念智能', '专致网络', '抖音数字学堂', '云南民族大学', '微众银行', '方正证券', '工商银行',
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
@@ -179,7 +179,6 @@ function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
-<p class="visually-hidden">${esc(c.name)}</p>
 <h1 id="hero-title" class="rise" style="--d:.7s">${T(c, c.lede)}</h1>
 <p class="sub rise" style="--d:.85s">${T(c, c.now)}</p>
 <p class="cta rise" style="--d:1s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
@@ -258,7 +257,7 @@ function projectShow(c, cs) {
     tone: TONES[cs.slug],
     name: t.name,
     line: t.title,
-    note: t.why,
+    note: t.note,
     site: t.links[0][1],
     siteLabel: cs.slug === 'ai-signal' ? t.links[0][0] : c.visit,
     caseUrl: casePath(c, cs.slug),
