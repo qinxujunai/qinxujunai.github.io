@@ -22,6 +22,8 @@ export const CASES = [
       sub: 'Windows 上的语音输入。全部在你自己的电脑上完成，不联网，不登录。我写它，是因为要跟 AI 交代的话，常常比我愿意打的字多。',
       card: 'Windows 上的语音输入，全部在自己的电脑上完成。',
       note: 'Windows · 离线 · 免登录',
+      // The judgement behind it, for the home page (from the sections below).
+      why: '预览负责快，终稿只认完整录音；剪贴板没核对过，不算送达。',
       imageAlt: 'VoiceFlow 的官网：让想法成文。按一下，说出你的话。',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
@@ -132,6 +134,7 @@ export const CASES = [
       sub: 'Voice typing for Windows. Everything happens on your own computer: no internet, no account. I built it because what I need to tell an AI is usually longer than I want to type.',
       card: 'Voice typing for Windows, entirely on your own computer.',
       note: 'Windows · Offline · No account',
+      why: 'The live preview is for speed; the final text trusts only the full recording. Nothing counts as delivered until the clipboard is checked.',
       imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
       facts: [
         ['Role', 'Solo: product, design, engineering, release'],
@@ -252,6 +255,7 @@ export const CASES = [
       sub: '它每天替我读 X、Hacker News、论文和各家实验室的博客，只留下值得看的，早上十点发到我的邮箱，同一期也放到网上。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
       note: '每天 10:00 · 七类信源 · 每条都附原文',
+      why: '模型只能引用编号，链接由代码回填，写不出假链接。',
       imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
       facts: [
         ['角色', '独立开发'],
@@ -354,6 +358,7 @@ export const CASES = [
       sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, emails it to me at 10 a.m. and posts the same issue on the web.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
       note: 'Daily at 10:00 · Seven kinds of sources · Every item linked',
+      why: 'The model may only cite item numbers; code fills in every link, so it cannot invent one.',
       imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
       facts: [
         ['Role', 'Built solo'],
@@ -465,6 +470,7 @@ export const CASES = [
       sub: '视频、播客、图文都行，本地的音视频也可以。Windows 版，在你自己的电脑上处理。',
       card: '视频、播客、图文都行。',
       note: '视频 · 播客 · 图文 · 在你自己的电脑上处理',
+      why: '能读字幕和正文，就不转写；不用显卡也能跑。',
       imageAlt: '万象成文的官网：把视频、播客和图文，直接变成可用的文字与媒体。',
       facts: [
         ['角色', '独立开发'],
@@ -550,6 +556,7 @@ export const CASES = [
       sub: 'Videos, podcasts and articles all work, and so do local recordings. A Windows app that does the work on your own computer.',
       card: 'Videos, podcasts and articles all work.',
       note: 'Video · Podcasts · Articles · Processed on your own PC',
+      why: 'If there are subtitles or page text, it skips transcription. No GPU needed.',
       imageAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media.',
       facts: [
         ['Role', 'Built solo'],

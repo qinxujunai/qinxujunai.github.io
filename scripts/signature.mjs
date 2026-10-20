@@ -65,10 +65,17 @@ function rng(seed) {
 }
 
 // 白文 seal: a vermilion block with the characters cut out (even-odd fill), worn edges.
-function seal(x, y, w) {
+// kind "tall": 徐 above 俊 in a vertical seal. kind "four": 秦徐俊印 in a square, read right column first.
+// Every character is scaled uniformly into a square cell, so no stroke is stretched.
+function seal(x, y, w, kind = 'tall') {
   const buf = fs.readFileSync(sealFontFile);
   const face = opentype.parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
   const rand = rng(20261019);
+  const cols = kind === 'four' ? 2 : 1;
+  const pad = w * (cols === 2 ? 0.1 : 0.14);
+  const gap = w * 0.05;
+  const cell = (w - pad * 2 - gap * (cols - 1)) / cols;
+  const h = pad * 2 + cell * 2 + gap;
   const pts = [];
   const edge = (x0, y0, x1, y1, n) => {
     for (let i = 0; i < n; i++) {
@@ -80,30 +87,32 @@ function seal(x, y, w) {
     }
   };
   const r = w * 0.06;
-  edge(x + r, y, x + w - r, y, 14);
-  edge(x + w, y + r, x + w, y + w - r, 14);
-  edge(x + w - r, y + w, x + r, y + w, 14);
-  edge(x, y + w - r, x, y + r, 14);
+  edge(x + r, y, x + w - r, y, 12);
+  edge(x + w, y + r, x + w, y + h - r, 20);
+  edge(x + w - r, y + h, x + r, y + h, 12);
+  edge(x, y + h - r, x, y + r, 20);
   let d = `M${pts.map((p) => p.map((v) => v.toFixed(1)).join(' ')).join('L')}Z`;
-  // Right column 徐, left column 俊 (seals read right to left), each stretched to a tall cell.
-  const pad = w * 0.12;
-  const cellW = (w - pad * 2 - w * 0.04) / 2;
-  const cellH = w - pad * 2;
-  [['徐', x + w - pad - cellW], ['俊', x + pad]].forEach(([ch, cx]) => {
+  const cells = kind === 'four'
+    ? [['秦', 1, 0], ['徐', 1, 1], ['俊', 0, 0], ['印', 0, 1]]
+    : [['徐', 0, 0], ['俊', 0, 1]];
+  for (const [ch, col, row] of cells) {
     const g = face.charToGlyph(ch).getPath(0, 0, 100);
     const bb = g.getBoundingBox();
-    const sx = cellW / (bb.x2 - bb.x1);
-    const sy = cellH / (bb.y2 - bb.y1);
+    const bw = bb.x2 - bb.x1;
+    const bh = bb.y2 - bb.y1;
+    const k = cell / Math.max(bw, bh);
+    const ox = x + pad + col * (cell + gap) + (cell - bw * k) / 2;
+    const oy = y + pad + row * (cell + gap) + (cell - bh * k) / 2;
     for (const c of g.commands) {
       for (const [kx, ky] of [['x', 'y'], ['x1', 'y1'], ['x2', 'y2']]) {
         if (c[kx] === undefined) continue;
-        c[kx] = cx + (c[kx] - bb.x1) * sx;
-        c[ky] = y + pad + (c[ky] - bb.y1) * sy;
+        c[kx] = ox + (c[kx] - bb.x1) * k;
+        c[ky] = oy + (c[ky] - bb.y1) * k;
       }
     }
     d += g.toPathData(1);
-  });
-  return d;
+  }
+  return { d, h };
 }
 
 // Layout presets: [font, char, x, y, size, rotate]. Coordinates are in a 300 × 130 design box.
@@ -115,7 +124,9 @@ const LAYOUTS = {
   // Straighter variants (2026-10-20 review): one baseline, little rotation, seal optional.
   cursive2: { glyphs: [['liu-jian-mao-cao', '秦', 56, 64, 112, -2], ['liu-jian-mao-cao', '徐', 136, 70, 100, 0], ['liu-jian-mao-cao', '俊', 212, 68, 100, 1]], seal: [258, 88, 26] },
   zhimang2: { glyphs: [['zhi-mang-xing', '秦', 56, 64, 108, 0], ['zhi-mang-xing', '徐', 150, 66, 104, 0], ['zhi-mang-xing', '俊', 244, 66, 104, 0]], seal: null },
-  kai: { glyphs: [['ma-shan-zheng', '秦', 56, 62, 106, 0], ['ma-shan-zheng', '徐', 148, 66, 98, 0], ['ma-shan-zheng', '俊', 238, 66, 98, 0]], seal: [286, 82, 32] },
+  kai: { glyphs: [['ma-shan-zheng', '秦', 56, 62, 106, 0], ['ma-shan-zheng', '徐', 148, 66, 98, 0], ['ma-shan-zheng', '俊', 238, 66, 98, 0]], seal: [288, 66, 26] },
+  // Four-character square seal 秦徐俊印, an alternative.
+  kai4: { glyphs: [['ma-shan-zheng', '秦', 56, 62, 106, 0], ['ma-shan-zheng', '徐', 148, 66, 98, 0], ['ma-shan-zheng', '俊', 238, 66, 98, 0]], seal: [286, 72, 38, 'four'] },
 };
 LAYOUTS.final = LAYOUTS.kai;
 
@@ -123,11 +134,11 @@ function compose(name) {
   const L = LAYOUTS[name];
   const paths = L.glyphs.map(([font, ch, x, y, size, rot]) => placed(font, ch, { x, y, size, rotate: rot }));
   const box = paths.map((p) => p.getBoundingBox()).reduce((a, b) => ({ x1: Math.min(a.x1, b.x1), y1: Math.min(a.y1, b.y1), x2: Math.max(a.x2, b.x2), y2: Math.max(a.y2, b.y2) }));
-  const [sx, sy, sw] = L.seal || [box.x2, box.y1, 0];
-  const vb = [Math.floor(box.x1) - 2, Math.floor(Math.min(box.y1, sy)) - 2, Math.ceil(Math.max(box.x2, sx + sw) - box.x1) + 4, Math.ceil(Math.max(box.y2, sy + sw) - Math.min(box.y1, sy)) + 4];
+  const [sx, sy, sw, kind] = L.seal || [box.x2, box.y1, 0];
+  const { d: sealD, h: sh } = L.seal ? seal(sx, sy, sw, kind) : { d: '', h: 0 };
+  const vb = [Math.floor(box.x1) - 2, Math.floor(Math.min(box.y1, sy)) - 2, Math.ceil(Math.max(box.x2, sx + sw) - box.x1) + 4, Math.ceil(Math.max(box.y2, sy + sh) - Math.min(box.y1, sy)) + 4];
   // The seal's characters are cut out of the red block; a paper-coloured backing shows through them,
   // so they read as white on any page colour, as a real stamp does.
-  const sealD = L.seal ? seal(sx, sy, sw) : '';
   const sealPath = L.seal ? `<path class="seal" fill="#fbf8f1" d="${sealD.slice(0, sealD.indexOf('Z') + 1)}"/><path class="seal" fill="#c8102e" fill-rule="evenodd" d="${sealD}"/>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.join(' ')}">${paths.map((p) => `<path d="${p.toPathData(1)}"/>`).join('')}${sealPath}</svg>\n`;
 }

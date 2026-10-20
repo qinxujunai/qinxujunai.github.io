@@ -9,7 +9,8 @@ export const GITHUB = 'https://github.com/qinxujunai';
 export const VIBECODING = 'https://qinxujunai.github.io/qinxujun-ai-vibecoding/';
 
 // Visual work. First his AI-generated work, from the portfolio linked on his resume (AI faces are not real
-// people; no brand logos or licensed characters). Then his photographs: landscapes, buildings and objects only.
+// people; no brand logos or licensed characters). Then four of his photographs: landscapes and buildings only.
+// The alt lists keep all eight originals so indexes stay stable.
 const aiWork = (t) => [
   { key: 'ai-hat', alt: t[0], caption: t[1] },
   { key: 'ai-vest', alt: t[2], caption: t[3], tall: true },
@@ -26,12 +27,8 @@ const photos = (alt, ai) => [
   ...aiWork(ai),
   { key: 'photo-aerial', alt: alt[0] },
   { key: 'photo-pagoda', alt: alt[1] },
-  { key: 'photo-buddha', alt: alt[2], tall: true },
-  { key: 'photo-gate', alt: alt[3] },
-  { key: 'photo-wall', alt: alt[4] },
   { key: 'photo-dusk', alt: alt[5] },
   { key: 'photo-sky', alt: alt[6] },
-  { key: 'photo-autumn', alt: alt[7] },
 ];
 
 export const content = {
@@ -39,18 +36,20 @@ export const content = {
     lang: 'zh-CN',
     path: '/',
     title: '秦徐俊',
-    description: '秦徐俊。我用 AI 做东西，也把做法分享出来：VoiceFlow、AI Signal、万象成文，还有 ai.vibecoding。',
+    description: '秦徐俊，做 AI 产品。先立边界，再把概率压成确定性：VoiceFlow、AI Signal、万象成文，和写下这套做法的 ai.vibecoding。',
     skip: '跳到正文',
     switchLabel: 'English',
     switchLang: 'en',
     themeLabel: '切换深色或浅色',
     name: '秦徐俊',
     // The name card's two lines under the name. He presents himself, not an employer or a job title.
-    role: '用 AI 做东西',
+    role: '做 AI 产品',
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
-    lede: '我用 AI 做东西，也把做法分享出来。',
-    now: '学新媒体出身，做过内容和运营，现在用 AI 做东西。这里有一个离线的语音输入法、一封每天早上的 AI 简报、一个把视频变成文字的工具，还有我做这些东西的方法。',
+    // his words: ai.vibecoding workflow title (May 2026)
+    lede: '先立边界，再把概率压成确定性。',
+    now: '我做 AI 产品。模型负责生成，我负责问题、边界和验收。做内容和运营的几年，让我总先想清楚：人为什么会用一个东西。',
+    hook: '我把这套做法写成了 ai.vibecoding，约 18 分钟读完，读完就能动手',
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
@@ -59,7 +58,6 @@ export const content = {
     home: '首页',
 
     workTitle: '作品',
-    workHeadline: '我做的东西，点开就能看。',
     visit: '访问网站',
     readCase: '怎么做的',
     openSite: (name) => `打开 ${name} 的网站`,
@@ -87,18 +85,18 @@ export const content = {
     },
 
     pathTitle: '经历',
-    pathHeadline: '内容和运营出身，现在做 AI。',
+    pathHeadline: '做 AI，也懂人。',
     journey: [
-      { when: '2025.11', role: 'AI 解决方案架构', org: '比智科技', desc: '给金融、政企客户做 AI 问数，从第一次聊需求到上线。' },
-      { when: '2024.08', role: 'AI 项目负责人', org: '一念智能', desc: '在飞书搭了写脚本的智能体，一条脚本从 3 小时变成 20 分钟；用 AI 做了方正证券活动的开场片，5 天做完；也接手做完了微众银行的 AI 课程。' },
+      { when: '2025.11', role: 'AI 解决方案架构', org: '比智科技', desc: '给金融、政企客户做 AI 问数，从需求诊断到回款；主导通信、政企客户的招投标，5 家以上客户进入采购评估。' },
+      { when: '2024.08', role: 'AI 项目负责人', org: '一念智能', desc: '拆了 50 多个爆款案例，在飞书搭了写脚本的智能体，一条脚本从 3 小时变成 20 分钟；用 AI 做了方正证券活动的开场片；接手微众银行的 AI 课程项目，48 小时找到问题，客户点名要我继续负责。' },
       { when: '2023.04', role: '商业内容项目交付', org: '专致网络', desc: '运营抖音文旅号「云南妙妙屋」，3 个月涨粉 2000 多；写了 150 多条信息流广告脚本，撑起每月 10 万以上的投放；拍工商银行宣传片那次，演员没来，我自己上了。' },
-      { when: '2022.06', role: '社区运营（实习）', org: '抖音数字学堂', desc: '做公益项目的社群和宣传，出镜、拍摄、剪辑都自己来。' },
-      { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。' },
+      { when: '2022.06', role: '社区运营（实习）', org: '抖音数字学堂', desc: '', light: true },
+      { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是内容怎么被看见、被记住。', light: true },
     ],
 
     photosTitle: '影像',
-    photosHeadline: '会拍，也会用 AI 做画面。',
-    photosIntro: '新媒体专业出身，拍摄、剪辑、航拍都自己来；现在也用 Midjourney 和 AI 视频工具做画面。',
+    photosHeadline: '一张人台照，变成一组模特图。',
+    photosIntro: '做内容练出来的眼光，现在交给 Midjourney 和 AI 视频工具。拍摄、剪辑、航拍，我也都自己来。',
     prev: '上一张',
     next: '下一张',
     photos: photos([
@@ -137,6 +135,7 @@ export const content = {
     save: '保存名片',
     // his words: the manifesto of ai.vibecoding (May 2026)
     closing: ['AI 进化得越快，我们越需要慢下来。', '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。'],
+    colophon: '纯 HTML 和 CSS，系统字体，不发任何外部请求，在微信里也打开得很快。',
     notFound: { title: '这一页不存在', body: '链接可能写错了，或者页面已经搬走。', back: '回到首页' },
 
     // Project page chrome
@@ -158,17 +157,18 @@ export const content = {
     lang: 'en',
     path: '/en/',
     title: 'Qin Xujun',
-    description: 'Qin Xujun. I build things with AI, and share how I do it: VoiceFlow, AI Signal, Wanxiang and ai.vibecoding.',
+    description: 'Qin Xujun builds AI products. Set the boundary first, then compress probability into certainty: VoiceFlow, AI Signal, Wanxiang, and ai.vibecoding, where the method is written down.',
     skip: 'Skip to content',
     switchLabel: '中文',
     switchLang: 'zh-CN',
     themeLabel: 'Switch between dark and light',
     name: 'Qin Xujun',
-    role: 'I build things with AI.',
+    role: 'I build AI products.',
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
-    lede: 'I build things with AI, and share how I do it.',
-    now: 'I studied new media and worked in content and growth; now I build with AI. Here you’ll find an offline voice keyboard, a morning AI briefing, a tool that turns videos into text, and the way I make all of them.',
+    lede: 'Set the boundary first, then compress probability into certainty.', // his words
+    now: 'I build AI products. The model generates; I own the question, the boundary and the acceptance test. Years in content and growth taught me to ask first why anyone would use a thing.',
+    hook: 'I wrote the method down as ai.vibecoding. About 18 minutes, and you can start right after',
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
@@ -177,7 +177,6 @@ export const content = {
     home: 'Home',
 
     workTitle: 'Work',
-    workHeadline: 'Things I’ve made. Open any of them.',
     visit: 'Visit the site',
     readCase: 'How it works',
     openSite: (name) => `Open the ${name} website`,
@@ -204,18 +203,18 @@ export const content = {
     },
 
     pathTitle: 'Path',
-    pathHeadline: 'Content and growth first, now AI.',
+    pathHeadline: 'I build AI, with a feel for people.',
     journey: [
-      { when: '2025.11', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Natural-language data queries for finance and government clients, from the first conversation to launch.' },
-      { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Built a script-writing agent in Feishu that took one script from three hours to twenty minutes, made the AI opening film for a Founder Securities event in five days, and took over and finished an AI course for WeBank.' },
+      { when: '2025.11', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: 'Natural-language data queries for finance and government clients, from diagnosis to payment; led bids for telecom and government clients, with 5+ clients reaching procurement review.' },
+      { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'Broke down 50+ hit scripts and built a script-writing agent in Feishu: one script went from three hours to twenty minutes. Made the AI opening film for a Founder Securities event. Took over a WeBank AI course project, found the problem in 48 hours, and the client asked for me by name.' },
       { when: '2023.04', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: 'Ran a Douyin travel account, “Yunnan Miaomiao House”, and grew it by 2,000+ followers in three months; wrote 150-odd in-feed ad scripts behind more than ¥100k of monthly ad spend. On an ICBC film, the actor didn’t show up, so I stepped in.' },
-      { when: '2022.06', role: 'Community Operations (intern)', org: 'Douyin Digital Academy', desc: 'Community and outreach for public-interest programs; I did the on-camera work, shooting and editing myself.' },
-      { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How to make content, and how to get it seen.' },
+      { when: '2022.06', role: 'Community Operations (intern)', org: 'Douyin Digital Academy', desc: '', light: true },
+      { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How content gets seen, and remembered.', light: true },
     ],
 
     photosTitle: 'Visuals',
-    photosHeadline: 'I shoot, and I make images with AI.',
-    photosIntro: 'I studied new media and do my own shooting, editing and drone work; now I also make images with Midjourney and AI video tools.',
+    photosHeadline: 'One mannequin shot, a full set of on-model images.',
+    photosIntro: 'An eye trained by years of content, now working through Midjourney and AI video tools. I still shoot, edit and fly the drone myself.',
     prev: 'Previous photo',
     next: 'Next photo',
     photos: photos([
@@ -253,6 +252,7 @@ export const content = {
     },
     save: 'Save the card',
     closing: ['The faster AI evolves, the more we need to slow down.', 'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.'], // his words
+    colophon: 'Plain HTML and CSS, system fonts, no outside requests. Opens fast, even inside WeChat.',
     notFound: { title: 'This page doesn’t exist', body: 'The link may be mistyped, or the page has moved.', back: 'Back to home' },
 
     caseLabels: {
