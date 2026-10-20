@@ -16,7 +16,7 @@ const esc = (s) =>
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names and fixed phrases stay whole.
 const KEEP = [
-  '云南妙妙屋', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
+  '云南妙妙屋', '先立边界', '约 18 分钟读完', '读完就能动手', '做 AI 产品', '为什么会用', '一个东西', '剪贴板没核对过', '不算送达', '完整录音', '链接由代码回填', '写不出假链接', '不用显卡', '人台照', '模特图', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
   'AI 进化得越快', '我们越需要慢下来',
   '秦徐俊', '比智科技', '一念智能', '专致网络', '抖音数字学堂', '云南民族大学', '微众银行', '方正证券', '工商银行',
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
@@ -26,7 +26,7 @@ const KEEP = [
 ];
 const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
 const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const KEEP_RE = KEEP.map((k) => [new RegExp([...k].map(reEsc).join('(?:<wbr>)?'), 'g'), k.replace(/ /g, ' ')]);
+const KEEP_RE = KEEP.map((k) => [new RegExp([...k].map(reEsc).join('(?:<wbr>)?'), 'g'), k.replace(/ /g, '\u00a0')]);
 function zhText(s) {
   let out = [...segmenter.segment(String(s))].map((x) => esc(x.segment)).join('<wbr>');
   for (const [re, k] of KEEP_RE) out = out.replace(re, k);
@@ -168,6 +168,7 @@ function footer(c) {
   return `<footer class="foot">
 <div class="foot-inner">
 <span>© ${new Date().getFullYear()} ${esc(c.name)}</span>
+<span class="colophon">${T(c, c.colophon)}</span>
 </div>
 </footer>`;
 }
@@ -176,13 +177,13 @@ function footer(c) {
 
 function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
-${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' })}
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
 <p class="visually-hidden">${esc(c.name)}</p>
-<h1 id="hero-title" class="rise" style="--d:.4s">${T(c, c.lede)}</h1>
-<p class="sub rise" style="--d:.6s">${T(c, c.now)}</p>
-<p class="cta rise" style="--d:.75s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
+<h1 id="hero-title" class="rise" style="--d:.7s">${T(c, c.lede)}</h1>
+<p class="sub rise" style="--d:.85s">${T(c, c.now)}</p>
+<p class="cta rise" style="--d:1s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
+<p class="hook rise" style="--d:1.1s"><a href="${VIBECODING}" ${ext}>${T(c, c.hook)}${chevron}</a></p>
 </section>`;
 }
 
@@ -257,7 +258,7 @@ function projectShow(c, cs) {
     tone: TONES[cs.slug],
     name: t.name,
     line: t.title,
-    note: t.note,
+    note: t.why,
     site: t.links[0][1],
     siteLabel: cs.slug === 'ai-signal' ? t.links[0][0] : c.visit,
     caseUrl: casePath(c, cs.slug),
@@ -270,10 +271,7 @@ function projectShow(c, cs) {
 
 function work(c) {
   return `<section id="work" class="works" aria-labelledby="work-title">
-<div class="tile plain intro">
-<p class="eyebrow">${c.workTitle}</p>
-<h2 id="work-title">${T(c, c.workHeadline)}</h2>
-</div>
+<h2 id="work-title" class="visually-hidden">${c.workTitle}</h2>
 ${CASES.map((cs) => projectShow(c, cs)).join('\n')}
 </section>`;
 }
@@ -306,7 +304,7 @@ function journey(c) {
 <h2 id="path-title">${T(c, c.pathHeadline)}</h2>
 </div>
 <ol class="path reveal">
-${c.journey.map((p) => `<li><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
+${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
 </ol>
 </section>`;
 }

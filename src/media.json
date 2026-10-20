@@ -41,34 +41,6 @@
       "kb": 26
     }
   },
-  "photo-gate": {
-    "540": {
-      "src": "/assets/media/photo-gate-540.webp",
-      "w": 540,
-      "h": 348,
-      "kb": 40
-    },
-    "860": {
-      "src": "/assets/media/photo-gate-860.webp",
-      "w": 860,
-      "h": 554,
-      "kb": 95
-    }
-  },
-  "photo-wall": {
-    "540": {
-      "src": "/assets/media/photo-wall-540.webp",
-      "w": 540,
-      "h": 321,
-      "kb": 31
-    },
-    "860": {
-      "src": "/assets/media/photo-wall-860.webp",
-      "w": 860,
-      "h": 510,
-      "kb": 64
-    }
-  },
   "photo-dusk": {
     "540": {
       "src": "/assets/media/photo-dusk-540.webp",
@@ -83,20 +55,6 @@
       "kb": 26
     }
   },
-  "photo-buddha": {
-    "540": {
-      "src": "/assets/media/photo-buddha-540.webp",
-      "w": 540,
-      "h": 810,
-      "kb": 32
-    },
-    "860": {
-      "src": "/assets/media/photo-buddha-860.webp",
-      "w": 860,
-      "h": 1289,
-      "kb": 61
-    }
-  },
   "photo-sky": {
     "540": {
       "src": "/assets/media/photo-sky-540.webp",
@@ -109,20 +67,6 @@
       "w": 860,
       "h": 573,
       "kb": 14
-    }
-  },
-  "photo-autumn": {
-    "540": {
-      "src": "/assets/media/photo-autumn-540.webp",
-      "w": 540,
-      "h": 304,
-      "kb": 23
-    },
-    "860": {
-      "src": "/assets/media/photo-autumn-860.webp",
-      "w": 860,
-      "h": 484,
-      "kb": 58
     }
   },
   "site-voiceflow": {
