@@ -646,11 +646,6 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
-.path li:first-child .when {
-  color: var(--ink);
-  font-weight: 600;
-}
-
 .path h3 {
   font-size: 19px;
   line-height: 1.35;

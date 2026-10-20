@@ -79,8 +79,8 @@ for (const lang of ['zh', 'en']) {
           <img src="${avatar}" style="width:128px;height:128px;border-radius:50%">
         </div>
         <div style="margin-top:72px;font-size:56px;font-weight:600">${c.name}</div>
-        <div style="margin-top:10px;font-size:30px;color:#a1a1a6">${c.role} · ${c.org}</div>
-        <div style="margin-top:40px;font-size:38px;line-height:1.35">${c.lede}</div>
+        <div style="margin-top:14px;font-size:34px;line-height:1.35">${c.role}</div>
+        <div style="margin-top:8px;font-size:28px;color:#a1a1a6">${c.lede}</div>
         <div style="margin-top:56px;display:flex;align-items:center;gap:40px">
           <img src="${qr}" style="width:300px;height:300px;padding:16px;background:#fff;border-radius:28px">
           <div style="font-size:28px;line-height:1.5;color:#a1a1a6">${lang === 'zh' ? '微信扫一扫<br>加我微信' : 'Scan with WeChat<br>to add me'}<br><br>qinxujunai.github.io</div>
