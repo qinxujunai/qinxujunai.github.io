@@ -341,13 +341,13 @@ function contact(c) {
 <div class="namecard-stage">
 <div class="namecard" role="group" aria-label="${esc(c.cardLabel)}" data-tilt>
 <div class="nc-card-row">
-<div class="nc-left">${signatureRef('nc-sig')}<p class="nc-role">${T(c, bare(c.role))}</p></div>
-<div class="nc-qr"><img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async"></div>
+<div class="nc-left">${signatureRef('nc-sig')}<div class="nc-id"><p class="nc-role">${T(c, bare(c.role))}</p><p class="nc-wx">${esc(c.wechatLabel)} ${esc(c.wechatId)}</p></div></div>
+<div class="nc-qr"><img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async"><span class="nc-scan">${esc(c.scanLabel)}</span></div>
 </div>
 </div>
 </div>
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(bare(c.hint.wechat))}" data-hint-phone="${esc(bare(c.hint.phone))}" data-hint-desktop="${esc(bare(c.hint.desktop))}">${esc(bare(c.hint.default))}</p>
-<p class="cta">${c.wechatId ? `<button type="button" class="pill" data-wechat-id="${esc(c.wechatId)}" data-copied="${esc(bare(c.copied))}" hidden>${esc(c.copyWechat)}</button>` : ''}<a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
+<p class="cta contact-cta">${c.wechatId ? `<button type="button" class="pill" data-wechat-id="${esc(c.wechatId)}" data-copied="${esc(bare(c.copied))}" data-label-phone="${esc(c.copyWechat)}" data-label-desktop="${esc(c.copyOnly)}" hidden>${esc(c.copyWechat)}</button>` : ''}<a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
 <p class="closing-line reveal"><span class="closing-lead">${T(c, bare(c.closing[0]))}</span>${T(c, c.closing[1])}</p>
 </section>`;
 }
