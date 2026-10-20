@@ -269,32 +269,32 @@
     "720": {
       "src": "/assets/media/site-voiceflow-card-720.webp",
       "w": 720,
-      "h": 450,
-      "kb": 8
+      "h": 338,
+      "kb": 7
     }
   },
   "site-wanxiang-card": {
     "720": {
       "src": "/assets/media/site-wanxiang-card-720.webp",
       "w": 720,
-      "h": 450,
-      "kb": 8
+      "h": 293,
+      "kb": 7
     }
   },
   "site-ai-signal-card": {
     "720": {
       "src": "/assets/media/site-ai-signal-card-720.webp",
       "w": 720,
-      "h": 450,
-      "kb": 17
+      "h": 341,
+      "kb": 13
     }
   },
   "site-vibecoding-card": {
     "720": {
       "src": "/assets/media/site-vibecoding-card-720.webp",
       "w": 720,
-      "h": 450,
-      "kb": 12
+      "h": 383,
+      "kb": 10
     }
   }
 }

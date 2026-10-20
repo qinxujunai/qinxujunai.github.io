@@ -16,6 +16,8 @@ const esc = (s) =>
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names and fixed phrases stay whole.
 const KEEP = [
+  '按 F2 说话，文字直接打在光标处', '最后 4 张是实拍', 'AI 视频工具',
+  '文章链接', '写成了一个网站', '零基础也能读', '值得看的', '一页读完', '里面的文字', '文字直接打在光标处',
   '让 AI 负责拆解、生成与验证', '让人守住目标、边界与品味', '用自然语言', '创造可运行的作品',
   '云南妙妙屋', '几分钟读完', '先读读我的方法', '我是秦徐俊', '做 AI 产品', '内容和运营', '人为什么会用它', '先立边界', '约 18 分钟读完', '读完就能动手', '做 AI 产品', '为什么会用', '一个东西', '剪贴板没核对过', '不算送达', '完整录音', '链接由代码回填', '写不出假链接', '不用显卡', '人台照', '模特图', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
   'AI 进化得越快', '我们越需要慢下来',
@@ -36,7 +38,7 @@ function zhText(s) {
     .replace(/(\d)<wbr>([–\-./:→])/g, '$1$2').replace(/([–\-./:])<wbr>(\d)/g, '$1$2') // "2026-10-19", "0–10"
     .replace(/<wbr>([，。、；：！？）」』”])/g, '$1')
     .replace(/([（「『“])<wbr>/g, '$1')
-    .replace(/<wbr>\s<wbr>/g, ' ');
+    .replace(/<wbr>(\s)<wbr>/g, '$1');
 }
 const T = (c, s) => (c.lang === 'zh-CN' ? zhText(s) : esc(s));
 // Keep a date such as 2026-10-19 on one line.
@@ -202,6 +204,8 @@ const hostPath = (url) => url.replace(/^https?:\/\//, '').replace(/\?.*$/, '').r
 
 // Headlines and one-line copy carry no closing full stop (his rule: fewer marks, easier on the eye).
 const bare = (s) => String(s).replace(/[。.]\s*$/, '');
+// In a list like 「A · B · C」 a line may break after a dot, never before it.
+const dots = (s) => String(s).replace(/ · /g, '\u00a0· ');
 
 // A project's own website in a browser window: a thin address bar with the real URL, then the page.
 // Phones get a fixed 16:10 crop of the same desktop page (no phone frame: these are not phone apps).
@@ -228,7 +232,7 @@ ${line ? `<p class="show-line">${T(c, bare(line))}</p>` : ''}
 </div>
 ${frame(c, { key: image.key, alt, url: site, name, first: pin })}
 <div class="show-foot">
-${note ? `<p class="show-note">${T(c, bare(note))}</p>` : ''}
+${note ? `<p class="show-note">${T(c, dots(bare(note)))}</p>` : ''}
 <p class="cta"><a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}</p>
 </div>
 </div>
@@ -280,7 +284,7 @@ function visual(c) {
 ${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}${p.caption ? `<figcaption>${T(c, bare(p.caption))}</figcaption>` : ''}</figure></li>`).join('\n')}
 </ul>
 <div class="show-foot">
-<p class="show-note">${T(c, bare(v.note))}</p>
+<p class="show-note"><span class="touch">${T(c, v.swipe)} · </span>${T(c, dots(bare(v.note)))}</p>
 <p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
 </div>
 </div>
@@ -295,18 +299,18 @@ ${visual(c)}
 </section>`;
 }
 
-// 想法: one block. His own line lights up as it scrolls by, one plain sentence, then the site itself.
+// 想法: the same shape as a work. Eyebrow, name, one plain line, the site, then facts and the link.
 function share(c) {
   const s = c.share;
   return `<section id="share" class="tile dark share" aria-labelledby="share-title">
-<div class="statement" data-statement>
+<div class="show-head">
 <p class="eyebrow">${s.title}</p>
-<h2 class="pull" id="share-title">${statement(c, bare(s.quote))}</h2>
+<h2 class="show-name" id="share-title">${esc(s.name)}</h2>
 <p class="show-line">${T(c, bare(s.intro))}</p>
 </div>
 ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', url: VIBECODING, name: s.name })}
 <div class="show-foot">
-<p class="show-note">${T(c, bare(s.note))}</p>
+<p class="show-note">${T(c, dots(bare(s.note)))}</p>
 <p class="cta"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.link)}${chevron}<span class="visually-hidden"> ${esc(s.name)}</span></a></p>
 </div>
 </section>`;
@@ -336,9 +340,8 @@ function contact(c) {
 </div>
 <div class="namecard-stage">
 <div class="namecard" role="group" aria-label="${esc(c.cardLabel)}" data-tilt>
-<div class="nc-top">${signatureRef('nc-sig')}${img('avatar', '', { sizes: '56px', cls: 'nc-avatar' })}</div>
-<div class="nc-bottom">
-<p class="nc-role">${T(c, bare(c.role))}</p>
+<div class="nc-card-row">
+<div class="nc-left">${signatureRef('nc-sig')}<p class="nc-role">${T(c, bare(c.role))}</p></div>
 <div class="nc-qr"><img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async"></div>
 </div>
 </div>
@@ -355,7 +358,7 @@ function caseCard(c, cs) {
   return `<article class="card-tile product-card reveal">
 <p class="eyebrow">${esc(t.name)}</p>
 <h3><a href="${casePath(c, cs.slug)}">${T(c, bare(t.line))}</a></h3>
-<p class="card-line">${T(c, bare(t.note))}</p>
+<p class="card-line">${T(c, dots(bare(t.note)))}</p>
 <p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
 </article>`;
 }
