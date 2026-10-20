@@ -17,10 +17,10 @@ export const CASES = [
     image: { key: 'voiceflow-app', mobile: 'voiceflow-app-m' },
     zh: {
       name: 'VoiceFlow',
-      kind: '产品 · 独立开发',
-      title: '说完就上屏，一个字都不丢。',
-      sub: 'Windows 离线语音输入，为每天和 AI 长对话的人而做：光标在哪，就在哪说话；录音和识别都不离开自己的电脑。',
-      card: '离线语音输入。按 F2 说话，文字直接出现在光标处。',
+      kind: '',
+      title: '按一下，说话，文字就出现在光标处。',
+      sub: 'Windows 上的语音输入。全部在你自己的电脑上完成，不联网，不登录。我写它，是因为和 AI 说的话常常比打的字多。',
+      card: 'Windows 上的语音输入，全部在自己的电脑上完成。',
       imageAlt: 'VoiceFlow 的主界面：已就绪、快捷键、试说一句和最近听写',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
@@ -37,14 +37,14 @@ export const CASES = [
       ],
       sections: [
         {
-          h: '为什么要做',
+          h: '为什么做',
           p: [
             '和 AI 对话时，真正花时间的往往不是那句指令，而是补充背景、解释约束、继续追问。这些话常常比指令本身长得多，打字成了瓶颈。',
             '现有的语音输入大多要联网、要登录，长段落容易丢掉结尾，识别完还得从另一个窗口复制回来。我想要的很简单：光标在哪，就在哪说；说完，文字就在那里。',
           ],
         },
         {
-          h: '难在哪里',
+          h: '难的地方',
           list: [
             '快和准互相拉扯。边说边出字，需要一个流式小模型，但它不够准；准的模型，要等完整的音频。',
             '发出 Ctrl+V 不等于文字送到了。目标窗口可能换了，剪贴板可能被占用，权限可能不够。',
@@ -53,14 +53,14 @@ export const CASES = [
           ],
         },
         {
-          h: '边界',
+          h: '做什么，不做什么',
           scope: {
             do: ['快捷键触发的日常输入', '中文、英文和中英混说', '本机识别，安装后离线可用，无需登录', '自定义术语和明确纠错'],
             dont: ['会议记录和说话人区分', '靠云端改写、润色', '没有足够语料之前，宣称准确率优于其他产品'],
           },
         },
         {
-          h: '架构',
+          h: '怎么搭的',
           flow: [
             { t: '界面进程（Qt）', n: ['所有操作走同一个入口', '全局热键 F2，先于模型启动', '原生绘制的录音胶囊', '交付与本地历史'] },
             { t: '三个受监督的子进程', n: ['录音进程：采集麦克风，同时留一份可恢复的录音', '预览进程：流式模型，边说边出字', '识别进程：SenseVoice 读完整段录音，出终稿'] },
@@ -85,7 +85,7 @@ export const CASES = [
           },
         },
         {
-          h: '怎么证明它可靠',
+          h: '怎么知道它靠得住',
           p: ['v0.3.1 发布机实测（Windows 11 · Ryzen 7 5800H），每一档 20 个样本，取 P95：'],
           metrics: [
             { v: '6 ms', l: '按下 F2 到第一帧反馈', g: '门槛 ≤ 50 ms' },
@@ -102,7 +102,7 @@ export const CASES = [
           after: ['这些是延迟和机制的证据，不是准确率。项目的规矩：没有足够的授权真实语料，就不对外宣称准确率。'],
         },
         {
-          h: '时间线',
+          h: '经过',
           timeline: [
             ['2026.05.23', '第一次提交'],
             ['2026.07.04', 'v0.1.0 发布'],
@@ -113,7 +113,7 @@ export const CASES = [
           ],
         },
         {
-          h: '还差什么',
+          h: '还没做好的',
           list: [
             '安装包还没有代码签名，Windows 会弹出安全提示。',
             '正式版只支持 Windows 10 / 11。',
@@ -125,10 +125,10 @@ export const CASES = [
     },
     en: {
       name: 'VoiceFlow',
-      kind: 'Product · built solo',
-      title: 'Say it, and it’s on the screen. Every word.',
-      sub: 'Offline voice typing for Windows, made for people who talk to AI all day: speak wherever the cursor is, and your audio never leaves your computer.',
-      card: 'Offline voice typing. Press F2, speak, and the text lands at your cursor.',
+      kind: '',
+      title: 'Press a key, talk, and the words appear at your cursor.',
+      sub: 'Voice typing for Windows. Everything happens on your own computer: no internet, no account. I built it because I say more to AI than I type.',
+      card: 'Voice typing for Windows, entirely on your own computer.',
       imageAlt: 'VoiceFlow main window (in Chinese): ready state, hotkeys, a test dictation box and recent history',
       facts: [
         ['Role', 'Solo: product, design, engineering, release'],
@@ -145,14 +145,14 @@ export const CASES = [
       ],
       sections: [
         {
-          h: 'Why build it',
+          h: 'Why I built it',
           p: [
             'When you work with AI, the instruction is rarely the long part. The context, the constraints and the follow-up questions are. Typing becomes the bottleneck.',
             'Most voice input needs a network and an account, drops the end of long passages, and leaves you copying text back from another window. I wanted something simpler: speak where the cursor is, and find the words there when you stop.',
           ],
         },
         {
-          h: 'What made it hard',
+          h: 'The hard parts',
           list: [
             'Speed and accuracy pull against each other. Live text needs a small streaming model, which is less accurate; the accurate model needs the whole recording.',
             'Sending Ctrl+V is not the same as delivering text. The window may have changed, the clipboard may be busy, permissions may block it.',
@@ -161,14 +161,14 @@ export const CASES = [
           ],
         },
         {
-          h: 'Scope',
+          h: 'What it does, and doesn’t',
           scope: {
             do: ['Everyday input from a hotkey', 'Chinese, English and both mixed', 'On-device recognition, offline after install, no account', 'Custom terms and explicit corrections'],
             dont: ['Meeting notes or speaker separation', 'Cloud rewriting or polishing', 'Claims of beating other products before there is enough speech data'],
           },
         },
         {
-          h: 'Architecture',
+          h: 'How it’s built',
           flow: [
             { t: 'UI process (Qt)', n: ['One entry point for every action', 'Global F2 hotkey, live before the models load', 'Natively painted recording capsule', 'Delivery and local history'] },
             { t: 'Three supervised workers', n: ['Recording: the microphone, plus a recoverable copy', 'Preview: a streaming model, text as you speak', 'Recognition: SenseVoice reads the whole clip for the final text'] },
@@ -193,7 +193,7 @@ export const CASES = [
           },
         },
         {
-          h: 'How I know it holds up',
+          h: 'How I know it works',
           p: ['Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:'],
           metrics: [
             { v: '6 ms', l: 'F2 to first feedback', g: 'Gate ≤ 50 ms' },
@@ -210,7 +210,7 @@ export const CASES = [
           after: ['This is evidence about latency and mechanics, not accuracy. The project’s rule: no accuracy claims without enough authorized real speech.'],
         },
         {
-          h: 'Timeline',
+          h: 'How it went',
           timeline: [
             ['2026.05.23', 'First commit'],
             ['2026.07.04', 'v0.1.0 released'],
@@ -221,7 +221,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What’s still missing',
+          h: 'Not done yet',
           list: [
             'The installer is not code-signed yet, so Windows shows a warning.',
             'The release supports Windows 10 and 11 only.',
@@ -243,10 +243,10 @@ export const CASES = [
     image: { key: 'ai-signal', mobile: 'ai-signal-m' },
     zh: {
       name: 'AI Signal',
-      kind: '产品 · 独立开发',
-      title: '几百条 AI 资讯里，替我挑出值得看的那几条。',
-      sub: '一份每天自动运行的 AI 简报：七类信源，DeepSeek 按写死的编辑标准挑选，3 分钟读完，早上十点进邮箱。',
-      card: '每天自动运行的 AI 简报。模型只能引用编号，链接和数字由代码回填，一个都编不出来。',
+      kind: '',
+      title: '每天早上一封邮件，3 分钟读完今天的 AI。',
+      sub: '它每天替我读 X、Hacker News、论文和各家实验室的博客，只留下值得看的，早上十点发到邮箱。',
+      card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
       imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
       facts: [
         ['角色', '独立开发'],
@@ -263,14 +263,14 @@ export const CASES = [
       ],
       sections: [
         {
-          h: '为什么要做',
+          h: '为什么做',
           p: [
             'AI 的信息太多了：推文、播客、博客、论文、GitHub，每天几百条，真正值得看的不到 5 条。刷信息流费时间，还容易被情绪和噪音带着走。',
             '我想要一位靠谱的编辑：每天替我读一遍，只留下会改变判断的东西，3 分钟读完。',
           ],
         },
         {
-          h: '难在哪里',
+          h: '难的地方',
           list: [
             '模型会编。让它自己写链接和数字，迟早会出现一个看起来很真的假链接。',
             '同一件事会在博客、Hacker News 和推文里同时出现，不合并就是重复。',
@@ -279,14 +279,14 @@ export const CASES = [
           ],
         },
         {
-          h: '边界',
+          h: '做什么，不做什么',
           scope: {
             do: ['聚合公开信源', '按写死的编辑标准挑选、合并、改写', '每天一封邮件和一期网页版，每条都附原文'],
             dont: ['需要 X、YouTube 的 API key', '做 App 和账号体系', '追踪读者：没有像素，没有点击统计'],
           },
         },
         {
-          h: '架构',
+          h: '怎么搭的',
           flow: [
             { t: '收集', n: ['X 上的 builder、播客（follow-builders）', 'OpenAI、DeepMind、Google AI、Hugging Face 官方博客', 'Hacker News：36 小时内、60 分以上', 'Hugging Face 论文热榜、GitHub 今日趋势、量子位', '去掉 60 天内发过的'] },
             { t: '编号', n: ['每条素材一个编号：H3、P1、G2…'] },
@@ -313,7 +313,7 @@ export const CASES = [
           },
         },
         {
-          h: '怎么证明它可靠',
+          h: '怎么知道它靠得住',
           list: [
             'v3 第一期（2026-10-20）从 60 条新内容里选出 30 条，自动发信，并发布网页版和往期。',
             '链接和数字全部来自原始数据；模型引用了不存在的编号，这条就不会出现。',
@@ -322,7 +322,7 @@ export const CASES = [
           ],
         },
         {
-          h: '时间线',
+          h: '经过',
           timeline: [
             ['2026.05', '第一版：follow-builders 的推文和播客，LLM 策展，邮件送达'],
             ['2026.05.22', 'v2：加入 Hacker News、ArXiv、GitHub、中文媒体'],
@@ -331,7 +331,7 @@ export const CASES = [
           ],
         },
         {
-          h: '还差什么',
+          h: '还没做好的',
           list: [
             '推文和播客仍依赖第三方的 follow-builders feed，它一停，这两类就会断。',
             'Reddit 拒绝自动化请求，社区讨论目前只有 Hacker News。',
@@ -343,10 +343,10 @@ export const CASES = [
     },
     en: {
       name: 'AI Signal',
-      kind: 'Product · built solo',
-      title: 'Hundreds of AI headlines a day. It keeps the few worth reading.',
-      sub: 'A daily AI briefing that runs itself: seven kinds of sources, DeepSeek editing to a fixed brief, three minutes to read, in the inbox at 10 a.m.',
-      card: 'A daily AI briefing. The model may only cite IDs; links and numbers are filled in by code, so none can be made up.',
+      kind: '',
+      title: 'One email each morning: today’s AI in three minutes.',
+      sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, and sends it at 10 a.m.',
+      card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
       imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
       facts: [
         ['Role', 'Built solo'],
@@ -363,14 +363,14 @@ export const CASES = [
       ],
       sections: [
         {
-          h: 'Why build it',
+          h: 'Why I built it',
           p: [
             'There is too much AI news: posts, podcasts, blogs, papers, GitHub. Hundreds of items a day, and fewer than five worth reading. Scrolling a feed costs time and lets noise set the mood.',
             'I wanted a dependable editor: someone who reads everything each day and keeps only what would change a decision, in three minutes.',
           ],
         },
         {
-          h: 'What made it hard',
+          h: 'The hard parts',
           list: [
             'Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.',
             'The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.',
@@ -379,14 +379,14 @@ export const CASES = [
           ],
         },
         {
-          h: 'Scope',
+          h: 'What it does, and doesn’t',
           scope: {
             do: ['Aggregate public sources', 'Select, merge and rewrite to a fixed editorial brief', 'One email and one web issue a day, every item linked'],
             dont: ['Require X or YouTube API keys', 'Build an app or accounts', 'Track readers: no pixels, no click counting'],
           },
         },
         {
-          h: 'Architecture',
+          h: 'How it’s built',
           flow: [
             { t: 'Collect', n: ['Builders on X and podcasts (follow-builders)', 'OpenAI, DeepMind, Google AI, Hugging Face blogs', 'Hacker News: last 36 h, 60+ points', 'HF Daily Papers, GitHub Trending, QbitAI', 'Drop anything sent in the last 60 days'] },
             { t: 'Number', n: ['Every item gets an ID: H3, P1, G2…'] },
@@ -413,7 +413,7 @@ export const CASES = [
           },
         },
         {
-          h: 'How I know it holds up',
+          h: 'How I know it works',
           list: [
             'The first v3 issue (2026-10-20) picked 30 of 60 new items, went out by email, and published a web edition and archive.',
             'Every link and number comes from the raw data; an item that cites an unknown ID never appears.',
@@ -422,7 +422,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'Timeline',
+          h: 'How it went',
           timeline: [
             ['2026.05', 'First version: follow-builders posts and podcasts, LLM curation, email'],
             ['2026.05.22', 'v2: Hacker News, ArXiv, GitHub and Chinese media added'],
@@ -431,7 +431,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What’s still missing',
+          h: 'Not done yet',
           list: [
             'Posts and podcasts still depend on the third-party follow-builders feed.',
             'Reddit refuses automated requests, so community discussion comes only from Hacker News.',
@@ -452,10 +452,10 @@ export const CASES = [
     image: { key: 'wanxiang', mobile: 'wanxiang-m' },
     zh: {
       name: '万象成文',
-      kind: '产品 · 独立开发',
-      title: '一个链接进去，可用的文字出来。',
-      sub: '把公开视频、播客、图文链接和本地音视频，整理成能读、能复制、能下载的文字与媒体。Windows 本地优先。',
-      card: '视频、播客、图文，一个链接变成可用的文字和原始媒体。',
+      kind: '',
+      title: '贴一个链接，拿回一篇文字。',
+      sub: '视频、播客、图文都行，本地的音视频也可以。Windows 版，在你自己的电脑上处理。',
+      card: '视频、播客、图文都行。',
       imageAlt: '万象成文首页：把链接或文件，直接变成文字。下面是粘贴链接的输入框',
       facts: [
         ['角色', '独立开发'],
@@ -472,14 +472,14 @@ export const CASES = [
       ],
       sections: [
         {
-          h: '为什么要做',
+          h: '为什么做',
           p: [
             '好内容散落在视频、播客和图文里，可工作需要的是文字：能检索、能引用、能交给 AI。现有的办法往往要装好几个工具，再在它们之间来回复制。',
             '万象成文只解决这一件事：给它一个链接或一个文件，拿回可用的文字和原始媒体。',
           ],
         },
         {
-          h: '难在哪里',
+          h: '难的地方',
           list: [
             '每个平台的结构都不一样，而且经常变；抖音和小红书还会在会话或网络受限时拦截。',
             '转写又慢又吃机器，不能要求每个人都有显卡。',
@@ -487,14 +487,14 @@ export const CASES = [
           ],
         },
         {
-          h: '边界',
+          h: '做什么，不做什么',
           scope: {
             do: ['音频、视频转文字', '图文链接提取正文和图片', '预览并下载原视频、原音频、图片和文本'],
             dont: ['账号体系', '支付、套餐、积分', '多工作台、Agent 后台', '平台化配置中心'],
           },
         },
         {
-          h: '架构',
+          h: '怎么搭的',
           flow: [
             { t: '桌面外壳', n: ['Tauri 2（Rust）+ React', '首次运行只准备必要组件，约 222 MB', '运行包校验 SHA-256'] },
             { t: '本地服务', n: ['FastAPI，随应用启动', '只监听随机的本机端口', '每次启动生成短期令牌', 'SSE 实时推送进度'] },
@@ -516,7 +516,7 @@ export const CASES = [
           },
         },
         {
-          h: '怎么证明它可靠',
+          h: '怎么知道它靠得住',
           list: [
             '2026-08-11 用真实样本跑了一轮线上冒烟测试：B 站、小宇宙、抖音、公众号通过；小红书一篇 15 张图、14 个 Live 片段的图文通过。',
             '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
@@ -525,7 +525,7 @@ export const CASES = [
           ],
         },
         {
-          h: '还差什么',
+          h: '还没做好的',
           list: [
             '安装包还没有代码签名，Windows 会弹出安全提示。',
             '小红书的视频样本目前会触发平台的会话验证；YouTube 在国内网络下经常超时。',
@@ -536,10 +536,10 @@ export const CASES = [
     },
     en: {
       name: 'Wanxiang',
-      kind: 'Product · built solo',
-      title: 'Paste a link. Get usable text back.',
-      sub: 'Turns public videos, podcasts, articles and local recordings into text and media you can read, copy and download. Local-first, for Windows.',
-      card: 'Videos, podcasts and articles: one link in, usable text and original media out.',
+      kind: '',
+      title: 'Paste a link, get the text back.',
+      sub: 'Videos, podcasts and articles all work, and so do local recordings. A Windows app that does the work on your own computer.',
+      card: 'Videos, podcasts and articles all work.',
       imageAlt: 'Wanxiang home screen (in Chinese): turn a link or a file straight into text, with a box to paste a link',
       facts: [
         ['Role', 'Built solo'],
@@ -556,14 +556,14 @@ export const CASES = [
       ],
       sections: [
         {
-          h: 'Why build it',
+          h: 'Why I built it',
           p: [
             'Good material lives in videos, podcasts and articles, but work runs on text: something you can search, quote and hand to an AI. Getting it usually means several tools and a lot of copying between them.',
             'Wanxiang does one thing: give it a link or a file, and get usable text and the original media back.',
           ],
         },
         {
-          h: 'What made it hard',
+          h: 'The hard parts',
           list: [
             'Every platform is structured differently and changes often; Douyin and Xiaohongshu block requests when a session or network looks wrong.',
             'Transcription is slow and hardware-hungry, and not everyone has a GPU.',
@@ -571,14 +571,14 @@ export const CASES = [
           ],
         },
         {
-          h: 'Scope',
+          h: 'What it does, and doesn’t',
           scope: {
             do: ['Transcribe audio and video', 'Extract article text and images', 'Preview and download original video, audio, images and text'],
             dont: ['Accounts', 'Payments, plans or credits', 'Workspaces or an agent console', 'A platform-style settings center'],
           },
         },
         {
-          h: 'Architecture',
+          h: 'How it’s built',
           flow: [
             { t: 'Desktop shell', n: ['Tauri 2 (Rust) + React', 'First run fetches only what it needs, about 222 MB', 'Runtime packs verified by SHA-256'] },
             { t: 'Local service', n: ['FastAPI, launched with the app', 'Listens only on a random local port', 'A short-lived token per launch', 'Progress streamed over SSE'] },
@@ -600,7 +600,7 @@ export const CASES = [
           },
         },
         {
-          h: 'How I know it holds up',
+          h: 'How I know it works',
           list: [
             'A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.',
             'Each platform’s status is published with the date of its last check, not as a permanent promise.',
@@ -609,7 +609,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What’s still missing',
+          h: 'Not done yet',
           list: [
             'The installer is not code-signed yet, so Windows shows a warning.',
             'Xiaohongshu video samples currently trigger session checks; YouTube often times out on networks in mainland China.',
@@ -625,14 +625,12 @@ export const CASES = [
   {
     slug: 'enterprise-ai',
     kind: 'solution',
-    big: { zh: '100%', en: '100%' },
     zh: {
       name: '企业 AI 方案',
-      kind: '方案 · 比智科技',
-      title: '从第一次需求会，到 100% 回款。',
-      sub: '在比智科技做 AI 解决方案架构：帮金融、政企客户把“想用 AI”，变成能采购、能交付、能回款的项目。',
-      card: '数据智能与 AI 问数方案，从需求诊断一路跟到回款。',
-      bigLabel: '3 万–10 万+ 项目回款率',
+      kind: '工作 · 比智科技',
+      title: '给金融和政企客户做 AI 问数方案。',
+      sub: '在比智科技，我陪客户把“想用 AI”这件事想清楚：问题是什么，值不值得做，怎么采购，怎么上线。',
+      card: '从第一次聊需求，到项目上线和回款。',
       facts: [
         ['角色', 'AI 解决方案架构'],
         ['时间', '2025.11 起'],
@@ -643,14 +641,14 @@ export const CASES = [
       results: [
         { v: '5+', l: '客户进入采购评估' },
         { v: '100%', l: '负责项目的回款率' },
-        { v: '3 万–10 万+', l: '项目规模，全链路闭环' },
+        { v: '3 万–10 万+', l: '项目规模，从方案跟到回款' },
       ],
       sections: [
         {
           h: '客户的问题',
           p: [
             '“想用 AI”离“能采购”很远。中间隔着一串问题：业务痛点到底是什么，ROI 算不算得过来，交付边界在哪里，采购和合规怎么走。',
-            '我的工作，是把这些问题一个个答清楚，再把答案变成一个能签、能交、能收回款的项目。',
+            '我做的，就是陪客户把这些问题一个个想清楚，再一起把项目做出来。',
           ],
         },
         {
@@ -661,7 +659,7 @@ export const CASES = [
             { t: '方案', n: ['围绕数据平台、智能分析、AI 问数设计方案', '产品演示'] },
             { t: '选型', n: ['自研方案和外采产品一起评估', '能力 · 成本 · 交付周期 · ROI', '输出选型建议，推动决策链'] },
             { t: '招投标', n: ['材料梳理、资质准备', '政企采购准入与合规'] },
-            { t: '闭环', n: ['方案 → 合同 → 开票 → 回款', '协同销管、财务、法务'] },
+            { t: '收尾', n: ['方案 → 合同 → 开票 → 回款', '协同销管、财务、法务'] },
           ],
         },
         {
@@ -677,11 +675,10 @@ export const CASES = [
     },
     en: {
       name: 'Enterprise AI solutions',
-      kind: 'Solution · Bizhi Technology',
-      title: 'From first meeting to full payment.',
-      sub: 'As an AI solution architect at Bizhi Technology, I helped finance and government clients turn “we want AI” into projects that could be bought, delivered and paid for.',
-      card: 'Data-intelligence and natural-language-query solutions, followed from diagnosis to payment.',
-      bigLabel: 'Payment collected on ¥30k–100k+ projects',
+      kind: 'Work · Bizhi Technology',
+      title: 'Data-query AI for finance and government clients.',
+      sub: 'At Bizhi Technology I helped clients think “we want AI” through: what the problem is, whether it’s worth it, how to buy it, how to launch it.',
+      card: 'From the first conversation to launch and payment.',
       facts: [
         ['Role', 'AI Solution Architect'],
         ['When', 'From Nov 2025'],
@@ -699,7 +696,7 @@ export const CASES = [
           h: 'The client’s problem',
           p: [
             '“We want AI” is a long way from a purchase order. In between sit the real questions: what the business pain is, whether the ROI adds up, where delivery ends, and how procurement and compliance work.',
-            'My job was to answer those questions one by one, then turn the answers into a project that could be signed, delivered and paid for.',
+            'My part was to think those questions through with the client, one by one, and then build the project together.',
           ],
         },
         {
@@ -731,14 +728,12 @@ export const CASES = [
   {
     slug: 'script-agent',
     kind: 'solution',
-    big: { zh: '20 分钟', en: '20 min' },
     zh: {
       name: '飞书脚本智能体',
-      kind: '方案 · 一念智能',
-      title: '把 3 小时的脚本，压到 20 分钟。',
-      sub: '在一念智能，我为创始人 IP 搭起了公司第一个 AI 驱动的内容工作流。',
-      card: '拆解 50+ 个爆款案例，在飞书搭成脚本生成智能体。',
-      bigLabel: '写一条脚本，原来要 3 小时',
+      kind: '工作 · 一念智能',
+      title: '在飞书搭了一个写脚本的智能体。',
+      sub: '在一念智能，我把 50 多个爆款视频拆开，写成智能体的规则，团队用它写短视频脚本。',
+      card: '一条脚本从 3 小时变成 20 分钟。',
       facts: [
         ['角色', 'AI 项目负责人，AI 内容工作流负责人'],
         ['时间', '2024.08 – 2025.10'],
@@ -752,7 +747,7 @@ export const CASES = [
       ],
       sections: [
         {
-          h: '为什么要做',
+          h: '为什么做',
           p: ['创始人 IP 要持续出内容，可一条脚本要写 3 个小时。靠人堆，产量上不去，质量也不稳定。'],
         },
         {
@@ -776,11 +771,10 @@ export const CASES = [
     },
     en: {
       name: 'Feishu script agent',
-      kind: 'Solution · Yinian Intelligence',
-      title: 'A three-hour script, written in twenty minutes.',
-      sub: 'At Yinian Intelligence I built the company’s first AI-driven content workflow, for the founder’s personal brand.',
-      card: '50+ hit videos broken down and rebuilt as a script-writing agent in Feishu.',
-      bigLabel: 'Per script, down from three hours',
+      kind: 'Work · Yinian Intelligence',
+      title: 'A script-writing agent in Feishu.',
+      sub: 'At Yinian Intelligence I broke down 50-odd hit videos and turned them into an agent’s rules, so the team could write short-video scripts with it.',
+      card: 'One script went from three hours to twenty minutes.',
       facts: [
         ['Role', 'AI Project Lead; owner of the AI content workflow'],
         ['When', 'Aug 2024 – Oct 2025'],
@@ -794,7 +788,7 @@ export const CASES = [
       ],
       sections: [
         {
-          h: 'Why build it',
+          h: 'Why I built it',
           p: ['The founder’s brand needed a steady stream of content, and one script took three hours. More people would not fix the volume or the uneven quality.'],
         },
         {
@@ -823,14 +817,12 @@ export const CASES = [
   {
     slug: 'webank-rescue',
     kind: 'solution',
-    big: { zh: '5 天', en: '5 days' },
     zh: {
       name: '微众银行 AI 课程',
-      kind: '项目交付 · 一念智能',
-      title: '48 小时找到病因，5 天交完 30 天的量。',
-      sub: '一个 10.5 万元的 AI 课程项目，因为前期交付质量出了问题，客户信任受损、濒临违约。我临时接手。',
-      card: '10.5 万元的项目濒临违约。接手后 48 小时诊断，5 天交完 30 天的量。',
-      bigLabel: '完成原定 30 天的交付量',
+      kind: '工作 · 一念智能',
+      title: '接手一个快要出问题的 AI 课程项目。',
+      sub: '一个 10.5 万元的微众银行 AI 课程项目，前期交付出了问题，客户不满意。我中途接手。',
+      card: '两个人，五天，把剩下的课交完。',
       facts: [
         ['角色', '项目负责人，临时接手'],
         ['时间', '一念智能期间（2024.08 – 2025.10）'],
@@ -839,8 +831,8 @@ export const CASES = [
       ],
       results: [
         { v: '48 小时', l: '完成诊断，拿出补救方案' },
-        { v: '5 天', l: '完成原定 30 天的交付量' },
-        { v: '3 节', l: 'AI 赋能课程，全部交付' },
+        { v: '5 天', l: '做完原定 30 天的量' },
+        { v: '3 节', l: 'AI 课程，全部上完' },
         { v: '20–30 万', l: '级别的后续合作意向' },
       ],
       sections: [
@@ -853,7 +845,7 @@ export const CASES = [
           flow: [
             { t: '48 小时内', n: ['诊断问题出在哪里', '制定补救方案'] },
             { t: '重建信任', n: ['开线上会议，把问题和方案摆到桌面上', '重建沟通节奏'] },
-            { t: '交付', n: ['带 2 人小组', '5 天完成原定 30 天的量', '3 节 AI 赋能课程'] },
+            { t: '上课', n: ['带 2 人小组', '5 天完成原定 30 天的量', '3 节 AI 赋能课程'] },
             { t: '之后', n: ['修复客户关系', '推动企业 AI 化陪跑的后续合作'] },
           ],
         },
@@ -868,11 +860,10 @@ export const CASES = [
     },
     en: {
       name: 'WeBank AI course',
-      kind: 'Delivery · Yinian Intelligence',
-      title: '48 hours to find the problem. Five days to deliver a month of work.',
-      sub: 'A ¥105,000 AI training project for WeBank was close to default after early delivery problems had cost the client’s trust. I was brought in to take it over.',
-      card: 'A ¥105,000 project close to default: diagnosed in 48 hours, 30 days of work delivered in five.',
-      bigLabel: 'To deliver 30 days of planned work',
+      kind: 'Work · Yinian Intelligence',
+      title: 'Taking over an AI course project that was going wrong.',
+      sub: 'A ¥105,000 AI course for WeBank had run into delivery problems and an unhappy client. I took it over midway.',
+      card: 'Two people, five days, and the remaining sessions were done.',
       facts: [
         ['Role', 'Project lead, brought in mid-project'],
         ['When', 'At Yinian Intelligence (Aug 2024 – Oct 2025)'],
