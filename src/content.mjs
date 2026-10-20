@@ -48,8 +48,8 @@ export const content = {
     portraitAlt: '秦徐俊的照片',
     // First screen (his choice, 2026-10-20): avatar, signature, this headline, the product list, two actions.
     lede: '我用 AI 做东西，也把做法分享出来。',
-    // his words: ai.vibecoding hero.subtitle (May 2026). The headline says what; this says why.
-    now: '让 AI 负责拆解、生成与验证，让你守住目标、边界与品味。',
+    // his words (ai.vibecoding hero.subtitle, May 2026), with 让你 → 让人 at his request: the home page speaks to everyone.
+    now: '让 AI 负责拆解、生成与验证，让人守住目标、边界与品味。',
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
@@ -167,7 +167,7 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
     lede: 'I build things with AI, and share how I do it.',
-    now: 'Let AI decompose, generate, and verify, while you protect the goal, boundaries, and taste.', // his words
+    now: 'Let AI decompose, generate, and verify, while people keep the goal, the boundaries, and the taste.', // his words, adapted
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
