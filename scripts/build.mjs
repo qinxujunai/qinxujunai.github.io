@@ -109,7 +109,7 @@ const other = (c) => content[c.lang === 'zh-CN' ? 'en' : 'zh'];
 const casePath = (c, slug) => `${c.path}work/${slug}/`;
 const caseOf = (slug) => CASES.find((x) => x.slug === slug);
 
-function head(c, { url, alt, title, description = c.description, noindex = false }) {
+function head(c, { url, alt, title, description = c.description, noindex = false, preload = [] }) {
   const zhUrl = alt?.zh;
   const enUrl = alt?.en;
   return `<!doctype html>
@@ -121,6 +121,7 @@ function head(c, { url, alt, title, description = c.description, noindex = false
 <meta name="description" content="${esc(description)}">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
+${preload.map((k) => `<link rel="preload" as="image" href="${Object.values(media[k])[0].src}">`).join('\n')}
 ${themeScript}
 <style>${css}</style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -180,9 +181,11 @@ function hero(c) {
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
 <h1 id="hero-title" class="rise" style="--d:.7s">${T(c, c.lede)}</h1>
-<p class="sub rise" style="--d:.85s">${T(c, c.now)}</p>
-<p class="cta rise" style="--d:1s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
-<p class="hook rise" style="--d:1.1s"><a href="${VIBECODING}" ${ext}>${T(c, c.hook)}${chevron}</a></p>
+<ul class="highlights">
+${[['voiceflow', 'VoiceFlow', '#voiceflow'], ['ai-signal', 'AI Signal', '#ai-signal'], ['wanxiang', c.lang === 'zh-CN' ? '万象成文' : 'Wanxiang', '#wanxiang'], ['vibecoding', 'ai.vibecoding', VIBECODING]]
+  .map(([k, name, href]) => `<li><a href="${href}"${href.startsWith('http') ? ` ${ext}` : ''}>${img(`hl-${k}`, '', { sizes: '200px', eager: true })}<span class="hl-name">${esc(name)}</span><span class="hl-what">${T(c, c.highlights[k])}</span></a></li>`).join('\n')}
+</ul>
+<p class="cta rise" style="--d:1s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a></p>
 </section>`;
 }
 
