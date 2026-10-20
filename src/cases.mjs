@@ -28,7 +28,7 @@ export const CASES = [
         ['形态', 'Windows 桌面应用，开源'],
         ['技术', 'Python · PyQt6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['官网', 'https://qinxujunai.github.io/VoiceFlow/'], ['源码', VF], ['下载', `${VF}/releases/latest`]],
+      links: [['官网', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
         { v: '427 ms', l: '停止到粘贴，P95（0–10 秒录音）' },
@@ -136,7 +136,7 @@ export const CASES = [
         ['Form', 'Windows desktop app, open source'],
         ['Stack', 'Python · PyQt6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['Website', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Source', VF], ['Download', `${VF}/releases/latest`]],
+      links: [['Website', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
         { v: '427 ms', l: 'Stop to paste, P95 (0–10 s clips)' },
@@ -254,7 +254,7 @@ export const CASES = [
         ['形态', '自动化工作流，开源'],
         ['技术', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['最新一期', 'https://qinxujunai.github.io/ai-signal/'], ['往期', 'https://qinxujunai.github.io/ai-signal/archive/'], ['源码', SIG]],
+      links: [['最新一期', 'https://qinxujunai.github.io/ai-signal/'], ['往期', 'https://qinxujunai.github.io/ai-signal/archive/']],
       results: [
         { v: '7 类', l: '信源：X、播客、官方博客、HN、论文、GitHub、中文媒体' },
         { v: '60 → 30', l: 'v3 第一期：60 条新内容里选出 30 条' },
@@ -354,7 +354,7 @@ export const CASES = [
         ['Form', 'Automated workflow, open source'],
         ['Stack', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['Latest issue', 'https://qinxujunai.github.io/ai-signal/'], ['Archive', 'https://qinxujunai.github.io/ai-signal/archive/'], ['Source', SIG]],
+      links: [['Latest issue', 'https://qinxujunai.github.io/ai-signal/'], ['Archive', 'https://qinxujunai.github.io/ai-signal/archive/']],
       results: [
         { v: '7', l: 'Source types: X, podcasts, lab blogs, HN, papers, GitHub, Chinese media' },
         { v: '60 → 30', l: 'First v3 issue: 30 picked from 60 new items' },
@@ -463,7 +463,7 @@ export const CASES = [
         ['形态', 'Windows 桌面应用，另有网页预览'],
         ['技术', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['官网', 'https://qinxujunai.github.io/Audio2Text/'], ['源码', A2T], ['下载', `${A2T}/releases/latest`]],
+      links: [['官网', 'https://qinxujunai.github.io/Audio2Text/'], ['下载', `${A2T}/releases/latest`]],
       results: [
         { v: '6 个', l: '平台：B 站、小宇宙、抖音、小红书、公众号、YouTube' },
         { v: '0.035', l: 'CPU 转写实时率 RTF，单样本探测（越小越快）' },
@@ -547,7 +547,7 @@ export const CASES = [
         ['Form', 'Windows desktop app, plus a web preview'],
         ['Stack', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['Website', 'https://qinxujunai.github.io/Audio2Text/'], ['Source', A2T], ['Download', `${A2T}/releases/latest`]],
+      links: [['Website', 'https://qinxujunai.github.io/Audio2Text/'], ['Download', `${A2T}/releases/latest`]],
       results: [
         { v: '6', l: 'Platforms: Bilibili, Xiaoyuzhou, Douyin, Xiaohongshu, WeChat articles, YouTube' },
         { v: '0.035', l: 'Real-time factor on CPU, single-sample probe (lower is faster)' },

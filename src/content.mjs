@@ -4,8 +4,8 @@
 
 export const SITE = 'https://qinxujunai.github.io';
 export const GITHUB = 'https://github.com/qinxujunai';
-// His May 2026 version, which the quotes come from. The live site was rewritten later and no longer carries them.
-export const VIBECODING = 'https://github.com/qinxujunai/qinxujun-ai-vibecoding/blob/367e746/src/content/site.tsx';
+// Links go to the project's live site, not its source (his request, 2026-10-20).
+export const VIBECODING = 'https://qinxujunai.github.io/qinxujun-ai-vibecoding/';
 
 // Photographs: his own. Landscapes, buildings and objects only.
 const photos = (alt) => [
@@ -63,7 +63,7 @@ export const content = {
     thinkingTitle: '思考',
     thinkingHeadline: 'AI 越强，人越要想清楚。',
     thinkingQuote: '让 AI 负责拆解、生成与验证，让你守住目标、边界与品味。', // his words
-    thinkingSource: ['摘自我 2026 年 5 月写的 ', 'ai.vibecoding 原文'],
+    thinkingSource: ['摘自我写的 ', 'ai.vibecoding'],
     abilitiesHeadline: '先想清楚，再让 AI 动手。',
     abilities: [
       {
@@ -98,7 +98,7 @@ export const content = {
       { name: '浏览器验收', en: 'Ship Review', body: '用真实浏览器检查页面、移动端宽度、复制、弹窗、外链与控制台日志，再提交、推送和部署。' },
     ],
     methodClosing: '这个网站也是这样做出来的：AI Agent 执行，我定方向、做验收。',
-    methodLink: '读 5 月版原文（GitHub）',
+    methodLink: '访问 ai.vibecoding',
     vibecodingAlt: 'ai.vibecoding 首屏的 Claude Code 终端：先访谈、再计划、最后实现并验证',
 
     pathTitle: '经历',
@@ -201,7 +201,7 @@ export const content = {
     thinkingTitle: 'Thinking',
     thinkingHeadline: 'The stronger AI gets, the clearer we have to think.',
     thinkingQuote: 'Let AI decompose, generate, and verify, while you protect the goal, boundaries, and taste.', // his words
-    thinkingSource: ['From the May 2026 text of ', 'ai.vibecoding', ', which I wrote'],
+    thinkingSource: ['From ', 'ai.vibecoding', ', which I wrote'],
     abilitiesHeadline: 'Think it through. Then let AI do the work.',
     abilities: [
       {
@@ -236,7 +236,7 @@ export const content = {
       { name: 'Ship Review', en: '', body: 'Check the real browser, mobile width, copy actions, modals, links, and console logs before committing or deploying.' },
     ],
     methodClosing: 'This site was made the same way: an AI agent did the work; I set the direction and signed off on it.',
-    methodLink: 'Read the May 2026 original on GitHub',
+    methodLink: 'Visit ai.vibecoding',
     vibecodingAlt: 'The Claude Code terminal on ai.vibecoding: interview first, then plan, then build and verify',
 
     pathTitle: 'Path',
