@@ -178,14 +178,13 @@ function footer(c) {
 
 function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
+${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' })}
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
-<h1 id="hero-title" class="rise" style="--d:.7s">${T(c, c.lede)}</h1>
-<ul class="highlights">
-${[['voiceflow', 'VoiceFlow', '#voiceflow'], ['ai-signal', 'AI Signal', '#ai-signal'], ['wanxiang', c.lang === 'zh-CN' ? '万象成文' : 'Wanxiang', '#wanxiang'], ['vibecoding', 'ai.vibecoding', VIBECODING]]
-  .map(([k, name, href]) => `<li><a href="${href}"${href.startsWith('http') ? ` ${ext}` : ''}>${img(`hl-${k}`, '', { sizes: '200px', eager: true })}<span class="hl-name">${esc(name)}</span><span class="hl-what">${T(c, c.highlights[k])}</span></a></li>`).join('\n')}
-</ul>
-<p class="cta rise" style="--d:1s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a></p>
+<p class="visually-hidden">${esc(c.name)}</p>
+<h1 id="hero-title" class="rise" style="--d:.5s">${T(c, c.lede)}</h1>
+<p class="sub rise" style="--d:.65s">${T(c, c.now)}</p>
+<p class="cta rise" style="--d:.8s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
 </section>`;
 }
 
