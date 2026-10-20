@@ -411,8 +411,8 @@ main {
 /* Hero */
 
 .hero {
-  padding-top: 56px;
-  padding-bottom: 40px;
+  padding-top: 32px;
+  padding-bottom: 32px;
   background: var(--plain);
 }
 
@@ -421,11 +421,11 @@ main {
 }
 
 .hero h1 {
-  max-width: 17em;
+  max-width: 11em;
   margin: 0 auto;
-  font-size: 21px;
-  line-height: 1.45;
-  font-weight: 500;
+  font-size: min(48px, 8.6vw);
+  line-height: 1.12;
+  font-weight: 600;
   letter-spacing: -0.005em;
 }
 
@@ -435,7 +435,7 @@ main {
 
 .hero .sub {
   max-width: 24em;
-  margin-top: 16px;
+  margin-top: 20px;
   color: var(--muted);
   font-size: 17px;
 }
@@ -446,7 +446,7 @@ main {
 
 .hero .sig {
   display: block;
-  height: 76px;
+  height: 60px;
   width: auto;
   margin: 0 auto;
   fill: var(--sig);
@@ -845,6 +845,16 @@ main {
   to { opacity: 1; transform: none; }
 }
 
+.avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--soft);
+  box-shadow: 0 0 0 1px var(--hairline), 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
 /* Home: one blue button per screen. The nav's WeChat button waits until the hero's has scrolled away. */
 .motion .home .nav-tools .pill {
   display: none;
@@ -858,63 +868,6 @@ main {
 @keyframes dock {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-/* First screen: one plain sentence, then the four pieces of work themselves (Apple's "highlights"). */
-.highlights {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  max-width: 980px;
-  margin: 28px auto 0;
-  text-align: left;
-}
-
-.highlights a {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border-radius: 18px;
-  overflow: hidden;
-  background: var(--soft);
-  color: var(--ink);
-  text-decoration: none;
-  box-shadow: 0 0 0 1px var(--hairline);
-}
-
-.highlights a:hover {
-  text-decoration: none;
-}
-
-.highlights img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: top;
-  background: #fff;
-  border-bottom: 1px solid var(--hairline);
-}
-
-.hl-name {
-  padding: 12px 14px 0;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.hl-what {
-  padding: 2px 14px 14px;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-
-@media (min-width: 734px) {
-  .highlights {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 40px;
-  }
 }
 
 /* Home: the small signature in the nav appears once the big one has scrolled away, as if it docked there. */
@@ -945,11 +898,12 @@ main {
   }
 
   .hero .sig {
-    height: 88px;
+    height: 72px;
   }
 
   .hero h1 {
-    font-size: 26px;
+    font-size: 64px;
+    line-height: 1.07;
   }
 
   .hero .sub {
@@ -1020,7 +974,8 @@ main {
   }
 
   .hero h1 {
-    font-size: 28px;
+    font-size: 68px;
+    line-height: 1.06;
   }
 
   .hero .sub {
@@ -1043,7 +998,7 @@ main {
   }
 
   .hero .sig {
-    height: 112px;
+    height: 92px;
   }
 
   .gallery {
