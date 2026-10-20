@@ -82,6 +82,10 @@ for (const [name, crop] of Object.entries(SITES)) {
     const w = Math.round((c.width || cssWidth) * k);
     await emit(out, file, { widths: widths.map((x) => Math.min(x, w)), quality, crop: { left: Math.round((c.left || 0) * k), top: 0, width: w, height: Math.min(Math.round(c.height * k), meta.height) } });
   }
+  // First-screen card: the top of the phone version, 4:3.
+  const m = find(new RegExp(`^site-${name}-m\\.`));
+  const mm = await sharp(m).metadata();
+  await emit(`hl-${name}`, m, { widths: [320], quality: 56, crop: { left: 0, top: 0, width: mm.width, height: Math.round(mm.width * 0.75) } });
 }
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.

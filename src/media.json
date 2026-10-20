@@ -296,5 +296,37 @@
       "h": 482,
       "kb": 32
     }
+  },
+  "hl-voiceflow": {
+    "320": {
+      "src": "/assets/media/hl-voiceflow-320.webp",
+      "w": 320,
+      "h": 240,
+      "kb": 5
+    }
+  },
+  "hl-wanxiang": {
+    "320": {
+      "src": "/assets/media/hl-wanxiang-320.webp",
+      "w": 320,
+      "h": 240,
+      "kb": 5
+    }
+  },
+  "hl-ai-signal": {
+    "320": {
+      "src": "/assets/media/hl-ai-signal-320.webp",
+      "w": 320,
+      "h": 240,
+      "kb": 7
+    }
+  },
+  "hl-vibecoding": {
+    "320": {
+      "src": "/assets/media/hl-vibecoding-320.webp",
+      "w": 320,
+      "h": 240,
+      "kb": 6
+    }
   }
 }
