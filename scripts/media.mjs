@@ -59,7 +59,7 @@ const find = (re) => {
 };
 
 // Portrait: a tight head-and-shoulders crop of the ID photo.
-await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80, crop: { left: 152, top: 70, width: 720, height: 720 } });
+await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80, crop: { left: 72, top: 0, width: 880, height: 880 } });
 
 // Products
 // Project websites, captured full-page from qinxujunai.github.io (same origin) by scripts/capture-sites.cjs.
