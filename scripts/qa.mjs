@@ -108,11 +108,12 @@ for (const cfg of matrix) {
   const lede = Date.now() - t0;
   await page.waitForLoadState('load');
   const load = Date.now() - t0;
+  // Read LCP and CLS for the first screen before scrolling: a reader's scroll ends LCP, a script's does not.
+  await page.waitForTimeout(500);
+  const { cls, lcp } = await page.evaluate(() => ({ cls: window.__cls, lcp: window.__lcp }));
   await page.locator('#contact').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => document.querySelector('.qr').complete && document.querySelector('.qr').naturalWidth > 0);
   const qr = Date.now() - t0;
-  await page.waitForTimeout(500);
-  const { cls, lcp } = await page.evaluate(() => ({ cls: window.__cls, lcp: window.__lcp }));
   const bytes = await page.evaluate(() => performance.getEntriesByType('resource').reduce((s, r) => s + (r.transferSize || 0), 0) + (performance.getEntriesByType('navigation')[0]?.transferSize || 0));
   check(lede < 3000, `slow 3G: intro readable after ${lede}ms`);
   check(lcp < 2500, `slow 3G: LCP ${Math.round(lcp)}ms`);

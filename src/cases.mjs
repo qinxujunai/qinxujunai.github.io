@@ -21,7 +21,9 @@ export const CASES = [
       title: '按一下，说话，文字就出现在光标处。',
       sub: 'Windows 上的语音输入。全程在本机完成，不联网，不用登录。',
       card: 'Windows 上的语音输入，全部在自己的电脑上完成。',
-      note: 'Windows · 离线 · 免登录',
+      // Home page: one plain line (what it does for you) above the picture, plain facts below it.
+      line: '在 Windows 上按 F2 说话，文字直接打在光标处',
+      note: 'Windows 10 / 11 · 装好后断网也能用 · 免费开源',
       // The judgement behind it, for the home page (from the sections below).
       why: '预览负责快，终稿只认完整录音；剪贴板没核对过，不算送达。',
       imageAlt: 'VoiceFlow 的官网：让想法成文。按一下，说出你的话。',
@@ -133,7 +135,8 @@ export const CASES = [
       title: 'Press a key, talk, and the words appear at your cursor.',
       sub: 'Voice typing for Windows. It all happens on your own computer: no internet, no account.',
       card: 'Voice typing for Windows, entirely on your own computer.',
-      note: 'Windows · Offline · No account',
+      line: 'Press F2 on Windows, speak, and the words appear at your cursor',
+      note: 'Windows 10 / 11 · Works offline after install · Free and open source',
       why: 'The live preview is for speed; the final text trusts only the full recording. Nothing counts as delivered until the clipboard is checked.',
       imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
       facts: [
@@ -254,7 +257,8 @@ export const CASES = [
       title: '每天早上一封邮件，看懂当天的 AI。',
       sub: '每天读一遍 X、Hacker News、论文和各大实验室的博客，只留下值得看的。上午 10 点发到我的邮箱，同一期也发布在网上。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
-      note: '每天 10:00 · 七类信源 · 每条都附原文',
+      line: '每天一页 AI 新闻摘要，每条都附原文',
+      note: '北京时间每天 10:00 更新 · 七类信源 · 往期都能翻',
       why: '模型只能引用编号，链接由代码回填，写不出假链接。',
       imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
       facts: [
@@ -357,7 +361,8 @@ export const CASES = [
       title: 'One email each morning. Today’s AI, understood.',
       sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs, and keeps only what’s worth reading. It reaches my inbox at 10 a.m., and the same issue goes up on the web.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
-      note: 'Daily at 10:00 · Seven kinds of sources · Every item linked',
+      line: 'The day’s AI news on one page, every item linked to its source',
+      note: 'Updated daily at 10:00 Beijing time · Seven kinds of sources · Full archive',
       why: 'The model may only cite item numbers; code fills in every link, so it cannot invent one.',
       imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
       facts: [
@@ -469,7 +474,8 @@ export const CASES = [
       title: '贴一个链接，拿回一篇文字。',
       sub: '视频、播客、图文链接，或者本地的音视频文件。Windows 版，全程在本机处理。',
       card: '视频、播客、图文都行。',
-      note: '视频 · 播客 · 图文 · 本机处理',
+      line: '贴一个视频、播客或文章链接，拿回整理好的文字',
+      note: 'B 站、小宇宙、公众号可用 · 本机处理，不用显卡',
       why: '能读字幕和正文，就不转写；不用显卡也能跑。',
       imageAlt: '万象成文的官网：把视频、播客和图文，直接变成可用的文字与媒体。',
       facts: [
@@ -555,7 +561,8 @@ export const CASES = [
       title: 'Paste a link, get the text back.',
       sub: 'Videos, podcasts and articles all work, and so do local recordings. A Windows app that does the work on your own computer.',
       card: 'Videos, podcasts and articles all work.',
-      note: 'Video · Podcasts · Articles · Processed on your own PC',
+      line: 'Paste a video, podcast or article link and get clean text back',
+      note: 'Works with Bilibili, Xiaoyuzhou and WeChat articles · Runs locally, no GPU needed',
       why: 'If there are subtitles or page text, it skips transcription. No GPU needed.',
       imageAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media.',
       facts: [
