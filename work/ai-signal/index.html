@@ -84,7 +84,7 @@
 </section>
 <section class="case-sec" id="s2" aria-labelledby="s2-title">
 <h2 id="s2-title">难<wbr>在<wbr>哪里</h2>
-<ul class="bullets"><li>模型<wbr>会<wbr>编。<wbr>让<wbr>它<wbr>自己<wbr>写<wbr>链<wbr>接<wbr>和<wbr>数字，<wbr>迟早<wbr>会<wbr>出现<wbr>一个<wbr>看起来<wbr>很<wbr>真的<wbr>假<wbr>链<wbr>接。</li><li>同<wbr>一件事<wbr>会<wbr>在<wbr>博<wbr>客、<wbr>Hacker News 和<wbr>推<wbr>文<wbr>里<wbr>同时<wbr>出现，<wbr>不<wbr>合并<wbr>就是<wbr>重复。</li><li>它<wbr>会<wbr>悄悄<wbr>停<wbr>掉。<wbr>2026-07-22 之后，<wbr>GitHub 因为<wbr>仓库 60 天<wbr>没有<wbr>新<wbr>提交，<wbr>暂停<wbr>了<wbr>定<wbr>时<wbr>任务；<wbr>简报<wbr>停<wbr>发<wbr>了<wbr>将近<wbr>三个月，<wbr>没有<wbr>任何<wbr>报<wbr>错。</li><li>旧<wbr>的<wbr>信<wbr>源<wbr>在<wbr>烂：<wbr>GitHub Trending 用<wbr>的<wbr>第三<wbr>方<wbr>接口<wbr>失效<wbr>了，<wbr>机器<wbr>之<wbr>心<wbr>的 RSS 也没<wbr>了，<wbr>旧<wbr>的<wbr>反馈<wbr>按钮<wbr>指向<wbr>一个 404 的<wbr>服务。</li></ul>
+<ul class="bullets"><li>模型<wbr>会<wbr>编。<wbr>让<wbr>它<wbr>自己<wbr>写<wbr>链<wbr>接<wbr>和<wbr>数字，<wbr>迟早<wbr>会<wbr>出现<wbr>一个<wbr>看起来<wbr>很<wbr>真的<wbr>假<wbr>链<wbr>接。</li><li>同<wbr>一件事<wbr>会<wbr>在<wbr>博<wbr>客、<wbr>Hacker News 和<wbr>推<wbr>文<wbr>里<wbr>同时<wbr>出现，<wbr>不<wbr>合并<wbr>就是<wbr>重复。</li><li>它<wbr>会<wbr>悄悄<wbr>停<wbr>掉。<wbr>2026-07-22 之后，<wbr>GitHub 因为<wbr>项目 60 天<wbr>没有<wbr>更新，<wbr>暂停<wbr>了<wbr>定<wbr>时<wbr>任务；<wbr>简报<wbr>停<wbr>发<wbr>了<wbr>将近<wbr>三个月，<wbr>没有<wbr>任何<wbr>报<wbr>错。</li><li>旧<wbr>的<wbr>信<wbr>源<wbr>在<wbr>烂：<wbr>GitHub Trending 用<wbr>的<wbr>第三<wbr>方<wbr>接口<wbr>失效<wbr>了，<wbr>机器<wbr>之<wbr>心<wbr>的 RSS 也没<wbr>了，<wbr>旧<wbr>的<wbr>反馈<wbr>按钮<wbr>指向<wbr>一个 404 的<wbr>服务。</li></ul>
 </section>
 <section class="case-sec" id="s3" aria-labelledby="s3-title">
 <h2 id="s3-title">边界</h2>
@@ -93,18 +93,18 @@
 <section class="case-sec" id="s4" aria-labelledby="s4-title">
 <h2 id="s4-title">架构</h2>
 <ol class="flow">
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>收集 · prepare<wbr>-<wbr>digest</p><ul><li>X 上<wbr>的 builder、<wbr>播<wbr>客<wbr>（follow<wbr>-<wbr>builders）</li><li>OpenAI、<wbr>DeepMind、<wbr>Google AI、<wbr>Hugging Face 官方<wbr>博<wbr>客</li><li>Hacker News：<wbr>36 小时<wbr>内、<wbr>60 分<wbr>以上</li><li>Hugging Face 论文<wbr>热<wbr>榜、<wbr>GitHub 今日<wbr>趋势、<wbr>量子<wbr>位</li><li>去掉 60 天内<wbr>发过<wbr>的</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>收集</p><ul><li>X 上<wbr>的 builder、<wbr>播<wbr>客<wbr>（follow<wbr>-<wbr>builders）</li><li>OpenAI、<wbr>DeepMind、<wbr>Google AI、<wbr>Hugging Face 官方<wbr>博<wbr>客</li><li>Hacker News：<wbr>36 小时<wbr>内、<wbr>60 分<wbr>以上</li><li>Hugging Face 论文<wbr>热<wbr>榜、<wbr>GitHub 今日<wbr>趋势、<wbr>量子<wbr>位</li><li>去掉 60 天内<wbr>发过<wbr>的</li></ul></li>
 <li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>编号</p><ul><li>每<wbr>条<wbr>素材<wbr>一个<wbr>编号：<wbr>H3、<wbr>P1、<wbr>G2<wbr>…</li></ul></li>
 <li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>编辑 · DeepSeek</p><ul><li>按<wbr>「三<wbr>问」<wbr>挑选，<wbr>多<wbr>来源<wbr>合并</li><li>只<wbr>输出 JSON，<wbr>只能<wbr>引用<wbr>编号</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">4</span>回填 · remix<wbr>-<wbr>digest</p><ul><li>代码<wbr>按<wbr>编号<wbr>填<wbr>回<wbr>链<wbr>接、<wbr>分数、<wbr>star 数</li><li>编号<wbr>不存在，<wbr>这<wbr>条<wbr>直接<wbr>丢弃</li><li>模型<wbr>失败：<wbr>按<wbr>热<wbr>度<wbr>排出<wbr>降级<wbr>版</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">5</span>送<wbr>达 · deliver</p><ul><li>邮件<wbr>主题<wbr>就是<wbr>当天<wbr>的<wbr>标题</li><li>网页<wbr>版<wbr>和<wbr>已<wbr>发<wbr>列表<wbr>提交<wbr>回<wbr>仓库</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">4</span>回填</p><ul><li>代码<wbr>按<wbr>编号<wbr>填<wbr>回<wbr>链<wbr>接、<wbr>分数、<wbr>star 数</li><li>编号<wbr>不存在，<wbr>这<wbr>条<wbr>直接<wbr>丢弃</li><li>模型<wbr>失败：<wbr>按<wbr>热<wbr>度<wbr>排出<wbr>降级<wbr>版</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">5</span>送<wbr>达</p><ul><li>邮件<wbr>主题<wbr>就是<wbr>当天<wbr>的<wbr>标题</li><li>同时<wbr>发布<wbr>网页<wbr>版<wbr>和<wbr>往<wbr>期</li></ul></li>
 </ol>
 <p>编辑<wbr>标准<wbr>写在<wbr>提示<wbr>词<wbr>里，<wbr>每<wbr>条<wbr>内容<wbr>必须<wbr>过<wbr>三<wbr>问：<wbr>读者<wbr>会<wbr>因为<wbr>这<wbr>条<wbr>信息<wbr>做出<wbr>不同<wbr>的<wbr>决策<wbr>吗？<wbr>这<wbr>是<wbr>新的<wbr>事实，<wbr>还是<wbr>噪音？<wbr>有<wbr>没有<wbr>具体<wbr>的<wbr>数字<wbr>或<wbr>名字？</p>
 <p>排版<wbr>参照 TLDR、<wbr>The Rundown 和 Axios：<wbr>一<wbr>栏，<wbr>标题<wbr>即<wbr>事实，<wbr>每<wbr>条<wbr>下面<wbr>一行<wbr>写<wbr>来源、<wbr>热<wbr>度<wbr>和<wbr>讨论<wbr>链<wbr>接；<wbr>论文<wbr>和<wbr>开<wbr>源<wbr>项目<wbr>用<wbr>两<wbr>栏<wbr>的<wbr>排行<wbr>列表。</p>
 </section>
 <section class="case-sec" id="s5" aria-labelledby="s5-title">
 <h2 id="s5-title">我<wbr>放弃<wbr>了<wbr>什么</h2>
-<ul class="choices"><li><h3>模型<wbr>只<wbr>引用<wbr>编号，<wbr>不<wbr>写<wbr>链<wbr>接</h3><p><span class="k">原因</span>链<wbr>接<wbr>和<wbr>数字<wbr>最<wbr>容易<wbr>被<wbr>编造；<wbr>由<wbr>代码<wbr>回填，<wbr>就<wbr>不可能<wbr>出<wbr>错</p><p><span class="k">放弃<wbr>的<wbr>方案</span>让<wbr>模型<wbr>直接<wbr>写，<wbr>再<wbr>事后<wbr>校<wbr>验</p></li><li><h3>每天<wbr>把<wbr>网页<wbr>版<wbr>提交<wbr>回<wbr>仓库</h3><p><span class="k">原因</span>既是<wbr>存档，<wbr>也<wbr>让<wbr>定<wbr>时<wbr>任务<wbr>不会<wbr>因为 60 天<wbr>无<wbr>活动<wbr>被<wbr>暂停</p><p><span class="k">放弃<wbr>的<wbr>方案</span>只发<wbr>邮件，<wbr>不留<wbr>痕迹</p></li><li><h3>去掉 👍 / 👎 和<wbr>追踪<wbr>像<wbr>素</h3><p><span class="k">原因</span>接收<wbr>反馈<wbr>的<wbr>服务<wbr>早已<wbr>返回 404，<wbr>留<wbr>着<wbr>就是<wbr>坏<wbr>链<wbr>接</p><p><span class="k">放弃<wbr>的<wbr>方案</span>假装<wbr>有<wbr>反馈<wbr>回路</p></li><li><h3>Hacker News 改用 Algolia，<wbr>按<wbr>整<wbr>词<wbr>匹配</h3><p><span class="k">原因</span>旧<wbr>做法<wbr>只看<wbr>首页 30 条，<wbr>按<wbr>子<wbr>串<wbr>匹配，<wbr>「said」<wbr>也<wbr>会<wbr>被<wbr>当成 AI</p><p><span class="k">放弃<wbr>的<wbr>方案</span>首页<wbr>接口</p></li><li><h3>用 DeepSeek 的 chat 模型</h3><p><span class="k">原因</span>每天<wbr>约 $<wbr>0.003</p><p><span class="k">放弃<wbr>的<wbr>方案</span>更<wbr>贵的<wbr>推理<wbr>模型</p></li></ul>
+<ul class="choices"><li><h3>模型<wbr>只<wbr>引用<wbr>编号，<wbr>不<wbr>写<wbr>链<wbr>接</h3><p><span class="k">原因</span>链<wbr>接<wbr>和<wbr>数字<wbr>最<wbr>容易<wbr>被<wbr>编造；<wbr>由<wbr>代码<wbr>回填，<wbr>就<wbr>不可能<wbr>出<wbr>错</p><p><span class="k">放弃<wbr>的<wbr>方案</span>让<wbr>模型<wbr>直接<wbr>写，<wbr>再<wbr>事后<wbr>校<wbr>验</p></li><li><h3>每天<wbr>发布<wbr>一期<wbr>网页<wbr>版</h3><p><span class="k">原因</span>既是<wbr>存档，<wbr>也<wbr>让<wbr>定<wbr>时<wbr>任务<wbr>不会<wbr>因为 60 天<wbr>无<wbr>活动<wbr>被<wbr>暂停</p><p><span class="k">放弃<wbr>的<wbr>方案</span>只发<wbr>邮件，<wbr>不留<wbr>痕迹</p></li><li><h3>去掉 👍 / 👎 和<wbr>追踪<wbr>像<wbr>素</h3><p><span class="k">原因</span>接收<wbr>反馈<wbr>的<wbr>服务<wbr>早已<wbr>返回 404，<wbr>留<wbr>着<wbr>就是<wbr>坏<wbr>链<wbr>接</p><p><span class="k">放弃<wbr>的<wbr>方案</span>假装<wbr>有<wbr>反馈<wbr>回路</p></li><li><h3>Hacker News 改用 Algolia，<wbr>按<wbr>整<wbr>词<wbr>匹配</h3><p><span class="k">原因</span>旧<wbr>做法<wbr>只看<wbr>首页 30 条，<wbr>按<wbr>子<wbr>串<wbr>匹配，<wbr>「said」<wbr>也<wbr>会<wbr>被<wbr>当成 AI</p><p><span class="k">放弃<wbr>的<wbr>方案</span>首页<wbr>接口</p></li><li><h3>用 DeepSeek 的 chat 模型</h3><p><span class="k">原因</span>每天<wbr>约 $<wbr>0.003</p><p><span class="k">放弃<wbr>的<wbr>方案</span>更<wbr>贵的<wbr>推理<wbr>模型</p></li></ul>
 </section>
 <section class="case-sec" id="s6" aria-labelledby="s6-title">
 <h2 id="s6-title">怎么<wbr>证明<wbr>它<wbr>可靠</h2>
@@ -156,7 +156,6 @@
 <footer class="foot">
 <div class="foot-inner">
 <span>© 2026 秦徐俊</span>
-<a href="https://github.com/qinxujunai/qinxujunai.github.io" rel="noopener">本站源码</a>
 </div>
 </footer>
 </body>

@@ -93,9 +93,9 @@
 <section class="case-sec" id="s4" aria-labelledby="s4-title">
 <h2 id="s4-title">Architecture</h2>
 <ol class="flow">
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>UI process (Qt)</p><ul><li>AppController: the single entry point</li><li>Global F2 hotkey, live before the models load</li><li>Natively painted recording capsule</li><li>Delivery and local history</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>Three supervised workers</p><ul><li>audio_worker: microphone and recovery journal</li><li>preview_worker: streaming Zipformer, text as you speak</li><li>asr_worker: SenseVoice + VAD, the final text</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>Delivery chain</p><ul><li>Write to the clipboard, read it back</li><li>Re-check the foreground window at stop</li><li>One Ctrl+V, never a blind retry</li><li>Append to local history.jsonl</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>UI process (Qt)</p><ul><li>One entry point for every action</li><li>Global F2 hotkey, live before the models load</li><li>Natively painted recording capsule</li><li>Delivery and local history</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>Three supervised workers</p><ul><li>Recording: the microphone, plus a recoverable copy</li><li>Preview: a streaming model, text as you speak</li><li>Recognition: SenseVoice reads the whole clip for the final text</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>Delivery chain</p><ul><li>Write to the clipboard, read it back</li><li>Re-check the foreground window at stop</li><li>One Ctrl+V, never a blind retry</li><li>Save to local history</li></ul></li>
 </ol>
 <p>Every worker has a heartbeat, a bounded queue and a hard kill path. If a driver or model hangs, only that process restarts; the window and the hotkey keep responding.</p>
 <p>A dictation is a recoverable session: IDLE → ARMING → RECORDING → FINALIZING → DELIVERING → COMPLETE or RECOVERABLE. Stopping latches the last audio sample, discards the preview, and trusts only SenseVoice’s pass over the full recording. A session is complete only when the clipboard has been verified and history written; anything undelivered stays on the machine and is offered back at the next launch.</p>
@@ -109,7 +109,7 @@
 <p>Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:</p>
 <ul class="metrics"><li><span class="m-v">6 ms</span><span class="m-l">F2 to first feedback</span><span class="m-g">Gate ≤ 50 ms</span></li><li><span class="m-v">427 ms</span><span class="m-l">Stop to paste, 0–10 s clips</span><span class="m-g">Gate ≤ 500 ms</span></li><li><span class="m-v">541 ms</span><span class="m-l">Stop to paste, two-minute clips</span><span class="m-g">Gate ≤ 2.5 s</span></li><li><span class="m-v">1,024 MB</span><span class="m-l">Resident memory after install</span><span class="m-g">Earlier 1,324.6 MB</span></li></ul>
 <ul class="bullets"><li>796 automated tests, up from 396 at v0.3.3.</li><li>500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.</li><li>Since v0.3.2, every release ships with a release and verification record.</li><li>Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.</li></ul>
-<p>This is evidence about latency and mechanics, not accuracy. The repository’s rule: no accuracy claims without enough authorized real speech.</p>
+<p>This is evidence about latency and mechanics, not accuracy. The project’s rule: no accuracy claims without enough authorized real speech.</p>
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
 <h2 id="s7-title">Timeline</h2>
@@ -157,7 +157,6 @@
 <footer class="foot">
 <div class="foot-inner">
 <span>© 2026 Qin Xujun</span>
-<a href="https://github.com/qinxujunai/qinxujunai.github.io" rel="noopener">Source of this site</a>
 </div>
 </footer>
 </body>

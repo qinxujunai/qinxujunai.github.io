@@ -93,9 +93,9 @@
 <section class="case-sec" id="s4" aria-labelledby="s4-title">
 <h2 id="s4-title">架构</h2>
 <ol class="flow">
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>界面<wbr>进程<wbr>（Qt）</p><ul><li>AppController：<wbr>所有<wbr>操作<wbr>的<wbr>唯一<wbr>入口</li><li>全局<wbr>热<wbr>键 F2，<wbr>先<wbr>于<wbr>模型<wbr>启动</li><li>原生绘制<wbr>的<wbr>录音<wbr>胶囊</li><li>交付<wbr>与<wbr>本地<wbr>历史</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>三<wbr>个<wbr>受监督<wbr>的<wbr>子进程</p><ul><li>audio_worker：<wbr>采集<wbr>麦克<wbr>风，<wbr>写<wbr>恢复<wbr>日志</li><li>preview_worker：<wbr>流<wbr>式 Zipformer，<wbr>边说<wbr>边<wbr>出<wbr>字</li><li>asr_worker：SenseVoice + VAD，<wbr>整段<wbr>终稿</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>交付<wbr>链</p><ul><li>写<wbr>入<wbr>剪贴板，<wbr>逐字回读<wbr>核对</li><li>复核<wbr>停止<wbr>那<wbr>一刻<wbr>的<wbr>前台<wbr>窗口</li><li>只发<wbr>一次 Ctrl<wbr>+<wbr>V，<wbr>不<wbr>盲目<wbr>重<wbr>试</li><li>写<wbr>入<wbr>本地<wbr>历史 history.jsonl</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>界面<wbr>进程<wbr>（Qt）</p><ul><li>所有<wbr>操作<wbr>走<wbr>同<wbr>一个<wbr>入口</li><li>全局<wbr>热<wbr>键 F2，<wbr>先<wbr>于<wbr>模型<wbr>启动</li><li>原生绘制<wbr>的<wbr>录音<wbr>胶囊</li><li>交付<wbr>与<wbr>本地<wbr>历史</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>三<wbr>个<wbr>受监督<wbr>的<wbr>子进程</p><ul><li>录音<wbr>进程：<wbr>采集<wbr>麦克<wbr>风，<wbr>同时<wbr>留<wbr>一份<wbr>可<wbr>恢复<wbr>的<wbr>录音</li><li>预<wbr>览<wbr>进程：<wbr>流<wbr>式<wbr>模型，<wbr>边说<wbr>边<wbr>出<wbr>字</li><li>识别<wbr>进程：<wbr>SenseVoice 读<wbr>完整<wbr>段<wbr>录音，<wbr>出<wbr>终稿</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>交付<wbr>链</p><ul><li>写<wbr>入<wbr>剪贴板，<wbr>逐字回读<wbr>核对</li><li>复核<wbr>停止<wbr>那<wbr>一刻<wbr>的<wbr>前台<wbr>窗口</li><li>只发<wbr>一次 Ctrl<wbr>+<wbr>V，<wbr>不<wbr>盲目<wbr>重<wbr>试</li><li>写进<wbr>本地<wbr>历史</li></ul></li>
 </ol>
 <p>每<wbr>个子进程<wbr>都有<wbr>心跳、<wbr>有<wbr>界<wbr>队列<wbr>和<wbr>强制<wbr>结束<wbr>路径。<wbr>驱动<wbr>或<wbr>模型<wbr>卡<wbr>死，<wbr>只<wbr>重<wbr>启<wbr>那<wbr>一个<wbr>进程，<wbr>界面<wbr>和<wbr>热<wbr>键<wbr>照常<wbr>响应。</p>
 <p>一次<wbr>听写<wbr>是<wbr>一个<wbr>可<wbr>恢复<wbr>的<wbr>会话：<wbr>IDLE → ARMING → RECORDING → FINALIZING → DELIVERING → COMPLETE 或 RECOVERABLE。<wbr>停下<wbr>的<wbr>那<wbr>一刻<wbr>先<wbr>锁定<wbr>最后<wbr>一个<wbr>采样<wbr>点，<wbr>预<wbr>览<wbr>立即<wbr>作废，<wbr>终稿<wbr>只<wbr>认 SenseVoice 对<wbr>完整<wbr>音<wbr>频<wbr>的<wbr>结果。<wbr>只有<wbr>文字<wbr>在<wbr>剪贴板<wbr>里<wbr>核对<wbr>无误、<wbr>并<wbr>写进<wbr>历史，<wbr>才算<wbr>完成；<wbr>没<wbr>送到<wbr>的<wbr>录音<wbr>留在<wbr>本<wbr>机，<wbr>下次<wbr>启动<wbr>时<wbr>提醒<wbr>你<wbr>找回。</p>
@@ -109,7 +109,7 @@
 <p>v0.3.1 发布<wbr>机<wbr>实<wbr>测<wbr>（Windows 11 · Ryzen 7 5800H），<wbr>每一<wbr>档 20 个<wbr>样本，<wbr>取 P95：</p>
 <ul class="metrics"><li><span class="m-v">6 ms</span><span class="m-l">按下 F2 到<wbr>第一<wbr>帧<wbr>反馈</span><span class="m-g">门槛 ≤ 50 ms</span></li><li><span class="m-v">427 ms</span><span class="m-l">0–10 秒<wbr>录音，<wbr>停止<wbr>到<wbr>粘贴</span><span class="m-g">门槛 ≤ 500 ms</span></li><li><span class="m-v">541 ms</span><span class="m-l">两分钟<wbr>录音，<wbr>停止<wbr>到<wbr>粘贴</span><span class="m-g">门槛 ≤ 2.5 s</span></li><li><span class="m-v">1,024 MB</span><span class="m-l">安装<wbr>后<wbr>常驻<wbr>内存</span><span class="m-g">早期 1,324.6 MB</span></li></ul>
 <ul class="bullets"><li>796 项<wbr>自动<wbr>化<wbr>测试，<wbr>v0.3.3 时<wbr>是 396 项。</li><li>500 次<wbr>录音<wbr>生命<wbr>周期，<wbr>10,000 组<wbr>随机<wbr>的<wbr>开始、<wbr>停止、<wbr>取消、<wbr>退出<wbr>序列，<wbr>50,000 个<wbr>异常<wbr>文本<wbr>模糊<wbr>用例。</li><li>从 v0.3.2 起，<wbr>每<wbr>个<wbr>版本<wbr>都<wbr>附<wbr>一份<wbr>发布<wbr>与<wbr>验证<wbr>记录。</li><li>用户<wbr>提过<wbr>的 12 条<wbr>反馈，<wbr>每<wbr>条<wbr>都<wbr>写下<wbr>结论<wbr>和<wbr>理由：<wbr>采纳、<wbr>按<wbr>门槛<wbr>暂<wbr>缓，<wbr>或者<wbr>拒绝。</li></ul>
-<p>这些<wbr>是<wbr>延迟<wbr>和<wbr>机制<wbr>的<wbr>证据，<wbr>不是<wbr>准确<wbr>率。<wbr>仓库<wbr>里<wbr>写<wbr>明：<wbr>没有<wbr>足够<wbr>的<wbr>授权<wbr>真实<wbr>语<wbr>料，<wbr>就不<wbr>对外<wbr>宣称<wbr>准确<wbr>率。</p>
+<p>这些<wbr>是<wbr>延迟<wbr>和<wbr>机制<wbr>的<wbr>证据，<wbr>不是<wbr>准确<wbr>率。<wbr>项目<wbr>的<wbr>规矩：<wbr>没有<wbr>足够<wbr>的<wbr>授权<wbr>真实<wbr>语<wbr>料，<wbr>就不<wbr>对外<wbr>宣称<wbr>准确<wbr>率。</p>
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
 <h2 id="s7-title">时间<wbr>线</h2>
@@ -157,7 +157,6 @@
 <footer class="foot">
 <div class="foot-inner">
 <span>© 2026 秦徐俊</span>
-<a href="https://github.com/qinxujunai/qinxujunai.github.io" rel="noopener">本站源码</a>
 </div>
 </footer>
 </body>

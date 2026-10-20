@@ -164,7 +164,6 @@ function footer(c) {
   return `<footer class="foot">
 <div class="foot-inner">
 <span>© ${new Date().getFullYear()} ${esc(c.name)}</span>
-<a href="${GITHUB}/qinxujunai.github.io" ${ext}>${c.footerSource}</a>
 </div>
 </footer>`;
 }
@@ -353,7 +352,7 @@ function contact(c) {
 </div>
 </div>
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(c.hint.wechat)}" data-hint-phone="${esc(c.hint.phone)}" data-hint-desktop="${esc(c.hint.desktop)}">${esc(c.hint.default)}</p>
-<p class="cta"><a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a><a class="more-link" href="${GITHUB}" ${ext}>${c.github}${chevron}</a></p>
+<p class="cta"><a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
 <p class="closing-line reveal">${T(c, c.closing)}</p>
 </section>`;
 }
