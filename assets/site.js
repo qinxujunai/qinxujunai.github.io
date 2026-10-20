@@ -35,15 +35,18 @@
   var text = target && target.getAttribute('data-hint-' + where);
   if (text) target.textContent = text;
   var save = document.querySelector('[data-qr-save]');
-  if (save && where === 'wechat') save.hidden = true;
+  if (save && where !== 'phone') save.hidden = true;
   // Outside WeChat on a phone: one tap copies his WeChat ID and opens WeChat (no app can add a personal
   // contact from a browser). Shown only when the ID is set in src/content.mjs.
+  // On a computer the same control only copies the ID, as a quiet text link.
   var copy = document.querySelector('[data-wechat-id]');
-  if (copy && where === 'phone') {
+  if (copy && where !== 'wechat') {
     copy.hidden = false;
+    copy.textContent = copy.getAttribute('data-label-' + where);
+    if (where === 'desktop') copy.className = 'more-link';
     copy.addEventListener('click', function () {
       var id = copy.getAttribute('data-wechat-id');
-      var done = function () { if (target) target.textContent = copy.getAttribute('data-copied'); window.location.href = 'weixin://'; };
+      var done = function () { if (target) target.textContent = copy.getAttribute('data-copied'); if (where === 'phone') window.location.href = 'weixin://'; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(id).then(done, done);
       else done();
     });
@@ -206,6 +209,14 @@
   }
 
   // The nav turns dark while a black tile is under it.
+  // At the contact section the card is the way to add him; the nav button would be a second one.
+  var contactEl = document.getElementById('contact');
+  if (contactEl && canObserve) {
+    new IntersectionObserver(function (entries) {
+      root.classList.toggle('at-contact', entries[0].isIntersecting);
+    }, { rootMargin: '0px 0px -30% 0px' }).observe(contactEl);
+  }
+
   var darks = [].slice.call(document.querySelectorAll('main .dark'));
   if (canObserve) {
     var darkWatch = new IntersectionObserver(function (entries) {
