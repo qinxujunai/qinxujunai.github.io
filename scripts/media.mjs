@@ -85,7 +85,8 @@ for (const [name, crop] of Object.entries(SITES)) {
 }
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
-const PHOTOS = ['photo-aerial', 'photo-pagoda', 'photo-gate', 'photo-wall', 'photo-dusk', 'photo-buddha', 'photo-sky', 'photo-autumn'];
+// AI work from his portfolio (generated images; no brand logos, no licensed characters), then his photographs.
+const PHOTOS = ['ai-hat', 'ai-vest', 'ai-shirt', 'ai-cup', 'ai-tin', 'ai-bag', 'ai-portrait', 'ai-lips', 'ai-leaves', 'ai-studio', 'photo-aerial', 'photo-pagoda', 'photo-gate', 'photo-wall', 'photo-dusk', 'photo-buddha', 'photo-sky', 'photo-autumn'];
 for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 50 });
 
 fs.writeFileSync('src/media.json', JSON.stringify(manifest, null, 2) + '\n');

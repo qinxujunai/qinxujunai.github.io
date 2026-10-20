@@ -16,6 +16,7 @@ const esc = (s) =>
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names and fixed phrases stay whole.
 const KEEP = [
+  '云南妙妙屋', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
   'AI 进化得越快', '我们越需要慢下来',
   '秦徐俊', '比智科技', '一念智能', '专致网络', '抖音数字学堂', '云南民族大学', '微众银行', '方正证券', '工商银行',
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
@@ -319,7 +320,7 @@ function photos(c) {
 <p class="sub">${T(c, c.photosIntro)}</p>
 </div>
 <ul class="gallery" data-gallery tabindex="0" aria-label="${esc(c.photosTitle)}">
-${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px', priority: 'low' })}</li>`).join('\n')}
+${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px', priority: 'low' })}${p.caption ? `<figcaption>${T(c, p.caption)}</figcaption>` : ''}</figure></li>`).join('\n')}
 </ul>
 <p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
 </section>`;
