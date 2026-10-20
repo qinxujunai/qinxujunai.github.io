@@ -46,10 +46,15 @@ export const content = {
     role: '做 AI 产品',
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
-    // Plain self-introduction, as the best personal sites open (rauno.me, karpathy.ai, paco.me).
-    lede: '我是秦徐俊，做 AI 产品。',
-    now: '做过几年内容和运营，所以做任何东西，我都先想：人为什么会用它。下面是我做的三个产品，还有我用 AI 做事的方法。',
-    hook: '先读读我的方法：ai.vibecoding，约 18 分钟，读完就能动手',
+    // First screen, as the best personal sites and Apple product pages do it: one plain sentence
+    // (brianlovin.com, emilkowal.ski), then the work itself fills the screen.
+    lede: '我做 AI 产品，从想法到上线。下面四个，都已经上线。',
+    highlights: {
+      voiceflow: 'Windows 离线语音输入',
+      'ai-signal': '每天早上的 AI 简报',
+      wanxiang: '视频、播客变成文字',
+      vibecoding: '我用 AI 做事的方法',
+    },
     addWechat: '加我微信',
     navWechat: '加微信',
     seeWork: '看看作品',
@@ -166,9 +171,13 @@ export const content = {
     role: 'I build AI products.',
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
-    lede: 'I’m Qin Xujun. I build AI products.',
-    now: 'Years in content and growth taught me to start with one question: why would anyone use this? Below are three products I made, and the way I build with AI.',
-    hook: 'Start with my method: ai.vibecoding, an 18-minute read you can act on',
+    lede: 'I make AI products, from idea to launch. Here are four that are live.',
+    highlights: {
+      voiceflow: 'Offline voice typing for Windows',
+      'ai-signal': 'A morning AI briefing',
+      wanxiang: 'Video and podcasts into text',
+      vibecoding: 'How I build with AI',
+    },
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',

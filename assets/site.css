@@ -421,11 +421,11 @@ main {
 }
 
 .hero h1 {
-  max-width: 11em;
+  max-width: 17em;
   margin: 0 auto;
-  font-size: min(48px, 8.2vw);
-  line-height: 1.12;
-  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.45;
+  font-weight: 500;
   letter-spacing: -0.005em;
 }
 
@@ -860,16 +860,61 @@ main {
   to { opacity: 1; }
 }
 
-/* What the reader can take away right now: his method, one tap from the first screen. */
-.hero .hook {
-  max-width: 34em;
+/* First screen: one plain sentence, then the four pieces of work themselves (Apple's "highlights"). */
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 980px;
   margin: 28px auto 0;
-  font-size: 15px;
-  line-height: 1.5;
+  text-align: left;
 }
 
-.hero .hook a {
-  color: var(--link);
+.highlights a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--soft);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 0 0 0 1px var(--hairline);
+}
+
+.highlights a:hover {
+  text-decoration: none;
+}
+
+.highlights img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top;
+  background: #fff;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.hl-name {
+  padding: 12px 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.hl-what {
+  padding: 2px 14px 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+@media (min-width: 734px) {
+  .highlights {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
 }
 
 /* Home: the small signature in the nav appears once the big one has scrolled away, as if it docked there. */
@@ -904,8 +949,7 @@ main {
   }
 
   .hero h1 {
-    font-size: 64px;
-    line-height: 1.07;
+    font-size: 26px;
   }
 
   .hero .sub {
@@ -976,8 +1020,7 @@ main {
   }
 
   .hero h1 {
-    font-size: 68px;
-    line-height: 1.06;
+    font-size: 28px;
   }
 
   .hero .sub {
