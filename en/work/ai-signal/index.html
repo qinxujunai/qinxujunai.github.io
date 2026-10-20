@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI Signal: One email each morning: today’s AI in a few minutes · Qin Xujun</title>
-<meta name="description" content="Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, emails it to me at 10 a.m. and posts the same issue on the web.">
+<title>AI Signal: One email each morning. Today’s AI, understood · Qin Xujun</title>
+<meta name="description" content="Every day it reads X, Hacker News, papers and the labs’ blogs, and keeps only what’s worth reading. It reaches my inbox at 10 a.m., and the same issue goes up on the web.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 
@@ -17,8 +17,8 @@
 <link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/ai-signal/">
 <link rel="alternate" hreflang="x-default" href="https://qinxujunai.github.io/work/ai-signal/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI Signal: One email each morning: today’s AI in a few minutes · Qin Xujun">
-<meta property="og:description" content="Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, emails it to me at 10 a.m. and posts the same issue on the web.">
+<meta property="og:title" content="AI Signal: One email each morning. Today’s AI, understood · Qin Xujun">
+<meta property="og:description" content="Every day it reads X, Hacker News, papers and the labs’ blogs, and keeps only what’s worth reading. It reaches my inbox at 10 a.m., and the same issue goes up on the web.">
 <meta property="og:url" content="https://qinxujunai.github.io/en/work/ai-signal/">
 <meta property="og:image" content="https://qinxujunai.github.io/og.png">
 <meta property="og:image:width" content="1200">
@@ -52,8 +52,8 @@
 <header class="tile plain case-head">
 <nav class="crumb" aria-label="Work"><a href="/en/#work">Work</a><span class="chev" aria-hidden="true">›</span><span aria-current="page">AI Signal</span></nav>
 
-<h1 id="case-title">One email each morning: today’s AI in a few minutes.</h1>
-<p class="sub">Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, emails it to me at 10 a.m. and posts the same issue on the web.</p>
+<h1 id="case-title">One email each morning. Today’s AI, understood.</h1>
+<p class="sub">Every day it reads X, Hacker News, papers and the labs’ blogs, and keeps only what’s worth reading. It reaches my inbox at 10 a.m., and the same issue goes up on the web.</p>
 <p class="cta"><a class="more-link" href="https://qinxujunai.github.io/ai-signal/" rel="noopener">Latest issue<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> AI Signal</span></a><a class="more-link" href="https://qinxujunai.github.io/ai-signal/archive/" rel="noopener">Archive<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> AI Signal</span></a></p>
 <div class="case-frame" data-scrollshot><a class="frame narrow" href="https://qinxujunai.github.io/ai-signal/" rel="noopener">
 <span class="visually-hidden">Open the AI Signal website</span>
@@ -66,7 +66,7 @@
 <dl class="facts">
 <div><dt>Source types: X, podcasts, lab blogs, HN, papers, GitHub, Chinese media</dt><dd>7</dd></div>
 <div><dt>First v3 issue: 30 picked from 60 new items</dt><dd>60 → 30</dd></div>
-<div><dt>Links written by the model: all filled in by code</dt><dd>0</dd></div>
+<div><dt>Links written by the model; code fills in every one</dt><dd>0</dd></div>
 <div><dt>Model cost per day</dt><dd>$0.003</dd></div>
 </dl>
 
@@ -83,16 +83,16 @@
 </aside>
 <div class="case-main">
 <section class="case-sec" id="s1" aria-labelledby="s1-title">
-<h2 id="s1-title">Why I built it</h2>
+<h2 id="s1-title">Why</h2>
 <p>There is too much AI news: posts, podcasts, blogs, papers, GitHub. Hundreds of items a day, and maybe twenty that matter. Scrolling a feed costs time and lets noise set the mood.</p>
 <p>I wanted a dependable editor: someone who reads everything each day and keeps only what would change a decision, readable in a few minutes.</p>
 </section>
 <section class="case-sec" id="s2" aria-labelledby="s2-title">
-<h2 id="s2-title">The hard parts</h2>
+<h2 id="s2-title">Hard parts</h2>
 <ul class="bullets"><li>Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.</li><li>The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.</li><li>It can stop silently. After 2026-07-22, GitHub paused the schedule because the project had not been updated for 60 days. The briefing stopped for almost three months with no error anywhere.</li><li>Old sources rot: the third-party GitHub Trending API died, a Chinese media RSS feed disappeared, and the old feedback buttons pointed at a service returning 404.</li></ul>
 </section>
 <section class="case-sec" id="s3" aria-labelledby="s3-title">
-<h2 id="s3-title">What it does, and doesn’t</h2>
+<h2 id="s3-title">Scope</h2>
 <div class="scope"><div><h3>Does</h3><ul class="yes"><li>Aggregate public sources</li><li>Select, merge and rewrite to a fixed editorial brief</li><li>One email and one web issue a day, every item linked</li></ul></div><div><h3>Does not</h3><ul class="no"><li>Require X or YouTube API keys</li><li>Build an app or accounts</li><li>Track readers: no pixels, no click counting</li></ul></div></div>
 </section>
 <section class="case-sec" id="s4" aria-labelledby="s4-title">
@@ -108,19 +108,19 @@
 <p>The layout follows TLDR, The Rundown and Axios: one column, headlines that state facts, one source line under every item, and ranked two-column lists for papers and repositories.</p>
 </section>
 <section class="case-sec" id="s5" aria-labelledby="s5-title">
-<h2 id="s5-title">What I gave up</h2>
+<h2 id="s5-title">Trade-offs</h2>
 <ul class="choices"><li><h3>The model cites IDs, never links</h3><p><span class="k">Why</span>Links and numbers are the easiest things to invent; filled in by code, they at least always exist</p><p><span class="k">Given up</span>Let the model write them and check afterwards</p></li><li><h3>Publish a web edition every day</h3><p><span class="k">Why</span>It is the archive, and it keeps the schedule from being paused after 60 quiet days</p><p><span class="k">Given up</span>Email only, no trace</p></li><li><h3>Remove 👍 / 👎 and the tracking pixel</h3><p><span class="k">Why</span>The feedback service had been returning 404; keeping them meant broken links</p><p><span class="k">Given up</span>Pretending there is a feedback loop</p></li><li><h3>Hacker News through Algolia, whole-word matching</h3><p><span class="k">Why</span>The old code read 30 front-page stories and matched substrings, so “said” counted as AI</p><p><span class="k">Given up</span>The front-page API</p></li><li><h3>DeepSeek’s chat model</h3><p><span class="k">Why</span>About $0.003 a day</p><p><span class="k">Given up</span>A pricier reasoning model</p></li></ul>
 </section>
 <section class="case-sec" id="s6" aria-labelledby="s6-title">
-<h2 id="s6-title">How I know it works</h2>
+<h2 id="s6-title">Evidence</h2>
 <ul class="bullets"><li>The first v3 issue (2026-10-20) picked 30 of 60 new items, went out by email, and published a web edition and archive.</li><li>Every link and number comes from the raw data; an item that cites an unknown ID never appears.</li><li>If the model is down, an issue still goes out, ranked by source signal and labelled as such; a failed source is named in the footer.</li><li>Sent links are remembered for 60 days, so nothing repeats.</li></ul>
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
-<h2 id="s7-title">How it went</h2>
+<h2 id="s7-title">Timeline</h2>
 <ol class="timeline"><li><span class="when">2026.05</span><span>First version: follow-builders posts and podcasts, LLM curation, email</span></li><li><span class="when">2026.05.22</span><span>v2: Hacker News, ArXiv, GitHub and Chinese media added</span></li><li><span class="when">2026.07.22</span><span>Last automatic send; the schedule was then paused after 60 days without commits</span></li><li><span class="when">2026.10.20</span><span>v3: new sources, editing and layout; daily sends restored</span></li></ol>
 </section>
 <section class="case-sec" id="s8" aria-labelledby="s8-title">
-<h2 id="s8-title">Not done yet</h2>
+<h2 id="s8-title">Still missing</h2>
 <ul class="bullets"><li>Posts and podcasts still depend on the third-party follow-builders feed.</li><li>Reddit refuses automated requests, so community discussion comes only from Hacker News.</li><li>QbitAI is the only Chinese source.</li><li>There is no reader feedback loop; the editorial brief improves only when someone reads and edits it.</li><li>The model can cite the wrong ID: the link is real but may not match the item. The first issue still had phrases the brief forbids, like “a head-on challenge”.</li></ul>
 </section>
 </div>
@@ -133,13 +133,13 @@
 <p class="eyebrow">VoiceFlow</p>
 <h3><a href="/en/work/voiceflow/">Press a key, talk, and the words appear at your cursor.</a></h3>
 <p class="card-line">Windows · Offline · No account</p>
-<p class="card-more" aria-hidden="true">How it works<span class="chev" aria-hidden="true">›</span></p>
+<p class="card-more" aria-hidden="true">Learn more<span class="chev" aria-hidden="true">›</span></p>
 </article>
 <article class="card-tile product-card reveal">
 <p class="eyebrow">Wanxiang</p>
 <h3><a href="/en/work/wanxiang/">Paste a link, get the text back.</a></h3>
 <p class="card-line">Video · Podcasts · Articles · Processed on your own PC</p>
-<p class="card-more" aria-hidden="true">How it works<span class="chev" aria-hidden="true">›</span></p>
+<p class="card-more" aria-hidden="true">Learn more<span class="chev" aria-hidden="true">›</span></p>
 </article>
 </div>
 </section>

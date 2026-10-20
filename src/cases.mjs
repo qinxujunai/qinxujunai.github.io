@@ -1,4 +1,4 @@
-// Six case studies, one page each at /work/<slug>/ and /en/work/<slug>/.
+// Three project pages, one each at /work/<slug>/ and /en/work/<slug>/.
 // Every number has a source, noted next to it: a repository document, the resume, or src/stats.json ({ stat }).
 // Section blocks the renderer understands: p, metrics, flow, scope, table, list, timeline, after.
 
@@ -19,7 +19,7 @@ export const CASES = [
       name: 'VoiceFlow',
       kind: '',
       title: '按一下，说话，文字就出现在光标处。',
-      sub: 'Windows 上的语音输入。全部在你自己的电脑上完成，不联网，不登录。我写它，是因为要跟 AI 交代的话，常常比我愿意打的字多。',
+      sub: 'Windows 上的语音输入。全程在你自己的电脑上完成，不联网，不用登录。',
       card: 'Windows 上的语音输入，全部在自己的电脑上完成。',
       note: 'Windows · 离线 · 免登录',
       // The judgement behind it, for the home page (from the sections below).
@@ -31,23 +31,23 @@ export const CASES = [
         ['形态', 'Windows 桌面应用，开源'],
         ['技术', 'Python · PyQt6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['官网', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载', `${VF}/releases/latest`]],
+      links: [['访问网站', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
-        { v: '427 ms', l: '停止到发出粘贴，P95（0–10 秒录音，v0.3.1 实测）' },
+        { v: '427 ms', l: '说完到送出文字，95% 的情况在此之内（10 秒内的录音，v0.3.1 实测）' },
         { v: '796 项', l: '自动化测试，每次发布都跑' },
         { v: '14 次', l: '发布，从 v0.1.0 到 v0.3.8' },
       ],
       sections: [
         {
-          h: '为什么做',
+          h: '起因',
           p: [
-            '和 AI 对话时，真正花时间的往往不是那句指令，而是补充背景、解释约束、继续追问。这些话常常比指令本身长得多，打字成了瓶颈。',
+            '和 AI 对话时，花时间的往往不是那句指令，而是补充背景、解释约束、继续追问。这些话比指令长得多，打字成了瓶颈。',
             '现有的语音输入大多要联网、要登录，长段落容易丢掉结尾，识别完还得从另一个窗口复制回来。我想要的很简单：光标在哪，就在哪说；说完，文字就在那里。',
           ],
         },
         {
-          h: '难的地方',
+          h: '难点',
           list: [
             '快和准互相拉扯。边说边出字，需要一个流式小模型，但它不够准；准的模型，要等完整的音频。',
             '发出 Ctrl+V 不等于文字送到了。目标窗口可能换了，剪贴板可能被占用，权限可能不够。',
@@ -56,14 +56,14 @@ export const CASES = [
           ],
         },
         {
-          h: '做什么，不做什么',
+          h: '边界',
           scope: {
             do: ['快捷键触发的日常输入', '中文、英文和中英混说', '本机识别，安装后离线可用，无需登录', '自定义术语和明确纠错'],
             dont: ['会议记录和说话人区分', '靠云端改写、润色', '没有足够语料之前，宣称准确率优于其他产品'],
           },
         },
         {
-          h: '怎么搭的',
+          h: '架构',
           flow: [
             { t: '界面进程（Qt）', n: ['所有操作走同一个入口', '全局热键 F2，先于模型启动', '原生绘制的录音胶囊', '交付与本地历史'] },
             { t: '三个受监督的子进程', n: ['录音进程：采集麦克风，同时留一份可恢复的录音', '预览进程：流式模型，边说边出字', '识别进程：SenseVoice 读完整段录音，出终稿'] },
@@ -71,11 +71,11 @@ export const CASES = [
           ],
           after: [
             '每个子进程都有心跳、有界队列和强制结束路径。驱动或模型卡死，只重启那一个进程，界面和热键照常响应。',
-            '一次听写是一个可恢复的会话：IDLE → ARMING → RECORDING → FINALIZING → DELIVERING → COMPLETE 或 RECOVERABLE。停下的那一刻先锁定最后一个采样点，预览立即作废，终稿只认 SenseVoice 对完整音频的结果。只有文字在剪贴板里核对无误、并写进历史，才算完成；没送到的录音留在本机，下次启动时提醒你找回。',
+            '每次听写都可以恢复。停下的那一刻，先锁定最后一段声音，预览随即作废，终稿只认对完整录音的识别结果。文字在剪贴板里核对无误、写进历史，才算完成；没送到的录音留在本机，下次启动时提醒你找回。',
           ],
         },
         {
-          h: '我放弃了什么',
+          h: '取舍',
           table: {
             head: ['决定', '原因', '放弃的方案'],
             rows: [
@@ -88,12 +88,12 @@ export const CASES = [
           },
         },
         {
-          h: '怎么知道它靠得住',
-          p: ['v0.3.1 发布机实测（Windows 11 · Ryzen 7 5800H），每一档 20 个样本，取 P95：'],
+          h: '验证',
+          p: ['v0.3.1 在发布机上实测（Windows 11 · Ryzen 7 5800H）。每一档 20 个样本，数字是 95% 的情况都能做到的值：'],
           metrics: [
             { v: '6 ms', l: '按下 F2 到第一帧反馈', g: '门槛 ≤ 50 ms' },
-            { v: '427 ms', l: '0–10 秒录音，停止到发出粘贴', g: '门槛 ≤ 500 ms' },
-            { v: '541 ms', l: '两分钟录音，停止到发出粘贴', g: '门槛 ≤ 2.5 s' },
+            { v: '427 ms', l: '10 秒内的录音，说完到送出文字', g: '门槛 ≤ 500 ms' },
+            { v: '541 ms', l: '两分钟的录音，说完到送出文字', g: '门槛 ≤ 2.5 s' },
             { v: '1,024 MB', l: '安装后私有内存（v0.3.1）', g: '早期 1,324.6 MB' },
           ],
           list: [
@@ -105,7 +105,7 @@ export const CASES = [
           after: ['这些是延迟和机制的证据，不是准确率。项目的规矩：没有足够的授权真实语料，就不对外宣称准确率。'],
         },
         {
-          h: '经过',
+          h: '历程',
           timeline: [
             ['2026.05.23', '第一次提交'],
             ['2026.07.04', 'v0.1.0 发布'],
@@ -116,7 +116,7 @@ export const CASES = [
           ],
         },
         {
-          h: '还没做好的',
+          h: '还差什么',
           list: [
             '安装包还没有代码签名，Windows 会弹出安全提示。',
             '正式版只支持 Windows 10 / 11。',
@@ -131,7 +131,7 @@ export const CASES = [
       name: 'VoiceFlow',
       kind: '',
       title: 'Press a key, talk, and the words appear at your cursor.',
-      sub: 'Voice typing for Windows. Everything happens on your own computer: no internet, no account. I built it because what I need to tell an AI is usually longer than I want to type.',
+      sub: 'Voice typing for Windows. It all happens on your own computer: no internet, no account.',
       card: 'Voice typing for Windows, entirely on your own computer.',
       note: 'Windows · Offline · No account',
       why: 'The live preview is for speed; the final text trusts only the full recording. Nothing counts as delivered until the clipboard is checked.',
@@ -142,23 +142,23 @@ export const CASES = [
         ['Form', 'Windows desktop app, open source'],
         ['Stack', 'Python · PyQt6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['Website', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download', `${VF}/releases/latest`]],
+      links: [['Visit the site', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
-        { v: '427 ms', l: 'Stop to paste sent, P95 (0–10 s clips, measured on v0.3.1)' },
+        { v: '427 ms', l: 'From stopping to text sent, in 95% of cases (clips under 10 s, measured on v0.3.1)' },
         { v: '796', l: 'Automated tests on every release' },
         { v: '14', l: 'Releases, v0.1.0 to v0.3.8' },
       ],
       sections: [
         {
-          h: 'Why I built it',
+          h: 'Why',
           p: [
             'When you work with AI, the instruction is rarely the long part. The context, the constraints and the follow-up questions are. Typing becomes the bottleneck.',
             'Most voice input needs a network and an account, drops the end of long passages, and leaves you copying text back from another window. I wanted something simpler: speak where the cursor is, and find the words there when you stop.',
           ],
         },
         {
-          h: 'The hard parts',
+          h: 'Hard parts',
           list: [
             'Speed and accuracy pull against each other. Live text needs a small streaming model, which is less accurate; the accurate model needs the whole recording.',
             'Sending Ctrl+V is not the same as delivering text. The window may have changed, the clipboard may be busy, permissions may block it.',
@@ -167,7 +167,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What it does, and doesn’t',
+          h: 'Scope',
           scope: {
             do: ['Everyday input from a hotkey', 'Chinese, English and both mixed', 'On-device recognition, offline after install, no account', 'Custom terms and explicit corrections'],
             dont: ['Meeting notes or speaker separation', 'Cloud rewriting or polishing', 'Claims of beating other products before there is enough speech data'],
@@ -186,7 +186,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What I gave up',
+          h: 'Trade-offs',
           table: {
             head: ['Decision', 'Why', 'Given up'],
             rows: [
@@ -199,12 +199,12 @@ export const CASES = [
           },
         },
         {
-          h: 'How I know it works',
-          p: ['Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H), 20 samples per bucket, P95:'],
+          h: 'Evidence',
+          p: ['Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H). 20 samples per bucket; each number holds in 95% of cases:'],
           metrics: [
             { v: '6 ms', l: 'F2 to first feedback', g: 'Gate ≤ 50 ms' },
-            { v: '427 ms', l: 'Stop to paste sent, 0–10 s clips', g: 'Gate ≤ 500 ms' },
-            { v: '541 ms', l: 'Stop to paste sent, two-minute clips', g: 'Gate ≤ 2.5 s' },
+            { v: '427 ms', l: 'Clips under 10 s, stopping to text sent', g: 'Gate ≤ 500 ms' },
+            { v: '541 ms', l: 'Two-minute clips, stopping to text sent', g: 'Gate ≤ 2.5 s' },
             { v: '1,024 MB', l: 'Private memory after install (v0.3.1)', g: 'Earlier 1,324.6 MB' },
           ],
           list: [
@@ -216,7 +216,7 @@ export const CASES = [
           after: ['This is evidence about latency and mechanics, not accuracy. The project’s rule: no accuracy claims without enough authorized real speech.'],
         },
         {
-          h: 'How it went',
+          h: 'Timeline',
           timeline: [
             ['2026.05.23', 'First commit'],
             ['2026.07.04', 'v0.1.0 released'],
@@ -227,7 +227,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'Not done yet',
+          h: 'Still missing',
           list: [
             'The installer is not code-signed yet, so Windows shows a warning.',
             'The release supports Windows 10 and 11 only.',
@@ -251,8 +251,8 @@ export const CASES = [
     zh: {
       name: 'AI Signal',
       kind: '',
-      title: '每天早上一封邮件，几分钟读完今天的 AI。',
-      sub: '它每天替我读 X、Hacker News、论文和各家实验室的博客，只留下值得看的，早上十点发到我的邮箱，同一期也放到网上。',
+      title: '每天早上一封邮件，看懂当天的 AI。',
+      sub: '每天读一遍 X、Hacker News、论文和各大实验室的博客，只留下值得看的。上午 10 点发到我的邮箱，同一期也发布在网上。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
       note: '每天 10:00 · 七类信源 · 每条都附原文',
       why: '模型只能引用编号，链接由代码回填，写不出假链接。',
@@ -267,19 +267,19 @@ export const CASES = [
       results: [
         { v: '7 类', l: '信源：X、播客、官方博客、HN、论文、GitHub、中文媒体' },
         { v: '60 → 30', l: 'v3 第一期：60 条新内容里选出 30 条' },
-        { v: '0', l: '由模型写出的链接：全部由代码回填' },
+        { v: '0', l: '条链接由模型自己写出，全部由程序按编号填回' },
         { v: '$0.003', l: '每天的模型成本' },
       ],
       sections: [
         {
-          h: '为什么做',
+          h: '起因',
           p: [
-            'AI 的信息太多了：推文、播客、博客、论文、GitHub，每天几百条，真正重要的也就二十来条。刷信息流费时间，还容易被情绪和噪音带着走。',
-            '我想要一位靠谱的编辑：每天替我读一遍，只留下会改变判断的东西，几分钟就能读完。',
+            'AI 的信息太多：推文、播客、博客、论文、GitHub，每天几百条，真正重要的二十来条。刷信息流费时间，也容易被情绪和噪音带着走。',
+            '我想要一位靠谱的编辑：每天替我读一遍，只留下会改变判断的内容，几分钟读完。',
           ],
         },
         {
-          h: '难的地方',
+          h: '难点',
           list: [
             '模型会编。让它自己写链接和数字，迟早会出现一个看起来很真的假链接。',
             '同一件事会在博客、Hacker News 和推文里同时出现，不合并就是重复。',
@@ -288,14 +288,14 @@ export const CASES = [
           ],
         },
         {
-          h: '做什么，不做什么',
+          h: '边界',
           scope: {
             do: ['聚合公开信源', '按写死的编辑标准挑选、合并、改写', '每天一封邮件和一期网页版，每条都附原文'],
             dont: ['需要 X、YouTube 的 API key', '做 App 和账号体系', '追踪读者：没有像素，没有点击统计'],
           },
         },
         {
-          h: '怎么搭的',
+          h: '架构',
           flow: [
             { t: '收集', n: ['X 上的 builder、播客（follow-builders）', 'OpenAI、DeepMind、Google AI、Hugging Face 官方博客', 'Hacker News：36 小时内、60 分以上', 'Hugging Face 论文热榜、GitHub 今日趋势、量子位', '去掉 60 天内发过的'] },
             { t: '编号', n: ['每条素材一个编号：H3、P1、G2…'] },
@@ -309,7 +309,7 @@ export const CASES = [
           ],
         },
         {
-          h: '我放弃了什么',
+          h: '取舍',
           table: {
             head: ['决定', '原因', '放弃的方案'],
             rows: [
@@ -322,7 +322,7 @@ export const CASES = [
           },
         },
         {
-          h: '怎么知道它靠得住',
+          h: '验证',
           list: [
             'v3 第一期（2026-10-20）从 60 条新内容里选出 30 条，自动发信，并发布网页版和往期。',
             '链接和数字全部来自原始数据；模型引用了不存在的编号，这条就不会出现。',
@@ -331,7 +331,7 @@ export const CASES = [
           ],
         },
         {
-          h: '经过',
+          h: '历程',
           timeline: [
             ['2026.05', '第一版：follow-builders 的推文和播客，LLM 策展，邮件送达'],
             ['2026.05.22', 'v2：加入 Hacker News、ArXiv、GitHub、中文媒体'],
@@ -340,7 +340,7 @@ export const CASES = [
           ],
         },
         {
-          h: '还没做好的',
+          h: '还差什么',
           list: [
             '推文和播客仍依赖第三方的 follow-builders feed，它一停，这两类就会断。',
             'Reddit 拒绝自动化请求，社区讨论目前只有 Hacker News。',
@@ -354,8 +354,8 @@ export const CASES = [
     en: {
       name: 'AI Signal',
       kind: '',
-      title: 'One email each morning: today’s AI in a few minutes.',
-      sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs for me, keeps what’s worth reading, emails it to me at 10 a.m. and posts the same issue on the web.',
+      title: 'One email each morning. Today’s AI, understood.',
+      sub: 'Every day it reads X, Hacker News, papers and the labs’ blogs, and keeps only what’s worth reading. It reaches my inbox at 10 a.m., and the same issue goes up on the web.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
       note: 'Daily at 10:00 · Seven kinds of sources · Every item linked',
       why: 'The model may only cite item numbers; code fills in every link, so it cannot invent one.',
@@ -370,19 +370,19 @@ export const CASES = [
       results: [
         { v: '7', l: 'Source types: X, podcasts, lab blogs, HN, papers, GitHub, Chinese media' },
         { v: '60 → 30', l: 'First v3 issue: 30 picked from 60 new items' },
-        { v: '0', l: 'Links written by the model: all filled in by code' },
+        { v: '0', l: 'Links written by the model; code fills in every one' },
         { v: '$0.003', l: 'Model cost per day' },
       ],
       sections: [
         {
-          h: 'Why I built it',
+          h: 'Why',
           p: [
             'There is too much AI news: posts, podcasts, blogs, papers, GitHub. Hundreds of items a day, and maybe twenty that matter. Scrolling a feed costs time and lets noise set the mood.',
             'I wanted a dependable editor: someone who reads everything each day and keeps only what would change a decision, readable in a few minutes.',
           ],
         },
         {
-          h: 'The hard parts',
+          h: 'Hard parts',
           list: [
             'Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.',
             'The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.',
@@ -391,7 +391,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What it does, and doesn’t',
+          h: 'Scope',
           scope: {
             do: ['Aggregate public sources', 'Select, merge and rewrite to a fixed editorial brief', 'One email and one web issue a day, every item linked'],
             dont: ['Require X or YouTube API keys', 'Build an app or accounts', 'Track readers: no pixels, no click counting'],
@@ -412,7 +412,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What I gave up',
+          h: 'Trade-offs',
           table: {
             head: ['Decision', 'Why', 'Given up'],
             rows: [
@@ -425,7 +425,7 @@ export const CASES = [
           },
         },
         {
-          h: 'How I know it works',
+          h: 'Evidence',
           list: [
             'The first v3 issue (2026-10-20) picked 30 of 60 new items, went out by email, and published a web edition and archive.',
             'Every link and number comes from the raw data; an item that cites an unknown ID never appears.',
@@ -434,7 +434,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'How it went',
+          h: 'Timeline',
           timeline: [
             ['2026.05', 'First version: follow-builders posts and podcasts, LLM curation, email'],
             ['2026.05.22', 'v2: Hacker News, ArXiv, GitHub and Chinese media added'],
@@ -443,7 +443,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'Not done yet',
+          h: 'Still missing',
           list: [
             'Posts and podcasts still depend on the third-party follow-builders feed.',
             'Reddit refuses automated requests, so community discussion comes only from Hacker News.',
@@ -467,7 +467,7 @@ export const CASES = [
       name: '万象成文',
       kind: '',
       title: '贴一个链接，拿回一篇文字。',
-      sub: '视频、播客、图文都行，本地的音视频也可以。Windows 版，在你自己的电脑上处理。',
+      sub: '视频、播客、图文链接，或者本地的音视频文件。Windows 版，全程在你自己的电脑上处理。',
       card: '视频、播客、图文都行。',
       note: '视频 · 播客 · 图文 · 在你自己的电脑上处理',
       why: '能读字幕和正文，就不转写；不用显卡也能跑。',
@@ -478,23 +478,23 @@ export const CASES = [
         ['形态', 'Windows 桌面应用，另有网页预览'],
         ['技术', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['官网', 'https://qinxujunai.github.io/Audio2Text/'], ['下载', `${A2T}/releases/latest`]],
+      links: [['访问网站', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
       results: [
         { v: '3 + 3', l: 'B 站、小宇宙、公众号已验证；抖音、小红书、YouTube 时好时坏' },
-        { v: '0.035', l: 'CPU 转写实时率 RTF，单样本探测（越小越快）' },
+        { v: '约 2 分钟', l: '在普通 CPU 上转写 1 小时音频（单样本测得，实时率 0.035）' },
         { v: '521 KB → 2 KB', l: '小红书单次提取的传输量' },
         { v: '3 件事', l: '只做转文字、提图文、下原件' },
       ],
       sections: [
         {
-          h: '为什么做',
+          h: '起因',
           p: [
             '好内容散落在视频、播客和图文里，可工作需要的是文字：能检索、能引用、能交给 AI。现有的办法往往要装好几个工具，再在它们之间来回复制。',
             '万象成文只解决这一件事：给它一个链接或一个文件，拿回可用的文字和原始媒体。',
           ],
         },
         {
-          h: '难的地方',
+          h: '难点',
           list: [
             '每个平台的结构都不一样，而且经常变；抖音和小红书还会在会话或网络受限时拦截。',
             '转写又慢又吃机器，不能要求每个人都有显卡。',
@@ -502,14 +502,14 @@ export const CASES = [
           ],
         },
         {
-          h: '做什么，不做什么',
+          h: '边界',
           scope: {
             do: ['音频、视频转文字', '图文链接提取正文和图片', '预览并下载原视频、原音频、图片和文本'],
             dont: ['账号体系', '支付、套餐、积分', '多工作台、Agent 后台', '平台化配置中心'],
           },
         },
         {
-          h: '怎么搭的',
+          h: '架构',
           flow: [
             { t: '桌面外壳', n: ['Tauri 2（Rust）+ React', '首次运行只准备必要组件，约 222 MB', '运行包校验 SHA-256'] },
             { t: '本地服务', n: ['FastAPI，随应用启动', '只监听随机的本机端口', '每次启动生成短期令牌', 'SSE 实时推送进度'] },
@@ -519,11 +519,11 @@ export const CASES = [
           after: ['同一套服务也能部署成网页预览；Windows 桌面端是完整的主产品。'],
         },
         {
-          h: '我放弃了什么',
+          h: '取舍',
           table: {
             head: ['决定', '原因', '放弃的方案'],
             rows: [
-              ['默认用 SenseVoice', 'CPU 上 RTF 约 0.035，Faster-Whisper medium 在 CPU 上约 2.01；一段 989 秒的课程，SenseVoice 用 48 秒（这段 RTF 0.049），RTX 3060 上的 Whisper 用 97 秒', '默认上更大的模型'],
+              ['默认用 SenseVoice', '在 CPU 上，SenseVoice 的实时率约 0.035（1 小时音频约 2 分钟转完），Faster-Whisper medium 约 2.01；一段 989 秒的课程，SenseVoice 用 48 秒，RTX 3060 显卡上的 Whisper 用 97 秒', '默认上更大的模型'],
               ['能读字幕和正文，就不转写', '最快的转写，是不用转写', '所有内容统一走转写'],
               ['小红书直接读页面里的结构化数据', '不再传整页 HTML：传输量从 521 KB 降到 2 KB，总耗时少 30–40%', '先抓整页，再解析'],
               ['只做三件事', '账号、支付、工作台，会把一个工具变成一个平台', '做成平台'],
@@ -531,7 +531,7 @@ export const CASES = [
           },
         },
         {
-          h: '怎么知道它靠得住',
+          h: '验证',
           list: [
             '2026-08-11 用真实样本跑了一轮线上冒烟测试：B 站、小宇宙、抖音、公众号通过；小红书一篇 15 张图、14 个 Live 片段的图文通过。',
             '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
@@ -539,7 +539,7 @@ export const CASES = [
           ],
         },
         {
-          h: '还没做好的',
+          h: '还差什么',
           list: [
             '60 个样本、3 小时音频的准确率评测还没跑；跑完之前不换转写模型。',
             '安装包还没有代码签名，Windows 会弹出安全提示。',
@@ -564,23 +564,23 @@ export const CASES = [
         ['Form', 'Windows desktop app, plus a web preview'],
         ['Stack', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['Website', 'https://qinxujunai.github.io/Audio2Text/'], ['Download', `${A2T}/releases/latest`]],
+      links: [['Visit the site', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
       results: [
         { v: '3 + 3', l: 'Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu, YouTube' },
-        { v: '0.035', l: 'Real-time factor on CPU, single-sample probe (lower is faster)' },
+        { v: '~2 min', l: 'To transcribe an hour of audio on an ordinary CPU (single-sample probe, real-time factor 0.035)' },
         { v: '521 → 2 KB', l: 'Transfer per Xiaohongshu extraction' },
         { v: '3', l: 'Jobs: transcribe, extract, download' },
       ],
       sections: [
         {
-          h: 'Why I built it',
+          h: 'Why',
           p: [
             'Good material lives in videos, podcasts and articles, but work runs on text: something you can search, quote and hand to an AI. Getting it usually means several tools and a lot of copying between them.',
             'Wanxiang does one thing: give it a link or a file, and get usable text and the original media back.',
           ],
         },
         {
-          h: 'The hard parts',
+          h: 'Hard parts',
           list: [
             'Every platform is structured differently and changes often; Douyin and Xiaohongshu block requests when a session or network looks wrong.',
             'Transcription is slow and hardware-hungry, and not everyone has a GPU.',
@@ -588,7 +588,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'What it does, and doesn’t',
+          h: 'Scope',
           scope: {
             do: ['Transcribe audio and video', 'Extract article text and images', 'Preview and download original video, audio, images and text'],
             dont: ['Accounts', 'Payments, plans or credits', 'Workspaces or an agent console', 'A platform-style settings center'],
@@ -605,11 +605,11 @@ export const CASES = [
           after: ['The same service can also run as a web preview; the Windows app is the complete product.'],
         },
         {
-          h: 'What I gave up',
+          h: 'Trade-offs',
           table: {
             head: ['Decision', 'Why', 'Given up'],
             rows: [
-              ['SenseVoice by default', 'RTF about 0.035 on CPU versus about 2.01 for Faster-Whisper medium; a 989-second lecture took SenseVoice 48 s (RTF 0.049 on that one) and Whisper on an RTX 3060 97 s', 'A bigger default model'],
+              ['SenseVoice by default', 'On a CPU, SenseVoice runs at a real-time factor of about 0.035 (an hour of audio in about two minutes) versus about 2.01 for Faster-Whisper medium; a 989-second lecture took SenseVoice 48 s and Whisper on an RTX 3060 GPU 97 s', 'A bigger default model'],
               ['Use subtitles and page text when they exist', 'The fastest transcription is the one you skip', 'Transcribe everything'],
               ['Read Xiaohongshu’s structured page data directly', 'No full-page HTML: transfer fell from 521 KB to 2 KB and total time by 30–40%', 'Fetch the page, then parse it'],
               ['Do three things only', 'Accounts, payments and workspaces turn a tool into a platform', 'Becoming a platform'],
@@ -617,7 +617,7 @@ export const CASES = [
           },
         },
         {
-          h: 'How I know it works',
+          h: 'Evidence',
           list: [
             'A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.',
             'Each platform’s status is published with the date of its last check, not as a permanent promise.',
@@ -625,7 +625,7 @@ export const CASES = [
           ],
         },
         {
-          h: 'Not done yet',
+          h: 'Still missing',
           list: [
             'The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.',
             'The installer is not code-signed yet, so Windows shows a warning.',
