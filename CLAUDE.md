@@ -89,11 +89,11 @@
   - 「案例」统一改叫「作品」。
 
 ## 否决过的方案
-- **签名字体**：
-  - Liu Jian Mao Cao（v1–v3 用过）：太草，难以辨认。
-  - Zhi Mang Xing：笔画太重。
-  - 混排两种字体：笔画粗细不一致。
-  - 最后选了 Long Cang，加白文印。对比图用 `scripts/lab/glyphs.mjs` 和 `node scripts/signature.mjs … sheet` 生成。
+- **签名字体**（v4.4，2026-10-20 定稿：马善政楷书 + 朱印）：
+  - v1–v3 用刘建毛草；v4 改龙藏体加印，他说「甚至没之前的好看」。
+  - 我出了 5 个候选（刘建毛草原版、刘建毛草收紧加印、志莽行书、马善政楷书加印、龙藏体加印），推荐刘建毛草加印；他最后选了「楷书搭配印章」。
+  - 印章是红底白字的「徐俊」，下面垫一层纸色底，深色模式下字也是白的。
+  - 对比图用 `node scripts/signature.mjs … sheet` 生成；布局在 `LAYOUTS` 里，定稿是 `kai`。
 - **首屏标题**：「用自然语言，创造可运行的作品」很好，但不够直接对准 AI 解决方案，改用「从一句话，到能用的 AI」。原句的意思保留在思考区。
 - **案例页的架构图**：本想手画 SVG，改为数据驱动的阶段卡片（`flow` 区块）。这样手机上可读，深浅色自动适配，加新案例也不用画图。
 - **不单独做 ai.vibecoding 案例**：它是方法论的出处，放在「方法」区链接过去。线上站 2026-10 被改写，原话已不在页面上，所以引用链接指向 5 月版本的源码（367e746）。
@@ -126,6 +126,6 @@
 
 ## 工作环境备忘
 - 源素材不进仓库：头像、截图、照片原图、字体包都放在会话临时目录里。重建图片要先准备源目录，见 `scripts/media.mjs` 顶部。
-- 签名需要 @fontsource/long-cang 的 woff 和 NotoSerifSC-Bold.otf：
+- 签名需要 @fontsource/ma-shan-zheng 的 woff 和 NotoSerifSC-Bold.otf：
   `node scripts/signature.mjs <fonts-dir> <NotoSerifSC-Bold.otf> final`
 - Playwright 和 Chromium 的路径：`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`。

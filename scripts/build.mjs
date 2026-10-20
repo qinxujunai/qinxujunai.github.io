@@ -91,7 +91,7 @@ const themeScript =
 const sigStart =
   "(function(){var r=document.documentElement;if(!r.classList.contains('sig-pending'))return;" +
   "var g=document.querySelector('.hero .sig'),p=g.querySelectorAll('path'),i;" +
-  "for(i=0;i<p.length;i++)p[i].style.setProperty('--at',0.15+i*0.45+(p[i].classList.contains('seal')?0.2:0)+'s');" +
+  "var n=0;for(i=0;i<p.length;i++){var s=p[i].classList.contains('seal');p[i].style.setProperty('--at',(s?0.35:0.15)+(s?n:i)*0.45+'s');if(!s)n=i+1}" +
   "g.classList.add('write');r.classList.remove('sig-pending');" +
   "try{sessionStorage.setItem('qxj.signed','1')}catch(e){}})()";
 
