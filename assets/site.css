@@ -2214,7 +2214,15 @@ main {
     font-size: 11px;
   }
 
+  .frame-view picture {
+    display: block;
+    height: 100%;
+  }
+
   .frame-img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
     transform: none;
   }
 }
@@ -2410,4 +2418,71 @@ main {
   width: min(92%, 460px);
   margin: 40px auto 0;
   transform: none;
+}
+
+/* One headline scale: page title > section titles > block names. */
+.hero h1 {
+  font-size: min(40px, 10.2vw);
+}
+
+#path h2,
+.ending h2 {
+  font-size: min(36px, 9.2vw);
+}
+
+.hero .sub,
+.closing-line {
+  color: var(--body);
+}
+
+.sig-mini .seal {
+  display: none;
+}
+
+@media (hover: hover) {
+  .touch {
+    display: none;
+  }
+}
+
+@media (min-width: 734px) {
+  .hero h1 {
+    font-size: 68px;
+  }
+
+  #path h2,
+  .ending h2 {
+    font-size: 56px;
+  }
+
+  .show-line,
+  .share .show-line {
+    max-width: none;
+  }
+
+  .visual .gallery,
+  .visual .gallery[data-gallery] {
+    padding-left: max(var(--gutter), calc((100vw - 1040px) / 2));
+    padding-right: max(var(--gutter), calc((100vw - 1040px) / 2));
+    scroll-padding: 0 max(var(--gutter), calc((100vw - 1040px) / 2));
+  }
+}
+
+/* 想法 now follows the work blocks: eyebrow, name, one line, the site, facts and link. */
+.share .show-name {
+  margin-top: 4px;
+}
+
+/* Name card: signature and one line on the left, the QR code on the right. */
+.nc-card-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.nc-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

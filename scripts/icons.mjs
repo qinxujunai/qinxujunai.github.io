@@ -65,7 +65,6 @@ await render(
 // Name card, portrait for a phone album: the same card as the contact section, QR large enough to scan.
 const dataUri = (f, type) => `data:${type};base64,${fs.readFileSync(f).toString('base64')}`;
 const qr = dataUri('assets/wechat-qr.png', 'image/png');
-const avatar = dataUri('assets/media/avatar-320.webp', 'image/webp');
 for (const lang of ['zh', 'en']) {
   const c = content[lang];
   await render(
@@ -76,7 +75,6 @@ for (const lang of ['zh', 'en']) {
       <div style="border-radius:56px;background:#1d1d1f;color:#f5f5f7;padding:72px 68px 64px;box-shadow:0 40px 80px -30px rgba(0,0,0,.45)">
         <div style="display:flex;align-items:center;justify-content:space-between">
           ${svg.replace('<svg', '<svg style="height:120px;width:auto;fill:#f5f5f7"')}
-          <img src="${avatar}" style="width:128px;height:128px;border-radius:50%">
         </div>
         <div style="margin-top:72px;font-size:34px;line-height:1.35">${c.role}</div>
         <div style="margin-top:56px;display:flex;align-items:center;gap:40px">
