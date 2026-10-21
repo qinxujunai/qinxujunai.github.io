@@ -138,8 +138,10 @@ export const content = {
     ], ['实拍：山脚下的城区', '湖上游船，山顶有塔', '黄昏的湖边', '日落时的云']),
 
     contactTitle: '联系',
-    contactHeadline: '谢谢你看到这里',
-    contactLead: '加个微信，交个朋友',
+    contactHeadline: '欢迎交流',
+    contactLead: '聊 AI，聊产品，聊你正在做的事',
+    // his words: the manifesto of ai.vibecoding (May 2026)
+    closing: ['AI 进化得越快，我们越需要慢下来。', '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。'],
     cardLabel: '秦徐俊的名片',
     qrAlt: '秦徐俊的微信二维码',
     hint: {
@@ -167,7 +169,7 @@ export const content = {
       doLabel: '做',
       dontLabel: '不做',
       more: '其他作品',
-      contactHeadline: '谢谢你看到这里',
+      contactHeadline: '欢迎交流',
       contactBody: '',
       liveNote: (date) => `GitHub 数据每 6 小时自动更新，最近一次 ${date}`,
     },
@@ -273,8 +275,9 @@ export const content = {
     ], ['Photo: a town below the mountains', 'A boat, a pagoda on the hill', 'A lakeside at dusk', 'Clouds at sunset']),
 
     contactTitle: 'Contact',
-    contactHeadline: 'Thanks for reading this far',
-    contactLead: 'Say hi on WeChat',
+    contactHeadline: 'Let’s talk',
+    contactLead: 'AI, products, whatever you’re building',
+    closing: ['The faster AI evolves, the more we need to slow down.', 'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.'], // his words
     cardLabel: 'Qin Xujun’s card',
     qrAlt: 'Qin Xujun’s WeChat QR code',
     hint: {
@@ -300,7 +303,7 @@ export const content = {
       doLabel: 'Does',
       dontLabel: 'Does not',
       more: 'Other work',
-      contactHeadline: 'Thanks for reading this far',
+      contactHeadline: 'Let’s talk',
       contactBody: '',
       liveNote: (date) => `GitHub numbers refresh every six hours, last on ${date}`,
     },
