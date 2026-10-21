@@ -2225,10 +2225,6 @@ main {
   color: var(--muted);
 }
 
-.foot .colophon {
-  color: var(--muted);
-}
-
 /* On the home page, the note under each project is the judgement behind it. */
 .show-note {
   max-width: 30em;

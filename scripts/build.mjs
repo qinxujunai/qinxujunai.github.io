@@ -172,7 +172,6 @@ function footer(c) {
   return `<footer class="foot">
 <div class="foot-inner">
 <span>© ${new Date().getFullYear()}</span>
-<span class="colophon">${T(c, c.colophon)}</span>
 </div>
 </footer>`;
 }
