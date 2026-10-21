@@ -85,11 +85,6 @@ export const content = {
       title: '推荐',
       headline: '想系统学用 AI 做产品，我推荐 easy-vibe',
       line: 'Datawhale 的开源教程，从找到一个好想法，讲到把产品上线',
-      routes: [
-        { who: '先试试', get: '5 分钟，做出第一个 AI 小应用' },
-        { who: '有个想法', get: '做出一个能演示的产品原型' },
-        { who: '想做完整的产品', get: '独立做出一个能上线的全栈 AI 应用' },
-      ],
       note: 'Datawhale 开源 · 免费 · 零基础可学',
       link: '开始学习',
       url: 'https://datawhalechina.github.io/easy-vibe/zh-cn/',
@@ -222,11 +217,6 @@ export const content = {
       title: 'Recommended',
       headline: 'Want to learn to build with AI properly? I recommend easy-vibe',
       line: 'An open course by Datawhale, from finding a good idea to shipping the product',
-      routes: [
-        { who: 'Just trying', get: 'Build your first small AI app in 5 minutes' },
-        { who: 'Have an idea', get: 'Make a prototype you can demo' },
-        { who: 'Want the full path', get: 'Ship a full-stack AI app on your own' },
-      ],
       note: 'Open source by Datawhale · free · no coding background needed',
       link: 'Start learning',
       url: 'https://datawhalechina.github.io/easy-vibe/en/',
