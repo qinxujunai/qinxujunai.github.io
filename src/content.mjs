@@ -84,7 +84,7 @@ export const content = {
     journey: [
       { when: '2025.11', role: 'AI 解决方案架构', org: '比智科技', desc: '5 家以上客户进入采购评估。做的是让人用一句话查数据的 AI 方案，从需求诊断到回款，也主导招投标。' },
       { when: '2024.08', role: 'AI 项目负责人', org: '一念智能', desc: '一条脚本从 3 小时缩到 20 分钟：在飞书搭了写脚本的智能体。接手微众银行的 AI 课程项目，48 小时找到问题，客户点名要我继续负责。方正证券活动的开场片，用 AI 做成。' },
-      { when: '2023.04', role: '商业内容项目交付', org: '专致网络', desc: '150 多条信息流广告脚本，支撑每月 10 万以上的投放。抖音文旅号云南妙妙屋，3 个月涨粉 2000 多。拍工商银行宣传片时演员没来，我自己上了。' },
+      { when: '2023.04', role: '商业内容项目交付', org: '专致网络', desc: '150 多条信息流广告脚本，支撑每月 10 万以上的投放。抖音文旅号云南妙妙屋，3 个月涨粉 2000 多。负责工商银行宣传片，从策划到交付。' },
       { when: '2022.06', role: '社区运营（实习）', org: '抖音数字学堂', desc: '', light: true },
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。', light: true },
     ],
@@ -141,7 +141,6 @@ export const content = {
     copied: '已复制 praxiscore，去微信搜索里粘贴',
     // his words: the manifesto of ai.vibecoding (May 2026)
     closing: ['AI 进化得越快，我们越需要慢下来。', '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。'],
-    colophon: '纯 HTML 和 CSS · 系统字体 · 不发任何外部请求',
     notFound: { title: '这一页不存在', body: '链接可能写错了，或者页面已经搬走。', back: '回到首页' },
 
     // Project page chrome
@@ -207,7 +206,7 @@ export const content = {
     journey: [
       { when: '2025.11', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: '5+ clients reached procurement review. The work: AI that lets people query data in one sentence, from diagnosis to payment, including the bids.' },
       { when: '2024.08', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'One script went from three hours to twenty minutes: I built a script-writing agent in Feishu. Took over a WeBank AI course project, found the problem in 48 hours, and the client asked for me by name. Made the opening film for a Founder Securities event with AI.' },
-      { when: '2023.04', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: '150-odd in-feed ad scripts behind more than ¥100k of monthly ad spend. A Douyin travel account grown by 2,000+ followers in three months. On an ICBC film, the actor didn’t show up, so I stepped in.' },
+      { when: '2023.04', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: '150-odd in-feed ad scripts behind more than ¥100k of monthly ad spend. A Douyin travel account grown by 2,000+ followers in three months. Produced ICBC’s brand film from concept to delivery.' },
       { when: '2022.06', role: 'Community Operations (intern)', org: 'Douyin Digital Academy', desc: '', light: true },
       { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How to make content, and how to get it seen.', light: true },
     ],
@@ -262,7 +261,6 @@ export const content = {
     copyOnly: 'Copy my WeChat ID',
     copied: 'Copied praxiscore. Paste it into WeChat search',
     closing: ['The faster AI evolves, the more we need to slow down.', 'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.'], // his words
-    colophon: 'Plain HTML and CSS · System fonts · No outside requests',
     notFound: { title: 'This page doesn’t exist', body: 'The link may be mistyped, or the page has moved.', back: 'Back to home' },
 
     caseLabels: {

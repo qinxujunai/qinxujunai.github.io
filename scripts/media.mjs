@@ -63,16 +63,18 @@ await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80,
 
 // Products
 // Project websites, captured full-page from qinxujunai.github.io (same origin) by scripts/capture-sites.cjs.
-//   site-<name>-d.png: 1280px wide, 1x · site-<name>-m.png: 390px wide, 2x
+//   site-<name>-d.png: 1280px wide, 2x, full page · site-<name>-c.png: 820px wide, 3x, first 1200px
 // Shown inside a browser or phone frame that scrolls through the page as you scroll past it.
 // Crops in CSS pixels of the desktop capture (1280 wide, captured at 2x).
 // Each ends on a section edge of that site, short enough that the page moves about as fast as the scroll.
 const SITES = {
-  // card: where the phone card ends, on blank space just under each site's first screen.
-  voiceflow: { d: { height: 2180 }, card: 600 },
-  wanxiang: { d: { height: 2250 }, card: 520 },
-  'ai-signal': { d: { left: 260, width: 760, height: 2100 }, card: 360 },
-  vibecoding: { d: { height: 2280 }, card: 680 },
+  // card: the phone card, cut from the 820px-wide 3x capture (site-<name>-c.png), in CSS px.
+  // About 1.8:1 (the card's view), starting and ending on blank space, so the main heading,
+  // one line and the button fill the card at a readable size.
+  voiceflow: { d: { height: 2180 }, card: { top: 110, height: 455 } },
+  wanxiang: { d: { height: 2250 }, card: { top: 90, height: 455 } },
+  'ai-signal': { d: { left: 260, width: 760, height: 2100 }, card: { left: 100, width: 600, top: 0, height: 333 } },
+  vibecoding: { d: { height: 2280 }, card: { top: 140, height: 445 } },
 };
 for (const [name, crop] of Object.entries(SITES)) {
   const file = find(new RegExp(`^site-${name}-d\\.`));
@@ -84,7 +86,12 @@ for (const [name, crop] of Object.entries(SITES)) {
   // Wide screens: the page from the top to a section edge, scrolled inside the window.
   await emit(`site-${name}`, file, { widths: [1040, 2080].map((x) => Math.min(x, w)), quality: 58, crop: { left, top: 0, width: w, height: Math.min(Math.round(c.height * k), meta.height) } });
   // Phones: just the top of the same page, ending on blank space, small enough for a weak network.
-  await emit(`site-${name}-card`, file, { widths: [720], quality: 60, crop: { left, top: 0, width: w, height: Math.round(crop.card * k) } });
+  // Phones: the site's first screen from the 820px capture, 1080px wide so it stays sharp on 3x screens.
+  const cfile = find(new RegExp(`^site-${name}-c\\.`));
+  const kc = (await sharp(cfile).metadata()).width / 820;
+  const cc = crop.card;
+  const px = (v) => Math.round(v * kc);
+  await emit(`site-${name}-card`, cfile, { widths: [1080], quality: 72, crop: { left: px(cc.left || 0), top: px(cc.top), width: px(cc.width || 820), height: px(cc.height) } });
 }
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.

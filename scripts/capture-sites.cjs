@@ -1,4 +1,5 @@
-// Captures each project website full-page at desktop width (1280px, 2x) for the project windows and phone cards.
+// Captures each project website: full-page at desktop width (1280px, 2x) for the windows on wide screens,
+// and the first 1200px at 820px wide, 3x, for the phone cards (bigger type, sharp on 3x screens).
 // Usage: node scripts/capture-sites.cjs <out-dir>   then: npm run media -- <out-dir> site-voiceflow site-voiceflow-card …
 const pw = (() => { try { return require('playwright'); } catch { return require('/opt/node22/lib/node_modules/playwright'); } })();
 const out = process.argv[2];
@@ -6,7 +7,7 @@ const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': '
 (async () => {
   const b = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', proxy: { server: process.env.HTTPS_PROXY } });
   for (const [name, path] of Object.entries(sites)) {
-    for (const [tag, vp, dpr, mobile] of [['d', { width: 1280, height: 800 }, 2, false]]) {
+    for (const [tag, vp, dpr, mobile] of [['d', { width: 1280, height: 800 }, 2, false], ['c', { width: 820, height: 1200 }, 3, false]]) {
       const ctx = await b.newContext({ viewport: vp, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile, reducedMotion: 'reduce', colorScheme: 'light', locale: 'zh-CN' });
       const p = await ctx.newPage();
       await p.goto('https://qinxujunai.github.io/' + path, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => {});
@@ -14,7 +15,7 @@ const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': '
       await p.waitForTimeout(1500);
       await p.addStyleTag({ content: '*{animation:none!important;transition:none!important} [class*="fixed"],[class*="sticky"],header{position:static!important}' }).catch(()=>{});
       const h = await p.evaluate(() => document.documentElement.scrollHeight);
-      await p.screenshot({ path: `${out}/site-${name}-${tag}.png`, fullPage: true });
+      await p.screenshot({ path: `${out}/site-${name}-${tag}.png`, fullPage: tag === 'd' });
       console.log(name, tag, h);
       await ctx.close();
     }
