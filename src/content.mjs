@@ -72,18 +72,28 @@ export const content = {
     share: {
       title: '想法',
       name: 'ai.vibecoding',
-      headline: '用 AI 做产品的方法，我写成了一份免费指南',
-      // his words: ai.vibecoding, src/content/site.tsx @ 367e746 (May 2026)
-      why: 'AI 写代码很快，但交付靠流程',
-      whyNote: '从想法到上线，我自己怎么做，都写在里面',
-      // the three reading routes on the site itself
-      routes: [
-        { who: '零基础', get: '做出第一个能用的作品' },
-        { who: '产品经理、创业者', get: '花很少的钱，验证一个想法' },
-        { who: '工程师、技术负责人', get: '让团队把 AI 用进日常开发' },
-      ],
-      note: '10 章 · 约 18 分钟 · 免费',
+      // his words: the hero title of ai.vibecoding (May 2026)
+      quote: '用自然语言，创造可运行的作品',
+      intro: '我把用 AI 做产品的方法写成了一个网站，零基础也能读',
+      note: '10 章 · 约 18 分钟',
       link: '开始阅读',
+    },
+
+    // A recommendation, not his work: Datawhale's open course easy-vibe. Facts from its README
+    // (github.com/datawhalechina/easy-vibe, docs-readme/zh-CN, "你的学习路径"), checked 2026-10-21.
+    recommend: {
+      title: '推荐',
+      headline: '想系统学用 AI 做产品，我推荐 easy-vibe',
+      line: 'Datawhale 的开源教程，从找到一个好想法，讲到把产品上线',
+      routes: [
+        { who: '先试试', get: '5 分钟，做出第一个 AI 小应用' },
+        { who: '有个想法', get: '做出一个能演示的产品原型' },
+        { who: '想做完整的产品', get: '独立做出一个能上线的全栈 AI 应用' },
+      ],
+      note: 'Datawhale 开源 · 免费 · 零基础可学',
+      link: '开始学习',
+      url: 'https://datawhalechina.github.io/easy-vibe/zh-cn/',
+      alt: 'easy-vibe 教程网站首页',
     },
 
     pathTitle: '经历',
@@ -146,8 +156,6 @@ export const content = {
     copyWechat: '复制微信号，打开微信',
     copyOnly: '复制微信号',
     copied: '已复制 praxiscore，去微信搜索里粘贴',
-    // his words: the manifesto of ai.vibecoding (May 2026)
-    closing: ['AI 进化得越快，我们越需要慢下来。', '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。'],
     notFound: { title: '这一页不存在', body: '链接可能写错了，或者页面已经搬走。', back: '回到首页' },
 
     // Project page chrome
@@ -202,16 +210,25 @@ export const content = {
     share: {
       title: 'Ideas',
       name: 'ai.vibecoding',
-      headline: 'I wrote down how I build products with AI, as a free guide',
-      why: 'AI writes quickly, but delivery depends on process', // his words: ai.vibecoding, src/content/site.tsx @ 367e746, en
-      whyNote: 'Everything I do, from idea to launch, is in it',
-      routes: [
-        { who: 'New to code', get: 'Build your first working product' },
-        { who: 'Product managers, founders', get: 'Test an idea for very little money' },
-        { who: 'Engineers, tech leads', get: 'Bring AI into your team’s daily work' },
-      ],
-      note: '10 chapters · about 18 minutes · free',
+      quote: 'Use natural language to create working products', // his words
+      intro: 'I wrote down how I build products with AI, as a website anyone can read',
+      note: '10 chapters · about 18 minutes',
       link: 'Start reading',
+    },
+
+    recommend: {
+      title: 'Recommended',
+      headline: 'Want to learn to build with AI properly? I recommend easy-vibe',
+      line: 'An open course by Datawhale, from finding a good idea to shipping the product',
+      routes: [
+        { who: 'Just trying', get: 'Build your first small AI app in 5 minutes' },
+        { who: 'Have an idea', get: 'Make a prototype you can demo' },
+        { who: 'Want the full path', get: 'Ship a full-stack AI app on your own' },
+      ],
+      note: 'Open source by Datawhale · free · no coding background needed',
+      link: 'Start learning',
+      url: 'https://datawhalechina.github.io/easy-vibe/en/',
+      alt: 'The easy-vibe course website',
     },
 
     pathTitle: 'Path',
@@ -273,7 +290,6 @@ export const content = {
     copyWechat: 'Copy my WeChat ID and open WeChat',
     copyOnly: 'Copy my WeChat ID',
     copied: 'Copied praxiscore. Paste it into WeChat search',
-    closing: ['The faster AI evolves, the more we need to slow down.', 'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.'], // his words
     notFound: { title: 'This page doesn’t exist', body: 'The link may be mistyped, or the page has moved.', back: 'Back to home' },
 
     caseLabels: {
