@@ -51,7 +51,7 @@
 - **图片**：
   - 运行 `npm run media -- <源目录> [名字…]` 生成 `assets/media/*.webp`。带名字时只重建这几张，并合并进 `src/media.json`。
   - 源图不进仓库，见 `scripts/media.mjs` 顶部说明。
-  - 作品窗口里的网站截图：先运行 `node scripts/capture-sites.cjs <源目录>` 整页截取四个线上网站（桌面 1280、手机 390），再 `npm run media -- <源目录> site-voiceflow site-voiceflow-m …`。网站改版后要重截。
+  - 作品窗口里的网站截图：先运行 `node scripts/capture-sites.cjs <源目录>` 截取四个线上网站：桌面窗口用 1280 宽 2 倍整页（`-d`），手机卡片用 820 宽 3 倍首屏（`-c`，输出 1080px 宽，在 3 倍屏上清晰）。再 `npm run media -- <源目录> site-voiceflow site-voiceflow-card …`。网站改版后要重截。
 - **图标、分享图、名片 PNG**：`npm run icons` 生成。名片里嵌的是 `assets/wechat-qr.png`，换二维码后必须重新生成。
 
 ## 红线
@@ -68,7 +68,7 @@
   - 不出现手机号、邮箱、薪资、年龄、毕业年份；不提交简历。
   - 联系方式只用微信：二维码 `assets/wechat-qr.png`（换图后必须还能被解码，`npm run qa` 会检查）和他本人给的微信号 praxiscore（`content.mjs` 的 `wechatId`）。
   - 摄影只用风景、建筑、静物，不放他人正脸，不放品牌 logo。
-  - 名字全站只以签名出现：名片不再打字写「秦徐俊」，页脚只写「© 年份」。
+  - 名字全站只以签名出现：名片不再打字写「秦徐俊」，页脚只写「© 年份」，不写网站怎么做的。
   - AI 生成的人像不是真人，可以放；AI 作品里同样不放品牌 logo 和版权角色。
 - **零外部请求**：不加外部字体、统计、CDN、嵌入。字体只用系统字体：PingFang / SF / 各平台黑体。
 - **两种字体、三档文字**：系统黑体排所有文字；楷书只作为名字的标志（签名 + 印章）。文字颜色只有三档：标题 `--ink`、正文 `--body`、辅助信息 `--muted`。

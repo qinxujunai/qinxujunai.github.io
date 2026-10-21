@@ -266,35 +266,35 @@
     }
   },
   "site-voiceflow-card": {
-    "720": {
-      "src": "/assets/media/site-voiceflow-card-720.webp",
-      "w": 720,
-      "h": 338,
-      "kb": 7
+    "1080": {
+      "src": "/assets/media/site-voiceflow-card-1080.webp",
+      "w": 1080,
+      "h": 599,
+      "kb": 20
     }
   },
   "site-wanxiang-card": {
-    "720": {
-      "src": "/assets/media/site-wanxiang-card-720.webp",
-      "w": 720,
-      "h": 293,
-      "kb": 7
+    "1080": {
+      "src": "/assets/media/site-wanxiang-card-1080.webp",
+      "w": 1080,
+      "h": 599,
+      "kb": 15
     }
   },
   "site-ai-signal-card": {
-    "720": {
-      "src": "/assets/media/site-ai-signal-card-720.webp",
-      "w": 720,
-      "h": 341,
-      "kb": 13
+    "1080": {
+      "src": "/assets/media/site-ai-signal-card-1080.webp",
+      "w": 1080,
+      "h": 599,
+      "kb": 28
     }
   },
   "site-vibecoding-card": {
-    "720": {
-      "src": "/assets/media/site-vibecoding-card-720.webp",
-      "w": 720,
-      "h": 383,
-      "kb": 10
+    "1080": {
+      "src": "/assets/media/site-vibecoding-card-1080.webp",
+      "w": 1080,
+      "h": 586,
+      "kb": 23
     }
   }
 }
