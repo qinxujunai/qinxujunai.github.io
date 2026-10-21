@@ -1,16 +1,18 @@
 // Captures each project website: full-page at desktop width (1280px, 2x) for the windows on wide screens,
 // and the first 1200px at 820px wide, 3x, for the phone cards (bigger type, sharp on 3x screens).
-// Usage: node scripts/capture-sites.cjs <out-dir>   then: npm run media -- <out-dir> site-voiceflow site-voiceflow-card …
+// Usage: node scripts/capture-sites.cjs <out-dir> [name…]   then: npm run media -- <out-dir> site-voiceflow site-voiceflow-card …
 const pw = (() => { try { return require('playwright'); } catch { return require('/opt/node22/lib/node_modules/playwright'); } })();
 const out = process.argv[2];
-const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': 'ai-signal/', vibecoding: 'qinxujun-ai-vibecoding/' };
+const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': 'ai-signal/', vibecoding: 'qinxujun-ai-vibecoding/', easyvibe: 'https://datawhalechina.github.io/easy-vibe/zh-cn/' };
+const only = process.argv.slice(3);
 (async () => {
   const b = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', proxy: { server: process.env.HTTPS_PROXY } });
   for (const [name, path] of Object.entries(sites)) {
+    if (only.length && !only.includes(name)) continue;
     for (const [tag, vp, dpr, mobile] of [['d', { width: 1280, height: 800 }, 2, false], ['c', { width: 820, height: 1200 }, 3, false]]) {
       const ctx = await b.newContext({ viewport: vp, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile, reducedMotion: 'reduce', colorScheme: 'light', locale: 'zh-CN' });
       const p = await ctx.newPage();
-      await p.goto('https://qinxujunai.github.io/' + path, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => {});
+      await p.goto(path.startsWith('http') ? path : 'https://qinxujunai.github.io/' + path, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => {});
       await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 120)); } window.scrollTo(0, 0); });
       await p.waitForTimeout(1500);
       await p.addStyleTag({ content: '*{animation:none!important;transition:none!important} [class*="fixed"],[class*="sticky"],header{position:static!important}' }).catch(()=>{});

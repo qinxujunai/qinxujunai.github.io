@@ -298,26 +298,40 @@ ${visual(c)}
 </section>`;
 }
 
-// 想法: a gift to the reader, not a fifth work. What it is, why he wrote it (his words, lit as they
-// scroll by), what each kind of reader gets from it, then the site itself and one link.
+// 想法: the same shape as a work. Eyebrow, name, one plain line, the site, then facts and the link.
 function share(c) {
   const s = c.share;
   return `<section id="share" class="tile dark share" aria-labelledby="share-title">
-<div class="share-head reveal">
+<div class="show-head">
 <p class="eyebrow">${s.title}</p>
-<h2 id="share-title">${bare(s.headline).split(/(?<=，)/).map((part) => `<span class="clause">${T(c, part)}</span>`).join('')}</h2>
+<h2 class="show-name" id="share-title">${esc(s.name)}</h2>
+<p class="show-line">${T(c, bare(s.intro))}</p>
 </div>
-<div class="statement" data-statement>
-<p class="pull">${statement(c, bare(s.why))}</p>
-<p class="said">${T(c, bare(s.whyNote))}</p>
-</div>
-<ul class="routes reveal">
-${s.routes.map((r) => `<li><span class="who">${T(c, r.who)}</span><span class="get">${T(c, bare(r.get))}</span></li>`).join('\n')}
-</ul>
 ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', url: VIBECODING, name: s.name })}
 <div class="show-foot">
 <p class="show-note">${T(c, dots(bare(s.note)))}</p>
 <p class="cta"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.link)}${chevron}<span class="visually-hidden"> ${esc(s.name)}</span></a></p>
+</div>
+</section>`;
+}
+
+// 推荐: before saying goodbye, one thing worth the reader's time. Not his work: Datawhale's open
+// course easy-vibe. What it is, one line, what each kind of learner gets, the site, one link.
+function recommend(c) {
+  const r = c.recommend;
+  return `<section id="recommend" class="tile dark share" aria-labelledby="recommend-title">
+<div class="show-head reveal">
+<p class="eyebrow">${esc(r.title)}</p>
+<h2 id="recommend-title" class="rec-title">${bare(r.headline).split(/(?<=[，?])\s*/).map((part) => `<span class="clause">${T(c, part)}</span>`).join(c.lang === 'zh-CN' ? '' : ' ')}</h2>
+<p class="show-line">${T(c, bare(r.line))}</p>
+</div>
+<ul class="routes reveal">
+${r.routes.map((x) => `<li><span class="who">${T(c, x.who)}</span><span class="get">${T(c, bare(x.get))}</span></li>`).join('\n')}
+</ul>
+${frame(c, { key: 'site-easyvibe', alt: r.alt, url: r.url, name: 'easy-vibe' })}
+<div class="show-foot">
+<p class="show-note">${T(c, dots(bare(r.note)))}</p>
+<p class="cta"><a class="more-link" href="${r.url}" ${ext}>${esc(r.link)}${chevron}<span class="visually-hidden"> easy-vibe</span></a></p>
 </div>
 </section>`;
 }
@@ -354,7 +368,6 @@ function contact(c) {
 </div>
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(bare(c.hint.wechat))}" data-hint-phone="${esc(bare(c.hint.phone))}" data-hint-desktop="${esc(bare(c.hint.desktop))}">${esc(bare(c.hint.default))}</p>
 <p class="cta contact-cta">${c.wechatId ? `<button type="button" class="pill" data-wechat-id="${esc(c.wechatId)}" data-copied="${esc(bare(c.copied))}" data-label-phone="${esc(c.copyWechat)}" data-label-desktop="${esc(c.copyOnly)}" hidden>${esc(c.copyWechat)}</button>` : ''}<a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
-<p class="closing-line reveal"><span class="closing-lead">${T(c, bare(c.closing[0]))}</span>${T(c, c.closing[1])}</p>
 </section>`;
 }
 
@@ -380,6 +393,7 @@ ${hero(c)}
 ${work(c)}
 ${share(c)}
 ${journey(c)}
+${recommend(c)}
 ${contact(c)}
 </main>
 ${footer(c)}

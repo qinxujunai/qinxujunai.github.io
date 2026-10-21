@@ -75,6 +75,9 @@ const SITES = {
   wanxiang: { d: { height: 2250 }, card: { top: 90, height: 455 } },
   'ai-signal': { d: { left: 260, width: 760, height: 2100 }, card: { left: 100, width: 600, top: 0, height: 333 } },
   vibecoding: { d: { height: 2280 }, card: { top: 140, height: 445 } },
+  // Not his work: Datawhale's easy-vibe course, recommended near the end.
+  // Desktop skips its blank splash screen and starts at the site's nav.
+  easyvibe: { d: { top: 870, height: 1230 }, card: { top: 340, height: 440 } },
 };
 for (const [name, crop] of Object.entries(SITES)) {
   const file = find(new RegExp(`^site-${name}-d\\.`));
@@ -84,8 +87,7 @@ for (const [name, crop] of Object.entries(SITES)) {
   const w = Math.round((c.width || 1280) * k);
   const left = Math.round((c.left || 0) * k);
   // Wide screens: the page from the top to a section edge, scrolled inside the window.
-  await emit(`site-${name}`, file, { widths: [1040, 2080].map((x) => Math.min(x, w)), quality: 58, crop: { left, top: 0, width: w, height: Math.min(Math.round(c.height * k), meta.height) } });
-  // Phones: just the top of the same page, ending on blank space, small enough for a weak network.
+  await emit(`site-${name}`, file, { widths: [1040, 2080].map((x) => Math.min(x, w)), quality: 58, crop: { left, top: Math.round((c.top || 0) * k), width: w, height: Math.min(Math.round(c.height * k), meta.height - Math.round((c.top || 0) * k)) } });
   // Phones: the site's first screen from the 820px capture, 1080px wide so it stays sharp on 3x screens.
   const cfile = find(new RegExp(`^site-${name}-c\\.`));
   const kc = (await sharp(cfile).metadata()).width / 820;
