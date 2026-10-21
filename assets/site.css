@@ -1121,7 +1121,7 @@ main {
 }
 
 .js .statement .pull span {
-  color: #636366;
+  color: #86868b;
   transition: color 0.35s ease;
 }
 
@@ -2239,8 +2239,7 @@ main {
   color: var(--body);
 }
 
-.dark .show-line,
-.share .show-line {
+.dark .show-line {
   color: #d2d2d7;
 }
 
@@ -2291,21 +2290,91 @@ main {
   margin: 0;
 }
 
-/* 想法: one block, his line, one sentence, the site, then the link. */
+/* 想法: a gift, not a fifth work. Headline, his line lit by scroll, three routes, the site, the link. */
 .share {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
+}
+
+.share h2 {
+  max-width: 13em;
+  margin: 8px auto 0;
+  font-size: min(34px, 8.6vw);
+  line-height: 1.15;
+}
+
+/* The headline breaks only after its comma. */
+.share h2 .clause {
+  display: inline-block;
 }
 
 .share .statement {
   padding: 0;
 }
 
-.share .statement .show-line {
-  max-width: 24em;
-  margin: 16px auto 0;
+.share .statement .pull {
+  font-size: min(24px, 6.4vw);
+  line-height: 1.3;
+}
+
+.share .statement .said {
+  margin-top: 12px;
+  font-size: 17px;
+  box-shadow: none;
+}
+
+.routes {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.routes li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.routes .who {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.routes .get {
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (min-width: 734px) {
+  .share h2 {
+    font-size: 56px;
+  }
+
+  .share .statement .pull {
+    max-width: none;
+    font-size: 32px;
+  }
+
+  .routes {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .routes li {
+    padding: 24px;
+  }
 }
 
 /* 经历: one focal point per row. Role is the heading; date, company and light rows step back. */
@@ -2418,8 +2487,7 @@ main {
     font-size: 56px;
   }
 
-  .show-line,
-  .share .show-line {
+  .show-line {
     max-width: none;
   }
 
@@ -2429,11 +2497,6 @@ main {
     padding-right: max(var(--gutter), calc((100vw - 1040px) / 2));
     scroll-padding: 0 max(var(--gutter), calc((100vw - 1040px) / 2));
   }
-}
-
-/* 想法 now follows the work blocks: eyebrow, name, one line, the site, facts and link. */
-.share .show-name {
-  margin-top: 4px;
 }
 
 /* Name card: signature and one line on the left, the QR code on the right. */

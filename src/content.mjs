@@ -72,10 +72,17 @@ export const content = {
     share: {
       title: '想法',
       name: 'ai.vibecoding',
-      // his words: the hero title of ai.vibecoding (May 2026)
-      quote: '用自然语言，创造可运行的作品',
-      intro: '我把用 AI 做产品的方法写成了一个网站，零基础也能读',
-      note: '10 章 · 约 18 分钟',
+      headline: '用 AI 做产品的方法，我写成了一份免费指南',
+      // his words: ai.vibecoding, src/content/site.tsx @ 367e746 (May 2026)
+      why: 'AI 写代码很快，但交付靠流程',
+      whyNote: '从想法到上线，我自己怎么做，都写在里面',
+      // the three reading routes on the site itself
+      routes: [
+        { who: '零基础', get: '做出第一个能用的作品' },
+        { who: '产品经理、创业者', get: '花很少的钱，验证一个想法' },
+        { who: '工程师、技术负责人', get: '让团队把 AI 用进日常开发' },
+      ],
+      note: '10 章 · 约 18 分钟 · 免费',
       link: '开始阅读',
     },
 
@@ -195,9 +202,15 @@ export const content = {
     share: {
       title: 'Ideas',
       name: 'ai.vibecoding',
-      quote: 'Use natural language to create working products', // his words
-      intro: 'I wrote down how I build products with AI, as a website anyone can read',
-      note: '10 chapters · about 18 minutes',
+      headline: 'I wrote down how I build products with AI, as a free guide',
+      why: 'AI writes quickly, but delivery depends on process', // his words: ai.vibecoding, src/content/site.tsx @ 367e746, en
+      whyNote: 'Everything I do, from idea to launch, is in it',
+      routes: [
+        { who: 'New to code', get: 'Build your first working product' },
+        { who: 'Product managers, founders', get: 'Test an idea for very little money' },
+        { who: 'Engineers, tech leads', get: 'Bring AI into your team’s daily work' },
+      ],
+      note: '10 chapters · about 18 minutes · free',
       link: 'Start reading',
     },
 
