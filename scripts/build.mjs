@@ -298,15 +298,22 @@ ${visual(c)}
 </section>`;
 }
 
-// 想法: the same shape as a work. Eyebrow, name, one plain line, the site, then facts and the link.
+// 想法: a gift to the reader, not a fifth work. What it is, why he wrote it (his words, lit as they
+// scroll by), what each kind of reader gets from it, then the site itself and one link.
 function share(c) {
   const s = c.share;
   return `<section id="share" class="tile dark share" aria-labelledby="share-title">
-<div class="show-head">
+<div class="share-head reveal">
 <p class="eyebrow">${s.title}</p>
-<h2 class="show-name" id="share-title">${esc(s.name)}</h2>
-<p class="show-line">${T(c, bare(s.intro))}</p>
+<h2 id="share-title">${bare(s.headline).split(/(?<=，)/).map((part) => `<span class="clause">${T(c, part)}</span>`).join('')}</h2>
 </div>
+<div class="statement" data-statement>
+<p class="pull">${statement(c, bare(s.why))}</p>
+<p class="said">${T(c, bare(s.whyNote))}</p>
+</div>
+<ul class="routes reveal">
+${s.routes.map((r) => `<li><span class="who">${T(c, r.who)}</span><span class="get">${T(c, bare(r.get))}</span></li>`).join('\n')}
+</ul>
 ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', url: VIBECODING, name: s.name })}
 <div class="show-foot">
 <p class="show-note">${T(c, dots(bare(s.note)))}</p>
