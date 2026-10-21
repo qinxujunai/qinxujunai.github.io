@@ -26,6 +26,8 @@ export const CASES = [
       note: 'Windows 语音输入 · 装好后断网也能用 · 免费开源',
       // The judgement behind it, for the home page (from the sections below).
       why: '预览负责快，终稿只认完整录音；剪贴板没核对过，不算送达。',
+      // Why he built it, in his words (his answer, 2026-10-21). Shown on the home page under the picture.
+      story: '我常对着 AI 一说就是十几分钟。用过的输入法，网一卡，整段话就没了；最后几句常常出不来；光标不在输入框，说完的话直接消失。所以我做了一个全在本机跑的：说到最后一个字，就出来最后一个字。',
       imageAlt: 'VoiceFlow 的官网：让想法成文。按一下，说出你的话。',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
@@ -44,8 +46,10 @@ export const CASES = [
         {
           h: '起因',
           p: [
-            '和 AI 对话时，花时间的往往不是那句指令，而是补充背景、解释约束、继续追问。这些话比指令长得多，打字成了瓶颈。',
-            '现有的语音输入大多要联网、要登录，长段落容易丢掉结尾，识别完还得从另一个窗口复制回来。我想要的很简单：光标在哪，就在哪说；说完，文字就在那里。',
+            // His answer, 2026-10-21.
+            '我用语音跟 AI 聊天、做开发，一说就是五六分钟，甚至十几分钟。',
+            '试过的工具各有各的好：国外有能用 AI 校对的，要付费；国内的输入法识别得很好。但我碰到三个问题。第一，说完一结束，网一卡，整段话就没了。第二，最后几句常常识别不出来，可我要的是完整：说到最后一个字，就得出来最后一个字。第三，光标不在输入框里，说完的话直接消失。',
+            '所以我想要一个全在本机跑的：没有网络延迟，说的每句话都完整落下；光标不在输入框，也先留在剪贴板，保证一个字都不丢。',
           ],
         },
         {
@@ -138,6 +142,7 @@ export const CASES = [
       line: 'When typing is too slow, press F2, speak, and the words land at your cursor',
       note: 'Voice typing for Windows · Offline after install · Free, open source',
       why: 'The live preview is for speed; the final text trusts only the full recording. Nothing counts as delivered until the clipboard is checked.',
+      story: 'I often talk to an AI for ten minutes or more at a time. With the voice input I used, one network hiccup and the whole passage was gone; the last few sentences often never appeared; if the cursor wasn’t in a text box, everything I said simply vanished. So I built one that runs entirely on my own computer: when I say the last word, the last word appears.',
       imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
       facts: [
         ['Role', 'Solo: product, design, engineering, release'],
@@ -156,8 +161,9 @@ export const CASES = [
         {
           h: 'Why',
           p: [
-            'When you work with AI, the instruction is rarely the long part. The context, the constraints and the follow-up questions are. Typing becomes the bottleneck.',
-            'Most voice input needs a network and an account, drops the end of long passages, and leaves you copying text back from another window. I wanted something simpler: speak where the cursor is, and find the words there when you stop.',
+            'I talk to AI by voice while I chat and build, often for five or six minutes at a time, sometimes more than ten.',
+            'The tools I tried each had strengths: one from abroad could clean up text with AI, for a fee; the voice input on Chinese phones and PCs recognised speech well. But I kept hitting three problems. First, when I stopped, one network hiccup and the whole passage was gone. Second, the last few sentences often never appeared, when what I needed was all of it: the last word I say should be the last word on screen. Third, if the cursor wasn’t in a text box, everything I said simply vanished.',
+            'So I wanted one that runs entirely on my own computer: no network delay, every sentence landing in full, and if there’s no text box, the words wait on the clipboard so not one is lost.',
           ],
         },
         {
@@ -260,6 +266,8 @@ export const CASES = [
       line: 'AI 消息太多，它每天挑出值得看的，一页读完',
       note: '北京时间每天 10:00 更新 · 每条都附原文 · 往期都能翻',
       why: '模型只能引用编号，链接由代码回填，写不出假链接。',
+      // His answer, 2026-10-21.
+      story: 'AI 的消息每天成百上千。难的不是看到，是分清哪些可信、哪些值得看；GitHub 上的好项目，我也想第一时间知道它能解决什么问题。所以我让它每天替我读一遍。',
       imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
       facts: [
         ['角色', '独立开发'],
@@ -278,8 +286,9 @@ export const CASES = [
         {
           h: '起因',
           p: [
-            'AI 的信息太多：推文、播客、博客、论文、GitHub，每天几百条，真正重要的二十来条。刷信息流费时间，也容易被情绪和噪音带着走。',
-            '我想要一位靠谱的编辑：每天替我读一遍，只留下会改变判断的内容，几分钟读完。',
+            // His answer, 2026-10-21.
+            'AI 的信息太多：推文、播客、博客、论文、GitHub，每天几百条。难的不是看到，是分清哪些来自可信的来源、哪些是真正有价值的，而不是噪音。GitHub 上的好项目，我也想第一时间知道它能解决什么问题。',
+            '我觉得在 AI 时代，提出一个好问题会越来越重要；好问题背后是判断力，判断力靠长期吃进好的信息。所以我想要一位靠谱的编辑：每天替我读一遍，只留下会改变判断的内容，几分钟读完。',
           ],
         },
         {
@@ -364,6 +373,7 @@ export const CASES = [
       line: 'Too much AI news? It picks what’s worth reading each day, on one page',
       note: 'Updated daily at 10:00 Beijing time · Every item links to its source · Full archive',
       why: 'The model may only cite item numbers; code fills in every link, so it cannot invent one.',
+      story: 'Hundreds of AI updates arrive every day. The hard part isn’t seeing them; it’s telling which are credible and which are worth reading. I also want to know about good GitHub projects early, and what problem each one solves. So it reads everything for me each morning.',
       imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
       facts: [
         ['Role', 'Built solo'],
@@ -382,8 +392,8 @@ export const CASES = [
         {
           h: 'Why',
           p: [
-            'There is too much AI news: posts, podcasts, blogs, papers, GitHub. Hundreds of items a day, and maybe twenty that matter. Scrolling a feed costs time and lets noise set the mood.',
-            'I wanted a dependable editor: someone who reads everything each day and keeps only what would change a decision, readable in a few minutes.',
+            'There is too much AI news: posts, podcasts, blogs, papers, GitHub. Hundreds of items a day. The hard part isn’t seeing them; it’s telling which come from credible sources and which are worth anything, rather than noise. I also want to know about good GitHub projects early, and what problem each one solves.',
+            'In the age of AI, asking a good question matters more and more; behind a good question is judgement, and judgement is built by taking in good information over a long time. So I wanted a dependable editor: someone who reads everything each day and keeps only what would change a decision, readable in a few minutes.',
           ],
         },
         {
@@ -477,6 +487,8 @@ export const CASES = [
       line: '视频和播客里的内容，贴个链接就变成文字',
       note: 'Windows 版 · B 站、小宇宙、公众号已验证 · 本机处理不用显卡',
       why: '能读字幕和正文，就不转写；不用显卡也能跑。',
+      // His WeChat post the night he started (2026) and his answer (2026-10-21).
+      story: '我想把一期两个小时的小宇宙播客转成文字，拿去跟 AI 聊。试了几个小程序，要么太长转不动，要么太贵。我不会写代码，那天晚上，还是按下了 Win+R。',
       imageAlt: '万象成文的官网：把视频、播客和图文，直接变成可用的文字与媒体。',
       facts: [
         ['角色', '独立开发'],
@@ -495,8 +507,11 @@ export const CASES = [
         {
           h: '起因',
           p: [
-            '好内容散落在视频、播客和图文里，可工作需要的是文字：能检索、能引用、能交给 AI。现有的办法往往要装好几个工具，再在它们之间来回复制。',
-            '万象成文只解决这一件事：给它一个链接或一个文件，拿回可用的文字和原始媒体。',
+            // His WeChat post the night he started (2026) and his answer (2026-10-21).
+            '我常听小宇宙的播客，一期两三个小时，有的更长。有一期我觉得特别有价值，想转成文字，拿去跟 AI 聊。试了好几个小程序，要么时长太长转不动，要么收费太贵。',
+            '我想，这功能用代码实现应该不难吧？可我不会写代码。命令行那个黑底白字的界面，光想想就觉得不是我能碰的世界。那天晚上我跟 AI 说：别给我列计划了，直接带我做。它说，第一步，按 Win+R。我按了。',
+            '代码跑通、第一次找到我下载的那个音频文件时，我是真的开心，很具体的那种「我居然做到了」。那晚我在朋友圈写：今晚我上车了。',
+            '后来它长成了现在的样子：给它一个链接或一个文件，拿回可用的文字和原始媒体。',
           ],
         },
         {
@@ -537,6 +552,16 @@ export const CASES = [
           },
         },
         {
+          h: '历程',
+          // His answer, 2026-10-21.
+          timeline: [
+            ['第一步', '先在命令行里跑起来：装好 FFmpeg，下载转写模型，直到第一次转出文字'],
+            ['第二步', '给它一个好用的界面，参照苹果的设计来做'],
+            ['第三步', '小红书等平台的图片和文字也能抓，下载原图原视频，不带平台水印'],
+            ['之后', '一遍遍地改，直到稳定可用'],
+          ],
+        },
+        {
           h: '验证',
           list: [
             '2026-08-11 用真实样本跑了一轮线上冒烟测试：B 站、小宇宙、抖音、公众号通过；小红书一篇 15 张图、14 个 Live 片段的图文通过。',
@@ -564,6 +589,7 @@ export const CASES = [
       line: 'What’s said in a video or podcast, turned into text from a pasted link',
       note: 'For Windows · Tested on Bilibili, Xiaoyuzhou and WeChat articles · Runs locally, no GPU',
       why: 'If there are subtitles or page text, it skips transcription. No GPU needed.',
+      story: 'I wanted to turn a two-hour podcast episode into text so I could discuss it with an AI. The apps I tried either couldn’t handle the length or cost too much. I couldn’t code. That night I pressed Win+R anyway.',
       imageAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media.',
       facts: [
         ['Role', 'Built solo'],
@@ -582,8 +608,10 @@ export const CASES = [
         {
           h: 'Why',
           p: [
-            'Good material lives in videos, podcasts and articles, but work runs on text: something you can search, quote and hand to an AI. Getting it usually means several tools and a lot of copying between them.',
-            'Wanxiang does one thing: give it a link or a file, and get usable text and the original media back.',
+            'I listen to podcasts on Xiaoyuzhou; an episode runs two or three hours, sometimes longer. One felt so valuable that I wanted it as text, to discuss with an AI. The apps I tried either couldn’t handle the length or cost too much.',
+            'Surely this couldn’t be hard to do in code? But I couldn’t code. The black-and-white command line felt like a world I wasn’t allowed into. That night I told the AI: skip the study plan, just walk me through it. It said: step one, press Win+R. I pressed it.',
+            'When the code first ran and found the audio file I had downloaded, I was genuinely happy, the very specific kind of “I actually did it”. That night I posted: tonight, I got on the train.',
+            'It has since grown into what it is now: give it a link or a file, and get usable text and the original media back.',
           ],
         },
         {
@@ -622,6 +650,15 @@ export const CASES = [
               ['Do three things only', 'Accounts, payments and workspaces turn a tool into a platform', 'Becoming a platform'],
             ],
           },
+        },
+        {
+          h: 'Timeline',
+          timeline: [
+            ['Step 1', 'Get it running in the command line: install FFmpeg, download a transcription model, until the first text came out'],
+            ['Step 2', 'Give it a good interface, modelled on Apple’s design'],
+            ['Step 3', 'Pull images and text from Xiaohongshu and other platforms too, without their watermarks'],
+            ['Since', 'Rework it again and again until it was stable'],
+          ],
         },
         {
           h: 'Evidence',

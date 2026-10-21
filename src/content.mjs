@@ -60,6 +60,7 @@ export const content = {
     workTitle: '作品',
     visit: '访问网站',
     readCase: '进一步了解',
+    whyLabel: '为什么做',
     openSite: (name) => `打开 ${name} 的网站`,
     flagship: {
       key: 'F2',
@@ -71,6 +72,9 @@ export const content = {
 
     share: {
       title: '想法',
+      // His answer, 2026-10-21: what he thinks matters most now.
+      view: 'AI 时代，能提出一个好问题，越来越重要',
+      viewNote: '好问题背后是判断力。判断力来自长期做会复利的事：健身、阅读、交朋友。做一天，就有一天的收获；谁想追上，都得从你的第一天开始。',
       name: 'ai.vibecoding',
       // his words: the hero title of ai.vibecoding (May 2026)
       quote: '用自然语言，创造可运行的作品',
@@ -195,6 +199,7 @@ export const content = {
     workTitle: 'Work',
     visit: 'Visit the site',
     readCase: 'Learn more',
+    whyLabel: 'Why I built it',
     openSite: (name) => `Open the ${name} website`,
     flagship: {
       key: 'F2',
@@ -206,6 +211,8 @@ export const content = {
 
     share: {
       title: 'Ideas',
+      view: 'In the age of AI, asking a good question matters more and more',
+      viewNote: 'Behind a good question is judgement. Judgement comes from doing things that compound over years: exercise, reading, friendship. Every day you put in counts, and anyone who wants to catch up has to start from your first day.',
       name: 'ai.vibecoding',
       quote: 'Use natural language to create working products', // his words
       intro: 'I wrote down how I build products with AI, as a website anyone can read',
