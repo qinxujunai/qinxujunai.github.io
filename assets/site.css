@@ -2273,7 +2273,7 @@ main {
   margin: 0;
 }
 
-/* 想法: one block, his line, one sentence, the site, then the link. */
+/* 想法: what he believes (lit by scroll), then ai.vibecoding, where he writes his method down. */
 .share {
   display: flex;
   flex-direction: column;
@@ -2285,9 +2285,56 @@ main {
   padding: 0;
 }
 
-.share .statement .show-line {
-  max-width: 24em;
-  margin: 16px auto 0;
+.share .statement .pull {
+  max-width: 13em;
+  margin-top: 8px;
+  font-size: min(34px, 8.6vw);
+  line-height: 1.18;
+}
+
+.share .statement .said {
+  max-width: 28em;
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--body);
+  box-shadow: none;
+}
+
+.share .statement + .show-head {
+  margin-top: 40px;
+}
+
+/* Why he built it, in his words, under each work's picture. */
+.story {
+  max-width: 30em;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.story-label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.story p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+@media (min-width: 734px) {
+  .share .statement .pull {
+    font-size: 56px;
+    line-height: 1.1;
+  }
+
+  .story p,
+  .share .statement .said {
+    font-size: 19px;
+  }
 }
 
 /* 推荐: a recommendation near the end. Headline, one line, three cards, the site, the link. */
@@ -2443,7 +2490,7 @@ main {
   }
 }
 
-/* 想法 now follows the work blocks: eyebrow, name, one line, the site, facts and link. */
+/* 想法: ai.vibecoding's name sits under the statement. */
 .share .show-name {
   margin-top: 4px;
 }
