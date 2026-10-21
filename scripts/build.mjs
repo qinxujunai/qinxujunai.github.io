@@ -221,7 +221,7 @@ function frame(c, { key, alt, url, name, first = false }) {
 // One project, two levels of text above the picture (name, one plain line), the rest below it
 // (plain facts and links). Only the flagship pins on wide screens (data-show); the others leaf through
 // their page as they pass (data-scrollshot). Phones never pin.
-function showcase(c, { id, tone, name, line, note, site, siteLabel, caseUrl, image, alt, pin = false }) {
+function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseUrl, image, alt, pin = false }) {
   return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
 <div class="show-track" ${pin ? 'data-show' : 'data-scrollshot'}>
 <div class="show-stage">
@@ -230,6 +230,7 @@ function showcase(c, { id, tone, name, line, note, site, siteLabel, caseUrl, ima
 ${line ? `<p class="show-line">${T(c, bare(line))}</p>` : ''}
 </div>
 ${frame(c, { key: image.key, alt, url: site, name, first: pin })}
+${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${T(c, dots(bare(note)))}</p>` : ''}
 <p class="cta"><a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}</p>
@@ -258,6 +259,7 @@ function projectShow(c, cs) {
     tone: TONES[cs.slug],
     name: t.name,
     line: t.line,
+    story: t.story,
     note: t.note,
     site: t.links[0][1],
     siteLabel: cs.slug === 'ai-signal' ? t.links[0][0] : c.visit,
@@ -298,13 +300,17 @@ ${visual(c)}
 </section>`;
 }
 
-// 想法: the same shape as a work. Eyebrow, name, one plain line, the site, then facts and the link.
+// 想法: what he believes (his words, lit as they scroll by), then where he writes his method down.
 function share(c) {
   const s = c.share;
   return `<section id="share" class="tile dark share" aria-labelledby="share-title">
-<div class="show-head">
+<div class="statement" data-statement>
 <p class="eyebrow">${s.title}</p>
-<h2 class="show-name" id="share-title">${esc(s.name)}</h2>
+<h2 class="pull" id="share-title">${statement(c, bare(s.view))}</h2>
+<p class="said">${T(c, s.viewNote)}</p>
+</div>
+<div class="show-head">
+<h3 class="show-name">${esc(s.name)}</h3>
 <p class="show-line">${T(c, bare(s.intro))}</p>
 </div>
 ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', url: VIBECODING, name: s.name })}
