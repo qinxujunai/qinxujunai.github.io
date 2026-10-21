@@ -296,5 +296,27 @@
       "h": 586,
       "kb": 23
     }
+  },
+  "site-easyvibe": {
+    "1040": {
+      "src": "/assets/media/site-easyvibe-1040.webp",
+      "w": 1040,
+      "h": 999,
+      "kb": 18
+    },
+    "2080": {
+      "src": "/assets/media/site-easyvibe-2080.webp",
+      "w": 2080,
+      "h": 1999,
+      "kb": 46
+    }
+  },
+  "site-easyvibe-card": {
+    "1080": {
+      "src": "/assets/media/site-easyvibe-card-1080.webp",
+      "w": 1080,
+      "h": 580,
+      "kb": 12
+    }
   }
 }
