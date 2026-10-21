@@ -316,7 +316,7 @@ ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding �
 }
 
 // 推荐: before saying goodbye, one thing worth the reader's time. Not his work: Datawhale's open
-// course easy-vibe. What it is, one line, what each kind of learner gets, the site, one link.
+// course easy-vibe. What it is, one line, the site, one link.
 function recommend(c) {
   const r = c.recommend;
   return `<section id="recommend" class="tile dark share" aria-labelledby="recommend-title">
@@ -325,9 +325,6 @@ function recommend(c) {
 <h2 id="recommend-title" class="rec-title">${bare(r.headline).split(/(?<=[，?])\s*/).map((part) => `<span class="clause">${T(c, part)}</span>`).join(c.lang === 'zh-CN' ? '' : ' ')}</h2>
 <p class="show-line">${T(c, bare(r.line))}</p>
 </div>
-<ul class="routes reveal">
-${r.routes.map((x) => `<li><span class="who">${T(c, x.who)}</span><span class="get">${T(c, bare(x.get))}</span></li>`).join('\n')}
-</ul>
 ${frame(c, { key: 'site-easyvibe', alt: r.alt, url: r.url, name: 'easy-vibe' })}
 <div class="show-foot">
 <p class="show-note">${T(c, dots(bare(r.note)))}</p>
