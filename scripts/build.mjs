@@ -368,6 +368,7 @@ function contact(c) {
 </div>
 <p class="qr-hint" data-qr-hint data-hint-wechat="${esc(bare(c.hint.wechat))}" data-hint-phone="${esc(bare(c.hint.phone))}" data-hint-desktop="${esc(bare(c.hint.desktop))}">${esc(bare(c.hint.default))}</p>
 <p class="cta contact-cta">${c.wechatId ? `<button type="button" class="pill" data-wechat-id="${esc(c.wechatId)}" data-copied="${esc(bare(c.copied))}" data-label-phone="${esc(c.copyWechat)}" data-label-desktop="${esc(c.copyOnly)}" hidden>${esc(c.copyWechat)}</button>` : ''}<a class="more-link" href="/assets/card-${lang}.png" download="qin-xujun-card.png" data-qr-save>${c.save}${chevron}</a></p>
+<p class="closing-line reveal"><span class="closing-lead">${T(c, bare(c.closing[0]))}</span>${T(c, c.closing[1])}</p>
 </section>`;
 }
 
