@@ -292,18 +292,11 @@ ${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, 
 </article>`;
 }
 
-// The fifth, small work: a demo shop site. No project page; the window links to the live site.
-function small(c) {
-  const m = c.small;
-  return showcase(c, { id: 'chongjinan', tone: 'plain', name: m.name, line: m.line, note: m.note, site: m.url, siteLabel: c.visit, image: { key: 'site-chongjinan' }, alt: m.alt });
-}
-
 function work(c) {
   return `<section id="work" class="works" aria-labelledby="work-title">
 <h2 id="work-title" class="visually-hidden">${c.workTitle}</h2>
 ${CASES.map((cs) => projectShow(c, cs)).join('\n')}
 ${visual(c)}
-${small(c)}
 </section>`;
 }
 
