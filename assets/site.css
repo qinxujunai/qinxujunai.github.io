@@ -1501,6 +1501,89 @@ main {
 
 /* ---------- Case pages ---------- */
 
+/* The product bar on case pages: back to the work, the name (to the top), the main sections on wide
+   screens, and the project's website one tap away. It is the page's one blue button; it steps aside at
+   the contact tile, which has its own. */
+.subnav .nav-inner {
+  gap: 4px;
+}
+
+.sub-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding-right: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.sub-back > span[aria-hidden] {
+  font-size: 22px;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+.sub-name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-right: auto;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sub-back:hover,
+.sub-name:hover {
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.sub-links,
+.sub-theme {
+  display: none !important;
+}
+
+.at-contact .case-page .nav-tools .pill {
+  display: none;
+}
+
+@media (min-width: 734px) {
+  .sub-links {
+    display: flex !important;
+    gap: 22px;
+    margin-right: 18px;
+    font-size: 12px;
+  }
+
+  .sub-links a {
+    color: var(--ink);
+    opacity: 0.72;
+  }
+
+  .sub-links a:hover,
+  .sub-links a[aria-current] {
+    opacity: 1;
+    text-decoration: none;
+  }
+
+  .sub-theme {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 359px) {
+  .sub-back-label {
+    display: none;
+  }
+}
+
+.try .cta {
+  margin-top: 8px;
+}
+
 .case-head {
   padding-bottom: 0;
 }
