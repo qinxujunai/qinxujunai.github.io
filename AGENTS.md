@@ -43,7 +43,7 @@
   6. 分节正文。区块类型有：`p`、`metrics`、`flow`（架构或流程）、`scope`（做 / 不做）、`table`（决定 / 原因 / 放弃的方案）、`list`、`timeline`、`after`。
   7. 其他作品（另外两个）。
   8. 加微信。
-- **VoiceFlow 数据**：star、下载、fork、最新版本来自 `src/stats.json`。`.github/workflows/stats.yml` 每 6 小时运行一次 `scripts/stats.mjs`，重建页面，只在数字有变化时提交。不要手改这些数字。
+- **GitHub 数据**：VoiceFlow 和万象成文的 star、下载（只算 `.exe` 安装包）、fork、最新版本来自 `src/stats.json`。`.github/workflows/stats.yml` 每 6 小时运行一次 `scripts/stats.mjs`，重建页面，只在数字有变化时提交。不要手改这些数字。
 - **签名**：
   - `src/signature.svg` 由 `scripts/signature.mjs` 生成：把 OFL 字体 Ma Shan Zheng（马善政楷书）的字形转成路径，按落款排布（「秦」略大；布局 `kai`）。
   - 末尾有一方红底白字的「徐俊」印（白字下垫纸色底），用 Noto Serif SC 切出，边缘做了残破处理，带 `class="seal"`。
@@ -56,6 +56,7 @@
 - **图标、分享图、名片 PNG**：`npm run icons` 生成。名片里嵌的是 `assets/wechat-qr.png`，换二维码后必须重新生成。
 
 ## 红线
+- **署名**：提交只署他本人（作者 qinxujunai，邮箱用他 GitHub 账号的 noreply 地址），提交说明里不加 `Co-Authored-By`、`Claude-Session` 这类署名（2026-10-23 他的要求，所有仓库都一样）。
 - **真实**：
   - 不编造成就、数字、客户、logo、推荐语。
   - 新增事实必须来自本人的话、他的仓库、简历或他的回答，并在 `src/cases.mjs` 注释里写明出处。
