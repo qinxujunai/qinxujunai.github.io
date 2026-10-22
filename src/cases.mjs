@@ -540,7 +540,7 @@ export const CASES = [
         { v: '25 秒', l: '47 分钟的 B 站视频，贴上链接到出文字（v2.3.0，显卡，单次实测）' },
         { v: '0 次', l: '超时：60 条真实链接各跑 3 轮，141/180 完整' },
         { v: '约 2 分钟', l: '在普通 CPU 上转写 1 小时音频（单样本测得，实时率 0.035）' },
-        { v: '3 件事', l: '只做转文字、提图文、下原件' },
+        { stat: 'downloads', l: '次下载 Windows 安装包（GitHub 统计）' },
       ],
       sections: [
         {
@@ -651,7 +651,7 @@ export const CASES = [
         { v: '25 s', l: 'From link to text for a 47-minute Bilibili video (v2.3.0, GPU, one run)' },
         { v: '0', l: 'Timeouts: 60 real links, three rounds; 141/180 complete' },
         { v: '~2 min', l: 'To transcribe an hour of audio on an ordinary CPU (single-sample probe, real-time factor 0.035)' },
-        { v: '3', l: 'Jobs: transcribe, extract, download' },
+        { stat: 'downloads', l: 'Windows installer downloads (GitHub count)' },
       ],
       sections: [
         {

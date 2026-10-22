@@ -197,7 +197,7 @@ function statement(c, text) {
   return text.split(/(?<=[，、])/).map((clause) => `<span class="clause">${[...clause].map((ch) => (ch === ' ' ? ' ' : `<span>${esc(ch)}</span>`)).join('')}</span>`).join('');
 }
 
-const statValue = (k) => stats.voiceflow[k];
+const statValue = (slug, k) => stats[slug][k];
 const statText = (v) => esc(typeof v === 'number' ? v.toLocaleString('en-US') : v);
 const hostPath = (url) => url.replace(/^https?:\/\//, '').replace(/\?.*$/, '').replace(/\/$/, '');
 
@@ -466,11 +466,11 @@ ${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
 <h2 class="visually-hidden" id="results-title">${L.results}</h2>
 <dl class="facts">
 ${t.results.map((r) => {
-  const v = r.stat ? statValue(r.stat) : r.v;
+  const v = r.stat ? statValue(cs.slug, r.stat) : r.v;
   return `<div><dt>${T(c, r.l)}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${statText(v)}</dd></div>`;
 }).join('\n')}
 </dl>
-${live ? `<p class="footnote">${dates(T(c, L.liveNote(stats.voiceflow.updated)))}</p>` : ''}
+${live ? `<p class="footnote">${dates(T(c, L.liveNote(stats[cs.slug].updated)))}</p>` : ''}
 </section>
 <div class="case-body">
 <aside class="case-facts" aria-labelledby="facts-title">
