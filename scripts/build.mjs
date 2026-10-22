@@ -168,6 +168,27 @@ ${SECTIONS.map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a
 </header>`;
 }
 
+// Case pages: an apple.com-style product bar instead of the site nav. Back to the work on the home page,
+// the project's name (to the top), the main sections on wide screens, and the project's website one tap away.
+function caseNav(c, cs, t, switchHref) {
+  const L = c.caseLabels;
+  const picks = t.sections.map((s, i) => ({ h: s.h, id: `s${i + 1}` })).filter((s) => L.barSections.includes(s.h));
+  return `<header class="nav subnav">
+<div class="nav-inner">
+<a class="sub-back" href="${home(c)}#${cs.slug}"><span aria-hidden="true">‹</span><span class="sub-back-label">${L.crumb}</span><span class="visually-hidden"> · ${esc(c.name)}</span></a>
+<a class="sub-name" href="#top">${esc(t.name)}</a>
+<nav class="sub-links" aria-label="${esc(L.onPage)}">
+${picks.map((p) => `<a href="#${p.id}" data-nav="${p.id}">${T(c, p.h)}</a>`).join('\n')}
+</nav>
+<div class="nav-tools">
+<a class="sub-lang" href="${switchHref}" hreflang="${c.switchLang}" lang="${c.switchLang}">${c.switchLabel}</a>
+<button type="button" class="sub-theme" data-theme-toggle aria-label="${esc(c.themeLabel)}">${icons.sunMoon}</button>
+<a class="pill" href="${t.links[0][1]}" ${ext}>${esc(c.visit)}<span class="visually-hidden"> ${esc(t.name)}</span></a>
+</div>
+</div>
+</header>`;
+}
+
 function footer(c) {
   return `<footer class="foot">
 <div class="foot-inner">
@@ -210,9 +231,10 @@ const dots = (s) => String(s).replace(/ · /g, '\u00a0· ');
 // Phones get a fixed 16:10 crop of the same desktop page (no phone frame: these are not phone apps).
 // On wide screens the page inside leafs from top to bottom as the section passes.
 // The whole window is a link to the live site.
-function frame(c, { key, alt, url, name, first = false }) {
-  return `<a class="frame" href="${url}" ${ext}>
-<span class="visually-hidden">${esc(c.openSite(name))}</span>
+// internal: the window opens the project's page on this site (the home page), not the project's own website.
+function frame(c, { key, alt, url, name, first = false, internal = false }) {
+  return `<a class="frame" href="${url}"${internal ? '' : ` ${ext}`}>
+<span class="visually-hidden">${esc(internal ? `${c.readCase} ${name}` : c.openSite(name))}</span>
 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">${esc(hostPath(url))}</span></span>
 <span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: `${key}-card`, cls: 'frame-img', eager: first })}</span>
 </a>`;
@@ -229,11 +251,11 @@ function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseU
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
 ${line ? `<p class="show-line">${T(c, bare(line))}</p>` : ''}
 </div>
-${frame(c, { key: image.key, alt, url: site, name, first: pin })}
+${frame(c, { key: image.key, alt, url: caseUrl || site, name, first: pin, internal: !!caseUrl })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${T(c, dots(bare(note)))}</p>` : ''}
-<p class="cta"><a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}</p>
+<p class="cta">${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}<a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a></p>
 </div>
 </div>
 </div>
@@ -451,11 +473,10 @@ function casePage(c, cs) {
   })}
 <body class="case-page">
 <a class="skip" href="#main">${c.skip}</a>
-${nav(c, { switchHref: casePath(o, cs.slug), onHome: false })}
+${caseNav(c, cs, t, casePath(o, cs.slug))}
 <main id="main">
 <article class="case" aria-labelledby="case-title">
-<header class="tile plain case-head">
-<nav class="crumb" aria-label="${esc(L.crumb)}"><a href="${home(c)}#work">${L.crumb}</a>${chevron}<span aria-current="page">${esc(t.name)}</span></nav>
+<header class="tile plain case-head" id="top">
 ${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
 <h1 id="case-title">${T(c, bare(t.title))}</h1>
 <p class="sub">${T(c, bare(t.sub))}</p>
@@ -485,13 +506,18 @@ ${t.sections.map((s, i) => block(c, s, i)).join('\n')}
 </div>
 </div>
 </article>
+<section class="tile plain try" id="try" aria-labelledby="try-title">
+<h2 id="try-title">${esc(L.tryIt(t.name))}</h2>
+<p class="sub">${T(c, dots(bare(t.note)))}</p>
+<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${chevron}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>
+</section>
 <section class="tile soft more-cases" aria-labelledby="more-title">
 <h2 id="more-title">${L.more}</h2>
 <div class="card-grid two">
 ${related.map((x) => caseCard(c, x)).join('\n')}
 </div>
 </section>
-<section class="tile dark case-cta" aria-labelledby="cta-title">
+<section class="tile dark case-cta" id="contact" aria-labelledby="cta-title">
 <h2 id="cta-title">${T(c, L.contactHeadline)}</h2>
 ${L.contactBody ? `<p class="sub">${T(c, L.contactBody)}</p>` : ''}
 <p class="cta"><a class="pill pill-lg" href="${home(c)}#contact">${c.addWechat}</a></p>

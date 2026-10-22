@@ -323,14 +323,14 @@
     "1040": {
       "src": "/assets/media/site-ask-data-1040.webp",
       "w": 1040,
-      "h": 1788,
-      "kb": 56
+      "h": 1747,
+      "kb": 65
     },
     "2080": {
       "src": "/assets/media/site-ask-data-2080.webp",
       "w": 2080,
-      "h": 3575,
-      "kb": 138
+      "h": 3494,
+      "kb": 160
     }
   },
   "site-ask-data-card": {
