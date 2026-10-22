@@ -3,7 +3,7 @@
 // Usage: node scripts/capture-sites.cjs <out-dir> [name…]   then: npm run media -- <out-dir> site-voiceflow site-voiceflow-card …
 const pw = (() => { try { return require('playwright'); } catch { return require('/opt/node22/lib/node_modules/playwright'); } })();
 const out = process.argv[2];
-const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': 'ai-signal/', vibecoding: 'qinxujun-ai-vibecoding/', easyvibe: 'https://datawhalechina.github.io/easy-vibe/zh-cn/' };
+const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': 'ai-signal/', 'ask-data': 'ask-data/', vibecoding: 'qinxujun-ai-vibecoding/', easyvibe: 'https://datawhalechina.github.io/easy-vibe/zh-cn/' };
 // SITE_<NAME>=<url> captures from another address, e.g. a local build before it is deployed.
 const only = process.argv.slice(3);
 (async () => {
