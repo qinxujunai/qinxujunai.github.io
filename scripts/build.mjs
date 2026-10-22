@@ -211,7 +211,7 @@ const dots = (s) => String(s).replace(/ · /g, '\u00a0· ');
 // On wide screens the page inside leafs from top to bottom as the section passes.
 // The whole window is a link to the live site.
 function frame(c, { key, alt, url, name, first = false }) {
-  return `<a class="frame${key === 'site-ai-signal' ? ' narrow' : ''}" href="${url}" ${ext}>
+  return `<a class="frame" href="${url}" ${ext}>
 <span class="visually-hidden">${esc(c.openSite(name))}</span>
 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">${esc(hostPath(url))}</span></span>
 <span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: `${key}-card`, cls: 'frame-img', eager: first })}</span>
@@ -262,7 +262,7 @@ function projectShow(c, cs) {
     story: t.story,
     note: t.note,
     site: t.links[0][1],
-    siteLabel: cs.slug === 'ai-signal' ? t.links[0][0] : c.visit,
+    siteLabel: c.visit,
     caseUrl: casePath(c, cs.slug),
     image: cs.image,
     alt: t.imageAlt,

@@ -11,7 +11,9 @@ export const CASES = [
   // Sources: VoiceFlow README, docs/flagship-reliability-architecture.md, docs/decisions/ADR-001…005,
   // docs/model-strategy.md, docs/feedback-review-2026-07-28.md, docs/release-performance-evidence-2026-08-11.md,
   // docs/resource-profile-2026-07-28.md, docs/release-evidence-0.3.2/0.3.3/0.3.8.md,
-  // docs/release-notes-0.3.9.md, docs/release-validation-0.3.9.md (822 tests, 2026-10-21), git tags (15).
+  // docs/release-notes-0.3.9.md, docs/release-validation-0.3.9.md (822 tests, 2026-10-21),
+  // docs/release-notes-0.3.10.md, docs/release-validation-0.3.10.md (829 tests; released 2026-10-22, tag c9df2cc), git tags (16),
+  // requirements.lock (PySide6 6.11.1).
   {
     slug: 'voiceflow',
     kind: 'product',
@@ -34,14 +36,14 @@ export const CASES = [
         ['角色', '独立开发：产品、设计、工程、发布'],
         ['时间', '2026.05 至今'],
         ['形态', 'Windows 桌面应用，开源'],
-        ['技术', 'Python · PyQt6 · Sherpa-ONNX · SenseVoice · Zipformer'],
+        ['技术', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
       links: [['访问网站', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
         { v: '427 ms', l: '说完到送出文字，95% 的情况在此之内（10 秒内的录音，v0.3.1 实测）' },
-        { v: '822 项', l: '自动化测试，每次发布都跑' },
-        { v: '15 次', l: '发布，从 v0.1.0 到 v0.3.9' },
+        { v: '829 项', l: '自动化测试，每次发布都跑' },
+        { v: '16 次', l: '发布，从 v0.1.0 到 v0.3.10' },
       ],
       sections: [
         {
@@ -104,7 +106,7 @@ export const CASES = [
             { v: '1,024 MB', l: '安装后私有内存（v0.3.1）', g: '早期 1,324.6 MB' },
           ],
           list: [
-            '822 项自动化测试，v0.3.3 时是 396 项。',
+            '829 项自动化测试，v0.3.3 时是 396 项。',
             '500 次录音生命周期，10,000 组随机的开始、停止、取消、退出序列，50,000 个异常文本模糊用例。',
             '从 v0.3.2 起，每个版本都附一份发布与验证记录。',
             '用户提过的 12 条反馈，每条都写下结论和理由：采纳、按门槛暂缓，或者拒绝。',
@@ -121,8 +123,8 @@ export const CASES = [
             ['2026.08.25', 'v0.3.2：三个受监督的子进程，每版附发布证据'],
             ['2026.10.11', 'v0.3.8：原生胶囊'],
             ['2026.10.21', 'v0.3.9：设置只留一个保存入口，词典可以搜索、批量删除、撤销；822 项测试'],
-            // VoiceFlow master 1e63302 / 66c27cf / e8f345e (2026-10-22), Windows quality CI green; not yet released.
-            ['2026.10.22', '设置界面按系统设置的样子重做；识别中的字逐个淡入，终稿原地替换草稿。已合入主线，下一版发布'],
+            // VoiceFlow v0.3.10 (released 2026-10-22; docs/release-notes-0.3.10.md).
+            ['2026.10.22', 'v0.3.10：设置界面按系统设置的样子重做；识别中的字逐个淡入，终稿原地替换草稿；829 项测试'],
           ],
         },
         {
@@ -152,14 +154,14 @@ export const CASES = [
         ['Role', 'Solo: product, design, engineering, release'],
         ['When', 'May 2026 to now'],
         ['Form', 'Windows desktop app, open source'],
-        ['Stack', 'Python · PyQt6 · Sherpa-ONNX · SenseVoice · Zipformer'],
+        ['Stack', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
       links: [['Visit the site', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
         { v: '427 ms', l: 'From stopping to text sent, in 95% of cases (clips under 10 s, measured on v0.3.1)' },
-        { v: '822', l: 'Automated tests on every release' },
-        { v: '15', l: 'Releases, v0.1.0 to v0.3.9' },
+        { v: '829', l: 'Automated tests on every release' },
+        { v: '16', l: 'Releases, v0.1.0 to v0.3.10' },
       ],
       sections: [
         {
@@ -221,7 +223,7 @@ export const CASES = [
             { v: '1,024 MB', l: 'Private memory after install (v0.3.1)', g: 'Earlier 1,324.6 MB' },
           ],
           list: [
-            '822 automated tests, up from 396 at v0.3.3.',
+            '829 automated tests, up from 396 at v0.3.3.',
             '500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.',
             'Since v0.3.2, every release ships with a release and verification record.',
             'Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.',
@@ -238,7 +240,7 @@ export const CASES = [
             ['2026.08.25', 'v0.3.2: three supervised workers; evidence with every release'],
             ['2026.10.11', 'v0.3.8: native capsule'],
             ['2026.10.21', 'v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests'],
-            ['2026.10.22', 'Settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place. Merged; ships in the next release'],
+            ['2026.10.22', 'v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests'],
           ],
         },
         {
@@ -262,6 +264,8 @@ export const CASES = [
   // v4 (2026-10-22, commit 4647f40): README, scripts/sources.js, clock.js, daily.yml (04:07–09:47 queue, claim,
   // 09:35 collect, 10:00:00 send), scripts/test (7 tests); Actions history 2026-10-22 (09:41 cron started 14:32,
   // 10:17 cron 15:31); Reddit returns 403 to direct requests, so threads come via AINews (Latent Space RSS).
+  // v4.1.0 (2026-10-23, GitHub Release; CHANGELOG.md): product site at the root, latest/, archive/, feed.xml (Atom, 30 issues),
+  // MIT licence; scripts/test (8 tests).
   {
     slug: 'ai-signal',
     kind: 'product',
@@ -277,14 +281,14 @@ export const CASES = [
       why: '模型只能引用编号，链接由代码回填，写不出假链接。',
       // His answer, 2026-10-21.
       story: 'AI 的消息每天成百上千。难的不是看到，是分清哪些可信、哪些值得看；GitHub 上的好项目，我也想第一时间知道它能解决什么问题。所以我让它每天替我读一遍。',
-      imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
+      imageAlt: 'AI Signal 的网站：AI 的消息每天成百上千，它替你读一遍，只留下值得看的；下面是今天这期的标题和三条要点',
       facts: [
         ['角色', '独立开发'],
         ['时间', '2026.05 起；v4 于 2026.10'],
         ['形态', '自动化工作流，开源'],
         ['技术', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['最新一期', 'https://qinxujunai.github.io/ai-signal/'], ['往期', 'https://qinxujunai.github.io/ai-signal/archive/']],
+      links: [['访问网站', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11 类', l: '信源，从 X、Reddit 到论文和新模型' },
         { v: '10:00', l: '北京时间每天整点发出' },
@@ -314,7 +318,7 @@ export const CASES = [
         {
           h: '边界',
           scope: {
-            do: ['聚合公开信源', '按写死的编辑标准挑选、合并、改写', '每天一封邮件和一期网页版，每条都附原文'],
+            do: ['聚合公开信源', '按写死的编辑标准挑选、合并、改写', '每天一封邮件、一期网页版和 RSS，每条都附原文'],
             dont: ['需要 X、YouTube 的 API key', '做 App 和账号体系', '追踪读者：没有像素，没有点击统计'],
           },
         },
@@ -356,7 +360,7 @@ export const CASES = [
             '链接和数字全部来自原始数据；模型引用了不存在的编号，这条就不会出现。',
             '模型无响应时照样发出一期，按来源热度排序，并在邮件里写明；某个信源挂了，页脚会写出来。',
             '发过的链接记录 60 天，下一期不会重复。',
-            'v4 加了 7 组自动测试：各信源的解析、热度、北京时间的计算；每次提交都在云端跑一遍。',
+            '8 组自动测试：各信源的解析、热度、北京时间的计算、配色上限，以及网站和 RSS；每次提交都在云端跑一遍。',
             '准点从 2026-10-23 那期开始生效，以发信时间和运行记录为准。',
           ],
         },
@@ -368,6 +372,7 @@ export const CASES = [
             ['2026.07.22', '最后一次自动发送；之后定时任务因 60 天无提交被暂停'],
             ['2026.10.20', 'v3：重写信源、编辑方式和排版，恢复每日发送'],
             ['2026.10.22', 'v4：10:00 整送达；加入 Techmeme、Reddit、热门模型、Product Hunt、Anthropic、Qwen、36氪；版式改成白底黑字，只留链接一种颜色'],
+            ['2026.10.23', 'v4.1：有了自己的网站，打开先看到它是什么和今天这期的要点；加上 RSS、开源许可和版本发布'],
           ],
         },
         {
@@ -392,14 +397,14 @@ export const CASES = [
       note: 'Arrives daily at 10:00 Beijing time · Every item links to its source · Full archive',
       why: 'The model may only cite item numbers; code fills in every link, so it cannot invent one.',
       story: 'Hundreds of AI updates arrive every day. The hard part isn’t seeing them; it’s telling which are credible and which are worth reading. I also want to know about good GitHub projects early, and what problem each one solves. So it reads everything for me each morning.',
-      imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
+      imageAlt: 'The AI Signal website (in Chinese): it reads the day’s AI news for you and keeps what’s worth reading; below, today’s headline and three key points',
       facts: [
         ['Role', 'Built solo'],
         ['When', 'Since May 2026; v4 in Oct 2026'],
         ['Form', 'Automated workflow, open source'],
         ['Stack', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['Latest issue', 'https://qinxujunai.github.io/ai-signal/'], ['Archive', 'https://qinxujunai.github.io/ai-signal/archive/']],
+      links: [['Visit the site', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11', l: 'Source types, from X and Reddit to papers and new models' },
         { v: '10:00', l: 'Sent on the hour, Beijing time, every day' },
@@ -428,7 +433,7 @@ export const CASES = [
         {
           h: 'Scope',
           scope: {
-            do: ['Aggregate public sources', 'Select, merge and rewrite to a fixed editorial brief', 'One email and one web issue a day, every item linked'],
+            do: ['Aggregate public sources', 'Select, merge and rewrite to a fixed editorial brief', 'One email, one web issue and an RSS entry a day, every item linked'],
             dont: ['Require X or YouTube API keys', 'Build an app or accounts', 'Track readers: no pixels, no click counting'],
           },
         },
@@ -470,7 +475,7 @@ export const CASES = [
             'Every link and number comes from the raw data; an item that cites an unknown ID never appears.',
             'If the model is down, an issue still goes out, ranked by source signal and labelled as such; a failed source is named in the footer.',
             'Sent links are remembered for 60 days, so nothing repeats.',
-            'v4 adds seven groups of automated tests (source parsing, signal strength, Beijing-time arithmetic) that run in the cloud on every commit.',
+            'Eight groups of automated tests (source parsing, signal strength, Beijing-time arithmetic, the colour limit, the website and RSS) run in the cloud on every commit.',
             'On-time delivery starts with the 23 Oct issue; the send time and run log are the evidence.',
           ],
         },
@@ -482,6 +487,7 @@ export const CASES = [
             ['2026.07.22', 'Last automatic send; the schedule was then paused after 60 days without commits'],
             ['2026.10.20', 'v3: new sources, editing and layout; daily sends restored'],
             ['2026.10.22', 'v4: on the hour at 10:00; Techmeme, Reddit, trending models, Product Hunt, Anthropic, Qwen and 36Kr added; black on white, one colour for links'],
+            ['2026.10.23', 'v4.1: a website of its own that opens with what it is and today’s key points; RSS, an open-source licence and versioned releases'],
           ],
         },
         {
@@ -501,8 +507,12 @@ export const CASES = [
   // ───────────────────────── 万象成文 ─────────────────────────
   // Sources: Audio2Text README (positioning, scope, platform table, live smoke 2026-08-11, loopback port + token,
   // SHA-256/SBOM/provenance), AGENTS.md (text priority, FastAPI, 521 KB → 2 KB, 30–40%), docs/transcription-benchmark.md,
-  // docs/project-status.md and docs/platform-benchmark-20261021.md (five platforms, 137/180, 2.3 still a candidate; 2026-10-22),
-  // the live site's platform list (YouTube retired 2026-10-21).
+  // docs/platform-benchmark-20261021.md (five platforms, 137/180, 4 timeouts; history),
+  // v2.3.0 (released 2026-10-23, frozen a192250): docs/project-status.md, docs/release-2.3.0.md,
+  // docs/platform-benchmark-20261022.md (same 60 links × 3 rounds: 141/180, 0 timeouts; installed app: a 2,804 s
+  // Bilibili video gave text in 25.452 s, original video at 92.970 s; DASH-only background video was 854×462 vs 1280×692),
+  // docs/ascend-accuracy-20261012.md (ASCEND, SenseVoice FP32 on CUDA: CER 9.31%, WER 23.34%, MER 15.52%; 72-clip
+  // same-audio test vs Whisper medium; same-weight CPU/CUDA 12.65×), the live site's platform list (YouTube retired 2026-10-21).
   {
     slug: 'wanxiang',
     kind: 'product',
@@ -527,9 +537,9 @@ export const CASES = [
       ],
       links: [['访问网站', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
       results: [
-        { v: '3 + 2', l: 'B 站、小宇宙、公众号已验证；抖音、小红书时好时坏' },
+        { v: '25 秒', l: '47 分钟的 B 站视频，贴上链接到出文字（v2.3.0，显卡，单次实测）' },
+        { v: '0 次', l: '超时：60 条真实链接各跑 3 轮，141/180 完整' },
         { v: '约 2 分钟', l: '在普通 CPU 上转写 1 小时音频（单样本测得，实时率 0.035）' },
-        { v: '521 KB → 2 KB', l: '小红书单次提取的传输量' },
         { v: '3 件事', l: '只做转文字、提图文、下原件' },
       ],
       sections: [
@@ -548,6 +558,7 @@ export const CASES = [
           list: [
             '每个平台的结构都不一样，而且经常变；抖音和小红书还会在会话或网络受限时拦截。',
             '转写又慢又吃机器，不能要求每个人都有显卡。',
+            '长视频要先下完整段原视频才能转写，几百 MB 的文件会把整件事拖到超时。',
             '桌面端要在没装 Python 的电脑上跑起来，同时不能把本地接口暴露给别的程序。',
           ],
         },
@@ -563,8 +574,8 @@ export const CASES = [
           flow: [
             { t: '桌面外壳', n: ['Tauri 2（Rust）+ React', '首次运行只准备必要组件，约 222 MB', '运行包校验 SHA-256'] },
             { t: '本地服务', n: ['FastAPI，随应用启动', '只监听随机的本机端口', '每次启动生成短期令牌', 'SSE 实时推送进度'] },
-            { t: '取文字', n: ['平台字幕 → 页面正文 → 转写', '命中字幕或正文，就跳过转写'] },
-            { t: '转写', n: ['默认 SenseVoice int8，CPU 即可', '有显卡且实测有收益时，用 Faster-Whisper', '初始化失败，自动回落'] },
+            { t: '取文字', n: ['平台字幕 → 页面正文 → 转写', '命中字幕或正文，就跳过转写', '视频先下音轨，马上出文字；原视频在后台补齐'] },
+            { t: '转写', n: ['默认 SenseVoice，CPU 即可', '有 NVIDIA 显卡时可以走 CUDA', 'CPU 版和显卡版在不同进程里，互不干扰'] },
           ],
           after: ['同一套服务也能部署成网页预览；Windows 桌面端是完整的主产品。'],
         },
@@ -573,8 +584,10 @@ export const CASES = [
           table: {
             head: ['决定', '原因', '放弃的方案'],
             rows: [
-              ['默认用 SenseVoice', '在 CPU 上，SenseVoice 的实时率约 0.035（1 小时音频约 2 分钟转完），Faster-Whisper medium 约 2.01；一段 989 秒的课程，SenseVoice 用 48 秒，RTX 3060 显卡上的 Whisper 用 97 秒', '默认上更大的模型'],
+              ['默认用 SenseVoice', '在 CPU 上，SenseVoice 的实时率约 0.035（1 小时音频约 2 分钟转完），Faster-Whisper medium 约 2.01。同一批 72 段人工标注的语音、都在显卡上跑 3 轮：普通话错误率 SenseVoice 12.75%、Whisper medium 37.50%，用时 23 秒对 138 秒', '默认上更大的模型'],
               ['能读字幕和正文，就不转写', '最快的转写，是不用转写', '所有内容统一走转写'],
+              ['先出文字，原视频后台补齐', '旧的 4 次超时都卡在转写前下载完整原视频（样本 260 MB）；改完同一批链接三轮 0 次超时', '等原视频下完再转写'],
+              ['后台补的原视频仍取原画质', '只取分段流会更快，但同一段视频只有 854×462，原视频是 1280×692', '用清晰度换速度'],
               ['小红书直接读页面里的结构化数据', '不再传整页 HTML：传输量从 521 KB 降到 2 KB，总耗时少 30–40%', '先抓整页，再解析'],
               ['只做三件事', '账号、支付、工作台，会把一个工具变成一个平台', '做成平台'],
             ],
@@ -588,13 +601,18 @@ export const CASES = [
             ['第二步', '给它一个好用的界面，参照苹果的设计来做'],
             ['第三步', '小红书等平台的图片和文字也能抓，下载原图原视频，不带平台水印'],
             ['之后', '一遍遍地改，直到稳定可用'],
+            // Audio2Text v2.3.0, released 2026-10-23.
+            ['2026.10.23', 'v2.3.0：AI 校对、显卡加速、处理时显示还要多久；视频先出文字，原视频后台补齐'],
           ],
         },
         {
           h: '验证',
           list: [
             '2026-08-11 用真实样本跑了一轮线上冒烟测试：B 站、小宇宙、抖音、公众号通过；小红书一篇 15 张图、14 个 Live 片段的图文通过。',
-            '2026-10-21：5 个平台、60 条链接，各跑 3 轮。180 次里 137 次完整拿到结果，公众号 30 次全部成功；另有 4 次超时。',
+            '2026-10-21：5 个平台、60 条链接，各跑 3 轮。180 次里 137 次完整拿到结果，4 次超时，所以 2.3 那时没有发布。',
+            '2026-10-22，改完后用同一批链接重跑 3 轮：141 次完整，0 次超时。B 站 57/57、公众号 30/30、小宇宙 27/30、抖音 24/30、小红书 3/33；失败全部留在分母里。',
+            '准确率：在公开语料 ASCEND（香港的中英双语对话，人工标注）上，显卡版 SenseVoice 的普通话字错误率 9.31%、英文词错误率 23.34%、中英混说 15.52%（5,735 段，各跑 3 轮）。',
+            'v2.3.0 的安装包先在他的电脑上、再在一台全新的 Windows 上验收；发布的就是验收过的同一个文件，从官网下载后核对 SHA-256 一致。',
             '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
             '安装包、运行包和发布产物都提供 SHA-256；GitHub Actions 同时生成 SBOM 和构建来源证明。',
           ],
@@ -602,15 +620,11 @@ export const CASES = [
         {
           h: '还差什么',
           list: [
-            '60 个样本、3 小时音频的准确率评测还没跑；跑完之前不换转写模型。',
             '安装包还没有代码签名，Windows 会弹出安全提示。',
-            // Audio2Text 0751581 (2026-10-22): Douyin via the no-login share-page API, verified live once.
-            '旧的小红书链接常常读不到。抖音以前常要求登录，新版本改走不用登录的分享页接口（实测拿到了标题、时长和完整原视频），还没在三轮测试里复核。',
-            // Audio2Text branch codex/wanxiang-platform-audio-ui, e728d4a (2026-10-22).
-            '新版本加了 AI 校对：只指出明确的错，由你逐处确认，原文保留；处理时会显示已经用了多久、大概还要多久。还没正式发布，公开下载仍是 v2.1.0。',
-            // Audio2Text 6033f39 (2026-10-22): the 4 timeouts were Bilibili downloads of the whole video before transcription.
-            '那 4 次超时都卡在 B 站：转写前要先下完整段原视频。新版本改成先下音轨、马上出文字，原视频在后台补齐；还要在原来的电脑上把三轮重跑一遍，才能确认超时没了。',
-            '准确率还没有大样本结论。现在的模型选择，是速度和安装体积的取舍。',
+            // docs/platform-benchmark-20261022.md: 39 failures, kept in the denominator.
+            '三轮里还有 39 次没拿到：10 条不带分享参数的旧小红书链接读不到；2 条抖音作品分享接口返回空，原因还没查清，不能说登录就能解决；1 期小宇宙读不到内容。',
+            '英文的错误率还偏高。测评语料是香港的对话，代表不了方言、背景音乐和所有长视频；不用显卡的版本用的是另一套权重，还没做同样规模的测评。',
+            '只有 Windows 版。',
           ],
         },
       ],
@@ -634,9 +648,9 @@ export const CASES = [
       ],
       links: [['Visit the site', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
       results: [
-        { v: '3 + 2', l: 'Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu' },
+        { v: '25 s', l: 'From link to text for a 47-minute Bilibili video (v2.3.0, GPU, one run)' },
+        { v: '0', l: 'Timeouts: 60 real links, three rounds; 141/180 complete' },
         { v: '~2 min', l: 'To transcribe an hour of audio on an ordinary CPU (single-sample probe, real-time factor 0.035)' },
-        { v: '521 → 2 KB', l: 'Transfer per Xiaohongshu extraction' },
         { v: '3', l: 'Jobs: transcribe, extract, download' },
       ],
       sections: [
@@ -654,6 +668,7 @@ export const CASES = [
           list: [
             'Every platform is structured differently and changes often; Douyin and Xiaohongshu block requests when a session or network looks wrong.',
             'Transcription is slow and hardware-hungry, and not everyone has a GPU.',
+            'A long video used to be downloaded in full before transcription; a file of a few hundred MB could stall the whole job until it timed out.',
             'The desktop app has to run on a computer without Python, without exposing its local API to other programs.',
           ],
         },
@@ -669,8 +684,8 @@ export const CASES = [
           flow: [
             { t: 'Desktop shell', n: ['Tauri 2 (Rust) + React', 'First run fetches only what it needs, about 222 MB', 'Runtime packs verified by SHA-256'] },
             { t: 'Local service', n: ['FastAPI, launched with the app', 'Listens only on a random local port', 'A short-lived token per launch', 'Progress streamed over SSE'] },
-            { t: 'Get the text', n: ['Platform subtitles → page text → transcription', 'If subtitles or text exist, skip transcription'] },
-            { t: 'Transcribe', n: ['SenseVoice int8 on CPU by default', 'Faster-Whisper on a GPU only when measured to help', 'Falls back automatically on failure'] },
+            { t: 'Get the text', n: ['Platform subtitles → page text → transcription', 'If subtitles or text exist, skip transcription', 'Video: fetch the audio first and deliver the text; the original video follows in the background'] },
+            { t: 'Transcribe', n: ['SenseVoice on CPU by default', 'CUDA on an NVIDIA GPU, when there is one', 'CPU and GPU runtimes in separate processes'] },
           ],
           after: ['The same service can also run as a web preview; the Windows app is the complete product.'],
         },
@@ -679,8 +694,10 @@ export const CASES = [
           table: {
             head: ['Decision', 'Why', 'Given up'],
             rows: [
-              ['SenseVoice by default', 'On a CPU, SenseVoice runs at a real-time factor of about 0.035 (an hour of audio in about two minutes) versus about 2.01 for Faster-Whisper medium; a 989-second lecture took SenseVoice 48 s and Whisper on an RTX 3060 GPU 97 s', 'A bigger default model'],
+              ['SenseVoice by default', 'On a CPU, SenseVoice runs at a real-time factor of about 0.035 (an hour of audio in about two minutes) versus about 2.01 for Faster-Whisper medium. On the same 72 hand-transcribed clips, both on a GPU, three rounds: Mandarin character error rate 12.75% for SenseVoice and 37.50% for Whisper medium, in 23 s against 138 s', 'A bigger default model'],
               ['Use subtitles and page text when they exist', 'The fastest transcription is the one you skip', 'Transcribe everything'],
+              ['Text first, original video in the background', 'All 4 old timeouts were waiting for the whole original video (a 260 MB sample) before transcription; with the change, the same links ran three rounds with no timeouts', 'Wait for the video, then transcribe'],
+              ['The background video keeps the original quality', 'The split streams alone are faster, but the same video came out at 854×462 instead of the original 1280×692', 'Trading resolution for speed'],
               ['Read Xiaohongshu’s structured page data directly', 'No full-page HTML: transfer fell from 521 KB to 2 KB and total time by 30–40%', 'Fetch the page, then parse it'],
               ['Do three things only', 'Accounts, payments and workspaces turn a tool into a platform', 'Becoming a platform'],
             ],
@@ -693,13 +710,17 @@ export const CASES = [
             ['Step 2', 'Give it a good interface, modelled on Apple’s design'],
             ['Step 3', 'Pull images and text from Xiaohongshu and other platforms too, without their watermarks'],
             ['Since', 'Rework it again and again until it was stable'],
+            ['2026.10.23', 'v2.3.0: AI proofreading, GPU acceleration, an estimate of the time left; video text first, the original in the background'],
           ],
         },
         {
           h: 'Evidence',
           list: [
             'A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.',
-            '2026-10-21: five platforms, 60 links, three rounds each. 137 of 180 runs delivered in full, all 30 WeChat articles among them; 4 timed out.',
+            '2026-10-21: five platforms, 60 links, three rounds each. 137 of 180 runs delivered in full and 4 timed out, so 2.3 was held back.',
+            '2026-10-22, after the fixes, the same links over three rounds: 141 delivered in full, no timeouts. Bilibili 57/57, WeChat 30/30, Xiaoyuzhou 27/30, Douyin 24/30, Xiaohongshu 3/33; every failure stays in the count.',
+            'Accuracy: on the public ASCEND corpus (hand-transcribed Hong Kong conversations in Chinese and English), the GPU build of SenseVoice scored a Mandarin character error rate of 9.31%, an English word error rate of 23.34% and 15.52% on mixed speech (5,735 clips, three rounds each).',
+            'The v2.3.0 installer was accepted on his own PC and then on a clean Windows machine; the file released is that same file, and a download from the website matches its SHA-256.',
             'Each platform’s status is published with the date of its last check, not as a permanent promise.',
             'Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.',
           ],
@@ -707,12 +728,10 @@ export const CASES = [
         {
           h: 'Still missing',
           list: [
-            'The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.',
             'The installer is not code-signed yet, so Windows shows a warning.',
-            'Older Xiaohongshu links often can’t be read. Douyin used to ask for a login; the next version reads its no-login share-page API instead (tested: title, duration and the full original video), not yet re-checked over three rounds.',
-            'The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept; while it works, it shows the time spent and roughly how long is left. It isn’t released yet; the public download is still v2.1.0.',
-            'All 4 timeouts were Bilibili downloads: the whole original video had to arrive before transcription. The next version fetches the audio first, delivers the text, and completes the video in the background; the three rounds still have to be rerun on the original machine to confirm the timeouts are gone.',
-            'No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.',
+            '39 of the 180 runs still failed: 10 old Xiaohongshu links without their share parameters can’t be read; for 2 Douyin posts the share API returns nothing, for reasons not yet known, so signing in isn’t a proven fix; 1 Xiaoyuzhou episode has no readable content.',
+            'The English error rate is still high. The test corpus is Hong Kong conversation; it can’t stand in for dialects, background music or every long video. The CPU build uses different weights and hasn’t been tested at the same scale.',
+            'Windows only.',
           ],
         },
       ],

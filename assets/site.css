@@ -2042,10 +2042,6 @@ main {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14), 0 30px 80px -20px rgba(0, 0, 0, 0.8);
 }
 
-.frame.narrow {
-  width: min(100%, 720px);
-}
-
 .frame:hover {
   text-decoration: none;
 }
@@ -2139,8 +2135,7 @@ main {
 /* Phones: no phone frame (these are Windows apps and websites). A fixed 16:10 browser card with the
    real address, showing the top of the page; nothing scrolls inside it. */
 @media (max-width: 733px) {
-  .frame,
-  .frame.narrow {
+  .frame {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
