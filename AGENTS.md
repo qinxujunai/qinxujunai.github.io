@@ -7,7 +7,7 @@
 
 只放有代码库、有网站的作品：VoiceFlow、AI Signal、万象成文，加上分享方法的 ai.vibecoding。公司里的经历只在「经历」里各写一句，不单独成页。视觉和交互对标 apple.com 的产品页。
 
-项目的来龙去脉、他的原话、历次决策，都记在 [CLAUDE.md](CLAUDE.md)。文案平台见 [docs/copy.md](docs/copy.md)。
+项目的来龙去脉、他的原话、历次决策，都记在 [CLAUDE.md](CLAUDE.md)（早期逐版记录在 [docs/history.md](docs/history.md)）。改完在 CLAUDE.md 的「决策记录」追加一版：他说了什么、改了什么、为什么。文案平台见 [docs/copy.md](docs/copy.md)。
 
 ## 事实
 - **纯静态**：页面由 `scripts/build.mjs` 生成，不要手改。生成的文件有：
