@@ -31,6 +31,7 @@
   - VoiceFlow：github.com/qinxujunai/VoiceFlow，2026-05-23 首次提交，到 v0.3.10（2026-10-22，设置重做和文字淡入，829 项测试；他本机 Codex 发版）。
   - AI Signal：github.com/qinxujunai/ai-signal。网站 qinxujunai.github.io/ai-signal/ 是产品主页，当天全文在 `latest/`，另有 RSS；v4.1.0（2026-10-23）。
   - 万象成文：github.com/qinxujunai/Audio2Text，当前 v2.3.0（2026-10-23，三轮 141/180、0 超时；他本机 Codex 发版）。
+  - 问数：github.com/qinxujunai/ask-data，网站 qinxujunai.github.io/ask-data/（2026-10-23 第一版）。用一句话问世界银行数据；模型只写查询，数字由程序从结果填入。对应他工作里做的 AI 问数方案。还没有他第一人称的「为什么做」，首页暂不放 story。
   - ai.vibecoding：github.com/qinxujunai/qinxujun-ai-vibecoding，这是他的方法论。
 - **不放的东西**：
   - AI Work Method。他的评价是「很垃圾的项目」。2026-10-22 他已删掉这个仓库，ai-agent-landscape 也删了。
@@ -97,6 +98,7 @@
   - 署名：所有仓库的提交作者改为 qinxujunai（GitHub noreply 邮箱），不再加 Co-Authored-By / Claude-Session。之前的提交没有改写历史（要强推，会打乱标签和发布）。
   - 万象成文作品页的结果条加「次下载 Windows 安装包」，`scripts/stats.mjs` 同时统计两个项目，只算 `.exe`（万象成文首次运行自己下载的 ffmpeg、模型包不算）。VoiceFlow 的下载数也改成只算安装包。
   - AI Signal v4.2.0：网站加订阅区（Buttondown，免费 100 人；他注册后设置仓库变量和 Secret 才出现邮件表单）。
+  - 问数（新仓库 ask-data，他在手机上建的空仓库）：世界银行 17 个指标；检索（MiniSearch）+ 验证过的示例 + DeepSeek 写 SQL；只读查询两道边界；回答里的数字由程序填。网站从 gh-pages 分支发布（第一次推这个分支时 Pages 自动开启）。首页作品第三个（AI Signal 之后），背景改成深、浅灰、白、浅灰、白交替（AI 视觉改为白底）。准确率没评测，页面写明。
 
 ## 否决过的方案
 - **签名字体**（v4.4，2026-10-20 定稿：马善政楷书 + 朱印）：

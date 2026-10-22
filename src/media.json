@@ -318,5 +318,27 @@
       "h": 580,
       "kb": 12
     }
+  },
+  "site-ask-data": {
+    "1040": {
+      "src": "/assets/media/site-ask-data-1040.webp",
+      "w": 1040,
+      "h": 1788,
+      "kb": 56
+    },
+    "2080": {
+      "src": "/assets/media/site-ask-data-2080.webp",
+      "w": 2080,
+      "h": 3575,
+      "kb": 138
+    }
+  },
+  "site-ask-data-card": {
+    "1080": {
+      "src": "/assets/media/site-ask-data-card-1080.webp",
+      "w": 1080,
+      "h": 599,
+      "kb": 32
+    }
   }
 }
