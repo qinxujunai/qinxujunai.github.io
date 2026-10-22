@@ -121,6 +121,8 @@ export const CASES = [
             ['2026.08.25', 'v0.3.2：三个受监督的子进程，每版附发布证据'],
             ['2026.10.11', 'v0.3.8：原生胶囊'],
             ['2026.10.21', 'v0.3.9：设置只留一个保存入口，词典可以搜索、批量删除、撤销；822 项测试'],
+            // VoiceFlow master 1e63302 / 66c27cf / e8f345e (2026-10-22), Windows quality CI green; not yet released.
+            ['2026.10.22', '设置界面按系统设置的样子重做；识别中的字逐个淡入，终稿原地替换草稿。已合入主线，下一版发布'],
           ],
         },
         {
@@ -236,6 +238,7 @@ export const CASES = [
             ['2026.08.25', 'v0.3.2: three supervised workers; evidence with every release'],
             ['2026.10.11', 'v0.3.8: native capsule'],
             ['2026.10.21', 'v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests'],
+            ['2026.10.22', 'Settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place. Merged; ships in the next release'],
           ],
         },
         {
@@ -256,6 +259,9 @@ export const CASES = [
   // Sources: ai-signal repository v3 (2026-10-20): README, scripts/prepare-digest.js, remix-digest.js, render.js,
   // .github/workflows/daily.yml; the first v3 issue (docs/archive/2026-10-20.html: 60 new items, 30 picked);
   // GitHub Actions history (last run of the old workflow 2026-07-22, state disabled_inactivity).
+  // v4 (2026-10-22, commit 4647f40): README, scripts/sources.js, clock.js, daily.yml (04:07–09:47 queue, claim,
+  // 09:35 collect, 10:00:00 send), scripts/test (7 tests); Actions history 2026-10-22 (09:41 cron started 14:32,
+  // 10:17 cron 15:31); Reddit returns 403 to direct requests, so threads come via AINews (Latent Space RSS).
   {
     slug: 'ai-signal',
     kind: 'product',
@@ -264,26 +270,26 @@ export const CASES = [
       name: 'AI Signal',
       kind: '',
       title: '每天上午一期，几分钟读完当天的 AI。',
-      sub: '每天读一遍 X、Hacker News、论文和各大实验室的博客，只留下值得看的，上午 10 点发到我的邮箱，也发布在网上。',
+      sub: '每天读一遍 X、Hacker News、Reddit、论文、新模型和各大实验室的博客，只留下值得看的，北京时间 10:00 整发到我的邮箱，也发布在网上。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
       line: 'AI 消息太多，它每天挑出值得看的，一页读完',
-      note: '北京时间每天 10:00 更新 · 每条都附原文 · 往期都能翻',
+      note: '北京时间每天 10:00 送达 · 每条都附原文 · 往期都能翻',
       why: '模型只能引用编号，链接由代码回填，写不出假链接。',
       // His answer, 2026-10-21.
       story: 'AI 的消息每天成百上千。难的不是看到，是分清哪些可信、哪些值得看；GitHub 上的好项目，我也想第一时间知道它能解决什么问题。所以我让它每天替我读一遍。',
       imageAlt: 'AI Signal 的一期：标题、30 秒读完、头条和要闻，每条下面一行写着来源和热度',
       facts: [
         ['角色', '独立开发'],
-        ['时间', '2026.05 起；v3 于 2026.10'],
+        ['时间', '2026.05 起；v4 于 2026.10'],
         ['形态', '自动化工作流，开源'],
         ['技术', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
       links: [['最新一期', 'https://qinxujunai.github.io/ai-signal/'], ['往期', 'https://qinxujunai.github.io/ai-signal/archive/']],
       results: [
-        { v: '7 类', l: '信源：X、播客、官方博客、HN、论文、GitHub、中文媒体' },
-        { v: '60 → 30', l: 'v3 第一期：60 条新内容里选出 30 条' },
+        { v: '11 类', l: '信源，从 X、Reddit 到论文和新模型' },
+        { v: '10:00', l: '北京时间每天整点发出' },
+        { v: '54 → 26', l: '10-22 那期：54 条新内容里选出 26 条' },
         { v: '0', l: '条链接由模型自己写出，全部由程序按编号填回' },
-        { v: '$0.003', l: '每天的模型成本' },
       ],
       sections: [
         {
@@ -301,6 +307,8 @@ export const CASES = [
             '同一件事会在博客、Hacker News 和推文里同时出现，不合并就是重复。',
             '它会悄悄停掉。2026-07-22 之后，GitHub 因为项目 60 天没有更新，暂停了定时任务；简报停发了将近三个月，没有任何报错。',
             '旧的信源在烂：GitHub Trending 用的第三方接口失效了，机器之心的 RSS 也没了，旧的反馈按钮指向一个 404 的服务。',
+            '从来没准点过。GitHub 的定时任务高峰期会晚好几个小时：10-22 定在 09:41 的任务，14:32 才开始跑，还可能直接被丢掉。',
+            'Reddit 拒绝自动请求，直接抓会被 403。',
           ],
         },
         {
@@ -313,15 +321,17 @@ export const CASES = [
         {
           h: '架构',
           flow: [
-            { t: '收集', n: ['X 上的 builder、播客（follow-builders）', 'OpenAI、DeepMind、Google AI、Hugging Face 官方博客', 'Hacker News：36 小时内、60 分以上', 'Hugging Face 论文热榜、GitHub 今日趋势、量子位', '去掉 60 天内发过的'] },
-            { t: '编号', n: ['每条素材一个编号：H3、P1、G2…'] },
+            { t: '排队', n: ['北京时间 04:07 到 09:47，每 20 分钟排一次', '第一个启动的任务认领当天，其余看到就退出'] },
+            { t: '收集 · 09:35', n: ['X 上的 builder、播客（follow-builders）', 'OpenAI、Anthropic、DeepMind、Google AI、Qwen 等官方博客', 'Hacker News、Techmeme、Reddit（经 AINews 汇总）', '论文热榜、Hugging Face 热门模型、GitHub 今日趋势、Product Hunt', '量子位、36氪', '去掉 60 天内发过的'] },
+            { t: '编号', n: ['每条素材一个编号：H3、R1、M2…'] },
             { t: '编辑 · DeepSeek', n: ['按「三问」挑选，多来源合并', '只输出 JSON，只能引用编号'] },
             { t: '回填', n: ['代码按编号填回链接、分数、star 数', '编号不存在，这条直接丢弃', '模型失败：按热度排出降级版'] },
-            { t: '送达', n: ['邮件主题就是当天的标题', '同时发布网页版和往期'] },
+            { t: '送达 · 10:00', n: ['等到 10:00:00 发出，发之前再查一次今天发过没有', '邮件主题就是当天的标题', '同时发布网页版和往期'] },
           ],
           after: [
             '编辑标准写在提示词里，每条内容必须过三问：读者会因为这条信息做出不同的决策吗？这是新的事实，还是噪音？有没有具体的数字或名字？',
-            '排版参照 TLDR、The Rundown 和 Axios：一栏，标题即事实，每条下面一行写来源、热度和讨论链接；论文和开源项目用两栏的排行列表。',
+            '排版参照 TLDR、The Rundown、Axios 和 AINews：深色报头写期号、当天最重要的一件事和主编的一句话；头条单独一张卡，写「为什么重要」；每条下面一行写分类、信号强度（●●○）、来源和讨论；之后是社区在聊、观点、新模型、新产品、论文、开源、快讯。',
+            '信号强度：几个独立来源报道了同一件事，或者社区里讨论得有多热，最多三个点。',
           ],
         },
         {
@@ -333,7 +343,9 @@ export const CASES = [
               ['每天发布一期网页版', '既是存档，也让定时任务不会因为 60 天无活动被暂停', '只发邮件，不留痕迹'],
               ['去掉 👍 / 👎 和追踪像素', '接收反馈的服务早已返回 404，留着就是坏链接', '假装有反馈回路'],
               ['Hacker News 改用 Algolia，按整词匹配', '旧做法只看首页 30 条，按子串匹配，「said」也会被当成 AI', '首页接口'],
-              ['用 DeepSeek 的 chat 模型', '每天约 $0.003', '更贵的推理模型'],
+              ['凌晨起每 20 分钟排一次，先认领再等到 10:00', '只用 GitHub 就能吃下几个小时的延迟，不用另租服务器', '外部定时服务去触发'],
+              ['Reddit 经 AINews 的每日汇总', '直接请求被 403；AINews 每天整理 Reddit 热帖，带讨论热度', '登录 Reddit 接口，要管账号和密钥'],
+              ['用 DeepSeek 的 chat 模型', '一年几美元', '更贵的推理模型'],
             ],
           },
         },
@@ -344,6 +356,8 @@ export const CASES = [
             '链接和数字全部来自原始数据；模型引用了不存在的编号，这条就不会出现。',
             '模型无响应时照样发出一期，按来源热度排序，并在邮件里写明；某个信源挂了，页脚会写出来。',
             '发过的链接记录 60 天，下一期不会重复。',
+            'v4 加了 7 组自动测试：各信源的解析、热度、北京时间的计算；每次提交都在云端跑一遍。',
+            '准点从 2026-10-23 那期开始生效，以发信时间和运行记录为准。',
           ],
         },
         {
@@ -353,14 +367,15 @@ export const CASES = [
             ['2026.05.22', 'v2：加入 Hacker News、ArXiv、GitHub、中文媒体'],
             ['2026.07.22', '最后一次自动发送；之后定时任务因 60 天无提交被暂停'],
             ['2026.10.20', 'v3：重写信源、编辑方式和排版，恢复每日发送'],
+            ['2026.10.22', 'v4：10:00 整送达；加入 Techmeme、Reddit、热门模型、Product Hunt、Anthropic、Qwen、36氪；重新设计版式'],
           ],
         },
         {
           h: '还差什么',
           list: [
             '推文和播客仍依赖第三方的 follow-builders feed，它一停，这两类就会断。',
-            'Reddit 拒绝自动化请求，社区讨论目前只有 Hacker News。',
-            '中文来源只有量子位。',
+            '准点靠 GitHub 在早上把十几次排队里的任意一次及时启动；一次都没轮上，那天就由 10 点以后的补发兜底，会晚。',
+            'Reddit 依赖 AINews 的汇总，它哪天停更，社区这一栏就会空。',
             '没有读者反馈回路；编辑标准只能靠人读了再改。',
             '模型可能引错编号：链接是真的，但不一定配对。第一期里也还有「正面挑战」「标志性」这类编辑标准不允许的评语。',
           ],
@@ -371,25 +386,25 @@ export const CASES = [
       name: 'AI Signal',
       kind: '',
       title: 'One issue each morning: the day’s AI in a few minutes.',
-      sub: 'Every day it reads X, Hacker News, papers and lab blogs, keeps what’s worth reading, and sends it to my inbox at 10 a.m. and to the web.',
+      sub: 'Every day it reads X, Hacker News, Reddit, papers, new models and lab blogs, keeps what’s worth reading, and sends it to my inbox at exactly 10:00 Beijing time, and to the web.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
       line: 'Too much AI news? It picks what’s worth reading each day, on one page',
-      note: 'Updated daily at 10:00 Beijing time · Every item links to its source · Full archive',
+      note: 'Arrives daily at 10:00 Beijing time · Every item links to its source · Full archive',
       why: 'The model may only cite item numbers; code fills in every link, so it cannot invent one.',
       story: 'Hundreds of AI updates arrive every day. The hard part isn’t seeing them; it’s telling which are credible and which are worth reading. I also want to know about good GitHub projects early, and what problem each one solves. So it reads everything for me each morning.',
       imageAlt: 'An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line',
       facts: [
         ['Role', 'Built solo'],
-        ['When', 'Since May 2026; v3 in Oct 2026'],
+        ['When', 'Since May 2026; v4 in Oct 2026'],
         ['Form', 'Automated workflow, open source'],
         ['Stack', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
       links: [['Latest issue', 'https://qinxujunai.github.io/ai-signal/'], ['Archive', 'https://qinxujunai.github.io/ai-signal/archive/']],
       results: [
-        { v: '7', l: 'Source types: X, podcasts, lab blogs, HN, papers, GitHub, Chinese media' },
-        { v: '60 → 30', l: 'First v3 issue: 30 picked from 60 new items' },
+        { v: '11', l: 'Source types, from X and Reddit to papers and new models' },
+        { v: '10:00', l: 'Sent on the hour, Beijing time, every day' },
+        { v: '54 → 26', l: 'The 22 Oct issue: 26 picked from 54 new items' },
         { v: '0', l: 'Links written by the model; code fills in every one' },
-        { v: '$0.003', l: 'Model cost per day' },
       ],
       sections: [
         {
@@ -406,6 +421,8 @@ export const CASES = [
             'The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.',
             'It can stop silently. After 2026-07-22, GitHub paused the schedule because the project had not been updated for 60 days. The briefing stopped for almost three months with no error anywhere.',
             'Old sources rot: the third-party GitHub Trending API died, a Chinese media RSS feed disappeared, and the old feedback buttons pointed at a service returning 404.',
+            'It was never on time. GitHub’s scheduler runs hours late at busy times: on 22 Oct the 09:41 job started at 14:32. It may also drop runs.',
+            'Reddit refuses automated requests with a 403.',
           ],
         },
         {
@@ -418,15 +435,17 @@ export const CASES = [
         {
           h: 'How it’s built',
           flow: [
-            { t: 'Collect', n: ['Builders on X and podcasts (follow-builders)', 'OpenAI, DeepMind, Google AI, Hugging Face blogs', 'Hacker News: last 36 h, 60+ points', 'HF Daily Papers, GitHub Trending, QbitAI', 'Drop anything sent in the last 60 days'] },
-            { t: 'Number', n: ['Every item gets an ID: H3, P1, G2…'] },
+            { t: 'Queue', n: ['A run every 20 minutes from 04:07 to 09:47 Beijing', 'The first to start claims the day; the rest stop'] },
+            { t: 'Collect · 09:35', n: ['Builders on X and podcasts (follow-builders)', 'OpenAI, Anthropic, DeepMind, Google AI, Qwen and other lab blogs', 'Hacker News, Techmeme, Reddit (via AINews)', 'HF Daily Papers and trending models, GitHub Trending, Product Hunt', 'QbitAI, 36Kr', 'Drop anything sent in the last 60 days'] },
+            { t: 'Number', n: ['Every item gets an ID: H3, R1, M2…'] },
             { t: 'Edit · DeepSeek', n: ['Select by three questions, merge sources', 'JSON only, IDs only'] },
             { t: 'Resolve', n: ['Code fills in links, scores and stars by ID', 'Unknown ID: the item is dropped', 'Model down: a ranked fallback issue'] },
-            { t: 'Deliver', n: ['The subject line is the day’s headline', 'A web edition and archive go up the same day'] },
+            { t: 'Deliver · 10:00', n: ['Sent at 10:00:00, after checking once more that today hasn’t gone out', 'The subject line is the day’s headline', 'A web edition and archive go up the same day'] },
           ],
           after: [
             'The editorial standard lives in the prompt. Every item must pass three questions: Would the reader decide differently because of it? Is it a new fact or noise? Does it carry a concrete number or name?',
-            'The layout follows TLDR, The Rundown and Axios: one column, headlines that state facts, one source line under every item, and ranked two-column lists for papers and repositories.',
+            'The layout follows TLDR, The Rundown, Axios and AINews: a dark masthead with the issue number, the day’s one big thing and an editor’s line; the lead story on its own card with “why it matters”; one line under every item with its tag, signal strength (●●○), source and discussion; then community, voices, new models, new products, papers, open source and quick hits.',
+            'Signal strength: how many independent sources covered the story, or how hot the discussion is, up to three dots.',
           ],
         },
         {
@@ -438,7 +457,9 @@ export const CASES = [
               ['Publish a web edition every day', 'It is the archive, and it keeps the schedule from being paused after 60 quiet days', 'Email only, no trace'],
               ['Remove 👍 / 👎 and the tracking pixel', 'The feedback service had been returning 404; keeping them meant broken links', 'Pretending there is a feedback loop'],
               ['Hacker News through Algolia, whole-word matching', 'The old code read 30 front-page stories and matched substrings, so “said” counted as AI', 'The front-page API'],
-              ['DeepSeek’s chat model', 'About $0.003 a day', 'A pricier reasoning model'],
+              ['Queue from before dawn every 20 minutes; claim first, then wait for 10:00', 'GitHub alone absorbs hours of delay, with no server to rent', 'An external scheduler triggering the run'],
+              ['Reddit through AINews’ daily recap', 'Direct requests get a 403; AINews collects the hottest threads every day, with their activity', 'Logging in to Reddit’s API, with an account and keys to manage'],
+              ['DeepSeek’s chat model', 'A few dollars a year', 'A pricier reasoning model'],
             ],
           },
         },
@@ -449,6 +470,8 @@ export const CASES = [
             'Every link and number comes from the raw data; an item that cites an unknown ID never appears.',
             'If the model is down, an issue still goes out, ranked by source signal and labelled as such; a failed source is named in the footer.',
             'Sent links are remembered for 60 days, so nothing repeats.',
+            'v4 adds seven groups of automated tests (source parsing, signal strength, Beijing-time arithmetic) that run in the cloud on every commit.',
+            'On-time delivery starts with the 23 Oct issue; the send time and run log are the evidence.',
           ],
         },
         {
@@ -458,14 +481,15 @@ export const CASES = [
             ['2026.05.22', 'v2: Hacker News, ArXiv, GitHub and Chinese media added'],
             ['2026.07.22', 'Last automatic send; the schedule was then paused after 60 days without commits'],
             ['2026.10.20', 'v3: new sources, editing and layout; daily sends restored'],
+            ['2026.10.22', 'v4: on the hour at 10:00; Techmeme, Reddit, trending models, Product Hunt, Anthropic, Qwen and 36Kr added; a new layout'],
           ],
         },
         {
           h: 'Still missing',
           list: [
             'Posts and podcasts still depend on the third-party follow-builders feed.',
-            'Reddit refuses automated requests, so community discussion comes only from Hacker News.',
-            'QbitAI is the only Chinese source.',
+            'Punctuality depends on GitHub starting any one of a dozen morning runs in time; if none does, the late backups after 10:00 send it, late.',
+            'Reddit depends on the AINews recap; if it stops, the community section goes empty.',
             'There is no reader feedback loop; the editorial brief improves only when someone reads and edits it.',
             'The model can cite the wrong ID: the link is real but may not match the item. The first issue still had phrases the brief forbids, like “a head-on challenge”.',
           ],
@@ -581,7 +605,8 @@ export const CASES = [
             '60 个样本、3 小时音频的准确率评测还没跑；跑完之前不换转写模型。',
             '安装包还没有代码签名，Windows 会弹出安全提示。',
             '抖音常要求有效会话，旧的小红书链接常常读不到。',
-            '新版本加了 AI 校对：只指出明确的错，由你逐处确认，原文保留。因为上面那 4 次超时，它还没正式发布，公开下载仍是 v2.1.0。',
+            // Audio2Text branch codex/wanxiang-platform-audio-ui, e728d4a (2026-10-22).
+            '新版本加了 AI 校对：只指出明确的错，由你逐处确认，原文保留；处理时会显示已经用了多久、大概还要多久。因为上面那 4 次超时，它还没正式发布，公开下载仍是 v2.1.0。',
             '准确率还没有大样本结论。现在的模型选择，是速度和安装体积的取舍。',
           ],
         },
@@ -682,7 +707,7 @@ export const CASES = [
             'The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.',
             'The installer is not code-signed yet, so Windows shows a warning.',
             'Douyin often asks for a valid session, and older Xiaohongshu links often can’t be read.',
-            'The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept. Because of those 4 timeouts it isn’t released yet; the public download is still v2.1.0.',
+            'The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept; while it works, it shows the time spent and roughly how long is left. Because of those 4 timeouts it isn’t released yet; the public download is still v2.1.0.',
             'No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.',
           ],
         },

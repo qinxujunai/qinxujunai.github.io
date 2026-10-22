@@ -80,7 +80,7 @@
       "src": "/assets/media/site-voiceflow-2080.webp",
       "w": 2080,
       "h": 3543,
-      "kb": 86
+      "kb": 87
     }
   },
   "site-wanxiang": {
@@ -102,13 +102,13 @@
       "src": "/assets/media/site-ai-signal-1040.webp",
       "w": 1040,
       "h": 2874,
-      "kb": 171
+      "kb": 144
     },
     "1520": {
       "src": "/assets/media/site-ai-signal-1520.webp",
       "w": 1520,
       "h": 4200,
-      "kb": 266
+      "kb": 224
     }
   },
   "site-vibecoding": {
@@ -122,7 +122,7 @@
       "src": "/assets/media/site-vibecoding-2080.webp",
       "w": 2080,
       "h": 3705,
-      "kb": 164
+      "kb": 163
     }
   },
   "ai-hat": {
@@ -270,7 +270,7 @@
       "src": "/assets/media/site-voiceflow-card-1080.webp",
       "w": 1080,
       "h": 599,
-      "kb": 20
+      "kb": 19
     }
   },
   "site-wanxiang-card": {
@@ -285,8 +285,8 @@
     "1080": {
       "src": "/assets/media/site-ai-signal-card-1080.webp",
       "w": 1080,
-      "h": 599,
-      "kb": 30
+      "h": 601,
+      "kb": 24
     }
   },
   "site-vibecoding-card": {
@@ -294,7 +294,7 @@
       "src": "/assets/media/site-vibecoding-card-1080.webp",
       "w": 1080,
       "h": 586,
-      "kb": 23
+      "kb": 22
     }
   },
   "site-easyvibe": {
