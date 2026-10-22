@@ -57,14 +57,14 @@
 <div class="case-frame" data-scrollshot><a class="frame" href="https://qinxujunai.github.io/Audio2Text/" rel="noopener">
 <span class="visually-hidden">Open the Wanxiang website</span>
 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">qinxujunai.github.io/Audio2Text</span></span>
-<span class="frame-view"><picture><source media="(max-width: 733px)" srcset="/assets/media/site-wanxiang-card-1080.webp" width="1080" height="599"><img class="frame-img" src="/assets/media/site-wanxiang-1040.webp" srcset="/assets/media/site-wanxiang-1040.webp 1040w, /assets/media/site-wanxiang-2080.webp 2080w" sizes="1040px" width="1040" height="1828" alt="The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media." loading="lazy" decoding="async"></picture></span>
+<span class="frame-view"><picture><source media="(max-width: 733px)" srcset="/assets/media/site-wanxiang-card-1080.webp" width="1080" height="599"><img class="frame-img" src="/assets/media/site-wanxiang-1040.webp" srcset="/assets/media/site-wanxiang-1040.webp 1040w, /assets/media/site-wanxiang-2080.webp 2080w" sizes="1040px" width="1040" height="1747" alt="The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media." loading="lazy" decoding="async"></picture></span>
 </a></div>
 
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
 <h2 class="visually-hidden" id="results-title">Key results</h2>
 <dl class="facts">
-<div><dt>Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu, YouTube</dt><dd>3 + 3</dd></div>
+<div><dt>Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu</dt><dd>3 + 2</dd></div>
 <div><dt>To transcribe an hour of audio on an ordinary CPU (single-sample probe, real-time factor 0.035)</dt><dd>~2 min</dd></div>
 <div><dt>Transfer per Xiaohongshu extraction</dt><dd>521 → 2 KB</dd></div>
 <div><dt>Jobs: transcribe, extract, download</dt><dd>3</dd></div>
@@ -117,11 +117,11 @@
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
 <h2 id="s7-title">Evidence</h2>
-<ul class="bullets"><li>A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.</li><li>Each platform’s status is published with the date of its last check, not as a permanent promise.</li><li>Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.</li></ul>
+<ul class="bullets"><li>A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.</li><li>2026-10-21: five platforms, 60 links, three rounds each. 137 of 180 runs delivered in full, all 30 WeChat articles among them; 4 timed out.</li><li>Each platform’s status is published with the date of its last check, not as a permanent promise.</li><li>Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.</li></ul>
 </section>
 <section class="case-sec" id="s8" aria-labelledby="s8-title">
 <h2 id="s8-title">Still missing</h2>
-<ul class="bullets"><li>The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.</li><li>The installer is not code-signed yet, so Windows shows a warning.</li><li>Xiaohongshu video samples currently trigger session checks; YouTube often times out on networks in mainland China.</li><li>No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.</li></ul>
+<ul class="bullets"><li>The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.</li><li>The installer is not code-signed yet, so Windows shows a warning.</li><li>Douyin often asks for a valid session, and older Xiaohongshu links often can’t be read.</li><li>The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept. Because of those 4 timeouts it isn’t released yet; the public download is still v2.1.0.</li><li>No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.</li></ul>
 </section>
 </div>
 </div>
