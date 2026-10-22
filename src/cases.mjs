@@ -10,7 +10,8 @@ export const CASES = [
   // ───────────────────────── VoiceFlow ─────────────────────────
   // Sources: VoiceFlow README, docs/flagship-reliability-architecture.md, docs/decisions/ADR-001…005,
   // docs/model-strategy.md, docs/feedback-review-2026-07-28.md, docs/release-performance-evidence-2026-08-11.md,
-  // docs/resource-profile-2026-07-28.md, docs/release-evidence-0.3.2/0.3.3/0.3.8.md, git tags.
+  // docs/resource-profile-2026-07-28.md, docs/release-evidence-0.3.2/0.3.3/0.3.8.md,
+  // docs/release-notes-0.3.9.md, docs/release-validation-0.3.9.md (822 tests, 2026-10-21), git tags (15).
   {
     slug: 'voiceflow',
     kind: 'product',
@@ -39,8 +40,8 @@ export const CASES = [
       results: [
         { stat: 'stars', l: 'GitHub Star' },
         { v: '427 ms', l: '说完到送出文字，95% 的情况在此之内（10 秒内的录音，v0.3.1 实测）' },
-        { v: '796 项', l: '自动化测试，每次发布都跑' },
-        { v: '14 次', l: '发布，从 v0.1.0 到 v0.3.8' },
+        { v: '822 项', l: '自动化测试，每次发布都跑' },
+        { v: '15 次', l: '发布，从 v0.1.0 到 v0.3.9' },
       ],
       sections: [
         {
@@ -103,7 +104,7 @@ export const CASES = [
             { v: '1,024 MB', l: '安装后私有内存（v0.3.1）', g: '早期 1,324.6 MB' },
           ],
           list: [
-            '796 项自动化测试，v0.3.3 时是 396 项。',
+            '822 项自动化测试，v0.3.3 时是 396 项。',
             '500 次录音生命周期，10,000 组随机的开始、停止、取消、退出序列，50,000 个异常文本模糊用例。',
             '从 v0.3.2 起，每个版本都附一份发布与验证记录。',
             '用户提过的 12 条反馈，每条都写下结论和理由：采纳、按门槛暂缓，或者拒绝。',
@@ -118,7 +119,8 @@ export const CASES = [
             ['2026.07.28', 'v0.2.0：逐条回应 12 条用户反馈'],
             ['2026.08.10', 'v0.3.0：可恢复的会话，交付前先核对剪贴板'],
             ['2026.08.25', 'v0.3.2：三个受监督的子进程，每版附发布证据'],
-            ['2026.10.11', 'v0.3.8：原生胶囊，796 项测试'],
+            ['2026.10.11', 'v0.3.8：原生胶囊'],
+            ['2026.10.21', 'v0.3.9：设置只留一个保存入口，词典可以搜索、批量删除、撤销；822 项测试'],
           ],
         },
         {
@@ -154,8 +156,8 @@ export const CASES = [
       results: [
         { stat: 'stars', l: 'GitHub stars' },
         { v: '427 ms', l: 'From stopping to text sent, in 95% of cases (clips under 10 s, measured on v0.3.1)' },
-        { v: '796', l: 'Automated tests on every release' },
-        { v: '14', l: 'Releases, v0.1.0 to v0.3.8' },
+        { v: '822', l: 'Automated tests on every release' },
+        { v: '15', l: 'Releases, v0.1.0 to v0.3.9' },
       ],
       sections: [
         {
@@ -217,7 +219,7 @@ export const CASES = [
             { v: '1,024 MB', l: 'Private memory after install (v0.3.1)', g: 'Earlier 1,324.6 MB' },
           ],
           list: [
-            '796 automated tests, up from 396 at v0.3.3.',
+            '822 automated tests, up from 396 at v0.3.3.',
             '500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.',
             'Since v0.3.2, every release ships with a release and verification record.',
             'Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.',
@@ -232,7 +234,8 @@ export const CASES = [
             ['2026.07.28', 'v0.2.0: a written answer to all 12 pieces of user feedback'],
             ['2026.08.10', 'v0.3.0: recoverable sessions; the clipboard is verified before delivery'],
             ['2026.08.25', 'v0.3.2: three supervised workers; evidence with every release'],
-            ['2026.10.11', 'v0.3.8: native capsule, 796 tests'],
+            ['2026.10.11', 'v0.3.8: native capsule'],
+            ['2026.10.21', 'v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests'],
           ],
         },
         {
@@ -473,7 +476,9 @@ export const CASES = [
 
   // ───────────────────────── 万象成文 ─────────────────────────
   // Sources: Audio2Text README (positioning, scope, platform table, live smoke 2026-08-11, loopback port + token,
-  // SHA-256/SBOM/provenance), AGENTS.md (text priority, FastAPI, 521 KB → 2 KB, 30–40%), docs/transcription-benchmark.md.
+  // SHA-256/SBOM/provenance), AGENTS.md (text priority, FastAPI, 521 KB → 2 KB, 30–40%), docs/transcription-benchmark.md,
+  // docs/project-status.md and docs/platform-benchmark-20261021.md (five platforms, 137/180, 2.3 still a candidate; 2026-10-22),
+  // the live site's platform list (YouTube retired 2026-10-21).
   {
     slug: 'wanxiang',
     kind: 'product',
@@ -498,7 +503,7 @@ export const CASES = [
       ],
       links: [['访问网站', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
       results: [
-        { v: '3 + 3', l: 'B 站、小宇宙、公众号已验证；抖音、小红书、YouTube 时好时坏' },
+        { v: '3 + 2', l: 'B 站、小宇宙、公众号已验证；抖音、小红书时好时坏' },
         { v: '约 2 分钟', l: '在普通 CPU 上转写 1 小时音频（单样本测得，实时率 0.035）' },
         { v: '521 KB → 2 KB', l: '小红书单次提取的传输量' },
         { v: '3 件事', l: '只做转文字、提图文、下原件' },
@@ -565,6 +570,7 @@ export const CASES = [
           h: '验证',
           list: [
             '2026-08-11 用真实样本跑了一轮线上冒烟测试：B 站、小宇宙、抖音、公众号通过；小红书一篇 15 张图、14 个 Live 片段的图文通过。',
+            '2026-10-21：5 个平台、60 条链接，各跑 3 轮。180 次里 137 次完整拿到结果，公众号 30 次全部成功；另有 4 次超时。',
             '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
             '安装包、运行包和发布产物都提供 SHA-256；GitHub Actions 同时生成 SBOM 和构建来源证明。',
           ],
@@ -574,7 +580,8 @@ export const CASES = [
           list: [
             '60 个样本、3 小时音频的准确率评测还没跑；跑完之前不换转写模型。',
             '安装包还没有代码签名，Windows 会弹出安全提示。',
-            '小红书的视频样本目前会触发平台的会话验证；YouTube 在国内网络下经常超时。',
+            '抖音常要求有效会话，旧的小红书链接常常读不到。',
+            '新版本加了 AI 校对：只指出明确的错，由你逐处确认，原文保留。因为上面那 4 次超时，它还没正式发布，公开下载仍是 v2.1.0。',
             '准确率还没有大样本结论。现在的模型选择，是速度和安装体积的取舍。',
           ],
         },
@@ -599,7 +606,7 @@ export const CASES = [
       ],
       links: [['Visit the site', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
       results: [
-        { v: '3 + 3', l: 'Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu, YouTube' },
+        { v: '3 + 2', l: 'Verified: Bilibili, Xiaoyuzhou, WeChat articles. Unstable: Douyin, Xiaohongshu' },
         { v: '~2 min', l: 'To transcribe an hour of audio on an ordinary CPU (single-sample probe, real-time factor 0.035)' },
         { v: '521 → 2 KB', l: 'Transfer per Xiaohongshu extraction' },
         { v: '3', l: 'Jobs: transcribe, extract, download' },
@@ -664,6 +671,7 @@ export const CASES = [
           h: 'Evidence',
           list: [
             'A live smoke test with real samples on 2026-08-11: Bilibili, Xiaoyuzhou, Douyin and WeChat articles passed; a Xiaohongshu post with 15 images and 14 Live clips passed.',
+            '2026-10-21: five platforms, 60 links, three rounds each. 137 of 180 runs delivered in full, all 30 WeChat articles among them; 4 timed out.',
             'Each platform’s status is published with the date of its last check, not as a permanent promise.',
             'Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.',
           ],
@@ -673,7 +681,8 @@ export const CASES = [
           list: [
             'The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.',
             'The installer is not code-signed yet, so Windows shows a warning.',
-            'Xiaohongshu video samples currently trigger session checks; YouTube often times out on networks in mainland China.',
+            'Douyin often asks for a valid session, and older Xiaohongshu links often can’t be read.',
+            'The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept. Because of those 4 timeouts it isn’t released yet; the public download is still v2.1.0.',
             'No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.',
           ],
         },
