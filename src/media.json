@@ -88,7 +88,7 @@
       "src": "/assets/media/site-wanxiang-1040.webp",
       "w": 1040,
       "h": 1747,
-      "kb": 40
+      "kb": 41
     },
     "2080": {
       "src": "/assets/media/site-wanxiang-2080.webp",
@@ -102,13 +102,13 @@
       "src": "/assets/media/site-ai-signal-1040.webp",
       "w": 1040,
       "h": 2874,
-      "kb": 144
+      "kb": 143
     },
     "1520": {
       "src": "/assets/media/site-ai-signal-1520.webp",
       "w": 1520,
       "h": 4200,
-      "kb": 224
+      "kb": 220
     }
   },
   "site-vibecoding": {
@@ -285,8 +285,8 @@
     "1080": {
       "src": "/assets/media/site-ai-signal-card-1080.webp",
       "w": 1080,
-      "h": 601,
-      "kb": 24
+      "h": 600,
+      "kb": 25
     }
   },
   "site-vibecoding-card": {

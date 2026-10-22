@@ -330,7 +330,7 @@ export const CASES = [
           ],
           after: [
             '编辑标准写在提示词里，每条内容必须过三问：读者会因为这条信息做出不同的决策吗？这是新的事实，还是噪音？有没有具体的数字或名字？',
-            '排版参照 TLDR、The Rundown、Axios 和 AINews：深色报头写期号、当天最重要的一件事和主编的一句话；头条单独一张卡，写「为什么重要」；每条下面一行写分类、信号强度（●●○）、来源和讨论；之后是社区在聊、观点、新模型、新产品、论文、开源、快讯。',
+            '排版参照 Apple 的新闻邮件和 Stratechery：白底黑字，层级只靠字号、字重和留白，全期只有链接一种颜色。开头是期号、当天最重要的一件事和主编的一句话；头条写「为什么重要」；每条下面一行写分类、信号强度（●●○）、来源和讨论；之后是社区在聊、观点、新模型、新产品、论文、开源、快讯。',
             '信号强度：几个独立来源报道了同一件事，或者社区里讨论得有多热，最多三个点。',
           ],
         },
@@ -367,7 +367,7 @@ export const CASES = [
             ['2026.05.22', 'v2：加入 Hacker News、ArXiv、GitHub、中文媒体'],
             ['2026.07.22', '最后一次自动发送；之后定时任务因 60 天无提交被暂停'],
             ['2026.10.20', 'v3：重写信源、编辑方式和排版，恢复每日发送'],
-            ['2026.10.22', 'v4：10:00 整送达；加入 Techmeme、Reddit、热门模型、Product Hunt、Anthropic、Qwen、36氪；重新设计版式'],
+            ['2026.10.22', 'v4：10:00 整送达；加入 Techmeme、Reddit、热门模型、Product Hunt、Anthropic、Qwen、36氪；版式改成白底黑字，只留链接一种颜色'],
           ],
         },
         {
@@ -444,7 +444,7 @@ export const CASES = [
           ],
           after: [
             'The editorial standard lives in the prompt. Every item must pass three questions: Would the reader decide differently because of it? Is it a new fact or noise? Does it carry a concrete number or name?',
-            'The layout follows TLDR, The Rundown, Axios and AINews: a dark masthead with the issue number, the day’s one big thing and an editor’s line; the lead story on its own card with “why it matters”; one line under every item with its tag, signal strength (●●○), source and discussion; then community, voices, new models, new products, papers, open source and quick hits.',
+            'The layout follows Apple’s own newsletters and Stratechery: black type on white, hierarchy from size, weight and space alone, and one colour, for links. It opens with the issue number, the day’s one big thing and an editor’s line; the lead says why it matters; one line under every item gives its tag, signal strength (●●○), source and discussion; then community, voices, new models, new products, papers, open source and quick hits.',
             'Signal strength: how many independent sources covered the story, or how hot the discussion is, up to three dots.',
           ],
         },
@@ -481,7 +481,7 @@ export const CASES = [
             ['2026.05.22', 'v2: Hacker News, ArXiv, GitHub and Chinese media added'],
             ['2026.07.22', 'Last automatic send; the schedule was then paused after 60 days without commits'],
             ['2026.10.20', 'v3: new sources, editing and layout; daily sends restored'],
-            ['2026.10.22', 'v4: on the hour at 10:00; Techmeme, Reddit, trending models, Product Hunt, Anthropic, Qwen and 36Kr added; a new layout'],
+            ['2026.10.22', 'v4: on the hour at 10:00; Techmeme, Reddit, trending models, Product Hunt, Anthropic, Qwen and 36Kr added; black on white, one colour for links'],
           ],
         },
         {
@@ -606,7 +606,9 @@ export const CASES = [
             '安装包还没有代码签名，Windows 会弹出安全提示。',
             '抖音常要求有效会话，旧的小红书链接常常读不到。',
             // Audio2Text branch codex/wanxiang-platform-audio-ui, e728d4a (2026-10-22).
-            '新版本加了 AI 校对：只指出明确的错，由你逐处确认，原文保留；处理时会显示已经用了多久、大概还要多久。因为上面那 4 次超时，它还没正式发布，公开下载仍是 v2.1.0。',
+            '新版本加了 AI 校对：只指出明确的错，由你逐处确认，原文保留；处理时会显示已经用了多久、大概还要多久。还没正式发布，公开下载仍是 v2.1.0。',
+            // Audio2Text 6033f39 (2026-10-22): the 4 timeouts were Bilibili downloads of the whole video before transcription.
+            '那 4 次超时都卡在 B 站：转写前要先下完整段原视频。新版本改成先下音轨、马上出文字，原视频在后台补齐；还要在原来的电脑上把三轮重跑一遍，才能确认超时没了。',
             '准确率还没有大样本结论。现在的模型选择，是速度和安装体积的取舍。',
           ],
         },
@@ -707,7 +709,8 @@ export const CASES = [
             'The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.',
             'The installer is not code-signed yet, so Windows shows a warning.',
             'Douyin often asks for a valid session, and older Xiaohongshu links often can’t be read.',
-            'The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept; while it works, it shows the time spent and roughly how long is left. Because of those 4 timeouts it isn’t released yet; the public download is still v2.1.0.',
+            'The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept; while it works, it shows the time spent and roughly how long is left. It isn’t released yet; the public download is still v2.1.0.',
+            'All 4 timeouts were Bilibili downloads: the whole original video had to arrive before transcription. The next version fetches the audio first, delivers the text, and completes the video in the background; the three rounds still have to be rerun on the original machine to confirm the timeouts are gone.',
             'No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.',
           ],
         },
