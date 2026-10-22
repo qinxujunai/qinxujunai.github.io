@@ -73,7 +73,7 @@ const SITES = {
   // one line and the button fill the card at a readable size.
   voiceflow: { d: { height: 2180 }, card: { top: 110, height: 455 } },
   wanxiang: { d: { height: 2150 }, card: { top: 90, height: 455 } },
-  'ai-signal': { d: { left: 260, width: 760, height: 2100 }, card: { left: 60, width: 700, top: 0, height: 389 } },
+  'ai-signal': { d: { height: 1850 }, card: { top: 49, height: 427 } },
   vibecoding: { d: { height: 2280 }, card: { top: 140, height: 445 } },
   // Not his work: Datawhale's easy-vibe course, recommended near the end.
   // Desktop skips its blank splash screen and starts at the site's nav.
