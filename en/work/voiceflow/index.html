@@ -70,8 +70,8 @@
 <dl class="facts">
 <div><dt>GitHub stars</dt><dd data-count="100">100</dd></div>
 <div><dt>From stopping to text sent, in 95% of cases (clips under 10 s, measured on v0.3.1)</dt><dd>427 ms</dd></div>
-<div><dt>Automated tests on every release</dt><dd>796</dd></div>
-<div><dt>Releases, v0.1.0 to v0.3.8</dt><dd>14</dd></div>
+<div><dt>Automated tests on every release</dt><dd>822</dd></div>
+<div><dt>Releases, v0.1.0 to v0.3.9</dt><dd>15</dd></div>
 </dl>
 <p class="footnote">GitHub numbers refresh every six hours, last on <span class="nw">2026-10-21</span></p>
 </section>
@@ -118,12 +118,12 @@
 <h2 id="s6-title">Evidence</h2>
 <p>Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H). 20 samples per bucket; each number holds in 95% of cases:</p>
 <ul class="metrics"><li><span class="m-v">6 ms</span><span class="m-l">F2 to first feedback</span><span class="m-g">Gate ≤ 50 ms</span></li><li><span class="m-v">427 ms</span><span class="m-l">Clips under 10 s, stopping to text sent</span><span class="m-g">Gate ≤ 500 ms</span></li><li><span class="m-v">541 ms</span><span class="m-l">Two-minute clips, stopping to text sent</span><span class="m-g">Gate ≤ 2.5 s</span></li><li><span class="m-v">1,024 MB</span><span class="m-l">Private memory after install (v0.3.1)</span><span class="m-g">Earlier 1,324.6 MB</span></li></ul>
-<ul class="bullets"><li>796 automated tests, up from 396 at v0.3.3.</li><li>500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.</li><li>Since v0.3.2, every release ships with a release and verification record.</li><li>Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.</li></ul>
+<ul class="bullets"><li>822 automated tests, up from 396 at v0.3.3.</li><li>500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.</li><li>Since v0.3.2, every release ships with a release and verification record.</li><li>Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.</li></ul>
 <p>This is evidence about latency and mechanics, not accuracy. The project’s rule: no accuracy claims without enough authorized real speech.</p>
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
 <h2 id="s7-title">Timeline</h2>
-<ol class="timeline"><li><span class="when">2026.05.23</span><span>First commit</span></li><li><span class="when">2026.07.04</span><span>v0.1.0 released</span></li><li><span class="when">2026.07.28</span><span>v0.2.0: a written answer to all 12 pieces of user feedback</span></li><li><span class="when">2026.08.10</span><span>v0.3.0: recoverable sessions; the clipboard is verified before delivery</span></li><li><span class="when">2026.08.25</span><span>v0.3.2: three supervised workers; evidence with every release</span></li><li><span class="when">2026.10.11</span><span>v0.3.8: native capsule, 796 tests</span></li></ol>
+<ol class="timeline"><li><span class="when">2026.05.23</span><span>First commit</span></li><li><span class="when">2026.07.04</span><span>v0.1.0 released</span></li><li><span class="when">2026.07.28</span><span>v0.2.0: a written answer to all 12 pieces of user feedback</span></li><li><span class="when">2026.08.10</span><span>v0.3.0: recoverable sessions; the clipboard is verified before delivery</span></li><li><span class="when">2026.08.25</span><span>v0.3.2: three supervised workers; evidence with every release</span></li><li><span class="when">2026.10.11</span><span>v0.3.8: native capsule</span></li><li><span class="when">2026.10.21</span><span>v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests</span></li></ol>
 </section>
 <section class="case-sec" id="s8" aria-labelledby="s8-title">
 <h2 id="s8-title">Still missing</h2>

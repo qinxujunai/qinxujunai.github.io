@@ -59,7 +59,7 @@ const find = (re) => {
 };
 
 // Portrait: a tight head-and-shoulders crop of the ID photo.
-await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80, crop: { left: 72, top: 0, width: 880, height: 880 } });
+if (want('avatar')) await emit('avatar', find(/^avatar\./), { width: 160, square: true, quality: 80, crop: { left: 72, top: 0, width: 880, height: 880 } });
 
 // Products
 // Project websites, captured full-page from qinxujunai.github.io (same origin) by scripts/capture-sites.cjs.
@@ -72,7 +72,7 @@ const SITES = {
   // About 1.8:1 (the card's view), starting and ending on blank space, so the main heading,
   // one line and the button fill the card at a readable size.
   voiceflow: { d: { height: 2180 }, card: { top: 110, height: 455 } },
-  wanxiang: { d: { height: 2250 }, card: { top: 90, height: 455 } },
+  wanxiang: { d: { height: 2150 }, card: { top: 90, height: 455 } },
   'ai-signal': { d: { left: 260, width: 760, height: 2100 }, card: { left: 100, width: 600, top: 0, height: 333 } },
   vibecoding: { d: { height: 2280 }, card: { top: 140, height: 445 } },
   // Not his work: Datawhale's easy-vibe course, recommended near the end.
@@ -80,6 +80,7 @@ const SITES = {
   easyvibe: { d: { top: 870, height: 1230 }, card: { top: 340, height: 440 } },
 };
 for (const [name, crop] of Object.entries(SITES)) {
+  if (!want(`site-${name}`) && !want(`site-${name}-card`)) continue;
   const file = find(new RegExp(`^site-${name}-d\\.`));
   const meta = await sharp(file).metadata();
   const k = meta.width / 1280;
@@ -99,7 +100,7 @@ for (const [name, crop] of Object.entries(SITES)) {
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.
 // AI work from his portfolio (generated images; no brand logos, no licensed characters), then his photographs.
 const PHOTOS = ['ai-hat', 'ai-vest', 'ai-shirt', 'ai-cup', 'ai-tin', 'ai-bag', 'ai-portrait', 'ai-lips', 'ai-leaves', 'ai-studio', 'photo-aerial', 'photo-pagoda', 'photo-dusk', 'photo-sky'];
-for (const p of PHOTOS) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 50 });
+for (const p of PHOTOS) if (want(p)) await emit(p, find(new RegExp(`^${p}\\.`)), { widths: [540, 860], quality: 50 });
 
 fs.writeFileSync('src/media.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log('wrote src/media.json');
