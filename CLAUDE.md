@@ -28,9 +28,9 @@
 - **主张**：他自己写过的「先立边界，再把概率压成确定性。」三个作品都是这个动作。但它是方法论，不放首屏标题（他否了），只在作品页和分享区体现。
 - **AI 视觉作品**：取自简历作品链接里的图（人台→AI 模特、服装上身图、猫头形象包装延展、AI 人像、AI 场景）。不放其中的香奈儿（品牌 logo）、蜘蛛侠、小丑（版权角色）。
 - **作品**：
-  - VoiceFlow：github.com/qinxujunai/VoiceFlow，2026-05-23 首次提交，到 v0.3.9（2026-10-21）；主线上有 v13 的设置重做和文字淡入，未发版。
-  - AI Signal：github.com/qinxujunai/ai-signal。
-  - 万象成文：github.com/qinxujunai/Audio2Text，当前 v2.1.0。
+  - VoiceFlow：github.com/qinxujunai/VoiceFlow，2026-05-23 首次提交，到 v0.3.10（2026-10-22，设置重做和文字淡入，829 项测试；他本机 Codex 发版）。
+  - AI Signal：github.com/qinxujunai/ai-signal。网站 qinxujunai.github.io/ai-signal/ 是产品主页，当天全文在 `latest/`，另有 RSS；v4.1.0（2026-10-23）。
+  - 万象成文：github.com/qinxujunai/Audio2Text，当前 v2.3.0（2026-10-23，三轮 141/180、0 超时；他本机 Codex 发版）。
   - ai.vibecoding：github.com/qinxujunai/qinxujun-ai-vibecoding，这是他的方法论。
 - **不放的东西**：
   - AI Work Method。他的评价是「很垃圾的项目」。2026-10-22 他已删掉这个仓库，ai-agent-landscape 也删了。
@@ -86,6 +86,12 @@
   - VoiceFlow：3507 行的设置窗口拆成 `src/settings_ui/` 五个页面模块，行为不变（`8fd32c3`）。
   - 记忆：三个项目的 AGENTS.md / CLAUDE.md 都加了「不许回退的决定 / 已知问题 / 交接日志」；万象成文 2026-05 的维护日志、本站 v1–v12.2 的逐版记录移到各自的 `docs/history.md`。
   - 网站：万象成文「还差什么」写明抖音的新做法和还没复核。
+
+- **v15（2026-10-23）**：他本机的 Codex 发了万象成文 v2.3.0 和 VoiceFlow v0.3.10，回报贴给我。他说「最新的、该同步的都同步」，AI Signal 要有一个能展示的网址，「所有成熟的项目都是这样做的」，再把个人网站完善一下。
+  - AI Signal（ai-signal e19a309、e31b25c，v4.1.0）：网址根目录改成产品主页（它是什么、今天这期的标题和三条要点、怎么做的），全文在 `latest/`，加 RSS、MIT 许可、CHANGELOG；版本号变了就自动发 Release（云端推不了标签）。删掉过时的编辑器规则文件（其中一条让助手去读本机 Claude 设置里的密钥）。
+  - 两份回报和 GitHub 一致：Audio2Text 两条分支都在 477e170，v2.3.0 冻结来源 a192250；VoiceFlow master af1a705，v0.3.10 标签 c9df2cc。两个仓库的 AGENTS.md 已由 Codex 更新，我没再改。
+  - 网站：VoiceFlow 829 项测试、16 次发布、技术栈 PyQt6 改正为 PySide6（以 requirements.lock 为准）；万象成文结果条换成 25 秒出文字 / 0 次超时，验证写三轮 141/180 和 ASCEND 错误率（只是显卡版，注明 CPU 版权重不同、没测同规模），还差什么写 39 次失败的原因；AI Signal 链接改为「访问网站」+「今天这期」，窗口截图换成产品主页，去掉专门给它的窄窗口样式。
+  - 「为什么做」三段都是他 10-21 的原话，没改。
 
 ## 否决过的方案
 - **签名字体**（v4.4，2026-10-20 定稿：马善政楷书 + 朱印）：
