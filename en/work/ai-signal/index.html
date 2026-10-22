@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI Signal: One issue each morning: the day’s AI in a few minutes · Qin Xujun</title>
-<meta name="description" content="Every day it reads X, Hacker News, papers and lab blogs, keeps what’s worth reading, and sends it to my inbox at 10 a.m. and to the web.">
+<meta name="description" content="Every day it reads X, Hacker News, Reddit, papers, new models and lab blogs, keeps what’s worth reading, and sends it to my inbox at exactly 10:00 Beijing time, and to the web.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 
@@ -18,7 +18,7 @@
 <link rel="alternate" hreflang="x-default" href="https://qinxujunai.github.io/work/ai-signal/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AI Signal: One issue each morning: the day’s AI in a few minutes · Qin Xujun">
-<meta property="og:description" content="Every day it reads X, Hacker News, papers and lab blogs, keeps what’s worth reading, and sends it to my inbox at 10 a.m. and to the web.">
+<meta property="og:description" content="Every day it reads X, Hacker News, Reddit, papers, new models and lab blogs, keeps what’s worth reading, and sends it to my inbox at exactly 10:00 Beijing time, and to the web.">
 <meta property="og:url" content="https://qinxujunai.github.io/en/work/ai-signal/">
 <meta property="og:image" content="https://qinxujunai.github.io/og.png">
 <meta property="og:image:width" content="1200">
@@ -52,22 +52,22 @@
 <nav class="crumb" aria-label="Work"><a href="/en/#work">Work</a><span class="chev" aria-hidden="true">›</span><span aria-current="page">AI Signal</span></nav>
 
 <h1 id="case-title">One issue each morning: the day’s AI in a few minutes</h1>
-<p class="sub">Every day it reads X, Hacker News, papers and lab blogs, keeps what’s worth reading, and sends it to my inbox at 10 a.m. and to the web</p>
+<p class="sub">Every day it reads X, Hacker News, Reddit, papers, new models and lab blogs, keeps what’s worth reading, and sends it to my inbox at exactly 10:00 Beijing time, and to the web</p>
 <p class="cta"><a class="more-link" href="https://qinxujunai.github.io/ai-signal/" rel="noopener">Latest issue<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> AI Signal</span></a><a class="more-link" href="https://qinxujunai.github.io/ai-signal/archive/" rel="noopener">Archive<span class="chev" aria-hidden="true">›</span><span class="visually-hidden"> AI Signal</span></a></p>
 <div class="case-frame" data-scrollshot><a class="frame narrow" href="https://qinxujunai.github.io/ai-signal/" rel="noopener">
 <span class="visually-hidden">Open the AI Signal website</span>
 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">qinxujunai.github.io/ai-signal</span></span>
-<span class="frame-view"><picture><source media="(max-width: 733px)" srcset="/assets/media/site-ai-signal-card-1080.webp" width="1080" height="599"><img class="frame-img" src="/assets/media/site-ai-signal-1040.webp" srcset="/assets/media/site-ai-signal-1040.webp 1040w, /assets/media/site-ai-signal-1520.webp 1520w" sizes="1040px" width="1040" height="2874" alt="An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line" loading="lazy" decoding="async"></picture></span>
+<span class="frame-view"><picture><source media="(max-width: 733px)" srcset="/assets/media/site-ai-signal-card-1080.webp" width="1080" height="601"><img class="frame-img" src="/assets/media/site-ai-signal-1040.webp" srcset="/assets/media/site-ai-signal-1040.webp 1040w, /assets/media/site-ai-signal-1520.webp 1520w" sizes="1040px" width="1040" height="2874" alt="An AI Signal issue: headline, 30-second summary, lead story and stories, each with a source line" loading="lazy" decoding="async"></picture></span>
 </a></div>
 
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
 <h2 class="visually-hidden" id="results-title">Key results</h2>
 <dl class="facts">
-<div><dt>Source types: X, podcasts, lab blogs, HN, papers, GitHub, Chinese media</dt><dd>7</dd></div>
-<div><dt>First v3 issue: 30 picked from 60 new items</dt><dd>60 → 30</dd></div>
+<div><dt>Source types, from X and Reddit to papers and new models</dt><dd>11</dd></div>
+<div><dt>Sent on the hour, Beijing time, every day</dt><dd>10:00</dd></div>
+<div><dt>The 22 Oct issue: 26 picked from 54 new items</dt><dd>54 → 26</dd></div>
 <div><dt>Links written by the model; code fills in every one</dt><dd>0</dd></div>
-<div><dt>Model cost per day</dt><dd>$0.003</dd></div>
 </dl>
 
 </section>
@@ -76,7 +76,7 @@
 <h2 id="facts-title">At a glance</h2>
 <dl>
 <div><dt>Role</dt><dd>Built solo</dd></div>
-<div><dt>When</dt><dd>Since May 2026; v3 in Oct 2026</dd></div>
+<div><dt>When</dt><dd>Since May 2026; v4 in Oct 2026</dd></div>
 <div><dt>Form</dt><dd>Automated workflow, open source</dd></div>
 <div><dt>Stack</dt><dd>Node.js · GitHub Actions · DeepSeek · SMTP</dd></div>
 </dl>
@@ -89,7 +89,7 @@
 </section>
 <section class="case-sec" id="s2" aria-labelledby="s2-title">
 <h2 id="s2-title">Hard parts</h2>
-<ul class="bullets"><li>Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.</li><li>The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.</li><li>It can stop silently. After 2026-07-22, GitHub paused the schedule because the project had not been updated for 60 days. The briefing stopped for almost three months with no error anywhere.</li><li>Old sources rot: the third-party GitHub Trending API died, a Chinese media RSS feed disappeared, and the old feedback buttons pointed at a service returning 404.</li></ul>
+<ul class="bullets"><li>Models make things up. Let one write links and numbers and sooner or later a convincing fake appears.</li><li>The same story shows up on a blog, on Hacker News and on X at once. Without merging, it repeats.</li><li>It can stop silently. After 2026-07-22, GitHub paused the schedule because the project had not been updated for 60 days. The briefing stopped for almost three months with no error anywhere.</li><li>Old sources rot: the third-party GitHub Trending API died, a Chinese media RSS feed disappeared, and the old feedback buttons pointed at a service returning 404.</li><li>It was never on time. GitHub’s scheduler runs hours late at busy times: on 22 Oct the 09:41 job started at 14:32. It may also drop runs.</li><li>Reddit refuses automated requests with a 403.</li></ul>
 </section>
 <section class="case-sec" id="s3" aria-labelledby="s3-title">
 <h2 id="s3-title">Scope</h2>
@@ -98,30 +98,32 @@
 <section class="case-sec" id="s4" aria-labelledby="s4-title">
 <h2 id="s4-title">How it’s built</h2>
 <ol class="flow">
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>Collect</p><ul><li>Builders on X and podcasts (follow-builders)</li><li>OpenAI, DeepMind, Google AI, Hugging Face blogs</li><li>Hacker News: last 36 h, 60+ points</li><li>HF Daily Papers, GitHub Trending, QbitAI</li><li>Drop anything sent in the last 60 days</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>Number</p><ul><li>Every item gets an ID: H3, P1, G2…</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>Edit · DeepSeek</p><ul><li>Select by three questions, merge sources</li><li>JSON only, IDs only</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">4</span>Resolve</p><ul><li>Code fills in links, scores and stars by ID</li><li>Unknown ID: the item is dropped</li><li>Model down: a ranked fallback issue</li></ul></li>
-<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">5</span>Deliver</p><ul><li>The subject line is the day’s headline</li><li>A web edition and archive go up the same day</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">1</span>Queue</p><ul><li>A run every 20 minutes from 04:07 to 09:47 Beijing</li><li>The first to start claims the day; the rest stop</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">2</span>Collect · 09:35</p><ul><li>Builders on X and podcasts (follow-builders)</li><li>OpenAI, Anthropic, DeepMind, Google AI, Qwen and other lab blogs</li><li>Hacker News, Techmeme, Reddit (via AINews)</li><li>HF Daily Papers and trending models, GitHub Trending, Product Hunt</li><li>QbitAI, 36Kr</li><li>Drop anything sent in the last 60 days</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>Number</p><ul><li>Every item gets an ID: H3, R1, M2…</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">4</span>Edit · DeepSeek</p><ul><li>Select by three questions, merge sources</li><li>JSON only, IDs only</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">5</span>Resolve</p><ul><li>Code fills in links, scores and stars by ID</li><li>Unknown ID: the item is dropped</li><li>Model down: a ranked fallback issue</li></ul></li>
+<li class="reveal"><p class="flow-t"><span class="flow-i" aria-hidden="true">6</span>Deliver · 10:00</p><ul><li>Sent at 10:00:00, after checking once more that today hasn’t gone out</li><li>The subject line is the day’s headline</li><li>A web edition and archive go up the same day</li></ul></li>
 </ol>
 <p>The editorial standard lives in the prompt. Every item must pass three questions: Would the reader decide differently because of it? Is it a new fact or noise? Does it carry a concrete number or name?</p>
-<p>The layout follows TLDR, The Rundown and Axios: one column, headlines that state facts, one source line under every item, and ranked two-column lists for papers and repositories.</p>
+<p>The layout follows TLDR, The Rundown, Axios and AINews: a dark masthead with the issue number, the day’s one big thing and an editor’s line; the lead story on its own card with “why it matters”; one line under every item with its tag, signal strength (●●○), source and discussion; then community, voices, new models, new products, papers, open source and quick hits.</p>
+<p>Signal strength: how many independent sources covered the story, or how hot the discussion is, up to three dots.</p>
 </section>
 <section class="case-sec" id="s5" aria-labelledby="s5-title">
 <h2 id="s5-title">Trade-offs</h2>
-<ul class="choices"><li><h3>The model cites IDs, never links</h3><p><span class="k">Why</span>Links and numbers are the easiest things to invent; filled in by code, they at least always exist</p><p><span class="k">Given up</span>Let the model write them and check afterwards</p></li><li><h3>Publish a web edition every day</h3><p><span class="k">Why</span>It is the archive, and it keeps the schedule from being paused after 60 quiet days</p><p><span class="k">Given up</span>Email only, no trace</p></li><li><h3>Remove 👍 / 👎 and the tracking pixel</h3><p><span class="k">Why</span>The feedback service had been returning 404; keeping them meant broken links</p><p><span class="k">Given up</span>Pretending there is a feedback loop</p></li><li><h3>Hacker News through Algolia, whole-word matching</h3><p><span class="k">Why</span>The old code read 30 front-page stories and matched substrings, so “said” counted as AI</p><p><span class="k">Given up</span>The front-page API</p></li><li><h3>DeepSeek’s chat model</h3><p><span class="k">Why</span>About $0.003 a day</p><p><span class="k">Given up</span>A pricier reasoning model</p></li></ul>
+<ul class="choices"><li><h3>The model cites IDs, never links</h3><p><span class="k">Why</span>Links and numbers are the easiest things to invent; filled in by code, they at least always exist</p><p><span class="k">Given up</span>Let the model write them and check afterwards</p></li><li><h3>Publish a web edition every day</h3><p><span class="k">Why</span>It is the archive, and it keeps the schedule from being paused after 60 quiet days</p><p><span class="k">Given up</span>Email only, no trace</p></li><li><h3>Remove 👍 / 👎 and the tracking pixel</h3><p><span class="k">Why</span>The feedback service had been returning 404; keeping them meant broken links</p><p><span class="k">Given up</span>Pretending there is a feedback loop</p></li><li><h3>Hacker News through Algolia, whole-word matching</h3><p><span class="k">Why</span>The old code read 30 front-page stories and matched substrings, so “said” counted as AI</p><p><span class="k">Given up</span>The front-page API</p></li><li><h3>Queue from before dawn every 20 minutes; claim first, then wait for 10:00</h3><p><span class="k">Why</span>GitHub alone absorbs hours of delay, with no server to rent</p><p><span class="k">Given up</span>An external scheduler triggering the run</p></li><li><h3>Reddit through AINews’ daily recap</h3><p><span class="k">Why</span>Direct requests get a 403; AINews collects the hottest threads every day, with their activity</p><p><span class="k">Given up</span>Logging in to Reddit’s API, with an account and keys to manage</p></li><li><h3>DeepSeek’s chat model</h3><p><span class="k">Why</span>A few dollars a year</p><p><span class="k">Given up</span>A pricier reasoning model</p></li></ul>
 </section>
 <section class="case-sec" id="s6" aria-labelledby="s6-title">
 <h2 id="s6-title">Evidence</h2>
-<ul class="bullets"><li>The first v3 issue (2026-10-20) picked 30 of 60 new items, went out by email, and published a web edition and archive.</li><li>Every link and number comes from the raw data; an item that cites an unknown ID never appears.</li><li>If the model is down, an issue still goes out, ranked by source signal and labelled as such; a failed source is named in the footer.</li><li>Sent links are remembered for 60 days, so nothing repeats.</li></ul>
+<ul class="bullets"><li>The first v3 issue (2026-10-20) picked 30 of 60 new items, went out by email, and published a web edition and archive.</li><li>Every link and number comes from the raw data; an item that cites an unknown ID never appears.</li><li>If the model is down, an issue still goes out, ranked by source signal and labelled as such; a failed source is named in the footer.</li><li>Sent links are remembered for 60 days, so nothing repeats.</li><li>v4 adds seven groups of automated tests (source parsing, signal strength, Beijing-time arithmetic) that run in the cloud on every commit.</li><li>On-time delivery starts with the 23 Oct issue; the send time and run log are the evidence.</li></ul>
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
 <h2 id="s7-title">Timeline</h2>
-<ol class="timeline"><li><span class="when">2026.05</span><span>First version: follow-builders posts and podcasts, LLM curation, email</span></li><li><span class="when">2026.05.22</span><span>v2: Hacker News, ArXiv, GitHub and Chinese media added</span></li><li><span class="when">2026.07.22</span><span>Last automatic send; the schedule was then paused after 60 days without commits</span></li><li><span class="when">2026.10.20</span><span>v3: new sources, editing and layout; daily sends restored</span></li></ol>
+<ol class="timeline"><li><span class="when">2026.05</span><span>First version: follow-builders posts and podcasts, LLM curation, email</span></li><li><span class="when">2026.05.22</span><span>v2: Hacker News, ArXiv, GitHub and Chinese media added</span></li><li><span class="when">2026.07.22</span><span>Last automatic send; the schedule was then paused after 60 days without commits</span></li><li><span class="when">2026.10.20</span><span>v3: new sources, editing and layout; daily sends restored</span></li><li><span class="when">2026.10.22</span><span>v4: on the hour at 10:00; Techmeme, Reddit, trending models, Product Hunt, Anthropic, Qwen and 36Kr added; a new layout</span></li></ol>
 </section>
 <section class="case-sec" id="s8" aria-labelledby="s8-title">
 <h2 id="s8-title">Still missing</h2>
-<ul class="bullets"><li>Posts and podcasts still depend on the third-party follow-builders feed.</li><li>Reddit refuses automated requests, so community discussion comes only from Hacker News.</li><li>QbitAI is the only Chinese source.</li><li>There is no reader feedback loop; the editorial brief improves only when someone reads and edits it.</li><li>The model can cite the wrong ID: the link is real but may not match the item. The first issue still had phrases the brief forbids, like “a head-on challenge”.</li></ul>
+<ul class="bullets"><li>Posts and podcasts still depend on the third-party follow-builders feed.</li><li>Punctuality depends on GitHub starting any one of a dozen morning runs in time; if none does, the late backups after 10:00 send it, late.</li><li>Reddit depends on the AINews recap; if it stops, the community section goes empty.</li><li>There is no reader feedback loop; the editorial brief improves only when someone reads and edits it.</li><li>The model can cite the wrong ID: the link is real but may not match the item. The first issue still had phrases the brief forbids, like “a head-on challenge”.</li></ul>
 </section>
 </div>
 </div>
