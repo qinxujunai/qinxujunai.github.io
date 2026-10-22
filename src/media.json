@@ -318,5 +318,27 @@
       "h": 580,
       "kb": 12
     }
+  },
+  "site-chongjinan": {
+    "1040": {
+      "src": "/assets/media/site-chongjinan-1040.webp",
+      "w": 1040,
+      "h": 1893,
+      "kb": 106
+    },
+    "2080": {
+      "src": "/assets/media/site-chongjinan-2080.webp",
+      "w": 2080,
+      "h": 3786,
+      "kb": 259
+    }
+  },
+  "site-chongjinan-card": {
+    "1080": {
+      "src": "/assets/media/site-chongjinan-card-1080.webp",
+      "w": 1080,
+      "h": 616,
+      "kb": 35
+    }
   }
 }
