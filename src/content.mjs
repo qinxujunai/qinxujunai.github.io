@@ -105,16 +105,6 @@ export const content = {
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。', light: true },
     ],
 
-    // A small work after the gallery: a fictional pet-grooming shop whose booking form writes to a real database.
-    // Facts from github.com/qinxujunai/pet_care (README, app/api/appointments/route.ts), 2026-10-22.
-    small: {
-      name: '宠瑾安',
-      line: '一家宠物护理店的官网，可以在线预约',
-      note: '作品演示，门店是虚构的 · 提交的预约真的会存进数据库',
-      url: 'https://chongjinan-care.netlify.app/',
-      alt: '宠瑾安的网站：预约制猫犬护理，首屏是一只金毛和预约表单',
-    },
-
     visual: {
       name: 'AI 视觉',
       line: '商品图、人像、包装，用 AI 做出来',
@@ -249,14 +239,6 @@ export const content = {
       { when: '2022.06', role: 'Community Operations (intern)', org: 'Douyin Digital Academy', desc: '', light: true },
       { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How to make content, and how to get it seen.', light: true },
     ],
-
-    small: {
-      name: 'Chongjinan',
-      line: 'A pet-grooming shop’s website, with online booking',
-      note: 'A demo; the shop is fictional · Bookings really are saved to a database',
-      url: 'https://chongjinan-care.netlify.app/',
-      alt: 'The Chongjinan website (in Chinese): appointment-only grooming for cats and dogs, a golden retriever beside the booking form',
-    },
 
     visual: {
       name: 'AI visuals',
