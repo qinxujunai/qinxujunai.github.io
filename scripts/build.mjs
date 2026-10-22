@@ -250,7 +250,8 @@ function voiceflowDemo(c) {
 </div>`;
 }
 
-const TONES = { voiceflow: 'dark flagship', 'ai-signal': 'soft', wanxiang: 'plain' };
+// Backgrounds alternate down the page: dark, soft, plain, soft, then the gallery on plain.
+const TONES = { voiceflow: 'dark flagship', 'ai-signal': 'soft', 'ask-data': 'plain', wanxiang: 'soft' };
 
 function projectShow(c, cs) {
   const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
@@ -275,7 +276,7 @@ function projectShow(c, cs) {
 // once the section is near, because lazy images inside a horizontal scroller could stay blank in WeChat.
 function visual(c) {
   const v = c.visual;
-  return `<article class="show soft visual" id="visual" aria-labelledby="visual-title">
+  return `<article class="show plain visual" id="visual" aria-labelledby="visual-title">
 <div class="show-stage">
 <div class="show-head">
 <h3 id="visual-title" class="show-name">${esc(v.name)}</h3>
