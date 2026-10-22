@@ -604,7 +604,8 @@ export const CASES = [
           list: [
             '60 个样本、3 小时音频的准确率评测还没跑；跑完之前不换转写模型。',
             '安装包还没有代码签名，Windows 会弹出安全提示。',
-            '抖音常要求有效会话，旧的小红书链接常常读不到。',
+            // Audio2Text 0751581 (2026-10-22): Douyin via the no-login share-page API, verified live once.
+            '旧的小红书链接常常读不到。抖音以前常要求登录，新版本改走不用登录的分享页接口（实测拿到了标题、时长和完整原视频），还没在三轮测试里复核。',
             // Audio2Text branch codex/wanxiang-platform-audio-ui, e728d4a (2026-10-22).
             '新版本加了 AI 校对：只指出明确的错，由你逐处确认，原文保留；处理时会显示已经用了多久、大概还要多久。还没正式发布，公开下载仍是 v2.1.0。',
             // Audio2Text 6033f39 (2026-10-22): the 4 timeouts were Bilibili downloads of the whole video before transcription.
@@ -708,7 +709,7 @@ export const CASES = [
           list: [
             'The 60-sample, three-hour accuracy benchmark hasn’t been run yet; the transcription model won’t change until it has.',
             'The installer is not code-signed yet, so Windows shows a warning.',
-            'Douyin often asks for a valid session, and older Xiaohongshu links often can’t be read.',
+            'Older Xiaohongshu links often can’t be read. Douyin used to ask for a login; the next version reads its no-login share-page API instead (tested: title, duration and the full original video), not yet re-checked over three rounds.',
             'The next version adds AI proofreading: it flags only clear errors, you confirm each one, and the original is kept; while it works, it shows the time spent and roughly how long is left. It isn’t released yet; the public download is still v2.1.0.',
             'All 4 timeouts were Bilibili downloads: the whole original video had to arrive before transcription. The next version fetches the audio first, delivers the text, and completes the video in the background; the three rounds still have to be rerun on the original machine to confirm the timeouts are gone.',
             'No large-sample accuracy figures yet. Today’s model choice is a trade-off of speed and install size.',
