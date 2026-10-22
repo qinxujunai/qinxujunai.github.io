@@ -74,7 +74,7 @@ const SITES = {
   voiceflow: { d: { height: 2180 }, card: { top: 110, height: 455 } },
   wanxiang: { d: { height: 2150 }, card: { top: 90, height: 455 } },
   'ai-signal': { d: { height: 1850 }, card: { top: 49, height: 427 } },
-  'ask-data': { d: { height: 2200 }, card: { top: 95, height: 455 } },
+  'ask-data': { d: { height: 2150 }, card: { top: 95, height: 455 } },
   vibecoding: { d: { height: 2280 }, card: { top: 140, height: 445 } },
   // Not his work: Datawhale's easy-vibe course, recommended near the end.
   // Desktop skips its blank splash screen and starts at the site's nav.

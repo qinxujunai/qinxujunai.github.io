@@ -288,7 +288,10 @@
   var sectionObserver = new IntersectionObserver(function (entries) {
     for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) setCurrent(entries[e].target.id);
   }, { rootMargin: '-40% 0px -55% 0px' });
-  ['top', 'work', 'share', 'path', 'contact'].forEach(function (id) {
+  // Home: the nav's sections. Case pages: the sections in the product bar.
+  var tracked = ['top', 'work', 'share', 'path', 'contact'];
+  for (var n = 0; n < navLinks.length; n++) tracked.push(navLinks[n].getAttribute('data-nav'));
+  tracked.forEach(function (id) {
     var el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });
