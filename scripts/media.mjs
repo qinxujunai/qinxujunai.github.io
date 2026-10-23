@@ -77,9 +77,10 @@ const SITES = {
   'ai-signal': { d: { height: 470 }, card: { top: 0, height: 385 } },
   vibecoding: { d: { height: 670 }, card: { top: 0, height: 610 } },
   // The products at work, for the home page (v21): today's AI Signal issue, and 万象成文's result page
-  // (Audio2Text docs/assets/result-video-desktop.png, the app's own screenshot).
+  // (v24: a real run, a 52-second China News Service clip, CC BY 3.0, uploaded to the app in the cloud;
+  // the same run as Audio2Text's site demo. Sources: result page at 1280 wide 2x (-d) and 390 wide 3x (-c)).
   'prod-ai-signal': { d: { left: 280, width: 720, top: 70, height: 490 }, card: { top: 70, height: 325 } },
-  'prod-wanxiang': { d: { left: 250, width: 780, top: 84, height: 588 }, card: { top: 0, height: 414 } },
+  'prod-wanxiang': { d: { left: 130, width: 1020, top: 138, height: 684 }, card: { top: 358, height: 414 } },
   // Not his work: Datawhale's easy-vibe course, recommended near the end.
   // Its first screen is a splash: the logo, a line and two buttons.
   easyvibe: { d: { top: 200, height: 480 }, card: { top: 370, height: 300 } },
