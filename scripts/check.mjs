@@ -63,9 +63,9 @@ for (const [name, h] of Object.entries(html)) {
   const sizeless = [...h.matchAll(/<img\b[^>]*>/g)].filter((m) => !/width="/.test(m[0]) || !/height="/.test(m[0]));
   if (sizeless.length) fail(`${name}: images without width/height`);
   const internal = [...h.matchAll(/\s(?:href|src|srcset)="(\/[^"]*)"/g)].flatMap((m) => m[1].split(', ').map((u) => u.split(' ')[0]));
-  // /laibuji-aini/ is the film's own repository on this same origin (the film plays from there); it is checked
+  // /too-late-to-love-you/ is the film's own repository on this same origin (the film plays from there); it is checked
   // by that repository and on the live site, not in this checkout.
-  const broken = [...new Set(internal.filter((u) => !u.startsWith('/laibuji-aini/') && !exists(u)))];
+  const broken = [...new Set(internal.filter((u) => !u.startsWith('/too-late-to-love-you/') && !exists(u)))];
   if (broken.length) fail(`${name}: internal links to missing files: ${broken.join(', ')}`);
   const anchors = [...h.matchAll(/\shref="#([^"]+)"/g)].map((m) => m[1]).filter((id) => !h.includes(`id="${id}"`));
   if (anchors.length) fail(`${name}: anchors without a target: ${anchors.join(', ')}`);
