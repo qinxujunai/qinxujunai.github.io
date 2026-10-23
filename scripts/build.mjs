@@ -244,7 +244,7 @@ ${href ? `<span class="visually-hidden">${esc(label)}</span>` : ''}
 // One project, two levels of text above the picture (name, one plain line), the rest below it
 // (plain facts and links). Only the flagship pins on wide screens (data-show); the others leaf through
 // their page as they pass (data-scrollshot). Phones never pin.
-function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseUrl, image, alt, pin = false }) {
+function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseUrl, image, alt, pin = false, first = false }) {
   return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
 <div class="show-track" ${pin ? 'data-show' : 'data-scrollshot'}>
 <div class="show-stage">
@@ -252,7 +252,7 @@ function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseU
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
 ${line ? `<p class="show-line">${T(c, bare(line))}</p>` : ''}
 </div>
-${frame(c, { key: image.key, alt, href: caseUrl, label: `${c.readCase} ${name}`, first: pin })}
+${frame(c, { key: image.key, alt, href: caseUrl, label: `${c.readCase} ${name}`, first })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${T(c, dots(bare(note)))}</p>` : ''}
@@ -273,8 +273,8 @@ function voiceflowDemo(c) {
 </div>`;
 }
 
-// Backgrounds alternate down the page: dark, soft, plain, soft, then the gallery on plain.
-const TONES = { voiceflow: 'dark flagship', 'ai-signal': 'soft', 'ask-data': 'plain', wanxiang: 'soft' };
+// Backgrounds alternate down the page: dark, soft, plain, then the gallery on soft.
+const TONES = { voiceflow: 'dark flagship', 'ai-signal': 'soft', wanxiang: 'plain' };
 
 function projectShow(c, cs) {
   const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
@@ -290,7 +290,11 @@ function projectShow(c, cs) {
     caseUrl: casePath(c, cs.slug),
     image: cs.image,
     alt: t.imageAlt,
-    pin: cs.slug === 'voiceflow',
+    // v19: no pinned scroll-through; every picture is the site's still first screen.
+    pin: false,
+    // Pictures load lazily: on phones the first screen is the hero, and an early download of a
+    // picture below it slows the hero on weak networks (QA: slow 3G LCP).
+    first: false,
   });
 }
 
@@ -299,7 +303,7 @@ function projectShow(c, cs) {
 // once the section is near, because lazy images inside a horizontal scroller could stay blank in WeChat.
 function visual(c) {
   const v = c.visual;
-  return `<article class="show plain visual" id="visual" aria-labelledby="visual-title">
+  return `<article class="show soft visual" id="visual" aria-labelledby="visual-title">
 <div class="show-stage">
 <div class="show-head">
 <h3 id="visual-title" class="show-name">${esc(v.name)}</h3>
@@ -415,7 +419,7 @@ function caseCard(c, cs) {
 
 function homePage(c) {
   const o = other(c);
-  return `${head(c, { url: c.path, alt: { zh: '/', en: '/en/' }, title: c.title, preload: ['site-voiceflow-card'] })}
+  return `${head(c, { url: c.path, alt: { zh: '/', en: '/en/' }, title: c.title })}
 <body class="home">
 <a class="skip" href="#main">${c.skip}</a>
 ${nav(c, { switchHref: o.path, onHome: true })}
@@ -484,7 +488,7 @@ ${caseNav(c, cs, t, casePath(o, cs.slug))}
 ${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
 <h1 id="case-title">${T(c, bare(t.title))}</h1>
 <p class="sub">${T(c, bare(t.sub))}</p>
-${t.links ? `<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
+${t.links.length > 1 ? `<p class="cta">${t.links.slice(1).map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
 ${cs.image ? `<div class="case-frame" data-scrollshot>${frame(c, { key: cs.image.key, alt: t.imageAlt })}</div>` : ''}
 ${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
 </header>

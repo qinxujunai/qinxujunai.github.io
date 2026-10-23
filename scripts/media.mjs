@@ -63,22 +63,22 @@ if (want('avatar')) await emit('avatar', find(/^avatar\./), { width: 160, square
 
 // Products
 // Project websites, captured full-page from qinxujunai.github.io (same origin) by scripts/capture-sites.cjs.
-//   site-<name>-d.png: 1280px wide, 2x, full page · site-<name>-c.png: 820px wide, 3x, first 1200px
-// Shown inside a browser or phone frame that scrolls through the page as you scroll past it.
-// Crops in CSS pixels of the desktop capture (1280 wide, captured at 2x).
-// Each ends on a section edge of that site, short enough that the page moves about as fast as the scroll.
+//   site-<name>-d.png: 1280px wide, 2x, full page · site-<name>-c.png: the phone layout, 390px wide, 3x
+// d (wide screens) and card (phones) are each the site's first screen as built, nav included, cut on the
+// site's own edge before its first picture or next section (v19: one picture, no scrolling inside it).
+// Crops in CSS pixels of the captures.
 const SITES = {
-  // card: the phone card, cut from the 820px-wide 3x capture (site-<name>-c.png), in CSS px.
-  // About 1.8:1 (the card's view), starting and ending on blank space, so the main heading,
-  // one line and the button fill the card at a readable size.
-  voiceflow: { d: { height: 2180 }, card: { top: 110, height: 455 } },
-  wanxiang: { d: { height: 2150 }, card: { top: 90, height: 455 } },
-  'ai-signal': { d: { height: 1850 }, card: { top: 49, height: 427 } },
-  'ask-data': { d: { height: 2150 }, card: { top: 95, height: 455 } },
-  vibecoding: { d: { height: 2280 }, card: { top: 140, height: 445 } },
+  // card: the phone picture, cut from the site's phone layout (390px wide, 3x; site-<name>-c.png), in CSS px.
+  // It is the site's first screen exactly as built: from the top (its own nav included) down to the
+  // blank space before its first picture or next section. Never a fixed ratio: a fixed 16:10 cut
+  // through 万象成文's hero and its demo (v19).
+  voiceflow: { d: { height: 620 }, card: { top: 0, height: 520 } },
+  wanxiang: { d: { height: 432 }, card: { top: 0, height: 530 } },
+  'ai-signal': { d: { height: 470 }, card: { top: 0, height: 385 } },
+  vibecoding: { d: { height: 670 }, card: { top: 0, height: 610 } },
   // Not his work: Datawhale's easy-vibe course, recommended near the end.
-  // Desktop skips its blank splash screen and starts at the site's nav.
-  easyvibe: { d: { top: 870, height: 1230 }, card: { top: 340, height: 440 } },
+  // Its first screen is a splash: the logo, a line and two buttons.
+  easyvibe: { d: { top: 200, height: 480 }, card: { top: 370, height: 300 } },
 };
 for (const [name, crop] of Object.entries(SITES)) {
   if (!want(`site-${name}`) && !want(`site-${name}-card`)) continue;
@@ -90,12 +90,12 @@ for (const [name, crop] of Object.entries(SITES)) {
   const left = Math.round((c.left || 0) * k);
   // Wide screens: the page from the top to a section edge, scrolled inside the window.
   await emit(`site-${name}`, file, { widths: [1040, 2080].map((x) => Math.min(x, w)), quality: 58, crop: { left, top: Math.round((c.top || 0) * k), width: w, height: Math.min(Math.round(c.height * k), meta.height - Math.round((c.top || 0) * k)) } });
-  // Phones: the site's first screen from the 820px capture, 1080px wide so it stays sharp on 3x screens.
+  // Phones: the site's own phone first screen, 1080px wide so it stays sharp on 3x screens.
   const cfile = find(new RegExp(`^site-${name}-c\\.`));
-  const kc = (await sharp(cfile).metadata()).width / 820;
+  const kc = (await sharp(cfile).metadata()).width / 390;
   const cc = crop.card;
   const px = (v) => Math.round(v * kc);
-  await emit(`site-${name}-card`, cfile, { widths: [1080], quality: 72, crop: { left: px(cc.left || 0), top: px(cc.top), width: px(cc.width || 820), height: px(cc.height) } });
+  await emit(`site-${name}-card`, cfile, { widths: [1080], quality: 72, crop: { left: px(cc.left || 0), top: px(cc.top), width: px(cc.width || 390), height: px(cc.height) } });
 }
 
 // Photographs, in display order. Landscapes, buildings and objects only: no faces, no logos.

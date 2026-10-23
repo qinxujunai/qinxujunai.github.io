@@ -1,9 +1,9 @@
 // Captures each project website: full-page at desktop width (1280px, 2x) for the windows on wide screens,
-// and the first 1200px at 820px wide, 3x, for the phone cards (bigger type, sharp on 3x screens).
+// and the site's phone layout (390px wide, 3x) for the phone pictures.
 // Usage: node scripts/capture-sites.cjs <out-dir> [name…]   then: npm run media -- <out-dir> site-voiceflow site-voiceflow-card …
 const pw = (() => { try { return require('playwright'); } catch { return require('/opt/node22/lib/node_modules/playwright'); } })();
 const out = process.argv[2];
-const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': 'ai-signal/', 'ask-data': 'ask-data/', vibecoding: 'qinxujun-ai-vibecoding/', easyvibe: 'https://datawhalechina.github.io/easy-vibe/zh-cn/' };
+const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': 'ai-signal/', vibecoding: 'qinxujun-ai-vibecoding/', easyvibe: 'https://datawhalechina.github.io/easy-vibe/zh-cn/' };
 // SITE_<NAME>=<url> captures from another address, e.g. a local build before it is deployed.
 const only = process.argv.slice(3);
 (async () => {
@@ -13,7 +13,9 @@ const only = process.argv.slice(3);
   for (const [name, path] of Object.entries(sites)) {
     if (only.length && !only.includes(name)) continue;
     const url = process.env[`SITE_${name.toUpperCase().replace(/-/g, '_')}`] || (path.startsWith('http') ? path : 'https://qinxujunai.github.io/' + path);
-    for (const [tag, vp, dpr, mobile] of [['d', { width: 1280, height: 800 }, 2, false], ['c', { width: 820, height: 1200 }, 3, false]]) {
+    // d: desktop, full page, for the windows on wide screens. c: the site's own phone layout (390 wide, 3x),
+    // first screen, for phones: readable at about 1:1 instead of a desktop page shrunk to a third.
+    for (const [tag, vp, dpr, mobile] of [['d', { width: 1280, height: 800 }, 2, false], ['c', { width: 390, height: 1200 }, 3, true]]) {
       const ctx = await (/^http:\/\/(127\.0\.0\.1|localhost)/.test(url) ? local : b).newContext({ viewport: vp, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile, reducedMotion: 'reduce', colorScheme: 'light', locale: 'zh-CN' });
       const p = await ctx.newPage();
       await p.goto(url, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => {});
