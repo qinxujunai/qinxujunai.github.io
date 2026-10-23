@@ -614,7 +614,9 @@ export const CASES = [
     slug: 'wanxiang',
     kind: 'product',
     image: { key: 'site-wanxiang', mobile: 'site-wanxiang-m' },
-    // Home page picture: the app's result page.
+    // Home page picture: the app's result page from a real run (v24, 2026-10-23): a 52-second China News Service clip
+    // (Wikimedia Commons, CC BY 3.0) uploaded to the app in the cloud, transcribed by SenseVoice int8 on CPU in 5.3 s.
+    // The same run as Audio2Text's site demo (Audio2Text showcase/README.md).
     shot: 'site-prod-wanxiang',
     zh: {
       name: '万象成文',
@@ -625,7 +627,7 @@ export const CASES = [
       line: '贴一个链接，拿回全部文字',
       note: 'Windows 版 · B 站、小宇宙、公众号已验证 · 本机处理不用显卡',
       why: '能读字幕就不转写；AI 校对只提建议，原文一个字不动',
-      shotAlt: '万象成文的结果页：左边是整理好的正文，右边是原视频',
+      shotAlt: '万象成文处理一段 52 秒中文视频的结果：左边是转写出的正文，右边是可以播放和下载的视频',
       // His WeChat post the night he started (2026) and his answer (2026-10-21).
       story: '我想把一期两个小时的小宇宙播客转成文字，拿去跟 AI 聊。试了几个小程序，要么太长转不动，要么太贵。我不会写代码，那天晚上，还是按下了 Win+R。',
       imageAlt: '万象成文的网站：把视频、播客和图文，直接变成可用的文字与媒体。',
@@ -669,7 +671,7 @@ export const CASES = [
           ],
           // The app's own result page (Audio2Text docs/assets/result-video-desktop.png).
           shot: 'site-prod-wanxiang',
-          shotAlt: '万象成文的结果页：左边是整理好的正文，可以复制、保存、校对；右边是可以预览和保存的原视频',
+          shotAlt: '万象成文的结果页：左边是转写出的正文，可以复制、下载；右边是可以播放和下载的视频',
         },
         {
           h: '原文，由你决定怎么改',
@@ -760,7 +762,7 @@ export const CASES = [
       line: 'Paste a link. Get every word back',
       note: 'For Windows · Tested on Bilibili, Xiaoyuzhou and WeChat articles · Runs locally, no GPU',
       why: 'If there are subtitles it skips transcription; AI proofreading only suggests, and the original is never touched',
-      shotAlt: 'The Wanxiang result page (in Chinese): the finished text on the left, the original video on the right',
+      shotAlt: 'Wanxiang after a 52-second Mandarin video (in Chinese): the transcribed text on the left, the playable video on the right',
       story: 'I wanted to turn a two-hour podcast episode into text so I could discuss it with an AI. The apps I tried either couldn’t handle the length or cost too much. I couldn’t code. That night I pressed Win+R anyway.',
       imageAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media.',
       facts: [
@@ -801,7 +803,7 @@ export const CASES = [
             'It used to download the whole original video before transcribing, and a few hundred megabytes could stall the job until it timed out. Now it fetches the audio, delivers the text at once, and completes the original video, at full quality, in the background. A 47-minute Bilibili video: text in 25 seconds.',
           ],
           shot: 'site-prod-wanxiang',
-          shotAlt: 'The Wanxiang result page (in Chinese): the finished text on the left, ready to copy, save or proofread; the original video on the right',
+          shotAlt: 'The Wanxiang result page (in Chinese): the transcribed text on the left, ready to copy or download; the playable video on the right',
         },
         {
           h: 'Your original, changed only as you decide',
