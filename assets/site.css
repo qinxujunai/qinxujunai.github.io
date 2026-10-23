@@ -2,7 +2,6 @@
    a slim blurred local nav, centered full-width tiles in white / light grey / black,
    system type set large and tight, blue text links with chevrons, one blue pill for the main action. */
 
-
 :root {
   color-scheme: light;
   --page: #ffffff;
@@ -654,78 +653,7 @@ main {
   line-height: 1.7;
 }
 
-/* Photos: Apple-style gallery, swipe on phones, paddles everywhere */
-
-.gallery {
-  display: flex;
-  gap: 14px;
-  margin: 40px calc(-1 * var(--gutter)) 0;
-  padding: 0 var(--gutter) 4px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding: 0 var(--gutter);
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-}
-
-.gallery::-webkit-scrollbar {
-  display: none;
-}
-
-.gallery li {
-  flex: none;
-  scroll-snap-align: start;
-}
-
-.gallery img {
-  width: auto;
-  height: 300px;
-  max-width: 82vw;
-  border-radius: 18px;
-  object-fit: cover;
-  background: var(--soft);
-}
-
-.gallery li.tall img {
-  width: 200px;
-}
-
 /* A one-line note under AI work; the image sets the width. */
-.gallery figcaption {
-  width: 0;
-  min-width: 100%;
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-
-.paddles {
-  display: flex;
-  justify-content: flex-end;
-  gap: 14px;
-  max-width: 980px;
-  margin: 20px auto 0;
-}
-
-.paddles button {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--soft);
-  color: var(--ink);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.paddles button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
 
 /* Footer */
 
@@ -896,14 +824,6 @@ main {
     font-size: 56px;
   }
 
-  .gallery img {
-    height: 420px;
-  }
-
-  .gallery li.tall img {
-    width: 280px;
-  }
-
   .path li {
     grid-template-columns: 120px 1fr;
   }
@@ -972,22 +892,6 @@ main {
 
   .hero .sig {
     height: 92px;
-  }
-
-  .gallery {
-    padding-left: max(var(--gutter), calc((100vw - 980px) / 2));
-    padding-right: max(var(--gutter), calc((100vw - 980px) / 2));
-    scroll-padding: 0 max(var(--gutter), calc((100vw - 980px) / 2));
-    margin-left: calc(-1 * var(--gutter) - 12px);
-    margin-right: calc(-1 * var(--gutter) - 12px);
-  }
-
-  .gallery img {
-    height: 480px;
-  }
-
-  .gallery li.tall img {
-    width: 320px;
   }
 }
 
@@ -2005,17 +1909,6 @@ main {
   }
 }
 
-/* The fourth work: AI visuals, a swipeable gallery inside the same block shape, edge to edge. */
-.visual .gallery,
-.visual .gallery[data-gallery] {
-  align-self: stretch;
-  margin: 0 calc(-1 * var(--gutter));
-}
-
-.visual .show-foot .paddles {
-  margin: 0;
-}
-
 /* 想法: what he believes (lit by scroll), then ai.vibecoding, where he writes his method down. */
 .share {
   display: flex;
@@ -2158,21 +2051,6 @@ main {
   }
 }
 
-/* Gallery paddles: only where there is a pointer; phones swipe. */
-.paddles button {
-  font: inherit;
-}
-
-@media (hover: none) {
-  .paddles {
-    display: none;
-  }
-}
-
-.gallery li {
-  scroll-snap-stop: always;
-}
-
 .cta [hidden] {
   display: none;
 }
@@ -2223,13 +2101,6 @@ main {
   .show-line,
   .share .show-line {
     max-width: none;
-  }
-
-  .visual .gallery,
-  .visual .gallery[data-gallery] {
-    padding-left: max(var(--gutter), calc((100vw - 1040px) / 2));
-    padding-right: max(var(--gutter), calc((100vw - 1040px) / 2));
-    scroll-padding: 0 max(var(--gutter), calc((100vw - 1040px) / 2));
   }
 }
 
@@ -2319,18 +2190,6 @@ main {
   }
 }
 
-/* Desktop gallery paddles sit at the right edge of the 1040 grid. */
-@media (min-width: 734px) {
-  .visual .show-foot {
-    align-self: stretch;
-  }
-
-  .visual .show-foot .paddles {
-    align-self: flex-end;
-    margin-right: max(0px, calc((100% - 1040px) / 2));
-  }
-}
-
 /* The ending's last words: his own, under the name card. */
 .closing-line {
   max-width: 26em;
@@ -2349,7 +2208,6 @@ main {
   letter-spacing: -0.01em;
   color: var(--ink);
 }
-
 
 /* On the home page VoiceFlow shows itself at work: the capsule writing as you speak. */
 .demo-link {

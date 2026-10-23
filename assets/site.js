@@ -1,4 +1,4 @@
-// Theme, contact hint, the VoiceFlow capsule, gallery paddles, tile reveals, the name card and nav tracking.
+// Theme, contact hint, the VoiceFlow capsule, tile reveals, the name card and nav tracking.
 // The signature is started by a tiny inline script in the hero (see scripts/build.mjs).
 (function () {
   window.qxjReady = true;
