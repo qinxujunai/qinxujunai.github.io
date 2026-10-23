@@ -226,54 +226,6 @@
     darks.forEach(function (el) { darkWatch.observe(el); });
   }
 
-  // Project windows: the website inside scrolls from top to bottom as its section passes.
-  // The pinned flagship ([data-show]) gets a track just long enough for the page to move with the scroll.
-  var shows = [].slice.call(document.querySelectorAll('[data-show], [data-scrollshot]')).map(function (el) {
-    return { el: el, pinned: el.hasAttribute('data-show'), img: el.querySelector('.frame-img'), view: el.querySelector('.frame-view'), on: false };
-  });
-  if (shows.length && root.classList.contains('motion')) {
-    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-    // Phones show a still 16:10 crop: nothing pins and nothing scrolls inside the window.
-    var wide = window.matchMedia('(min-width: 734px)');
-    var size = function () {
-      shows.forEach(function (s) {
-        if (s.pinned && s.img) s.el.style.height = wide.matches ? Math.round(window.innerHeight + Math.max(0, s.img.offsetHeight - s.view.clientHeight) * 1.15) + 'px' : '';
-      });
-    };
-    var layout = function () {
-      var vh = window.innerHeight;
-      shows.forEach(function (s) {
-        if (!s.on || !s.img) return;
-        if (!wide.matches) { s.img.style.removeProperty('--shift'); return; }
-        var r = (s.pinned ? s.el : s.view).getBoundingClientRect();
-        var p = s.pinned ? -r.top / Math.max(1, r.height - vh) : (vh - r.top) / (vh + r.height);
-        // A short rest at the top and at the end; in between the page moves evenly.
-        p = s.pinned ? clamp((p - 0.06) / 0.88) : clamp((p - 0.2) / 0.6);
-        var travel = Math.max(0, s.img.offsetHeight - s.view.clientHeight);
-        s.img.style.setProperty('--shift', (-travel * p).toFixed(1) + 'px');
-      });
-    };
-    var ticking = false;
-    var onScroll = function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { ticking = false; layout(); });
-    };
-    var watch = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        shows.forEach(function (s) { if (s.el === e.target) s.on = e.isIntersecting; });
-      });
-      layout();
-    });
-    shows.forEach(function (s) {
-      watch.observe(s.el);
-      if (s.img) s.img.addEventListener('load', function () { size(); layout(); });
-    });
-    size();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () { size(); onScroll(); });
-  }
-
   // Section tracking for the nav.
   var navLinks = document.querySelectorAll('[data-nav]');
   var current = null;

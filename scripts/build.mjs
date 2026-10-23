@@ -174,7 +174,8 @@ ${SECTIONS.map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a
 // the project's name (to the top), the main sections on wide screens, and the project's website one tap away.
 function caseNav(c, cs, t, switchHref) {
   const L = c.caseLabels;
-  const picks = t.sections.map((s, i) => ({ h: s.h, id: `s${i + 1}` })).filter((s) => L.barSections.includes(s.h));
+  // Shortcuts: the story chapters and 「还差什么」, by their short `nav` names; the details stay out of the bar.
+  const picks = t.sections.map((s, i) => ({ h: s.nav, id: `s${i + 1}` })).filter((s) => s.h);
   return `<header class="nav subnav">
 <div class="nav-inner">
 <a class="sub-back" href="${home(c)}#${cs.slug}"><span aria-hidden="true">‹</span><span class="sub-back-label">${L.crumb}</span><span class="visually-hidden"> · ${esc(c.name)}</span></a>
@@ -203,11 +204,15 @@ function footer(c) {
 
 // The title is his: two clauses, one per line. In Chinese the comma between them goes (his note,
 // v20: with the comma the two lines look lopsided); English keeps its comma.
-function heroTitle(c) {
-  const text = bare(c.lede);
+// A Chinese headline in two lines, split where its comma was (he found the comma lopsided, v20).
+function lines(c, text) {
   if (c.lang !== 'zh-CN') return T(c, text);
   return text.split('，').map((part) => `<span class="line">${T(c, part)}</span>`).join('');
 }
+const heroTitle = (c) => lines(c, bare(c.lede));
+
+// A Chinese line that may wrap only after its punctuation, never inside a phrase.
+const clauses = (c, text) => (c.lang !== 'zh-CN' ? T(c, text) : text.split(/(?<=[，：；])/).map((x) => `<span class="clause">${T(c, x)}</span>`).join(''));
 
 function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
@@ -234,13 +239,12 @@ const hostPath = (url) => url.replace(/^https?:\/\//, '').replace(/\?.*$/, '').r
 
 // Headlines and one-line copy carry no closing full stop (his rule: fewer marks, easier on the eye).
 const bare = (s) => String(s).replace(/[。.]\s*$/, '');
-// In a list like 「A · B · C」 a line may break after a dot, never before it.
-const dots = (s) => String(s).replace(/ · /g, '\u00a0· ');
+// In a list like 「A · B · C」 a line may break after a dot, never before it, and never inside an item.
+const dots = (c, s) => bare(s).split(' · ').map((x) => `<span class="clause">${T(c, x)}</span>`).join('\u00a0· ');
 
-// A project's own website, as a plain screenshot of its first screen (no browser chrome: a fake
-// window inside this site read as "another site in the site"). On wide screens the page inside leafs
-// from top to bottom as the section passes; phones get a fixed 16:10 crop. With href, the picture is a
-// link to the project's page on this site; it never leads off the site.
+// A still picture: a project's website at its first screen, or the product at work. No browser chrome
+// (a fake window inside this site read as "another site in the site"). Phones get their own crop.
+// With href, the picture is a link to the project's page on this site; it never leads off the site.
 function frame(c, { key, alt, href, label, first = false }) {
   const tag = href ? 'a' : 'div';
   return `<${tag} class="frame"${href ? ` href="${href}"` : ''}>
@@ -250,22 +254,25 @@ ${href ? `<span class="visually-hidden">${esc(label)}</span>` : ''}
 }
 
 // One project, two levels of text above the picture (name, one plain line), the rest below it
-// (plain facts and links). Only the flagship pins on wide screens (data-show); the others leaf through
-// their page as they pass (data-scrollshot). Phones never pin.
-function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseUrl, image, alt, pin = false, first = false }) {
+// (his reason, what makes it dependable, plain facts and links).
+// VoiceFlow's picture on the home page is the product itself: the capsule writing as you speak.
+function capsuleLink(c, href, name) {
+  return `<a class="demo-link" href="${href}"><span class="visually-hidden">${esc(`${c.readCase} ${name}`)}</span>${voiceflowDemo(c)}</a>`;
+}
+
+function showcase(c, { id, tone, name, line, story, trust, note, site, siteLabel, caseUrl, shot, alt, first = false }) {
   return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
-<div class="show-track" ${pin ? 'data-show' : 'data-scrollshot'}>
 <div class="show-stage">
 <div class="show-head">
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
-${line ? `<p class="show-line">${T(c, bare(line))}</p>` : ''}
+${line ? `<p class="show-line">${clauses(c, bare(line))}</p>` : ''}
 </div>
-${frame(c, { key: image.key, alt, href: caseUrl, label: `${c.readCase} ${name}`, first })}
+${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
+${trust ? `<p class="trust"><span class="trust-label">${esc(c.trustLabel)}</span>${T(c, bare(trust))}</p>` : ''}
 <div class="show-foot">
-${note ? `<p class="show-note">${T(c, dots(bare(note)))}</p>` : ''}
+${note ? `<p class="show-note">${dots(c, note)}</p>` : ''}
 <p class="cta">${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}<a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${outward}<span class="visually-hidden"> ${esc(name)}</span></a></p>
-</div>
 </div>
 </div>
 </article>`;
@@ -281,7 +288,7 @@ function voiceflowDemo(c) {
 </div>`;
 }
 
-// Backgrounds alternate down the page: dark, soft, plain, then the gallery on soft.
+// Backgrounds alternate down the page: dark, soft, plain; after the path (plain) the gallery sits on soft.
 const TONES = { voiceflow: 'dark flagship', 'ai-signal': 'soft', wanxiang: 'plain' };
 
 function projectShow(c, cs) {
@@ -296,10 +303,10 @@ function projectShow(c, cs) {
     site: t.links[0][1],
     siteLabel: c.open(t.name),
     caseUrl: casePath(c, cs.slug),
-    image: cs.image,
-    alt: t.imageAlt,
-    // v19: no pinned scroll-through; every picture is the site's still first screen.
-    pin: false,
+    // The home page shows the product at work (cs.shot); the case page shows its website (cs.image).
+    shot: cs.shot,
+    trust: t.why,
+    alt: t.shotAlt || t.imageAlt,
     // Pictures load lazily: on phones the first screen is the hero, and an early download of a
     // picture below it slows the hero on weak networks (QA: slow 3G LCP).
     first: false,
@@ -315,13 +322,13 @@ function visual(c) {
 <div class="show-stage">
 <div class="show-head">
 <h3 id="visual-title" class="show-name">${esc(v.name)}</h3>
-<p class="show-line">${T(c, bare(v.line))}</p>
+<p class="show-line">${clauses(c, bare(v.line))}</p>
 </div>
 <ul class="gallery" data-gallery tabindex="0" aria-label="${esc(v.name)}">
 ${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}${p.caption ? `<figcaption>${T(c, bare(p.caption))}</figcaption>` : ''}</figure></li>`).join('\n')}
 </ul>
 <div class="show-foot">
-<p class="show-note"><span class="touch">${T(c, v.swipe)} · </span>${T(c, dots(bare(v.note)))}</p>
+<p class="show-note"><span class="touch">${T(c, v.swipe)} · </span>${dots(c, v.note)}</p>
 <p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
 </div>
 </div>
@@ -331,11 +338,11 @@ ${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, 
 function work(c) {
   return `<section id="work" class="works" aria-labelledby="work-title">
 <header class="tile plain works-head">
-<h2 id="work-title">${c.workTitle}</h2>
-<p class="sub">${T(c, bare(c.workLine))}</p>
+<p class="eyebrow">${c.workTitle}</p>
+<h2 id="work-title">${lines(c, bare(c.workHeadline))}</h2>
+<p class="sub">${clauses(c, bare(c.workLine))}</p>
 </header>
 ${CASES.map((cs) => projectShow(c, cs)).join('\n')}
-${visual(c)}
 </section>`;
 }
 
@@ -350,11 +357,11 @@ function share(c) {
 </div>
 <div class="show-head">
 <h3 class="show-name">${esc(s.name)}</h3>
-<p class="show-line">${T(c, bare(s.intro))}</p>
+<p class="show-line">${clauses(c, bare(s.intro))}</p>
 </div>
 ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', name: s.name })}
 <div class="show-foot">
-<p class="show-note">${T(c, dots(bare(s.note)))}</p>
+<p class="show-note">${dots(c, s.note)}</p>
 <p class="cta"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.link)}${outward}<span class="visually-hidden"> ${esc(s.name)}</span></a></p>
 </div>
 </section>`;
@@ -368,11 +375,11 @@ function recommend(c) {
 <div class="show-head reveal">
 <p class="eyebrow">${esc(r.title)}</p>
 <h2 id="recommend-title" class="rec-title">${bare(r.headline).split(/(?<=[，?])\s*/).map((part) => `<span class="clause">${T(c, part)}</span>`).join(c.lang === 'zh-CN' ? '' : ' ')}</h2>
-<p class="show-line">${T(c, bare(r.line))}</p>
+<p class="show-line">${clauses(c, bare(r.line))}</p>
 </div>
 ${frame(c, { key: 'site-easyvibe', alt: r.alt })}
 <div class="show-foot">
-<p class="show-note">${T(c, dots(bare(r.note)))}</p>
+<p class="show-note">${dots(c, r.note)}</p>
 <p class="cta"><a class="more-link" href="${r.url}" ${ext}>${esc(r.link)}${outward}<span class="visually-hidden"> easy-vibe</span></a></p>
 </div>
 </section>`;
@@ -382,7 +389,8 @@ function journey(c) {
   return `<section class="tile soft" id="path" aria-labelledby="path-title">
 <div class="reveal">
 <p class="eyebrow">${c.pathTitle}</p>
-<h2 id="path-title">${T(c, bare(c.pathHeadline))}</h2>
+<h2 id="path-title">${lines(c, bare(c.pathHeadline))}</h2>
+<p class="sub">${clauses(c, bare(c.pathLine))}</p>
 </div>
 <ol class="path reveal">
 ${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3>${p.org ? `<p class="org">${T(c, p.org)}</p>` : ''}${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
@@ -419,8 +427,8 @@ function caseCard(c, cs) {
   const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
   return `<article class="card-tile product-card reveal">
 <p class="eyebrow">${esc(t.name)}</p>
-<h3><a href="${casePath(c, cs.slug)}">${T(c, bare(t.line))}</a></h3>
-<p class="card-line">${T(c, dots(bare(t.note)))}</p>
+<h3><a href="${casePath(c, cs.slug)}">${clauses(c, bare(t.line))}</a></h3>
+<p class="card-line">${dots(c, t.note)}</p>
 <p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
 </article>`;
 }
@@ -436,6 +444,7 @@ ${hero(c)}
 ${work(c)}
 ${share(c)}
 ${journey(c)}
+${visual(c)}
 ${recommend(c)}
 ${contact(c)}
 </main>
@@ -453,6 +462,29 @@ ${stages.map((s, i) => `<li class="reveal"><p class="flow-t"><span class="flow-i
 </ol>`;
 }
 
+// A case page reads like a story (v21): chapters whose headlines are conclusions, then the engineering
+// (scope, build, trade-offs, evidence, timeline) folded under one 「技术细节」, then what is still missing.
+function caseSections(c, sections) {
+  const out = [];
+  let tech = [];
+  // Inside the fold nothing fades in: a closed <details> is never on screen, so it would stay hidden.
+  const flush = () => {
+    if (!tech.length) return;
+    out.push(`<details class="tech">
+<summary><span>${esc(c.caseLabels.techTitle)}</span><span class="tech-what">${esc(c.caseLabels.techWhat(tech.map(([s]) => s.h)))}</span></summary>
+${tech.map(([s, i]) => block(c, s, i)).join('\n').replace(/<li class="reveal">/g, '<li>')}
+</details>`);
+    tech = [];
+  };
+  sections.forEach((s, i) => {
+    if (s.tech) return tech.push([s, i]);
+    flush();
+    out.push(block(c, s, i));
+  });
+  flush();
+  return out.join('\n');
+}
+
 function block(c, s, i) {
   const L = c.caseLabels;
   const parts = [];
@@ -467,8 +499,9 @@ function block(c, s, i) {
   if (s.list) parts.push(`<ul class="bullets">${s.list.map((x) => `<li>${T(c, x)}</li>`).join('')}</ul>`);
   if (s.timeline) parts.push(`<ol class="timeline">${s.timeline.map(([w, x]) => `<li><span class="when">${esc(w)}</span><span>${T(c, x)}</span></li>`).join('')}</ol>`);
   for (const p of s.after ?? []) parts.push(`<p>${T(c, p)}</p>`);
+  if (s.shot) parts.push(`<div class="sec-shot">${frame(c, { key: s.shot, alt: s.shotAlt })}</div>`);
   return `<section class="case-sec" id="s${i + 1}" aria-labelledby="s${i + 1}-title">
-<h2 id="s${i + 1}-title">${T(c, s.h)}</h2>
+<h2 id="s${i + 1}-title">${clauses(c, s.h)}</h2>
 ${parts.join('\n')}
 </section>`;
 }
@@ -494,10 +527,10 @@ ${caseNav(c, cs, t, casePath(o, cs.slug))}
 <article class="case" aria-labelledby="case-title">
 <header class="tile plain case-head" id="top">
 <p class="eyebrow">${esc(L.howMade(t.name))}</p>
-<h1 id="case-title">${T(c, bare(t.title))}</h1>
-<p class="sub">${T(c, bare(t.sub))}</p>
+<h1 id="case-title">${clauses(c, bare(t.title))}</h1>
+<p class="sub">${clauses(c, bare(t.sub))}</p>
 ${t.links.length > 1 ? `<p class="cta">${t.links.slice(1).map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
-${cs.image ? `<div class="case-frame" data-scrollshot>${frame(c, { key: cs.image.key, alt: t.imageAlt })}</div>` : ''}
+${cs.image ? `<div class="case-frame">${frame(c, { key: cs.image.key, alt: t.imageAlt })}</div>` : ''}
 ${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
@@ -518,13 +551,13 @@ ${t.facts.map(([k, v]) => `<div><dt>${T(c, k)}</dt><dd>${T(c, v)}</dd></div>`).j
 </dl>
 </aside>
 <div class="case-main">
-${t.sections.map((s, i) => block(c, s, i)).join('\n')}
+${caseSections(c, t.sections)}
 </div>
 </div>
 </article>
 <section class="tile plain try" id="try" aria-labelledby="try-title">
 <h2 id="try-title">${esc(L.tryIt(t.name))}</h2>
-<p class="sub">${T(c, dots(bare(t.note)))}</p>
+<p class="sub">${dots(c, t.note)}</p>
 <p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>
 </section>
 <section class="tile soft more-cases" aria-labelledby="more-title">
