@@ -319,26 +319,48 @@
       "kb": 18
     }
   },
-  "site-ask-data": {
+  "site-prod-ai-signal": {
     "1040": {
-      "src": "/assets/media/site-ask-data-1040.webp",
+      "src": "/assets/media/site-prod-ai-signal-1040.webp",
       "w": 1040,
-      "h": 1747,
-      "kb": 65
+      "h": 708,
+      "kb": 32
     },
-    "2080": {
-      "src": "/assets/media/site-ask-data-2080.webp",
-      "w": 2080,
-      "h": 3494,
-      "kb": 160
+    "1440": {
+      "src": "/assets/media/site-prod-ai-signal-1440.webp",
+      "w": 1440,
+      "h": 980,
+      "kb": 45
     }
   },
-  "site-ask-data-card": {
+  "site-prod-ai-signal-card": {
     "1080": {
-      "src": "/assets/media/site-ask-data-card-1080.webp",
+      "src": "/assets/media/site-prod-ai-signal-card-1080.webp",
       "w": 1080,
-      "h": 599,
-      "kb": 32
+      "h": 1745,
+      "kb": 68
+    }
+  },
+  "site-prod-wanxiang": {
+    "1040": {
+      "src": "/assets/media/site-prod-wanxiang-1040.webp",
+      "w": 1040,
+      "h": 845,
+      "kb": 24
+    },
+    "1600": {
+      "src": "/assets/media/site-prod-wanxiang-1600.webp",
+      "w": 1600,
+      "h": 1300,
+      "kb": 41
+    }
+  },
+  "site-prod-wanxiang-card": {
+    "1080": {
+      "src": "/assets/media/site-prod-wanxiang-card-1080.webp",
+      "w": 1080,
+      "h": 1146,
+      "kb": 31
     }
   }
 }
