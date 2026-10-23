@@ -187,6 +187,24 @@
     darks.forEach(function (el) { darkWatch.observe(el); });
   }
 
+  // His film in the first screen: the cover shows until Play; wide screens get the full-bitrate original.
+  var film = document.getElementById('film');
+  var filmCover = document.querySelector('[data-film-play]');
+  if (film && filmCover) {
+    filmCover.hidden = false;
+    var wide = film.getAttribute('data-wide');
+    var saver = navigator.connection && navigator.connection.saveData;
+    if (wide && window.matchMedia('(min-width: 1024px)').matches && !saver) film.src = wide;
+    var hideCover = function () { filmCover.hidden = true; };
+    film.addEventListener('play', hideCover);
+    film.addEventListener('error', hideCover);
+    filmCover.addEventListener('click', function () {
+      hideCover();
+      var p = film.play();
+      if (p && p.catch) p.catch(function () {});
+    });
+  }
+
   // Section tracking for the nav.
   var navLinks = document.querySelectorAll('[data-nav]');
   var current = null;

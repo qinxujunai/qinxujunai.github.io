@@ -54,7 +54,7 @@ const exists = (url) => {
   return p === '' || fs.existsSync(p.endsWith('/') ? `${p}index.html` : p) || fs.existsSync(`${p}/index.html`);
 };
 for (const [name, h] of Object.entries(html)) {
-  const loads = [...h.matchAll(/<(?:script|img|link|source|iframe)\b[^>]*?\s(?:src|href)="([^"]+)"/g)]
+  const loads = [...h.matchAll(/<(?:script|img|link|source|iframe|video)\b[^>]*?\s(?:src|href)="([^"]+)"/g)]
     .map((m) => m[0].startsWith('<link') && /rel="(canonical|alternate)"/.test(m[0]) ? null : m[1])
     .filter((u) => u && /^(https?:)?\/\//.test(u));
   if (loads.length) fail(`${name} loads from another origin: ${loads.join(', ')}`);
@@ -63,7 +63,9 @@ for (const [name, h] of Object.entries(html)) {
   const sizeless = [...h.matchAll(/<img\b[^>]*>/g)].filter((m) => !/width="/.test(m[0]) || !/height="/.test(m[0]));
   if (sizeless.length) fail(`${name}: images without width/height`);
   const internal = [...h.matchAll(/\s(?:href|src|srcset)="(\/[^"]*)"/g)].flatMap((m) => m[1].split(', ').map((u) => u.split(' ')[0]));
-  const broken = [...new Set(internal.filter((u) => !exists(u)))];
+  // /laibuji-aini/ is the film's own repository on this same origin (the film plays from there); it is checked
+  // by that repository and on the live site, not in this checkout.
+  const broken = [...new Set(internal.filter((u) => !u.startsWith('/laibuji-aini/') && !exists(u)))];
   if (broken.length) fail(`${name}: internal links to missing files: ${broken.join(', ')}`);
   const anchors = [...h.matchAll(/\shref="#([^"]+)"/g)].map((m) => m[1]).filter((id) => !h.includes(`id="${id}"`));
   if (anchors.length) fail(`${name}: anchors without a target: ${anchors.join(', ')}`);
