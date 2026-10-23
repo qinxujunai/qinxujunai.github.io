@@ -138,6 +138,8 @@
     - VoiceFlow 胶囊在桌面放大（64px 高、19px 字）：产品本身就是那条胶囊。
     - 删掉 50 条已经没有页面在用的旧样式（逐像素比对，未改动的页面没有变化），样式表 44.1KB → 39.7KB。
 
+- **v22（2026-10-23，进行中，交给他电脑上的智能体）**：他说「把之前 AI 影视那个板块替换成这个，因为这个 AI 视频呈现出了我基本所有东西」，还要「为这个片子单独做一个网站，去讲这个片子」（制作过程、流程、心得体会、拓展），并「确保一定要保留原来的画质」。视频约 60 MB，云端会话上传不了（上限 30 MB），所以在他电脑上接着做。完整计划、他的原话、画质与体积的做法、要改哪些文件，都在 [docs/film-plan.md](docs/film-plan.md)。片名、背景、心得还没给，不要编。
+
 ## 否决过的方案
 - **签名字体**（v4.4，2026-10-20 定稿：马善政楷书 + 朱印）：
   - v1–v3 用刘建毛草；v4 改龙藏体加印，他说「甚至没之前的好看」。
@@ -168,11 +170,12 @@
 ## 待他补充
 - 万象成文：首个版本的具体月份（可选）。
 - 不再问他：「最近在想」、AI Signal 期数、是否每天在用。他说「没人在乎」（2026-10-21）。
-- AI 视频片段（可选）：有的话压成几秒的静音循环，放进影像区。
+- 影片（v22）：视频文件、片名、背景与思路、制作过程、心得体会；可选 B 站链接、分镜、提示词。见 [docs/film-plan.md](docs/film-plan.md)。
 - 本人的手写签名（可选）。拿到后替换 `src/signature.svg`。
 
 ## 工作环境备忘
 - 源素材不进仓库：头像、截图、照片原图、字体包都放在会话临时目录里。重建图片要先准备源目录，见 `scripts/media.mjs` 顶部。
 - 签名需要 @fontsource/ma-shan-zheng 的 woff 和 NotoSerifSC-Bold.otf：
   `node scripts/signature.mjs <fonts-dir> <NotoSerifSC-Bold.otf> final`
-- Playwright 和 Chromium 的路径：`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`。
+- Playwright 和 Chromium 的路径：云端是 `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`；在他电脑上没有这个路径时，`qa.mjs`、`icons.mjs`、`capture-sites.cjs` 自动改用 Playwright 自带的浏览器（先 `npx playwright install chromium`）。
+- 在他电脑上接着做：`git pull` 拿 GitHub 最新代码（GitHub 为准），`npm install`，改完按 AGENTS.md「完成的定义」验证。提交作者设成 `qinxujunai` 和他 GitHub 账号的 noreply 邮箱（`git config user.name`、`git config user.email`），不加 Co-Authored-By 之类的署名。
