@@ -7,9 +7,12 @@ const sites = { voiceflow: 'VoiceFlow/', wanxiang: 'Audio2Text/', 'ai-signal': '
 // SITE_<NAME>=<url> captures from another address, e.g. a local build before it is deployed.
 const only = process.argv.slice(3);
 (async () => {
-  const b = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', proxy: { server: process.env.HTTPS_PROXY } });
+  // The cloud container has its own Chromium and an outbound proxy; elsewhere Playwright's own browser is used.
+  const cloud = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+  const executablePath = require('fs').existsSync(cloud) ? cloud : undefined;
+  const b = await pw.chromium.launch({ executablePath, ...(process.env.HTTPS_PROXY ? { proxy: { server: process.env.HTTPS_PROXY } } : {}) });
   // A local build is reached directly, not through the proxy.
-  const local = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--lang=zh-CN'] });
+  const local = await pw.chromium.launch({ executablePath, args: ['--lang=zh-CN'] });
   for (const [name, path] of Object.entries(sites)) {
     if (only.length && !only.includes(name)) continue;
     const url = process.env[`SITE_${name.toUpperCase().replace(/-/g, '_')}`] || (path.startsWith('http') ? path : 'https://qinxujunai.github.io/' + path);
