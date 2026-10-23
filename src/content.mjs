@@ -103,7 +103,7 @@ export const content = {
       play: '播放《来不及爱你》',
       alt: '《来不及爱你》：她在船舱里望向镜头，眼里含着泪',
       link: '这部片子怎么拍的',
-      url: 'https://qinxujunai.github.io/laibuji-aini/',
+      url: 'https://qinxujunai.github.io/too-late-to-love-you/',
     },
 
     contactTitle: '联系',
@@ -226,7 +226,7 @@ export const content = {
       play: 'Play 来不及爱你',
       alt: '来不及爱你: in the ferry cabin she looks into the lens, eyes wet with tears',
       link: 'How it was made',
-      url: 'https://qinxujunai.github.io/laibuji-aini/en/',
+      url: 'https://qinxujunai.github.io/too-late-to-love-you/en/',
     },
 
     contactTitle: 'Contact',
