@@ -2129,7 +2129,7 @@ main {
   display: flex;
   flex-direction: column;
   width: min(100%, 1040px);
-  height: min(68vh, 620px);
+  height: auto;
   border-radius: 14px;
   overflow: hidden;
   background: #ffffff;
@@ -2203,12 +2203,12 @@ main {
   font-size: min(44px, 10vw);
 }
 
-/* Phones: a fixed 16:10 crop of the top of the page; nothing scrolls inside it. */
+/* Phones: the site's first screen at its own height (cut on the site's own section edge, never a
+   fixed ratio); nothing scrolls inside it. */
 @media (max-width: 733px) {
   .frame {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 10;
     border-radius: 12px;
   }
 
@@ -2218,9 +2218,7 @@ main {
   }
 
   .frame-img {
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
+    height: auto;
     transform: none;
   }
 }
