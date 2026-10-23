@@ -337,22 +337,22 @@
     "1080": {
       "src": "/assets/media/site-prod-ai-signal-card-1080.webp",
       "w": 1080,
-      "h": 1745,
-      "kb": 68
+      "h": 900,
+      "kb": 39
     }
   },
   "site-prod-wanxiang": {
     "1040": {
       "src": "/assets/media/site-prod-wanxiang-1040.webp",
       "w": 1040,
-      "h": 845,
-      "kb": 24
+      "h": 784,
+      "kb": 22
     },
-    "1600": {
-      "src": "/assets/media/site-prod-wanxiang-1600.webp",
-      "w": 1600,
-      "h": 1300,
-      "kb": 41
+    "1560": {
+      "src": "/assets/media/site-prod-wanxiang-1560.webp",
+      "w": 1560,
+      "h": 1176,
+      "kb": 37
     }
   },
   "site-prod-wanxiang-card": {
