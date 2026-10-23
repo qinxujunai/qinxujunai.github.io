@@ -8,7 +8,6 @@ export const GITHUB = 'https://github.com/qinxujunai';
 // Links go to the project's live site, not its source (his request, 2026-10-20).
 export const VIBECODING = 'https://qinxujunai.github.io/qinxujun-ai-vibecoding/';
 
-// Film entry: supplied creative archive and original film, 2026-10-23.
 export const content = {
   zh: {
     lang: 'zh-CN',
@@ -38,9 +37,9 @@ export const content = {
 
     workTitle: '作品',
     // v21: the thesis the three works share. Each one then says, under 「靠得住，是因为」, how it keeps that promise.
-    workHeadline: '让 AI 做的东西，靠得住',
-    workLine: '三个作品，同一个做法：模型负责快，边界负责准',
-    trustLabel: '靠得住，是因为',
+    // v23: a headline that states a fact the three stories prove (each starts from his own problem).
+    workHeadline: '先解决自己的问题',
+    workLine: '三个作品，都在线上，打开就能用',
     // The button names the product, never 「官网」 (v20: readers did not know what 官网 meant here).
     open: (name) => (/^[A-Za-z]/.test(name) ? `打开 ${name}` : `打开${name}`),
     readCase: '怎么做的',
@@ -95,14 +94,14 @@ export const content = {
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。', light: true },
     ],
 
+    // v23: the film plays in the hero, under his name and headline (his request, 2026-10-23: 「这个片子甚至可以放到我主页头像下面」).
     film: {
       name: '来不及爱你',
-      line: '一个十秒的画面，怎样长成一部影片',
-      story: '从轮渡上的一次回眸开始，故事在不断生成、判断与剪辑中慢慢成形。照片、眼泪、海风，以及那些被推翻的镜头，都有留下或舍弃的理由。',
-      note: '57 秒 · 无对白 · AI 叙事短片',
-      link: '观看影片与创作手记',
+      meta: '我导演的 AI 短片 · 57 秒',
+      play: '播放《来不及爱你》',
+      alt: '《来不及爱你》：她在船舱里望向镜头，眼里含着泪',
+      link: '这部片子怎么拍的',
       url: 'https://qinxujunai.github.io/laibuji-aini/',
-      alt: '《来不及爱你》成片静帧：她含着泪，看着手里的合照',
     },
 
     contactTitle: '联系',
@@ -172,9 +171,8 @@ export const content = {
     home: 'Home',
 
     workTitle: 'Work',
-    workHeadline: 'AI-made things you can rely on',
-    workLine: 'Three works, one method: the model makes it fast, the boundaries make it right',
-    trustLabel: 'You can rely on it because',
+    workHeadline: 'Start with your own problem',
+    workLine: 'Three works, all live, ready to open',
     open: (name) => `Open ${name}`,
     readCase: 'How it was made',
     whyLabel: 'Why I built it',
@@ -222,12 +220,11 @@ export const content = {
 
     film: {
       name: '来不及爱你',
-      line: 'How a ten-second image became a film',
-      story: 'A glance on a ferry came first. The story grew through generating, watching and editing. A photograph, a tear, the sea wind, and the shots left out: each was a choice.',
-      note: '57 seconds · No dialogue · An AI-assisted short',
-      link: 'Watch the film and explore its making',
+      meta: 'An AI short film I directed · 57 sec',
+      play: 'Play 来不及爱你',
+      alt: '来不及爱你: in the ferry cabin she looks into the lens, eyes wet with tears',
+      link: 'How it was made',
       url: 'https://qinxujunai.github.io/laibuji-aini/en/',
-      alt: 'A still from 来不及爱你: she looks at a photograph with tears in her eyes',
     },
 
     contactTitle: 'Contact',

@@ -127,6 +127,7 @@ function head(c, { url, alt, title, description = c.description, noindex = false
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 ${preload.map((k) => `<link rel="preload" as="image" href="${Object.values(media[k])[0].src}" media="(max-width: 733px)" fetchpriority="high">`).join('\n')}
+${url === c.path ? `<link rel="preload" as="image" href="/assets/media/film-key-960.webp" imagesrcset="/assets/media/film-key-960.webp 960w, /assets/media/film-key-2560.webp 2560w" imagesizes="(min-width: 1100px) 980px, calc(100vw - 40px)" fetchpriority="high">` : ''}
 ${themeScript}
 <style>${css}</style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -223,7 +224,21 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' 
 <h1 id="hero-title" class="rise" style="--d:.5s">${heroTitle(c)}</h1>
 <p class="sub rise" style="--d:.65s">${T(c, bare(c.now))}</p>
 <p class="cta rise" style="--d:.8s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
+${heroFilm(c)}
 </section>`;
+}
+
+// His film, playable right in the first screen (v23). The file lives once, in the film's own repository on this
+// same origin (/laibuji-aini/), so the page still makes no third-party request. Nothing downloads until Play:
+// phones get his 4K web version, wide screens the full-bitrate original (switched in site.js).
+const FILM = '/laibuji-aini/media/';
+function heroFilm(c) {
+  const f = c.film;
+  return `<figure class="hero-film">
+<div class="film-screen" id="film-watch"><video id="film" controls playsinline preload="none" poster="/assets/media/film-key-960.webp" width="960" height="540" aria-label="${esc(f.name)}" src="${FILM}film-mobile.mp4" data-wide="${FILM}film-original.mp4"></video>
+<button class="film-cover" type="button" data-film-play hidden aria-label="${esc(f.play)}"><img src="/assets/media/film-key-960.webp" srcset="/assets/media/film-key-960.webp 960w, /assets/media/film-key-2560.webp 2560w" sizes="(min-width: 1100px) 980px, calc(100vw - 40px)" width="960" height="540" alt="${esc(f.alt)}" fetchpriority="high" decoding="async"><span class="film-disc" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 3.5v13l10.5-6.5Z" fill="currentColor"/></svg></span></button></div>
+<figcaption><span class="film-name">${esc(f.name)}</span><span class="film-meta">${T(c, f.meta)}</span><a class="more-link" href="${esc(f.url)}" ${ext}>${esc(f.link)}${outward}</a></figcaption>
+</figure>`;
 }
 
 // Splits a line into spans so it can light up as it scrolls by.
@@ -261,7 +276,7 @@ function capsuleLink(c, href, name) {
   return `<a class="demo-link" href="${href}"><span class="visually-hidden">${esc(`${c.readCase} ${name}`)}</span>${voiceflowDemo(c)}</a>`;
 }
 
-function showcase(c, { id, tone, name, line, story, trust, note, site, siteLabel, caseUrl, shot, alt, first = false }) {
+function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseUrl, shot, alt, first = false }) {
   return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
 <div class="show-stage">
 <div class="show-head">
@@ -270,7 +285,6 @@ ${line ? `<p class="show-line">${clauses(c, bare(line))}</p>` : ''}
 </div>
 ${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
-${trust ? `<p class="trust"><span class="trust-label">${esc(c.trustLabel)}</span>${T(c, bare(trust))}</p>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${dots(c, note)}</p>` : ''}
 <p class="cta">${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}<a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${outward}<span class="visually-hidden"> ${esc(name)}</span></a></p>
@@ -306,33 +320,11 @@ function projectShow(c, cs) {
     caseUrl: casePath(c, cs.slug),
     // The home page shows the product at work (cs.shot); the case page shows its website (cs.image).
     shot: cs.shot,
-    trust: t.why,
     alt: t.shotAlt || t.imageAlt,
     // Pictures load lazily: on phones the first screen is the hero, and an early download of a
     // picture below it slows the hero on weak networks (QA: slow 3G LCP).
     first: false,
   });
-}
-
-// The fourth work: AI-made images (then a few of his photographs), as a swipeable gallery.
-// Gallery images are lazy so they never compete with the first screen; site.js switches them all to eager
-// once the section is near, because lazy images inside a horizontal scroller could stay blank in WeChat.
-function filmFeature(c) {
-  const v = c.film;
-  return `<article class="show soft film-feature" id="film" aria-labelledby="film-title">
-<div class="show-stage">
-<div class="show-head">
-<h3 id="film-title" class="show-name">${esc(v.name)}</h3>
-<p class="show-line">${clauses(c, bare(v.line))}</p>
-</div>
-<a class="film-poster" href="${esc(v.url)}" ${ext} aria-label="${esc(v.link)}"><img src="/assets/film-poster.webp" width="1440" height="810" alt="${esc(v.alt)}" loading="lazy" decoding="async"/></a>
-<div class="show-foot">
-<p class="film-story">${T(c, v.story)}</p>
-<p class="show-note">${dots(c, v.note)}</p>
-<p><a class="more-link" href="${esc(v.url)}" ${ext}>${esc(v.link)} ${outward}</a></p>
-</div>
-</div>
-</article>`;
 }
 
 function work(c) {
@@ -444,7 +436,6 @@ ${hero(c)}
 ${work(c)}
 ${share(c)}
 ${journey(c)}
-${filmFeature(c)}
 ${recommend(c)}
 ${contact(c)}
 </main>
