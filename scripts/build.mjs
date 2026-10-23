@@ -317,20 +317,19 @@ function projectShow(c, cs) {
 // The fourth work: AI-made images (then a few of his photographs), as a swipeable gallery.
 // Gallery images are lazy so they never compete with the first screen; site.js switches them all to eager
 // once the section is near, because lazy images inside a horizontal scroller could stay blank in WeChat.
-function visual(c) {
-  const v = c.visual;
-  return `<article class="show soft visual" id="visual" aria-labelledby="visual-title">
+function filmFeature(c) {
+  const v = c.film;
+  return `<article class="show soft film-feature" id="film" aria-labelledby="film-title">
 <div class="show-stage">
 <div class="show-head">
-<h3 id="visual-title" class="show-name">${esc(v.name)}</h3>
+<h3 id="film-title" class="show-name">${esc(v.name)}</h3>
 <p class="show-line">${clauses(c, bare(v.line))}</p>
 </div>
-<ul class="gallery" data-gallery tabindex="0" aria-label="${esc(v.name)}">
-${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, p.alt, { sizes: '(min-width: 734px) 860px, 540px' })}${p.caption ? `<figcaption>${T(c, bare(p.caption))}</figcaption>` : ''}</figure></li>`).join('\n')}
-</ul>
+<a class="film-poster" href="${esc(v.url)}" ${ext} aria-label="${esc(v.link)}"><img src="/assets/film-poster.webp" width="1440" height="810" alt="${esc(v.alt)}" loading="lazy" decoding="async"/></a>
 <div class="show-foot">
-<p class="show-note"><span class="touch">${T(c, v.swipe)} · </span>${dots(c, v.note)}</p>
-<p class="paddles"><button type="button" data-prev aria-label="${esc(c.prev)}"><span aria-hidden="true">‹</span></button><button type="button" data-next aria-label="${esc(c.next)}"><span aria-hidden="true">›</span></button></p>
+<p class="film-story">${T(c, v.story)}</p>
+<p class="show-note">${dots(c, v.note)}</p>
+<p><a class="more-link" href="${esc(v.url)}" ${ext}>${esc(v.link)} ${outward}</a></p>
 </div>
 </div>
 </article>`;
@@ -445,7 +444,7 @@ ${hero(c)}
 ${work(c)}
 ${share(c)}
 ${journey(c)}
-${visual(c)}
+${filmFeature(c)}
 ${recommend(c)}
 ${contact(c)}
 </main>
