@@ -8,6 +8,8 @@ import { CASES } from '../src/cases.mjs';
 
 const read = (f) => fs.readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
 const stats = JSON.parse(read('src/stats.json'));
+// Today's AI Signal issue, refreshed every morning by scripts/signal.mjs (the home page card).
+const signal = JSON.parse(read('src/signal.json'));
 const media = JSON.parse(read('src/media.json'));
 
 const esc = (s) =>
@@ -276,6 +278,20 @@ function capsuleLink(c, href, name) {
   return `<a class="demo-link" href="${href}"><span class="visually-hidden">${esc(`${c.readCase} ${name}`)}</span>${voiceflowDemo(c)}</a>`;
 }
 
+// AI Signal at work: today's issue as live text, not a screenshot, so it is never out of date (v24).
+// The issue is in Chinese on both language versions, so the card is marked lang="zh-CN".
+function signalCard(c, href, name) {
+  const s = signal;
+  const zh = { lang: 'zh-CN' };
+  return `<a class="signal-card" href="${href}" lang="zh-CN"><span class="visually-hidden" lang="${c.lang}">${esc(`${c.readCase} ${name}`)}</span>
+<span class="sc-when">第 ${s.number} 期 · ${esc(s.dateLabel)}</span>
+<span class="sc-head">${T(zh, s.headline)}</span>
+${s.intro ? `<span class="sc-intro">${T(zh, s.intro)}</span>` : ''}
+<span class="sc-meta">从 ${s.scanned} 条新内容里选了 ${s.picked} 条 · 约 ${s.minutes} 分钟读完</span>
+${s.tldr.length ? `<span class="sc-tldr"><span class="sc-tldr-label">30 秒读完</span>${s.tldr.map((t, i) => `<span class="sc-item"><span class="sc-n">${i + 1}</span><span>${T(zh, t)}</span></span>`).join('')}</span>` : ''}
+</a>`;
+}
+
 function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseUrl, shot, alt, first = false }) {
   return `<article class="show ${tone}" id="${id}" aria-labelledby="${id}-title">
 <div class="show-stage">
@@ -283,7 +299,7 @@ function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseU
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
 ${line ? `<p class="show-line">${clauses(c, bare(line))}</p>` : ''}
 </div>
-${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first })}
+${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : shot === 'signal' ? signalCard(c, caseUrl, name) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${dots(c, note)}</p>` : ''}

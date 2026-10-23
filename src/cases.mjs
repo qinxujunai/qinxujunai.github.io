@@ -325,7 +325,7 @@ export const CASES = [
     kind: 'product',
     image: { key: 'site-ai-signal', mobile: 'site-ai-signal-m' },
     // Home page picture: the 23 Oct issue itself (qinxujunai.github.io/ai-signal/latest/).
-    shot: 'site-prod-ai-signal',
+    shot: 'signal',
     zh: {
       name: 'AI Signal',
       kind: '',

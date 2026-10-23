@@ -2567,3 +2567,90 @@ main {
     transition: none;
   }
 }
+
+/* v24: today's AI Signal issue as live text (src/signal.json, refreshed every morning). */
+.signal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 840px);
+  padding: 32px 40px 36px;
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--body);
+  text-align: left;
+  text-decoration: none;
+  box-shadow: 0 0 0 1px var(--hairline), 0 30px 70px -30px rgba(0, 0, 0, 0.35);
+}
+
+.signal-card:hover {
+  text-decoration: none;
+}
+
+.sc-when,
+.sc-meta,
+.sc-tldr-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sc-head {
+  font-size: 32px;
+  line-height: 1.22;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.signal-card:hover .sc-head {
+  color: var(--link);
+}
+
+.sc-intro {
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.sc-tldr {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 20px 24px;
+  border-radius: 14px;
+  background: var(--soft);
+}
+
+.sc-item {
+  display: flex;
+  gap: 14px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.sc-n {
+  flex: none;
+  width: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 733px) {
+  .signal-card {
+    padding: 22px 20px 24px;
+    border-radius: 14px;
+  }
+
+  .sc-head {
+    font-size: 24px;
+  }
+
+  .sc-intro {
+    font-size: 16px;
+  }
+
+  /* One phone screen per work: the three-line summary stays on wide screens only. */
+  .sc-tldr {
+    display: none;
+  }
+}

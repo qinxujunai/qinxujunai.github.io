@@ -13,8 +13,8 @@ export const content = {
     lang: 'zh-CN',
     path: '/',
     // What a WeChat chat shows when the link is shared: his name and his headline, then the thesis.
-    title: '秦徐俊 · 我用 AI 做东西，也把想法分享出来',
-    description: '三个在线上的作品，同一个做法：模型负责快，边界负责准。VoiceFlow、AI Signal、万象成文，和分享做法的 ai.vibecoding。',
+    title: '秦徐俊 · 我用 AI 做东西，也把做法分享出来',
+    description: '一部我导演的 AI 短片《来不及爱你》，三个在线上、打开就能用的作品，和一套能照着做的方法 ai.vibecoding。',
     skip: '跳到正文',
     switchLabel: 'English',
     switchLang: 'en',
@@ -25,7 +25,8 @@ export const content = {
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
     // First screen (his choice, 2026-10-20): avatar, signature, this headline, the product list, two actions.
-    lede: '我用 AI 做东西，也把想法分享出来',
+    // v24 (2026-10-23): he chose 「做法」 over 「想法」: a method others can follow is worth more than an opinion.
+    lede: '我用 AI 做东西，也把做法分享出来',
     // his words (ai.vibecoding hero.subtitle, May 2026), with 让你 → 让人 at his request: the home page speaks to everyone.
     now: '让 AI 负责拆解、生成与验证，让人守住目标、边界与品味',
     addWechat: '加我微信',
@@ -82,11 +83,12 @@ export const content = {
     // v21: the path told as one line of growth (his stance: the media degree is what powers the AI work).
     // The clients stay in the sub line; 「让内容被看见」 echoes his degree line at the bottom of the list.
     pathHeadline: '从让内容被看见，到让 AI 落地',
-    pathLine: '做内容出身，现在为金融、政企客户做 AI 项目',
+    pathLine: '做内容出身，做过乙方交付，也在甲方把 AI 用进真实业务',
     journey: [
       // His answer 2026-10-23: AI 项目经理 since 2026-08, company not named; 比智科技 until 2026-07.
       // Years only: the work runs one line (AI projects for clients), the exact months add nothing.
-      { when: '2026 至今', role: 'AI 项目经理', org: '', desc: '' },
+      // His words, 2026-10-23: the company may be named now; the DingTalk→Feishu switch and review tagging (4–5 h a day → 10 min) are his account.
+      { when: '2026 至今', role: 'AI 项目经理', org: '奥普智能科技', desc: '把一家上市公司的协同办公从钉钉迁到飞书：调研立项、对接飞书的方案与商务、协调各个部门，平稳落地。内部的 AI 需求也由我来接：电商后台的评论打标，原来一个人每天要花四五个小时，现在 AI 10 分钟。' },
       { when: '2025–2026', role: 'AI 解决方案架构', org: '比智科技', desc: '5 家以上客户进入采购评估。做的是让人用一句话查数据的 AI 方案，从需求诊断到回款，也主导招投标。' },
       { when: '2024–2025', role: 'AI 项目负责人', org: '一念智能', desc: '一条脚本从 3 小时缩到 20 分钟：在飞书搭了写脚本的智能体。接手微众银行的 AI 课程项目，48 小时找到问题，客户点名要我继续负责。方正证券活动的开场片，用 AI 做成。' },
       { when: '2023–2024', role: '商业内容项目交付', org: '专致网络', desc: '150 多条信息流广告脚本，支撑每月 10 万以上的投放。抖音文旅号云南妙妙屋，3 个月涨粉 2000 多。负责工商银行宣传片，从策划到交付。' },
@@ -151,8 +153,8 @@ export const content = {
   en: {
     lang: 'en',
     path: '/en/',
-    title: 'Qin Xujun · I build things with AI, and share what I think',
-    description: 'Three works you can open today, one method: the model makes it fast, the boundaries make it right. VoiceFlow, AI Signal, Wanxiang, and ai.vibecoding, where I share the method.',
+    title: 'Qin Xujun · I build things with AI, and share how I do it',
+    description: 'An AI short film I directed, three works you can open today, and ai.vibecoding, a method you can follow.',
     skip: 'Skip to content',
     switchLabel: '中文',
     switchLang: 'zh-CN',
@@ -161,7 +163,7 @@ export const content = {
     role: 'I build AI products.',
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
-    lede: 'I build things with AI, and share what I think',
+    lede: 'I build things with AI, and share how I do it',
     now: 'Let AI decompose, generate, and verify, while people keep the goal, the boundaries, and the taste', // his words, adapted
     addWechat: 'Add me on WeChat',
     navWechat: 'WeChat',
@@ -208,9 +210,9 @@ export const content = {
 
     pathTitle: 'Path',
     pathHeadline: 'From getting content seen to getting AI shipped',
-    pathLine: 'I started in content; now I build AI projects for finance and government clients',
+    pathLine: 'Started in content, delivered AI for clients, and now put it to work in-house',
     journey: [
-      { when: '2026 to now', role: 'AI Project Manager', org: '', desc: '' },
+      { when: '2026 to now', role: 'AI Project Manager', org: 'Aupu Smart Technology', desc: 'Moved a listed company from DingTalk to Feishu: research and sign-off, solution and commercial talks with Feishu, every department on board, a clean switchover. I also take the in-house AI work: tagging e-commerce reviews took one person 4–5 hours a day; with AI it takes 10 minutes.' },
       { when: '2025–2026', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: '5+ clients reached procurement review. The work: AI that lets people query data in one sentence, from diagnosis to payment, including the bids.' },
       { when: '2024–2025', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'One script went from three hours to twenty minutes: I built a script-writing agent in Feishu. Took over a WeBank AI course project, found the problem in 48 hours, and the client asked for me by name. Made the opening film for a Founder Securities event with AI.' },
       { when: '2023–2024', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: '150-odd in-feed ad scripts behind more than ¥100k of monthly ad spend. A Douyin travel account grown by 2,000+ followers in three months. Produced ICBC’s brand film from concept to delivery.' },
