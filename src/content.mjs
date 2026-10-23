@@ -35,8 +35,9 @@ export const content = {
   zh: {
     lang: 'zh-CN',
     path: '/',
-    title: '秦徐俊',
-    description: '秦徐俊。我用 AI 做东西，也把想法分享出来：VoiceFlow、AI Signal、万象成文，和 ai.vibecoding。',
+    // What a WeChat chat shows when the link is shared: his name and his headline, then the thesis.
+    title: '秦徐俊 · 我用 AI 做东西，也把想法分享出来',
+    description: '三个在线上的作品，同一个做法：模型负责快，边界负责准。VoiceFlow、AI Signal、万象成文，和分享做法的 ai.vibecoding。',
     skip: '跳到正文',
     switchLabel: 'English',
     switchLang: 'en',
@@ -58,7 +59,10 @@ export const content = {
     home: '首页',
 
     workTitle: '作品',
-    workLine: '三个都在线上，打开就能用',
+    // v21: the thesis the three works share. Each one then says, under 「靠得住，是因为」, how it keeps that promise.
+    workHeadline: '让 AI 做的东西，靠得住',
+    workLine: '三个作品，同一个做法：模型负责快，边界负责准',
+    trustLabel: '靠得住，是因为',
     // The button names the product, never 「官网」 (v20: readers did not know what 官网 meant here).
     open: (name) => (/^[A-Za-z]/.test(name) ? `打开 ${name}` : `打开${name}`),
     readCase: '怎么做的',
@@ -98,7 +102,10 @@ export const content = {
     },
 
     pathTitle: '经历',
-    pathHeadline: '为金融、政企客户做 AI 项目',
+    // v21: the path told as one line of growth (his stance: the media degree is what powers the AI work).
+    // The clients stay in the sub line; 「让内容被看见」 echoes his degree line at the bottom of the list.
+    pathHeadline: '从让内容被看见，到让 AI 落地',
+    pathLine: '做内容出身，现在为金融、政企客户做 AI 项目',
     journey: [
       // His answer 2026-10-23: AI 项目经理 since 2026-08, company not named; 比智科技 until 2026-07.
       // Years only: the work runs one line (AI projects for clients), the exact months add nothing.
@@ -176,9 +183,9 @@ export const content = {
       onPage: '本页',
       // The first line of a case page says what the page is: the making of the product, not the product.
       howMade: (name) => `${name} · 怎么做的`,
+      techTitle: '技术细节',
+      techWhat: (hs) => hs.join('、'),
       tryIt: (name) => (/^[A-Za-z]/.test(name) ? `试试 ${name}` : `试试${name}`),
-      // Sections that get a shortcut in the case-page bar (wide screens).
-      barSections: ['起因', '要解决什么', '架构', '取舍', '还差什么'],
       contactHeadline: '欢迎交流',
       contactBody: '',
       liveNote: (date) => `GitHub 数据每 6 小时自动更新，最近一次 ${date}`,
@@ -188,8 +195,8 @@ export const content = {
   en: {
     lang: 'en',
     path: '/en/',
-    title: 'Qin Xujun',
-    description: 'Qin Xujun. I build things with AI, and share what I think: VoiceFlow, AI Signal, Wanxiang and ai.vibecoding.',
+    title: 'Qin Xujun · I build things with AI, and share what I think',
+    description: 'Three works you can open today, one method: the model makes it fast, the boundaries make it right. VoiceFlow, AI Signal, Wanxiang, and ai.vibecoding, where I share the method.',
     skip: 'Skip to content',
     switchLabel: '中文',
     switchLang: 'zh-CN',
@@ -208,7 +215,9 @@ export const content = {
     home: 'Home',
 
     workTitle: 'Work',
-    workLine: 'All three are live and ready to use',
+    workHeadline: 'AI-made things you can rely on',
+    workLine: 'Three works, one method: the model makes it fast, the boundaries make it right',
+    trustLabel: 'You can rely on it because',
     open: (name) => `Open ${name}`,
     readCase: 'How it was made',
     whyLabel: 'Why I built it',
@@ -243,7 +252,8 @@ export const content = {
     },
 
     pathTitle: 'Path',
-    pathHeadline: 'AI projects for finance and government clients',
+    pathHeadline: 'From getting content seen to getting AI shipped',
+    pathLine: 'I started in content; now I build AI projects for finance and government clients',
     journey: [
       { when: '2026 to now', role: 'AI Project Manager', org: '', desc: '' },
       { when: '2025–2026', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: '5+ clients reached procurement review. The work: AI that lets people query data in one sentence, from diagnosis to payment, including the bids.' },
@@ -315,8 +325,9 @@ export const content = {
       more: 'Other work',
       onPage: 'On this page',
       howMade: (name) => `${name} · How it was made`,
+      techTitle: 'The details',
+      techWhat: (hs) => hs.join(', '),
       tryIt: (name) => `Try ${name}`,
-      barSections: ['Why', 'The problem', 'How it’s built', 'Trade-offs', 'Still missing'],
       contactHeadline: 'Let’s talk',
       contactBody: '',
       liveNote: (date) => `GitHub numbers refresh every six hours, last on ${date}`,
