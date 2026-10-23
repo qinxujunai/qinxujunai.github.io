@@ -96,45 +96,6 @@
     }, { threshold: 0.4 }).observe(capsule);
   }
 
-  // Gallery: load every image once the section is near, so none stays blank off to the side.
-  var gallery = document.querySelector('[data-gallery]');
-  if (gallery && canObserve) {
-    var near = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      [].forEach.call(gallery.querySelectorAll('img'), function (im) { im.loading = 'eager'; });
-      near.disconnect();
-    }, { rootMargin: '600px 0px' });
-    near.observe(gallery);
-  }
-
-  // Gallery paddles
-  var prev = document.querySelector('[data-prev]');
-  var next = document.querySelector('[data-next]');
-  if (gallery && prev && next) {
-    // Step exactly one picture, so none is ever left half in view.
-    var page = function (dir) {
-      var items = gallery.children;
-      var pad = parseFloat(getComputedStyle(gallery).scrollPaddingLeft) || 0;
-      var x = gallery.scrollLeft;
-      var to = null;
-      for (var k = 0; k < items.length; k++) {
-        var left = items[k].offsetLeft - gallery.offsetLeft - pad;
-        if (dir > 0 && left > x + 4) { to = left; break; }
-        if (dir < 0 && left < x - 4) to = left;
-      }
-      if (to !== null) gallery.scrollTo({ left: to, behavior: still ? 'auto' : 'smooth' });
-    };
-    var sync = function () {
-      prev.disabled = gallery.scrollLeft <= 4;
-      next.disabled = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 4;
-    };
-    prev.addEventListener('click', function () { page(-1); });
-    next.addEventListener('click', function () { page(1); });
-    gallery.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
-    sync();
-  }
-
   var reveals = document.querySelectorAll('.reveal');
   if (!canObserve) {
     root.classList.remove('motion');

@@ -8,29 +8,7 @@ export const GITHUB = 'https://github.com/qinxujunai';
 // Links go to the project's live site, not its source (his request, 2026-10-20).
 export const VIBECODING = 'https://qinxujunai.github.io/qinxujun-ai-vibecoding/';
 
-// Visual work. First his AI-generated work, from the portfolio linked on his resume (AI faces are not real
-// people; no brand logos or licensed characters). Then four of his photographs: landscapes and buildings only.
-// The alt lists keep all eight originals so indexes stay stable.
-const aiWork = (t) => [
-  { key: 'ai-hat', alt: t[0], caption: t[1] },
-  { key: 'ai-vest', alt: t[2], caption: t[3], tall: true },
-  { key: 'ai-shirt', alt: t[4], caption: t[5], tall: true },
-  { key: 'ai-cup', alt: t[6], caption: t[7] },
-  { key: 'ai-tin', alt: t[8], caption: t[9], tall: true },
-  { key: 'ai-bag', alt: t[10], caption: t[11], tall: true },
-  { key: 'ai-portrait', alt: t[12], caption: t[13], tall: true },
-  { key: 'ai-lips', alt: t[14], caption: t[18], tall: true },
-  { key: 'ai-leaves', alt: t[15], caption: t[19], tall: true },
-  { key: 'ai-studio', alt: t[16], caption: t[17] },
-];
-const photos = (alt, ai, shot) => [
-  ...aiWork(ai),
-  { key: 'photo-aerial', alt: alt[0], caption: shot[0] },
-  { key: 'photo-pagoda', alt: alt[1], caption: shot[1] },
-  { key: 'photo-dusk', alt: alt[5], caption: shot[2] },
-  { key: 'photo-sky', alt: alt[6], caption: shot[3] },
-];
-
+// Film entry: supplied creative archive and original film, 2026-10-23.
 export const content = {
   zh: {
     lang: 'zh-CN',
@@ -117,36 +95,15 @@ export const content = {
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。', light: true },
     ],
 
-    visual: {
-      name: 'AI 视觉',
-      line: '商品图、人像、包装，用 AI 做出来',
-      swipe: '左右滑动',
-      note: 'Midjourney 和 AI 视频工具 · 最后 4 张是实拍',
+    film: {
+      name: '来不及爱你',
+      line: '一个十秒的画面，怎样长成一部影片',
+      story: '从轮渡上的一次回眸开始，故事在不断生成、判断与剪辑中慢慢成形。照片、眼泪、海风，以及那些被推翻的镜头，都有留下或舍弃的理由。',
+      note: '57 秒 · 无对白 · AI 叙事短片',
+      link: '观看影片与创作手记',
+      url: 'https://qinxujunai.github.io/laibuji-aini/',
+      alt: '《来不及爱你》成片静帧：她含着泪，看着手里的合照',
     },
-    prev: '上一张',
-    next: '下一张',
-    photos: photos([
-      '航拍：山脚下的城区和远处的群山',
-      '湖上的游船，远处山顶有一座塔',
-      '暗处的一尊金色佛像',
-      '挂着红灯笼的木牌坊',
-      '黄墙寺院与红灯笼',
-      '黄昏时湖边的建筑和喷泉',
-      '日落时金色的云层',
-      '航拍：被群山围住的城市',
-    ], [
-      '左边是人台戴着草编帽，右边是 AI 生成的模特戴着同一顶帽子', '人台照 → AI 模特图',
-      '一件刺绣马甲，生成多位模特的上身图', '一件马甲，一组上身图',
-      '一件蓝色刺绣上衣，生成不同模特和场景的上身图', '一件上衣，换模特、换场景',
-      '印着猫头形象的咖啡杯', '猫头形象：杯套',
-      '印着同一猫头形象的茶罐', '茶罐',
-      '印着同一猫头形象的红白手提袋', '手提袋',
-      'AI 生成的人像：白衣女子，光影落在脸上', 'AI 人像',
-      'AI 生成的人像：红唇特写',
-      'AI 生成的人像：树叶下仰头的女孩',
-      'AI 生成的场景：洒满阳光的工作室', 'AI 场景',
-      '红唇特写', '树叶下仰头',
-    ], ['实拍：山脚下的城区', '湖上游船，山顶有塔', '黄昏的湖边', '日落时的云']),
 
     contactTitle: '联系',
     contactHeadline: '欢迎交流',
@@ -263,36 +220,15 @@ export const content = {
       { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How to make content, and how to get it seen.', light: true },
     ],
 
-    visual: {
-      name: 'AI visuals',
-      line: 'Product shots, portraits and packaging, made with AI',
-      swipe: 'Swipe',
-      note: 'Midjourney and AI video tools · the last four are my own photographs',
+    film: {
+      name: '来不及爱你',
+      line: 'How a ten-second image became a film',
+      story: 'A glance on a ferry came first. The story grew through generating, watching and editing. A photograph, a tear, the sea wind, and the shots left out: each was a choice.',
+      note: '57 seconds · No dialogue · An AI-assisted short',
+      link: 'Watch the film and explore its making',
+      url: 'https://qinxujunai.github.io/laibuji-aini/en/',
+      alt: 'A still from 来不及爱你: she looks at a photograph with tears in her eyes',
     },
-    prev: 'Previous photo',
-    next: 'Next photo',
-    photos: photos([
-      'Aerial view of a town at the foot of the mountains',
-      'A boat on a lake, a pagoda on the hill behind it',
-      'A golden Buddha statue in the dark',
-      'A wooden gateway hung with red lanterns',
-      'A yellow temple wall with red lanterns',
-      'Lakeside buildings and a fountain at dusk',
-      'Golden clouds at sunset',
-      'Aerial view of a city surrounded by hills',
-    ], [
-      'Left, a straw visor on a mannequin; right, an AI-generated model wearing the same visor', 'Mannequin shot → AI model',
-      'An embroidered vest, generated on several models', 'One vest, a set of on-model shots',
-      'A blue embroidered top, generated on different models and settings', 'One top, new models and settings',
-      'A coffee cup printed with a cat mascot', 'Cat mascot: cup sleeve',
-      'A tea tin printed with the same cat mascot', 'Tea tin',
-      'Red and white shopping bags with the same cat mascot', 'Shopping bags',
-      'AI-generated portrait: a woman in white, light across her face', 'AI portrait',
-      'AI-generated portrait: a close-up of red lips',
-      'AI-generated portrait: a girl looking up under leaves',
-      'AI-generated scene: a sunlit studio', 'AI scene',
-      'Red lips, close up', 'Looking up under leaves',
-    ], ['Photo: a town below the mountains', 'A boat, a pagoda on the hill', 'A lakeside at dusk', 'Clouds at sunset']),
 
     contactTitle: 'Contact',
     contactHeadline: 'Let’s talk',

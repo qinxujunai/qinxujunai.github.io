@@ -20,9 +20,9 @@ const WECHAT_ANDROID =
   'Mozilla/5.0 (Linux; Android 14; V2309A Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/122.0.6261.120 Mobile Safari/537.36 XWEB/1220133 MMWEBSDK/20240404 MMWEBID/1234 MicroMessenger/8.0.49.2600(0x28003133) WeChat/arm64 Weixin NetType/4G Language/zh_CN ABI/arm64';
 const SAFARI = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 
-const executablePath = fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
+const executablePath = process.env.CHROME_PATH || (fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
   ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
-  : undefined;
+  : undefined);
 const browser = await playwright.chromium.launch({ executablePath });
 
 const results = [];
@@ -40,6 +40,7 @@ async function open({ path = '/', width = 390, height = 844, ua = WECHAT_IOS, sc
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('request', (r) => { if (new URL(r.url()).origin !== ORIGIN && !r.url().startsWith('data:')) foreign.push(r.url()); });
+  page.on('request', (r) => { if (/\.mp4(?:[?#]|$)/.test(r.url())) errors.push(`unexpected video download on personal site: ${r.url()}`); });
   page.on('response', (r) => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
   return { ctx, page, errors, foreign };
 }

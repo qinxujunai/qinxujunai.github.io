@@ -7,10 +7,14 @@
 
 **我用 AI 做东西，也把想法分享出来。** 首页把他做的每个作品，直接放成可以点开的网站窗口；每个作品还有一页，讲为什么做、难在哪、怎么搭的、还没做好的。
 
+## 影片网站（v22）
+
+《来不及爱你》独立仓库：`qinxujunai/laibuji-aini`，网站 `https://qinxujunai.github.io/laibuji-aini/`。首页经历后以影片入口替代原 AI 视觉画廊，点击进入影片放映与创作手记。视频不放在本仓库，修改和替换见 [实施说明](docs/film-v22-handoff.md)。
+
 ## 页面
 | 页面 | 地址 |
 |---|---|
-| 首页：首屏 · 作品（含 AI 视觉）· 想法 · 经历 · 联系 | `/`、`/en/` |
+| 首页：首屏 · 作品 · 想法 · 经历 · 影片 · 推荐 · 联系 | `/`、`/en/` |
 | VoiceFlow：离线语音输入 | `/work/voiceflow/` |
 | AI Signal：每天早上的 AI 简报 | `/work/ai-signal/` |
 | 万象成文：贴一个链接，拿回一篇文字 | `/work/wanxiang/` |
@@ -25,7 +29,7 @@ src/stats.json         VoiceFlow 的 GitHub 数据（自动更新）
 src/media.json         图片清单（scripts/media.mjs 生成）
 src/signature.svg      签名与印章（scripts/signature.mjs 生成）
 assets/site.css        样式（构建时内联）
-assets/site.js         交互：主题、签名收进导航、作品窗口滚动、胶囊打字、计数、逐字点亮、画廊、名片
+assets/site.js         交互：主题、签名收进导航、胶囊打字、计数、逐字点亮、名片
 assets/media/          WebP 图片
 assets/card-*.png      可保存的名片（scripts/icons.mjs 生成）
 scripts/build.mjs      生成全部页面和 sitemap

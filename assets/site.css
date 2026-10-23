@@ -2,6 +2,10 @@
    a slim blurred local nav, centered full-width tiles in white / light grey / black,
    system type set large and tight, blue text links with chevrons, one blue pill for the main action. */
 
+.film-poster { display:block; max-width:840px; margin:0 auto; }
+.film-poster img { display:block; width:100%; height:auto; }
+.film-story { max-width:680px; margin:24px auto; font-size:17px; line-height:1.8; color:var(--body); }
+
 :root {
   color-scheme: light;
   --page: #ffffff;
