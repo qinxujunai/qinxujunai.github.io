@@ -73,56 +73,56 @@
     "1040": {
       "src": "/assets/media/site-voiceflow-1040.webp",
       "w": 1040,
-      "h": 1771,
-      "kb": 36
+      "h": 504,
+      "kb": 12
     },
     "2080": {
       "src": "/assets/media/site-voiceflow-2080.webp",
       "w": 2080,
-      "h": 3543,
-      "kb": 87
+      "h": 1008,
+      "kb": 27
     }
   },
   "site-wanxiang": {
     "1040": {
       "src": "/assets/media/site-wanxiang-1040.webp",
       "w": 1040,
-      "h": 1747,
-      "kb": 44
+      "h": 351,
+      "kb": 10
     },
     "2080": {
       "src": "/assets/media/site-wanxiang-2080.webp",
       "w": 2080,
-      "h": 3494,
-      "kb": 107
+      "h": 702,
+      "kb": 23
     }
   },
   "site-ai-signal": {
     "1040": {
       "src": "/assets/media/site-ai-signal-1040.webp",
       "w": 1040,
-      "h": 1503,
-      "kb": 51
+      "h": 382,
+      "kb": 9
     },
     "2080": {
       "src": "/assets/media/site-ai-signal-2080.webp",
       "w": 2080,
-      "h": 3006,
-      "kb": 117
+      "h": 764,
+      "kb": 20
     }
   },
   "site-vibecoding": {
     "1040": {
       "src": "/assets/media/site-vibecoding-1040.webp",
       "w": 1040,
-      "h": 1853,
-      "kb": 67
+      "h": 544,
+      "kb": 16
     },
     "2080": {
       "src": "/assets/media/site-vibecoding-2080.webp",
       "w": 2080,
-      "h": 3705,
-      "kb": 163
+      "h": 1089,
+      "kb": 34
     }
   },
   "ai-hat": {
@@ -269,54 +269,54 @@
     "1080": {
       "src": "/assets/media/site-voiceflow-card-1080.webp",
       "w": 1080,
-      "h": 599,
-      "kb": 19
+      "h": 1440,
+      "kb": 36
     }
   },
   "site-wanxiang-card": {
     "1080": {
       "src": "/assets/media/site-wanxiang-card-1080.webp",
       "w": 1080,
-      "h": 599,
-      "kb": 17
+      "h": 1468,
+      "kb": 35
     }
   },
   "site-ai-signal-card": {
     "1080": {
       "src": "/assets/media/site-ai-signal-card-1080.webp",
       "w": 1080,
-      "h": 562,
-      "kb": 15
+      "h": 1066,
+      "kb": 28
     }
   },
   "site-vibecoding-card": {
     "1080": {
       "src": "/assets/media/site-vibecoding-card-1080.webp",
       "w": 1080,
-      "h": 586,
-      "kb": 22
+      "h": 1689,
+      "kb": 41
     }
   },
   "site-easyvibe": {
     "1040": {
       "src": "/assets/media/site-easyvibe-1040.webp",
       "w": 1040,
-      "h": 999,
-      "kb": 18
+      "h": 390,
+      "kb": 6
     },
     "2080": {
       "src": "/assets/media/site-easyvibe-2080.webp",
       "w": 2080,
-      "h": 1999,
-      "kb": 46
+      "h": 780,
+      "kb": 15
     }
   },
   "site-easyvibe-card": {
     "1080": {
       "src": "/assets/media/site-easyvibe-card-1080.webp",
       "w": 1080,
-      "h": 580,
-      "kb": 12
+      "h": 831,
+      "kb": 18
     }
   },
   "site-ask-data": {

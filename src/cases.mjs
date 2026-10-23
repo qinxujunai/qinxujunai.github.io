@@ -5,7 +5,6 @@
 const VF = 'https://github.com/qinxujunai/VoiceFlow';
 const A2T = 'https://github.com/qinxujunai/Audio2Text';
 const SIG = 'https://github.com/qinxujunai/ai-signal';
-const ASK = 'https://github.com/qinxujunai/ask-data';
 
 export const CASES = [
   // ───────────────────────── VoiceFlow ─────────────────────────
@@ -42,9 +41,9 @@ export const CASES = [
       links: [['打开官网', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
-        { v: '427 ms', l: '说完到送出文字，95% 的情况在此之内（10 秒内的录音，v0.3.1 实测）' },
-        { v: '829 项', l: '自动化测试，每次发布都跑' },
-        { v: '16 次', l: '发布，从 v0.1.0 到 v0.3.10' },
+        { v: '427 ms', l: '说完到文字送出（95% 的情况）' },
+        { v: '829 项', l: '自动化测试' },
+        { v: '16 次', l: '正式发布' },
       ],
       sections: [
         {
@@ -160,9 +159,9 @@ export const CASES = [
       links: [['Open the website', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
-        { v: '427 ms', l: 'From stopping to text sent, in 95% of cases (clips under 10 s, measured on v0.3.1)' },
-        { v: '829', l: 'Automated tests on every release' },
-        { v: '16', l: 'Releases, v0.1.0 to v0.3.10' },
+        { v: '427 ms', l: 'From stopping to text sent (95% of cases)' },
+        { v: '829', l: 'Automated tests' },
+        { v: '16', l: 'Releases' },
       ],
       sections: [
         {
@@ -291,10 +290,12 @@ export const CASES = [
       ],
       links: [['打开官网', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
-        { v: '11 类', l: '信源，从 X、Reddit 到论文和新模型' },
-        { v: '10:00', l: '北京时间每天整点发出' },
-        { v: '54 → 26', l: '10-22 那期：54 条新内容里选出 26 条' },
-        { v: '0', l: '条链接由模型自己写出，全部由程序按编号填回' },
+        { v: '11 类', l: '信源' },
+        { v: '10:00', l: '每天准点送达' },
+        // 10-23 issue: Send step 10:00:00–10:00:03 Beijing (run 39870655280).
+        { v: '0 条', l: '模型自己写的链接' },
+        // scripts/prepare-digest.js keeps data/seen.json for 60 days.
+        { v: '60 天', l: '发过的内容不再重复' },
       ],
       sections: [
         {
@@ -362,7 +363,7 @@ export const CASES = [
             '模型无响应时照样发出一期，按来源热度排序，并在邮件里写明；某个信源挂了，页脚会写出来。',
             '发过的链接记录 60 天，下一期不会重复。',
             '8 组自动测试：各信源的解析、热度、北京时间的计算、配色上限，以及网站和 RSS；每次提交都在云端跑一遍。',
-            '准点从 2026-10-23 那期开始生效，以发信时间和运行记录为准。',
+            '准点：2026-10-23 那期，北京时间 10:00:00 开始发送，10:00:03 发完；同一早上排队的另一次运行看到已发，自动退出，没有重复发（GitHub 运行记录）。',
           ],
         },
         {
@@ -407,10 +408,10 @@ export const CASES = [
       ],
       links: [['Open the website', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
-        { v: '11', l: 'Source types, from X and Reddit to papers and new models' },
-        { v: '10:00', l: 'Sent on the hour, Beijing time, every day' },
-        { v: '54 → 26', l: 'The 22 Oct issue: 26 picked from 54 new items' },
-        { v: '0', l: 'Links written by the model; code fills in every one' },
+        { v: '11', l: 'Source types' },
+        { v: '10:00', l: 'On time, every day' },
+        { v: '0', l: 'Links written by the model' },
+        { v: '60 days', l: 'Before anything repeats' },
       ],
       sections: [
         {
@@ -477,7 +478,7 @@ export const CASES = [
             'If the model is down, an issue still goes out, ranked by source signal and labelled as such; a failed source is named in the footer.',
             'Sent links are remembered for 60 days, so nothing repeats.',
             'Eight groups of automated tests (source parsing, signal strength, Beijing-time arithmetic, the colour limit, the website and RSS) run in the cloud on every commit.',
-            'On-time delivery starts with the 23 Oct issue; the send time and run log are the evidence.',
+            'On time: the 23 Oct issue began sending at 10:00:00 Beijing time and finished at 10:00:03; another queued run that morning saw it had gone out and stopped, so nothing was sent twice (GitHub run log).',
           ],
         },
         {
@@ -499,202 +500,6 @@ export const CASES = [
             'Reddit depends on the AINews recap; if it stops, the community section goes empty.',
             'There is no reader feedback loop; the editorial brief improves only when someone reads and edits it.',
             'The model can cite the wrong ID: the link is real but may not match the item. The first issue still had phrases the brief forbids, like “a head-on challenge”.',
-          ],
-        },
-      ],
-    },
-  },
-
-  // ───────────────────────── 问数 ─────────────────────────
-  // Sources: ask-data repository (2026-10-23): README, AGENTS.md, src/schema.js (17 indicators, 1990–2024),
-  // src/knowledge/examples.js (21 verified questions), src/engine/* (guard: one read-only statement, 500 rows;
-  // PRAGMA query_only; 4 s worker timeout; answer placeholders), test/engine.test.js (7 groups),
-  // countries table (217 countries and regions, 47 aggregates). His resume: his job includes AI 问数 solutions.
-  // Live check 2026-10-23: a verified question answered in about 2 s on the live site. No model evaluation yet.
-  {
-    slug: 'ask-data',
-    kind: 'product',
-    image: { key: 'site-ask-data', mobile: 'site-ask-data-m' },
-    zh: {
-      name: '问数',
-      kind: '',
-      title: '用一句话问数据，每个数字都能核对。',
-      sub: '问世界银行的公开数据。模型只写查询，数字由数据库在你的浏览器里现场算出。',
-      card: '用一句话问数据，数字都来自数据库。',
-      line: '用一句话问数据，数字都从数据库里算出来',
-      note: '打开就能用 · 世界银行公开数据 · 每一步都摊开',
-      why: '模型只写查询和句子，数字由程序从结果里填。',
-      imageAlt: '问数的网站：用一句话问数据。模型只写查询，数字由数据库现场算出。每个答案，都能核对。',
-      facts: [
-        ['角色', '独立开发'],
-        ['时间', '2026.10'],
-        ['形态', '网页，开源，不需要服务器'],
-        ['技术', 'SQLite（sql.js）· MiniSearch · Observable Plot · DeepSeek'],
-      ],
-      links: [['打开官网', 'https://qinxujunai.github.io/ask-data/'], ['查看源码', ASK]],
-      results: [
-        { v: '0', l: '个数字由模型写出，全部由程序从查询结果填入' },
-        { v: '2 道', l: '查询边界：只读单条检查，加上只读的数据库连接' },
-        { v: '21 个', l: '验证过的问题，不填 key 也能问' },
-        { v: '17 个', l: '指标，217 个国家和地区，1990–2024 年' },
-      ],
-      sections: [
-        {
-          h: '要解决什么',
-          p: [
-            '企业里问数据，难的不是让模型写出 SQL，而是让人敢用它给的数字。模型会编一个看起来很对的数，会编一个不存在的字段，也会把「发达国家」理解成它自己想的那几个国家。',
-            '问数把能编的地方都收走：模型只负责把问题翻译成查询，再写一句话；数字只能来自数据库。',
-          ],
-        },
-        {
-          h: '难点',
-          list: [
-            '模型会编数字。哪怕查询是对的，它写回答时也可能自己算一个、记错一个。',
-            '口径不一致。「最新」「世界平均」「发达国家」，每个人理解都不同，模型也一样。',
-            '模型写的查询可能改数据、可能跑很久，也可能一次就写错。',
-            '没有模型 key 的访客，也要能用。',
-          ],
-        },
-        {
-          h: '边界',
-          scope: {
-            do: ['世界银行 17 个指标、1990–2024 年的问题', '趋势、排名、对比、占比、首次超过', '每个答案附查询、步骤和数据来源'],
-            dont: ['跨数据源、需要外部知识的问题', '替访客保管模型 key', '对外宣称准确率（还没有评测结果）'],
-          },
-        },
-        {
-          h: '架构',
-          flow: [
-            { t: '检索', n: ['指标说明、业务口径、验证过的示例', '认出问题里的国家，换成代码', 'BM25 检索，中文按相邻两字切分'] },
-            { t: '写查询', n: ['问题在示例库里：直接用验证过的查询', '否则 DeepSeek 只看检索到的内容和表结构，写一条 SQL'] },
-            { t: '检查', n: ['只允许单条只读查询，最多 500 行', '不通过就把原因交回模型，只修一次'] },
-            { t: '运行', n: ['SQLite 在浏览器的 Web Worker 里', '数据库连接本身只读，超过 4 秒就停'] },
-            { t: '回答', n: ['模型写句子，数字只能是指向结果格子的占位符', '程序按单位填数；模型自己写了数字，这句话就不显示'] },
-          ],
-          after: ['和 AI Signal 是同一个思路：模型只引用编号，链接和数字由代码填回。'],
-        },
-        {
-          h: '取舍',
-          table: {
-            head: ['决定', '原因', '放弃的方案'],
-            rows: [
-              ['数据库放在浏览器里', '整个数据库 1.5 MB，不用服务器，数据也不离开访客的电脑', '后端服务'],
-              ['关键词检索，不上向量库', '口径和示例只有几十条，关键词检索够用，也能解释为什么检索到这一条', '一开始就上向量数据库'],
-              ['访客自己填 key，浏览器直连 DeepSeek', '纯静态部署，不替别人保管 key', '做一个代理服务器'],
-              ['验证过的问题不调模型', '没有 key 也能用；验证过的答案比现写的可靠', '所有问题都交给模型'],
-            ],
-          },
-        },
-        {
-          h: '验证',
-          list: [
-            '7 组自动测试：21 个验证过的问题逐条真跑；改数据的语句会被拦下，数据库连接本身也拒绝写入；模拟模型先写错、被拦下、修正，再回答。',
-            '浏览器里试了三条路径：示例问题、没有 key 的自由提问、有 key 的自由提问，手机和电脑、深色和浅色都没有报错，无障碍检查 0 违规。',
-            '线上网站打开后点一个示例问题，约 2 秒出答案。',
-          ],
-        },
-        {
-          h: '历程',
-          timeline: [['2026.10.23', '第一版上线']],
-        },
-        {
-          h: '还差什么',
-          list: [
-            '准确率还没有评测。评测程序已经写好：把每个示例问题重新交给模型、拿掉它自己的示例，再比对结果，分别看带检索和不带检索。要有 key 才能跑。',
-            '检索是关键词检索；口径和示例多到几百条以后，应该换成向量检索或两者混合。',
-            '只有世界银行这一份数据；数据不会自动更新。',
-          ],
-        },
-      ],
-    },
-    en: {
-      name: 'Ask Data',
-      kind: '',
-      title: 'Ask the data in one sentence, and check every number.',
-      sub: 'Questions over World Bank public data. The model writes only the query; the database works out every number, in your browser.',
-      card: 'Ask the data in one sentence; every number comes from the database.',
-      line: 'Ask the data in one sentence; every number is worked out by the database',
-      note: 'Nothing to install · World Bank public data · Every step shown',
-      why: 'The model writes the query and the sentence; code fills in every number from the result.',
-      imageAlt: 'The Ask Data website (in Chinese): ask the data in one sentence. The model writes the query; the database works out the numbers.',
-      facts: [
-        ['Role', 'Built solo'],
-        ['When', 'Oct 2026'],
-        ['Form', 'Website, open source, no server'],
-        ['Stack', 'SQLite (sql.js) · MiniSearch · Observable Plot · DeepSeek'],
-      ],
-      links: [['Open the website', 'https://qinxujunai.github.io/ask-data/'], ['View the source', ASK]],
-      results: [
-        { v: '0', l: 'Numbers written by the model; code fills in every one from the result' },
-        { v: '2', l: 'Query boundaries: a read-only, single-statement check and a read-only connection' },
-        { v: '21', l: 'Verified questions that work without a key' },
-        { v: '17', l: 'Indicators, 217 countries and regions, 1990–2024' },
-      ],
-      sections: [
-        {
-          h: 'The problem',
-          p: [
-            'When a company asks its data a question, the hard part isn’t getting a model to write SQL; it’s getting people to trust the numbers. Models invent a plausible figure, a column that doesn’t exist, or their own idea of which countries count as “developed”.',
-            'Ask Data takes away everything a model could invent: it only turns the question into a query and writes a sentence; the numbers can only come from the database.',
-          ],
-        },
-        {
-          h: 'Hard parts',
-          list: [
-            'Models invent numbers. Even with the right query, the answer may contain a figure it worked out or misremembered.',
-            'Definitions drift. “Latest”, “world average”, “developed countries” mean different things to different people, and to models.',
-            'A model-written query might change data, run for ages, or simply be wrong the first time.',
-            'Visitors without a model key should still be able to use it.',
-          ],
-        },
-        {
-          h: 'Scope',
-          scope: {
-            do: ['Questions over 17 World Bank indicators, 1990–2024', 'Trends, rankings, comparisons, shares, first-time crossings', 'The query, the steps and the source with every answer'],
-            dont: ['Questions that need other data or outside knowledge', 'Holding visitors’ model keys', 'Accuracy claims (no evaluation yet)'],
-          },
-        },
-        {
-          h: 'How it’s built',
-          flow: [
-            { t: 'Retrieve', n: ['Indicator notes, business terms, verified examples', 'Countries in the question, resolved to codes', 'BM25, with Chinese indexed as character pairs'] },
-            { t: 'Write the query', n: ['A verified question uses its verified query', 'Otherwise DeepSeek sees only what was retrieved plus the schema, and writes one SQL query'] },
-            { t: 'Check', n: ['One read-only statement, at most 500 rows', 'If it fails, the reason goes back to the model for one repair'] },
-            { t: 'Run', n: ['SQLite in a Web Worker in the browser', 'The connection itself is read-only; anything past 4 s is stopped'] },
-            { t: 'Answer', n: ['The model writes the sentence; numbers are placeholders pointing at result cells', 'Code fills them in by unit; a number the model typed itself hides the sentence'] },
-          ],
-          after: ['The same idea as AI Signal: the model cites IDs, and code fills in the links and numbers.'],
-        },
-        {
-          h: 'Trade-offs',
-          table: {
-            head: ['Decision', 'Why', 'Given up'],
-            rows: [
-              ['The database lives in the browser', 'It is 1.5 MB; no server, and the data never leaves the visitor’s machine', 'A backend'],
-              ['Keyword retrieval, no vector store', 'A few dozen definitions and examples: keywords are enough, and explainable', 'A vector database from day one'],
-              ['Visitors bring their own key; the browser calls DeepSeek directly', 'Fully static, and nobody else’s key to hold', 'A proxy server'],
-              ['Verified questions skip the model', 'Works without a key, and a verified answer beats a fresh one', 'Sending every question to the model'],
-            ],
-          },
-        },
-        {
-          h: 'Evidence',
-          list: [
-            'Seven groups of automated tests: all 21 verified questions run for real; write statements are blocked and the connection itself refuses writes; a simulated model writes a bad query, gets blocked, repairs it and answers.',
-            'Three paths tried in a browser (a verified question, a free question without a key, a free question with one) on phone and desktop, light and dark: no errors, zero accessibility violations.',
-            'On the live site, a verified question answers in about two seconds.',
-          ],
-        },
-        {
-          h: 'Timeline',
-          timeline: [['2026.10.23', 'First version live']],
-        },
-        {
-          h: 'Still missing',
-          list: [
-            'No accuracy evaluation yet. The script exists: ask the model every verified question with its own example held out, compare the results, with and without retrieval. It needs a key to run.',
-            'Retrieval is keyword-based; past a few hundred definitions and examples it should become vector or hybrid search.',
-            'One dataset only, and it doesn’t update itself.',
           ],
         },
       ],
@@ -734,10 +539,10 @@ export const CASES = [
       ],
       links: [['打开官网', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
       results: [
-        { v: '25 秒', l: '47 分钟的 B 站视频，贴上链接到出文字（v2.3.0，显卡，单次实测）' },
-        { v: '0 次', l: '超时：60 条真实链接各跑 3 轮，141/180 完整' },
-        { v: '约 2 分钟', l: '在普通 CPU 上转写 1 小时音频（单样本测得，实时率 0.035）' },
-        { stat: 'downloads', l: '次下载 Windows 安装包（GitHub 统计）' },
+        { v: '25 秒', l: '47 分钟视频出文字（实测）' },
+        { v: '0 次', l: '超时（三轮 180 次）' },
+        { v: '约 2 分钟', l: '普通 CPU 转写 1 小时音频' },
+        { stat: 'downloads', l: '次安装包下载' },
       ],
       sections: [
         {
@@ -845,10 +650,10 @@ export const CASES = [
       ],
       links: [['Open the website', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
       results: [
-        { v: '25 s', l: 'From link to text for a 47-minute Bilibili video (v2.3.0, GPU, one run)' },
-        { v: '0', l: 'Timeouts: 60 real links, three rounds; 141/180 complete' },
-        { v: '~2 min', l: 'To transcribe an hour of audio on an ordinary CPU (single-sample probe, real-time factor 0.035)' },
-        { stat: 'downloads', l: 'Windows installer downloads (GitHub count)' },
+        { v: '25 s', l: 'Text from a 47-minute video (measured)' },
+        { v: '0', l: 'Timeouts (180 runs)' },
+        { v: '~2 min', l: 'An hour of audio on an ordinary CPU' },
+        { stat: 'downloads', l: 'Installer downloads' },
       ],
       sections: [
         {

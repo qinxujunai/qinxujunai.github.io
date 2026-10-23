@@ -58,7 +58,7 @@ export const content = {
     home: '首页',
 
     workTitle: '作品',
-    workLine: '四个都在线上，打开就能用',
+    workLine: '三个都在线上，打开就能用',
     visit: '打开官网',
     readCase: '进一步了解',
     whyLabel: '为什么做',
@@ -205,7 +205,7 @@ export const content = {
     home: 'Home',
 
     workTitle: 'Work',
-    workLine: 'All four are live and ready to use',
+    workLine: 'All three are live and ready to use',
     visit: 'Open the website',
     readCase: 'Learn more',
     whyLabel: 'Why I built it',
