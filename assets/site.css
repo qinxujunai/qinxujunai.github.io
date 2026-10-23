@@ -314,6 +314,22 @@ a:hover {
   font-weight: 400;
 }
 
+.chev.out {
+  font-size: 0.95em;
+  transform: translateY(-0.02em);
+}
+
+/* The heading over the work: what follows is four things you can open and use. */
+.works-head {
+  padding-bottom: 8px;
+}
+
+.works-head h2 {
+  margin: 0;
+  font-size: min(48px, 11vw);
+  line-height: 1.08;
+}
+
 .more-link {
   display: inline-flex;
   align-items: center;
@@ -2129,34 +2145,6 @@ main {
   text-decoration: none;
 }
 
-.frame-bar {
-  display: flex;
-  flex: none;
-  align-items: center;
-  gap: 7px;
-  height: 34px;
-  padding: 0 12px;
-  background: #f2f2f4;
-  border-bottom: 1px solid #e3e3e6;
-}
-
-.frame-bar i {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: #d4d4d8;
-}
-
-.frame-url {
-  flex: 1;
-  margin-right: 44px;
-  overflow: hidden;
-  font-size: 12px;
-  color: #6e6e73;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .frame-view {
   position: relative;
   display: block;
@@ -2215,30 +2203,13 @@ main {
   font-size: min(44px, 10vw);
 }
 
-/* Phones: no phone frame (these are Windows apps and websites). A fixed 16:10 browser card with the
-   real address, showing the top of the page; nothing scrolls inside it. */
+/* Phones: a fixed 16:10 crop of the top of the page; nothing scrolls inside it. */
 @media (max-width: 733px) {
   .frame {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
     border-radius: 12px;
-  }
-
-  .frame-bar {
-    height: 26px;
-    gap: 5px;
-    padding: 0 10px;
-  }
-
-  .frame-bar i {
-    width: 8px;
-    height: 8px;
-  }
-
-  .frame-url {
-    margin-right: 0;
-    font-size: 11px;
   }
 
   .frame-view picture {
