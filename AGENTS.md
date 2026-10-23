@@ -7,6 +7,8 @@
 
 只放有代码库、有网站的作品：VoiceFlow、AI Signal、万象成文，加上分享方法的 ai.vibecoding。（问数 v16 加过、v19 撤下：他说那是个 demo，不算作品；仓库 ask-data 保留。）公司里的经历只在「经历」里各写一句，不单独成页。视觉和交互对标 apple.com 的产品页。
 
+**进行中（v22）**：首页的「AI 视觉」画廊要换成他的一部 AI 影片，并为影片单独做一个网站。计划与规矩见 [docs/film-plan.md](docs/film-plan.md)，动手前先读。
+
 项目的来龙去脉、他的原话、历次决策，都记在 [CLAUDE.md](CLAUDE.md)（早期逐版记录在 [docs/history.md](docs/history.md)）。改完在 CLAUDE.md 的「决策记录」追加一版：他说了什么、改了什么、为什么。文案平台见 [docs/copy.md](docs/copy.md)。
 
 ## 事实
