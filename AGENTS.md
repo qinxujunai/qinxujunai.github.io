@@ -7,7 +7,7 @@
 
 只放有代码库、有网站的作品：VoiceFlow、AI Signal、万象成文，加上分享方法的 ai.vibecoding。（问数 v16 加过、v19 撤下：他说那是个 demo，不算作品；仓库 ask-data 保留。）公司里的经历只在「经历」里各写一句，不单独成页。视觉和交互对标 apple.com 的产品页。
 
-**影片（v23）**：他导演的 AI 短片《来不及爱你》在首页首屏播放；片子自己的网站在仓库 `laibuji-aini`（`https://qinxujunai.github.io/laibuji-aini/`，规矩见那个仓库的 AGENTS.md）。视频文件只存在影片仓库，本站同源引用，不复制、不转码。v22 的实施记录在 [docs/film-v22-handoff.md](docs/film-v22-handoff.md)。
+**影片（v23）**：他导演的 AI 短片《来不及爱你》在首页首屏播放；片子自己的网站在仓库 `too-late-to-love-you`（`https://qinxujunai.github.io/too-late-to-love-you/`，规矩见那个仓库的 AGENTS.md；2026-10-23 从拼音名 `laibuji-aini` 改名，本站 `laibuji-aini/` 下留了跳转页，旧链接仍能打开）。视频文件只存在影片仓库，本站同源引用，不复制、不转码。v22 的实施记录在 [docs/film-v22-handoff.md](docs/film-v22-handoff.md)。
 
 项目的来龙去脉、他的原话、历次决策，都记在 [CLAUDE.md](CLAUDE.md)（早期逐版记录在 [docs/history.md](docs/history.md)）。改完在 CLAUDE.md 的「决策记录」追加一版：他说了什么、改了什么、为什么。文案平台见 [docs/copy.md](docs/copy.md)。
 
@@ -29,7 +29,7 @@
   1. 本地导航：签名（首页顶部隐藏，大签名滚出首屏后淡入，像「收进」导航栏）、作品 / 想法 / 经历 / 联系、加微信。
   2. 首屏（他本人定的）：头像、签名、大标题 `lede`、副句 `now`（他的原话，「让你」改「让人」）、「加我微信」和「看看作品 ›」，下面是他的影片（v23，他说「这个片子甚至可以放到我主页头像下面」）：
      - `heroFilm()`：16:9 黑底播放器，海报是成片 8.6 秒的一帧（`assets/media/film-key-960.webp` / `-2560.webp`），中间一个播放圆钮；点了就在原地播放。下面一行「来不及爱你 · 我导演的 AI 短片 · 57 秒」和「这部片子怎么拍的 ↗」（去影片网站）。
-     - 视频：`/laibuji-aini/media/film-mobile.mp4`（他导出的 4K 网页版），宽屏（≥1024px、未开省流量）由 `site.js` 在播放前换成 `film-original.mp4`。`preload="none"`，不点不下载（`qa.mjs` 会拦任何 mp4 请求）。
+     - 视频：`/too-late-to-love-you/media/film-mobile.mp4`（他导出的 4K 网页版），宽屏（≥1024px、未开省流量）由 `site.js` 在播放前换成 `film-original.mp4`。`preload="none"`，不点不下载（`qa.mjs` 会拦任何 mp4 请求）。
      - 海报在首页 `<head>` 里 preload，手机用 960 宽、16KB 的版本：它是手机首屏最大的元素，决定弱网 LCP（实测 2.3 秒）。不要给它加入场动画或 `loading="lazy"`。
   3. 作品：先是小字「作品」、标题「先解决自己的问题」和一句「三个作品，都在线上，打开就能用」（v23：标题说一件三个故事都能证明的事；v21 的「靠得住」主张和每个作品下的「靠得住，是因为」撤下——他说文案描述多、没做到），再是三个作品（VoiceFlow、AI Signal、万象成文；背景深、浅灰、白交替）。只有两级文字在图上方：名字（一级）、一句承诺式的 `line`（二级：「按 F2 说话，字直接打在光标处」「每天十点，值得看的 AI 消息，一页读完」「贴一个链接，拿回全部文字」）。图下方：先是「为什么做」（`story`，他的第一人称，先痛点后做法），再是一行大白话事实 `note` 和两个链接（三级）：先「怎么做的 ›」（作品页），再「打开 VoiceFlow ↗」这样以产品名命名的按钮。
      - **首页的图是产品在工作的样子**（`cs.shot`，v21）：VoiceFlow 是胶囊打字演示（`shot: 'capsule'`），AI Signal 是当天那期的**真文字卡片**（`shot: 'signal'`，`signalCard()` 读 `src/signal.json`；v24：截图会过期，卡片每天自动换成最新一期），万象成文是结果页（`site-prod-wanxiang`，手机只裁正文卡片）。作品页顶部仍是官网首屏（`cs.image`）。

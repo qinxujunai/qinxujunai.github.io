@@ -231,9 +231,9 @@ ${heroFilm(c)}
 }
 
 // His film, playable right in the first screen (v23). The file lives once, in the film's own repository on this
-// same origin (/laibuji-aini/), so the page still makes no third-party request. Nothing downloads until Play:
+// same origin (/too-late-to-love-you/), so the page still makes no third-party request. Nothing downloads until Play:
 // phones get his 4K web version, wide screens the full-bitrate original (switched in site.js).
-const FILM = '/laibuji-aini/media/';
+const FILM = '/too-late-to-love-you/media/';
 function heroFilm(c) {
   const f = c.film;
   return `<figure class="hero-film">
