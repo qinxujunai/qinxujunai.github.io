@@ -247,7 +247,8 @@ const dots = (c, s) => bare(s).split(' · ').map((x) => `<span class="clause">${
 // With href, the picture is a link to the project's page on this site; it never leads off the site.
 function frame(c, { key, alt, href, label, first = false }) {
   const tag = href ? 'a' : 'div';
-  return `<${tag} class="frame"${href ? ` href="${href}"` : ''}>
+  // A product at work is shown a little smaller than a whole website, so it fits one screen with its name.
+  return `<${tag} class="frame${key.startsWith('site-prod-') ? ' prod' : ''}"${href ? ` href="${href}"` : ''}>
 ${href ? `<span class="visually-hidden">${esc(label)}</span>` : ''}
 <span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: `${key}-card`, cls: 'frame-img', eager: first })}</span>
 </${tag}>`;
