@@ -39,7 +39,7 @@ export const CASES = [
         ['形态', 'Windows 桌面应用，开源'],
         ['技术', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['访问网站', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
+      links: [['打开官网', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
         { v: '427 ms', l: '说完到送出文字，95% 的情况在此之内（10 秒内的录音，v0.3.1 实测）' },
@@ -157,7 +157,7 @@ export const CASES = [
         ['Form', 'Windows desktop app, open source'],
         ['Stack', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['Visit the site', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
+      links: [['Open the website', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
         { v: '427 ms', l: 'From stopping to text sent, in 95% of cases (clips under 10 s, measured on v0.3.1)' },
@@ -289,7 +289,7 @@ export const CASES = [
         ['形态', '自动化工作流，开源'],
         ['技术', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['访问网站', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
+      links: [['打开官网', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11 类', l: '信源，从 X、Reddit 到论文和新模型' },
         { v: '10:00', l: '北京时间每天整点发出' },
@@ -405,7 +405,7 @@ export const CASES = [
         ['Form', 'Automated workflow, open source'],
         ['Stack', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['Visit the site', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
+      links: [['Open the website', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11', l: 'Source types, from X and Reddit to papers and new models' },
         { v: '10:00', l: 'Sent on the hour, Beijing time, every day' },
@@ -531,7 +531,7 @@ export const CASES = [
         ['形态', '网页，开源，不需要服务器'],
         ['技术', 'SQLite（sql.js）· MiniSearch · Observable Plot · DeepSeek'],
       ],
-      links: [['访问网站', 'https://qinxujunai.github.io/ask-data/'], ['查看源码', ASK]],
+      links: [['打开官网', 'https://qinxujunai.github.io/ask-data/'], ['查看源码', ASK]],
       results: [
         { v: '0', l: '个数字由模型写出，全部由程序从查询结果填入' },
         { v: '2 道', l: '查询边界：只读单条检查，加上只读的数据库连接' },
@@ -623,7 +623,7 @@ export const CASES = [
         ['Form', 'Website, open source, no server'],
         ['Stack', 'SQLite (sql.js) · MiniSearch · Observable Plot · DeepSeek'],
       ],
-      links: [['Visit the site', 'https://qinxujunai.github.io/ask-data/'], ['View the source', ASK]],
+      links: [['Open the website', 'https://qinxujunai.github.io/ask-data/'], ['View the source', ASK]],
       results: [
         { v: '0', l: 'Numbers written by the model; code fills in every one from the result' },
         { v: '2', l: 'Query boundaries: a read-only, single-statement check and a read-only connection' },
@@ -732,7 +732,7 @@ export const CASES = [
         ['形态', 'Windows 桌面应用，另有网页预览'],
         ['技术', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['访问网站', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
+      links: [['打开官网', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
       results: [
         { v: '25 秒', l: '47 分钟的 B 站视频，贴上链接到出文字（v2.3.0，显卡，单次实测）' },
         { v: '0 次', l: '超时：60 条真实链接各跑 3 轮，141/180 完整' },
@@ -843,7 +843,7 @@ export const CASES = [
         ['Form', 'Windows desktop app, plus a web preview'],
         ['Stack', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['Visit the site', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
+      links: [['Open the website', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
       results: [
         { v: '25 s', l: 'From link to text for a 47-minute Bilibili video (v2.3.0, GPU, one run)' },
         { v: '0', l: 'Timeouts: 60 real links, three rounds; 141/180 complete' },

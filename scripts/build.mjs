@@ -59,6 +59,8 @@ const signatureRef = (cls, { seal = true } = {}) => `<svg class="${cls}" viewBox
 
 const ext = 'rel="noopener"';
 const chevron = '<span class="chev" aria-hidden="true">›</span>';
+// Links that leave this site end in ↗; links that stay end in ›. Images only ever lead to pages on this site.
+const outward = '<span class="chev out" aria-hidden="true">↗</span>';
 
 // The stylesheet is inlined so the first screen needs no extra round trip on slow networks.
 const css = read('assets/site.css')
@@ -183,7 +185,7 @@ ${picks.map((p) => `<a href="#${p.id}" data-nav="${p.id}">${T(c, p.h)}</a>`).joi
 <div class="nav-tools">
 <a class="sub-lang" href="${switchHref}" hreflang="${c.switchLang}" lang="${c.switchLang}">${c.switchLabel}</a>
 <button type="button" class="sub-theme" data-theme-toggle aria-label="${esc(c.themeLabel)}">${icons.sunMoon}</button>
-<a class="pill" href="${t.links[0][1]}" ${ext}>${esc(c.visit)}<span class="visually-hidden"> ${esc(t.name)}</span></a>
+<a class="pill" href="${t.links[0][1]}" ${ext}>${esc(c.visit)} ↗<span class="visually-hidden"> ${esc(t.name)}</span></a>
 </div>
 </div>
 </header>`;
@@ -227,17 +229,16 @@ const bare = (s) => String(s).replace(/[。.]\s*$/, '');
 // In a list like 「A · B · C」 a line may break after a dot, never before it.
 const dots = (s) => String(s).replace(/ · /g, '\u00a0· ');
 
-// A project's own website in a browser window: a thin address bar with the real URL, then the page.
-// Phones get a fixed 16:10 crop of the same desktop page (no phone frame: these are not phone apps).
-// On wide screens the page inside leafs from top to bottom as the section passes.
-// The whole window is a link to the live site.
-// internal: the window opens the project's page on this site (the home page), not the project's own website.
-function frame(c, { key, alt, url, name, first = false, internal = false }) {
-  return `<a class="frame" href="${url}"${internal ? '' : ` ${ext}`}>
-<span class="visually-hidden">${esc(internal ? `${c.readCase} ${name}` : c.openSite(name))}</span>
-<span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span class="frame-url">${esc(hostPath(url))}</span></span>
+// A project's own website, as a plain screenshot of its first screen (no browser chrome: a fake
+// window inside this site read as "another site in the site"). On wide screens the page inside leafs
+// from top to bottom as the section passes; phones get a fixed 16:10 crop. With href, the picture is a
+// link to the project's page on this site; it never leads off the site.
+function frame(c, { key, alt, href, label, first = false }) {
+  const tag = href ? 'a' : 'div';
+  return `<${tag} class="frame"${href ? ` href="${href}"` : ''}>
+${href ? `<span class="visually-hidden">${esc(label)}</span>` : ''}
 <span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: `${key}-card`, cls: 'frame-img', eager: first })}</span>
-</a>`;
+</${tag}>`;
 }
 
 // One project, two levels of text above the picture (name, one plain line), the rest below it
@@ -251,11 +252,11 @@ function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseU
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
 ${line ? `<p class="show-line">${T(c, bare(line))}</p>` : ''}
 </div>
-${frame(c, { key: image.key, alt, url: caseUrl || site, name, first: pin, internal: !!caseUrl })}
+${frame(c, { key: image.key, alt, href: caseUrl, label: `${c.readCase} ${name}`, first: pin })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${T(c, dots(bare(note)))}</p>` : ''}
-<p class="cta">${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}<a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a></p>
+<p class="cta">${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}<a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${outward}<span class="visually-hidden"> ${esc(name)}</span></a></p>
 </div>
 </div>
 </div>
@@ -317,7 +318,10 @@ ${c.photos.map((p) => `<li${p.tall ? ' class="tall"' : ''}><figure>${img(p.key, 
 
 function work(c) {
   return `<section id="work" class="works" aria-labelledby="work-title">
-<h2 id="work-title" class="visually-hidden">${c.workTitle}</h2>
+<header class="tile plain works-head">
+<h2 id="work-title">${c.workTitle}</h2>
+<p class="sub">${T(c, bare(c.workLine))}</p>
+</header>
 ${CASES.map((cs) => projectShow(c, cs)).join('\n')}
 ${visual(c)}
 </section>`;
@@ -336,10 +340,10 @@ function share(c) {
 <h3 class="show-name">${esc(s.name)}</h3>
 <p class="show-line">${T(c, bare(s.intro))}</p>
 </div>
-${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', url: VIBECODING, name: s.name })}
+${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', name: s.name })}
 <div class="show-foot">
 <p class="show-note">${T(c, dots(bare(s.note)))}</p>
-<p class="cta"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.link)}${chevron}<span class="visually-hidden"> ${esc(s.name)}</span></a></p>
+<p class="cta"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.link)}${outward}<span class="visually-hidden"> ${esc(s.name)}</span></a></p>
 </div>
 </section>`;
 }
@@ -354,10 +358,10 @@ function recommend(c) {
 <h2 id="recommend-title" class="rec-title">${bare(r.headline).split(/(?<=[，?])\s*/).map((part) => `<span class="clause">${T(c, part)}</span>`).join(c.lang === 'zh-CN' ? '' : ' ')}</h2>
 <p class="show-line">${T(c, bare(r.line))}</p>
 </div>
-${frame(c, { key: 'site-easyvibe', alt: r.alt, url: r.url, name: 'easy-vibe' })}
+${frame(c, { key: 'site-easyvibe', alt: r.alt })}
 <div class="show-foot">
 <p class="show-note">${T(c, dots(bare(r.note)))}</p>
-<p class="cta"><a class="more-link" href="${r.url}" ${ext}>${esc(r.link)}${chevron}<span class="visually-hidden"> easy-vibe</span></a></p>
+<p class="cta"><a class="more-link" href="${r.url}" ${ext}>${esc(r.link)}${outward}<span class="visually-hidden"> easy-vibe</span></a></p>
 </div>
 </section>`;
 }
@@ -369,7 +373,7 @@ function journey(c) {
 <h2 id="path-title">${T(c, bare(c.pathHeadline))}</h2>
 </div>
 <ol class="path reveal">
-${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3><p class="org">${T(c, p.org)}</p>${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
+${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3>${p.org ? `<p class="org">${T(c, p.org)}</p>` : ''}${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
 </ol>
 </section>`;
 }
@@ -480,8 +484,8 @@ ${caseNav(c, cs, t, casePath(o, cs.slug))}
 ${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
 <h1 id="case-title">${T(c, bare(t.title))}</h1>
 <p class="sub">${T(c, bare(t.sub))}</p>
-${t.links ? `<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${chevron}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
-${cs.image ? `<div class="case-frame" data-scrollshot>${frame(c, { key: cs.image.key, alt: t.imageAlt, url: t.links[0][1], name: t.name })}</div>` : ''}
+${t.links ? `<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
+${cs.image ? `<div class="case-frame" data-scrollshot>${frame(c, { key: cs.image.key, alt: t.imageAlt })}</div>` : ''}
 ${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
@@ -509,7 +513,7 @@ ${t.sections.map((s, i) => block(c, s, i)).join('\n')}
 <section class="tile plain try" id="try" aria-labelledby="try-title">
 <h2 id="try-title">${esc(L.tryIt(t.name))}</h2>
 <p class="sub">${T(c, dots(bare(t.note)))}</p>
-<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${chevron}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>
+<p class="cta">${t.links.map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>
 </section>
 <section class="tile soft more-cases" aria-labelledby="more-title">
 <h2 id="more-title">${L.more}</h2>
