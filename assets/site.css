@@ -314,6 +314,10 @@ a:hover {
   font-weight: 400;
 }
 
+.hero h1 .line {
+  display: block;
+}
+
 .chev.out {
   font-size: 0.95em;
   transform: translateY(-0.02em);
@@ -1590,9 +1594,18 @@ main {
   }
 }
 
-@media (max-width: 359px) {
-  .sub-back-label {
+.sub-back {
+  white-space: nowrap;
+}
+
+/* Narrow phones: the button already names the product, so the bar drops the name. */
+@media (max-width: 429px) {
+  .sub-name {
     display: none;
+  }
+
+  .sub-back {
+    margin-right: auto;
   }
 }
 

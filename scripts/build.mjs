@@ -185,7 +185,7 @@ ${picks.map((p) => `<a href="#${p.id}" data-nav="${p.id}">${T(c, p.h)}</a>`).joi
 <div class="nav-tools">
 <a class="sub-lang" href="${switchHref}" hreflang="${c.switchLang}" lang="${c.switchLang}">${c.switchLabel}</a>
 <button type="button" class="sub-theme" data-theme-toggle aria-label="${esc(c.themeLabel)}">${icons.sunMoon}</button>
-<a class="pill" href="${t.links[0][1]}" ${ext}>${esc(c.visit)} ↗<span class="visually-hidden"> ${esc(t.name)}</span></a>
+<a class="pill" href="${t.links[0][1]}" ${ext}>${esc(c.open(t.name))} ↗</a>
 </div>
 </div>
 </header>`;
@@ -201,13 +201,21 @@ function footer(c) {
 
 // ---------- Home ----------
 
+// The title is his: two clauses, one per line. In Chinese the comma between them goes (his note,
+// v20: with the comma the two lines look lopsided); English keeps its comma.
+function heroTitle(c) {
+  const text = bare(c.lede);
+  if (c.lang !== 'zh-CN') return T(c, text);
+  return text.split('，').map((part) => `<span class="line">${T(c, part)}</span>`).join('');
+}
+
 function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
 ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' })}
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
 <p class="visually-hidden">${esc(c.name)}</p>
-<h1 id="hero-title" class="rise" style="--d:.5s">${T(c, bare(c.lede))}</h1>
+<h1 id="hero-title" class="rise" style="--d:.5s">${heroTitle(c)}</h1>
 <p class="sub rise" style="--d:.65s">${T(c, bare(c.now))}</p>
 <p class="cta rise" style="--d:.8s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
 </section>`;
@@ -286,7 +294,7 @@ function projectShow(c, cs) {
     story: t.story,
     note: t.note,
     site: t.links[0][1],
-    siteLabel: c.visit,
+    siteLabel: c.open(t.name),
     caseUrl: casePath(c, cs.slug),
     image: cs.image,
     alt: t.imageAlt,
@@ -485,7 +493,7 @@ ${caseNav(c, cs, t, casePath(o, cs.slug))}
 <main id="main">
 <article class="case" aria-labelledby="case-title">
 <header class="tile plain case-head" id="top">
-${t.kind ? `<p class="eyebrow">${T(c, t.kind)}</p>` : ''}
+<p class="eyebrow">${esc(L.howMade(t.name))}</p>
 <h1 id="case-title">${T(c, bare(t.title))}</h1>
 <p class="sub">${T(c, bare(t.sub))}</p>
 ${t.links.length > 1 ? `<p class="cta">${t.links.slice(1).map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}

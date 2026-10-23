@@ -59,8 +59,9 @@ export const content = {
 
     workTitle: '作品',
     workLine: '三个都在线上，打开就能用',
-    visit: '打开官网',
-    readCase: '进一步了解',
+    // The button names the product, never 「官网」 (v20: readers did not know what 官网 meant here).
+    open: (name) => (/^[A-Za-z]/.test(name) ? `打开 ${name}` : `打开${name}`),
+    readCase: '怎么做的',
     whyLabel: '为什么做',
     openSite: (name) => `打开 ${name} 的网站`,
     flagship: {
@@ -173,6 +174,8 @@ export const content = {
       dontLabel: '不做',
       more: '其他作品',
       onPage: '本页',
+      // The first line of a case page says what the page is: the making of the product, not the product.
+      howMade: (name) => `${name} · 怎么做的`,
       tryIt: (name) => (/^[A-Za-z]/.test(name) ? `试试 ${name}` : `试试${name}`),
       // Sections that get a shortcut in the case-page bar (wide screens).
       barSections: ['起因', '要解决什么', '架构', '取舍', '还差什么'],
@@ -206,8 +209,8 @@ export const content = {
 
     workTitle: 'Work',
     workLine: 'All three are live and ready to use',
-    visit: 'Open the website',
-    readCase: 'Learn more',
+    open: (name) => `Open ${name}`,
+    readCase: 'How it was made',
     whyLabel: 'Why I built it',
     openSite: (name) => `Open the ${name} website`,
     flagship: {
@@ -311,6 +314,7 @@ export const content = {
       dontLabel: 'Does not',
       more: 'Other work',
       onPage: 'On this page',
+      howMade: (name) => `${name} · How it was made`,
       tryIt: (name) => `Try ${name}`,
       barSections: ['Why', 'The problem', 'How it’s built', 'Trade-offs', 'Still missing'],
       contactHeadline: 'Let’s talk',

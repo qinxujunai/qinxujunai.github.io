@@ -31,14 +31,14 @@ export const CASES = [
       why: '预览负责快，终稿只认完整录音；剪贴板没核对过，不算送达。',
       // Why he built it, in his words (his answer, 2026-10-21). Shown on the home page under the picture.
       story: '我常对着 AI 一说就是十几分钟。用过的输入法，网一卡，整段话就没了；最后几句常常出不来；光标不在输入框，说完的话直接消失。所以我做了一个全在本机跑的：说到最后一个字，就出来最后一个字。',
-      imageAlt: 'VoiceFlow 的官网：让想法成文。按一下，说出你的话。',
+      imageAlt: 'VoiceFlow 的网站：让想法成文。按一下，说出你的话。',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
         ['时间', '2026.05 至今'],
         ['形态', 'Windows 桌面应用，开源'],
         ['技术', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['打开官网', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
+      links: [['打开 VoiceFlow', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
         { v: '427 ms', l: '说完到文字送出（95% 的情况）' },
@@ -156,7 +156,7 @@ export const CASES = [
         ['Form', 'Windows desktop app, open source'],
         ['Stack', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
-      links: [['Open the website', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
+      links: [['Open VoiceFlow', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
         { v: '427 ms', l: 'From stopping to text sent (95% of cases)' },
@@ -288,7 +288,7 @@ export const CASES = [
         ['形态', '自动化工作流，开源'],
         ['技术', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['打开官网', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
+      links: [['打开 AI Signal', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11 类', l: '信源' },
         { v: '10:00', l: '每天准点送达' },
@@ -406,7 +406,7 @@ export const CASES = [
         ['Form', 'Automated workflow, open source'],
         ['Stack', 'Node.js · GitHub Actions · DeepSeek · SMTP'],
       ],
-      links: [['Open the website', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
+      links: [['Open AI Signal', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11', l: 'Source types' },
         { v: '10:00', l: 'On time, every day' },
@@ -530,14 +530,14 @@ export const CASES = [
       why: '能读字幕和正文，就不转写；不用显卡也能跑。',
       // His WeChat post the night he started (2026) and his answer (2026-10-21).
       story: '我想把一期两个小时的小宇宙播客转成文字，拿去跟 AI 聊。试了几个小程序，要么太长转不动，要么太贵。我不会写代码，那天晚上，还是按下了 Win+R。',
-      imageAlt: '万象成文的官网：把视频、播客和图文，直接变成可用的文字与媒体。',
+      imageAlt: '万象成文的网站：把视频、播客和图文，直接变成可用的文字与媒体。',
       facts: [
         ['角色', '独立开发'],
         ['时间', '2026'],
         ['形态', 'Windows 桌面应用，另有网页预览'],
         ['技术', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['打开官网', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
+      links: [['打开万象成文', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
       results: [
         { v: '25 秒', l: '47 分钟视频出文字（实测）' },
         { v: '0 次', l: '超时（三轮 180 次）' },
@@ -614,7 +614,7 @@ export const CASES = [
             '2026-10-21：5 个平台、60 条链接，各跑 3 轮。180 次里 137 次完整拿到结果，4 次超时，所以 2.3 那时没有发布。',
             '2026-10-22，改完后用同一批链接重跑 3 轮：141 次完整，0 次超时。B 站 57/57、公众号 30/30、小宇宙 27/30、抖音 24/30、小红书 3/33；失败全部留在分母里。',
             '准确率：在公开语料 ASCEND（香港的中英双语对话，人工标注）上，显卡版 SenseVoice 的普通话字错误率 9.31%、英文词错误率 23.34%、中英混说 15.52%（5,735 段，各跑 3 轮）。',
-            'v2.3.0 的安装包先在他的电脑上、再在一台全新的 Windows 上验收；发布的就是验收过的同一个文件，从官网下载后核对 SHA-256 一致。',
+            'v2.3.0 的安装包先在他的电脑上、再在一台全新的 Windows 上验收；发布的就是验收过的同一个文件，从它的网站下载后核对 SHA-256 一致。',
             '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
             '安装包、运行包和发布产物都提供 SHA-256；GitHub Actions 同时生成 SBOM 和构建来源证明。',
           ],
@@ -648,7 +648,7 @@ export const CASES = [
         ['Form', 'Windows desktop app, plus a web preview'],
         ['Stack', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
-      links: [['Open the website', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
+      links: [['Open Wanxiang', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
       results: [
         { v: '25 s', l: 'Text from a 47-minute video (measured)' },
         { v: '0', l: 'Timeouts (180 runs)' },
