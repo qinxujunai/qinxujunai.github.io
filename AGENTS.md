@@ -7,7 +7,7 @@
 
 只放有代码库、有网站的作品：VoiceFlow、AI Signal、万象成文，加上分享方法的 ai.vibecoding。（问数 v16 加过、v19 撤下：他说那是个 demo，不算作品；仓库 ask-data 保留。）公司里的经历只在「经历」里各写一句，不单独成页。视觉和交互对标 apple.com 的产品页。
 
-**影片（v23）**：他导演的 AI 短片《来不及爱你》在首页首屏播放；片子自己的网站在仓库 `too-late-to-love-you`（`https://qinxujunai.github.io/too-late-to-love-you/`，规矩见那个仓库的 AGENTS.md；2026-10-23 从拼音名 `laibuji-aini` 改名，本站 `laibuji-aini/` 下留了跳转页，旧链接仍能打开）。视频文件只存在影片仓库，本站同源引用，不复制、不转码。v22 的实施记录在 [docs/film-v22-handoff.md](docs/film-v22-handoff.md)。
+**影片（v23）**：他导演的 AI 短片《来不及爱你》在首页首屏播放；片子自己的网站在仓库 `too-late-to-love-you`（`https://qinxujunai.github.io/too-late-to-love-you/`，规矩见那个仓库的 AGENTS.md；2026-10-23 从拼音名 `laibuji-aini` 改名，本站 `laibuji-aini/` 下留了跳转页，旧链接仍能打开）。视频文件只存在影片仓库，本站同源引用，不复制、不转码。**链接是单向的**：本站链到影片网站，影片网站不链回本站（2026-10-24 他说推荐片子时不想让人看到主网站）。v22 的实施记录在 [docs/film-v22-handoff.md](docs/film-v22-handoff.md)。
 
 项目的来龙去脉、他的原话、历次决策，都记在 [CLAUDE.md](CLAUDE.md)（早期逐版记录在 [docs/history.md](docs/history.md)）。改完在 CLAUDE.md 的「决策记录」追加一版：他说了什么、改了什么、为什么。文案平台见 [docs/copy.md](docs/copy.md)。
 
