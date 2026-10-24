@@ -78,6 +78,28 @@
     });
   }
 
+  // v27.16 Desktop: work pictures lean toward the pointer (±3°), like a focused poster on Apple TV.
+  if (!still && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('a.frame, .signal-card').forEach(function (el) {
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--ty', (((e.clientX - r.left) / r.width - 0.5) * 6).toFixed(2) + 'deg');
+        el.style.setProperty('--tx', ((0.5 - (e.clientY - r.top) / r.height) * 6).toFixed(2) + 'deg');
+      });
+      el.addEventListener('pointerleave', function () { el.style.removeProperty('--tx'); el.style.removeProperty('--ty'); });
+    });
+  }
+
+  // v27.16 A creator card is one link: a tap anywhere on it goes to their Douyin, unless the reader is selecting text.
+  document.querySelectorAll('.person').forEach(function (card) {
+    var link = card.querySelector('.person-go a');
+    if (!link) return;
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('a') || String(window.getSelection && window.getSelection())) return;
+      link.click();
+    });
+  });
+
   // VoiceFlow capsule: confirmed characters appear at a fixed 48 ms rhythm, as in the product.
   var typed = document.querySelector('.typed');
   if (typed && !still && canObserve) {

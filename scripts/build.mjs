@@ -417,7 +417,7 @@ const THING_ICONS = {
   spark: '<path d="M11 3.5l1.6 4.8 4.9 1.7-4.9 1.7L11 16.5l-1.6-4.8L4.5 10l4.9-1.7Z"/><path d="M18 14.5l.7 2 2 .8-2 .7-.7 2.1-.7-2.1-2-.7 2-.8Z"/>',
   weight: '<path d="M6.5 12h11"/><rect x="3.5" y="8" width="3" height="8" rx="1"/><rect x="17.5" y="8" width="3" height="8" rx="1"/><path d="M2 10.5v3M22 10.5v3"/>',
 };
-const thingIcon = (k) => `<svg class="thing-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${THING_ICONS[k]}</svg>`;
+const thingIcon = (k) => `<svg class="thing-icon ti-${k}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${THING_ICONS[k]}</svg>`;
 
 function three(c) {
   const t = c.three;
