@@ -78,19 +78,7 @@
     });
   }
 
-  // v27.16 Desktop: work pictures lean toward the pointer (±3°), like a focused poster on Apple TV.
-  if (!still && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('a.frame, .signal-card').forEach(function (el) {
-      el.addEventListener('pointermove', function (e) {
-        var r = el.getBoundingClientRect();
-        el.style.setProperty('--ty', (((e.clientX - r.left) / r.width - 0.5) * 6).toFixed(2) + 'deg');
-        el.style.setProperty('--tx', ((0.5 - (e.clientY - r.top) / r.height) * 6).toFixed(2) + 'deg');
-      });
-      el.addEventListener('pointerleave', function () { el.style.removeProperty('--tx'); el.style.removeProperty('--ty'); });
-    });
-  }
-
-  // v27.16 A creator card is one link: a tap anywhere on it goes to their Douyin, unless the reader is selecting text.
+  // A creator card is one link: a tap anywhere on it goes to their Douyin, unless the reader is selecting text.
   document.querySelectorAll('.person').forEach(function (card) {
     var link = card.querySelector('.person-go a');
     if (!link) return;
@@ -232,15 +220,6 @@
     var hideCover = function () { filmCover.hidden = true; };
     film.addEventListener('play', hideCover);
     film.addEventListener('error', hideCover);
-    // Glass touch (v27.15): the play disc lights up from the side the finger lands on.
-    var disc = filmCover.querySelector('.film-disc');
-    filmCover.addEventListener('pointerdown', function (e) {
-      if (!disc) return;
-      var r = disc.getBoundingClientRect();
-      var clamp = function (v) { return Math.max(0, Math.min(100, v)); };
-      disc.style.setProperty('--gx', clamp((e.clientX - r.left) / r.width * 100).toFixed(0) + '%');
-      disc.style.setProperty('--gy', clamp((e.clientY - r.top) / r.height * 100).toFixed(0) + '%');
-    });
     filmCover.addEventListener('click', function () {
       hideCover();
       var p = film.play();

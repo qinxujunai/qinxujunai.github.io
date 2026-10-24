@@ -37,7 +37,7 @@ export const CASES = [
       imageAlt: 'VoiceFlow 的网站：让想法成文。按一下，说出你的话。',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
-        ['时间', '2026.05 至今'],
+        ['时间', '2026.05 起'],
         ['形态', 'Windows 桌面应用，开源'],
         ['技术', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
@@ -181,7 +181,7 @@ export const CASES = [
       imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
       facts: [
         ['Role', 'Solo: product, design, engineering, release'],
-        ['When', 'May 2026 to now'],
+        ['When', 'Since May 2026'],
         ['Form', 'Windows desktop app, open source'],
         ['Stack', 'Python · PySide6 · Sherpa-ONNX · SenseVoice · Zipformer'],
       ],
