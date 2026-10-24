@@ -3143,3 +3143,25 @@ html:not(.js) .book + .book {
   font-size: 13px;
   color: var(--muted);
 }
+
+/* v27.6: long paragraphs break between characters like normal Chinese text (keep-all left them ragged and
+   looking off-centre); headings and short lines still break only at punctuation. The letter is justified. */
+:lang(zh-CN) .letter p,
+:lang(zh-CN) .story p,
+:lang(zh-CN) .person-why,
+:lang(zh-CN) .who,
+:lang(zh-CN) .book-mine,
+:lang(zh-CN) .book-core,
+:lang(zh-CN) .pr-q,
+:lang(zh-CN) .path .what {
+  word-break: normal;
+  line-break: strict;
+}
+
+.letter p {
+  text-align: justify;
+}
+
+.person .value + .book-k {
+  margin-top: 18px;
+}

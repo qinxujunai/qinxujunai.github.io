@@ -25,7 +25,7 @@ const KEEP = [
   '让 AI 负责拆解、生成与验证', '让人守住目标、边界与品味', '用自然语言', '创造可运行的作品',
   '云南妙妙屋', '几分钟读完', '先读读我的方法', '我是秦徐俊', '做 AI 产品', '内容和运营', '人为什么会用它', '先立边界', '约 18 分钟读完', '读完就能动手', '做 AI 产品', '为什么会用', '一个东西', '剪贴板没核对过', '不算送达', '完整录音', '链接由代码回填', '写不出假链接', '不用显卡', '人台照', '模特图', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
   'AI 进化得越快', '我们越需要慢下来',
-  'easy-vibe', 'ai.vibecoding', '凯圣王', '谭成义', '三分化', '杰克叔叔', '鲁大魔', '天行健', '日拱一卒', '功不唐捐', 'ChatGPT', '能量边界', '学技能', '内容运营',
+  'Jack 叔叔', 'easy-vibe', 'ai.vibecoding', '凯圣王', '谭成义', '三分化', '杰克叔叔', '鲁大魔', '天行健', '日拱一卒', '功不唐捐', 'ChatGPT', '能量边界', '学技能', '内容运营',
   '秦徐俊', '比智科技', '一念智能', '专致网络', '抖音数字学堂', '云南民族大学', '微众银行', '方正证券', '工商银行',
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
   '智能体', '上下文', '自然语言', '许愿池', '爆款案例', '信息流', '回款率', '采购评估', '招投标', '剪贴板', '终稿', '离线',
@@ -418,7 +418,7 @@ ${c.follow.list.map((k, i) => person(c, k, i)).join('\n')}
 // one course). v27.2: the three Douyin creators sit together inside 阅读, under the books (his words: 「推荐的人是获取知识的一种」).
 function person(c, k, i) {
   const f = c.follow;
-  return `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="value">${T(c, k.value)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
+  return `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="value">${T(c, k.value)}</p>${k.who ? `<p class="who">${T(c, k.who)}</p>` : ''}<p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
 }
 
 // v27.4: a small drawn icon on each of the three tiles (his words: 「不要光是一整块。你最好有点小的贴图」).
