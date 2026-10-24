@@ -108,7 +108,7 @@ export const content = {
       why: '我为什么推荐',
       go: '去抖音看看',
       list: [
-        { name: 'Jack 叔叔', value: '讲迷茫、焦虑的时候该做什么', handle: '抖音「Jack要加油」', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
+        { name: 'Jack 叔叔', value: '讲迷茫、焦虑的时候该做什么', handle: '抖音「Jack要加油」', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '主页简介：「每天高价值更新……每日解读 + 每周总结」', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
         { name: '鲁大魔', value: '讲他自己的创业经历和商业方法论', handle: '抖音「鲁大魔」', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: '主页简介：「2003 年自学编程做网站……现在是一名 AI 从业者」', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
         { name: '童年终结者', value: '讲知行合一，讲职场里的人性', handle: '抖音「童年终结者」', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '主页简介：「是个普通人，有缺点，不完美……和大家相遇已经第六年啦」', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
       ],
@@ -315,7 +315,7 @@ export const content = {
       why: 'Why I recommend them',
       go: 'Watch on Douyin',
       list: [
-        { name: 'Uncle Jack', value: 'On what to do when you feel lost or anxious', handle: 'Douyin: Jack要加油', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
+        { name: 'Jack', value: 'On what to do when you feel lost or anxious', handle: 'Douyin: Jack要加油', url: 'https://v.douyin.com/JxIstHXwiBU/', who: 'From his profile: “High-value updates every day … a daily read and a weekly roundup”', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
         { name: 'Lu Damo', value: 'His own story as a founder, and how business works', handle: 'Douyin: 鲁大魔', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: 'From his profile: “Taught myself to code and build websites in 2003 … now I work in AI”', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
         { name: 'Tongnian Zhongjiezhe', value: 'Doing what you know, and how people really work at work', handle: 'Douyin: 童年终结者', url: 'https://v.douyin.com/NVPxJZpySqY/', who: 'From his profile: “Just an ordinary person, with flaws, not perfect … our sixth year together”', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
       ],
