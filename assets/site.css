@@ -1720,6 +1720,7 @@ main {
   white-space: nowrap;
 }
 
+
 /* ---------- Projects: each one's own website, in a window ---------- */
 
 .show-stage {
@@ -1923,7 +1924,7 @@ main {
 }
 
 .share .statement .pull {
-  max-width: 13em;
+  max-width: 15em;
   margin-top: 8px;
   font-size: min(34px, 8.6vw);
   line-height: 1.18;
@@ -2952,4 +2953,15 @@ html:not(.js) .book + .book {
 
 .person-go [hidden] {
   display: none;
+}
+
+/* Phones: the statement is sized so its longest phrase (14 characters) fits one line; nothing runs off the edge. */
+@media (max-width: 733px) {
+  .share .statement .pull {
+    font-size: min(30px, 6.2vw);
+  }
+
+  .clause {
+    max-width: 100%;
+  }
 }
