@@ -62,7 +62,8 @@ await render(
     </div></div>`,
 );
 
-// Name card, portrait for a phone album: the same card as the contact section, QR large enough to scan.
+// Name card, portrait for a phone album: the same matte card as the contact section (v27.14: signature, the QR code,
+// one line of contact; no role, no instructions), with the QR code large enough to scan from the album.
 const dataUri = (f, type) => `data:${type};base64,${fs.readFileSync(f).toString('base64')}`;
 const qr = dataUri('assets/wechat-qr.png', 'image/png');
 for (const lang of ['zh', 'en']) {
@@ -72,16 +73,10 @@ for (const lang of ['zh', 'en']) {
     1080,
     1350,
     `<div style="box-sizing:border-box;width:1080px;height:1350px;padding:96px;background:#f5f5f7;display:flex;flex-direction:column;justify-content:center">
-      <div style="border-radius:56px;background:#1d1d1f;color:#f5f5f7;padding:72px 68px 64px;box-shadow:0 40px 80px -30px rgba(0,0,0,.45)">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          ${svg.replace('<svg', '<svg style="height:120px;width:auto;fill:#f5f5f7"')}
-        </div>
-        <div style="margin-top:72px;font-size:34px;line-height:1.35">${c.role}</div>
-        <div style="margin-top:10px;font-size:26px;color:#a1a1a6">${c.wechatLabel} ${c.wechatId}</div>
-        <div style="margin-top:56px;display:flex;align-items:center;gap:40px">
-          <img src="${qr}" style="width:300px;height:300px;padding:16px;background:#fff;border-radius:28px">
-          <div style="font-size:28px;line-height:1.5;color:#a1a1a6">${lang === 'zh' ? '微信扫一扫<br>加我微信' : 'Scan with WeChat<br>to add me'}</div>
-        </div>
+      <div style="border-radius:48px;background:#1c1c1e;color:#f5f5f7;padding:80px 72px 72px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.06),0 48px 96px -52px rgba(0,0,0,.5)">
+        ${svg.replace('<svg', '<svg style="display:block;height:128px;width:auto;fill:#f5f5f7"')}
+        <img src="${qr}" style="display:block;margin-top:96px;width:340px;height:340px;padding:16px;background:#fff;border-radius:24px">
+        <div style="margin-top:48px;font-size:28px;letter-spacing:.02em;color:#8e8e93">${c.wechatLabel} ${c.wechatId}</div>
       </div></div>`,
   );
 }
