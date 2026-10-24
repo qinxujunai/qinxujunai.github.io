@@ -379,10 +379,12 @@ ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding �
 }
 
 // 书架 (v26): the six books that changed him. Tap a cover and it opens: his line first (what it changed for
-// him), then what the book itself says. Covers are the real mainland editions (v26.2). Without JS
+// him), then what the book itself says. Covers are the real mainland editions (v26.2). v26.4: the book opens like a
+// book (pattern: Codrops' 3D Book Showcase, Apple Books): its cover swings open to the left over a two-page spread,
+// title page on the left, his words on the right. Without JS
 // every book shows in full; with JS the covers become tabs and one book is open at a time.
 // Cover heights at 300px wide (assets/media/book-1…6.webp), so each keeps its own proportions.
-const BOOK_H = [433, 453, 435, 445, 440, 406];
+const BOOK_H = [433, 440, 435, 445, 440, 406];
 function books(c) {
   const b = c.books;
   const id = (i) => `book-${i + 1}`;
@@ -396,7 +398,7 @@ function books(c) {
 ${b.list.map((k, i) => `<button type="button" class="cover" role="tab" id="${id(i)}-tab" aria-controls="${id(i)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><span class="visually-hidden">${T(c, k.t)}</span></button>`).join('\n')}
 </div>
 <div class="book-panels">
-${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span><span class="book-ed">${T(c, k.ed)}</span></h3><div class="book-cols"><div><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p></div><div><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p></div></div></div>`).join('\n')}
+${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><div class="spread"><div class="page page-l"><img class="pl-cover" src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span><span class="book-ed">${T(c, k.ed)}</span></h3></div><div class="page page-r"><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p></div><div class="flap" aria-hidden="true"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"></div></div></div>`).join('\n')}
 </div>
 </section>`;
 }
