@@ -330,6 +330,7 @@ a:hover {
 .works-head .line,
 #path h2 .line,
 .three h2 .line,
+.books h2 .line,
 .skill h2 .line,
 .fitness h2 .line,
 .letter h2 .line {
@@ -2936,9 +2937,14 @@ html:not(.js) .book + .book {
   text-decoration: none;
 }
 
-.thing-n {
-  font-size: 13px;
-  color: var(--muted);
+.thing-icon {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .thing-name {
@@ -2970,6 +2976,11 @@ html:not(.js) .book + .book {
 
   .thing-name {
     font-size: 32px;
+  }
+
+  .thing-icon {
+    width: 44px;
+    height: 44px;
   }
 
   .thing-line {

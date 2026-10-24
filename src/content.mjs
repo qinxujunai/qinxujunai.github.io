@@ -14,7 +14,7 @@ export const content = {
     path: '/',
     // What a WeChat chat shows when the link is shared: his name and his headline, then the thesis.
     title: '秦徐俊 · 我用 AI 做东西，也把做法分享出来',
-    description: '一部我导演的 AI 短片《来不及爱你》，三个在线上、打开就能用的作品，和一套能照着做的方法 ai.vibecoding。',
+    description: '我导演的 AI 短片《来不及爱你》，三个打开就能用的作品，还有我推荐的六本书、AI 教程和健身计划。',
     skip: '跳到正文',
     switchLabel: 'English',
     switchLang: 'en',
@@ -73,9 +73,11 @@ export const content = {
     // he read, from his photos (subject 27048361, 35295592, 35519608): he only recommends what he has read. Shown for identification, as any bookshop or review does; files in assets/media/book-1…6.webp.
     books: {
       title: '阅读',
-      headline: '改变过我的六本书',
-      line: '书没有一下子改变我的人生，但它潜移默化地改变了我怎么思考、怎么行动',
-      mine: '它改变了我',
+      // v27.4: no 「改变人生」 (his words: 「我没有说『改变我人生的六本书』，真的不要夸张。就是推荐六本我看过的好书」).
+      // 「从头读完」 is his: 「我推荐的每一本书，都是我真正意义上从头到尾看完过的，我才会去推荐」.
+      headline: '六本书，每一本都从头读完过',
+      line: '点开一本，看看书里讲什么、我读到了什么',
+      mine: '我的体会',
       core: '书里说',
       list: [
         { t: '牧羊少年奇幻之旅', a: '保罗·柯艾略', ed: '南海出版公司 · 丁文林 译', mine: '如果真的很想要一个事情，宇宙都会合力来帮忙解决。……恐惧、不知道怎么走的时候，我都推荐看这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
@@ -117,9 +119,9 @@ export const content = {
       line: '每一样，我都放上自己觉得最好的',
       // v27.1: the three things right under the headline (his words: 「那哪三件事情呢？直接放出来啊」).
       items: [
-        { id: 'books', name: '阅读', line: '六本书 · 三位博主' },
-        { id: 'skill', name: '学技能', line: '学 AI' },
-        { id: 'fitness', name: '健身', line: '三分化训练' },
+        { id: 'books', icon: 'book', name: '阅读', line: '六本书 · 三位博主' },
+        { id: 'skill', icon: 'spark', name: '学技能', line: '学 AI' },
+        { id: 'fitness', icon: 'weight', name: '健身', line: '三分化训练' },
       ],
       skill: {
         title: '学技能',
@@ -241,7 +243,7 @@ export const content = {
     lang: 'en',
     path: '/en/',
     title: 'Qin Xujun · I build things with AI, and share how I do it',
-    description: 'An AI short film I directed, three works you can open today, and ai.vibecoding, a method you can follow.',
+    description: 'An AI short film I directed, three works ready to open, and the books, AI course and training plan I recommend.',
     skip: 'Skip to content',
     switchLabel: '中文',
     switchLang: 'zh-CN',
@@ -288,9 +290,9 @@ export const content = {
 
     books: {
       title: 'Reading',
-      headline: 'Six books that changed me',
-      line: 'Books didn’t change my life overnight. They quietly changed how I think and act',
-      mine: 'What it changed for me',
+      headline: 'Six books, each read cover to cover',
+      line: 'Open one to see what it says and what I took from it',
+      mine: 'What I took from it',
       core: 'What the book says',
       list: [
         { t: 'The Alchemist', a: 'Paulo Coelho', ed: 'Chinese edition: Nanhai, tr. Ding Wenlin', mine: 'Truly want something, and the whole universe works together to help. … Afraid, not knowing which way to go: that is when I recommend this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
@@ -319,9 +321,9 @@ export const content = {
       headline: 'When I feel lost, I do three things',
       line: 'For each one, the best I have found',
       items: [
-        { id: 'books', name: 'Reading', line: 'Six books · three creators' },
-        { id: 'skill', name: 'A skill', line: 'Learn AI' },
-        { id: 'fitness', name: 'Fitness', line: 'A training plan' },
+        { id: 'books', icon: 'book', name: 'Reading', line: 'Six books · three creators' },
+        { id: 'skill', icon: 'spark', name: 'A skill', line: 'Learn AI' },
+        { id: 'fitness', icon: 'weight', name: 'Fitness', line: 'A training plan' },
       ],
       skill: {
         title: 'Learning a skill',

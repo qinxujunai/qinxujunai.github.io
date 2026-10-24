@@ -394,7 +394,7 @@ function books(c) {
   return `<section id="books" class="tile soft books" aria-labelledby="books-title">
 <div class="reveal">
 <p class="eyebrow">${esc(b.title)}</p>
-<h2 id="books-title">${T(c, bare(b.headline))}</h2>
+<h2 id="books-title">${lines(c, bare(b.headline))}</h2>
 <p class="sub">${clauses(c, bare(b.line), true)}</p>
 </div>
 <div class="shelf" role="tablist" aria-label="${esc(b.headline)}" data-shelf>
@@ -421,6 +421,15 @@ function person(c, k, i) {
   return `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="value">${T(c, k.value)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
 }
 
+// v27.4: a small drawn icon on each of the three tiles (his words: 「不要光是一整块。你最好有点小的贴图」).
+// Line icons on a 24 grid, drawn here so the page makes no extra request: an open book, a sparkle (AI), a dumbbell.
+const THING_ICONS = {
+  book: '<path d="M12 6.5C10 5 7 4.6 3.5 5.4v12.4c3.5-.8 6.5-.4 8.5 1.1 2-1.5 5-1.9 8.5-1.1V5.4C17 4.6 14 5 12 6.5Z"/><path d="M12 6.5V19"/>',
+  spark: '<path d="M11 3.5l1.6 4.8 4.9 1.7-4.9 1.7L11 16.5l-1.6-4.8L4.5 10l4.9-1.7Z"/><path d="M18 14.5l.7 2 2 .8-2 .7-.7 2.1-.7-2.1-2-.7 2-.8Z"/>',
+  weight: '<path d="M6.5 12h11"/><rect x="3.5" y="8" width="3" height="8" rx="1"/><rect x="17.5" y="8" width="3" height="8" rx="1"/><path d="M2 10.5v3M22 10.5v3"/>',
+};
+const thingIcon = (k) => `<svg class="thing-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${THING_ICONS[k]}</svg>`;
+
 function three(c) {
   const t = c.three;
   return `<section id="three" class="tile plain three" aria-labelledby="three-title">
@@ -430,7 +439,7 @@ function three(c) {
 <p class="sub">${clauses(c, bare(t.line), true)}</p>
 </div>
 <ol class="things reveal">
-${t.items.map((k, i) => `<li><a href="#${k.id}"><span class="thing-n">${i + 1}</span><span class="thing-name">${T(c, k.name)}</span><span class="thing-line">${k.line.split(' · ').map((x) => `<span>${T(c, x)}</span>`).join('')}</span></a></li>`).join('\n')}
+${t.items.map((k) => `<li><a href="#${k.id}">${thingIcon(k.icon)}<span class="thing-name">${T(c, k.name)}</span><span class="thing-line">${k.line.split(' · ').map((x) => `<span>${T(c, x)}</span>`).join('')}</span></a></li>`).join('\n')}
 </ol>
 </section>`;
 }
