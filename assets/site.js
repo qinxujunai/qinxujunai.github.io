@@ -227,67 +227,67 @@
   var filmCover = document.querySelector('[data-film-play]');
   var lineBox = document.querySelector('[data-film-line]');
   if (film && filmCover) {
-    var screen = film.parentNode;
-    var frame = null;
-    var line = 'orig';
+    var filmScreen = film.parentNode;
+    var filmFrame = null;
+    var filmLine = 'orig';
     try {
-      var savedLine = localStorage.getItem('qxj.line');
-      if (savedLine === 'orig' || savedLine === 'cn') line = savedLine;
-      else if (/^Asia\/(Shanghai|Chongqing|Harbin|Urumqi)$/.test(Intl.DateTimeFormat().resolvedOptions().timeZone)) line = 'cn';
+      var savedFilmLine = localStorage.getItem('qxj.line');
+      if (savedFilmLine === 'orig' || savedFilmLine === 'cn') filmLine = savedFilmLine;
+      else if (/^Asia\/(Shanghai|Chongqing|Harbin|Urumqi)$/.test(Intl.DateTimeFormat().resolvedOptions().timeZone)) filmLine = 'cn';
     } catch (e) {}
-    var started = false;
+    var filmStarted = false;
     var hideCover = function () { filmCover.hidden = true; };
     var openFrame = function (t) {
-      if (!frame) {
-        frame = document.createElement('iframe');
-        frame.className = 'film-frame';
-        frame.title = lineBox.getAttribute('data-title');
-        frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
-        frame.setAttribute('allow', 'autoplay; fullscreen');
-        frame.setAttribute('allowfullscreen', '');
-        frame.setAttribute('referrerpolicy', 'no-referrer');
-        screen.appendChild(frame);
+      if (!filmFrame) {
+        filmFrame = document.createElement('iframe');
+        filmFrame.className = 'film-frame';
+        filmFrame.title = lineBox.getAttribute('data-title');
+        filmFrame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
+        filmFrame.setAttribute('allow', 'autoplay; fullscreen');
+        filmFrame.setAttribute('allowfullscreen', '');
+        filmFrame.setAttribute('referrerpolicy', 'no-referrer');
+        filmScreen.appendChild(filmFrame);
       }
-      frame.src = lineBox.getAttribute('data-src') + (t ? '&t=' + Math.floor(t) : '');
+      filmFrame.src = lineBox.getAttribute('data-src') + (t ? '&t=' + Math.floor(t) : '');
       film.pause();
       film.hidden = true;
       hideCover();
     };
     var closeFrame = function () {
-      if (frame) { screen.removeChild(frame); frame = null; }
+      if (filmFrame) { filmScreen.removeChild(filmFrame); filmFrame = null; }
       film.hidden = false;
     };
-    var start = function () {
-      started = true;
+    var filmStart = function () {
+      filmStarted = true;
       hideCover();
-      if (line === 'cn' && lineBox) { openFrame(0); return; }
+      if (filmLine === 'cn' && lineBox) { openFrame(0); return; }
       var p = film.play();
       if (p && p.catch) p.catch(function () {});
     };
     var setLine = function (next, user) {
-      line = next;
+      filmLine = next;
       if (lineBox) {
         var bs = lineBox.querySelectorAll('button');
-        for (var k = 0; k < bs.length; k++) bs[k].setAttribute('aria-pressed', bs[k].getAttribute('data-line') === line ? 'true' : 'false');
+        for (var k = 0; k < bs.length; k++) bs[k].setAttribute('aria-pressed', bs[k].getAttribute('data-line') === filmLine ? 'true' : 'false');
       }
       if (user) {
-        try { localStorage.setItem('qxj.line', line); } catch (e) {}
-        if (started) {
-          if (line === 'cn') openFrame(film.currentTime);
+        try { localStorage.setItem('qxj.line', filmLine); } catch (e) {}
+        if (filmStarted) {
+          if (filmLine === 'cn') openFrame(film.currentTime);
           else { closeFrame(); var p = film.play(); if (p && p.catch) p.catch(function () {}); }
         }
       }
     };
     filmCover.hidden = false;
-    film.addEventListener('play', function () { started = true; hideCover(); });
+    film.addEventListener('play', function () { filmStarted = true; hideCover(); });
     film.addEventListener('error', hideCover);
-    filmCover.addEventListener('click', start);
+    filmCover.addEventListener('click', filmStart);
     if (lineBox) {
       lineBox.hidden = false;
-      setLine(line, false);
+      setLine(filmLine, false);
       lineBox.addEventListener('click', function (e) {
         var b = e.target.closest ? e.target.closest('[data-line]') : null;
-        if (b && b.getAttribute('data-line') !== line) setLine(b.getAttribute('data-line'), true);
+        if (b && b.getAttribute('data-line') !== filmLine) setLine(b.getAttribute('data-line'), true);
       });
     }
   }
