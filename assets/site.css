@@ -2859,8 +2859,40 @@ html:not(.js) .book + .book {
 }
 
 /* v27: the course, ai.vibecoding's small row, the three things, the letter. */
-.soft .course {
+.soft .course,
+.soft .person {
   background: var(--card);
+}
+
+/* 阅读, after the shelf: the people he listens to. */
+.listen {
+  margin-top: 80px;
+}
+
+.listen-title {
+  font-size: min(32px, 7.6vw);
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.listen .sub {
+  max-width: 30em;
+  margin: 10px auto 0;
+  font-size: 17px;
+  color: var(--body);
+}
+
+.value {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.person .value + .who {
+  margin-top: 4px;
 }
 
 .skill .frame {
@@ -2914,6 +2946,10 @@ html:not(.js) .book + .book {
   font-size: min(26px, 6.6vw);
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+.thing-line span {
+  display: block;
 }
 
 .thing-line {

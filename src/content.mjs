@@ -95,16 +95,16 @@ export const content = {
     // v27.1: the three stay together as one row of cards (his words: 「为什么要把三个人分开来呢」). Links are the share
     // links he sent (「我不是发过链接给你，点击就能跳出来吗」), shown everywhere, WeChat included.
     follow: {
-      title: '我推荐',
-      headline: '三位抖音博主',
-      // His words: 「去听那些你想成为的人的建议」 (no 「你」, v26.11).
-      line: '去听想成为的那种人的建议',
+      // v27.2: inside 阅读, under the books. His words: 「推荐的人是获取知识的一种，所以三个人放在一块就行」.
+      headline: '书之外，也听这三个人',
+      // His words: 「去听那些你想成为的人的建议，他们的思想还有书籍里的思想会反过来塑造你自己」 (「你」 dropped, v26.11).
+      line: '去听那些想成为的人的建议，他们的思想还有书籍里的思想，会反过来塑造自己',
       why: '我为什么推荐',
       go: '去抖音看看',
       list: [
-        { name: '杰克叔叔', handle: '抖音「Jack要加油」', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '每天更新健身，每周直播', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
-        { name: '鲁大魔', handle: '抖音「鲁大魔」', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
-        { name: '童年终结者', handle: '抖音「童年终结者」', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
+        { name: '杰克叔叔', value: '讲迷茫、焦虑的时候该做什么', handle: '抖音「Jack要加油」', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '每天更新健身，每周直播', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
+        { name: '鲁大魔', value: '讲他自己的创业经历和商业方法论', handle: '抖音「鲁大魔」', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
+        { name: '童年终结者', value: '讲知行合一，讲职场里的人性', handle: '抖音「童年终结者」', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
       ],
     },
 
@@ -117,7 +117,7 @@ export const content = {
       line: '每一样，我都放上自己觉得最好的',
       // v27.1: the three things right under the headline (his words: 「那哪三件事情呢？直接放出来啊」).
       items: [
-        { id: 'books', name: '阅读', line: '六本书' },
+        { id: 'books', name: '阅读', line: '六本书 · 三位博主' },
         { id: 'skill', name: '学技能', line: '学 AI' },
         { id: 'fitness', name: '健身', line: '三分化训练' },
       ],
@@ -303,15 +303,14 @@ export const content = {
     },
 
     follow: {
-      title: 'I recommend',
-      headline: 'Three creators on Douyin',
-      line: 'Listen to the people you want to become',
+      headline: 'Beyond books, three people I listen to',
+      line: 'Take advice from the people you want to become. Their thinking, like the thinking in books, shapes you in return',
       why: 'Why I recommend them',
       go: 'Watch on Douyin',
       list: [
-        { name: 'Uncle Jack', handle: 'Douyin: Jack要加油', url: 'https://v.douyin.com/JxIstHXwiBU/', who: 'Daily fitness, a live stream every week', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
-        { name: 'Lu Damo', handle: 'Douyin: 鲁大魔', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
-        { name: 'Tongnian Zhongjiezhe', handle: 'Douyin: 童年终结者', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
+        { name: 'Uncle Jack', value: 'On what to do when you feel lost or anxious', handle: 'Douyin: Jack要加油', url: 'https://v.douyin.com/JxIstHXwiBU/', who: 'Daily fitness, a live stream every week', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
+        { name: 'Lu Damo', value: 'His own story as a founder, and how business works', handle: 'Douyin: 鲁大魔', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
+        { name: 'Tongnian Zhongjiezhe', value: 'Doing what you know, and how people really work at work', handle: 'Douyin: 童年终结者', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
       ],
     },
 
@@ -320,7 +319,7 @@ export const content = {
       headline: 'When you feel lost, do three things',
       line: 'For each one, the best I have found',
       items: [
-        { id: 'books', name: 'Reading', line: 'Six books' },
+        { id: 'books', name: 'Reading', line: 'Six books · three people' },
         { id: 'skill', name: 'A skill', line: 'Learn AI' },
         { id: 'fitness', name: 'Fitness', line: 'A training plan' },
       ],
