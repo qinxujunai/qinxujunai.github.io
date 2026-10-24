@@ -1975,35 +1975,6 @@ main {
   }
 }
 
-/* 推荐: a recommendation near the end. Headline, one line, three cards, the site, the link. */
-#recommend .rec-title {
-  max-width: 14em;
-  margin: 8px auto 0;
-  font-size: min(26px, 6.6vw);
-  line-height: 1.25;
-}
-
-/* The headline breaks only after its comma. */
-.rec-title .clause {
-  display: inline-block;
-}
-
-:lang(zh-CN) #recommend .rec-title .clause {
-  white-space: nowrap;
-}
-
-#recommend .show-line {
-  max-width: 24em;
-  margin: 12px auto 0;
-}
-
-@media (min-width: 734px) {
-  #recommend .rec-title {
-    font-size: 48px;
-  }
-
-}
-
 /* 经历: one focal point per row. Role is the heading; date, company and light rows step back. */
 .path li {
   grid-template-columns: 1fr;
@@ -2393,6 +2364,31 @@ main {
 .hero-film .more-link {
   min-height: 0;
   font-size: 15px;
+}
+
+/* The domestic line (v26.6): a text button, shown once the film plays. */
+.film-mirror {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.film-mirror:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.film-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
 }
 
 @media (max-width: 733px) {
@@ -2892,15 +2888,92 @@ html:not(.js) .book + .book {
   font-size: 17px;
 }
 
+.dy-copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+}
+
+.dy-id {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.dy-val {
+  color: var(--ink);
+  user-select: all;
+}
+
+.dy-copy button {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font: inherit;
+  font-size: 17px;
+  cursor: pointer;
+}
+
 .person-go a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
 }
 
+.person.wide {
+  padding: 0;
+  overflow: hidden;
+}
+
+.wide-pic {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 0;
+}
+
+.wide-pic .frame {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.wide-text {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 26px 18px;
+}
+
+.wide-text h3 {
+  margin-top: 4px;
+}
+
 @media (min-width: 834px) {
+  .person.wide {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: stretch;
+  }
+
+  .wide-text {
+    justify-content: center;
+    padding: 36px 40px;
+  }
+
+  .wide-pic {
+    padding: 32px 0 32px 32px;
+  }
+
   .people {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+}
+
+.person-go [hidden] {
+  display: none;
 }
