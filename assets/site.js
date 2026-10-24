@@ -187,14 +187,12 @@
     darks.forEach(function (el) { darkWatch.observe(el); });
   }
 
-  // His film in the first screen: the cover shows until Play; wide screens get the full-bitrate original.
+  // His film in the first screen: the cover shows until Play. One file everywhere, his 4K web version (about 7 Mbps):
+  // the 14 Mbps original needed twice the bandwidth and stalled on desktop over slow links (2026-10-24).
   var film = document.getElementById('film');
   var filmCover = document.querySelector('[data-film-play]');
   if (film && filmCover) {
     filmCover.hidden = false;
-    var wide = film.getAttribute('data-wide');
-    var saver = navigator.connection && navigator.connection.saveData;
-    if (wide && window.matchMedia('(min-width: 1024px)').matches && !saver) film.src = wide;
     var hideCover = function () { filmCover.hidden = true; };
     film.addEventListener('play', hideCover);
     film.addEventListener('error', hideCover);
