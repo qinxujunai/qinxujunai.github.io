@@ -92,22 +92,19 @@ export const content = {
     // v26.5 (2026-10-24): three Douyin creators he recommends. His reasons are his words (docs/his-words-2026-10-24.md).
     // Who they are: from each profile's own bio, read 2026-10-24. Avatars: their public profile pictures.
     // Links: the profile without his share tracking (his share link carried his own user id).
+    // v27.1: the three stay together as one row of cards (his words: 「为什么要把三个人分开来呢」). Links are the share
+    // links he sent (「我不是发过链接给你，点击就能跳出来吗」), shown everywhere, WeChat included.
     follow: {
       title: '我推荐',
-      headline: '三位抖音博主，一个开源教程',
-      // v26.6: easy-vibe moved in here from its own section (two 「推荐」 sections read as a repeat).
-      line: '',
-      kind: 'Datawhale 开源教程',
+      headline: '三位抖音博主',
+      // His words: 「去听那些你想成为的人的建议」 (no 「你」, v26.11).
+      line: '去听想成为的那种人的建议',
       why: '我为什么推荐',
       go: '去抖音看看',
-      // WeChat blocks Douyin links, so inside WeChat the link becomes a button that copies the Douyin ID.
-      dyLabel: '抖音号',
-      copy: '复制抖音号',
-      copied: '已复制，去抖音搜索',
       list: [
-        { name: '杰克叔叔', dy: 'JackandLinda', handle: '抖音「Jack要加油」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: '每天更新健身，每周直播', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
-        { name: '鲁大魔', dy: 'ludamobiubiu', handle: '抖音「鲁大魔」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
-        { name: '童年终结者', dy: '1260338158', handle: '抖音「童年终结者」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
+        { name: '杰克叔叔', handle: '抖音「Jack要加油」', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '每天更新健身，每周直播', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
+        { name: '鲁大魔', handle: '抖音「鲁大魔」', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
+        { name: '童年终结者', handle: '抖音「童年终结者」', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
       ],
     },
 
@@ -118,16 +115,18 @@ export const content = {
       title: '三件事',
       headline: '迷茫的时候，就做三件事',
       line: '每一样，我都放上自己觉得最好的',
-      origin: '这句话，最早是从他那里听到的',
-      // His words: 「去听那些你想成为的人的建议，他们的思想还有书籍里的思想会反过来塑造你自己」 (said to the reader; v26.11: no 「你」).
-      readingPerson: '除了书，也去听想成为的那种人说话',
+      // v27.1: the three things right under the headline (his words: 「那哪三件事情呢？直接放出来啊」).
+      items: [
+        { id: 'books', name: '阅读', line: '六本书' },
+        { id: 'skill', name: '学技能', line: '学 AI' },
+        { id: 'fitness', name: '健身', line: '三分化训练' },
+      ],
       skill: {
         title: '学技能',
         headline: '学 AI，从 easy-vibe 开始',
         vibecoding: '我也写了一份：用 AI 做产品的方法',
         vibeNote: '6 章 · 约 10 分钟',
         vibeLink: '开始阅读',
-        person: '跟着真正做成过的人学',
       },
       // Facts from Douyin, read 2026-10-24: 凯圣王's bio 「健身基础知识连续分享六年」; the collection 「凯圣王-谭成义三分化」 (mix 7623788294471419945):
       // 6 episodes, 38,183,663 plays, 891,227 saves; episode 1 「训练计划」 21:29 (aweme 7623732958012198179); its description:
@@ -148,8 +147,6 @@ export const content = {
         why: '计划、跟练、名词，一套里都讲到了，新手不用再东拼西凑。合集在抖音有 3800 多万次播放、近 90 万次收藏。',
         go: '从第 1 集看起',
         url: 'https://www.iesdouyin.com/share/video/7623732958012198179/',
-        searchLabel: '抖音搜索',
-        copy: '复制合集名',
       },
     },
 
@@ -217,7 +214,7 @@ export const content = {
     copyWechat: '复制微信号，打开微信',
     copyOnly: '复制微信号',
     copied: '已复制 praxiscore，去微信搜索里粘贴',
-    notFound: { title: '这一页不存在', body: '链接可能写错了，或者页面已经搬走。', back: '回到首页' },
+    notFound: { title: '这一页不存在', boback: '回到首页' },
 
     // Project page chrome
     caseLabels: {
@@ -307,18 +304,14 @@ export const content = {
 
     follow: {
       title: 'I recommend',
-      headline: 'Three creators on Douyin, one open course',
-      line: '',
-      kind: 'Open course by Datawhale',
+      headline: 'Three creators on Douyin',
+      line: 'Listen to the people you want to become',
       why: 'Why I recommend them',
       go: 'Watch on Douyin',
-      dyLabel: 'Douyin ID',
-      copy: 'Copy Douyin ID',
-      copied: 'Copied. Search it in Douyin',
       list: [
-        { name: 'Uncle Jack', dy: 'JackandLinda', handle: 'Douyin: Jack要加油', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: 'Daily fitness, a live stream every week', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
-        { name: 'Lu Damo', dy: 'ludamobiubiu', handle: 'Douyin: 鲁大魔', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
-        { name: 'Tongnian Zhongjiezhe', dy: '1260338158', handle: 'Douyin: 童年终结者', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
+        { name: 'Uncle Jack', handle: 'Douyin: Jack要加油', url: 'https://v.douyin.com/JxIstHXwiBU/', who: 'Daily fitness, a live stream every week', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
+        { name: 'Lu Damo', handle: 'Douyin: 鲁大魔', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
+        { name: 'Tongnian Zhongjiezhe', handle: 'Douyin: 童年终结者', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
       ],
     },
 
@@ -326,15 +319,17 @@ export const content = {
       title: 'Three things',
       headline: 'When you feel lost, do three things',
       line: 'For each one, the best I have found',
-      origin: 'I first heard this from him',
-      readingPerson: 'Beyond books, listen to the people you want to become',
+      items: [
+        { id: 'books', name: 'Reading', line: 'Six books' },
+        { id: 'skill', name: 'A skill', line: 'Learn AI' },
+        { id: 'fitness', name: 'Fitness', line: 'A training plan' },
+      ],
       skill: {
         title: 'Learning a skill',
         headline: 'To learn AI, start with easy-vibe',
         vibecoding: 'I wrote one too: how I build products with AI',
         vibeNote: '6 chapters · about 10 minutes · in Chinese',
         vibeLink: 'Start reading',
-        person: 'Learn from people who have done it',
       },
       fitness: {
         title: 'Fitness',
@@ -351,8 +346,6 @@ export const content = {
         why: 'The plan, the follow-along sessions and the vocabulary are all in one series, so a beginner doesn’t have to piece things together. On Douyin it has more than 38 million plays and nearly 900,000 saves.',
         go: 'Start with episode 1',
         url: 'https://www.iesdouyin.com/share/video/7623732958012198179/',
-        searchLabel: 'Search Douyin for',
-        copy: 'Copy the series name',
       },
     },
 
@@ -411,7 +404,7 @@ export const content = {
     copyWechat: 'Copy my WeChat ID and open WeChat',
     copyOnly: 'Copy my WeChat ID',
     copied: 'Copied praxiscore. Paste it into WeChat search',
-    notFound: { title: 'This page doesn’t exist', body: 'The link may be mistyped, or the page has moved.', back: 'Back to home' },
+    notFound: { title: 'This page doesn’t exist', boback: 'Back to home' },
 
     caseLabels: {
       crumb: 'Work',

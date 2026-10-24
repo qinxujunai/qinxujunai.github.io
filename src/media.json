@@ -83,22 +83,22 @@
     "1040": {
       "src": "/assets/media/site-easyvibe-1040.webp",
       "w": 1040,
-      "h": 390,
+      "h": 225,
       "kb": 6
     },
     "2080": {
       "src": "/assets/media/site-easyvibe-2080.webp",
       "w": 2080,
-      "h": 780,
-      "kb": 15
+      "h": 450,
+      "kb": 13
     }
   },
   "site-easyvibe-card": {
     "1080": {
       "src": "/assets/media/site-easyvibe-card-1080.webp",
       "w": 1080,
-      "h": 831,
-      "kb": 18
+      "h": 460,
+      "kb": 11
     }
   },
   "site-prod-wanxiang": {
