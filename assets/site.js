@@ -75,12 +75,15 @@
     for (var dl = 0; dl < dyLinks.length; dl++) {
       var box = dyLinks[dl].nextElementSibling;
       dyLinks[dl].hidden = true;
+      if (!box) continue;
       box.hidden = false;
-      (function (btn) {
+      // A cover picture has no button: it simply stops being a link.
+      var dyBtn = box.querySelector('button');
+      if (dyBtn) (function (btn) {
         btn.addEventListener('click', function () {
           copyText(btn.getAttribute('data-dy'), function () { btn.textContent = btn.getAttribute('data-done'); });
         });
-      })(box.querySelector('button'));
+      })(dyBtn);
     }
   }
 

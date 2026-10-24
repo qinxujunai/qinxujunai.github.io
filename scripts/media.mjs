@@ -77,7 +77,6 @@ const SITES = {
   // with a 「播放演示」 button that does nothing in a screenshot (he: two big blocks for one project).
   wanxiang: { d: { height: 428 }, card: { top: 0, height: 530 } },
   'ai-signal': { d: { height: 470 }, card: { top: 0, height: 385 } },
-  vibecoding: { d: { height: 670 }, card: { top: 0, height: 610 } },
   // The products at work, for the home page (v21): today's AI Signal issue, and 万象成文's result page
   // (v24: a real run, a 52-second China News Service clip, CC BY 3.0, uploaded to the app in the cloud;
   // the same run as Audio2Text's site demo. Sources: result page at 1280 wide 2x (-d) and 390 wide 3x (-c)).
