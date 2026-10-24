@@ -78,14 +78,18 @@ export const content = {
       headline: '六本书，每一本都从头读完过',
       line: '点开一本，看看书里讲什么、我读到了什么',
       mine: '我的体会',
+      // v27.5: each book opens on WeChat Read (his choice A, 2026-10-24). URLs from WeChat Read bookIds, encoded as in
+      // malinkang/weread2notion (MIT): 749907, 522205 (陶曚 译; his 亦言 edition is not on WeChat Read), 798755 (王钟欣 余茜 译;
+      // his 文燚 edition is not there), 3300060305, 25615385, 33628204. Each page checked in a browser on 2026-10-24.
+      read: '在微信读书打开',
       core: '书里说',
       list: [
-        { t: '牧羊少年奇幻之旅', a: '保罗·柯艾略', ed: '南海出版公司 · 丁文林 译', mine: '如果真的很想要一个事情，宇宙都会合力来帮忙解决。……恐惧、不知道怎么走的时候，我都推荐看这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
-        { t: '人性的弱点', a: '戴尔·卡耐基', ed: '中国友谊出版公司 · 亦言 译（全集，完整全译本）', mine: '要发自内心地去关心、在乎别人，去真正地换位思考……真诚永远都是最重要的东西。', core: '真诚地关心别人，从对方的角度看事情，真心让对方觉得自己重要。卡耐基讲的都是这几件事，前提是真诚，不是技巧。' },
-        { t: '小狗钱钱', a: '博多·舍费尔', ed: '中信出版集团 · 文燚 译', mine: '我觉得这是任何一个想要财富自由的人，必须看的第一本理财书。', core: '一只会说话的狗教女孩吉娅理财：帮人照顾狗挣到第一笔钱，因为她喜欢狗，别人才愿意付钱；收入的一半存进「金鹅账户」，只存不花，让它慢慢生出收入。' },
-        { t: '非暴力沟通', a: '马歇尔·卢森堡', ed: '华夏出版社 · 刘轶 译（修订版）', mine: '很多时候我们担心表达自己会被别人攻击、显得软弱，但其实真诚地去表达自己内心的诉求，不要用暴力去沟通，这真的很重要。', core: '说话时把四件事分开：观察到了什么（不加评判）、我的感受、我的需要、我的请求。' },
-        { t: '被讨厌的勇气', a: '岸见一郎　古贺史健', ed: '机械工业出版社 · 渠海霞 译', mine: '怎么做是自己的事情，谁为结果买单谁就来负责；至于别人怎么想，那是别人的课题。', core: '阿德勒心理学的「课题分离」：一件事最后由谁承担结果，就是谁的课题。不去干涉别人的课题，也不让别人干涉自己的。' },
-        { t: '认知觉醒', a: '周岭', ed: '人民邮电出版社', mine: '只有实实在在的改变——比如看完一本书，改变了一个人的思考、行动或者任何东西，它才是有价值的。', core: '人有本能脑、情绪脑、理智脑，前两个更快、更有力。衡量成长的顺序是：改变量 > 行动量 > 思考量 > 学习量。' },
+        { t: '牧羊少年奇幻之旅', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: '保罗·柯艾略', ed: '南海出版公司 · 丁文林 译', mine: '如果真的很想要一个事情，宇宙都会合力来帮忙解决。……恐惧、不知道怎么走的时候，我都推荐看这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
+        { t: '人性的弱点', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: '微信读书上是陶曚译本', a: '戴尔·卡耐基', ed: '中国友谊出版公司 · 亦言 译（全集，完整全译本）', mine: '要发自内心地去关心、在乎别人，去真正地换位思考……真诚永远都是最重要的东西。', core: '真诚地关心别人，从对方的角度看事情，真心让对方觉得自己重要。卡耐基讲的都是这几件事，前提是真诚，不是技巧。' },
+        { t: '小狗钱钱', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: '微信读书上是王钟欣、余茜译本', a: '博多·舍费尔', ed: '中信出版集团 · 文燚 译', mine: '我觉得这是任何一个想要财富自由的人，必须看的第一本理财书。', core: '一只会说话的狗教女孩吉娅理财：帮人照顾狗挣到第一笔钱，因为她喜欢狗，别人才愿意付钱；收入的一半存进「金鹅账户」，只存不花，让它慢慢生出收入。' },
+        { t: '非暴力沟通', wr: 'https://weread.qq.com/web/bookDetail/b7d32470813ab7e0eg015e3f', wrNote: '', a: '马歇尔·卢森堡', ed: '华夏出版社 · 刘轶 译（修订版）', mine: '很多时候我们担心表达自己会被别人攻击、显得软弱，但其实真诚地去表达自己内心的诉求，不要用暴力去沟通，这真的很重要。', core: '说话时把四件事分开：观察到了什么（不加评判）、我的感受、我的需要、我的请求。' },
+        { t: '被讨厌的勇气', wr: 'https://weread.qq.com/web/bookDetail/8b9329607186dc198b9bdab', wrNote: '', a: '岸见一郎　古贺史健', ed: '机械工业出版社 · 渠海霞 译', mine: '怎么做是自己的事情，谁为结果买单谁就来负责；至于别人怎么想，那是别人的课题。', core: '阿德勒心理学的「课题分离」：一件事最后由谁承担结果，就是谁的课题。不去干涉别人的课题，也不让别人干涉自己的。' },
+        { t: '认知觉醒', wr: 'https://weread.qq.com/web/bookDetail/6a732ce07201202c6a7b30a', wrNote: '', a: '周岭', ed: '人民邮电出版社', mine: '只有实实在在的改变——比如看完一本书，改变了一个人的思考、行动或者任何东西，它才是有价值的。', core: '人有本能脑、情绪脑、理智脑，前两个更快、更有力。衡量成长的顺序是：改变量 > 行动量 > 思考量 > 学习量。' },
       ],
     },
 
@@ -293,14 +297,15 @@ export const content = {
       headline: 'Six books, each read cover to cover',
       line: 'Open one to see what it says and what I took from it',
       mine: 'What I took from it',
+      read: 'Open in WeChat Read',
       core: 'What the book says',
       list: [
-        { t: 'The Alchemist', a: 'Paulo Coelho', ed: 'Chinese edition: Nanhai, tr. Ding Wenlin', mine: 'Truly want something, and the whole universe works together to help. … Afraid, not knowing which way to go: that is when I recommend this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
-        { t: 'How to Win Friends and Influence People', a: 'Dale Carnegie', ed: 'Chinese edition: China Friendship, tr. Yi Yan (complete)', mine: 'Care about people from the heart, truly see things from their side … sincerity is always what matters most.', core: 'Be genuinely interested in other people, see things from their point of view, and make them feel important, sincerely. Sincerity first, technique second.' },
-        { t: 'A Dog Named Money', a: 'Bodo Schäfer', ed: 'Chinese edition: CITIC, tr. Wen Yi', mine: 'For anyone who wants financial freedom, this is the first money book to read.', core: 'A talking dog teaches a girl named Kira about money: she earns her first income looking after a dog, because she loves dogs; half of what she earns goes into a “goose” account that is never spent, so it can lay eggs.' },
-        { t: 'Nonviolent Communication', a: 'Marshall Rosenberg', ed: 'Chinese edition: Huaxia, tr. Liu Yi (revised)', mine: 'We often fear that saying what we need will get us attacked or make us look weak. Saying it honestly, without violence, really matters.', core: 'Keep four things apart when you speak: what you observed (without judging), what you feel, what you need, and what you ask for.' },
-        { t: 'The Courage to Be Disliked', a: 'Ichiro Kishimi, Fumitake Koga', ed: 'Chinese edition: China Machine Press, tr. Qu Haixia', mine: 'What I do is my task; whoever bears the result is responsible for it. What others think is their task.', core: 'Adler’s “separation of tasks”: whoever ultimately bears the consequence owns the task. Don’t intrude on other people’s tasks, and don’t let them intrude on yours.' },
-        { t: 'Cognitive Awakening (认知觉醒)', a: 'Zhou Ling', ed: 'Posts & Telecom Press', mine: 'Only real change counts: when a book changes how someone thinks, what they do, anything at all.', core: 'We have an instinctive brain, an emotional brain and a rational brain, and the first two are faster and stronger. Growth ranks: change > action > thinking > learning.' },
+        { t: 'The Alchemist', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: 'Paulo Coelho', ed: 'Chinese edition: Nanhai, tr. Ding Wenlin', mine: 'Truly want something, and the whole universe works together to help. … Afraid, not knowing which way to go: that is when I recommend this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
+        { t: 'How to Win Friends and Influence People', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: 'On WeChat Read: the Tao Meng translation', a: 'Dale Carnegie', ed: 'Chinese edition: China Friendship, tr. Yi Yan (complete)', mine: 'Care about people from the heart, truly see things from their side … sincerity is always what matters most.', core: 'Be genuinely interested in other people, see things from their point of view, and make them feel important, sincerely. Sincerity first, technique second.' },
+        { t: 'A Dog Named Money', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: 'On WeChat Read: the Wang Zhongxin and Yu Qian translation', a: 'Bodo Schäfer', ed: 'Chinese edition: CITIC, tr. Wen Yi', mine: 'For anyone who wants financial freedom, this is the first money book to read.', core: 'A talking dog teaches a girl named Kira about money: she earns her first income looking after a dog, because she loves dogs; half of what she earns goes into a “goose” account that is never spent, so it can lay eggs.' },
+        { t: 'Nonviolent Communication', wr: 'https://weread.qq.com/web/bookDetail/b7d32470813ab7e0eg015e3f', wrNote: '', a: 'Marshall Rosenberg', ed: 'Chinese edition: Huaxia, tr. Liu Yi (revised)', mine: 'We often fear that saying what we need will get us attacked or make us look weak. Saying it honestly, without violence, really matters.', core: 'Keep four things apart when you speak: what you observed (without judging), what you feel, what you need, and what you ask for.' },
+        { t: 'The Courage to Be Disliked', wr: 'https://weread.qq.com/web/bookDetail/8b9329607186dc198b9bdab', wrNote: '', a: 'Ichiro Kishimi, Fumitake Koga', ed: 'Chinese edition: China Machine Press, tr. Qu Haixia', mine: 'What I do is my task; whoever bears the result is responsible for it. What others think is their task.', core: 'Adler’s “separation of tasks”: whoever ultimately bears the consequence owns the task. Don’t intrude on other people’s tasks, and don’t let them intrude on yours.' },
+        { t: 'Cognitive Awakening (认知觉醒)', wr: 'https://weread.qq.com/web/bookDetail/6a732ce07201202c6a7b30a', wrNote: '', a: 'Zhou Ling', ed: 'Posts & Telecom Press', mine: 'Only real change counts: when a book changes how someone thinks, what they do, anything at all.', core: 'We have an instinctive brain, an emotional brain and a rational brain, and the first two are faster and stronger. Growth ranks: change > action > thinking > learning.' },
       ],
     },
 
