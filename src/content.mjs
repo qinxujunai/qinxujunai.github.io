@@ -84,12 +84,12 @@ export const content = {
       read: '在微信读书打开',
       core: '书里说',
       list: [
-        { t: '牧羊少年奇幻之旅', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: '保罗·柯艾略', ed: '南海出版公司 · 丁文林 译', mine: '如果真的很想要一个事情，宇宙都会合力来帮忙解决。……恐惧、不知道怎么走的时候，我都推荐看这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
-        { t: '人性的弱点', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: '微信读书上是陶曚译本', a: '戴尔·卡耐基', ed: '中国友谊出版公司 · 亦言 译（全集，完整全译本）', mine: '要发自内心地去关心、在乎别人，去真正地换位思考……真诚永远都是最重要的东西。', core: '真诚地关心别人，从对方的角度看事情，真心让对方觉得自己重要。卡耐基讲的都是这几件事，前提是真诚，不是技巧。' },
-        { t: '小狗钱钱', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: '微信读书上是王钟欣、余茜译本', a: '博多·舍费尔', ed: '中信出版集团 · 文燚 译', mine: '我觉得这是任何一个想要财富自由的人，必须看的第一本理财书。', core: '一只会说话的狗教女孩吉娅理财：帮人照顾狗挣到第一笔钱，因为她喜欢狗，别人才愿意付钱；收入的一半存进「金鹅账户」，只存不花，让它慢慢生出收入。' },
-        { t: '非暴力沟通', wr: 'https://weread.qq.com/web/bookDetail/b7d32470813ab7e0eg015e3f', wrNote: '', a: '马歇尔·卢森堡', ed: '华夏出版社 · 刘轶 译（修订版）', mine: '很多时候我们担心表达自己会被别人攻击、显得软弱，但其实真诚地去表达自己内心的诉求，不要用暴力去沟通，这真的很重要。', core: '说话时把四件事分开：观察到了什么（不加评判）、我的感受、我的需要、我的请求。' },
-        { t: '被讨厌的勇气', wr: 'https://weread.qq.com/web/bookDetail/8b9329607186dc198b9bdab', wrNote: '', a: '岸见一郎　古贺史健', ed: '机械工业出版社 · 渠海霞 译', mine: '怎么做是自己的事情，谁为结果买单谁就来负责；至于别人怎么想，那是别人的课题。', core: '阿德勒心理学的「课题分离」：一件事最后由谁承担结果，就是谁的课题。不去干涉别人的课题，也不让别人干涉自己的。' },
-        { t: '认知觉醒', wr: 'https://weread.qq.com/web/bookDetail/6a732ce07201202c6a7b30a', wrNote: '', a: '周岭', ed: '人民邮电出版社', mine: '只有实实在在的改变——比如看完一本书，改变了一个人的思考、行动或者任何东西，它才是有价值的。', core: '人有本能脑、情绪脑、理智脑，前两个更快、更有力。衡量成长的顺序是：改变量 > 行动量 > 思考量 > 学习量。' },
+        { t: '牧羊少年奇幻之旅', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: '保罗·柯艾略', ed: '南海出版公司 · 丁文林 译', mine: '真心想要一件事时，整个宇宙都会来帮忙。每当恐惧、不知道该往哪里走，我都会想起这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
+        { t: '人性的弱点', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: '微信读书上是陶曚译本', a: '戴尔·卡耐基', ed: '中国友谊出版公司 · 亦言 译（全集，完整全译本）', mine: '发自内心地关心别人，真正地换位思考。说到底，真诚永远是最重要的。', core: '真诚地关心别人，从对方的角度看事情，真心让对方觉得自己重要。卡耐基讲的都是这几件事，前提是真诚，不是技巧。' },
+        { t: '小狗钱钱', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: '微信读书上是王钟欣、余茜译本', a: '博多·舍费尔', ed: '中信出版集团 · 文燚 译', mine: '想走向财务自由，这是我会推荐的第一本理财书。', core: '一只会说话的狗教女孩吉娅理财：帮人照顾狗挣到第一笔钱，因为她喜欢狗，别人才愿意付钱；收入的一半存进「金鹅账户」，只存不花，让它慢慢生出收入。' },
+        { t: '非暴力沟通', wr: 'https://weread.qq.com/web/bookDetail/b7d32470813ab7e0eg015e3f', wrNote: '', a: '马歇尔·卢森堡', ed: '华夏出版社 · 刘轶 译（修订版）', mine: '我们常常担心，说出自己的需要会被攻击、显得软弱。其实真诚地说出内心的诉求，不用暴力去沟通，才最重要。', core: '说话时把四件事分开：观察到了什么（不加评判）、我的感受、我的需要、我的请求。' },
+        { t: '被讨厌的勇气', wr: 'https://weread.qq.com/web/bookDetail/8b9329607186dc198b9bdab', wrNote: '', a: '岸见一郎　古贺史健', ed: '机械工业出版社 · 渠海霞 译', mine: '怎么做是自己的事，谁承担结果，谁就负责；别人怎么想，是别人的课题。', core: '阿德勒心理学的「课题分离」：一件事最后由谁承担结果，就是谁的课题。不去干涉别人的课题，也不让别人干涉自己的。' },
+        { t: '认知觉醒', wr: 'https://weread.qq.com/web/bookDetail/6a732ce07201202c6a7b30a', wrNote: '', a: '周岭', ed: '人民邮电出版社', mine: '读完一本书，思考或行动真的有所改变，这本书才算读进去了。', core: '人有本能脑、情绪脑、理智脑，前两个更快、更有力。衡量成长的顺序是：改变量 > 行动量 > 思考量 > 学习量。' },
       ],
     },
 
@@ -108,9 +108,9 @@ export const content = {
       why: '我为什么推荐',
       go: '去抖音看看',
       list: [
-        { name: '杰克叔叔', value: '讲迷茫、焦虑的时候该做什么', handle: '抖音「Jack要加油」', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '每天更新健身，每周直播', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
-        { name: '鲁大魔', value: '讲他自己的创业经历和商业方法论', handle: '抖音「鲁大魔」', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
-        { name: '童年终结者', value: '讲知行合一，讲职场里的人性', handle: '抖音「童年终结者」', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
+        { name: 'Jack 叔叔', value: '讲迷茫、焦虑的时候该做什么', handle: '抖音「Jack要加油」', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
+        { name: '鲁大魔', value: '讲他自己的创业经历和商业方法论', handle: '抖音「鲁大魔」', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: '主页简介：「2003 年自学编程做网站……现在是一名 AI 从业者」', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
+        { name: '童年终结者', value: '讲知行合一，讲职场里的人性', handle: '抖音「童年终结者」', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '主页简介：「是个普通人，有缺点，不完美……和大家相遇已经第六年啦」', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
       ],
     },
 
@@ -199,9 +199,9 @@ export const content = {
     letter: {
       title: '天行健，君子以自强不息',
       body: [
-        '刚毕业的时候，我还没接触过 AI。大学那几年很迷茫，问过当时觉得最权威的人该怎么办，没有人回我。后来做过老师，做过内容运营，试过很多事，才慢慢明白：答案不在别人那里，在每天做的事里。',
-        '迷茫的时候，我就做三件事：阅读，学技能，健身。上班路上听一段长视频，下班路上听一期播客；想不通的事，就去和 Claude、ChatGPT 聊。读过的书、听过的话，会一点点变成自己的经验。',
-        '我相信真诚，守着自己的能量边界，也相信复利。日拱一卒无有尽，功不唐捐终入海。没有白走的路，每一步都算数。',
+        '刚毕业的时候，我还没有接触过 AI。大学那几年常常迷茫，也曾向当时觉得最权威的人求教，却没有等到回音。后来，我做过老师，做过内容运营，尝试过许多事，才渐渐明白：答案不在别人那里，而在每一天所做的事情里。',
+        '所以每当迷茫，我便去做三件事：阅读，学一门技能，锻炼身体。上班路上听一段长视频，下班路上听一期播客；想不通的事，就和 Claude、ChatGPT 慢慢聊。读过的书、听过的话，终会一点点沉淀为自己的经验。',
+        '我始终相信真诚，守住自己的能量边界，也相信时间的复利。日拱一卒无有尽，功不唐捐终入海。人生没有白走的路，每一步都算数。',
       ],
     },
     cardLabel: '秦徐俊的名片',
@@ -300,12 +300,12 @@ export const content = {
       read: 'Open in WeChat Read',
       core: 'What the book says',
       list: [
-        { t: 'The Alchemist', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: 'Paulo Coelho', ed: 'Chinese edition: Nanhai, tr. Ding Wenlin', mine: 'Truly want something, and the whole universe works together to help. … Afraid, not knowing which way to go: that is when I recommend this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
-        { t: 'How to Win Friends and Influence People', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: 'On WeChat Read: the Tao Meng translation', a: 'Dale Carnegie', ed: 'Chinese edition: China Friendship, tr. Yi Yan (complete)', mine: 'Care about people from the heart, truly see things from their side … sincerity is always what matters most.', core: 'Be genuinely interested in other people, see things from their point of view, and make them feel important, sincerely. Sincerity first, technique second.' },
-        { t: 'A Dog Named Money', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: 'On WeChat Read: the Wang Zhongxin and Yu Qian translation', a: 'Bodo Schäfer', ed: 'Chinese edition: CITIC, tr. Wen Yi', mine: 'For anyone who wants financial freedom, this is the first money book to read.', core: 'A talking dog teaches a girl named Kira about money: she earns her first income looking after a dog, because she loves dogs; half of what she earns goes into a “goose” account that is never spent, so it can lay eggs.' },
-        { t: 'Nonviolent Communication', wr: 'https://weread.qq.com/web/bookDetail/b7d32470813ab7e0eg015e3f', wrNote: '', a: 'Marshall Rosenberg', ed: 'Chinese edition: Huaxia, tr. Liu Yi (revised)', mine: 'We often fear that saying what we need will get us attacked or make us look weak. Saying it honestly, without violence, really matters.', core: 'Keep four things apart when you speak: what you observed (without judging), what you feel, what you need, and what you ask for.' },
+        { t: 'The Alchemist', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: 'Paulo Coelho', ed: 'Chinese edition: Nanhai, tr. Ding Wenlin', mine: 'When you truly want something, the whole universe comes to help. Whenever I am afraid or unsure of the way, I think of this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
+        { t: 'How to Win Friends and Influence People', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: 'On WeChat Read: the Tao Meng translation', a: 'Dale Carnegie', ed: 'Chinese edition: China Friendship, tr. Yi Yan (complete)', mine: 'Care about people from the heart, and truly see things from their side. In the end, sincerity matters most.', core: 'Be genuinely interested in other people, see things from their point of view, and make them feel important, sincerely. Sincerity first, technique second.' },
+        { t: 'A Dog Named Money', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: 'On WeChat Read: the Wang Zhongxin and Yu Qian translation', a: 'Bodo Schäfer', ed: 'Chinese edition: CITIC, tr. Wen Yi', mine: 'For the road to financial freedom, this is the first money book I would recommend.', core: 'A talking dog teaches a girl named Kira about money: she earns her first income looking after a dog, because she loves dogs; half of what she earns goes into a “goose” account that is never spent, so it can lay eggs.' },
+        { t: 'Nonviolent Communication', wr: 'https://weread.qq.com/web/bookDetail/b7d32470813ab7e0eg015e3f', wrNote: '', a: 'Marshall Rosenberg', ed: 'Chinese edition: Huaxia, tr. Liu Yi (revised)', mine: 'We often fear that saying what we need will get us attacked or make us look weak. Saying it honestly, without violence, is what matters most.', core: 'Keep four things apart when you speak: what you observed (without judging), what you feel, what you need, and what you ask for.' },
         { t: 'The Courage to Be Disliked', wr: 'https://weread.qq.com/web/bookDetail/8b9329607186dc198b9bdab', wrNote: '', a: 'Ichiro Kishimi, Fumitake Koga', ed: 'Chinese edition: China Machine Press, tr. Qu Haixia', mine: 'What I do is my task; whoever bears the result is responsible for it. What others think is their task.', core: 'Adler’s “separation of tasks”: whoever ultimately bears the consequence owns the task. Don’t intrude on other people’s tasks, and don’t let them intrude on yours.' },
-        { t: 'Cognitive Awakening (认知觉醒)', wr: 'https://weread.qq.com/web/bookDetail/6a732ce07201202c6a7b30a', wrNote: '', a: 'Zhou Ling', ed: 'Posts & Telecom Press', mine: 'Only real change counts: when a book changes how someone thinks, what they do, anything at all.', core: 'We have an instinctive brain, an emotional brain and a rational brain, and the first two are faster and stronger. Growth ranks: change > action > thinking > learning.' },
+        { t: 'Cognitive Awakening (认知觉醒)', wr: 'https://weread.qq.com/web/bookDetail/6a732ce07201202c6a7b30a', wrNote: '', a: 'Zhou Ling', ed: 'Posts & Telecom Press', mine: 'A book is truly read only when it changes how I think or act.', core: 'We have an instinctive brain, an emotional brain and a rational brain, and the first two are faster and stronger. Growth ranks: change > action > thinking > learning.' },
       ],
     },
 
@@ -315,9 +315,9 @@ export const content = {
       why: 'Why I recommend them',
       go: 'Watch on Douyin',
       list: [
-        { name: 'Uncle Jack', value: 'On what to do when you feel lost or anxious', handle: 'Douyin: Jack要加油', url: 'https://v.douyin.com/JxIstHXwiBU/', who: 'Daily fitness, a live stream every week', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
-        { name: 'Lu Damo', value: 'His own story as a founder, and how business works', handle: 'Douyin: 鲁大魔', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
-        { name: 'Tongnian Zhongjiezhe', value: 'Doing what you know, and how people really work at work', handle: 'Douyin: 童年终结者', url: 'https://v.douyin.com/NVPxJZpySqY/', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
+        { name: 'Uncle Jack', value: 'On what to do when you feel lost or anxious', handle: 'Douyin: Jack要加油', url: 'https://v.douyin.com/JxIstHXwiBU/', who: '', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
+        { name: 'Lu Damo', value: 'His own story as a founder, and how business works', handle: 'Douyin: 鲁大魔', url: 'https://v.douyin.com/iGU5ccOAeWU/', who: 'From his profile: “Taught myself to code and build websites in 2003 … now I work in AI”', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
+        { name: 'Tongnian Zhongjiezhe', value: 'Doing what you know, and how people really work at work', handle: 'Douyin: 童年终结者', url: 'https://v.douyin.com/NVPxJZpySqY/', who: 'From his profile: “Just an ordinary person, with flaws, not perfect … our sixth year together”', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
       ],
     },
 
@@ -390,9 +390,9 @@ export const content = {
     letter: {
       title: 'As heaven moves on, ceaselessly, so the noble keep striving',
       body: [
-        'When I graduated, I hadn’t touched AI. My university years were lost ones: I asked the people I thought had the answers what to do, and no one wrote back. Since then I have taught, run content, and tried a lot of things, and slowly I understood that the answer isn’t with anyone else. It is in what we do every day.',
-        'When I feel lost, I do three things: read, learn a skill, and train. A long video on the way to work, a podcast on the way home; whatever I can’t figure out, I talk through with Claude or ChatGPT. The books read and the words heard slowly become experience of my own.',
-        'I believe in sincerity, in a firm line around my own energy, and in compounding. Small steps every day, and no effort is ever wasted. There are no wasted roads; every step counts.',
+        'When I graduated, I had not yet touched AI. My university years were often uncertain; I asked the people I thought had the answers, and no reply came. Since then I have taught, run content, and tried many things, and slowly I understood: the answer is not with anyone else. It is in what we do each day.',
+        'So whenever I feel lost, I do three things: read, learn a skill, and train. A long video on the way to work, a podcast on the way home; whatever I cannot work out, I talk through slowly with Claude or ChatGPT. The books read and the words heard settle, little by little, into experience of my own.',
+        'I still believe in sincerity, in guarding my own energy, and in the compounding of time. Small steps, taken every day, are never wasted. No road walked is a wasted road; every step counts.',
       ],
     },
     cardLabel: 'Qin Xujun’s card',
