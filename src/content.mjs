@@ -120,7 +120,6 @@ export const content = {
     three: {
       title: '三件事',
       headline: '迷茫的时候，我会做三件事',
-      line: '每一样，我都放上自己觉得最好的',
       // v27.1: the three things right under the headline (his words: 「那哪三件事情呢？直接放出来啊」).
       items: [
         { id: 'books', icon: 'book', name: '阅读', line: '六本书 · 三位博主' },
@@ -143,7 +142,6 @@ export const content = {
         headline: '健身，我推荐这套三分化',
         line: '凯圣王和谭成义一起做的三分化训练，新手和练过一段时间的人都能用',
         coach: '凯圣王',
-        handle: '抖音「凯圣王」',
         who: '健身基础知识连续分享六年',
         course: '凯圣王-谭成义三分化',
         meta: '抖音合集 · 6 集',
@@ -324,7 +322,6 @@ export const content = {
     three: {
       title: 'Three things',
       headline: 'When I feel lost, I do three things',
-      line: 'For each one, the best I have found',
       items: [
         { id: 'books', icon: 'book', name: 'Reading', line: 'Six books · three creators' },
         { id: 'skill', icon: 'spark', name: 'A skill', line: 'Learn AI' },
@@ -342,7 +339,6 @@ export const content = {
         headline: 'For training, I recommend this three-day split',
         line: 'A three-day split by Kai Shengwang and Tan Chengyi, for beginners and for people who already train',
         coach: 'Kai Shengwang',
-        handle: 'Douyin: 凯圣王',
         who: 'Six years of sharing the basics of training',
         course: '凯圣王-谭成义三分化 (three-day split)',
         meta: 'Douyin series · 6 episodes · in Chinese',
