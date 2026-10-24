@@ -52,6 +52,16 @@
     });
   }
 
+  // Leaving for one of his own sites on this origin (a product, ai.vibecoding, the film): remember where the visitor was,
+  // for this tab only. Those sites show 「‹ 返回」 only when this is set, so a link someone was sent directly has none
+  // (v27.10; the contract is in docs/back-link.md).
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="' + location.origin + '/"]');
+    if (!a || a.target) return;
+    var spot = a.closest('[id]:not(#film)');
+    try { sessionStorage.setItem('qxj.back', location.origin + location.pathname + (spot ? '#' + spot.id : '')); } catch (err) {}
+  });
+
   // Name card: a slight tilt toward the pointer on desktop.
   var card = document.querySelector('[data-tilt]');
   if (card && !still && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

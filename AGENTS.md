@@ -7,7 +7,7 @@
 
 只放有代码库、有网站的作品：VoiceFlow、AI Signal、万象成文，加上分享方法的 ai.vibecoding。（问数 v16 加过、v19 撤下：他说那是个 demo，不算作品；仓库 ask-data 保留。）公司里的经历只在「经历」里各写一句，不单独成页。视觉和交互对标 apple.com 的产品页。
 
-**影片（v23）**：他导演的 AI 短片《来不及爱你》在首页首屏播放；片子自己的网站在仓库 `too-late-to-love-you`（`https://qinxujunai.github.io/too-late-to-love-you/`，规矩见那个仓库的 AGENTS.md；2026-10-23 从拼音名 `laibuji-aini` 改名，本站 `laibuji-aini/` 下留了跳转页，旧链接仍能打开）。视频是同一个文件，不转码：首页和影片网站都按「腾讯云上海 → Cloudflare R2 → 影片仓库」三个地址依次尝试（v27.8，国内不开 VPN 时 GitHub 放不出来）。放在哪、为什么、怎么换文件、费用与密钥，见 [docs/film-hosting.md](docs/film-hosting.md)。**链接是单向的**：本站链到影片网站，影片网站不链回本站（2026-10-24 他说推荐片子时不想让人看到主网站）。v22 的实施记录在 [docs/film-v22-handoff.md](docs/film-v22-handoff.md)。
+**影片（v23）**：他导演的 AI 短片《来不及爱你》在首页首屏播放；片子自己的网站在仓库 `too-late-to-love-you`（`https://qinxujunai.github.io/too-late-to-love-you/`，规矩见那个仓库的 AGENTS.md；2026-10-23 从拼音名 `laibuji-aini` 改名，本站 `laibuji-aini/` 下留了跳转页，旧链接仍能打开）。视频是同一个文件，不转码：首页和影片网站都按「腾讯云上海 → Cloudflare R2 → 影片仓库」三个地址依次尝试（v27.8，国内不开 VPN 时 GitHub 放不出来）。放在哪、为什么、怎么换文件、费用与密钥，见 [docs/film-hosting.md](docs/film-hosting.md)。**链接是单向的**：本站链到影片网站，影片网站页面里没有指向本站的链接（2026-10-24 他说推荐片子时不想让人看到主网站）。只有从本站点过去的人，左上角会出现「‹ 返回」（v27.10，五个出站网站都一样，见 [docs/back-link.md](docs/back-link.md)）。v22 的实施记录在 [docs/film-v22-handoff.md](docs/film-v22-handoff.md)。
 
 项目的来龙去脉、他的原话、历次决策，都记在 [CLAUDE.md](CLAUDE.md)（早期逐版记录在 [docs/history.md](docs/history.md)）。改完在 CLAUDE.md 的「决策记录」追加一版：他说了什么、改了什么、为什么。文案平台见 [docs/copy.md](docs/copy.md)。
 
@@ -96,6 +96,7 @@
 - **不对读者说教**（v27.3，最高优先级，详见 docs/copy.md）：标题副句说这里有什么、他做了什么，不教读者怎么活，不给人分类（「什么样的人」「这三个人」）。他的建议只放在有署名的引文里。`npm run check` 的 voice 检查会拦已知说法。
 - **不对读者说「你」**（v26.11）：他说「你每天的行动……」这类句子像在指责人。首页文案、引用他的话都去掉指向读者的「你」（例：「想要什么并不重要，重要的是为了想要的东西做了些什么」）。产品承诺里的「给你文字」这类服务口吻不在此列。
 - **加微信**：在微信里打开时长按二维码直接加（二维码是真实 `<img>`，不包在链接里）；手机浏览器里有微信号时显示「复制微信号，打开微信」（`content.mjs` 的 `wechatId`），否则「保存名片」；电脑上扫码。个人微信没有任何链接能一键加好友（爱短链也不行）。
+- **出站与返回（v27.10）**：点去他其他网站（三个产品、ai.vibecoding、影片）的链接时，`site.js` 在本标签页的 sessionStorage 记下 `qxj.back`；那五个网站只在读到它时显示左上角「‹ 返回」。别人直接打开那些网站时看不到返回。约定见 [docs/back-link.md](docs/back-link.md)，改任何一边都要两边一起改。
 - **链接规则（v18）**：留在本站的链接以 › 结尾；离开本站的链接和按钮以 ↗ 结尾（`outward`）。图片只会带人去本站的作品页，永远不会直接离开本站。去作品自己网站的按钮写「打开 + 产品名」（「打开 VoiceFlow」「打开万象成文」），全站不出现「官网」二字（v20：读的人不知道「官网」指什么、为什么要跳）。
 - **Apple 式的克制**：
   - 居中的磁贴，大而紧的半粗标题，蓝色文字链接配 ›（离开本站配 ↗）。
