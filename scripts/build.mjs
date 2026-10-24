@@ -379,8 +379,10 @@ ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding �
 }
 
 // 书架 (v26): the six books that changed him. Tap a cover and it opens: his line first (what it changed for
-// him), then what the book itself says. Covers are type on a colour, not publishers' artwork. Without JS
+// him), then what the book itself says. Covers are the real mainland editions (v26.2). Without JS
 // every book shows in full; with JS the covers become tabs and one book is open at a time.
+// Cover heights at 300px wide (assets/media/book-1…6.webp), so each keeps its own proportions.
+const BOOK_H = [433, 429, 425, 400, 440, 406];
 function books(c) {
   const b = c.books;
   const id = (i) => `book-${i + 1}`;
@@ -391,10 +393,10 @@ function books(c) {
 <p class="sub">${clauses(c, bare(b.line))}</p>
 </div>
 <div class="shelf" role="tablist" aria-label="${esc(b.headline)}" data-shelf>
-${b.list.map((k, i) => `<button type="button" class="cover tone-${k.tone}" role="tab" id="${id(i)}-tab" aria-controls="${id(i)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><span class="cover-t">${T(c, k.t)}</span><span class="cover-a">${T(c, k.a)}</span></button>`).join('\n')}
+${b.list.map((k, i) => `<button type="button" class="cover" role="tab" id="${id(i)}-tab" aria-controls="${id(i)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><span class="visually-hidden">${T(c, k.t)}</span></button>`).join('\n')}
 </div>
 <div class="book-panels">
-${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span></h3><div class="book-cols"><div><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p></div><div><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p></div></div></div>`).join('\n')}
+${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span><span class="book-ed">${T(c, k.ed)}</span></h3><div class="book-cols"><div><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p></div><div><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p></div></div></div>`).join('\n')}
 </div>
 </section>`;
 }
