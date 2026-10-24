@@ -39,8 +39,8 @@ export const content = {
     workTitle: '作品',
     // v21: the thesis the three works share. Each one then says, under 「靠得住，是因为」, how it keeps that promise.
     // v23: a headline that states a fact the three stories prove (each starts from his own problem).
-    workHeadline: '先解决自己的问题',
-    workLine: '三个作品，都在线上，打开就能用',
+    workHeadline: '三个作品，都从我自己的问题开始',
+    workLine: '都在线上，打开就能用',
     // The button names the product, never 「官网」 (v20: readers did not know what 官网 meant here).
     open: (name) => (/^[A-Za-z]/.test(name) ? `打开 ${name}` : `打开${name}`),
     readCase: '怎么做的',
@@ -57,12 +57,12 @@ export const content = {
     share: {
       title: '做法',
       // v26 (2026-10-24): his own words, docs/his-words-2026-10-24.md. Quoted verbatim; 「……」 marks a cut.
-      view: '我们每天都在用行动，为自己要成为什么样的人在投票',
-      viewNote: '想要什么并不重要，重要的是为了想要的东西做了些什么',
+      view: '每天做的事，都是在为想成为的自己投票',
+      viewNote: '',
       principles: [
-        ['行动', '想法本身没有任何价值', '今年 3 月份的时候，我对代码一无所知。但慢慢地，我可以用它来解决工作日常遇到的问题，可以搭建自己的网站，实现自己想呈现的东西。'],
-        ['复利', '每天比昨天进步 1%，一年就是 37 倍', '看书，阅读，健身这些长期主义的事情……不是那种正反馈来得非常快的，但是做一天有一天的收获。'],
-        ['过程', '让过程本身就是奖励', '如果做一件事情需要靠自律跟意志力，那大概率是做不下去的。……不让自己连续两天不去做一件事情。'],
+        ['行动', '想法要做出来，才有价值', '今年 3 月份的时候，我对代码一无所知。但慢慢地，我可以用它来解决工作日常遇到的问题，可以搭建自己的网站，实现自己想呈现的东西。'],
+        ['复利', '每天进步 1%，一年是 37 倍', '看书，阅读，健身这些长期主义的事情……不是那种正反馈来得非常快的，但是做一天有一天的收获。'],
+        ['过程', '过程本身就是奖励', '如果做一件事情需要靠自律跟意志力，那大概率是做不下去的。……不让自己连续两天不去做一件事情。'],
       ],
     },
 
@@ -74,7 +74,7 @@ export const content = {
     books: {
       title: '阅读',
       headline: '改变过我的六本书',
-      line: '看书并不会改变人生，但它会潜移默化地影响怎么去思考、怎么去行动',
+      line: '书没有一下子改变我的人生，但它潜移默化地改变了我怎么思考、怎么行动',
       mine: '它改变了我',
       core: '书里说',
       list: [
@@ -96,9 +96,9 @@ export const content = {
     // links he sent (「我不是发过链接给你，点击就能跳出来吗」), shown everywhere, WeChat included.
     follow: {
       // v27.2: inside 阅读, under the books. His words: 「推荐的人是获取知识的一种，所以三个人放在一块就行」.
-      headline: '书之外，也听这三个人',
+      headline: '我常看的三位抖音博主',
       // His words: 「去听那些你想成为的人的建议，他们的思想还有书籍里的思想会反过来塑造你自己」 (「你」 dropped, v26.11).
-      line: '去听那些想成为的人的建议，他们的思想还有书籍里的思想，会反过来塑造自己',
+      line: '上下班的路上，我常看他们的视频',
       why: '我为什么推荐',
       go: '去抖音看看',
       list: [
@@ -113,7 +113,7 @@ export const content = {
     // for recommending Jack), so Jack's card opens the section. Order is his: books, then AI, then fitness.
     three: {
       title: '三件事',
-      headline: '迷茫的时候，就做三件事',
+      headline: '迷茫的时候，我会做三件事',
       line: '每一样，我都放上自己觉得最好的',
       // v27.1: the three things right under the headline (his words: 「那哪三件事情呢？直接放出来啊」).
       items: [
@@ -123,7 +123,7 @@ export const content = {
       ],
       skill: {
         title: '学技能',
-        headline: '学 AI，从 easy-vibe 开始',
+        headline: '学 AI，我推荐 easy-vibe',
         vibecoding: '我也写了一份：用 AI 做产品的方法',
         vibeNote: '6 章 · 约 10 分钟',
         vibeLink: '开始阅读',
@@ -134,7 +134,7 @@ export const content = {
       // 谭成义 is 「谭指导」 in their descriptions. His own reason: 「这个就是我这个网站可以带给所有人的价值」; he asked me to research why.
       fitness: {
         title: '健身',
-        headline: '有一份计划，照着练就行',
+        headline: '健身，我推荐这套三分化',
         line: '凯圣王和谭成义一起做的三分化训练，新手和练过一段时间的人都能用',
         coach: '凯圣王',
         handle: '抖音「凯圣王」',
@@ -194,8 +194,8 @@ export const content = {
       title: '天行健，君子以自强不息',
       body: [
         '刚毕业的时候，我还没接触过 AI。大学那几年很迷茫，问过当时觉得最权威的人该怎么办，没有人回我。后来做过老师，做过内容运营，试过很多事，才慢慢明白：答案不在别人那里，在每天做的事里。',
-        '迷茫的时候，我就做三件事：阅读，学技能，健身。上班路上听一段长视频，下班路上听一期想成为的那种人的播客；想不通的事，就去和 Claude、ChatGPT 聊。读过的书、听过的话，会一点点变成自己的经验。',
-        '真诚待人，守好自己的能量边界，相信复利。日拱一卒无有尽，功不唐捐终入海。没有白走的路，每一步都算数。',
+        '迷茫的时候，我就做三件事：阅读，学技能，健身。上班路上听一段长视频，下班路上听一期播客；想不通的事，就去和 Claude、ChatGPT 聊。读过的书、听过的话，会一点点变成自己的经验。',
+        '我相信真诚，守着自己的能量边界，也相信复利。日拱一卒无有尽，功不唐捐终入海。没有白走的路，每一步都算数。',
       ],
     },
     cardLabel: '秦徐俊的名片',
@@ -260,8 +260,8 @@ export const content = {
     home: 'Home',
 
     workTitle: 'Work',
-    workHeadline: 'Start with your own problem',
-    workLine: 'Three works, all live, ready to open',
+    workHeadline: 'Three works, each started with a problem of my own',
+    workLine: 'All live, ready to open',
     open: (name) => `Open ${name}`,
     readCase: 'How it was made',
     whyLabel: 'Why I built it',
@@ -277,19 +277,19 @@ export const content = {
     share: {
       title: 'Practice',
       // His words (2026-10-24), translated.
-      view: 'Every day, with what we do, we vote for who we are becoming',
-      viewNote: 'What we want matters less than what we do for it',
+      view: 'What I do each day is a vote for who I want to become',
+      viewNote: '',
       principles: [
-        ['Action', 'An idea on its own is worth nothing', 'In March this year I knew nothing about code. Little by little I used it to solve problems at work, then to build my own website and make what I wanted to show.'],
-        ['Compounding', '1% better than yesterday, every day, is 37 times in a year', 'Reading, exercise, the long-haul things … the reward doesn’t come quickly, but every day put in is a day gained.'],
-        ['Process', 'Make the process itself the reward', 'If something takes self-discipline and willpower, you probably won’t keep it up. … Just never skip it two days in a row.'],
+        ['Action', 'An idea is worth something once it is made', 'In March this year I knew nothing about code. Little by little I used it to solve problems at work, then to build my own website and make what I wanted to show.'],
+        ['Compounding', '1% a day is 37 times in a year', 'Reading, exercise, the long-haul things … the reward doesn’t come quickly, but every day put in is a day gained.'],
+        ['Process', 'The process itself is the reward', 'If something takes self-discipline and willpower, it probably won’t last. … Just never skip it two days in a row.'],
       ],
     },
 
     books: {
       title: 'Reading',
       headline: 'Six books that changed me',
-      line: 'Reading won’t change your life, but it quietly shapes how you think and how you act',
+      line: 'Books didn’t change my life overnight. They quietly changed how I think and act',
       mine: 'What it changed for me',
       core: 'What the book says',
       list: [
@@ -303,8 +303,8 @@ export const content = {
     },
 
     follow: {
-      headline: 'Beyond books, three people I listen to',
-      line: 'Take advice from the people you want to become. Their thinking, like the thinking in books, shapes you in return',
+      headline: 'Three Douyin creators I watch',
+      line: 'On my way to and from work',
       why: 'Why I recommend them',
       go: 'Watch on Douyin',
       list: [
@@ -316,23 +316,23 @@ export const content = {
 
     three: {
       title: 'Three things',
-      headline: 'When you feel lost, do three things',
+      headline: 'When I feel lost, I do three things',
       line: 'For each one, the best I have found',
       items: [
-        { id: 'books', name: 'Reading', line: 'Six books · three people' },
+        { id: 'books', name: 'Reading', line: 'Six books · three creators' },
         { id: 'skill', name: 'A skill', line: 'Learn AI' },
         { id: 'fitness', name: 'Fitness', line: 'A training plan' },
       ],
       skill: {
         title: 'Learning a skill',
-        headline: 'To learn AI, start with easy-vibe',
+        headline: 'To learn AI, I recommend easy-vibe',
         vibecoding: 'I wrote one too: how I build products with AI',
         vibeNote: '6 chapters · about 10 minutes · in Chinese',
         vibeLink: 'Start reading',
       },
       fitness: {
         title: 'Fitness',
-        headline: 'Get a plan, then just follow it',
+        headline: 'For training, I recommend this three-day split',
         line: 'A three-day split by Kai Shengwang and Tan Chengyi, for beginners and for people who already train',
         coach: 'Kai Shengwang',
         handle: 'Douyin: 凯圣王',
@@ -384,8 +384,8 @@ export const content = {
       title: 'As heaven moves on, ceaselessly, so the noble keep striving',
       body: [
         'When I graduated, I hadn’t touched AI. My university years were lost ones: I asked the people I thought had the answers what to do, and no one wrote back. Since then I have taught, run content, and tried a lot of things, and slowly I understood that the answer isn’t with anyone else. It is in what we do every day.',
-        'When I feel lost, I do three things: read, learn a skill, and train. A long video on the way to work, a podcast by someone I want to become on the way home; whatever I can’t figure out, I talk through with Claude or ChatGPT. The books read and the words heard slowly become experience of my own.',
-        'Sincerity toward others, a firm line around my own energy, and faith in compounding. Small steps every day, and no effort is ever wasted. There are no wasted roads; every step counts.',
+        'When I feel lost, I do three things: read, learn a skill, and train. A long video on the way to work, a podcast on the way home; whatever I can’t figure out, I talk through with Claude or ChatGPT. The books read and the words heard slowly become experience of my own.',
+        'I believe in sincerity, in a firm line around my own energy, and in compounding. Small steps every day, and no effort is ever wasted. There are no wasted roads; every step counts.',
       ],
     },
     cardLabel: 'Qin Xujun’s card',

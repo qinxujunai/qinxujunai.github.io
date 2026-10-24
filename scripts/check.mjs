@@ -27,6 +27,16 @@ for (const f of PAGES.filter((p) => !p.startsWith('en/') && p !== '404.html')) {
   ids(html[f]) === ids(html[en]) ? ok(`${f} and ${en} share ids`) : fail(`ids differ:\n  ${f}: ${ids(html[f])}\n  ${en}: ${ids(html[en])}`);
 }
 
+// 2.5 Voice (v27.3, his words: 「苹果官网它会来一句说：『你是这样，你什么什么人』……它会这样说话吗？」).
+// The page says what is here and what he does; it never tells the reader how to live or sorts people into kinds.
+// His advice was spoken to one person; on a page it reads as a lecture. See docs/copy.md 「不对读者说教」.
+{
+  const LECTURE = [/什么样的人/, /那种人/, /这(三|几|两)个人/, /也听这/, /去听/, /你得/, /你要/, /你应该/, /你会发现/, /时候就做三件事/, /照着练就行/, /不要迷信/, /要懂一点/, /先解决自己的问题/, /重要的是为了/];
+  const text = (h) => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, '').replace(/<wbr>/g, '');
+  const hits = PAGES.filter((f) => !f.startsWith('en/')).flatMap((f) => LECTURE.filter((re) => re.test(text(html[f]).replace(/\s/g, ''))).map((re) => `${f}: ${re.source}`));
+  hits.length ? fail(`lecturing copy:\n  ${hits.join('\n  ')}`) : ok('voice: no lecturing or labelling of readers');
+}
+
 // 3. Privacy: tracked text files only
 const files = execSync('git ls-files --cached --others --exclude-standard', { encoding: 'utf8' })
   .split('\n')
