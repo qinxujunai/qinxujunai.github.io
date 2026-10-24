@@ -370,7 +370,6 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
-  padding-bottom: 12px;
 }
 
 .works {
@@ -657,28 +656,7 @@ main {
 
 /* A one-line note under AI work; the image sets the width. */
 
-/* Footer */
-
-.foot {
-  background: var(--plain);
-  border-top: 1px solid var(--hairline);
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.foot-inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 20px;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 20px var(--gutter) max(20px, env(safe-area-inset-bottom));
-}
-
-.foot a {
-  color: var(--muted);
-}
+/* No footer (v27.13): the page ends on the name card. */
 
 .lost {
   min-height: 80vh;
