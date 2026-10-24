@@ -252,6 +252,8 @@ function statement(c, text) {
 }
 
 const statValue = (slug, k) => stats[slug][k];
+// Text that changes by itself (GitHub numbers, today's AI Signal) is marked so the copy lock skips it.
+const LIVE = (h) => `<!--live-->${h}<!--/live-->`;
 const statText = (v) => esc(typeof v === 'number' ? v.toLocaleString('en-US') : v);
 const hostPath = (url) => url.replace(/^https?:\/\//, '').replace(/\?.*$/, '').replace(/\/$/, '');
 
@@ -281,11 +283,19 @@ function capsuleLink(c, href, name) {
 
 // AI Signal at work: today's issue as live text, not a screenshot, so it is never out of date (v24).
 // The issue is in Chinese on both language versions, so the card is marked lang="zh-CN".
+// 「10 月 24 日 周六」: spaced like every other number on the site (AI Signal's own label is unspaced).
+const cnDate = (iso) => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+  if (!m) return '';
+  const day = '日一二三四五六'[new Date(Date.UTC(+m[1], m[2] - 1, +m[3])).getUTCDay()];
+  return `${+m[2]} 月 ${+m[3]} 日 周${day}`;
+};
+
 function signalCard(c, href, name) {
   const s = signal;
   const zh = { lang: 'zh-CN' };
   return `<a class="signal-card" href="${href}" lang="zh-CN"><span class="visually-hidden" lang="${c.lang}">${esc(`${c.readCase} ${name}`)}</span>
-<span class="sc-when">第 ${s.number} 期 · ${esc(s.dateLabel)}</span>
+<span class="sc-when">第 ${s.number} 期 · ${esc(cnDate(s.date) || s.dateLabel)}</span>
 <span class="sc-head">${T(zh, s.headline)}</span>
 ${s.intro ? `<span class="sc-intro">${T(zh, s.intro)}</span>` : ''}
 <span class="sc-meta">从 ${s.scanned} 条新内容里选了 ${s.picked} 条 · 约 ${s.minutes} 分钟读完</span>
@@ -300,7 +310,7 @@ function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseU
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
 ${line ? `<p class="show-line">${clauses(c, bare(line), true)}</p>` : ''}
 </div>
-${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : shot === 'signal' ? signalCard(c, caseUrl, name) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first, whole: shot.startsWith('site-prod-') })}
+${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : shot === 'signal' ? LIVE(signalCard(c, caseUrl, name)) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first, whole: shot.startsWith('site-prod-') })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${dots(c, note)}</p>` : ''}
@@ -417,7 +427,7 @@ const THING_ICONS = {
   spark: '<path d="M11 3.5l1.6 4.8 4.9 1.7-4.9 1.7L11 16.5l-1.6-4.8L4.5 10l4.9-1.7Z"/><path d="M18 14.5l.7 2 2 .8-2 .7-.7 2.1-.7-2.1-2-.7 2-.8Z"/>',
   weight: '<path d="M6.5 12h11"/><rect x="3.5" y="8" width="3" height="8" rx="1"/><rect x="17.5" y="8" width="3" height="8" rx="1"/><path d="M2 10.5v3M22 10.5v3"/>',
 };
-const thingIcon = (k) => `<svg class="thing-icon ti-${k}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${THING_ICONS[k]}</svg>`;
+const thingIcon = (k) => `<svg class="thing-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${THING_ICONS[k]}</svg>`;
 
 function three(c) {
   const t = c.three;
@@ -641,10 +651,10 @@ ${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
 <dl class="facts">
 ${t.results.map((r) => {
   const v = r.stat ? statValue(cs.slug, r.stat) : r.v;
-  return `<div><dt>${T(c, r.l)}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${statText(v)}</dd></div>`;
+  return `<div><dt>${T(c, r.l)}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${r.stat ? LIVE(statText(v)) : statText(v)}</dd></div>`;
 }).join('\n')}
 </dl>
-${live ? `<p class="footnote">${dates(T(c, L.liveNote(stats[cs.slug].updated)))}</p>` : ''}
+${live ? `<p class="footnote">${LIVE(dates(T(c, L.liveNote(stats[cs.slug].updated))))}</p>` : ''}
 </section>
 <div class="case-body">
 <aside class="case-facts" aria-labelledby="facts-title">
@@ -698,7 +708,10 @@ function notFound() {
 
 // ---------- Write ----------
 const pages = [];
+// The words of a "more" link sit in .lt, so on hover they underline and the › / ↗ does not (as on apple.com.cn).
+const wrapLinkText = (html) => html.replace(/(<a [^>]*class="[^"]*more-link[^"]*"[^>]*>)([^<]+)(<span class="chev)/g, '$1<span class="lt">$2</span>$3');
 const write = (file, html) => {
+  if (file.endsWith('.html')) html = wrapLinkText(html);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, html);
   pages.push(file);

@@ -1,0 +1,18 @@
+# Every Monday: do all outside links (WeChat Read, Douyin, GitHub, the film's video on Tencent Cloud and Cloudflare)
+# still open? A broken one fails this run, and GitHub emails the owner.
+name: Link check
+on:
+  schedule:
+    - cron: '17 1 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/links.mjs

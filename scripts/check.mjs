@@ -91,7 +91,7 @@ const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
 const heavy = PAGES.filter((f) => gz(f) > 29);
 heavy.length ? fail(`over 29KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 29KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
 // v26.6: the domestic film line, WeChat copy buttons and the book opening. The first screen keeps its own budget.
-const budget = { 'assets/site.css': 57, 'assets/site.js': 16 }; // v27.2: 52KB for the reading section's people; v27.15: 55KB (hover lift, press, glass play button); v27.16: 57KB (book, icon, creator, tilt interactions)
+const budget = { 'assets/site.css': 55, 'assets/site.js': 16 }; // v27.2: 52KB for the reading section's people; v27.17: 55KB (Apple's measured hover rules; the v27.15–16 extras removed)
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
@@ -99,6 +99,11 @@ const first = gz('index.html') + gz('assets/site.js') + kb('assets/media/avatar-
 first <= 40 ? ok(`first screen ${first.toFixed(0)}KB over the wire ≤ 40KB`) : fail(`first screen ${first.toFixed(0)}KB > 40KB`);
 const media = fs.readdirSync('assets/media').reduce((s, f) => s + kb(`assets/media/${f}`), 0);
 media <= 3000 ? ok(`all images ${media.toFixed(0)}KB ≤ 3000KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 3000KB`);
+
+// 6. Copy lock (2026-10-24): the copy is final. Any changed word fails here until the owner agrees and `npm run lock` records it.
+import { checkCopy } from './copy-lock.mjs';
+const copyProblems = checkCopy(PAGES);
+copyProblems.length ? copyProblems.forEach(fail) : ok(`copy of ${PAGES.length} pages matches copy.lock.json; no relative time words`);
 
 if (failed) { console.error(`\n${failed} check(s) failed`); process.exit(1); }
 console.log('\nall checks passed');

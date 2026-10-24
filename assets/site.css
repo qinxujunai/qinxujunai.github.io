@@ -13,7 +13,8 @@
   --muted: #6e6e73;
   --link: #0066cc;
   --pill: #0071e3;
-  --pill-hover: #0077ed;
+  --pill-hover: #0076df;
+  --pill-active: #006edb;
   --hairline: #d2d2d7;
   --card: #ffffff;
   --nav: rgba(255, 255, 255, 0.86);
@@ -36,7 +37,8 @@
   --muted: #a1a1a6;
   --link: #2997ff;
   --pill: #0071e3;
-  --pill-hover: #0077ed;
+  --pill-hover: #0076df;
+  --pill-active: #006edb;
   --hairline: #3a3a3c;
   --card: #000000;
   --nav: rgba(22, 22, 23, 0.86);
@@ -130,9 +132,22 @@ a {
   border-radius: 4px;
 }
 
-a:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+/* Links (apple.com.cn, measured 2026-10-24): on a computer the words underline on hover, the › does not; on phones
+   nothing changes, so a tap never leaves a line behind. Text in a "more" link sits in .lt (added at build time). */
+@media (hover: hover) and (pointer: fine) and (min-width: 735px) {
+  a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  a.more-link:hover {
+    text-decoration: none;
+  }
+
+  a.more-link:hover .lt {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
 }
 
 :focus-visible {
@@ -297,7 +312,7 @@ a:hover {
 }
 
 .pill:active {
-  transform: scale(0.97);
+  background: var(--pill-active);
 }
 
 .pill-lg {
@@ -2283,26 +2298,9 @@ main {
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Touched, the glass lights up from where the finger is (--gx/--gy, set in site.js), like Liquid Glass. */
-.film-disc::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 65%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-}
 
 .film-cover:active .film-disc {
-  transform: scale(0.94);
-  transition-duration: 0.1s;
-}
-
-.film-cover:active .film-disc::after {
-  opacity: 1;
-  transition-duration: 0.08s;
+  transform: scale(0.95);
 }
 
 .film-disc svg {
@@ -2311,8 +2309,10 @@ main {
   margin-left: 4px;
 }
 
-.film-cover:hover .film-disc {
-  transform: scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+  .film-cover:hover .film-disc {
+    background: rgba(255, 255, 255, 0.24);
+  }
 }
 
 .film-cover:focus-visible {
@@ -2407,43 +2407,41 @@ main {
   color: var(--ink);
 }
 
-/* v27.15 Things that are clickable as a whole lift a little on hover (desktop) and press in on touch, the way
-   Apple's product tiles do: transform and shadow only, 0.35s ease-out; press 0.98 on pointer-down. */
+/* Hover (apple.com.cn, measured 2026-10-24): only things that are clickable as a whole respond, and only to a
+   mouse. They grow by a few pixels (Apple's cards: 0.5–1.6 %), 0.3 s ease-out: no lift, no shadow, no tilt.
+   Large pictures take the smaller factor so every tile grows by about the same few pixels. */
 a.frame,
 .signal-card,
 .things a,
-.course-cover {
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+.course-cover,
+.person {
+  transition: transform 0.3s cubic-bezier(0, 0, 0.5, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
   a.frame:hover,
+  .signal-card:hover {
+    transform: scale(1.006);
+  }
+
+  .things a:hover,
+  .course-cover:hover,
+  .person:hover,
+  .js .person.reveal.in:hover {
+    transform: scale(1.016);
+    transition: transform 0.3s cubic-bezier(0, 0, 0.5, 1);
+  }
+
+  a.frame:hover,
   .signal-card:hover,
   .things a:hover,
-  .course-cover:hover {
-    transform: translateY(-4px);
-  }
-
-  a.frame:hover {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 44px 80px -26px rgba(0, 0, 0, 0.42);
-  }
-
-  .signal-card:hover {
-    box-shadow: 0 0 0 1px var(--hairline), 0 44px 80px -30px rgba(0, 0, 0, 0.42);
-  }
-
-  .things a:hover {
-    box-shadow: 0 18px 36px -20px rgba(0, 0, 0, 0.28);
+  .person:hover {
+    text-decoration: none;
   }
 }
 
-a.frame:active,
-.signal-card:active,
-.things a:active,
-.course-cover:active,
-.demo-link:active {
-  transform: scale(0.98);
-  transition-duration: 0.1s;
+.person {
+  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2451,6 +2449,7 @@ a.frame:active,
   .signal-card,
   .things a,
   .course-cover,
+  .person,
   .film-disc {
     transition: none;
   }
@@ -2459,18 +2458,11 @@ a.frame:active,
   .signal-card:hover,
   .things a:hover,
   .course-cover:hover,
-  a.frame:active,
-  .signal-card:active,
-  .things a:active,
-  .course-cover:active,
-  .demo-link:active,
+  .person:hover,
+  .js .person.reveal.in:hover,
   .film-cover:active .film-disc {
     transform: none;
   }
-}
-
-.signal-card:hover .sc-head {
-  color: var(--link);
 }
 
 .sc-intro {
@@ -2650,16 +2642,11 @@ a.frame:active,
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 22px 40px rgba(0, 0, 0, 0.22);
 }
 
-/* v27.16 Desktop: a book under the pointer comes off the shelf a little, as a finger hooks it; pressed, it gives. */
-@media (hover: hover) and (pointer: fine) {
+/* A book under the mouse grows a little, like Apple's product images (1.6 %); the open one stays lifted. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .cover:not([aria-selected='true']):hover {
-    transform: translateY(-8px) rotate(-1.5deg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 18px 30px rgba(0, 0, 0, 0.18);
+    transform: scale(1.016);
   }
-}
-
-.cover:not([aria-selected='true']):active {
-  transform: translateY(-4px) scale(0.97);
 }
 
 .cover:focus-visible {
@@ -3246,35 +3233,4 @@ html:not(.js) .book + .book {
 
 .person .value + .book-k {
   margin-top: 18px;
-}
-
-/* v27.16 The three things: each icon does its one small thing on hover (a page turns, the spark turns, the weight lifts). */
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .things a:hover .ti-book { animation: ti-book 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
-  .things a:hover .ti-spark { animation: ti-spark 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
-  .things a:hover .ti-weight { animation: ti-weight 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
-
-  /* Creator cards are one link each (site.js): they lift, the face comes a little closer. */
-  .person { transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); cursor: pointer; }
-  .person:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.35); }
-  .person .avatar { transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
-  .person:hover .avatar { transform: scale(1.06); }
-
-  /* Work pictures lean toward the pointer, as a focused poster does on Apple TV (angles set in site.js, ±3°). */
-  a.frame:hover,
-  .signal-card:hover {
-    transform: perspective(1200px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)) translateY(-4px);
-  }
-}
-
-.person:active { transform: scale(0.98); transition-duration: 0.1s; }
-
-@keyframes ti-book { 40% { transform: scaleX(0.78); } 100% { transform: none; } }
-@keyframes ti-spark { 45% { transform: rotate(72deg) scale(1.18); } 100% { transform: none; } }
-@keyframes ti-weight { 40% { transform: translateY(-5px); } 70% { transform: translateY(1px); } 100% { transform: none; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .cover:not([aria-selected='true']):hover,
-  .cover:not([aria-selected='true']):active,
-  .person:active { transform: none; }
 }
