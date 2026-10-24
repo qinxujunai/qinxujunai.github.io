@@ -33,7 +33,7 @@ export const content = {
     navWechat: '加微信',
     seeWork: '看看作品',
     navLabel: '章节',
-    nav: { work: '作品', share: '想法', path: '经历', contact: '联系' },
+    nav: { work: '作品', share: '做法', books: '书架', contact: '联系' },
     home: '首页',
 
     workTitle: '作品',
@@ -55,16 +55,40 @@ export const content = {
     },
 
     share: {
-      title: '想法',
-      // His answer, 2026-10-21: what he thinks matters most now.
-      view: 'AI 时代，能提出一个好问题，越来越重要',
-      viewNote: '好问题背后是判断力。判断力来自长期做会复利的事：健身、阅读、交朋友。做一天，就有一天的收获；谁想追上，都得从你的第一天开始。',
+      title: '做法',
+      // v26 (2026-10-24): his own words, docs/his-words-2026-10-24.md. Quoted verbatim; 「……」 marks a cut.
+      view: '我们每天都在用行动，为自己要成为什么样的人在投票',
+      viewNote: '你想要什么并不重要，重要的是你为了想要的东西做了些什么事情。',
+      principles: [
+        ['行动', '想法本身没有任何价值', '今年 3 月份的时候，我对代码一无所知。但慢慢地，我可以用它来解决工作日常遇到的问题，可以搭建自己的网站，实现自己想呈现的东西。'],
+        ['复利', '每天比昨天进步 1%，一年就是 37 倍', '看书，阅读，健身这些长期主义的事情……不是那种正反馈来得非常快的，但是你做一天有一天的收获。'],
+        ['过程', '让过程本身就是奖励', '如果做一件事情需要靠自律跟意志力，那大概率是做不下去的。……不让自己连续两天不去做一件事情。'],
+      ],
       name: 'ai.vibecoding',
       // his words: the hero title of ai.vibecoding (May 2026)
       quote: '用自然语言，创造可运行的作品',
       intro: '我把用 AI 做产品的方法写成了一个网站，零基础也能读',
       note: '10 章 · 约 18 分钟',
       link: '开始阅读',
+    },
+
+    // v26: six books that changed him (his list and his words, 2026-10-24). 「书里说」 is checked against the books
+    // and published notes (认知觉醒's order is 改变量 > 行动量 > 思考量 > 学习量; 小狗钱钱's 金鹅账户 and the 50% rule).
+    // Covers are type, not publishers' artwork.
+    books: {
+      title: '书架',
+      headline: '改变过我的六本书',
+      line: '看书并不会改变人生，但它会潜移默化地影响怎么去思考、怎么去行动',
+      mine: '它改变了我',
+      core: '书里说',
+      list: [
+        { t: '牧羊少年奇幻之旅', a: '保罗·柯艾略', tone: 'amber', mine: '如果你真的很想要一个事情，宇宙都会合力来帮你解决。……当你恐惧、不知道怎么走的时候，我都推荐看这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
+        { t: '人性的弱点', a: '戴尔·卡耐基', tone: 'red', mine: '要发自内心地去关心、在乎别人，去真正地换位思考……真诚永远都是最重要的东西。', core: '真诚地关心别人，从对方的角度看事情，真心让对方觉得自己重要。卡耐基讲的都是这几件事，前提是真诚，不是技巧。' },
+        { t: '小狗钱钱', a: '博多·舍费尔', tone: 'gold', mine: '我觉得这是任何一个想要财富自由的人，必须看的第一本理财书。', core: '一只会说话的狗教女孩吉娅理财：帮人照顾狗挣到第一笔钱，因为她喜欢狗，别人才愿意付钱；收入的一半存进「金鹅账户」，只存不花，让它慢慢生出收入。' },
+        { t: '非暴力沟通', a: '马歇尔·卢森堡', tone: 'green', mine: '很多时候我们担心表达自己会被别人攻击、显得软弱，但其实真诚地去表达自己内心的诉求，不要用暴力去沟通，这真的很重要。', core: '说话时把四件事分开：观察到了什么（不加评判）、我的感受、我的需要、我的请求。' },
+        { t: '被讨厌的勇气', a: '岸见一郎　古贺史健', tone: 'ink', mine: '你怎么做那是自己的事情，谁为结果买单谁就来负责；至于别人怎么想，那是别人的课题。', core: '阿德勒心理学的「课题分离」：一件事最后由谁承担结果，就是谁的课题。不去干涉别人的课题，也不让别人干涉自己的。' },
+        { t: '认知觉醒', a: '周岭', tone: 'blue', mine: '只有实实在在的改变——比如看完一本书，改变了一个人的思考、行动或者任何东西，它才是有价值的。', core: '人有本能脑、情绪脑、理智脑，前两个更快、更有力。衡量成长的顺序是：改变量 > 行动量 > 思考量 > 学习量。' },
+      ],
     },
 
     // A recommendation, not his work: Datawhale's open course easy-vibe. Facts from its README
@@ -85,14 +109,11 @@ export const content = {
     pathHeadline: '从让内容被看见，到让 AI 落地',
     pathLine: '做内容出身，做过乙方交付，也在甲方把 AI 用进真实业务',
     journey: [
-      // His answer 2026-10-23: AI 项目经理 since 2026-08, company not named; 比智科技 until 2026-07.
-      // Years only: the work runs one line (AI projects for clients), the exact months add nothing.
-      // His words, 2026-10-23: the company may be named now; the DingTalk→Feishu switch and review tagging (4–5 h a day → 10 min) are his account.
-      { when: '2026 至今', role: 'AI 项目经理', org: '奥普智能科技', desc: '把一家上市公司的协同办公从钉钉迁到飞书：调研立项、对接飞书的方案与商务、协调各个部门，平稳落地。内部的 AI 需求也由我来接：电商后台的评论打标，原来一个人每天要花四五个小时，现在 AI 10 分钟。' },
-      { when: '2025–2026', role: 'AI 解决方案架构', org: '比智科技', desc: '5 家以上客户进入采购评估。做的是让人用一句话查数据的 AI 方案，从需求诊断到回款，也主导招投标。' },
-      { when: '2024–2025', role: 'AI 项目负责人', org: '一念智能', desc: '一条脚本从 3 小时缩到 20 分钟：在飞书搭了写脚本的智能体。接手微众银行的 AI 课程项目，48 小时找到问题，客户点名要我继续负责。方正证券活动的开场片，用 AI 做成。' },
-      { when: '2023–2024', role: '商业内容项目交付', org: '专致网络', desc: '150 多条信息流广告脚本，支撑每月 10 万以上的投放。抖音文旅号云南妙妙屋，3 个月涨粉 2000 多。负责工商银行宣传片，从策划到交付。' },
-      { when: '2022', role: '社区运营（实习）', org: '抖音数字学堂', desc: '', light: true },
+      // v26 (2026-10-24): four lines, not a résumé (his words: a résumé on the home page has 「没有必要」).
+      // 奥普: his correction 2026-10-24: write it up to the signing; it did not fully land. Not 「至今」.
+      { when: '2026', role: 'AI 项目经理', org: '奥普智能科技', desc: '推动一家上市公司把协同办公从钉钉迁到飞书，从调研立项做到签约；内部的 AI 需求也由我来接，电商评论打标从一个人每天四五个小时缩到 10 分钟。' },
+      { when: '2024–2026', role: 'AI 方案与项目', org: '比智科技 · 一念智能', desc: '为金融、政企客户做 AI 项目：5 家以上客户进入采购评估；接手微众银行的 AI 课程项目，客户点名要我继续负责。' },
+      { when: '2023–2024', role: '商业内容交付', org: '专致网络', desc: '写了 150 多条信息流广告脚本，负责工商银行宣传片，从策划到交付。' },
       { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。', light: true },
     ],
 
@@ -169,7 +190,7 @@ export const content = {
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
     navLabel: 'Sections',
-    nav: { work: 'Work', share: 'Ideas', path: 'Path', contact: 'Contact' },
+    nav: { work: 'Work', share: 'Practice', books: 'Books', contact: 'Contact' },
     home: 'Home',
 
     workTitle: 'Work',
@@ -188,14 +209,36 @@ export const content = {
     },
 
     share: {
-      title: 'Ideas',
-      view: 'In the age of AI, asking a good question matters more and more',
-      viewNote: 'Behind a good question is judgement. Judgement comes from doing things that compound over years: exercise, reading, friendship. Every day you put in counts, and anyone who wants to catch up has to start from your first day.',
+      title: 'Practice',
+      // His words (2026-10-24), translated.
+      view: 'Every day, with what we do, we vote for who we are becoming',
+      viewNote: 'What you want doesn’t matter. What matters is what you have done for it.',
+      principles: [
+        ['Action', 'An idea on its own is worth nothing', 'In March this year I knew nothing about code. Little by little I used it to solve problems at work, then to build my own website and make what I wanted to show.'],
+        ['Compounding', '1% better than yesterday, every day, is 37 times in a year', 'Reading, exercise, the long-haul things … the reward doesn’t come quickly, but every day you put in, you gain something.'],
+        ['Process', 'Make the process itself the reward', 'If something takes self-discipline and willpower, you probably won’t keep it up. … Just never skip it two days in a row.'],
+      ],
       name: 'ai.vibecoding',
       quote: 'Use natural language to create working products', // his words
       intro: 'I wrote down how I build products with AI, as a website anyone can read',
       note: '10 chapters · about 18 minutes',
       link: 'Start reading',
+    },
+
+    books: {
+      title: 'Books',
+      headline: 'Six books that changed me',
+      line: 'Reading won’t change your life, but it quietly shapes how you think and how you act',
+      mine: 'What it changed for me',
+      core: 'What the book says',
+      list: [
+        { t: 'The Alchemist', a: 'Paulo Coelho', tone: 'amber', mine: 'If you truly want something, the whole universe works together to help you get it. … Whenever you are afraid and don’t know which way to go, read this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
+        { t: 'How to Win Friends and Influence People', a: 'Dale Carnegie', tone: 'red', mine: 'Care about people from the heart, truly see things from their side … sincerity is always what matters most.', core: 'Be genuinely interested in other people, see things from their point of view, and make them feel important, sincerely. Sincerity first, technique second.' },
+        { t: 'A Dog Named Money', a: 'Bodo Schäfer', tone: 'gold', mine: 'For anyone who wants financial freedom, this is the first money book to read.', core: 'A talking dog teaches a girl named Kira about money: she earns her first income looking after a dog, because she loves dogs; half of what she earns goes into a “goose” account that is never spent, so it can lay eggs.' },
+        { t: 'Nonviolent Communication', a: 'Marshall Rosenberg', tone: 'green', mine: 'We often fear that saying what we need will get us attacked or make us look weak. Saying it honestly, without violence, really matters.', core: 'Keep four things apart when you speak: what you observed (without judging), what you feel, what you need, and what you ask for.' },
+        { t: 'The Courage to Be Disliked', a: 'Ichiro Kishimi, Fumitake Koga', tone: 'ink', mine: 'What you do is your task; whoever bears the result is responsible for it. What others think is their task.', core: 'Adler’s “separation of tasks”: whoever ultimately bears the consequence owns the task. Don’t intrude on other people’s tasks, and don’t let them intrude on yours.' },
+        { t: 'Cognitive Awakening (认知觉醒)', a: 'Zhou Ling', tone: 'blue', mine: 'Only real change counts: when a book changes how someone thinks, what they do, anything at all.', core: 'We have an instinctive brain, an emotional brain and a rational brain, and the first two are faster and stronger. Growth ranks: change > action > thinking > learning.' },
+      ],
     },
 
     recommend: {
@@ -212,11 +255,9 @@ export const content = {
     pathHeadline: 'From getting content seen to getting AI shipped',
     pathLine: 'Started in content, delivered AI for clients, and now put it to work in-house',
     journey: [
-      { when: '2026 to now', role: 'AI Project Manager', org: 'Aupu Smart Technology', desc: 'Moved a listed company from DingTalk to Feishu: research and sign-off, solution and commercial talks with Feishu, every department on board, a clean switchover. I also take the in-house AI work: tagging e-commerce reviews took one person 4–5 hours a day; with AI it takes 10 minutes.' },
-      { when: '2025–2026', role: 'AI Solution Architect', org: 'Bizhi Technology', desc: '5+ clients reached procurement review. The work: AI that lets people query data in one sentence, from diagnosis to payment, including the bids.' },
-      { when: '2024–2025', role: 'AI Project Lead', org: 'Yinian Intelligence', desc: 'One script went from three hours to twenty minutes: I built a script-writing agent in Feishu. Took over a WeBank AI course project, found the problem in 48 hours, and the client asked for me by name. Made the opening film for a Founder Securities event with AI.' },
-      { when: '2023–2024', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: '150-odd in-feed ad scripts behind more than ¥100k of monthly ad spend. A Douyin travel account grown by 2,000+ followers in three months. Produced ICBC’s brand film from concept to delivery.' },
-      { when: '2022', role: 'Community Operations (intern)', org: 'Douyin Digital Academy', desc: '', light: true },
+      { when: '2026', role: 'AI Project Manager', org: 'Aupu Smart Technology', desc: 'Led a listed company’s move from DingTalk to Feishu from research to a signed contract; took the in-house AI work too: tagging e-commerce reviews went from 4–5 hours a person a day to 10 minutes.' },
+      { when: '2024–2026', role: 'AI Solutions & Projects', org: 'Bizhi Technology · Yinian Intelligence', desc: 'AI projects for finance and public-sector clients: 5+ reached procurement review; took over a WeBank AI course project, and the client asked for me by name.' },
+      { when: '2023–2024', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: 'Wrote 150-odd in-feed ad scripts and produced ICBC’s brand film from concept to delivery.' },
       { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How to make content, and how to get it seen.', light: true },
     ],
 

@@ -218,10 +218,37 @@
     for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) setCurrent(entries[e].target.id);
   }, { rootMargin: '-40% 0px -55% 0px' });
   // Home: the nav's sections. Case pages: the sections in the product bar.
-  var tracked = ['top', 'work', 'share', 'path', 'contact'];
+  var tracked = ['top', 'work', 'share', 'books', 'path', 'contact'];
   for (var n = 0; n < navLinks.length; n++) tracked.push(navLinks[n].getAttribute('data-nav'));
   tracked.forEach(function (id) {
     var el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
   });
+
+  // 书架: the covers are tabs; one book open at a time. Arrow keys move between covers (WAI-ARIA tabs).
+  var shelf = document.querySelector('[data-shelf]');
+  if (shelf) {
+    var covers = shelf.querySelectorAll('[role="tab"]');
+    var openBook = function (i, focus) {
+      for (var b = 0; b < covers.length; b++) {
+        var on = b === i;
+        covers[b].setAttribute('aria-selected', on ? 'true' : 'false');
+        covers[b].tabIndex = on ? 0 : -1;
+        document.getElementById(covers[b].getAttribute('aria-controls')).hidden = !on;
+      }
+      if (focus) { covers[i].focus(); if (covers[i].scrollIntoView) covers[i].scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+    };
+    for (var bk = 0; bk < covers.length; bk++) {
+      (function (i) {
+        covers[i].addEventListener('click', function () { openBook(i, false); if (covers[i].scrollIntoView) covers[i].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
+        covers[i].addEventListener('keydown', function (ev) {
+          var d = ev.key === 'ArrowRight' ? 1 : ev.key === 'ArrowLeft' ? -1 : 0;
+          if (ev.key === 'Home') { ev.preventDefault(); openBook(0, true); }
+          else if (ev.key === 'End') { ev.preventDefault(); openBook(covers.length - 1, true); }
+          else if (d) { ev.preventDefault(); openBook((i + d + covers.length) % covers.length, true); }
+        });
+      })(bk);
+    }
+    openBook(0, false);
+  }
 })();
