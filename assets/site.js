@@ -33,7 +33,7 @@
   var where = /MicroMessenger/i.test(ua) ? 'wechat' : /Android|iPhone|iPad|iPod|Mobile/i.test(ua) ? 'phone' : 'desktop';
   var target = document.querySelector('[data-qr-hint]');
   var text = target && target.getAttribute('data-hint-' + where);
-  if (text) target.textContent = text;
+  if (target && text !== null) { target.textContent = text; target.hidden = !text; } // phones: no hint until a tap
   var save = document.querySelector('[data-qr-save]');
   if (save && where !== 'phone') save.hidden = true;
   // Outside WeChat on a phone: one tap copies his WeChat ID and opens WeChat (no app can add a personal
@@ -46,7 +46,7 @@
     if (where === 'desktop') copy.className = 'more-link';
     copy.addEventListener('click', function () {
       var id = copy.getAttribute('data-wechat-id');
-      var done = function () { if (target) target.textContent = copy.getAttribute('data-copied'); if (where === 'phone') window.location.href = 'weixin://'; };
+      var done = function () { if (target) { target.textContent = copy.getAttribute('data-copied'); target.hidden = false; } if (where === 'phone') window.location.href = 'weixin://'; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(id).then(done, done);
       else done();
     });
@@ -76,6 +76,17 @@
       card.style.removeProperty('--ry');
       card.style.removeProperty('--rx');
     });
+  }
+
+  // Name card (v27.12): a faint highlight slides across the card as it scrolls by (and follows the pointer on desktop),
+  // like light on a card in Apple Wallet. Still with reduced motion.
+  if (card && !still) {
+    var sheen = function () {
+      var r = card.getBoundingClientRect(), vh = window.innerHeight;
+      card.style.setProperty('--sheen', Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height))).toFixed(3));
+    };
+    window.addEventListener('scroll', sheen, { passive: true });
+    sheen();
   }
 
   // VoiceFlow capsule: confirmed characters appear at a fixed 48 ms rhythm, as in the product.

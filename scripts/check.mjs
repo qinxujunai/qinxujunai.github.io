@@ -91,7 +91,7 @@ const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
 const heavy = PAGES.filter((f) => gz(f) > 29);
 heavy.length ? fail(`over 29KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 29KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
 // v26.6: the domestic film line, WeChat copy buttons and the book opening. The first screen keeps its own budget.
-const budget = { 'assets/site.css': 52, 'assets/site.js': 16 }; // v27.2: 52KB for the reading section's people
+const budget = { 'assets/site.css': 53, 'assets/site.js': 16 }; // v27.2: 52KB for the reading section's people; v27.12: 53KB (the name card's light and shadow)
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }

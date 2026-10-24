@@ -139,7 +139,7 @@ export const content = {
       // 谭成义 is 「谭指导」 in their descriptions. His own reason: 「这个就是我这个网站可以带给所有人的价值」; he asked me to research why.
       fitness: {
         title: '健身',
-        headline: '健身，我推荐这套三分化',
+        headline: '我推荐这套三分化',
         line: '凯圣王和谭成义一起做的三分化训练，新手和练过一段时间的人都能用',
         coach: '凯圣王',
         handle: '抖音「凯圣王」',
@@ -207,18 +207,18 @@ export const content = {
     qrAlt: '秦徐俊的微信二维码',
     hint: {
       default: '用微信扫一扫，或在微信里长按二维码',
-      wechat: '长按二维码，直接加我',
-      phone: '复制微信号去微信里搜索，或保存名片扫一扫',
+      wechat: '长按二维码添加我',
+      phone: '', // v27.12: the button says it; the hint only shows the result after a tap
       desktop: '用手机微信扫一扫',
     },
     save: '保存名片',
-    // His WeChat ID (他提供后填入). When set, phones outside WeChat get 「复制微信号，打开微信」.
+    // His WeChat ID (他提供后填入). When set, phones outside WeChat get 「添加微信」 (copies the ID, then opens WeChat).
     wechatId: 'praxiscore', // his WeChat ID, given by him for this site (2026-10-20)
     wechatLabel: '微信',
     scanLabel: '微信扫一扫',
-    copyWechat: '复制微信号，打开微信',
+    copyWechat: '添加微信',
     copyOnly: '复制微信号',
-    copied: '已复制 praxiscore，去微信搜索里粘贴',
+    copied: '已复制 praxiscore 去微信搜索里粘贴',
     notFound: { title: '这一页不存在', boback: '回到首页' },
 
     // Project page chrome
@@ -337,7 +337,7 @@ export const content = {
       },
       fitness: {
         title: 'Fitness',
-        headline: 'For training, I recommend this three-day split',
+        headline: 'I recommend this three-day split',
         line: 'A three-day split by Kai Shengwang and Tan Chengyi, for beginners and for people who already train',
         coach: 'Kai Shengwang',
         handle: 'Douyin: 凯圣王',
@@ -398,16 +398,16 @@ export const content = {
     hint: {
       default: 'Scan with WeChat, or long-press the code inside WeChat',
       wechat: 'Long-press the code to add me',
-      phone: 'Copy my ID and search it in WeChat, or save the card and scan it',
+      phone: '',
       desktop: 'Scan with WeChat on your phone',
     },
     save: 'Save the card',
     wechatId: 'praxiscore',
     wechatLabel: 'WeChat',
     scanLabel: 'Scan with WeChat',
-    copyWechat: 'Copy my WeChat ID and open WeChat',
+    copyWechat: 'Add on WeChat',
     copyOnly: 'Copy my WeChat ID',
-    copied: 'Copied praxiscore. Paste it into WeChat search',
+    copied: 'Copied praxiscore · paste it into WeChat search',
     notFound: { title: 'This page doesn’t exist', boback: 'Back to home' },
 
     caseLabels: {
