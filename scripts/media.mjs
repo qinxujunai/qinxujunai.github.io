@@ -73,7 +73,9 @@ const SITES = {
   // blank space before its first picture or next section. Never a fixed ratio: a fixed 16:10 cut
   // through 万象成文's hero and its demo (v19).
   voiceflow: { d: { height: 620 }, card: { top: 0, height: 520 } },
-  wanxiang: { d: { height: 432 }, card: { top: 0, height: 530 } },
+  // v26.1 (2026-10-24): the whole first page down to its real demo and the line under it, so the home page shows
+  // 万象成文's own website, not a crop of one card (he said the cropped result card looked broken).
+  wanxiang: { d: { height: 1190 }, card: { top: 0, height: 880 } },
   'ai-signal': { d: { height: 470 }, card: { top: 0, height: 385 } },
   vibecoding: { d: { height: 670 }, card: { top: 0, height: 610 } },
   // The products at work, for the home page (v21): today's AI Signal issue, and 万象成文's result page
