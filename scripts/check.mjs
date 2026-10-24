@@ -13,6 +13,7 @@ const ok = (msg) => console.log('✓', msg);
 
 // 1. Up to date
 import { CASES } from '../src/cases.mjs';
+import { FILM_SOURCES } from '../src/content.mjs';
 const PAGES = ['index.html', 'en/index.html', '404.html', ...CASES.flatMap((c) => [`work/${c.slug}/index.html`, `en/work/${c.slug}/index.html`])];
 const readAll = () => Object.fromEntries(PAGES.map((f) => [f, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '']));
 const before = readAll();
@@ -66,7 +67,7 @@ const exists = (url) => {
 for (const [name, h] of Object.entries(html)) {
   const loads = [...h.matchAll(/<(?:script|img|link|source|iframe|video)\b[^>]*?\s(?:src|href)="([^"]+)"/g)]
     .map((m) => m[0].startsWith('<link') && /rel="(canonical|alternate)"/.test(m[0]) ? null : m[1])
-    .filter((u) => u && /^(https?:)?\/\//.test(u));
+    .filter((u) => u && /^(https?:)?\/\//.test(u) && !FILM_SOURCES.includes(u));
   if (loads.length) fail(`${name} loads from another origin: ${loads.join(', ')}`);
   const blank = [...h.matchAll(/<a\b[^>]*href="https?:[^"]+"[^>]*>/g)].filter((m) => !/rel="noopener"/.test(m[0]));
   if (blank.length) fail(`${name}: external links without rel="noopener"`);
