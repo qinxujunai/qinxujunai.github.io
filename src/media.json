@@ -55,20 +55,6 @@
       "kb": 20
     }
   },
-  "site-vibecoding": {
-    "1040": {
-      "src": "/assets/media/site-vibecoding-1040.webp",
-      "w": 1040,
-      "h": 544,
-      "kb": 16
-    },
-    "2080": {
-      "src": "/assets/media/site-vibecoding-2080.webp",
-      "w": 2080,
-      "h": 1089,
-      "kb": 34
-    }
-  },
   "site-voiceflow-card": {
     "1080": {
       "src": "/assets/media/site-voiceflow-card-1080.webp",
@@ -91,14 +77,6 @@
       "w": 1080,
       "h": 1066,
       "kb": 28
-    }
-  },
-  "site-vibecoding-card": {
-    "1080": {
-      "src": "/assets/media/site-vibecoding-card-1080.webp",
-      "w": 1080,
-      "h": 1689,
-      "kb": 41
     }
   },
   "site-easyvibe": {

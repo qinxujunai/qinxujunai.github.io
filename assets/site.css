@@ -328,7 +328,11 @@ a:hover {
 }
 
 .works-head .line,
-#path h2 .line {
+#path h2 .line,
+.three h2 .line,
+.skill h2 .line,
+.fitness h2 .line,
+.letter h2 .line {
   display: block;
 }
 
@@ -1870,8 +1874,7 @@ main {
   color: var(--body);
 }
 
-.dark .show-line,
-.share .show-line {
+.dark .show-line {
   color: #d2d2d7;
 }
 
@@ -1937,10 +1940,6 @@ main {
   line-height: 1.65;
   color: var(--body);
   box-shadow: none;
-}
-
-.share .statement + .show-head {
-  margin-top: 40px;
 }
 
 /* Why he built it, in his words, under each work's picture. */
@@ -2046,8 +2045,7 @@ main {
   font-size: min(36px, 9.2vw);
 }
 
-.hero .sub,
-.closing-line {
+.hero .sub {
   color: var(--body);
 }
 
@@ -2071,15 +2069,9 @@ main {
     font-size: 56px;
   }
 
-  .show-line,
-  .share .show-line {
+  .show-line {
     max-width: none;
   }
-}
-
-/* 想法: ai.vibecoding's name sits under the statement. */
-.share .show-name {
-  margin-top: 4px;
 }
 
 /* Name card: signature and one line on the left, the QR code on the right. */
@@ -2161,25 +2153,6 @@ main {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-}
-
-/* The ending's last words: his own, under the name card. */
-.closing-line {
-  max-width: 26em;
-  margin: 56px auto 0;
-  font-size: 19px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.closing-lead {
-  display: block;
-  text-wrap: balance;
-  margin-bottom: 8px;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
 }
 
 /* On the home page VoiceFlow shows itself at work: the capsule writing as you speak. */
@@ -2590,7 +2563,8 @@ main {
 }
 
 /* A thin spine shadow on the left edge, as on a real book. */
-.cover::after {
+.cover::after,
+.course-cover::after {
   content: '';
   position: absolute;
   inset: 0 auto 0 0;
@@ -2803,13 +2777,13 @@ html:not(.js) .book + .book {
   .js .book.opening .page-r { animation: none; }
 }
 
-/* 我推荐 (v26.5): three creators, one card each. */
+/* People he listens to (v26.5; v27: one card inside each of the three things). */
 .people {
   display: grid;
   gap: 16px;
   width: 100%;
-  max-width: 1040px;
-  margin: 40px auto 0;
+  max-width: 600px;
+  margin: 48px auto 0;
   padding: 0;
   list-style: none;
   text-align: left;
@@ -2899,57 +2873,7 @@ html:not(.js) .book + .book {
   min-height: 44px;
 }
 
-.person.wide {
-  padding: 0;
-  overflow: hidden;
-}
-
-.wide-pic {
-  display: flex;
-  align-items: center;
-  padding: 20px 20px 0;
-}
-
-.wide-pic .frame {
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-.wide-text {
-  display: flex;
-  flex-direction: column;
-  padding: 24px 26px 18px;
-}
-
-.wide-text h3 {
-  margin-top: 4px;
-}
-
-@media (min-width: 834px) {
-  .person.wide {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    align-items: stretch;
-  }
-
-  .wide-text {
-    justify-content: center;
-    padding: 36px 40px;
-  }
-
-  .wide-pic {
-    padding: 32px 0 32px 32px;
-  }
-
-  .people {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-}
+@media (min-width: 834px) {}
 
 .person-go [hidden] {
   display: none;
@@ -2963,5 +2887,187 @@ html:not(.js) .book + .book {
 
   .clause {
     max-width: 100%;
+  }
+}
+
+/* v27 三件事: one person per part, the course, ai.vibecoding as a small row under easy-vibe, and the letter. */
+.soft .person,
+.soft .course {
+  background: var(--card);
+}
+
+.person-label {
+  margin-bottom: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.person-id {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.person-id .avatar {
+  align-self: center;
+  margin: 0;
+  flex: none;
+  width: 56px;
+  height: 56px;
+}
+
+.person .person-id h3 {
+  margin-top: 0;
+  font-size: 21px;
+}
+
+.person-id .handle {
+  margin-top: 0;
+}
+
+.person .who {
+  margin-top: 14px;
+}
+
+.also {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2px 16px;
+  max-width: 600px;
+  margin: 48px auto 0;
+  padding: 20px 24px;
+  border-radius: 18px;
+  background: var(--soft);
+  text-align: left;
+}
+
+.also-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.also-line {
+  grid-column: 1;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.also-meta {
+  grid-column: 1;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.also-go {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  font-size: 17px;
+}
+
+.course {
+  max-width: 760px;
+  margin: 48px auto 0;
+  padding: 28px 26px 18px;
+  border-radius: 22px;
+  text-align: left;
+}
+
+.coach {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.course-body {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* The course stands like a small book: a cover with a spine. */
+.course-cover {
+  position: relative;
+  display: block;
+  width: 168px;
+  border-radius: 2px 6px 6px 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.course-cover[hidden] {
+  display: none;
+}
+
+.course-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
+.course-text h3 {
+  margin-top: 4px;
+  font-size: 24px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.course-ep {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.course .who {
+  margin: 12px 0 18px;
+}
+
+/* The ending opens with a letter: a short title, then plain paragraphs at reading width. */
+.ending .letter {
+  max-width: 34em;
+  margin: 0 auto 72px;
+  text-align: left;
+}
+
+.ending .letter h2 {
+  margin-bottom: 28px;
+  font-size: min(30px, 7.6vw);
+  text-align: center;
+}
+
+.letter p {
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--body);
+}
+
+.letter p + p {
+  margin-top: 1em;
+}
+
+@media (min-width: 734px) {
+  .course-body {
+    grid-template-columns: 200px 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  .course-cover {
+    width: 200px;
+  }
+
+  .course {
+    padding: 36px 40px 24px;
+  }
+
+  .ending .letter h2 {
+    font-size: 40px;
+  }
+
+  .letter p {
+    font-size: 21px;
   }
 }
