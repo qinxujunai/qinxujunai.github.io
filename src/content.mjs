@@ -149,16 +149,6 @@ export const content = {
       alt: '《来不及爱你》：她在船舱里望向镜头，眼里含着泪',
       link: '这部片子怎么拍的',
       url: 'https://qinxujunai.github.io/too-late-to-love-you/',
-      // v26.6 (2026-10-24): the film is served from GitHub, overseas; on slow links in China it stalls. His own Bilibili
-      // upload is the domestic line, played inside the page in a sandboxed player that cannot open Bilibili (he does not
-      // want people sent to his Bilibili page). Loaded only when someone presses Play on it. v26.7: a two-option switch
-      // (原画 / 国内); visitors on a China time zone start on 国内 (faster there, and it keeps the film off GitHub's
-      // bandwidth), everyone else on 原画; the choice is remembered.
-      mirror: 'https://player.bilibili.com/player.html?bvid=BV1BLn86TEC2&page=1&autoplay=1&danmaku=0&high_quality=1',
-      line: '线路',
-      lineOrig: '原画',
-      lineCn: '国内',
-      mirrorTitle: '《来不及爱你》国内线路',
     },
 
     contactTitle: '联系',
@@ -319,11 +309,6 @@ export const content = {
       alt: '来不及爱你: in the ferry cabin she looks into the lens, eyes wet with tears',
       link: 'How it was made',
       url: 'https://qinxujunai.github.io/too-late-to-love-you/en/',
-      mirror: 'https://player.bilibili.com/player.html?bvid=BV1BLn86TEC2&page=1&autoplay=1&danmaku=0&high_quality=1',
-      line: 'Source',
-      lineOrig: 'Original',
-      lineCn: 'China',
-      mirrorTitle: '来不及爱你 (China line)',
     },
 
     contactTitle: 'Contact',
