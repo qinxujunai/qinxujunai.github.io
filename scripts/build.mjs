@@ -239,7 +239,7 @@ function heroFilm(c) {
   return `<figure class="hero-film">
 <div class="film-screen" id="film-watch"><video id="film" controls playsinline preload="none" poster="/assets/media/film-key-960.webp" width="960" height="540" aria-label="${esc(f.name)}" src="${FILM}film-mobile.mp4"></video>
 <button class="film-cover" type="button" data-film-play hidden aria-label="${esc(f.play)}"><img src="/assets/media/film-key-960.webp" srcset="/assets/media/film-key-960.webp 960w, /assets/media/film-key-2560.webp 2560w" sizes="(min-width: 1100px) 980px, calc(100vw - 40px)" width="960" height="540" alt="${esc(f.alt)}" fetchpriority="high" decoding="async"><span class="film-disc" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 3.5v13l10.5-6.5Z" fill="currentColor"/></svg></span></button></div>
-<figcaption><span class="film-name">${esc(f.name)}</span><span class="film-meta">${T(c, f.meta)}</span><a class="more-link" href="${esc(f.url)}" ${ext}>${esc(f.link)}${outward}</a></figcaption>
+<figcaption><span class="film-name">${esc(f.name)}</span><span class="film-meta">${T(c, f.meta)}</span><a class="more-link" href="${esc(f.url)}" ${ext}>${esc(f.link)}${outward}</a><button type="button" class="film-mirror" data-film-mirror data-src="${esc(f.mirror)}" data-on="${esc(f.mirrorOn)}" data-off="${esc(f.mirrorOff)}" data-title="${esc(f.mirrorTitle)}" hidden>${esc(f.mirrorOn)}</button></figcaption>
 </figure>`;
 }
 
@@ -407,33 +407,17 @@ ${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-lab
 // words, and a link to their profile. People who shaped how he thinks, next to the books that did.
 function follow(c) {
   const f = c.follow;
+  const r = c.recommend;
   return `<section id="follow" class="tile plain follow" aria-labelledby="follow-title">
 <div class="reveal">
 <p class="eyebrow">${esc(f.title)}</p>
-<h2 id="follow-title">${T(c, bare(f.headline))}</h2>
-<p class="sub">${T(c, bare(f.line))}</p>
+<h2 id="follow-title">${clauses(c, bare(f.headline))}</h2>
+${f.line ? `<p class="sub">${T(c, bare(f.line))}</p>` : ''}
 </div>
 <ul class="people">
-${f.list.map((k, i) => `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`).join('\n')}
+${f.list.map((k, i) => `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext} data-dy-link>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a><span class="dy-copy" data-dy-copy hidden><span class="dy-id">${esc(f.dyLabel)} <span class="dy-val">${esc(k.dy)}</span></span><button type="button" data-dy="${esc(k.dy)}" data-done="${esc(f.copied)}">${esc(f.copy)}</button></span></p></li>`).join('\n')}
+<li class="person wide reveal"><div class="wide-pic">${frame(c, { key: 'site-easyvibe', alt: r.alt })}</div><div class="wide-text"><p class="handle">${esc(f.kind)}</p><h3>easy-vibe</h3><p class="who">${T(c, bare(r.line))}</p><p class="handle">${dots(c, r.note)}</p><p class="person-go"><a href="${r.url}" ${ext}>${esc(r.link)}${outward}<span class="visually-hidden"> easy-vibe</span></a></p></div></li>
 </ul>
-</section>`;
-}
-
-// 推荐: before saying goodbye, one thing worth the reader's time. Not his work: Datawhale's open
-// course easy-vibe. What it is, one line, the site, one link.
-function recommend(c) {
-  const r = c.recommend;
-  return `<section id="recommend" class="tile dark share" aria-labelledby="recommend-title">
-<div class="show-head reveal">
-<p class="eyebrow">${esc(r.title)}</p>
-<h2 id="recommend-title" class="rec-title">${bare(r.headline).split(/(?<=[，?])\s*/).map((part) => `<span class="clause">${T(c, part)}</span>`).join(c.lang === 'zh-CN' ? '' : ' ')}</h2>
-<p class="show-line">${clauses(c, bare(r.line))}</p>
-</div>
-${frame(c, { key: 'site-easyvibe', alt: r.alt })}
-<div class="show-foot">
-<p class="show-note">${dots(c, r.note)}</p>
-<p class="cta"><a class="more-link" href="${r.url}" ${ext}>${esc(r.link)}${outward}<span class="visually-hidden"> easy-vibe</span></a></p>
-</div>
 </section>`;
 }
 
@@ -498,7 +482,6 @@ ${share(c)}
 ${books(c)}
 ${follow(c)}
 ${journey(c)}
-${recommend(c)}
 ${contact(c)}
 </main>
 ${footer(c)}

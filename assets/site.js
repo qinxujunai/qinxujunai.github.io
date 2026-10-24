@@ -52,6 +52,38 @@
     });
   }
 
+  // 我推荐: WeChat blocks Douyin links. Inside WeChat each 「去抖音看看」 becomes the Douyin ID and a copy button.
+  if (where === 'wechat') {
+    var copyText = function (t, cb) {
+      var fallback = function () {
+        var ta = document.createElement('textarea');
+        ta.value = t;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, t.length);
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        cb();
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(cb, fallback);
+      else fallback();
+    };
+    var dyLinks = document.querySelectorAll('[data-dy-link]');
+    for (var dl = 0; dl < dyLinks.length; dl++) {
+      var box = dyLinks[dl].nextElementSibling;
+      dyLinks[dl].hidden = true;
+      box.hidden = false;
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          copyText(btn.getAttribute('data-dy'), function () { btn.textContent = btn.getAttribute('data-done'); });
+        });
+      })(box.querySelector('button'));
+    }
+  }
+
   // Name card: a slight tilt toward the pointer on desktop.
   var card = document.querySelector('[data-tilt]');
   if (card && !still && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -200,6 +232,43 @@
       hideCover();
       var p = film.play();
       if (p && p.catch) p.catch(function () {});
+    });
+  }
+
+  // The domestic line (v26.6): GitHub is overseas and the film can stall on slow links in China. Once the film has
+  // started (or stalls for 2 seconds) a quiet button offers his Bilibili copy, played here in a sandboxed frame from the
+  // same second. The sandbox has no popups or top navigation, so it cannot send anyone to Bilibili.
+  var mirror = document.querySelector('[data-film-mirror]');
+  if (film && mirror) {
+    var screen = film.parentNode;
+    var frame = null;
+    var stallTimer = null;
+    var showMirror = function () { mirror.hidden = false; };
+    film.addEventListener('play', showMirror);
+    film.addEventListener('waiting', function () { clearTimeout(stallTimer); stallTimer = setTimeout(showMirror, 2000); });
+    film.addEventListener('playing', function () { clearTimeout(stallTimer); });
+    mirror.addEventListener('click', function () {
+      if (!frame) {
+        var t = Math.floor(film.currentTime || 0);
+        film.pause();
+        frame = document.createElement('iframe');
+        frame.className = 'film-frame';
+        frame.title = mirror.getAttribute('data-title');
+        frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
+        frame.setAttribute('allow', 'autoplay; fullscreen');
+        frame.setAttribute('allowfullscreen', '');
+        frame.setAttribute('referrerpolicy', 'no-referrer');
+        frame.src = mirror.getAttribute('data-src') + (t ? '&t=' + t : '');
+        screen.appendChild(frame);
+        film.hidden = true;
+        if (filmCover) filmCover.hidden = true;
+        mirror.textContent = mirror.getAttribute('data-off');
+      } else {
+        screen.removeChild(frame);
+        frame = null;
+        film.hidden = false;
+        mirror.textContent = mirror.getAttribute('data-on');
+      }
     });
   }
 

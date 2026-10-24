@@ -100,14 +100,20 @@ export const content = {
     // Links: the profile without his share tracking (his share link carried his own user id).
     follow: {
       title: '我推荐',
-      headline: '三位抖音博主',
-      line: '他们的视频，我看了很多年',
+      headline: '三位抖音博主，一个开源教程',
+      // v26.6: easy-vibe moved in here from its own section (two 「推荐」 sections read as a repeat).
+      line: '',
+      kind: 'Datawhale 开源教程',
       why: '我为什么推荐',
       go: '去抖音看看',
+      // WeChat blocks Douyin links, so inside WeChat the link becomes a button that copies the Douyin ID.
+      dyLabel: '抖音号',
+      copy: '复制抖音号',
+      copied: '已复制，去抖音搜索',
       list: [
-        { name: '杰克叔叔', handle: '抖音「Jack要加油」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: '每天更新健身，每周直播', why: '他有很多切片，是我 24 年刚毕业的时候刷到的。那句话改变了我很多：当你迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
-        { name: '鲁大魔', handle: '抖音「鲁大魔」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
-        { name: '童年终结者', handle: '抖音「童年终结者」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
+        { name: '杰克叔叔', dy: 'JackandLinda', handle: '抖音「Jack要加油」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: '每天更新健身，每周直播', why: '他有很多切片，是我 24 年刚毕业的时候刷到的。那句话改变了我很多：当你迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
+        { name: '鲁大魔', dy: 'ludamobiubiu', handle: '抖音「鲁大魔」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
+        { name: '童年终结者', dy: '1260338158', handle: '抖音「童年终结者」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
       ],
     },
 
@@ -143,6 +149,13 @@ export const content = {
       alt: '《来不及爱你》：她在船舱里望向镜头，眼里含着泪',
       link: '这部片子怎么拍的',
       url: 'https://qinxujunai.github.io/too-late-to-love-you/',
+      // v26.6 (2026-10-24): the film is served from GitHub, overseas; on slow links in China it stalls. His own Bilibili
+      // upload is the domestic line, played inside the page in a sandboxed player that cannot open Bilibili (he does not
+      // want people sent to his Bilibili page). Loaded only when someone taps it.
+      mirror: 'https://player.bilibili.com/player.html?bvid=BV1BLn86TEC2&page=1&autoplay=1&danmaku=0&high_quality=1',
+      mirrorOn: '卡顿？换国内线路',
+      mirrorOff: '换回原画',
+      mirrorTitle: '《来不及爱你》国内线路',
     },
 
     contactTitle: '联系',
@@ -261,14 +274,18 @@ export const content = {
 
     follow: {
       title: 'I recommend',
-      headline: 'Three creators on Douyin',
-      line: 'I have watched their videos for years',
+      headline: 'Three creators on Douyin, one open course',
+      line: '',
+      kind: 'Open course by Datawhale',
       why: 'Why I recommend them',
       go: 'Watch on Douyin',
+      dyLabel: 'Douyin ID',
+      copy: 'Copy Douyin ID',
+      copied: 'Copied. Search it in Douyin',
       list: [
-        { name: 'Uncle Jack', handle: 'Douyin: Jack要加油', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: 'Daily fitness, a live stream every week', why: 'I came across his clips in 2024, just after graduating. One line changed me a lot: when you feel lost, anxious or in pain and don’t know what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
-        { name: 'Lu Damo', handle: 'Douyin: 鲁大魔', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
-        { name: 'Tongnian Zhongjiezhe', handle: 'Douyin: 童年终结者', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
+        { name: 'Uncle Jack', dy: 'JackandLinda', handle: 'Douyin: Jack要加油', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: 'Daily fitness, a live stream every week', why: 'I came across his clips in 2024, just after graduating. One line changed me a lot: when you feel lost, anxious or in pain and don’t know what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
+        { name: 'Lu Damo', dy: 'ludamobiubiu', handle: 'Douyin: 鲁大魔', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
+        { name: 'Tongnian Zhongjiezhe', dy: '1260338158', handle: 'Douyin: 童年终结者', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
       ],
     },
 
@@ -299,6 +316,10 @@ export const content = {
       alt: '来不及爱你: in the ferry cabin she looks into the lens, eyes wet with tears',
       link: 'How it was made',
       url: 'https://qinxujunai.github.io/too-late-to-love-you/en/',
+      mirror: 'https://player.bilibili.com/player.html?bvid=BV1BLn86TEC2&page=1&autoplay=1&danmaku=0&high_quality=1',
+      mirrorOn: 'Stuttering? Use the China line',
+      mirrorOff: 'Back to the original',
+      mirrorTitle: '来不及爱你 (China line)',
     },
 
     contactTitle: 'Contact',
