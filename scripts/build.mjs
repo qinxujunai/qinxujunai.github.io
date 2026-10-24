@@ -513,8 +513,8 @@ ${l.body.map((p) => `<p>${T(c, p)}</p>`).join('\n')}
 <div class="namecard-stage">
 <div class="namecard" role="group" aria-label="${esc(c.cardLabel)}" data-tilt>
 <div class="nc-card-row">
-<div class="nc-left">${signatureRef('nc-sig')}<div class="nc-id"><p class="nc-role">${T(c, bare(c.role))}</p><p class="nc-wx">${esc(c.wechatLabel)} ${esc(c.wechatId)}</p></div></div>
-<div class="nc-qr"><img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async"><span class="nc-scan">${esc(c.scanLabel)}</span></div>
+<div class="nc-left">${signatureRef('nc-sig')}<p class="nc-wx">${esc(c.wechatLabel)} ${esc(c.wechatId)}</p></div>
+<div class="nc-qr"><img class="qr" src="/assets/wechat-qr.png" width="232" height="232" alt="${esc(c.qrAlt)}" decoding="async"></div>
 </div>
 </div>
 </div>
