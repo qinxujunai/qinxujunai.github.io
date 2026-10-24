@@ -219,6 +219,9 @@
     darks.forEach(function (el) { darkWatch.observe(el); });
   }
 
+  // Leftover from the removed 线路 switch (v26.6–26.7): forget it on every phone that saved it.
+  try { localStorage.removeItem('qxj.line'); } catch (e) {}
+
   // His film in the first screen: the cover shows until Play. One file everywhere, his 4K web version (about 7 Mbps).
   // v26.6–26.7 tried his Bilibili upload as a domestic line (sandboxed embed); on his phone it would not play at all,
   // and he does not want a second line or a switch (2026-10-24). Removed: one player, one file.
