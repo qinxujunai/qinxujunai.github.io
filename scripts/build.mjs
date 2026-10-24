@@ -152,7 +152,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 </head>`;
 }
 
-const SECTIONS = ['work', 'share', 'path', 'contact'];
+const SECTIONS = ['work', 'share', 'books', 'contact'];
 
 // Apple-style local nav: signature on the left, sections in the middle, one blue action on the right.
 // On the home page the signature here is a reference to the hero's; case pages hold the paths here.
@@ -363,6 +363,9 @@ function share(c) {
 <h2 class="pull" id="share-title">${statement(c, bare(s.view))}</h2>
 <p class="said">${T(c, s.viewNote)}</p>
 </div>
+<ol class="principles">
+${s.principles.map(([k, h, q]) => `<li class="reveal"><p class="pr-k">${T(c, k)}</p><h3>${T(c, h)}</h3><p class="pr-q">“${T(c, q)}”</p></li>`).join('\n')}
+</ol>
 <div class="show-head">
 <h3 class="show-name">${esc(s.name)}</h3>
 <p class="show-line">${clauses(c, bare(s.intro))}</p>
@@ -371,6 +374,27 @@ ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding �
 <div class="show-foot">
 <p class="show-note">${dots(c, s.note)}</p>
 <p class="cta"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.link)}${outward}<span class="visually-hidden"> ${esc(s.name)}</span></a></p>
+</div>
+</section>`;
+}
+
+// 书架 (v26): the six books that changed him. Tap a cover and it opens: his line first (what it changed for
+// him), then what the book itself says. Covers are type on a colour, not publishers' artwork. Without JS
+// every book shows in full; with JS the covers become tabs and one book is open at a time.
+function books(c) {
+  const b = c.books;
+  const id = (i) => `book-${i + 1}`;
+  return `<section id="books" class="tile soft books" aria-labelledby="books-title">
+<div class="reveal">
+<p class="eyebrow">${esc(b.title)}</p>
+<h2 id="books-title">${T(c, bare(b.headline))}</h2>
+<p class="sub">${clauses(c, bare(b.line))}</p>
+</div>
+<div class="shelf" role="tablist" aria-label="${esc(b.headline)}" data-shelf>
+${b.list.map((k, i) => `<button type="button" class="cover tone-${k.tone}" role="tab" id="${id(i)}-tab" aria-controls="${id(i)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><span class="cover-t">${T(c, k.t)}</span><span class="cover-a">${T(c, k.a)}</span></button>`).join('\n')}
+</div>
+<div class="book-panels">
+${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span></h3><div class="book-cols"><div><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p></div><div><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p></div></div></div>`).join('\n')}
 </div>
 </section>`;
 }
@@ -451,6 +475,7 @@ ${nav(c, { switchHref: o.path, onHome: true })}
 ${hero(c)}
 ${work(c)}
 ${share(c)}
+${books(c)}
 ${journey(c)}
 ${recommend(c)}
 ${contact(c)}
