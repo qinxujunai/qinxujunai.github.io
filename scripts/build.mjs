@@ -373,7 +373,7 @@ function share(c) {
 <div class="statement" data-statement>
 <p class="eyebrow">${s.title}</p>
 <h2 class="pull" id="share-title">${statement(c, bare(s.view))}</h2>
-<p class="said">${clauses(c, bare(s.viewNote), true)}</p>
+${s.viewNote ? `<p class="said">${clauses(c, bare(s.viewNote), true)}</p>` : ''}
 </div>
 <ol class="principles">
 ${s.principles.map(([k, h, q]) => `<li class="reveal"><p class="pr-k">${T(c, k)}</p><h3>${T(c, h)}</h3><p class="pr-q">“${T(c, q)}”</p></li>`).join('\n')}
