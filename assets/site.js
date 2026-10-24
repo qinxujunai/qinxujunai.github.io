@@ -78,17 +78,6 @@
     });
   }
 
-  // Name card (v27.12): a faint highlight slides across the card as it scrolls by (and follows the pointer on desktop),
-  // like light on a card in Apple Wallet. Still with reduced motion.
-  if (card && !still) {
-    var sheen = function () {
-      var r = card.getBoundingClientRect(), vh = window.innerHeight;
-      card.style.setProperty('--sheen', Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height))).toFixed(3));
-    };
-    window.addEventListener('scroll', sheen, { passive: true });
-    sheen();
-  }
-
   // VoiceFlow capsule: confirmed characters appear at a fixed 48 ms rhythm, as in the product.
   var typed = document.querySelector('.typed');
   if (typed && !still && canObserve) {
