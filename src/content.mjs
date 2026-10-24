@@ -33,7 +33,7 @@ export const content = {
     navWechat: '加微信',
     seeWork: '看看作品',
     navLabel: '章节',
-    nav: { work: '作品', share: '做法', books: '书架', contact: '联系' },
+    nav: { work: '作品', share: '做法', three: '三件事', contact: '联系' },
     home: '首页',
 
     workTitle: '作品',
@@ -64,12 +64,6 @@ export const content = {
         ['复利', '每天比昨天进步 1%，一年就是 37 倍', '看书，阅读，健身这些长期主义的事情……不是那种正反馈来得非常快的，但是做一天有一天的收获。'],
         ['过程', '让过程本身就是奖励', '如果做一件事情需要靠自律跟意志力，那大概率是做不下去的。……不让自己连续两天不去做一件事情。'],
       ],
-      name: 'ai.vibecoding',
-      // his words: the hero title of ai.vibecoding (May 2026)
-      quote: '用自然语言，创造可运行的作品',
-      intro: '我把用 AI 做产品的方法写成了一个网站，零基础也能读',
-      note: '10 章 · 约 18 分钟',
-      link: '开始阅读',
     },
 
     // v26: six books that changed him (his list and his words, 2026-10-24). 「书里说」 is checked against the books
@@ -78,7 +72,7 @@ export const content = {
     // (book.douban.com subject 3608208, 26369699, 35193035). v26.3: 人性的弱点, 小狗钱钱, 非暴力沟通 are the editions
     // he read, from his photos (subject 27048361, 35295592, 35519608): he only recommends what he has read. Shown for identification, as any bookshop or review does; files in assets/media/book-1…6.webp.
     books: {
-      title: '书架',
+      title: '阅读',
       headline: '改变过我的六本书',
       line: '看书并不会改变人生，但它会潜移默化地影响怎么去思考、怎么去行动',
       mine: '它改变了我',
@@ -111,10 +105,52 @@ export const content = {
       copy: '复制抖音号',
       copied: '已复制，去抖音搜索',
       list: [
-        { name: '杰克叔叔', dy: 'JackandLinda', handle: '抖音「Jack要加油」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: '每天更新健身，每周直播', why: '他有很多切片，是我 24 年刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
+        { name: '杰克叔叔', dy: 'JackandLinda', handle: '抖音「Jack要加油」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: '每天更新健身，每周直播', why: '他有很多切片，是我……刚毕业的时候刷到的。那句话改变了我很多：迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
         { name: '鲁大魔', dy: 'ludamobiubiu', handle: '抖音「鲁大魔」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
         { name: '童年终结者', dy: '1260338158', handle: '抖音「童年终结者」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
       ],
+    },
+
+    // v27 (2026-10-24): 「三件事」. His words: 「每天当你迷茫不知道做什么，就做三件事情：健身、阅读、交朋友。挑一件事情，再学技能」
+    // and 「这三块的最佳时间，我已经放给大家了」 (docs/his-words-2026-10-24.md). The line came to him from 杰克叔叔 (his reason
+    // for recommending Jack), so Jack's card opens the section. Order is his: books, then AI, then fitness.
+    three: {
+      title: '三件事',
+      headline: '迷茫的时候，就做三件事',
+      line: '每一样，我都放上自己觉得最好的',
+      origin: '这句话，最早是从他那里听到的',
+      // His words: 「去听那些你想成为的人的建议，他们的思想还有书籍里的思想会反过来塑造你自己」 (said to the reader; v26.11: no 「你」).
+      readingPerson: '除了书，也去听想成为的那种人说话',
+      skill: {
+        title: '学技能',
+        headline: '学 AI，从 easy-vibe 开始',
+        vibecoding: '我也写了一份：用 AI 做产品的方法',
+        vibeNote: '6 章 · 约 10 分钟',
+        vibeLink: '开始阅读',
+        person: '跟着真正做成过的人学',
+      },
+      // Facts from Douyin, read 2026-10-24: 凯圣王's bio 「健身基础知识连续分享六年」; the collection 「凯圣王-谭成义三分化」 (mix 7623788294471419945):
+      // 6 episodes, 38,183,663 plays, 891,227 saves; episode 1 「训练计划」 21:29 (aweme 7623732958012198179); its description:
+      // 「新手和训练发烧友都可以用」, 动作选择、周期计划、设计思路; episodes 2, 4, 5 跟练 with 第三视角 on 常见错误; episode 3 名词释义.
+      // 谭成义 is 「谭指导」 in their descriptions. His own reason: 「这个就是我这个网站可以带给所有人的价值」; he asked me to research why.
+      fitness: {
+        title: '健身',
+        headline: '有一份计划，照着练就行',
+        line: '凯圣王和谭成义一起做的三分化训练，新手和练过一段时间的人都能用',
+        coach: '凯圣王',
+        handle: '抖音「凯圣王」',
+        who: '健身基础知识连续分享六年',
+        course: '凯圣王-谭成义三分化',
+        meta: '抖音合集 · 6 集',
+        ep: '第 1 集 · 训练计划 · 21 分钟',
+        desc: '先讲动作怎么选、周期怎么排、为什么这样设计，再一天一天带着练，用第三视角指出常见的错误。',
+        whyLabel: '为什么是这一套',
+        why: '计划、跟练、名词，一套里都讲到了，新手不用再东拼西凑。合集在抖音有 3800 多万次播放、近 90 万次收藏。',
+        go: '从第 1 集看起',
+        url: 'https://www.iesdouyin.com/share/video/7623732958012198179/',
+        searchLabel: '抖音搜索',
+        copy: '复制合集名',
+      },
     },
 
     recommend: {
@@ -154,8 +190,17 @@ export const content = {
     contactTitle: '联系',
     contactHeadline: '欢迎交流',
     contactLead: '聊 AI，聊产品，聊正在做的事',
-    // his words: the manifesto of ai.vibecoding (May 2026)
-    closing: ['AI 进化得越快，我们越需要慢下来。', '沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。'],
+    // v27 (2026-10-24): the ending, written from his words (docs/his-words-2026-10-24.md 「结尾想说的话」), at his request
+    // (「用顶级文笔……不要生搬硬套」). No graduation year (privacy), no employer names for the teaching years (his choice:
+    // 「按你的想法」), no 「你」 at the reader (v26.11). It replaces the ai.vibecoding manifesto under the card (his choice).
+    letter: {
+      title: '天行健，君子以自强不息',
+      body: [
+        '刚毕业的时候，我还没接触过 AI。大学那几年很迷茫，问过当时觉得最权威的人该怎么办，没有人回我。后来做过老师，做过内容运营，试过很多事，才慢慢明白：答案不在别人那里，在每天做的事里。',
+        '迷茫的时候，我就做三件事：阅读，学技能，健身。上班路上听一段长视频，下班路上听一期想成为的那种人的播客；想不通的事，就去和 Claude、ChatGPT 聊。读过的书、听过的话，会一点点变成自己的经验。',
+        '真诚待人，守好自己的能量边界，相信复利。日拱一卒无有尽，功不唐捐终入海。没有白走的路，每一步都算数。',
+      ],
+    },
     cardLabel: '秦徐俊的名片',
     qrAlt: '秦徐俊的微信二维码',
     hint: {
@@ -214,7 +259,7 @@ export const content = {
     navWechat: 'WeChat',
     seeWork: 'See what I’ve made',
     navLabel: 'Sections',
-    nav: { work: 'Work', share: 'Practice', books: 'Books', contact: 'Contact' },
+    nav: { work: 'Work', share: 'Practice', three: 'Three things', contact: 'Contact' },
     home: 'Home',
 
     workTitle: 'Work',
@@ -242,15 +287,10 @@ export const content = {
         ['Compounding', '1% better than yesterday, every day, is 37 times in a year', 'Reading, exercise, the long-haul things … the reward doesn’t come quickly, but every day put in is a day gained.'],
         ['Process', 'Make the process itself the reward', 'If something takes self-discipline and willpower, you probably won’t keep it up. … Just never skip it two days in a row.'],
       ],
-      name: 'ai.vibecoding',
-      quote: 'Use natural language to create working products', // his words
-      intro: 'I wrote down how I build products with AI, as a website anyone can read',
-      note: '10 chapters · about 18 minutes',
-      link: 'Start reading',
     },
 
     books: {
-      title: 'Books',
+      title: 'Reading',
       headline: 'Six books that changed me',
       line: 'Reading won’t change your life, but it quietly shapes how you think and how you act',
       mine: 'What it changed for me',
@@ -276,10 +316,44 @@ export const content = {
       copy: 'Copy Douyin ID',
       copied: 'Copied. Search it in Douyin',
       list: [
-        { name: 'Uncle Jack', dy: 'JackandLinda', handle: 'Douyin: Jack要加油', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: 'Daily fitness, a live stream every week', why: 'I came across his clips in 2024, just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
+        { name: 'Uncle Jack', dy: 'JackandLinda', handle: 'Douyin: Jack要加油', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: 'Daily fitness, a live stream every week', why: 'I came across his clips just after graduating. One line changed me a lot: when lost, anxious or in pain, not knowing what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
         { name: 'Lu Damo', dy: 'ludamobiubiu', handle: 'Douyin: 鲁大魔', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
         { name: 'Tongnian Zhongjiezhe', dy: '1260338158', handle: 'Douyin: 童年终结者', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
       ],
+    },
+
+    three: {
+      title: 'Three things',
+      headline: 'When you feel lost, do three things',
+      line: 'For each one, the best I have found',
+      origin: 'I first heard this from him',
+      readingPerson: 'Beyond books, listen to the people you want to become',
+      skill: {
+        title: 'Learning a skill',
+        headline: 'To learn AI, start with easy-vibe',
+        vibecoding: 'I wrote one too: how I build products with AI',
+        vibeNote: '6 chapters · about 10 minutes · in Chinese',
+        vibeLink: 'Start reading',
+        person: 'Learn from people who have done it',
+      },
+      fitness: {
+        title: 'Fitness',
+        headline: 'Get a plan, then just follow it',
+        line: 'A three-day split by Kai Shengwang and Tan Chengyi, for beginners and for people who already train',
+        coach: 'Kai Shengwang',
+        handle: 'Douyin: 凯圣王',
+        who: 'Six years of sharing the basics of training',
+        course: '凯圣王-谭成义三分化 (three-day split)',
+        meta: 'Douyin series · 6 episodes · in Chinese',
+        ep: 'Episode 1 · The plan · 21 min',
+        desc: 'First how to choose the lifts, how to plan the cycle and why it is designed this way; then a full day at a time, with common mistakes shown from a third camera.',
+        whyLabel: 'Why this one',
+        why: 'The plan, the follow-along sessions and the vocabulary are all in one series, so a beginner doesn’t have to piece things together. On Douyin it has more than 38 million plays and nearly 900,000 saves.',
+        go: 'Start with episode 1',
+        url: 'https://www.iesdouyin.com/share/video/7623732958012198179/',
+        searchLabel: 'Search Douyin for',
+        copy: 'Copy the series name',
+      },
     },
 
     recommend: {
@@ -314,7 +388,14 @@ export const content = {
     contactTitle: 'Contact',
     contactHeadline: 'Let’s talk',
     contactLead: 'AI, products, whatever you’re building',
-    closing: ['The faster AI evolves, the more we need to slow down.', 'Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.'], // his words
+    letter: {
+      title: 'As heaven moves on, ceaselessly, so the noble keep striving',
+      body: [
+        'When I graduated, I hadn’t touched AI. My university years were lost ones: I asked the people I thought had the answers what to do, and no one wrote back. Since then I have taught, run content, and tried a lot of things, and slowly I understood that the answer isn’t with anyone else. It is in what we do every day.',
+        'When I feel lost, I do three things: read, learn a skill, and train. A long video on the way to work, a podcast by someone I want to become on the way home; whatever I can’t figure out, I talk through with Claude or ChatGPT. The books read and the words heard slowly become experience of my own.',
+        'Sincerity toward others, a firm line around my own energy, and faith in compounding. Small steps every day, and no effort is ever wasted. There are no wasted roads; every step counts.',
+      ],
+    },
     cardLabel: 'Qin Xujun’s card',
     qrAlt: 'Qin Xujun’s WeChat QR code',
     hint: {
