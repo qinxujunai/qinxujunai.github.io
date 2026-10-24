@@ -239,7 +239,8 @@ function heroFilm(c) {
   return `<figure class="hero-film">
 <div class="film-screen" id="film-watch"><video id="film" controls playsinline preload="none" poster="/assets/media/film-key-960.webp" width="960" height="540" aria-label="${esc(f.name)}" src="${FILM}film-mobile.mp4"></video>
 <button class="film-cover" type="button" data-film-play hidden aria-label="${esc(f.play)}"><img src="/assets/media/film-key-960.webp" srcset="/assets/media/film-key-960.webp 960w, /assets/media/film-key-2560.webp 2560w" sizes="(min-width: 1100px) 980px, calc(100vw - 40px)" width="960" height="540" alt="${esc(f.alt)}" fetchpriority="high" decoding="async"><span class="film-disc" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 3.5v13l10.5-6.5Z" fill="currentColor"/></svg></span></button></div>
-<figcaption><span class="film-name">${esc(f.name)}</span><span class="film-meta">${T(c, f.meta)}</span><a class="more-link" href="${esc(f.url)}" ${ext}>${esc(f.link)}${outward}</a><button type="button" class="film-mirror" data-film-mirror data-src="${esc(f.mirror)}" data-on="${esc(f.mirrorOn)}" data-off="${esc(f.mirrorOff)}" data-title="${esc(f.mirrorTitle)}" hidden>${esc(f.mirrorOn)}</button></figcaption>
+<figcaption><span class="film-name">${esc(f.name)}</span><span class="film-meta">${T(c, f.meta)}</span><a class="more-link" href="${esc(f.url)}" ${ext}>${esc(f.link)}${outward}</a></figcaption>
+<div class="film-line" role="group" aria-label="${esc(f.line)}" data-film-line data-src="${esc(f.mirror)}" data-title="${esc(f.mirrorTitle)}" hidden><span>${esc(f.line)}</span><span class="seg"><button type="button" data-line="orig" aria-pressed="true">${esc(f.lineOrig)}</button><button type="button" data-line="cn" aria-pressed="false">${esc(f.lineCn)}</button></span></div>
 </figure>`;
 }
 
