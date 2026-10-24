@@ -52,41 +52,6 @@
     });
   }
 
-  // 我推荐: WeChat blocks Douyin links. Inside WeChat each 「去抖音看看」 becomes the Douyin ID and a copy button.
-  if (where === 'wechat') {
-    var copyText = function (t, cb) {
-      var fallback = function () {
-        var ta = document.createElement('textarea');
-        ta.value = t;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        ta.setSelectionRange(0, t.length);
-        try { document.execCommand('copy'); } catch (e) {}
-        document.body.removeChild(ta);
-        cb();
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(cb, fallback);
-      else fallback();
-    };
-    var dyLinks = document.querySelectorAll('[data-dy-link]');
-    for (var dl = 0; dl < dyLinks.length; dl++) {
-      var box = dyLinks[dl].nextElementSibling;
-      dyLinks[dl].hidden = true;
-      if (!box) continue;
-      box.hidden = false;
-      // A cover picture has no button: it simply stops being a link.
-      var dyBtn = box.querySelector('button');
-      if (dyBtn) (function (btn) {
-        btn.addEventListener('click', function () {
-          copyText(btn.getAttribute('data-dy'), function () { btn.textContent = btn.getAttribute('data-done'); });
-        });
-      })(dyBtn);
-    }
-  }
-
   // Name card: a slight tilt toward the pointer on desktop.
   var card = document.querySelector('[data-tilt]');
   if (card && !still && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

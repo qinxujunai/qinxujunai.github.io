@@ -25,7 +25,7 @@ const KEEP = [
   '让 AI 负责拆解、生成与验证', '让人守住目标、边界与品味', '用自然语言', '创造可运行的作品',
   '云南妙妙屋', '几分钟读完', '先读读我的方法', '我是秦徐俊', '做 AI 产品', '内容和运营', '人为什么会用它', '先立边界', '约 18 分钟读完', '读完就能动手', '做 AI 产品', '为什么会用', '一个东西', '剪贴板没核对过', '不算送达', '完整录音', '链接由代码回填', '写不出假链接', '不用显卡', '人台照', '模特图', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
   'AI 进化得越快', '我们越需要慢下来',
-  'easy-vibe', 'ai.vibecoding', '凯圣王', '谭成义', '三分化', '杰克叔叔', '鲁大魔', '天行健', '日拱一卒', '功不唐捐', 'ChatGPT', '能量边界',
+  'easy-vibe', 'ai.vibecoding', '凯圣王', '谭成义', '三分化', '杰克叔叔', '鲁大魔', '天行健', '日拱一卒', '功不唐捐', 'ChatGPT', '能量边界', '学技能', '内容运营',
   '秦徐俊', '比智科技', '一念智能', '专致网络', '抖音数字学堂', '云南民族大学', '微众银行', '方正证券', '工商银行',
   '阿里巴巴', '影刀 RPA', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
   '智能体', '上下文', '自然语言', '许愿池', '爆款案例', '信息流', '回款率', '采购评估', '招投标', '剪贴板', '终稿', '离线',
@@ -403,21 +403,15 @@ ${b.list.map((k, i) => `<button type="button" class="cover" role="tab" id="${id(
 <div class="book-panels">
 ${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><div class="spread"><div class="page page-l"><img class="pl-cover" src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span><span class="book-ed">${T(c, k.ed)}</span></h3></div><div class="page page-r"><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p></div><div class="flap" aria-hidden="true"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"></div></div></div>`).join('\n')}
 </div>
-<ul class="people">${person(c, 2, c.three.readingPerson)}</ul>
 </section>`;
 }
 
-// v27 (2026-10-24): 三件事. His line 「迷茫的时候，就做三件事」 came to him from 杰克叔叔, so Jack's card opens it; then
-// 阅读 (the shelf), 学技能 (easy-vibe first, ai.vibecoding small under it), 健身 (one coach, one course). Each part has one
-// main thing and, where it fits, one person he listens to. The Douyin creators live in the part they belong to (v26.5's
-// separate 「我推荐」 section is gone). In WeChat, Douyin links are blocked, so each becomes a copy button (site.js).
-const dyCopy = (label, value, copy, done) =>
-  `<span class="dy-copy" data-dy-copy hidden><span class="dy-id">${esc(label)} <span class="dy-val">${esc(value)}</span></span><button type="button" data-dy="${esc(value)}" data-done="${esc(done)}">${esc(copy)}</button></span>`;
-
-function person(c, i, label = '') {
+// v27 (2026-10-24): 三件事: the headline, then the three things themselves (v27.1, his words: 「那哪三件事情呢？直接放出来啊」),
+// each a tile that jumps to its part: 阅读 (the shelf), 学技能 (easy-vibe first, ai.vibecoding small under it), 健身 (one coach,
+// one course). After them, the three Douyin creators together in one row of cards, as in v26.5 (he asked to keep them together).
+function person(c, k, i) {
   const f = c.follow;
-  const k = f.list[i];
-  return `<li class="person reveal">${label ? `<p class="person-label">${clauses(c, bare(label), true)}</p>` : ''}<div class="person-id"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><div><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p></div></div><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext} data-dy-link>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a>${dyCopy(f.dyLabel, k.dy, f.copy, f.copied)}</p></li>`;
+  return `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
 }
 
 function three(c) {
@@ -428,7 +422,9 @@ function three(c) {
 <h2 id="three-title">${lines(c, bare(t.headline))}</h2>
 <p class="sub">${clauses(c, bare(t.line), true)}</p>
 </div>
-<ul class="people">${person(c, 0, t.origin)}</ul>
+<ol class="things reveal">
+${t.items.map((k, i) => `<li><a href="#${k.id}"><span class="thing-n">${i + 1}</span><span class="thing-name">${T(c, k.name)}</span><span class="thing-line">${T(c, k.line)}</span></a></li>`).join('\n')}
+</ol>
 </section>`;
 }
 
@@ -448,18 +444,16 @@ ${frame(c, { key: 'site-easyvibe', alt: r.alt })}
 </div>
 <div class="also reveal">
 <p class="also-name">ai.vibecoding</p>
-<p class="also-line">${T(c, bare(s.vibecoding))}</p>
+<p class="also-line">${clauses(c, bare(s.vibecoding))}</p>
 <p class="also-meta">${dots(c, s.vibeNote)}</p>
 <p class="also-go"><a class="more-link" href="${VIBECODING}" ${ext}>${esc(s.vibeLink)}${outward}<span class="visually-hidden"> ai.vibecoding</span></a></p>
 </div>
-<ul class="people">${person(c, 1, s.person)}</ul>
 </section>`;
 }
 
 // 健身: his words 「他的一个头像，下面是他的系列课程，打开定位的是他的第一集」. The course cover stands like a small book.
 function fitness(c) {
   const t = c.three.fitness;
-  const f = c.follow;
   return `<section id="fitness" class="tile soft fitness" aria-labelledby="fitness-title">
 <div class="reveal">
 <p class="eyebrow">${esc(t.title)}</p>
@@ -469,7 +463,7 @@ function fitness(c) {
 <article class="course reveal" aria-labelledby="course-title">
 <div class="person-id"><img class="avatar" src="/assets/media/follow-4.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><div><p class="coach">${T(c, t.coach)}</p><p class="handle">${T(c, t.handle)}</p><p class="handle">${T(c, t.who)}</p></div></div>
 <div class="course-body">
-<a class="course-cover" href="${t.url}" ${ext} data-dy-link tabindex="-1" aria-hidden="true"><img src="/assets/media/fit-course.webp" width="540" height="720" alt="" loading="lazy" decoding="async"></a><span class="course-cover" data-dy-copy hidden aria-hidden="true"><img src="/assets/media/fit-course.webp" width="540" height="720" alt="" loading="lazy" decoding="async"></span>
+<a class="course-cover" href="${t.url}" ${ext} tabindex="-1" aria-hidden="true"><img src="/assets/media/fit-course.webp" width="540" height="720" alt="" loading="lazy" decoding="async"></a>
 <div class="course-text">
 <p class="handle">${dots(c, t.meta)}</p>
 <h3 id="course-title">${T(c, t.course)}</h3>
@@ -477,15 +471,29 @@ function fitness(c) {
 <p class="who">${T(c, t.desc)}</p>
 <p class="book-k">${esc(t.whyLabel)}</p>
 <p class="person-why">${T(c, t.why)}</p>
-<p class="person-go"><a href="${t.url}" ${ext} data-dy-link>${esc(t.go)}${outward}<span class="visually-hidden"> ${esc(t.course)}</span></a>${dyCopy(t.searchLabel, t.course.replace(/ \(.*\)$/, ''), t.copy, f.copied)}</p>
+<p class="person-go"><a href="${t.url}" ${ext}>${esc(t.go)}${outward}<span class="visually-hidden"> ${esc(t.course)}</span></a></p>
 </div>
 </div>
 </article>
 </section>`;
 }
 
+function follow(c) {
+  const f = c.follow;
+  return `<section id="follow" class="tile plain follow" aria-labelledby="follow-title">
+<div class="reveal">
+<p class="eyebrow">${esc(f.title)}</p>
+<h2 id="follow-title">${T(c, bare(f.headline))}</h2>
+<p class="sub">${T(c, bare(f.line))}</p>
+</div>
+<ul class="people">
+${f.list.map((k, i) => person(c, k, i)).join('\n')}
+</ul>
+</section>`;
+}
+
 function journey(c) {
-  return `<section class="tile plain" id="path" aria-labelledby="path-title">
+  return `<section class="tile soft" id="path" aria-labelledby="path-title">
 <div class="reveal">
 <p class="eyebrow">${c.pathTitle}</p>
 <h2 id="path-title">${lines(c, bare(c.pathHeadline))}</h2>
@@ -510,7 +518,7 @@ ${l.body.map((p) => `<p>${T(c, p)}</p>`).join('\n')}
 </article>
 <div class="reveal">
 <h2 id="contact-title">${T(c, bare(c.contactHeadline))}</h2>
-<p class="sub">${T(c, bare(c.contactLead))}</p>
+<p class="sub">${clauses(c, bare(c.contactLead), true)}</p>
 </div>
 <div class="namecard-stage">
 <div class="namecard" role="group" aria-label="${esc(c.cardLabel)}" data-tilt>
@@ -550,6 +558,7 @@ ${three(c)}
 ${books(c)}
 ${skill(c)}
 ${fitness(c)}
+${follow(c)}
 ${journey(c)}
 ${contact(c)}
 </main>

@@ -84,7 +84,7 @@ const SITES = {
   'prod-wanxiang': { d: { left: 130, width: 1020, top: 138, height: 684 }, card: { top: 358, height: 414 } },
   // Not his work: Datawhale's easy-vibe course, recommended near the end.
   // Its first screen is a splash: the logo, a line and two buttons.
-  easyvibe: { d: { top: 200, height: 480 }, card: { top: 370, height: 300 } },
+  easyvibe: { d: { top: 243, height: 277 }, card: { top: 406, height: 166 } }, // v27.1: logo and tagline only; its buttons do nothing in a picture
 };
 for (const [name, crop] of Object.entries(SITES)) {
   if (!want(`site-${name}`) && !want(`site-${name}-card`)) continue;

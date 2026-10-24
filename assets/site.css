@@ -398,21 +398,18 @@ main {
 }
 
 .tile h2,
-.tile-title,
 .hero h1 {
   text-wrap: balance;
 }
 
-.tile h2,
-.tile-title {
+.tile h2 {
   font-size: min(40px, 8.6vw);
   line-height: 1.1;
   font-weight: 600;
   letter-spacing: -0.005em;
 }
 
-:lang(en) .tile h2,
-:lang(en) .tile-title {
+:lang(en) .tile h2 {
   letter-spacing: -0.02em;
 }
 
@@ -816,8 +813,7 @@ main {
     font-size: 21px;
   }
 
-  .tile h2,
-  .tile-title {
+  .tile h2 {
     font-size: 48px;
   }
 
@@ -884,8 +880,7 @@ main {
     margin-bottom: 32px;
   }
 
-  .tile h2,
-  .tile-title {
+  .tile h2 {
     font-size: 56px;
     line-height: 1.07;
   }
@@ -1914,7 +1909,7 @@ main {
   }
 }
 
-/* 想法: what he believes (lit by scroll), then ai.vibecoding, where he writes his method down. */
+/* 做法: what he believes, lit by scroll. */
 .share {
   display: flex;
   flex-direction: column;
@@ -2500,6 +2495,11 @@ main {
 }
 
 @media (min-width: 834px) {
+  .people {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
   .principles {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -2782,8 +2782,8 @@ html:not(.js) .book + .book {
   display: grid;
   gap: 16px;
   width: 100%;
-  max-width: 600px;
-  margin: 48px auto 0;
+  max-width: 1040px;
+  margin: 40px auto 0;
   padding: 0;
   list-style: none;
   text-align: left;
@@ -2839,34 +2839,6 @@ html:not(.js) .book + .book {
   font-size: 17px;
 }
 
-.dy-copy {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 14px;
-}
-
-.dy-id {
-  font-size: 15px;
-  color: var(--muted);
-}
-
-.dy-val {
-  color: var(--ink);
-  user-select: all;
-}
-
-.dy-copy button {
-  min-height: 44px;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--link);
-  font: inherit;
-  font-size: 17px;
-  cursor: pointer;
-}
-
 .person-go a {
   display: inline-flex;
   align-items: center;
@@ -2874,10 +2846,6 @@ html:not(.js) .book + .book {
 }
 
 @media (min-width: 834px) {}
-
-.person-go [hidden] {
-  display: none;
-}
 
 /* Phones: the statement is sized so its longest phrase (14 characters) fits one line; nothing runs off the edge. */
 @media (max-width: 733px) {
@@ -2890,44 +2858,87 @@ html:not(.js) .book + .book {
   }
 }
 
-/* v27 三件事: one person per part, the course, ai.vibecoding as a small row under easy-vibe, and the letter. */
-.soft .person,
+/* v27: the course, ai.vibecoding's small row, the three things, the letter. */
 .soft .course {
   background: var(--card);
 }
 
-.person-label {
-  margin-bottom: 18px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--muted);
+.skill .frame {
+  margin-top: 32px;
 }
 
-.person-id {
+.course .person-id {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.person-id .avatar {
+.course .avatar {
   align-self: center;
-  margin: 0;
   flex: none;
   width: 56px;
   height: 56px;
+  margin: 0;
 }
 
-.person .person-id h3 {
-  margin-top: 0;
-  font-size: 21px;
+/* The three things, right under their headline: three tiles, each jumps to its part. */
+.things {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 760px;
+  margin: 40px auto 0;
+  padding: 0;
+  list-style: none;
 }
 
-.person-id .handle {
-  margin-top: 0;
+.things a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 22px 8px 20px;
+  border-radius: 18px;
+  background: var(--soft);
+  color: var(--ink);
+  text-decoration: none;
 }
 
-.person .who {
-  margin-top: 14px;
+.thing-n {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.thing-name {
+  margin-top: 6px;
+  font-size: min(26px, 6.6vw);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.thing-line {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--body);
+}
+
+@media (min-width: 734px) {
+  .things {
+    gap: 16px;
+  }
+
+  .things a {
+    padding: 32px 16px 28px;
+  }
+
+  .thing-name {
+    font-size: 32px;
+  }
+
+  .thing-line {
+    font-size: 15px;
+  }
 }
 
 .also {
@@ -2995,10 +3006,6 @@ html:not(.js) .book + .book {
   width: 168px;
   border-radius: 2px 6px 6px 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 10px 24px rgba(0, 0, 0, 0.16);
-}
-
-.course-cover[hidden] {
-  display: none;
 }
 
 .course-cover img {
