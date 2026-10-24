@@ -219,11 +219,30 @@
     filmCover.hidden = false;
     var hideCover = function () { filmCover.hidden = true; };
     film.addEventListener('play', hideCover);
-    film.addEventListener('error', hideCover);
-    filmCover.addEventListener('click', function () {
-      hideCover();
+    // v27.18 Fallback without <source> (WeChat's player reads only src): if an address fails, or gives nothing for
+    // 10 seconds after Play, the next one is tried from the same second. Tencent Shanghai, then Cloudflare, then GitHub.
+    var sources = (film.getAttribute('data-sources') || '').split(' ').filter(Boolean);
+    var at = 0, guard = 0;
+    var next = function () {
+      clearTimeout(guard);
+      if (at >= sources.length - 1) return;
+      var t = film.currentTime || 0;
+      film.src = sources[++at];
+      film.load();
+      if (t) film.addEventListener('loadedmetadata', function () { film.currentTime = t; }, { once: true });
+      start();
+    };
+    var start = function () {
+      clearTimeout(guard);
+      guard = setTimeout(function () { if (film.readyState < 1) next(); }, 10000);
       var p = film.play();
       if (p && p.catch) p.catch(function () {});
+    };
+    film.addEventListener('error', next);
+    film.addEventListener('loadedmetadata', function () { clearTimeout(guard); });
+    filmCover.addEventListener('click', function () {
+      hideCover();
+      start();
     });
   }
 

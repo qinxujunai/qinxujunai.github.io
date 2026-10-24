@@ -14,16 +14,15 @@
 
 **注意**：QQ 浏览器里只有声音、没有画面，这是 QQ 浏览器的问题，换微信、系统浏览器都正常。别因为这个去改片子。
 
-## 现在的做法：一个播放器，三个地址，浏览器自己往下换
+## 现在的做法：一个播放器，三个地址，脚本往下换（v27.18）
 ```html
-<video ...>
-  <source src="https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4">  <!-- 1 腾讯云上海 -->
-  <source src="https://media.praxisai.online/too-late-to-love-you.mp4">                          <!-- 2 Cloudflare R2 -->
-  <source src="/too-late-to-love-you/media/film-mobile.mp4">                                     <!-- 3 GitHub 同源 -->
-</video>
+<video src="https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4"
+       data-sources="腾讯云上海 Cloudflare R2 /too-late-to-love-you/media/film-mobile.mp4"
+       playsinline webkit-playsinline x5-playsinline ...>
 ```
-- 第一个地址打不开（比如腾讯云欠费停了、返回 403 或 404），浏览器自动试下一个。没有按钮、没有开关，看的人感觉不到。2026-10-24 在 Chromium 里验证过：前两个 404、403，自动播放了第三个。
-- 局限：只在开始加载时换。播到一半断网，不会中途换。
+- **不能用 `<source>` 子元素**：2026-10-24 他在微信里放不出来，系统浏览器能放。微信在安卓上用腾讯 X5/XWeb 内核接管视频，只读 `video` 自己的 `src`，不认 `<source>` 列表。v27.8 那个测试页写的是 `src`，所以当时微信里能播。两站的 `check` 都会拦 `<source>`。
+- 备用由两站的 `site.js` 做：当前地址出错（欠费、403、404），或点播放 10 秒还没拿到数据，就换下一个，从同一秒接着放；三个都不行才显示提示。Chromium 里验证过：前两个打不开时依次换到第三个。
+- 腾讯云默认域名返回 `Content-Disposition: attachment` 和 `x-cos-force-download: true`（2024 年以后建的存储桶都这样）。普通浏览器和微信的播放器都不管它，测试页在微信里能播。要彻底去掉，只能绑定已经 ICP 备案的自定义域名（腾讯云官方说法）。
 - 个人网站的地址写在 `src/content.mjs` 的 `FILM_SOURCES`。`scripts/check.mjs` 只放行这三个，其他外部资源仍然不允许。
 - 影片网站的地址写在 `scripts/build.mjs` 的 `SOURCES`。「下载影片」链到腾讯云：默认域名本来就返回 `Content-Disposition: attachment`，点了直接下载。
 
