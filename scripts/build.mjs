@@ -232,12 +232,12 @@ ${heroFilm(c)}
 
 // His film, playable right in the first screen (v23). The file lives once, in the film's own repository on this
 // same origin (/too-late-to-love-you/), so the page still makes no third-party request. Nothing downloads until Play:
-// phones get his 4K web version, wide screens the full-bitrate original (switched in site.js).
+// every screen plays his 4K web version (about 7 Mbps); the 14 Mbps original stalled on desktop over slow links.
 const FILM = '/too-late-to-love-you/media/';
 function heroFilm(c) {
   const f = c.film;
   return `<figure class="hero-film">
-<div class="film-screen" id="film-watch"><video id="film" controls playsinline preload="none" poster="/assets/media/film-key-960.webp" width="960" height="540" aria-label="${esc(f.name)}" src="${FILM}film-mobile.mp4" data-wide="${FILM}film-original.mp4"></video>
+<div class="film-screen" id="film-watch"><video id="film" controls playsinline preload="none" poster="/assets/media/film-key-960.webp" width="960" height="540" aria-label="${esc(f.name)}" src="${FILM}film-mobile.mp4"></video>
 <button class="film-cover" type="button" data-film-play hidden aria-label="${esc(f.play)}"><img src="/assets/media/film-key-960.webp" srcset="/assets/media/film-key-960.webp 960w, /assets/media/film-key-2560.webp 2560w" sizes="(min-width: 1100px) 980px, calc(100vw - 40px)" width="960" height="540" alt="${esc(f.alt)}" fetchpriority="high" decoding="async"><span class="film-disc" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 3.5v13l10.5-6.5Z" fill="currentColor"/></svg></span></button></div>
 <figcaption><span class="film-name">${esc(f.name)}</span><span class="film-meta">${T(c, f.meta)}</span><a class="more-link" href="${esc(f.url)}" ${ext}>${esc(f.link)}${outward}</a></figcaption>
 </figure>`;
