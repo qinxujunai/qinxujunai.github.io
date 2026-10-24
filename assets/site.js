@@ -219,77 +219,21 @@
     darks.forEach(function (el) { darkWatch.observe(el); });
   }
 
-  // His film in the first screen: the cover shows until Play. Two lines (v26.7): 原画 is his 4K web version from this
-  // site; 国内 is his Bilibili upload in a sandboxed frame (no popups, no top navigation: it cannot open Bilibili).
-  // A China time zone starts on 国内 (faster there, and it keeps the film off GitHub's bandwidth); the choice is
-  // remembered. Nothing from Bilibili loads until someone presses Play on that line.
+  // His film in the first screen: the cover shows until Play. One file everywhere, his 4K web version (about 7 Mbps).
+  // v26.6–26.7 tried his Bilibili upload as a domestic line (sandboxed embed); on his phone it would not play at all,
+  // and he does not want a second line or a switch (2026-10-24). Removed: one player, one file.
   var film = document.getElementById('film');
   var filmCover = document.querySelector('[data-film-play]');
-  var lineBox = document.querySelector('[data-film-line]');
   if (film && filmCover) {
-    var filmScreen = film.parentNode;
-    var filmFrame = null;
-    var filmLine = 'orig';
-    try {
-      var savedFilmLine = localStorage.getItem('qxj.line');
-      if (savedFilmLine === 'orig' || savedFilmLine === 'cn') filmLine = savedFilmLine;
-      else if (/^Asia\/(Shanghai|Chongqing|Harbin|Urumqi)$/.test(Intl.DateTimeFormat().resolvedOptions().timeZone)) filmLine = 'cn';
-    } catch (e) {}
-    var filmStarted = false;
+    filmCover.hidden = false;
     var hideCover = function () { filmCover.hidden = true; };
-    var openFrame = function (t) {
-      if (!filmFrame) {
-        filmFrame = document.createElement('iframe');
-        filmFrame.className = 'film-frame';
-        filmFrame.title = lineBox.getAttribute('data-title');
-        filmFrame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
-        filmFrame.setAttribute('allow', 'autoplay; fullscreen');
-        filmFrame.setAttribute('allowfullscreen', '');
-        filmFrame.setAttribute('referrerpolicy', 'no-referrer');
-        filmScreen.appendChild(filmFrame);
-      }
-      filmFrame.src = lineBox.getAttribute('data-src') + (t ? '&t=' + Math.floor(t) : '');
-      film.pause();
-      film.hidden = true;
+    film.addEventListener('play', hideCover);
+    film.addEventListener('error', hideCover);
+    filmCover.addEventListener('click', function () {
       hideCover();
-    };
-    var closeFrame = function () {
-      if (filmFrame) { filmScreen.removeChild(filmFrame); filmFrame = null; }
-      film.hidden = false;
-    };
-    var filmStart = function () {
-      filmStarted = true;
-      hideCover();
-      if (filmLine === 'cn' && lineBox) { openFrame(0); return; }
       var p = film.play();
       if (p && p.catch) p.catch(function () {});
-    };
-    var setLine = function (next, user) {
-      filmLine = next;
-      if (lineBox) {
-        var bs = lineBox.querySelectorAll('button');
-        for (var k = 0; k < bs.length; k++) bs[k].setAttribute('aria-pressed', bs[k].getAttribute('data-line') === filmLine ? 'true' : 'false');
-      }
-      if (user) {
-        try { localStorage.setItem('qxj.line', filmLine); } catch (e) {}
-        if (filmStarted) {
-          if (filmLine === 'cn') openFrame(film.currentTime);
-          else { closeFrame(); var p = film.play(); if (p && p.catch) p.catch(function () {}); }
-        }
-      }
-    };
-    filmCover.hidden = false;
-    film.addEventListener('play', function () { filmStarted = true; hideCover(); });
-    film.addEventListener('error', hideCover);
-    filmCover.addEventListener('click', filmStart);
-    if (lineBox) {
-      lineBox.hidden = false;
-      setLine(filmLine, false);
-      lineBox.addEventListener('click', function (e) {
-        var b = e.target.closest ? e.target.closest('[data-line]') : null;
-        if (b && b.getAttribute('data-line') !== filmLine) setLine(b.getAttribute('data-line'), true);
-      });
-    }
+    });
   }
 
   // Section tracking for the nav.
