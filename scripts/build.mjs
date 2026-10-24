@@ -217,7 +217,16 @@ function lines(c, text) {
 const heroTitle = (c) => lines(c, bare(c.lede));
 
 // A Chinese line that may wrap only after its punctuation, never inside a phrase.
-const clauses = (c, text) => (c.lang !== 'zh-CN' ? T(c, text) : text.split(/(?<=[，：；])/).map((x) => `<span class="clause">${T(c, x)}</span>`).join(''));
+// v26.11: in centred lines the comma at a clause end goes (his rule: punctuation at a line end spoils centred text);
+// clauses are joined by a plain space, a small gap on one line that vanishes where the line wraps.
+// Centred lines (plain = true) drop the comma or 、 at a clause end; left-aligned sentences on case pages keep theirs.
+const clauses = (c, text, plain = false) => {
+  if (c.lang !== 'zh-CN') return T(c, text);
+  if (!plain) return text.split(/(?<=[，：；])/).map((x) => `<span class="clause">${T(c, x)}</span>`).join('');
+  // plain === 'list' keeps 、 (sentences that list things); otherwise a short centred line also drops a closing 、.
+  const at = plain === 'list' ? /(?<=[，：；])/ : /(?<=[，：；、])/;
+  return text.split(at).map((x) => `<span class="clause">${T(c, x.replace(/[，、]$/, ''))}</span>`).join(' ');
+};
 
 function hero(c) {
   return `<section class="tile hero" id="top" aria-labelledby="hero-title">
@@ -249,7 +258,7 @@ function heroFilm(c) {
 // Chinese phrases (split after ，and 、) never break inside, so lines break only at punctuation.
 function statement(c, text) {
   if (c.lang !== 'zh-CN') return text.split(/(\s+)/).map((p) => (/^\s+$/.test(p) ? p : `<span>${esc(p)}</span>`)).join('');
-  return text.split(/(?<=[，、])/).map((clause) => `<span class="clause">${[...clause].map((ch) => (ch === ' ' ? ' ' : `<span>${esc(ch)}</span>`)).join('')}</span>`).join('');
+  return text.split(/(?<=[，、])/).map((clause) => `<span class="clause">${[...clause.replace(/，$/, '')].map((ch) => (ch === ' ' ? ' ' : `<span>${esc(ch)}</span>`)).join('')}</span>`).join(' ');
 }
 
 const statValue = (slug, k) => stats[slug][k];
@@ -299,9 +308,9 @@ function showcase(c, { id, tone, name, line, story, note, site, siteLabel, caseU
 <div class="show-stage">
 <div class="show-head">
 <h3 id="${id}-title" class="show-name">${esc(name)}</h3>
-${line ? `<p class="show-line">${clauses(c, bare(line))}</p>` : ''}
+${line ? `<p class="show-line">${clauses(c, bare(line), true)}</p>` : ''}
 </div>
-${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : shot === 'signal' ? signalCard(c, caseUrl, name) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first })}
+${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : shot === 'signal' ? signalCard(c, caseUrl, name) : frame(c, { key: shot, alt, href: caseUrl, label: `${c.readCase} ${name}`, first, whole: shot.startsWith('site-prod-') })}
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${dots(c, note)}</p>` : ''}
@@ -350,7 +359,7 @@ function work(c) {
 <header class="tile plain works-head">
 <p class="eyebrow">${c.workTitle}</p>
 <h2 id="work-title">${lines(c, bare(c.workHeadline))}</h2>
-<p class="sub">${clauses(c, bare(c.workLine))}</p>
+<p class="sub">${clauses(c, bare(c.workLine), true)}</p>
 </header>
 ${CASES.map((cs) => projectShow(c, cs)).join('\n')}
 </section>`;
@@ -363,14 +372,14 @@ function share(c) {
 <div class="statement" data-statement>
 <p class="eyebrow">${s.title}</p>
 <h2 class="pull" id="share-title">${statement(c, bare(s.view))}</h2>
-<p class="said">${T(c, s.viewNote)}</p>
+<p class="said">${clauses(c, bare(s.viewNote), true)}</p>
 </div>
 <ol class="principles">
 ${s.principles.map(([k, h, q]) => `<li class="reveal"><p class="pr-k">${T(c, k)}</p><h3>${T(c, h)}</h3><p class="pr-q">“${T(c, q)}”</p></li>`).join('\n')}
 </ol>
 <div class="show-head">
 <h3 class="show-name">${esc(s.name)}</h3>
-<p class="show-line">${clauses(c, bare(s.intro))}</p>
+<p class="show-line">${clauses(c, bare(s.intro), true)}</p>
 </div>
 ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding 网站：用自然语言，创造可运行的作品' : 'The ai.vibecoding website (in Chinese): use natural language to create working products', name: s.name })}
 <div class="show-foot">
@@ -394,7 +403,7 @@ function books(c) {
 <div class="reveal">
 <p class="eyebrow">${esc(b.title)}</p>
 <h2 id="books-title">${T(c, bare(b.headline))}</h2>
-<p class="sub">${clauses(c, bare(b.line))}</p>
+<p class="sub">${clauses(c, bare(b.line), true)}</p>
 </div>
 <div class="shelf" role="tablist" aria-label="${esc(b.headline)}" data-shelf>
 ${b.list.map((k, i) => `<button type="button" class="cover" role="tab" id="${id(i)}-tab" aria-controls="${id(i)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><span class="visually-hidden">${T(c, k.t)}</span></button>`).join('\n')}
@@ -413,7 +422,7 @@ function follow(c) {
   return `<section id="follow" class="tile plain follow" aria-labelledby="follow-title">
 <div class="reveal">
 <p class="eyebrow">${esc(f.title)}</p>
-<h2 id="follow-title">${clauses(c, bare(f.headline))}</h2>
+<h2 id="follow-title">${clauses(c, bare(f.headline), true)}</h2>
 ${f.line ? `<p class="sub">${T(c, bare(f.line))}</p>` : ''}
 </div>
 <ul class="people">
@@ -428,7 +437,7 @@ function journey(c) {
 <div class="reveal">
 <p class="eyebrow">${c.pathTitle}</p>
 <h2 id="path-title">${lines(c, bare(c.pathHeadline))}</h2>
-<p class="sub">${clauses(c, bare(c.pathLine))}</p>
+<p class="sub">${clauses(c, bare(c.pathLine), true)}</p>
 </div>
 <ol class="path reveal">
 ${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3>${p.org ? `<p class="org">${T(c, p.org)}</p>` : ''}${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
@@ -465,7 +474,7 @@ function caseCard(c, cs) {
   const t = cs[c.lang === 'zh-CN' ? 'zh' : 'en'];
   return `<article class="card-tile product-card reveal">
 <p class="eyebrow">${esc(t.name)}</p>
-<h3><a href="${casePath(c, cs.slug)}">${clauses(c, bare(t.line))}</a></h3>
+<h3><a href="${casePath(c, cs.slug)}">${clauses(c, bare(t.line), true)}</a></h3>
 <p class="card-line">${dots(c, t.note)}</p>
 <p class="card-more" aria-hidden="true">${c.readCase}${chevron}</p>
 </article>`;
@@ -566,8 +575,8 @@ ${caseNav(c, cs, t, casePath(o, cs.slug))}
 <article class="case" aria-labelledby="case-title">
 <header class="tile plain case-head" id="top">
 <p class="eyebrow">${esc(L.howMade(t.name))}</p>
-<h1 id="case-title">${clauses(c, bare(t.title))}</h1>
-<p class="sub">${clauses(c, bare(t.sub))}</p>
+<h1 id="case-title">${clauses(c, bare(t.title), true)}</h1>
+<p class="sub">${clauses(c, bare(t.sub), 'list')}</p>
 ${t.links.length > 1 ? `<p class="cta">${t.links.slice(1).map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
 ${cs.image ? `<div class="case-frame">${frame(c, { key: cs.image.key, alt: t.imageAlt })}</div>` : ''}
 ${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
