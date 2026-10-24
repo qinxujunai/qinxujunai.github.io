@@ -2,6 +2,8 @@
 // (/work/<slug>/ and /en/work/<slug>/), 404.html and sitemap.xml.
 // No runtime dependencies: the output is plain HTML that GitHub Pages serves from main.
 import fs from 'node:fs';
+// The script URL carries a hash of its content, so a page never runs with a stale cached script (2026-10-24).
+const JS_VERSION = (await import('node:crypto')).createHash('sha256').update(fs.readFileSync('assets/site.js')).digest('hex').slice(0, 10);
 import path from 'node:path';
 import { content, SITE, GITHUB, VIBECODING } from '../src/content.mjs';
 import { CASES } from '../src/cases.mjs';
@@ -148,7 +150,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 <meta itemprop="image" content="${SITE}/share.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="${esc(c.name)}">
-<script src="/assets/site.js" defer></script>
+<script src="/assets/site.js?v=${JS_VERSION}" defer></script>
 </head>`;
 }
 
