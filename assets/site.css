@@ -2271,13 +2271,38 @@ main {
   width: 76px;
   height: 76px;
   margin: -38px 0 0 -38px;
+  overflow: hidden;
   border-radius: 50%;
   color: #fff;
-  background: rgba(0, 0, 0, 0.42);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.55);
-  transition: transform 0.2s ease;
+  /* v27.15 glass over the film's own frame (glass needs an image behind it): a light tint, blur with a saturation
+     lift, a bright rim along the top where light catches it, a hairline all round and a soft shadow. */
+  background: rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.22), 0 10px 28px -8px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Touched, the glass lights up from where the finger is (--gx/--gy, set in site.js), like Liquid Glass. */
+.film-disc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 65%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.film-cover:active .film-disc {
+  transform: scale(0.94);
+  transition-duration: 0.1s;
+}
+
+.film-cover:active .film-disc::after {
+  opacity: 1;
+  transition-duration: 0.08s;
 }
 
 .film-disc svg {
@@ -2380,6 +2405,68 @@ main {
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
+}
+
+/* v27.15 Things that are clickable as a whole lift a little on hover (desktop) and press in on touch, the way
+   Apple's product tiles do: transform and shadow only, 0.35s ease-out; press 0.98 on pointer-down. */
+a.frame,
+.signal-card,
+.things a,
+.course-cover {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.frame:hover,
+  .signal-card:hover,
+  .things a:hover,
+  .course-cover:hover {
+    transform: translateY(-4px);
+  }
+
+  a.frame:hover {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 44px 80px -26px rgba(0, 0, 0, 0.42);
+  }
+
+  .signal-card:hover {
+    box-shadow: 0 0 0 1px var(--hairline), 0 44px 80px -30px rgba(0, 0, 0, 0.42);
+  }
+
+  .things a:hover {
+    box-shadow: 0 18px 36px -20px rgba(0, 0, 0, 0.28);
+  }
+}
+
+a.frame:active,
+.signal-card:active,
+.things a:active,
+.course-cover:active,
+.demo-link:active {
+  transform: scale(0.98);
+  transition-duration: 0.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.frame,
+  .signal-card,
+  .things a,
+  .course-cover,
+  .film-disc {
+    transition: none;
+  }
+
+  a.frame:hover,
+  .signal-card:hover,
+  .things a:hover,
+  .course-cover:hover,
+  a.frame:active,
+  .signal-card:active,
+  .things a:active,
+  .course-cover:active,
+  .demo-link:active,
+  .film-cover:active .film-disc {
+    transform: none;
+  }
 }
 
 .signal-card:hover .sc-head {
@@ -2876,7 +2963,11 @@ html:not(.js) .book + .book {
 }
 
 .skill .frame {
-  margin-top: 32px;
+  margin: 32px auto 0; /* v27.15: centred; this tile is a plain block, unlike the work tiles whose frame sits in a centring column */
+}
+
+.skill .show-foot {
+  margin-top: 24px;
 }
 
 .course .person-id {
