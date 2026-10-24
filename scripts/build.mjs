@@ -262,12 +262,12 @@ const dots = (c, s) => bare(s).split(' · ').map((x) => `<span class="clause">${
 // A still picture: a project's website at its first screen, or the product at work. No browser chrome
 // (a fake window inside this site read as "another site in the site"). Phones get their own crop.
 // With href, the picture is a link to the project's page on this site; it never leads off the site.
-function frame(c, { key, alt, href, label, first = false }) {
+function frame(c, { key, alt, href, label, first = false, whole = false }) {
   const tag = href ? 'a' : 'div';
   // A product at work is shown a little smaller than a whole website, so it fits one screen with its name.
   return `<${tag} class="frame${key.startsWith('site-prod-') ? ' prod' : ''}"${href ? ` href="${href}"` : ''}>
 ${href ? `<span class="visually-hidden">${esc(label)}</span>` : ''}
-<span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: `${key}-card`, cls: 'frame-img', eager: first })}</span>
+<span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: whole ? '' : `${key}-card`, cls: 'frame-img', eager: first })}</span>
 </${tag}>`;
 }
 
@@ -535,7 +535,8 @@ function block(c, s, i) {
   if (s.list) parts.push(`<ul class="bullets">${s.list.map((x) => `<li>${T(c, x)}</li>`).join('')}</ul>`);
   if (s.timeline) parts.push(`<ol class="timeline">${s.timeline.map(([w, x]) => `<li><span class="when">${esc(w)}</span><span>${T(c, x)}</span></li>`).join('')}</ol>`);
   for (const p of s.after ?? []) parts.push(`<p>${T(c, p)}</p>`);
-  if (s.shot) parts.push(`<div class="sec-shot">${frame(c, { key: s.shot, alt: s.shotAlt })}</div>`);
+  // v26.9: a section picture is the whole screen on phones too; a phone crop of one card read as a broken fragment.
+  if (s.shot) parts.push(`<div class="sec-shot">${frame(c, { key: s.shot, alt: s.shotAlt, whole: true })}</div>`);
   return `<section class="case-sec" id="s${i + 1}" aria-labelledby="s${i + 1}-title">
 <h2 id="s${i + 1}-title">${clauses(c, s.h)}</h2>
 ${parts.join('\n')}

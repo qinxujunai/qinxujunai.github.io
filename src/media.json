@@ -31,14 +31,14 @@
     "1040": {
       "src": "/assets/media/site-wanxiang-1040.webp",
       "w": 1040,
-      "h": 967,
-      "kb": 25
+      "h": 348,
+      "kb": 10
     },
     "2080": {
       "src": "/assets/media/site-wanxiang-2080.webp",
       "w": 2080,
-      "h": 1934,
-      "kb": 66
+      "h": 696,
+      "kb": 23
     }
   },
   "site-ai-signal": {
@@ -81,8 +81,8 @@
     "1080": {
       "src": "/assets/media/site-wanxiang-card-1080.webp",
       "w": 1080,
-      "h": 2437,
-      "kb": 62
+      "h": 1468,
+      "kb": 35
     }
   },
   "site-ai-signal-card": {
