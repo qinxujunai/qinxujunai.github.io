@@ -5,9 +5,20 @@
 h2{font-size:17px;margin:24px 0 8px}video{width:100%;aspect-ratio:16/9;background:#000;display:block}p{color:#666;font-size:14px;margin:6px 0 0}</style></head>
 <body>
 <h1 style="font-size:20px;margin:0">播放测试（临时页面）</h1>
-<p>关掉 VPN，分别点两个播放，看哪个起播快、不卡，能不能拖进度条</p>
+<p>关掉 VPN，先点 A 看完，刷新页面再点 B。每个播放器下面会自动显示：起播用了几秒、卡了几次、下载速度</p>
 <h2>A · 腾讯云上海</h2>
 <video controls playsinline preload="none" src="https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4"></video>
+<p class="m">还没播放</p>
 <h2>B · Cloudflare</h2>
 <video controls playsinline preload="none" src="https://media.praxisai.online/too-late-to-love-you.mp4"></video>
+<p class="m">还没播放</p>
+<script>
+document.querySelectorAll("video").forEach(function(v){var m=v.nextElementSibling,t0=0,first=0,stalls=0;
+function show(){var b=0;try{b=v.buffered.length?v.buffered.end(v.buffered.length-1):0}catch(e){}
+var sec=(performance.now()-t0)/1000,mb=b/57.087*51.07;
+m.textContent="起播 "+(first?first.toFixed(1)+" 秒":"等待中")+" · 卡顿 "+stalls+" 次 · 已下载 "+mb.toFixed(1)+" MB · 约 "+(mb*8/sec).toFixed(1)+" Mb/秒";}
+v.addEventListener("play",function(){if(!t0){t0=performance.now();setInterval(show,500)}});
+v.addEventListener("playing",function(){if(!first)first=(performance.now()-t0)/1000});
+v.addEventListener("waiting",function(){if(first)stalls++});});
+</script>
 </body></html>
