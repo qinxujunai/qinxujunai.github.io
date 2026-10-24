@@ -617,7 +617,9 @@ export const CASES = [
     // Home page picture: the app's result page from a real run (v24, 2026-10-23): a 52-second China News Service clip
     // (Wikimedia Commons, CC BY 3.0) uploaded to the app in the cloud, transcribed by SenseVoice int8 on CPU in 5.3 s.
     // The same run as Audio2Text's site demo (Audio2Text showcase/README.md).
-    shot: 'site-prod-wanxiang',
+    // v26.1 (2026-10-24): the home page shows 万象成文's own website, its first page down to that real demo. A crop of
+    // one card from the result page read as a broken fragment on phones (he: 「不如上一版……至少是完整的产品本身的网页页面」).
+    shot: 'site-wanxiang',
     zh: {
       name: '万象成文',
       kind: '',
@@ -627,7 +629,7 @@ export const CASES = [
       line: '贴一个链接，拿回全部文字',
       note: 'Windows 版 · B 站、小宇宙、公众号已验证 · 本机处理不用显卡',
       why: '能读字幕就不转写；AI 校对只提建议，原文一个字不动',
-      shotAlt: '万象成文处理一段 52 秒中文视频的结果：左边是转写出的正文，右边是可以播放和下载的视频',
+      shotAlt: '万象成文的网站：把视频、播客和图文，直接变成可用的文字与媒体；下面是一次真实处理的演示',
       // His WeChat post the night he started (2026) and his answer (2026-10-21).
       story: '我想把一期两个小时的小宇宙播客转成文字，拿去跟 AI 聊。试了几个小程序，要么太长转不动，要么太贵。我不会写代码，那天晚上，还是按下了 Win+R。',
       imageAlt: '万象成文的网站：把视频、播客和图文，直接变成可用的文字与媒体。',
@@ -762,7 +764,7 @@ export const CASES = [
       line: 'Paste a link. Get every word back',
       note: 'For Windows · Tested on Bilibili, Xiaoyuzhou and WeChat articles · Runs locally, no GPU',
       why: 'If there are subtitles it skips transcription; AI proofreading only suggests, and the original is never touched',
-      shotAlt: 'Wanxiang after a 52-second Mandarin video (in Chinese): the transcribed text on the left, the playable video on the right',
+      shotAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media; below, a demo of a real run',
       story: 'I wanted to turn a two-hour podcast episode into text so I could discuss it with an AI. The apps I tried either couldn’t handle the length or cost too much. I couldn’t code. That night I pressed Win+R anyway.',
       imageAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media.',
       facts: [
