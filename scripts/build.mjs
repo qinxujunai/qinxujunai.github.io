@@ -403,7 +403,7 @@ ${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-lab
 <div class="listen" id="follow">
 <h3 class="listen-title">${clauses(c, bare(c.follow.headline), true)}</h3>
 <p class="sub">${clauses(c, bare(c.follow.line), true)}</p>
-<ul class="people">
+<ul class="people reveal">
 ${c.follow.list.map((k, i) => person(c, k, i)).join('\n')}
 </ul>
 </div>
@@ -415,7 +415,7 @@ ${c.follow.list.map((k, i) => person(c, k, i)).join('\n')}
 // one course). v27.2: the three Douyin creators sit together inside 阅读, under the books (his words: 「推荐的人是获取知识的一种」).
 function person(c, k, i) {
   const f = c.follow;
-  return `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="value">${T(c, k.value)}</p>${k.who ? `<p class="who">${T(c, k.who)}</p>` : ''}<p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
+  return `<li class="person"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="value">${T(c, k.value)}</p>${k.who ? `<p class="who">${T(c, k.who)}</p>` : ''}<p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
 }
 
 // v27.4: a small drawn icon on each of the three tiles (his words: 「不要光是一整块。你最好有点小的贴图」).
@@ -433,7 +433,6 @@ function three(c) {
 <div class="reveal">
 <p class="eyebrow">${esc(t.title)}</p>
 <h2 id="three-title">${lines(c, bare(t.headline))}</h2>
-<p class="sub">${clauses(c, bare(t.line), true)}</p>
 </div>
 <ol class="things reveal">
 ${t.items.map((k) => `<li><a href="#${k.id}">${thingIcon(k.icon)}<span class="thing-name">${T(c, k.name)}</span><span class="thing-line">${k.line.split(' · ').map((x) => `<span>${T(c, x)}</span>`).join('')}</span></a></li>`).join('\n')}
@@ -465,6 +464,7 @@ ${frame(c, { key: 'site-easyvibe', alt: r.alt })}
 }
 
 // 健身: his words 「他的一个头像，下面是他的系列课程，打开定位的是他的第一集」. The course cover stands like a small book.
+// v27.9: one compact head (cover beside title, episode and the coach with his avatar), then the text: about a screen less on phones.
 function fitness(c) {
   const t = c.three.fitness;
   return `<section id="fitness" class="tile soft fitness" aria-labelledby="fitness-title">
@@ -474,18 +474,20 @@ function fitness(c) {
 <p class="sub">${clauses(c, bare(t.line), true)}</p>
 </div>
 <article class="course reveal" aria-labelledby="course-title">
-<div class="person-id"><img class="avatar" src="/assets/media/follow-4.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><div><p class="coach">${T(c, t.coach)}</p><p class="handle">${T(c, t.handle)}</p><p class="handle">${T(c, t.who)}</p></div></div>
-<div class="course-body">
+<div class="course-head">
 <a class="course-cover" href="${t.url}" ${ext} tabindex="-1" aria-hidden="true"><img src="/assets/media/fit-course.webp" width="540" height="720" alt="" loading="lazy" decoding="async"></a>
-<div class="course-text">
+<div class="course-id">
 <p class="handle">${dots(c, t.meta)}</p>
 <h3 id="course-title">${T(c, t.course)}</h3>
 <p class="course-ep">${dots(c, t.ep)}</p>
+</div>
+<p class="coach-line"><img class="avatar" src="/assets/media/follow-4.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><span><span class="coach">${T(c, t.coach)}</span><span class="handle">${T(c, t.who)}</span></span></p>
+</div>
+<div class="course-text">
 <p class="who">${T(c, t.desc)}</p>
 <p class="book-k">${esc(t.whyLabel)}</p>
 <p class="person-why">${T(c, t.why)}</p>
 <p class="person-go"><a href="${t.url}" ${ext}>${esc(t.go)}${outward}<span class="visually-hidden"> ${esc(t.course)}</span></a></p>
-</div>
 </div>
 </article>
 </section>`;
