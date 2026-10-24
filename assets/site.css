@@ -2650,6 +2650,18 @@ a.frame:active,
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 22px 40px rgba(0, 0, 0, 0.22);
 }
 
+/* v27.16 Desktop: a book under the pointer comes off the shelf a little, as a finger hooks it; pressed, it gives. */
+@media (hover: hover) and (pointer: fine) {
+  .cover:not([aria-selected='true']):hover {
+    transform: translateY(-8px) rotate(-1.5deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 18px 30px rgba(0, 0, 0, 0.18);
+  }
+}
+
+.cover:not([aria-selected='true']):active {
+  transform: translateY(-4px) scale(0.97);
+}
+
 .cover:focus-visible {
   outline: 3px solid var(--link);
   outline-offset: 4px;
@@ -3234,4 +3246,35 @@ html:not(.js) .book + .book {
 
 .person .value + .book-k {
   margin-top: 18px;
+}
+
+/* v27.16 The three things: each icon does its one small thing on hover (a page turns, the spark turns, the weight lifts). */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .things a:hover .ti-book { animation: ti-book 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .things a:hover .ti-spark { animation: ti-spark 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .things a:hover .ti-weight { animation: ti-weight 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+  /* Creator cards are one link each (site.js): they lift, the face comes a little closer. */
+  .person { transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); cursor: pointer; }
+  .person:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.35); }
+  .person .avatar { transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .person:hover .avatar { transform: scale(1.06); }
+
+  /* Work pictures lean toward the pointer, as a focused poster does on Apple TV (angles set in site.js, ±3°). */
+  a.frame:hover,
+  .signal-card:hover {
+    transform: perspective(1200px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)) translateY(-4px);
+  }
+}
+
+.person:active { transform: scale(0.98); transition-duration: 0.1s; }
+
+@keyframes ti-book { 40% { transform: scaleX(0.78); } 100% { transform: none; } }
+@keyframes ti-spark { 45% { transform: rotate(72deg) scale(1.18); } 100% { transform: none; } }
+@keyframes ti-weight { 40% { transform: translateY(-5px); } 70% { transform: translateY(1px); } 100% { transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cover:not([aria-selected='true']):hover,
+  .cover:not([aria-selected='true']):active,
+  .person:active { transform: none; }
 }

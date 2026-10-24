@@ -133,3 +133,5 @@ CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome npx lighthouse ht
 - 小改（文字、颜色、间距、单个区块的样式）：`npm run build && npm run check`，手机和电脑各截一张改动处的图自己看，推送。不跑 `qa`，不跑线上 QA。
 - 大改（交互、脚本、播放器、首屏、跨仓库的改动）：上面的全套，加线上 QA。
 - 一次改好几处：中间只做小改那几步，最后统一跑一次全套。
+
+**上线用一条命令（v27.16）**：`npm run ship -- "改了什么"`（`scripts/ship.sh`）：构建、检查、以他的名义提交、`pull --rebase`（定时数据更新可能先到）、重建、推送。不要再手动一步步提交推送；检查不过就停在本地。GitHub Pages 推送后约 1 分钟生效，不用等着看线上，除非这次是大改。

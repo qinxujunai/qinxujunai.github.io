@@ -11,7 +11,8 @@
     "build": "node scripts/build.mjs",
     "icons": "node scripts/icons.mjs",
     "media": "node scripts/media.mjs",
-    "stats": "node scripts/stats.mjs"
+    "stats": "node scripts/stats.mjs",
+    "ship": "bash scripts/ship.sh"
   },
   "devDependencies": {
     "axe-core": "^4.10.2",
