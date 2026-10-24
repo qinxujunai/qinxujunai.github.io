@@ -3125,3 +3125,21 @@ html:not(.js) .book + .book {
     font-size: 21px;
   }
 }
+
+/* v27.5: each book opens on WeChat Read. */
+.book-go {
+  margin-top: 20px;
+  font-size: 17px;
+}
+
+.book-go a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.book-wr {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+}
