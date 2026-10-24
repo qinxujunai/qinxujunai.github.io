@@ -100,6 +100,9 @@ first <= 40 ? ok(`first screen ${first.toFixed(0)}KB over the wire ≤ 40KB`) : 
 const media = fs.readdirSync('assets/media').reduce((s, f) => s + kb(`assets/media/${f}`), 0);
 media <= 3000 ? ok(`all images ${media.toFixed(0)}KB ≤ 3000KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 3000KB`);
 
+// The film plays from the video's own src (v27.18): WeChat's in-app player on Android reads only src, never <source>.
+/<video id="film" src="https:\/\/media-1416754078[^"]+" data-sources="[^"]+"[^>]*x5-playsinline/.test(html['index.html']) && /<video id="film"[^>]*><\/video>/.test(html['index.html']) ? ok('film plays from src with a scripted fallback (WeChat)') : fail('the film must play from src, with no <source> children: WeChat ignores them');
+
 // 6. Copy lock (2026-10-24): the copy is final. Any changed word fails here until the owner agrees and `npm run lock` records it.
 import { checkCopy } from './copy-lock.mjs';
 const copyProblems = checkCopy(PAGES);
