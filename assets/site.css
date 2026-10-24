@@ -2631,7 +2631,7 @@ main {
 
 /* The open book: lifted and turned a little, as if its cover were swinging open. */
 .cover[aria-selected='true'] {
-  transform: translateY(-10px) perspective(700px) rotateY(-16deg);
+  transform: translateY(-12px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14), 0 22px 40px rgba(0, 0, 0, 0.22);
 }
 
@@ -2642,32 +2642,54 @@ main {
 
 .book-panels {
   width: 100%;
-  max-width: 860px;
-  margin: 24px auto 0;
+  max-width: 940px;
+  margin: 28px auto 0;
   text-align: left;
-}
-
-.book {
-  padding: 30px 28px;
-  border-radius: 22px;
-  background: var(--card);
 }
 
 html:not(.js) .book + .book {
   margin-top: 16px;
 }
 
-.js .book {
-  animation: book-open 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+/* An open book: a two-page spread. Cream paper in light mode, dark paper in dark mode; a thin fold in the middle. */
+.spread {
+  --paper: #fbfaf6;
+  --fold: rgba(0, 0, 0, 0.08);
+  position: relative;
+  display: grid;
+  border-radius: 6px 14px 14px 6px;
+  background: var(--paper);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.1);
+  perspective: 2200px;
 }
 
-@keyframes book-open {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
+:root[data-theme='dark'] .spread {
+  --paper: #1c1c1e;
+  --fold: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+
+.page {
+  padding: 28px 26px;
+}
+
+.page-l {
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--fold);
+}
+
+.pl-cover {
+  flex: none;
+  width: 76px;
+  height: auto;
+  border-radius: 2px 3px 3px 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 6px 14px rgba(0, 0, 0, 0.14);
 }
 
 .book h3 {
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.25;
   color: var(--ink);
 }
@@ -2688,12 +2710,6 @@ html:not(.js) .book + .book {
   color: var(--muted);
 }
 
-.book-cols {
-  display: grid;
-  gap: 22px;
-  margin-top: 22px;
-}
-
 .book-k {
   font-size: 13px;
   font-weight: 600;
@@ -2701,7 +2717,7 @@ html:not(.js) .book + .book {
 }
 
 .book-mine {
-  margin-top: 6px;
+  margin: 6px 0 24px;
   font-size: 19px;
   line-height: 1.6;
   color: var(--ink);
@@ -2715,18 +2731,101 @@ html:not(.js) .book + .book {
 }
 
 @media (min-width: 834px) {
-  .book {
-    padding: 40px 44px;
+  .spread {
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
   }
 
-  .book-cols {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+  .page {
+    padding: 44px 46px;
+  }
+
+  .page-l {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    border-bottom: 0;
+    border-right: 1px solid var(--fold);
+  }
+
+  .pl-cover {
+    width: 120px;
+  }
+
+  .book h3 {
+    font-size: 30px;
+  }
+}
+
+/* The cover: shown only while a book is being opened (JS adds .opening on a tap). It lies closed over the right
+   page, then swings open to the left around the spine; the left page appears as it lands. */
+.flap {
+  display: none;
+}
+
+.js .book.opening .flap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 50%;
+  display: block;
+  border-radius: 2px 14px 14px 2px;
+  overflow: hidden;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: cover-open 0.95s cubic-bezier(0.45, 0.05, 0.2, 1) forwards;
+}
+
+.flap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.js .book.opening .page-l {
+  animation: page-in 0.95s ease forwards;
+}
+
+.js .book.opening .page-r {
+  animation: page-r-in 0.95s ease forwards;
+}
+
+@keyframes cover-open {
+  from { transform: rotateY(0); }
+  to { transform: rotateY(-180deg); visibility: hidden; }
+}
+
+@keyframes page-in {
+  0%, 45% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes page-r-in {
+  0%, 20% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+/* Phones: one column, so the cover covers the whole page and opens to the left edge. */
+@media (max-width: 833px) {
+  .js .book.opening .flap {
+    left: 0;
+    width: 100%;
+    border-radius: 6px 14px 14px 6px;
+  }
+
+  @keyframes cover-open {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(-110deg); opacity: 0; visibility: hidden; }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cover { transition: none; }
-  .cover[aria-selected='true'] { transform: translateY(-6px); }
-  .js .book { animation: none; }
+  .js .book.opening .flap { display: none; }
+  .js .book.opening .page-l,
+  .js .book.opening .page-r { animation: none; }
+}
 }
