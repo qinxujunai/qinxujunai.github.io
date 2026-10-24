@@ -747,6 +747,7 @@ main {
 }
 
 .avatar {
+  align-self: flex-start;
   width: 72px;
   height: 72px;
   margin: 0 auto 20px;
@@ -2828,4 +2829,78 @@ html:not(.js) .book + .book {
   .js .book.opening .page-l,
   .js .book.opening .page-r { animation: none; }
 }
+
+/* 我推荐 (v26.5): three creators, one card each. */
+.people {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 1040px;
+  margin: 40px auto 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 26px 18px;
+  border-radius: 22px;
+  background: var(--soft);
+}
+
+.avatar {
+  align-self: flex-start;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.person h3 {
+  margin-top: 16px;
+  font-size: 24px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.handle {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.who {
+  margin: 10px 0 18px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.person-why {
+  margin-top: 6px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.person-go {
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 17px;
+}
+
+.person-go a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+@media (min-width: 834px) {
+  .people {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
 }

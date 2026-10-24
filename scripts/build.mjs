@@ -403,6 +403,22 @@ ${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-lab
 </section>`;
 }
 
+// 我推荐 (v26.5): three Douyin creators he follows. Their avatar, who they are (their own bio), his reason in his
+// words, and a link to their profile. People who shaped how he thinks, next to the books that did.
+function follow(c) {
+  const f = c.follow;
+  return `<section id="follow" class="tile plain follow" aria-labelledby="follow-title">
+<div class="reveal">
+<p class="eyebrow">${esc(f.title)}</p>
+<h2 id="follow-title">${T(c, bare(f.headline))}</h2>
+<p class="sub">${T(c, bare(f.line))}</p>
+</div>
+<ul class="people">
+${f.list.map((k, i) => `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`).join('\n')}
+</ul>
+</section>`;
+}
+
 // 推荐: before saying goodbye, one thing worth the reader's time. Not his work: Datawhale's open
 // course easy-vibe. What it is, one line, the site, one link.
 function recommend(c) {
@@ -480,6 +496,7 @@ ${hero(c)}
 ${work(c)}
 ${share(c)}
 ${books(c)}
+${follow(c)}
 ${journey(c)}
 ${recommend(c)}
 ${contact(c)}

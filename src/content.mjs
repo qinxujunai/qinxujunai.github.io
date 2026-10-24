@@ -95,6 +95,22 @@ export const content = {
 
     // A recommendation, not his work: Datawhale's open course easy-vibe. Facts from its README
     // (github.com/datawhalechina/easy-vibe, docs-readme/zh-CN, "你的学习路径"), checked 2026-10-21.
+    // v26.5 (2026-10-24): three Douyin creators he recommends. His reasons are his words (docs/his-words-2026-10-24.md).
+    // Who they are: from each profile's own bio, read 2026-10-24. Avatars: their public profile pictures.
+    // Links: the profile without his share tracking (his share link carried his own user id).
+    follow: {
+      title: '我推荐',
+      headline: '三位抖音博主',
+      line: '他们的视频，我看了很多年',
+      why: '我为什么推荐',
+      go: '去抖音看看',
+      list: [
+        { name: '杰克叔叔', handle: '抖音「Jack要加油」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: '每天更新健身，每周直播', why: '他有很多切片，是我 24 年刚毕业的时候刷到的。那句话改变了我很多：当你迷茫、焦虑、痛苦，不知道做什么的时候，就去健身、阅读、交朋友。我自己也加了学技能这一项。' },
+        { name: '鲁大魔', handle: '抖音「鲁大魔」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: '2003 年自学编程做网站，投资过软件、游戏、电商、工厂，现在做 AI', why: '我看了他很多视频，他的经历，还有很多商业方法论，我觉得非常棒。' },
+        { name: '童年终结者', handle: '抖音「童年终结者」', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '「是个普通人，有缺点，不完美」，在抖音分享第六年', why: '我觉得无论是知行合一，还是职场人性的很多东西，他的很多视频都非常好。' },
+      ],
+    },
+
     recommend: {
       title: '推荐',
       headline: '想系统学用 AI 做产品，我推荐 easy-vibe',
@@ -240,6 +256,19 @@ export const content = {
         { t: 'Nonviolent Communication', a: 'Marshall Rosenberg', ed: 'Chinese edition: Huaxia, tr. Liu Yi (revised)', mine: 'We often fear that saying what we need will get us attacked or make us look weak. Saying it honestly, without violence, really matters.', core: 'Keep four things apart when you speak: what you observed (without judging), what you feel, what you need, and what you ask for.' },
         { t: 'The Courage to Be Disliked', a: 'Ichiro Kishimi, Fumitake Koga', ed: 'Chinese edition: China Machine Press, tr. Qu Haixia', mine: 'What you do is your task; whoever bears the result is responsible for it. What others think is their task.', core: 'Adler’s “separation of tasks”: whoever ultimately bears the consequence owns the task. Don’t intrude on other people’s tasks, and don’t let them intrude on yours.' },
         { t: 'Cognitive Awakening (认知觉醒)', a: 'Zhou Ling', ed: 'Posts & Telecom Press', mine: 'Only real change counts: when a book changes how someone thinks, what they do, anything at all.', core: 'We have an instinctive brain, an emotional brain and a rational brain, and the first two are faster and stronger. Growth ranks: change > action > thinking > learning.' },
+      ],
+    },
+
+    follow: {
+      title: 'I recommend',
+      headline: 'Three creators on Douyin',
+      line: 'I have watched their videos for years',
+      why: 'Why I recommend them',
+      go: 'Watch on Douyin',
+      list: [
+        { name: 'Uncle Jack', handle: 'Douyin: Jack要加油', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAO-a9F9-OtKEJZjjL_CLIF-QrWBOcuGupqfH6jzu7_XW1w1bP5JVH-MMZ6ZqEjZ9v', who: 'Daily fitness, a live stream every week', why: 'I came across his clips in 2024, just after graduating. One line changed me a lot: when you feel lost, anxious or in pain and don’t know what to do, go to the gym, read, make friends. I added one more: learn a skill.' },
+        { name: 'Lu Damo', handle: 'Douyin: 鲁大魔', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAm-xPDmDstvdrD-gEQ6rzW2M5npKeNuQmCBt5iUyffs0', who: 'Taught himself to code and build websites in 2003; invested in software, games, e-commerce and factories; now works in AI', why: 'I have watched a lot of his videos: his story, and a lot of business thinking. I think they are excellent.' },
+        { name: 'Tongnian Zhongjiezhe', handle: 'Douyin: 童年终结者', url: 'https://www.iesdouyin.com/share/user/MS4wLjABAAAAqgTlGelEmVztKQAuVWbB-88uN0WDKJRl7P-53IERh5Y', who: '“Just an ordinary person, with flaws, not perfect”; six years of sharing on Douyin', why: 'On putting what you know into practice, and on how people work at work, so many of his videos are really good.' },
       ],
     },
 
