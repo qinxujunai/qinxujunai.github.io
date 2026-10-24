@@ -210,6 +210,15 @@
     var hideCover = function () { filmCover.hidden = true; };
     film.addEventListener('play', hideCover);
     film.addEventListener('error', hideCover);
+    // Glass touch (v27.15): the play disc lights up from the side the finger lands on.
+    var disc = filmCover.querySelector('.film-disc');
+    filmCover.addEventListener('pointerdown', function (e) {
+      if (!disc) return;
+      var r = disc.getBoundingClientRect();
+      var clamp = function (v) { return Math.max(0, Math.min(100, v)); };
+      disc.style.setProperty('--gx', clamp((e.clientX - r.left) / r.width * 100).toFixed(0) + '%');
+      disc.style.setProperty('--gy', clamp((e.clientY - r.top) / r.height * 100).toFixed(0) + '%');
+    });
     filmCover.addEventListener('click', function () {
       hideCover();
       var p = film.play();
