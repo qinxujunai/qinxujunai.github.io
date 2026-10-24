@@ -431,3 +431,17 @@ export const content = {
     },
   },
 };
+
+// His film, playable right in the first screen (v23). Nothing downloads until Play. One file, his 4K web version
+// (about 7 Mbps, never transcoded), served from three places in order (v27.8, 2026-10-24):
+//   1. Tencent Cloud Shanghai (轻量对象存储): GitHub Pages and Cloudflare are too slow in mainland China, where he and
+//      most viewers are; measured in WeChat without VPN: Tencent 1.0 s to first frame, 9.1 Mbps; Cloudflare 4.2 s, 4.2 Mbps.
+//   2. Cloudflare R2 (free traffic): the browser moves to it on its own if Tencent fails (e.g. the account runs out of money).
+//   3. The film repository on this origin: last resort.
+// These are the only resources the site loads from another origin; scripts/check.mjs allows exactly these.
+// Replacing the file: see AGENTS.md「影片的视频文件放在哪」.
+export const FILM_SOURCES = [
+  'https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4',
+  'https://media.praxisai.online/too-late-to-love-you.mp4',
+  '/too-late-to-love-you/media/film-mobile.mp4',
+];
