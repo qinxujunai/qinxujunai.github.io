@@ -236,7 +236,7 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' 
 <script>${sigStart}</script>
 <p class="visually-hidden">${esc(c.name)}</p>
 <h1 id="hero-title" class="rise" style="--d:.5s">${heroTitle(c)}</h1>
-<p class="sub rise" style="--d:.65s">${T(c, bare(c.now))}</p>
+<p class="sub rise" style="--d:.65s">${clauses(c, bare(c.now), 'list')}</p>
 <p class="cta rise" style="--d:.8s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
 ${heroFilm(c)}
 </section>`;
@@ -403,15 +403,22 @@ ${b.list.map((k, i) => `<button type="button" class="cover" role="tab" id="${id(
 <div class="book-panels">
 ${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><div class="spread"><div class="page page-l"><img class="pl-cover" src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span><span class="book-ed">${T(c, k.ed)}</span></h3></div><div class="page page-r"><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p></div><div class="flap" aria-hidden="true"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"></div></div></div>`).join('\n')}
 </div>
+<div class="listen" id="follow">
+<h3 class="listen-title">${clauses(c, bare(c.follow.headline), true)}</h3>
+<p class="sub">${clauses(c, bare(c.follow.line), true)}</p>
+<ul class="people">
+${c.follow.list.map((k, i) => person(c, k, i)).join('\n')}
+</ul>
+</div>
 </section>`;
 }
 
 // v27 (2026-10-24): 三件事: the headline, then the three things themselves (v27.1, his words: 「那哪三件事情呢？直接放出来啊」),
 // each a tile that jumps to its part: 阅读 (the shelf), 学技能 (easy-vibe first, ai.vibecoding small under it), 健身 (one coach,
-// one course). After them, the three Douyin creators together in one row of cards, as in v26.5 (he asked to keep them together).
+// one course). v27.2: the three Douyin creators sit together inside 阅读, under the books (his words: 「推荐的人是获取知识的一种」).
 function person(c, k, i) {
   const f = c.follow;
-  return `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
+  return `<li class="person reveal"><img class="avatar" src="/assets/media/follow-${i + 1}.webp" width="240" height="240" alt="" loading="lazy" decoding="async"><h3>${T(c, k.name)}</h3><p class="handle">${T(c, k.handle)}</p><p class="value">${T(c, k.value)}</p><p class="who">${T(c, k.who)}</p><p class="book-k">${esc(f.why)}</p><p class="person-why">“${T(c, k.why)}”</p><p class="person-go"><a href="${k.url}" ${ext}>${esc(f.go)}${outward}<span class="visually-hidden"> ${esc(k.name)}</span></a></p></li>`;
 }
 
 function three(c) {
@@ -423,7 +430,7 @@ function three(c) {
 <p class="sub">${clauses(c, bare(t.line), true)}</p>
 </div>
 <ol class="things reveal">
-${t.items.map((k, i) => `<li><a href="#${k.id}"><span class="thing-n">${i + 1}</span><span class="thing-name">${T(c, k.name)}</span><span class="thing-line">${T(c, k.line)}</span></a></li>`).join('\n')}
+${t.items.map((k, i) => `<li><a href="#${k.id}"><span class="thing-n">${i + 1}</span><span class="thing-name">${T(c, k.name)}</span><span class="thing-line">${k.line.split(' · ').map((x) => `<span>${T(c, x)}</span>`).join('')}</span></a></li>`).join('\n')}
 </ol>
 </section>`;
 }
@@ -475,20 +482,6 @@ function fitness(c) {
 </div>
 </div>
 </article>
-</section>`;
-}
-
-function follow(c) {
-  const f = c.follow;
-  return `<section id="follow" class="tile plain follow" aria-labelledby="follow-title">
-<div class="reveal">
-<p class="eyebrow">${esc(f.title)}</p>
-<h2 id="follow-title">${T(c, bare(f.headline))}</h2>
-<p class="sub">${T(c, bare(f.line))}</p>
-</div>
-<ul class="people">
-${f.list.map((k, i) => person(c, k, i)).join('\n')}
-</ul>
 </section>`;
 }
 
@@ -558,7 +551,6 @@ ${three(c)}
 ${books(c)}
 ${skill(c)}
 ${fitness(c)}
-${follow(c)}
 ${journey(c)}
 ${contact(c)}
 </main>
