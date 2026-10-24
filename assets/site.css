@@ -2777,15 +2777,14 @@ html:not(.js) .book + .book {
 .people {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 84%;
-  gap: 14px;
+  grid-auto-columns: 84vw;
+  gap: 12px;
   width: calc(100% + 2 * var(--gutter));
   max-width: 1040px;
   margin: 40px calc(-1 * var(--gutter)) 0;
-  padding: 4px var(--gutter) 14px;
+  padding: 4px 8vw 14px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-padding: 0 var(--gutter);
   scrollbar-width: none;
   list-style: none;
   text-align: left;
@@ -2793,7 +2792,12 @@ html:not(.js) .book + .book {
 
 .people::-webkit-scrollbar { display: none; }
 
-.person { scroll-snap-align: start; }
+.person { scroll-snap-align: center; }
+
+/* The card's head (avatar, name, handle) is centred; the paragraphs under it stay left-aligned so they read evenly. */
+.person > .avatar { align-self: center; }
+.person > h3,
+.person > .handle { text-align: center; }
 
 @media (min-width: 834px) {
   .people {
