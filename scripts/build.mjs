@@ -382,7 +382,7 @@ ${frame(c, { key: 'site-vibecoding', alt: c.lang === 'zh-CN' ? 'ai.vibecoding ç½
 // him), then what the book itself says. Covers are the real mainland editions (v26.2). Without JS
 // every book shows in full; with JS the covers become tabs and one book is open at a time.
 // Cover heights at 300px wide (assets/media/book-1â€¦6.webp), so each keeps its own proportions.
-const BOOK_H = [433, 429, 425, 400, 440, 406];
+const BOOK_H = [433, 453, 435, 445, 440, 406];
 function books(c) {
   const b = c.books;
   const id = (i) => `book-${i + 1}`;
