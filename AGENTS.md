@@ -127,3 +127,8 @@ npm run qa             # 首页：中/英 × 深/浅 × 三种视口；案例页
 CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome npx lighthouse http://127.0.0.1:4173/   # 移动端四项 ≥ 95（本地 SEO 因 canonical 指向线上会略低）
 ```
 推送后，对线上再跑一次：`npm run qa -- https://qinxujunai.github.io`。
+
+**按改动大小分档（2026-10-24 他同意：每次改都跑全套太慢）**：
+- 小改（文字、颜色、间距、单个区块的样式）：`npm run build && npm run check`，手机和电脑各截一张改动处的图自己看，推送。不跑 `qa`，不跑线上 QA。
+- 大改（交互、脚本、播放器、首屏、跨仓库的改动）：上面的全套，加线上 QA。
+- 一次改好几处：中间只做小改那几步，最后统一跑一次全套。
