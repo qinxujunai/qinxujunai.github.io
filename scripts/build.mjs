@@ -198,14 +198,6 @@ ${picks.map((p) => `<a href="#${p.id}" data-nav="${p.id}">${T(c, p.h)}</a>`).joi
 </header>`;
 }
 
-function footer(c) {
-  return `<footer class="foot">
-<div class="foot-inner">
-<span>© ${new Date().getFullYear()}</span>
-</div>
-</footer>`;
-}
-
 // ---------- Home ----------
 
 // The title is his: two clauses, one per line. In Chinese the comma between them goes (his note,
@@ -559,7 +551,6 @@ ${fitness(c)}
 ${journey(c)}
 ${contact(c)}
 </main>
-${footer(c)}
 </body>
 </html>
 `;
@@ -684,7 +675,6 @@ ${L.contactBody ? `<p class="sub">${T(c, L.contactBody)}</p>` : ''}
 <p class="cta"><a class="pill pill-lg" href="${home(c)}#contact">${c.addWechat}</a></p>
 </section>
 </main>
-${footer(c)}
 </body>
 </html>
 `;
