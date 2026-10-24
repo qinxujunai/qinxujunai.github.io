@@ -2496,11 +2496,6 @@ main {
 }
 
 @media (min-width: 834px) {
-  .people {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
   .principles {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -2778,16 +2773,38 @@ html:not(.js) .book + .book {
   .js .book.opening .page-r { animation: none; }
 }
 
-/* People he listens to (v26.5; v27: one card inside each of the three things). */
+/* People he listens to (v26.5). v27.9: on phones the three cards slide sideways like the shelf (three stacked cards were two screens). */
 .people {
   display: grid;
-  gap: 16px;
-  width: 100%;
+  grid-auto-flow: column;
+  grid-auto-columns: 84%;
+  gap: 14px;
+  width: calc(100% + 2 * var(--gutter));
   max-width: 1040px;
-  margin: 40px auto 0;
-  padding: 0;
+  margin: 40px calc(-1 * var(--gutter)) 0;
+  padding: 4px var(--gutter) 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 var(--gutter);
+  scrollbar-width: none;
   list-style: none;
   text-align: left;
+}
+
+.people::-webkit-scrollbar { display: none; }
+
+.person { scroll-snap-align: start; }
+
+@media (min-width: 834px) {
+  .people {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin: 40px auto 0;
+    padding: 0;
+    overflow: visible;
+  }
 }
 
 .person {
@@ -2846,8 +2863,6 @@ html:not(.js) .book + .book {
   min-height: 44px;
 }
 
-@media (min-width: 834px) {}
-
 /* Phones: the statement is sized so its longest phrase (14 characters) fits one line; nothing runs off the edge. */
 @media (max-width: 733px) {
   .share .statement .pull {
@@ -2900,18 +2915,36 @@ html:not(.js) .book + .book {
   margin-top: 32px;
 }
 
-.course .person-id {
+.course-head {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px 18px;
+  align-items: start;
+}
+
+/* Phones: the coach sits under the cover and title, full width; wider screens: beside the cover, under the title. */
+.coach-line {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
+}
+
+.coach-line > span {
+  display: flex;
+  flex-direction: column;
 }
 
 .course .avatar {
   align-self: center;
   flex: none;
-  width: 56px;
-  height: 56px;
+  width: 36px;
+  height: 36px;
   margin: 0;
+}
+
+.course-text {
+  margin-top: 20px;
 }
 
 /* The three things, right under their headline: three tiles, each jumps to its part. */
@@ -3035,22 +3068,16 @@ html:not(.js) .book + .book {
 }
 
 .coach {
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ink);
-}
-
-.course-body {
-  display: grid;
-  gap: 24px;
-  margin-top: 24px;
 }
 
 /* The course stands like a small book: a cover with a spine. */
 .course-cover {
   position: relative;
   display: block;
-  width: 168px;
+  width: 100%;
   border-radius: 2px 6px 6px 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 10px 24px rgba(0, 0, 0, 0.16);
 }
@@ -3062,16 +3089,16 @@ html:not(.js) .book + .book {
   border-radius: inherit;
 }
 
-.course-text h3 {
+.course-id h3 {
   margin-top: 4px;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.25;
   color: var(--ink);
 }
 
 .course-ep {
   margin-top: 6px;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--ink);
 }
 
@@ -3103,14 +3130,23 @@ html:not(.js) .book + .book {
 }
 
 @media (min-width: 734px) {
-  .course-body {
-    grid-template-columns: 200px 1fr;
-    gap: 36px;
-    align-items: start;
+  .course-head {
+    grid-template-columns: 160px 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 14px 32px;
   }
 
   .course-cover {
-    width: 200px;
+    grid-row: 1 / span 2;
+  }
+
+  .coach-line {
+    grid-column: 2;
+    align-self: start;
+  }
+
+  .course-id h3 {
+    font-size: 26px;
   }
 
   .course {
