@@ -219,57 +219,77 @@
     darks.forEach(function (el) { darkWatch.observe(el); });
   }
 
-  // His film in the first screen: the cover shows until Play. One file everywhere, his 4K web version (about 7 Mbps):
-  // the 14 Mbps original needed twice the bandwidth and stalled on desktop over slow links (2026-10-24).
+  // His film in the first screen: the cover shows until Play. Two lines (v26.7): 原画 is his 4K web version from this
+  // site; 国内 is his Bilibili upload in a sandboxed frame (no popups, no top navigation: it cannot open Bilibili).
+  // A China time zone starts on 国内 (faster there, and it keeps the film off GitHub's bandwidth); the choice is
+  // remembered. Nothing from Bilibili loads until someone presses Play on that line.
   var film = document.getElementById('film');
   var filmCover = document.querySelector('[data-film-play]');
+  var lineBox = document.querySelector('[data-film-line]');
   if (film && filmCover) {
-    filmCover.hidden = false;
-    var hideCover = function () { filmCover.hidden = true; };
-    film.addEventListener('play', hideCover);
-    film.addEventListener('error', hideCover);
-    filmCover.addEventListener('click', function () {
-      hideCover();
-      var p = film.play();
-      if (p && p.catch) p.catch(function () {});
-    });
-  }
-
-  // The domestic line (v26.6): GitHub is overseas and the film can stall on slow links in China. Once the film has
-  // started (or stalls for 2 seconds) a quiet button offers his Bilibili copy, played here in a sandboxed frame from the
-  // same second. The sandbox has no popups or top navigation, so it cannot send anyone to Bilibili.
-  var mirror = document.querySelector('[data-film-mirror]');
-  if (film && mirror) {
     var screen = film.parentNode;
     var frame = null;
-    var stallTimer = null;
-    var showMirror = function () { mirror.hidden = false; };
-    film.addEventListener('play', showMirror);
-    film.addEventListener('waiting', function () { clearTimeout(stallTimer); stallTimer = setTimeout(showMirror, 2000); });
-    film.addEventListener('playing', function () { clearTimeout(stallTimer); });
-    mirror.addEventListener('click', function () {
+    var line = 'orig';
+    try {
+      var savedLine = localStorage.getItem('qxj.line');
+      if (savedLine === 'orig' || savedLine === 'cn') line = savedLine;
+      else if (/^Asia\/(Shanghai|Chongqing|Harbin|Urumqi)$/.test(Intl.DateTimeFormat().resolvedOptions().timeZone)) line = 'cn';
+    } catch (e) {}
+    var started = false;
+    var hideCover = function () { filmCover.hidden = true; };
+    var openFrame = function (t) {
       if (!frame) {
-        var t = Math.floor(film.currentTime || 0);
-        film.pause();
         frame = document.createElement('iframe');
         frame.className = 'film-frame';
-        frame.title = mirror.getAttribute('data-title');
+        frame.title = lineBox.getAttribute('data-title');
         frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
         frame.setAttribute('allow', 'autoplay; fullscreen');
         frame.setAttribute('allowfullscreen', '');
         frame.setAttribute('referrerpolicy', 'no-referrer');
-        frame.src = mirror.getAttribute('data-src') + (t ? '&t=' + t : '');
         screen.appendChild(frame);
-        film.hidden = true;
-        if (filmCover) filmCover.hidden = true;
-        mirror.textContent = mirror.getAttribute('data-off');
-      } else {
-        screen.removeChild(frame);
-        frame = null;
-        film.hidden = false;
-        mirror.textContent = mirror.getAttribute('data-on');
       }
-    });
+      frame.src = lineBox.getAttribute('data-src') + (t ? '&t=' + Math.floor(t) : '');
+      film.pause();
+      film.hidden = true;
+      hideCover();
+    };
+    var closeFrame = function () {
+      if (frame) { screen.removeChild(frame); frame = null; }
+      film.hidden = false;
+    };
+    var start = function () {
+      started = true;
+      hideCover();
+      if (line === 'cn' && lineBox) { openFrame(0); return; }
+      var p = film.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    var setLine = function (next, user) {
+      line = next;
+      if (lineBox) {
+        var bs = lineBox.querySelectorAll('button');
+        for (var k = 0; k < bs.length; k++) bs[k].setAttribute('aria-pressed', bs[k].getAttribute('data-line') === line ? 'true' : 'false');
+      }
+      if (user) {
+        try { localStorage.setItem('qxj.line', line); } catch (e) {}
+        if (started) {
+          if (line === 'cn') openFrame(film.currentTime);
+          else { closeFrame(); var p = film.play(); if (p && p.catch) p.catch(function () {}); }
+        }
+      }
+    };
+    filmCover.hidden = false;
+    film.addEventListener('play', function () { started = true; hideCover(); });
+    film.addEventListener('error', hideCover);
+    filmCover.addEventListener('click', start);
+    if (lineBox) {
+      lineBox.hidden = false;
+      setLine(line, false);
+      lineBox.addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('[data-line]') : null;
+        if (b && b.getAttribute('data-line') !== line) setLine(b.getAttribute('data-line'), true);
+      });
+    }
   }
 
   // Section tracking for the nav.
