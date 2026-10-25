@@ -57,7 +57,8 @@ function zhText(s) {
     .replace(/(\d)<wbr>([–\-./:→])/g, '$1$2').replace(/([–\-./:])<wbr>(\d)/g, '$1$2') // "2026-10-19", "0–10"
     .replace(/<wbr>([，。、；：！？）」』”])/g, '$1')
     .replace(/([（「『“])<wbr>/g, '$1')
-    .replace(/<wbr>(\s)<wbr>/g, '$1');
+    .replace(/<wbr>(\s)<wbr>/g, '$1')
+    .replace(/(\d[\d.]*)(?:<wbr>)?%/g, '<span class="nw">$1%</span>'); // "40%" never splits from its number
 }
 const T = (c, s) => (c.lang === 'zh-CN' ? zhText(s) : esc(s));
 // Keep a date such as 2026-10-19 on one line.
@@ -180,7 +181,7 @@ function nav(c, { switchHref, onHome }) {
 <div class="nav-inner">
 <a class="nav-sig" href="${onHome ? '#top' : home(c)}" aria-label="${esc(c.name)} · ${esc(c.home)}">${onHome ? signatureRef('sig-mini', { seal: false }) : signature('sig-mini')}</a>
 <nav class="nav-links" aria-label="${esc(c.navLabel)}">
-${SECTIONS.map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a>`).join('\n')}
+${(c.nav.path ? ['work', 'share', 'three', 'path', 'contact'] : SECTIONS).map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a>`).join('\n')}
 </nav>
 <div class="nav-tools">
 <a href="${switchHref}" hreflang="${c.switchLang}" lang="${c.switchLang}">${c.switchLabel}</a>
@@ -518,9 +519,10 @@ function journey(c) {
 <h2 id="path-title">${lines(c, bare(c.pathHeadline))}</h2>
 <p class="sub">${clauses(c, bare(c.pathLine), true)}</p>
 </div>
-<ol class="path reveal">
+<ol class="path reveal${c.journey.some((p) => /\d{4}\.\d/.test(p.when)) ? ' months' : ''}">
 ${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3>${p.org ? `<p class="org">${T(c, p.org)}</p>` : ''}${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
 </ol>
+${c.resume ? `<p class="cta reveal"><a class="more-link" href="${c.resume.href}" download="${esc(c.resume.file)}">${c.resume.label}${chevron}</a></p>` : ''}
 </section>`;
 }
 
