@@ -103,6 +103,22 @@ media <= 3000 ? ok(`all images ${media.toFixed(0)}KB ≤ 3000KB (lazy-loaded bel
 // The film plays from the video's own src (v27.18): WeChat's in-app player on Android reads only src, never <source>.
 /<video id="film" src="https:\/\/media\.praxisai\.online\/too-late-to-love-you\.mp4" data-sources="[^"]+"[^>]*x5-playsinline/.test(html['index.html']) && /<video id="film"[^>]*><\/video>/.test(html['index.html']) ? ok('film plays from src with a scripted fallback (WeChat)') : fail('the film must play from src, with no <source> children: WeChat ignores them');
 
+// The shields.io fallback parser for GitHub counts (v27.20: 「1.2k」 used to become 1.2).
+try { execSync('node scripts/test-count.mjs', { stdio: 'pipe' }); ok('count parser handles 12, 1,234, 1.2k, 1.5M and rejects junk'); } catch (e) { fail(`count parser: ${e.stderr || e.message}`); }
+
+// scripts/push.sh says "pushed" only after a real push (v27.20: the old loop printed it after four refused pushes).
+try { execSync('bash scripts/test-push.sh', { stdio: 'pipe' }); ok('push.sh reports success only after a real push'); } catch (e) { fail(`push.sh: ${e.stdout || e.message}`); }
+
+// Docs (v27.20): the memory files keep their sections (one was lost to a careless append), and the current docs
+// do not send anyone to the old film repository.
+{
+  const need = { 'CLAUDE.md': ['## 他是谁', '## 他的原话', '## 决策记录', '## 否决过的方案', '## 待他补充', '## 工作环境备忘'], 'AGENTS.md': ['## 事实', '## 红线', '## 完成的定义'] };
+  const lost = Object.entries(need).flatMap(([f, hs]) => hs.filter((h) => !fs.readFileSync(f, 'utf8').includes(`\n${h}`)).map((h) => `${f} ${h}`));
+  lost.length ? fail(`missing sections: ${lost.join(', ')}`) : ok('CLAUDE.md and AGENTS.md keep all their sections');
+  const stale = ['README.md', 'AGENTS.md'].filter((f) => /qinxujunai\/laibuji-aini\b|github\.io\/laibuji-aini\//.test(fs.readFileSync(f, 'utf8')));
+  stale.length ? fail(`${stale.join(', ')} still point at the old film repository laibuji-aini`) : ok('README and AGENTS point at too-late-to-love-you');
+}
+
 // 6. Copy lock (2026-10-24): the copy is final. Any changed word fails here until the owner agrees and `npm run lock` records it.
 import { checkCopy } from './copy-lock.mjs';
 const copyProblems = checkCopy(PAGES);

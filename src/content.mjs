@@ -219,7 +219,7 @@ export const content = {
     copyWechat: '添加微信',
     copyOnly: '复制微信号',
     copied: '已复制 praxiscore 去微信搜索里粘贴',
-    notFound: { title: '这一页不存在', boback: '回到首页' },
+    notFound: { title: '这一页不存在', body: '链接可能写错了，或者页面已经搬走。', back: '回到首页' },
 
     // Project page chrome
     caseLabels: {
@@ -408,7 +408,7 @@ export const content = {
     copyWechat: 'Add on WeChat',
     copyOnly: 'Copy my WeChat ID',
     copied: 'Copied praxiscore · paste it into WeChat search',
-    notFound: { title: 'This page doesn’t exist', boback: 'Back to home' },
+    notFound: { title: 'This page doesn’t exist', body: 'The link may be mistyped, or the page has moved.', back: 'Back to home' },
 
     caseLabels: {
       crumb: 'Work',
