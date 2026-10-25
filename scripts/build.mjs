@@ -2,11 +2,25 @@
 // (/work/<slug>/ and /en/work/<slug>/), 404.html and sitemap.xml.
 // No runtime dependencies: the output is plain HTML that GitHub Pages serves from main.
 import fs from 'node:fs';
+import path from 'node:path';
 // The script URL carries a hash of its content, so a page never runs with a stale cached script (2026-10-24).
 const JS_VERSION = (await import('node:crypto')).createHash('sha256').update(fs.readFileSync('assets/site.js')).digest('hex').slice(0, 10);
-import path from 'node:path';
-import { content, SITE, GITHUB, VIBECODING, FILM } from '../src/content.mjs';
+import { content, SITE as PUBLIC_SITE, GITHUB, VIBECODING, FILM } from '../src/content.mjs';
 import { CASES } from '../src/cases.mjs';
+
+// Two sites from one codebase (2026-10-26). With no arguments this builds the public personal site in place.
+// `--profile <file> --out <dir>` builds the job-application site: the same pages plus his 经历 and a title under
+// his name, which live only in that private profile file (a private repository), so the public repo never
+// carries them. The profile's default export: { site, zh: {...}, en: {...} }, merged over src/content.mjs.
+const argv = process.argv.slice(2);
+const argOf = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
+const PROFILE_FILE = argOf('--profile');
+const OUT = path.resolve(argOf('--out') || '.');
+const PROFILE = PROFILE_FILE ? (await import(path.resolve(PROFILE_FILE))).default : null;
+if (PROFILE) for (const lang of ['zh', 'en']) Object.assign(content[lang], PROFILE[lang] || {});
+const SITE = PROFILE?.site || PUBLIC_SITE;
+// The job site is shared by link only: never indexed.
+const PRIVATE = Boolean(PROFILE);
 
 const read = (f) => fs.readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
 const stats = JSON.parse(read('src/stats.json'));
@@ -119,7 +133,8 @@ const other = (c) => content[c.lang === 'zh-CN' ? 'en' : 'zh'];
 const casePath = (c, slug) => `${c.path}work/${slug}/`;
 const caseOf = (slug) => CASES.find((x) => x.slug === slug);
 
-function head(c, { url, alt, title, description = c.description, noindex = false, preload = [] }) {
+function head(c, { url, alt, title, description = c.description, noindex: hide = false, preload = [] }) {
+  const noindex = hide || PRIVATE;
   const zhUrl = alt?.zh;
   const enUrl = alt?.en;
   return `<!doctype html>
@@ -227,6 +242,7 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' 
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
 <p class="visually-hidden">${esc(c.name)}</p>
+${c.heroRole ? `<p class="hero-role rise" style="--d:.4s">${T(c, c.heroRole)}</p>` : ''}
 <h1 id="hero-title" class="rise" style="--d:.5s">${heroTitle(c)}</h1>
 <p class="sub rise" style="--d:.65s">${clauses(c, bare(c.now), 'list')}</p>
 <p class="cta rise" style="--d:.8s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
@@ -561,7 +577,7 @@ ${three(c)}
 ${books(c)}
 ${skill(c)}
 ${fitness(c)}
-${journey(c)}
+${c.journey ? journey(c) : ''}
 ${contact(c)}
 </main>
 </body>
@@ -713,7 +729,8 @@ function notFound() {
 const pages = [];
 // The words of a "more" link sit in .lt, so on hover they underline and the › / ↗ does not (as on apple.com.cn).
 const wrapLinkText = (html) => html.replace(/(<a [^>]*class="[^"]*more-link[^"]*"[^>]*>)([^<]+)(<span class="chev)/g, '$1<span class="lt">$2</span>$3');
-const write = (file, html) => {
+const write = (rel, html) => {
+  const file = path.join(OUT, rel);
   if (file.endsWith('.html')) html = wrapLinkText(html);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, html);
@@ -728,7 +745,11 @@ for (const cs of CASES) {
 write('404.html', notFound());
 
 const pairs = [['/', '/en/'], ...CASES.map((cs) => [casePath(content.zh, cs.slug), casePath(content.en, cs.slug)])];
-fs.writeFileSync(
+if (PRIVATE) {
+  // The job site: copy the static files beside the pages, block crawlers, no sitemap.
+  for (const f of ['assets', 'favicon.svg', 'apple-touch-icon.png', 'og.png', 'share.png']) fs.cpSync(new URL(`../${f}`, import.meta.url), path.join(OUT, f), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
+} else fs.writeFileSync(
   'sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -737,4 +758,4 @@ ${pairs.map(([z, e]) => `<url><loc>${SITE}${z}</loc><xhtml:link rel="alternate" 
 </urlset>
 `,
 );
-for (const f of pages) console.log(f, `${(fs.statSync(f).size / 1024).toFixed(1)}KB`);
+for (const f of pages) console.log(path.relative(process.cwd(), f), `${(fs.statSync(f).size / 1024).toFixed(1)}KB`);
