@@ -22,7 +22,6 @@ export const content = {
     themeLabel: '切换深色或浅色',
     name: '秦徐俊',
     // The name card's two lines under the name. He presents himself, not an employer or a job title.
-    role: '做 AI 产品',
     org: 'qinxujunai.github.io',
     portraitAlt: '秦徐俊的照片',
     // First screen (his choice, 2026-10-20): avatar, signature, this headline, the product list, two actions.
@@ -166,19 +165,6 @@ export const content = {
       alt: 'easy-vibe 教程网站首页',
     },
 
-    pathTitle: '经历',
-    // v21: the path told as one line of growth (his stance: the media degree is what powers the AI work).
-    // The clients stay in the sub line; 「让内容被看见」 echoes his degree line at the bottom of the list.
-    pathHeadline: '从让内容被看见，到让 AI 落地',
-    pathLine: '做内容出身，做过乙方交付，也在甲方把 AI 用进真实业务',
-    journey: [
-      // v26 (2026-10-24): four lines, not a résumé (his words: a résumé on the home page has 「没有必要」).
-      // 奥普: his correction 2026-10-24: write it up to the signing; it did not fully land. Not 「至今」.
-      { when: '2026', role: 'AI 项目经理', org: '奥普智能科技', desc: '推动一家上市公司把协同办公从钉钉迁到飞书，从调研立项做到签约；内部的 AI 需求也由我来接，电商评论打标从一个人每天四五个小时缩到 10 分钟。' },
-      { when: '2024–2026', role: 'AI 方案与项目', org: '比智科技 · 一念智能', desc: '为金融、政企客户做 AI 项目：5 家以上客户进入采购评估；接手微众银行的 AI 课程项目，客户点名要我继续负责。' },
-      { when: '2023–2024', role: '商业内容交付', org: '专致网络', desc: '写了 150 多条信息流广告脚本，负责工商银行宣传片，从策划到交付。' },
-      { when: '本科', role: '网络与新媒体', org: '云南民族大学', desc: '学的是怎么做内容，怎么让内容被看见。', light: true },
-    ],
 
     // v23: the film plays in the hero, under his name and headline (his request, 2026-10-23: 「这个片子甚至可以放到我主页头像下面」).
     film: {
@@ -253,7 +239,6 @@ export const content = {
     switchLang: 'zh-CN',
     themeLabel: 'Switch between dark and light',
     name: 'Qin Xujun',
-    role: 'I build AI products.',
     org: 'qinxujunai.github.io',
     portraitAlt: 'Photo of Qin Xujun',
     lede: 'I build things with AI, and share how I do it',
@@ -364,15 +349,6 @@ export const content = {
       alt: 'The easy-vibe course website',
     },
 
-    pathTitle: 'Path',
-    pathHeadline: 'From getting content seen to getting AI shipped',
-    pathLine: 'Started in content, delivered AI for clients, and now put it to work in-house',
-    journey: [
-      { when: '2026', role: 'AI Project Manager', org: 'Aupu Smart Technology', desc: 'Led a listed company’s move from DingTalk to Feishu from research to a signed contract; took the in-house AI work too: tagging e-commerce reviews went from 4–5 hours a person a day to 10 minutes.' },
-      { when: '2024–2026', role: 'AI Solutions & Projects', org: 'Bizhi Technology · Yinian Intelligence', desc: 'AI projects for finance and public-sector clients: 5+ reached procurement review; took over a WeBank AI course project, and the client asked for me by name.' },
-      { when: '2023–2024', role: 'Branded Content Producer', org: 'Zhuanzhi Network', desc: 'Wrote 150-odd in-feed ad scripts and produced ICBC’s brand film from concept to delivery.' },
-      { when: 'B.A.', role: 'Network and New Media', org: 'Yunnan Minzu University', desc: 'How to make content, and how to get it seen.', light: true },
-    ],
 
     film: {
       name: '来不及爱你',
