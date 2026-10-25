@@ -11,7 +11,7 @@
 
 - 影片网站在单独的仓库 [`qinxujunai/too-late-to-love-you`](https://github.com/qinxujunai/too-late-to-love-you)，网址 `https://qinxujunai.github.io/too-late-to-love-you/`。
 - 本仓库的 `laibuji-aini/` 只放跳转页：影片仓库原名 `laibuji-aini`，2026-10-23 改名后，旧链接靠它们继续打开。
-- 首页首屏播放同一个视频文件，依次尝试 Cloudflare R2、腾讯云上海、影片仓库三个地址（`src/content.mjs` 的 `FILM_SOURCES`）。放在哪、为什么、怎么换文件，见 [docs/film-hosting.md](docs/film-hosting.md)。
+- 首页首屏播放同一个视频文件。它放在腾讯云上海和 Cloudflare R2 两处，一次用一套（现在是腾讯云），另一套只在当前这套完全打不开时顶上。用哪一套由影片仓库的 `src/hosts.json` 决定，本站的 `src/film-hosts.json` 是它的副本（`scripts/film-hosts.mjs` 抄来，不要手改）。换方案：在影片仓库运行 `npm run host -- cloudflare` 或 `tencent`，两个网站一起换。详见 [docs/film-hosting.md](docs/film-hosting.md)。
 
 ## 页面
 | 页面 | 地址 |
@@ -22,11 +22,12 @@
 | 万象成文：贴一个链接，拿回全部文字 | `/work/wanxiang/` |
 | 找不到页面 | `/404.html` |
 
-所有页面都有中英两版，支持深色和浅色，不依赖框架。外部请求只有一种：点了播放之后，从 Cloudflare R2 或腾讯云拿视频。
+所有页面都有中英两版，支持深色和浅色，不依赖框架。外部请求只有一种：点了播放之后，从当前方案（腾讯云或 Cloudflare R2）拿视频。
 
 ## 目录
 ```
-src/content.mjs        首页的全部文字（中英）和影片地址
+src/content.mjs        首页的全部文字（中英）
+src/film-hosts.json    影片放在哪（影片网站 hosts.json 的副本，自动更新）
 src/cases.mjs          三个作品页的全部文字、数字和出处
 src/stats.json         VoiceFlow、万象成文的 GitHub 数据（自动更新）
 src/signal.json        当天这期 AI Signal（自动更新）
@@ -40,9 +41,11 @@ copy.lock.json         文案锁定：所有页面看得见的字（npm run lock
 scripts/build.mjs      生成全部页面和 sitemap
 scripts/check.mjs      静态检查（含文案锁定、数字解析、推送脚本的测试）
 scripts/qa.mjs         浏览器验收
-scripts/ship.sh        一条命令上线：构建、检查、浏览器验收、提交、推送
+scripts/ship.sh        一条命令上线：同步影片地址、构建、检查、浏览器验收、提交、推送
+scripts/film-hosts.mjs 同步影片地址（ship 和每 6 小时的定时任务都会跑）
+scripts/test-player.cjs 播放器备用测试
 scripts/links.mjs      外链体检（每周一，.github/workflows/links.yml）
-scripts/stats.mjs      GitHub 数据（每 6 小时，.github/workflows/stats.yml）
+scripts/stats.mjs      GitHub 数据（每 6 小时，.github/workflows/stats.yml，同时同步影片地址）
 docs/copy.md           文案标准与出处
 CLAUDE.md              项目记忆：他是谁、他的原话、决策记录
 AGENTS.md              协作规则与完成的定义

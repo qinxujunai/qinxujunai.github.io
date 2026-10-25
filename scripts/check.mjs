@@ -6,6 +6,7 @@
 // 5. size budgets
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
+import path from 'node:path';
 
 let failed = 0;
 const fail = (msg) => { failed++; console.error('✗', msg); };
@@ -13,7 +14,9 @@ const ok = (msg) => console.log('✓', msg);
 
 // 1. Up to date
 import { CASES } from '../src/cases.mjs';
-import { FILM_SOURCES } from '../src/content.mjs';
+import { FILM } from '../src/content.mjs';
+// The film repository checked out next to this one, if any (its folder may still carry the old name).
+const SIBLING_FILM = [process.env.FILM_REPO, '../too-late-to-love-you', '../laibuji-aini'].find((d) => d && fs.existsSync(path.join(d, 'src/hosts.json'))) || '';
 const PAGES = ['index.html', 'en/index.html', '404.html', ...CASES.flatMap((c) => [`work/${c.slug}/index.html`, `en/work/${c.slug}/index.html`])];
 const readAll = () => Object.fromEntries(PAGES.map((f) => [f, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '']));
 const before = readAll();
@@ -67,14 +70,14 @@ const exists = (url) => {
 for (const [name, h] of Object.entries(html)) {
   const loads = [...h.matchAll(/<(?:script|img|link|source|iframe|video)\b[^>]*?\s(?:src|href)="([^"]+)"/g)]
     .map((m) => m[0].startsWith('<link') && /rel="(canonical|alternate)"/.test(m[0]) ? null : m[1])
-    .filter((u) => u && /^(https?:)?\/\//.test(u) && !FILM_SOURCES.includes(u));
+    .filter((u) => u && /^(https?:)?\/\//.test(u) && ![FILM.play, FILM.backup].includes(u));
   if (loads.length) fail(`${name} loads from another origin: ${loads.join(', ')}`);
   const blank = [...h.matchAll(/<a\b[^>]*href="https?:[^"]+"[^>]*>/g)].filter((m) => !/rel="noopener"/.test(m[0]));
   if (blank.length) fail(`${name}: external links without rel="noopener"`);
   const sizeless = [...h.matchAll(/<img\b[^>]*>/g)].filter((m) => !/width="/.test(m[0]) || !/height="/.test(m[0]));
   if (sizeless.length) fail(`${name}: images without width/height`);
   const internal = [...h.matchAll(/\s(?:href|src|srcset)="(\/[^"]*)"/g)].flatMap((m) => m[1].split(', ').map((u) => u.split(' ')[0]));
-  // /too-late-to-love-you/ is the film's own repository on this same origin (the film plays from there); it is checked
+  // /too-late-to-love-you/ is the film's own repository on this same origin; it is checked
   // by that repository and on the live site, not in this checkout.
   const broken = [...new Set(internal.filter((u) => !u.startsWith('/too-late-to-love-you/') && !exists(u)))];
   if (broken.length) fail(`${name}: internal links to missing files: ${broken.join(', ')}`);
@@ -100,8 +103,21 @@ first <= 40 ? ok(`first screen ${first.toFixed(0)}KB over the wire ≤ 40KB`) : 
 const media = fs.readdirSync('assets/media').reduce((s, f) => s + kb(`assets/media/${f}`), 0);
 media <= 3000 ? ok(`all images ${media.toFixed(0)}KB ≤ 3000KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 3000KB`);
 
-// The film plays from the video's own src (v27.18): WeChat's in-app player on Android reads only src, never <source>.
-/<video id="film" src="https:\/\/media\.praxisai\.online\/too-late-to-love-you\.mp4" data-sources="[^"]+"[^>]*x5-playsinline/.test(html['index.html']) && /<video id="film"[^>]*><\/video>/.test(html['index.html']) ? ok('film plays from src with a scripted fallback (WeChat)') : fail('the film must play from src, with no <source> children: WeChat ignores them');
+// The film (v27.18, 2026-10-25): plays from the video's own src (WeChat's in-app player on Android reads only src,
+// never <source>), from the active host in src/film-hosts.json, with the other host as its only fallback; that copy
+// matches the film site's src/hosts.json (npm run ship refreshes it first: scripts/film-hosts.mjs --strict).
+{
+  const want = `<video id="film" src="${FILM.play}" data-sources="${FILM.play} ${FILM.backup}"`;
+  const pages = ['index.html', 'en/index.html'];
+  const bad = pages.filter((p) => !html[p].includes(want) || !/<video id="film"[^>]*x5-playsinline[^>]*><\/video>/.test(html[p]));
+  const hosts = Object.keys(FILM.hosts);
+  bad.length || hosts.length !== 2 || !hosts.includes(FILM.active) ? fail(`the film must play from the active host (${FILM.active}) on src, with the other host as the only fallback and no <source> children: ${bad.join(', ')}`) : ok(`film plays from ${FILM.active} on src, the other host only if it cannot be reached`);
+  const film = SIBLING_FILM && path.join(SIBLING_FILM, 'src/hosts.json');
+  if (film) {
+    const f = JSON.parse(fs.readFileSync(film, 'utf8'));
+    f.active === FILM.active && JSON.stringify(f.hosts) === JSON.stringify(FILM.hosts) ? ok('film hosts match the film repository') : fail(`src/film-hosts.json (${FILM.active}) differs from the film repository's src/hosts.json (${f.active}): ship the film site first, then this one`);
+  }
+}
 
 // The shields.io fallback parser for GitHub counts (v27.20: 「1.2k」 used to become 1.2).
 try { execSync('node scripts/test-count.mjs', { stdio: 'pipe' }); ok('count parser handles 12, 1,234, 1.2k, 1.5M and rejects junk'); } catch (e) { fail(`count parser: ${e.stderr || e.message}`); }

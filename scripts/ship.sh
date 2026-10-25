@@ -2,16 +2,24 @@
 # One command from a finished change to live: build, check, commit as the owner, rebase on GitHub, rebuild, then
 # browser QA and the player test on a local server serving exactly that tree, then push. Anything failing stops it
 # before the push: nothing is published (a commit may stay local, which the next ship builds on).
+# First it copies the film site's hosts.json (where the film plays from), so both sites always use the same host.
 # Usage: npm run ship -- "what changed"
 set -euo pipefail
 msg="${1:?usage: npm run ship -- \"what changed\"}"
 who=(-c user.name=qinxujunai -c user.email=266454737+qinxujunai@users.noreply.github.com)
 branch="$(git branch --show-current)"
 port=4173
+node scripts/film-hosts.mjs --strict
 npm run -s build >/dev/null
 npm run -s check
 git add -A
-git "${who[@]}" commit -q -m "$msg"
+# Nothing new and nothing left unpushed from an earlier run: nothing to ship. A commit left by a run that stopped
+# before its push is shipped now.
+if git diff --cached --quiet; then
+  if [ -z "$(git rev-list "@{u}..HEAD" 2>/dev/null)" ]; then echo "nothing changed: nothing to ship"; exit 0; fi
+else
+  git "${who[@]}" commit -q -m "$msg"
+fi
 git pull -q --rebase origin "$branch"
 # Someone else (a scheduled data update) may have landed first: rebuild so the pages match the merged data.
 npm run -s build >/dev/null

@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 // Every word on the home page lives here, in both languages. Project pages live in src/cases.mjs.
 // Facts must trace to the owner's own words, his repositories, his resume, or his answers. See CLAUDE.md.
 // Lines marked "his words" are verbatim from text he committed himself (ai.vibecoding, May 2026).
@@ -431,17 +432,14 @@ export const content = {
 };
 
 // His film, playable right in the first screen (v23). Nothing downloads until Play. One file, his 4K web version
-// (about 7 Mbps, never transcoded), served from three places in order (v27.8, 2026-10-24):
-//   1. Tencent Cloud Shanghai (轻量对象存储): GitHub Pages and Cloudflare are too slow in mainland China, where he and
-//      most viewers are; measured in WeChat without VPN: Tencent 1.0 s to first frame, 9.1 Mbps; Cloudflare 4.2 s, 4.2 Mbps.
-//   2. Cloudflare R2 (free traffic): the browser moves to it on its own if Tencent fails (e.g. the account runs out of money).
-//   3. The film repository on this origin: last resort.
-// These are the only resources the site loads from another origin; scripts/check.mjs allows exactly these.
-// Replacing the file: see AGENTS.md「影片的视频文件放在哪」.
-// v27.19 (2026-10-25): Cloudflare first. He tested it in WeChat without VPN, 「完全没有问题」; R2 has no traffic fee, while
-// Tencent bills per GB. Tencent and then GitHub take over only when the address before them fails.
-export const FILM_SOURCES = [
-  'https://media.praxisai.online/too-late-to-love-you.mp4',
-  'https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4',
-  '/too-late-to-love-you/media/film-mobile.mp4',
-];
+// (never transcoded), on two hosts. Which one plays is decided in one place for both sites: the film repository's
+// src/hosts.json, copied here as src/film-hosts.json by scripts/film-hosts.mjs (never edit the copy; switch with
+// npm run host -- tencent | cloudflare in the film repository). The other host is used only when the active one cannot
+// be reached at all. These two addresses are the only resources the site loads from another origin.
+const filmHosts = JSON.parse(fs.readFileSync(new URL('./film-hosts.json', import.meta.url), 'utf8'));
+export const FILM = {
+  active: filmHosts.active,
+  play: filmHosts.hosts[filmHosts.active].play,
+  backup: Object.entries(filmHosts.hosts).find(([k]) => k !== filmHosts.active)[1].play,
+  hosts: filmHosts.hosts,
+};

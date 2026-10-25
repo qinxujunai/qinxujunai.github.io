@@ -5,7 +5,7 @@ import fs from 'node:fs';
 // The script URL carries a hash of its content, so a page never runs with a stale cached script (2026-10-24).
 const JS_VERSION = (await import('node:crypto')).createHash('sha256').update(fs.readFileSync('assets/site.js')).digest('hex').slice(0, 10);
 import path from 'node:path';
-import { content, SITE, GITHUB, VIBECODING, FILM_SOURCES } from '../src/content.mjs';
+import { content, SITE, GITHUB, VIBECODING, FILM } from '../src/content.mjs';
 import { CASES } from '../src/cases.mjs';
 
 const read = (f) => fs.readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
@@ -234,14 +234,14 @@ ${heroFilm(c)}
 </section>`;
 }
 
-// His film plays in the first screen (v23). Where the file comes from, and why: FILM_SOURCES in src/content.mjs.
+// His film plays in the first screen (v23). Which host it plays from: FILM in src/content.mjs (src/film-hosts.json).
 // v27.18: the address sits on the video's own src, never in <source> children. WeChat's in-app browser on Android
 // (Tencent X5/XWeb) takes the video over and reads only src, so <source> lists did not play there at all (2026-10-24);
 // the fallback to the next address is done in site.js. webkit-playsinline / x5-playsinline keep it in the page.
 function heroFilm(c) {
   const f = c.film;
   return `<figure class="hero-film">
-<div class="film-screen" id="film-watch"><video id="film" src="${FILM_SOURCES[0]}" data-sources="${esc(FILM_SOURCES.join(' '))}" controls playsinline webkit-playsinline x5-playsinline preload="none" poster="/assets/media/film-key-960.webp" width="960" height="540" aria-label="${esc(f.name)}"></video>
+<div class="film-screen" id="film-watch"><video id="film" src="${FILM.play}" data-sources="${esc(FILM.play + ' ' + FILM.backup)}" controls playsinline webkit-playsinline x5-playsinline preload="none" poster="/assets/media/film-key-960.webp" width="960" height="540" aria-label="${esc(f.name)}"></video>
 <button class="film-cover" type="button" data-film-play hidden aria-label="${esc(f.play)}"><img src="/assets/media/film-key-960.webp" srcset="/assets/media/film-key-960.webp 960w, /assets/media/film-key-2560.webp 2560w" sizes="(min-width: 1100px) 980px, calc(100vw - 40px)" width="960" height="540" alt="${esc(f.alt)}" fetchpriority="high" decoding="async"><span class="film-disc" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 3.5v13l10.5-6.5Z" fill="currentColor"/></svg></span></button></div>
 <figcaption><span class="film-name">${esc(f.name)}</span><span class="film-meta">${T(c, f.meta)}</span><a class="more-link" href="${esc(f.url)}" ${ext}>${esc(f.link)}${outward}</a></figcaption>
 </figure>`;

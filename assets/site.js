@@ -207,34 +207,33 @@
     darks.forEach(function (el) { darkWatch.observe(el); });
   }
 
-  // Leftover from the removed 线路 switch (v26.6–26.7): forget it on every phone that saved it.
-  try { localStorage.removeItem('qxj.line'); } catch (e) {}
-
-  // His film in the first screen: the cover shows until Play. One file everywhere, his 4K web version (about 7 Mbps).
-  // v26.6–26.7 tried his Bilibili upload as a domestic line (sandboxed embed); on his phone it would not play at all,
-  // and he does not want a second line or a switch (2026-10-24). Removed: one player, one file.
+  // His film in the first screen: the cover shows until Play. One file, his 4K web version, on two hosts.
   var film = document.getElementById('film');
   var filmCover = document.querySelector('[data-film-play]');
   if (film && filmCover) {
     filmCover.hidden = false;
     var hideCover = function () { filmCover.hidden = true; };
     film.addEventListener('play', hideCover);
-    // Fallback without <source> (v27.18; WeChat's player reads only src). An address is replaced by the next one,
-    // from the same second, when it errors, when it shows no picture within 10 s of Play (nothing at all, or only
-    // the file's metadata), or when playback has been stuck for 15 s. Ordinary buffering resumes well inside that.
-    // Each address is tried once, in order: Cloudflare R2, Tencent Shanghai, GitHub (scripts/test-player.cjs).
+    // The active host is on src (WeChat's player reads only src, v27.18), the other follows it in data-sources
+    // (src/film-hosts.json). The other is used only when the active one cannot be reached at all: an error, or nothing
+    // at all (not even the file's header) within 10 s of Play. A slow host is never switched away from (his rule,
+    // 2026-10-25). The switch resumes from the same second. scripts/test-player.cjs checks each case.
     var sources = (film.getAttribute('data-sources') || '').split(' ').filter(Boolean);
-    var at = 0, guard = 0, stuck = 0, played = false;
+    var at = 0, guard = 0;
     var last = function () { return at >= sources.length - 1; };
-    var clearTimers = function () { clearTimeout(guard); clearTimeout(stuck); };
-    // Armed by every 'play' event (the cover, the native controls, a resume after pause) until this address has shown
-    // a picture once. Play on a film that is already playing fires no 'play' and arms nothing.
-    var arm = function () { if (played || last()) return; clearTimeout(guard); guard = setTimeout(next, 10000); };
+    // Armed by every 'play' (the cover, the native controls) while nothing has arrived; cleared as soon as any bytes
+    // arrive ('progress': a slow host is not a dead one), by the file's header and by a pause.
+    var arrived = false;
+    var arm = function () {
+      if (film.readyState > 0 || arrived || last()) return;
+      clearTimeout(guard);
+      guard = setTimeout(function () { if (film.readyState === 0 && !arrived) next(); }, 10000);
+    };
     var next = function () {
-      clearTimers();
+      clearTimeout(guard);
       if (last()) return;
       var t = film.currentTime || 0;
-      played = false;
+      arrived = false;
       film.src = sources[++at];
       film.load();
       if (t) film.addEventListener('loadedmetadata', function () { film.currentTime = t; }, { once: true });
@@ -246,14 +245,9 @@
     };
     film.addEventListener('play', arm);
     film.addEventListener('error', next);
-    film.addEventListener('playing', function () { played = true; clearTimers(); });
-    film.addEventListener('pause', clearTimers);
-    // Stuck for 15 s after it had played: try the next address. On the last one there is nothing to switch to.
-    film.addEventListener('waiting', function () {
-      if (film.paused || !played || last()) return;
-      clearTimeout(stuck);
-      stuck = setTimeout(next, 15000);
-    });
+    film.addEventListener('progress', function () { arrived = true; clearTimeout(guard); });
+    film.addEventListener('loadedmetadata', function () { clearTimeout(guard); });
+    film.addEventListener('pause', function () { clearTimeout(guard); });
     filmCover.addEventListener('click', function () {
       hideCover();
       start();

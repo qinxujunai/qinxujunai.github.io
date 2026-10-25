@@ -1,6 +1,7 @@
 name: Refresh home page data
 
-# Every six hours: read VoiceFlow and 万象成文 numbers from GitHub. Every day at 10:07 Beijing time (02:07 UTC),
+# Every six hours: read VoiceFlow and 万象成文 numbers from GitHub, and the film site's hosts.json (which host the film
+# plays from, so this site follows a switch even if nobody ships it). Every day at 10:07 Beijing time (02:07 UTC),
 # right after AI Signal sends: read its latest.json for the home page card. Rebuild the pages and commit only if
 # something changed. Then ask GitHub Pages to rebuild.
 
@@ -33,6 +34,7 @@ jobs:
         run: |
           node scripts/stats.mjs
           node scripts/signal.mjs
+          node scripts/film-hosts.mjs
           node scripts/build.mjs
       - name: Commit if changed
         id: commit
@@ -43,7 +45,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/stats.json src/signal.json index.html en work sitemap.xml
+          git add src/stats.json src/signal.json src/film-hosts.json index.html en work sitemap.xml
           git commit -m "更新首页数据"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
