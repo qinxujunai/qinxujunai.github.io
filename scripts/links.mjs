@@ -1,12 +1,12 @@
-// Weekly link check (.github/workflows/links.yml): every outside link on the built pages, plus the film's video
-// files, must still open. A failure fails the workflow, and GitHub emails the owner.
+// Weekly link check (.github/workflows/links.yml): every outside link on the built pages, plus the film's play and
+// download addresses on both hosts, must still open; and this site must play from the same host as the film site. A failure fails the workflow, and GitHub emails the owner.
 // Redirects count as working (Douyin and WeChat Read share links redirect); 4xx/5xx and network errors do not.
 import fs from 'node:fs';
 import { CASES } from '../src/cases.mjs';
-import { FILM_SOURCES } from '../src/content.mjs';
+import { FILM } from '../src/content.mjs';
 
 const pages = ['index.html', ...CASES.map((c) => `work/${c.slug}/index.html`)];
-const urls = new Set(FILM_SOURCES.map((u) => new URL(u, 'https://qinxujunai.github.io/').href));
+const urls = new Set(Object.values(FILM.hosts).flatMap((h) => [h.play, h.download]));
 for (const p of pages) for (const m of fs.readFileSync(p, 'utf8').matchAll(/href="(https:\/\/[^"]+)"/g)) urls.add(m[1].replace(/&amp;/g, '&'));
 for (const u of [...urls]) if (/^https:\/\/qinxujunai\.github\.io\/?$/.test(u)) urls.delete(u);
 
@@ -24,6 +24,10 @@ async function probe(u) {
 }
 
 const bad = [];
+try {
+  const live = await (await fetch(`https://qinxujunai.github.io/too-late-to-love-you/hosts.json?t=${Date.now()}`)).json();
+  if (live.active !== FILM.active) bad.push(`the film site plays from ${live.active}, this site from ${FILM.active}: run npm run ship here`);
+} catch (e) { bad.push(`film site hosts.json: ${e.message}`); }
 for (const u of urls) {
   const s = await probe(u);
   const okay = typeof s === 'number' && s < 400;
