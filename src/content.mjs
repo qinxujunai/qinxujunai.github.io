@@ -438,8 +438,10 @@ export const content = {
 //   3. The film repository on this origin: last resort.
 // These are the only resources the site loads from another origin; scripts/check.mjs allows exactly these.
 // Replacing the file: see AGENTS.md「影片的视频文件放在哪」.
+// v27.19 (2026-10-25): Cloudflare first. He tested it in WeChat without VPN, 「完全没有问题」; R2 has no traffic fee, while
+// Tencent bills per GB. Tencent and then GitHub take over only when the address before them fails.
 export const FILM_SOURCES = [
-  'https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4',
   'https://media.praxisai.online/too-late-to-love-you.mp4',
+  'https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4',
   '/too-late-to-love-you/media/film-mobile.mp4',
 ];

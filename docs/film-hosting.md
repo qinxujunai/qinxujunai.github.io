@@ -14,10 +14,10 @@
 
 **注意**：QQ 浏览器里只有声音、没有画面，这是 QQ 浏览器的问题，换微信、系统浏览器都正常。别因为这个去改片子。
 
-## 现在的做法：一个播放器，三个地址，脚本往下换（v27.18）
+## 现在的做法：一个播放器，三个地址，脚本往下换（v27.18；v27.19 起 Cloudflare 第一）
 ```html
-<video src="https://media-1416754078.cos.ap-shanghai.myqcloud.com/too-late-to-love-you.mp4"
-       data-sources="腾讯云上海 Cloudflare R2 /too-late-to-love-you/media/film-mobile.mp4"
+<video src="https://media.praxisai.online/too-late-to-love-you.mp4"
+       data-sources="Cloudflare R2 腾讯云上海 /too-late-to-love-you/media/film-mobile.mp4"
        playsinline webkit-playsinline x5-playsinline ...>
 ```
 - **不能用 `<source>` 子元素**：2026-10-24 他在微信里放不出来，系统浏览器能放。微信在安卓上用腾讯 X5/XWeb 内核接管视频，只读 `video` 自己的 `src`，不认 `<source>` 列表。v27.8 那个测试页写的是 `src`，所以当时微信里能播。两站的 `check` 都会拦 `<source>`。
