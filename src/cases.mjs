@@ -424,7 +424,7 @@ export const CASES = [
               ['Hacker News 改用 Algolia，按整词匹配', '旧做法只看首页 30 条，按子串匹配，「said」也会被当成 AI', '首页接口'],
               ['凌晨起每 20 分钟排一次，先认领再等到 10:00', '只用 GitHub 就能吃下几个小时的延迟，不用另租服务器', '外部定时服务去触发'],
               ['Reddit 经 AINews 的每日汇总', '直接请求被 403；AINews 每天整理 Reddit 热帖，带讨论热度', '登录 Reddit 接口，要管账号和密钥'],
-              ['用 DeepSeek 的 chat 模型', '一年几美元', '更贵的推理模型'],
+              ['用 DeepSeek 的 flash 模型，开着深度思考', 'chat 模型 2026-07-24 已经退役；flash 是现在的版本，开着深度思考，想清楚再挑', '关掉深度思考，换更快的回答'],
             ],
           },
         },
@@ -558,7 +558,7 @@ export const CASES = [
               ['Hacker News through Algolia, whole-word matching', 'The old code read 30 front-page stories and matched substrings, so “said” counted as AI', 'The front-page API'],
               ['Queue from before dawn every 20 minutes; claim first, then wait for 10:00', 'GitHub alone absorbs hours of delay, with no server to rent', 'An external scheduler triggering the run'],
               ['Reddit through AINews’ daily recap', 'Direct requests get a 403; AINews collects the hottest threads every day, with their activity', 'Logging in to Reddit’s API, with an account and keys to manage'],
-              ['DeepSeek’s chat model', 'A few dollars a year', 'A pricier reasoning model'],
+              ['DeepSeek’s flash model, with thinking on', 'The chat model was retired on 2026-07-24; flash replaces it, and with thinking on it thinks before it picks', 'Thinking off, for faster answers'],
             ],
           },
         },
@@ -636,7 +636,7 @@ export const CASES = [
       facts: [
         ['角色', '独立开发'],
         ['时间', '2026'],
-        ['形态', 'Windows 桌面应用，另有网页预览'],
+        ['形态', 'Windows 桌面应用'],
         ['技术', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
       links: [['打开万象成文', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
@@ -699,7 +699,7 @@ export const CASES = [
             { t: '取文字', n: ['平台字幕 → 页面正文 → 转写', '命中字幕或正文，就跳过转写', '视频先下音轨，马上出文字；原视频在后台补齐'] },
             { t: '转写', n: ['默认 SenseVoice，CPU 即可', '有 NVIDIA 显卡时可以走 CUDA', 'CPU 版和显卡版在不同进程里，互不干扰'] },
           ],
-          after: ['同一套服务也能部署成网页预览；Windows 桌面端是完整的主产品。'],
+          after: ['只有 Windows 桌面版：抓取和转写都在你自己的电脑上。'],
         },
         {
           h: '取舍',
@@ -770,7 +770,7 @@ export const CASES = [
       facts: [
         ['Role', 'Built solo'],
         ['When', '2026'],
-        ['Form', 'Windows desktop app, plus a web preview'],
+        ['Form', 'Windows desktop app'],
         ['Stack', 'Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp'],
       ],
       links: [['Open Wanxiang', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
@@ -831,7 +831,7 @@ export const CASES = [
             { t: 'Get the text', n: ['Platform subtitles → page text → transcription', 'If subtitles or text exist, skip transcription', 'Video: fetch the audio first and deliver the text; the original video follows in the background'] },
             { t: 'Transcribe', n: ['SenseVoice on CPU by default', 'CUDA on an NVIDIA GPU, when there is one', 'CPU and GPU runtimes in separate processes'] },
           ],
-          after: ['The same service can also run as a web preview; the Windows app is the complete product.'],
+          after: ['There is only the Windows app: fetching and transcribing both happen on your own computer.'],
         },
         {
           h: 'Trade-offs',

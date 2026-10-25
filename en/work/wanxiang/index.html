@@ -78,7 +78,7 @@
 <dl>
 <div><dt>Role</dt><dd>Built solo</dd></div>
 <div><dt>When</dt><dd>2026</dd></div>
-<div><dt>Form</dt><dd>Windows desktop app, plus a web preview</dd></div>
+<div><dt>Form</dt><dd>Windows desktop app</dd></div>
 <div><dt>Stack</dt><dd>Tauri 2 · React · FastAPI · SenseVoice · Faster-Whisper · yt-dlp</dd></div>
 </dl>
 </aside>
@@ -120,7 +120,7 @@
 <li><p class="flow-t"><span class="flow-i" aria-hidden="true">3</span>Get the text</p><ul><li>Platform subtitles → page text → transcription</li><li>If subtitles or text exist, skip transcription</li><li>Video: fetch the audio first and deliver the text; the original video follows in the background</li></ul></li>
 <li><p class="flow-t"><span class="flow-i" aria-hidden="true">4</span>Transcribe</p><ul><li>SenseVoice on CPU by default</li><li>CUDA on an NVIDIA GPU, when there is one</li><li>CPU and GPU runtimes in separate processes</li></ul></li>
 </ol>
-<p>The same service can also run as a web preview; the Windows app is the complete product.</p>
+<p>There is only the Windows app: fetching and transcribing both happen on your own computer.</p>
 </section>
 <section class="case-sec" id="s7" aria-labelledby="s7-title">
 <h2 id="s7-title">Trade-offs</h2>
