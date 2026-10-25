@@ -219,27 +219,41 @@
     filmCover.hidden = false;
     var hideCover = function () { filmCover.hidden = true; };
     film.addEventListener('play', hideCover);
-    // v27.18 Fallback without <source> (WeChat's player reads only src): if an address fails, or gives nothing for
-    // 10 seconds after Play, the next one is tried from the same second. Tencent Shanghai, then Cloudflare, then GitHub.
+    // Fallback without <source> (v27.18; WeChat's player reads only src). An address is replaced by the next one,
+    // from the same second, when it errors, when it shows no picture within 10 s of Play (nothing at all, or only
+    // the file's metadata), or when playback has been stuck for 15 s. Ordinary buffering resumes well inside that.
+    // Each address is tried once, in order: Cloudflare R2, Tencent Shanghai, GitHub (scripts/test-player.cjs).
     var sources = (film.getAttribute('data-sources') || '').split(' ').filter(Boolean);
-    var at = 0, guard = 0;
+    var at = 0, guard = 0, stuck = 0, played = false;
+    var last = function () { return at >= sources.length - 1; };
+    var clearTimers = function () { clearTimeout(guard); clearTimeout(stuck); };
+    // Armed by every 'play' event (the cover, the native controls, a resume after pause) until this address has shown
+    // a picture once. Play on a film that is already playing fires no 'play' and arms nothing.
+    var arm = function () { if (played || last()) return; clearTimeout(guard); guard = setTimeout(next, 10000); };
     var next = function () {
-      clearTimeout(guard);
-      if (at >= sources.length - 1) return;
+      clearTimers();
+      if (last()) return;
       var t = film.currentTime || 0;
+      played = false;
       film.src = sources[++at];
       film.load();
       if (t) film.addEventListener('loadedmetadata', function () { film.currentTime = t; }, { once: true });
       start();
     };
     var start = function () {
-      clearTimeout(guard);
-      guard = setTimeout(function () { if (film.readyState < 1) next(); }, 10000);
       var p = film.play();
       if (p && p.catch) p.catch(function () {});
     };
+    film.addEventListener('play', arm);
     film.addEventListener('error', next);
-    film.addEventListener('loadedmetadata', function () { clearTimeout(guard); });
+    film.addEventListener('playing', function () { played = true; clearTimers(); });
+    film.addEventListener('pause', clearTimers);
+    // Stuck for 15 s after it had played: try the next address. On the last one there is nothing to switch to.
+    film.addEventListener('waiting', function () {
+      if (film.paused || !played || last()) return;
+      clearTimeout(stuck);
+      stuck = setTimeout(next, 15000);
+    });
     filmCover.addEventListener('click', function () {
       hideCover();
       start();
