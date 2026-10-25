@@ -2033,8 +2033,14 @@ main {
     gap: 24px;
   }
 
+  /* Month ranges (the job site) need the wider column and stay on one line. */
+  .path.months li {
+    grid-template-columns: 136px 1fr;
+  }
+
   .when {
     padding-top: 4px;
+    white-space: nowrap;
   }
 }
 
