@@ -21,7 +21,7 @@
        playsinline webkit-playsinline x5-playsinline ...>
 ```
 - **不能用 `<source>` 子元素**：2026-10-24 他在微信里放不出来，系统浏览器能放。微信在安卓上用腾讯 X5/XWeb 内核接管视频，只读 `video` 自己的 `src`，不认 `<source>` 列表。v27.8 那个测试页写的是 `src`，所以当时微信里能播。两站的 `check` 都会拦 `<source>`。
-- 备用由两站的 `site.js` 做：当前地址出错（欠费、403、404），或点播放 10 秒还没拿到数据，就换下一个，从同一秒接着放；三个都不行才显示提示。Chromium 里验证过：前两个打不开时依次换到第三个。
+- 备用由两站的 `site.js` 做：当前地址出错（欠费、403、404）、点播放 10 秒内没出画面（什么都没拿到，或只拿到片子信息），或播放中卡住 15 秒，就换下一个，从同一秒接着放；每个地址只试一次，三个都不行才显示提示。普通缓冲很快就恢复，不会触发。`scripts/test-player.cjs` 用合成测试画面逐种情况验证（v27.20）。
 - 腾讯云默认域名返回 `Content-Disposition: attachment` 和 `x-cos-force-download: true`（2024 年以后建的存储桶都这样）。普通浏览器和微信的播放器都不管它，测试页在微信里能播。要彻底去掉，只能绑定已经 ICP 备案的自定义域名（腾讯云官方说法）。
 - 个人网站的地址写在 `src/content.mjs` 的 `FILM_SOURCES`。`scripts/check.mjs` 只放行这三个，其他外部资源仍然不允许。
 - 影片网站的地址写在 `scripts/build.mjs` 的 `SOURCES`。「下载影片」链到腾讯云：默认域名本来就返回 `Content-Disposition: attachment`，点了直接下载。
