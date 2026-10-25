@@ -295,7 +295,7 @@
 
 - **v27.22（2026-10-25）**：他让我审查五个项目（技术是否过时、代码和文档有没有问题），看完后说「云资源全部关掉」「后面的你就去处理呗」。
   - 万象成文的云端预览（2026-05-15 部署：Hugging Face Space + Cloudflare Worker，绑 `wanxiang.praxisai.online`、`praxisai.men`）一直在线，而且线上是 5 月旧版：中转接口能替任何人抓任意网址（开放代理），转写接口不验证就调用他 Cloudflare 账号的 AI。已删除 Worker 和两个域名绑定；HF Space 要他在 Hugging Face 删除（我没有权限）。万象成文仓库 AGENTS.md 写明已关闭、不要重新部署。
-  - AI Signal：DeepSeek 官方 2026-07-24 退役了 `deepseek-chat`，改为 `deepseek-flash`，并关掉它默认开启的思考（保持原来的输出和费用）（ai-signal 4a9bf3d）。
+  - AI Signal：DeepSeek 官方 2026-07-24 退役了 `deepseek-chat`，改为 `deepseek-flash`（ai-signal 4a9bf3d）。他说深度思考就开着（默认），所以不设输出上限（思考也算在内，原来的 6000 会截断）、超时放到 10 分钟（ai-signal 0a781c8）。
   - VoiceFlow：锁定文件里 anyio、certifi（含被攻破的根证书）、filelock 有已知漏洞，升级（VoiceFlow 01befe5）；下次发版才进安装包。万象成文：yt-dlp 2026.8.19 → 2026.10.21（Audio2Text 1017b31）。
   - 本站：删掉 v4 挑签名字体时的对比工具 `scripts/lab/glyphs.mjs`（签名早已定稿，没有地方再用）；生成图片用的 sharp 0.33 → 0.35.5（修掉三个高危漏洞，只在本地生成图片时用）。
   - 审查结论里不做的：React、Vite、TypeScript 等大版本（对产品没有好处）；VoiceFlow 换模型（7 月实测 Qwen3-ASR、Fun-ASR-Nano 都不如 SenseVoice）；两个网站的样式、图片、脚本没有冗余。
