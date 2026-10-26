@@ -13,11 +13,10 @@ const fail = (msg) => { failed++; console.error('✗', msg); };
 const ok = (msg) => console.log('✓', msg);
 
 // 1. Up to date
-import { CASES } from '../src/cases.mjs';
 import { FILM } from '../src/content.mjs';
 // The film repository checked out next to this one, if any (its folder may still carry the old name).
 const SIBLING_FILM = [process.env.FILM_REPO, '../too-late-to-love-you', '../laibuji-aini'].find((d) => d && fs.existsSync(path.join(d, 'src/hosts.json'))) || '';
-const PAGES = ['index.html', 'en/index.html', '404.html', ...CASES.flatMap((c) => [`work/${c.slug}/index.html`, `en/work/${c.slug}/index.html`])];
+import { PAGES } from './pages.mjs';
 const readAll = () => Object.fromEntries(PAGES.map((f) => [f, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '']));
 const before = readAll();
 execSync('node scripts/build.mjs', { stdio: 'ignore' });
@@ -36,7 +35,8 @@ for (const f of PAGES.filter((p) => !p.startsWith('en/') && p !== '404.html')) {
 // His advice was spoken to one person; on a page it reads as a lecture. See docs/copy.md 「不对读者说教」.
 {
   const LECTURE = [/什么样的人/, /那种人/, /这(三|几|两)个人/, /也听这/, /去听/, /你得/, /你要/, /你应该/, /你会发现/, /时候就做三件事/, /照着练就行/, /不要迷信/, /要懂一点/, /先解决自己的问题/, /重要的是为了/];
-  const text = (h) => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, '').replace(/<wbr>/g, '');
+  // His own posts (写下的) are quoted word for word and attributed, so they sit outside this check (<!--live-->).
+  const text = (h) => h.replace(/<!--live-->[\s\S]*?<!--\/live-->/g, ' ').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, '').replace(/<wbr>/g, '');
   const hits = PAGES.filter((f) => !f.startsWith('en/')).flatMap((f) => LECTURE.filter((re) => re.test(text(html[f]).replace(/\s/g, ''))).map((re) => `${f}: ${re.source}`));
   hits.length ? fail(`lecturing copy:\n  ${hits.join('\n  ')}`) : ok('voice: no lecturing or labelling of readers');
 }
@@ -91,15 +91,16 @@ import zlib from 'node:zlib';
 const kb = (f) => fs.statSync(f).size / 1024;
 const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
 // v26 (2026-10-24): +2KB for the bookshelf and the three principles; v26.5 +2KB for 我推荐. The first screen has its own budget below.
-const heavy = PAGES.filter((f) => gz(f) > 29);
-heavy.length ? fail(`over 29KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 29KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
+// v27.27: 32KB for 写下的; every ten posts on the home page add about 1KB (docs/notes.md: mark old ones "home": false).
+const heavy = PAGES.filter((f) => gz(f) > 32);
+heavy.length ? fail(`over 32KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 32KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
 // v26.6: the domestic film line, WeChat copy buttons and the book opening. The first screen keeps its own budget.
-const budget = { 'assets/site.css': 55, 'assets/site.js': 16 }; // v27.2: 52KB for the reading section's people; v27.17: 55KB (Apple's measured hover rules; the v27.15–16 extras removed)
+const budget = { 'assets/site.css': 63, 'assets/site.js': 21 }; // v27.2: 52KB for the reading section's people; v27.17: 55KB (Apple's measured hover rules; the v27.15–16 extras removed); v27.27: 63/21KB for 写下的 (rail, sheet, /notes/)
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
 const first = gz('index.html') + gz('assets/site.js') + kb('assets/media/avatar-160.webp');
-first <= 40 ? ok(`first screen ${first.toFixed(0)}KB over the wire ≤ 40KB`) : fail(`first screen ${first.toFixed(0)}KB > 40KB`);
+first <= 44 ? ok(`first screen ${first.toFixed(0)}KB over the wire ≤ 44KB`) : fail(`first screen ${first.toFixed(0)}KB > 44KB`); // v27.27: 40 → 44KB (写下的 script and cards)
 const media = fs.readdirSync('assets/media').reduce((s, f) => s + kb(`assets/media/${f}`), 0);
 media <= 3000 ? ok(`all images ${media.toFixed(0)}KB ≤ 3000KB (lazy-loaded below the fold)`) : fail(`images ${media.toFixed(0)}KB > 3000KB`);
 

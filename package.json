@@ -13,7 +13,7 @@
     "media": "node scripts/media.mjs",
     "stats": "node scripts/stats.mjs",
     "ship": "bash scripts/ship.sh",
-    "lock": "node -e \"import('./scripts/copy-lock.mjs').then(async m=>{const {CASES}=await import('./src/cases.mjs');const P=['index.html','en/index.html','404.html',...CASES.flatMap(c=>['work/'+c.slug+'/index.html','en/work/'+c.slug+'/index.html'])];const r=m.checkCopy(P,'copy.lock.json',{write:true});r.forEach(x=>console.error(x));console.log('copy.lock.json written');process.exit(r.length?1:0)})\""
+    "lock": "node -e \"Promise.all([import('./scripts/copy-lock.mjs'),import('./scripts/pages.mjs')]).then(([m,{PAGES}])=>{const r=m.checkCopy(PAGES,'copy.lock.json',{write:true});r.forEach(x=>console.error(x));console.log('copy.lock.json written');process.exit(r.length?1:0)})\""
   },
   "devDependencies": {
     "axe-core": "^4.10.2",

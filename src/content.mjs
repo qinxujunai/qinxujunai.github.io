@@ -182,6 +182,19 @@ export const content = {
     // v27 (2026-10-24): the ending, written from his words (docs/his-words-2026-10-24.md 「结尾想说的话」), at his request
     // (「用顶级文笔……不要生搬硬套」). No graduation year (privacy), no employer names for the teaching years (his choice:
     // 「按你的想法」), no 「你」 at the reader (v26.11). It replaces the ai.vibecoding manifesto under the card (his choice).
+    // 写下的 (v27.27, 2026-10-26): his WeChat Moments; the latest three on the home page, every post on /notes/ (one line each, open for the whole text).
+    // The posts themselves live in src/notes.json (shared by both languages); format and rules: docs/notes.md.
+    notes: {
+      title: '朋友圈',
+      headline: '这些年写下的',
+      line: '每条一句，点开看全文',
+      all: '全部 {n} 条',
+      years: '年份',
+      pageTitle: '这些年写下的 · 秦徐俊',
+      pageLead: '{n} 条，新的在前，点开一条看全文',
+      pageDesc: '秦徐俊这些年在朋友圈写下的，每条全文，新的在前',
+      zhOnly: '',
+    },
     letter: {
       title: '天行健，君子以自强不息',
       body: [
@@ -362,6 +375,17 @@ export const content = {
     contactTitle: 'Contact',
     contactHeadline: 'Let’s talk',
     contactLead: 'AI, products, whatever you’re building',
+    notes: {
+      title: 'WeChat Moments',
+      headline: 'Things I have written',
+      line: 'One line from each, open one to read it all',
+      all: 'All {n} notes',
+      years: 'Years',
+      pageTitle: 'Things I have written · Qin Xujun',
+      pageLead: '{n} notes, newest first, open one to read it all',
+      pageDesc: 'What Qin Xujun has written on WeChat Moments over the years, each in full, newest first',
+      zhOnly: 'Written in Chinese',
+    },
     letter: {
       title: 'As heaven moves on, ceaselessly, so the noble keep striving',
       body: [

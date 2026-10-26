@@ -512,6 +512,89 @@ function fitness(c) {
 </section>`;
 }
 
+// ---------- 写下的 (v27.27, 2026-10-26) ----------
+// His WeChat Moments. Like an archive index (Apple Newsroom, Paul Graham's essays, Day One): one line per post, the
+// sentence he would quote, newest first. The home page shows the latest three and links to /notes/; there every post
+// is a row (date + that sentence) that opens in place to the whole text (<details>, works without JavaScript).
+// v27.27 first tried a sideways rail of cards; he said with dozens of posts 「在这儿划来划去？那我怎么知道有哪些？」.
+// The posts live in src/notes.json; the job site adds its own (work posts) through the profile's `moments`.
+// Format, rules and the design spec: docs/notes.md. The build refuses a post whose quote is not word for word in its
+// text, a bad date or a repeated id, so a mistake never ships.
+const NOTES = (() => {
+  const list = [...JSON.parse(read('src/notes.json')), ...(PROFILE?.moments || [])];
+  const squash = (s) => s.replace(/\s+/g, '');
+  const seen = new Set();
+  for (const n of list) {
+    const where = `notes: ${n.id || JSON.stringify(n).slice(0, 60)}`;
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(n.id || '')) throw new Error(`${where}: id must be lowercase letters, digits and -`);
+    if (seen.has(n.id)) throw new Error(`${where}: the id is used twice`);
+    seen.add(n.id);
+    if (!/^\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?$/.test(n.date || '')) throw new Error(`${where}: date must be YYYY-MM or YYYY-MM-DD`);
+    if (!n.quote || !n.text) throw new Error(`${where}: quote and text are both required`);
+    if (!squash(n.text).includes(squash(n.quote))) throw new Error(`${where}: the quote must appear word for word in the text`);
+    if (/<|>/.test(n.quote + n.text)) throw new Error(`${where}: plain text only, no HTML`);
+  }
+  // Newest first; a month-only date sorts as the start of that month.
+  return list.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
+})();
+const noteYear = (n) => n.date.slice(0, 4);
+const noteDate = (c, d) => {
+  const [y, m, day] = d.split('-').map(Number);
+  if (c.lang === 'zh-CN') return `${y} 年 ${m} 月${day ? ` ${day} 日` : ''}`;
+  const month = new Date(Date.UTC(y, m - 1, 1)).toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
+  return day ? `${month} ${day}, ${y}` : `${month} ${y}`;
+};
+// His text as paragraphs, with the quoted sentence in bold (the same sentence the row shows).
+const noteParas = (n) => {
+  const at = n.text.indexOf(n.quote);
+  const body = at < 0 ? esc(n.text) : `${esc(n.text.slice(0, at))}<strong>${esc(n.quote)}</strong>${esc(n.text.slice(at + n.quote.length))}`;
+  return body.split(/\n{2,}/).map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+};
+const n_ = (t, n) => t.replace('{n}', n);
+
+function notes(c) {
+  const t = c.notes;
+  if (!NOTES.length) return '';
+  return `<section id="notes" class="tile plain notes" aria-labelledby="notes-title">
+<div class="reveal">
+<p class="eyebrow">${esc(t.title)}</p>
+<h2 id="notes-title">${lines(c, bare(t.headline))}</h2>
+<p class="sub">${clauses(c, bare(t.line), true)}</p>
+</div>
+${LIVE(`<ol class="note-list reveal">
+${NOTES.slice(0, 3).map((n) => `<li><a href="${c.path}notes/#n-${n.id}"><time datetime="${n.date}">${noteDate(c, n.date)}</time><span class="note-q" lang="zh-CN">${esc(n.quote)}</span>${chevron}</a></li>`).join('\n')}
+</ol>
+<p class="cta"><a class="more-link" href="${c.path}notes/">${esc(n_(t.all, NOTES.length))}${chevron}</a></p>`)}
+</section>`;
+}
+
+// /notes/: every post, newest first, grouped by year. Each row opens in place to the whole text.
+function notesPage(c) {
+  const t = c.notes;
+  const o = other(c);
+  const ys = [...new Set(NOTES.map(noteYear))];
+  return `${head(c, { url: `${c.path}notes/`, alt: { zh: '/notes/', en: '/en/notes/' }, title: t.pageTitle, description: t.pageDesc })}
+<body class="notes-home">
+<a class="skip" href="#main">${c.skip}</a>
+${nav(c, { switchHref: `${o.path}notes/`, onHome: false })}
+<main id="main">
+<section class="tile plain notes-page" id="top" aria-labelledby="notes-page-title">
+<p class="eyebrow">${esc(t.title)}</p>
+<h1 id="notes-page-title">${lines(c, bare(t.headline))}</h1>
+${LIVE(`<p class="sub">${clauses(c, bare(n_(t.pageLead, NOTES.length)), true)}</p>`)}
+${t.zhOnly ? `<p class="notes-lang">${esc(t.zhOnly)}</p>` : ''}
+${ys.length < 2 ? '' : LIVE(`<nav class="note-years" aria-label="${esc(t.years)}">${ys.map((y) => `<a href="#y${y}">${y}</a>`).join('')}</nav>`)}
+${LIVE(ys.map((y) => `<div class="note-year" id="y${y}">
+<h2>${y}</h2>
+${NOTES.filter((n) => noteYear(n) === y).map((n) => `<details class="note" id="n-${n.id}"><summary><time datetime="${n.date}">${noteDate(c, n.date)}</time><span class="note-q" lang="zh-CN">${esc(n.quote)}</span><span class="note-x" aria-hidden="true"></span></summary><div class="note-text" lang="zh-CN">${noteParas(n)}</div></details>`).join('\n')}
+</div>`).join('\n'))}
+</section>
+</main>
+</body>
+</html>
+`;
+}
+
 function journey(c) {
   return `<section class="tile soft" id="path" aria-labelledby="path-title">
 <div class="reveal">
@@ -579,6 +662,7 @@ ${three(c)}
 ${books(c)}
 ${skill(c)}
 ${fitness(c)}
+${notes(c)}
 ${c.journey ? journey(c) : ''}
 ${contact(c)}
 </main>
@@ -745,8 +829,12 @@ for (const cs of CASES) {
   write(`en/work/${cs.slug}/index.html`, casePage(content.en, cs));
 }
 write('404.html', notFound());
+if (NOTES.length) {
+  write('notes/index.html', notesPage(content.zh));
+  write('en/notes/index.html', notesPage(content.en));
+}
 
-const pairs = [['/', '/en/'], ...CASES.map((cs) => [casePath(content.zh, cs.slug), casePath(content.en, cs.slug)])];
+const pairs = [['/', '/en/'], ...(NOTES.length ? [['/notes/', '/en/notes/']] : []), ...CASES.map((cs) => [casePath(content.zh, cs.slug), casePath(content.en, cs.slug)])];
 if (PRIVATE) {
   // The job site: copy the static files beside the pages, block crawlers, no sitemap.
   for (const f of ['assets', 'favicon.svg', 'apple-touch-icon.png', 'og.png', 'share.png']) fs.cpSync(new URL(`../${f}`, import.meta.url), path.join(OUT, f), { recursive: true });

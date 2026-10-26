@@ -3253,3 +3253,202 @@ html:not(.js) .book + .book {
 .person .value + .book-k {
   margin-top: 18px;
 }
+
+/* ---------- 写下的 (v27.27): his WeChat Moments as an archive index ----------
+   One row per post, as in Apple Newsroom or an iOS list: the date in the muted colour above the sentence he would quote,
+   hairlines between rows. The home page shows the latest three; /notes/ shows every post, each opening in place to
+   the whole text. Spec and numbers: docs/notes.md. */
+.note-list,
+.note-year {
+  max-width: 680px;
+  margin: 36px auto 0;
+  text-align: left;
+}
+
+.note-list {
+  border-top: 1px solid var(--hairline);
+}
+
+.note-list li,
+.note {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.note-list a,
+.note summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 16px;
+  align-items: center;
+  padding: 18px 4px;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.note-list time,
+.note time {
+  grid-column: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.note-q {
+  grid-column: 1;
+  margin-top: 4px;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.45;
+  word-break: normal;
+  line-break: strict;
+  text-wrap: pretty;
+}
+
+.note-list .chev,
+.note-x {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  color: var(--muted);
+}
+
+.note-list .chev {
+  font-size: 22px;
+}
+
+.notes .cta {
+  margin-top: 20px;
+}
+
+.notes-page h1 {
+  font-size: min(48px, 10vw);
+  line-height: 1.08;
+  font-weight: 600;
+}
+
+.notes-lang {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.note-years {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-top: 24px;
+}
+
+.note-years a {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 18px;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 36px;
+}
+
+.note-year {
+  margin-top: 48px;
+  scroll-margin-top: 64px;
+}
+
+.note-year h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 28px;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+}
+
+.note {
+  scroll-margin-top: 64px;
+}
+
+.note summary {
+  list-style: none;
+}
+
+.note summary::-webkit-details-marker {
+  display: none;
+}
+
+/* A plus that turns into a minus when the post is open (Apple's FAQ and support pages use the same). */
+.note-x {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.note-x::before,
+.note-x::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: transform 0.3s cubic-bezier(0, 0, 0.5, 1);
+}
+
+.note-x::after {
+  transform: rotate(90deg);
+}
+
+.note[open] .note-x::after {
+  transform: rotate(0deg);
+}
+
+.note-text {
+  padding: 0 4px 24px;
+}
+
+.note-text p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--body);
+  word-break: normal;
+  line-break: strict;
+}
+
+.note-text p + p {
+  margin-top: 14px;
+}
+
+.note-text strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+@media (min-width: 734px) {
+  .note-q {
+    font-size: 21px;
+  }
+
+  .note-list a,
+  .note summary {
+    padding: 22px 4px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .note-list a:hover .note-q,
+  .note summary:hover .note-q {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-x::before,
+  .note-x::after {
+    transition: none;
+  }
+}

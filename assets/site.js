@@ -276,6 +276,14 @@
     if (el) sectionObserver.observe(el);
   });
 
+  // 写下的 (/notes/): a link to one post (#n-…) opens that post.
+  var openNote = function () {
+    var el = location.hash.indexOf('#n-') === 0 && document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') { el.open = true; el.scrollIntoView(); }
+  };
+  openNote();
+  window.addEventListener('hashchange', openNote);
+
   // 书架: the covers are tabs; one book open at a time. Arrow keys move between covers (WAI-ARIA tabs).
   var shelf = document.querySelector('[data-shelf]');
   if (shelf) {
