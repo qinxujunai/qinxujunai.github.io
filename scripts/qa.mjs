@@ -65,6 +65,11 @@ for (const c of CASES) for (const path of [`/work/${c.slug}/`, `/en/work/${c.slu
   matrix.push({ path, scheme: 'light', width: 390, height: 844, ua: WECHAT_IOS, tag: 'iphone-wechat' });
   matrix.push({ path, scheme: 'dark', width: 1440, height: 900, mobile: false, tag: 'desktop' });
 }
+// 写下的 (v27.27): the full-text page, like a case page.
+for (const path of ['/notes/', '/en/notes/']) {
+  matrix.push({ path, scheme: 'light', width: 390, height: 844, ua: WECHAT_IOS, tag: 'iphone-wechat' });
+  matrix.push({ path, scheme: 'dark', width: 1440, height: 900, mobile: false, tag: 'desktop' });
+}
 for (const cfg of matrix) {
   const { ctx, page, errors, foreign } = await open(cfg);
   await page.goto(BASE + cfg.path, { waitUntil: 'load' });
@@ -155,6 +160,45 @@ for (const [ua, tag, expectSave] of [[WECHAT_IOS, 'wechat', false], [SAFARI, 'ph
   const fill = await page.evaluate(() => getComputedStyle(document.querySelector('.hero .sig path')).fill);
   const anim = await page.evaluate(() => getComputedStyle(document.querySelector('.hero .sig path')).animationName);
   check(anim === 'none' && fill !== 'transparent' && fill !== 'rgba(0, 0, 0, 0)', `reduced motion: no animation, fill ${fill}`);
+  await ctx.close();
+}
+
+// 5.5 写下的: tapping a card opens its whole post in the sheet (text from /notes/notes.json), axe passes with it open,
+// 「下一条」 moves on, Esc closes it and focus goes back to the card. Without JavaScript the card is a link to /notes/.
+for (const width of [390, 1440]) {
+  const { ctx, page, errors } = await open({ width, height: 844, ua: width < 700 ? WECHAT_IOS : undefined, mobile: width < 700 });
+  await page.goto(BASE + '/', { waitUntil: 'load' });
+  await page.locator('#notes').scrollIntoViewIfNeeded();
+  const first = page.locator('.note-card a').first();
+  const quote = await first.locator('blockquote').textContent();
+  await first.click();
+  await page.waitForTimeout(700);
+  const open1 = await page.evaluate(() => document.querySelector('[data-note-sheet]').open);
+  const body = await page.locator('[data-sheet-body]').textContent();
+  await page.addScriptTag({ content: axeSource });
+  const axe = await page.evaluate(async () => (await window.axe.run(document.querySelector('[data-note-sheet]'), { runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] })).violations.map((v) => v.id));
+  const strong = await page.locator('[data-sheet-body] strong').first().textContent().catch(() => '');
+  const nextOn = await page.locator('[data-sheet-step="1"]').isEnabled();
+  if (nextOn) await page.locator('[data-sheet-step="1"]').click();
+  const body2 = await page.locator('[data-sheet-body]').textContent();
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(300);
+  const closed = await page.evaluate(() => !document.querySelector('[data-note-sheet]').open && !document.documentElement.classList.contains('sheet-open'));
+  const back = await page.evaluate(() => document.activeElement && document.activeElement.matches('.note-card a'));
+  check(open1 && body.includes(quote.trim()) && strong.trim() === quote.trim(), `notes ${width}: the sheet opens with the whole post, its quote in bold`);
+  check(axe.length === 0, `notes ${width}: axe with the sheet open ${axe.join(' ; ')}`);
+  check(!nextOn || body2 !== body, `notes ${width}: 下一条 shows the next post`);
+  check(closed && back, `notes ${width}: Esc closes the sheet and focus returns to the card`);
+  check(errors.length === 0, `notes ${width}: errors ${errors.join(' ; ')}`);
+  await ctx.close();
+}
+{
+  const { ctx, page } = await open({ js: false });
+  await page.goto(BASE + '/', { waitUntil: 'load' });
+  const href = await page.locator('.note-card a').first().getAttribute('href');
+  await page.goto(BASE + href, { waitUntil: 'load' });
+  const target = await page.evaluate((id) => Boolean(document.getElementById(id)), href.split('#')[1]);
+  check(href.startsWith('/notes/#n-') && target, `no JS: a note card links to its post on /notes/ (${href})`);
   await ctx.close();
 }
 
