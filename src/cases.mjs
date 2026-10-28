@@ -330,10 +330,10 @@ export const CASES = [
       name: 'AI Signal',
       kind: '',
       title: '每天上午一期，几分钟读完当天的 AI。',
-      sub: '每天读一遍 X、Hacker News、论文和实验室博客，只留下值得看的，北京时间 10:00 整发出。',
+      sub: '每天读一遍 X、Hacker News、论文和实验室博客，只留下值得看的，计划在北京时间 10:00 发出。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
       line: '每天十点，值得看的 AI 消息，一页读完',
-      note: '北京时间每天 10:00 送达 · 每条都附原文 · 往期都能翻',
+      note: '计划每天北京时间 10:00 发出 · 每条都附原文 · 往期都能翻',
       why: '模型只能写编号，链接和数字由程序填回，编不出一个假链接',
       shotAlt: 'AI Signal 10 月 23 日那期：标题「OpenAI 估值目标下调至 1.25 万亿美元」，下面是 30 秒读完的三条',
       // His answer, 2026-10-21.
@@ -348,7 +348,7 @@ export const CASES = [
       links: [['打开 AI Signal', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11 类', l: '信源' },
-        { v: '10:00', l: '每天准点送达' },
+        { v: '10:00', l: '计划发送时间（北京时间）' },
         // 10-23 issue: Send step 10:00:00–10:00:03 Beijing (run 39870655280).
         { v: '0 条', l: '模型自己写的链接' },
         // scripts/prepare-digest.js keeps data/seen.json for 60 days.
@@ -372,8 +372,8 @@ export const CASES = [
           ],
         },
         {
-          h: '10:00 整，不早不晚',
-          nav: '准点',
+          h: '每天计划在 10:00 发出',
+          nav: '发送时间',
           p: [
             'GitHub 的定时任务高峰期会晚好几个小时：10-22 定在 09:41 的任务，14:32 才开始跑。现在从凌晨四点起每 20 分钟排一次队，第一个启动的认领当天，09:35 读完、编好，等到 10:00:00 发出；其余的看到已经发过，就自己退出。',
             // ai-signal Actions run 39870655280 (Send step 02:00:00–02:00:03 UTC).
@@ -469,10 +469,10 @@ export const CASES = [
       name: 'AI Signal',
       kind: '',
       title: 'One issue each morning: the day’s AI in a few minutes.',
-      sub: 'Every day it reads X, Hacker News, papers and lab blogs, keeps what’s worth reading, and sends it at exactly 10:00 Beijing time.',
+      sub: 'Every day it reads X, Hacker News, papers and lab blogs, keeps what’s worth reading, and aims to send it at 10:00 Beijing time.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
       line: 'Every day at 10:00, the AI news worth reading, on one page',
-      note: 'Arrives daily at 10:00 Beijing time · Every item links to its source · Full archive',
+      note: 'Scheduled for 10:00 Beijing time daily · Every item links to its source · Full archive',
       why: 'The model may only cite item numbers; code fills in every link and number, so it cannot invent one',
       shotAlt: 'The 23 Oct issue of AI Signal (in Chinese): the headline, then three items to read in 30 seconds',
       story: 'Hundreds of AI updates arrive every day. The hard part isn’t seeing them; it’s telling which are credible and which are worth reading. I also want to know about good GitHub projects early, and what problem each one solves. So it reads everything for me each morning.',
@@ -486,7 +486,7 @@ export const CASES = [
       links: [['Open AI Signal', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11', l: 'Source types' },
-        { v: '10:00', l: 'On time, every day' },
+        { v: '10:00', l: 'Scheduled send time (Beijing)' },
         { v: '0', l: 'Links written by the model' },
         { v: '60 days', l: 'Before anything repeats' },
       ],
@@ -507,8 +507,8 @@ export const CASES = [
           ],
         },
         {
-          h: '10:00 sharp, not a minute either way',
-          nav: 'On time',
+          h: 'Scheduled for 10:00 each day',
+          nav: 'Send time',
           p: [
             'GitHub’s scheduler runs hours late at busy times: on 22 Oct the 09:41 job started at 14:32. Now a run is queued every 20 minutes from 4 a.m.; the first to start claims the day, reads and edits at 09:35, and sends at 10:00:00. The others see it has gone out and stop.',
             'The 23 Oct issue began sending at 10:00:00 and finished at 10:00:03.',
@@ -626,7 +626,7 @@ export const CASES = [
       title: '贴一个链接，拿回一篇文字。',
       sub: '视频、播客、图文链接，或本地音视频文件，都在你的 Windows 电脑上处理。',
       card: '视频、播客、图文都行。',
-      line: '贴一个链接，拿回全部文字',
+      line: '贴一个链接，拿回一篇文字',
       note: 'Windows 版 · B 站、小宇宙、公众号已验证 · 本机处理不用显卡',
       why: '能读字幕就不转写；AI 校对只提建议，原文一个字不动',
       shotAlt: '万象成文处理一段 52 秒中文视频的结果：左边是转写出的正文，右边是可以播放和下载的视频',
@@ -642,7 +642,7 @@ export const CASES = [
       links: [['打开万象成文', 'https://qinxujunai.github.io/Audio2Text/'], ['下载 Windows 版', `${A2T}/releases/latest`]],
       results: [
         { v: '25 秒', l: '47 分钟视频出文字（实测）' },
-        { v: '0 次', l: '超时（三轮 180 次）' },
+        { v: '0 次', l: '超时；180 次中 141 次完整' },
         { v: '约 2 分钟', l: '普通 CPU 转写 1 小时音频' },
         { stat: 'downloads', l: '次安装包下载' },
       ],
@@ -761,7 +761,7 @@ export const CASES = [
       title: 'Paste a link, get the text back.',
       sub: 'Videos, podcasts, articles or local recordings, handled on the device by a Windows app.',
       card: 'Videos, podcasts and articles all work.',
-      line: 'Paste a link. Get every word back',
+      line: 'Paste a link. Get the text back',
       note: 'For Windows · Tested on Bilibili, Xiaoyuzhou and WeChat articles · Runs locally, no GPU',
       why: 'If there are subtitles it skips transcription; AI proofreading only suggests, and the original is never touched',
       shotAlt: 'Wanxiang after a 52-second Mandarin video (in Chinese): the transcribed text on the left, the playable video on the right',
@@ -776,7 +776,7 @@ export const CASES = [
       links: [['Open Wanxiang', 'https://qinxujunai.github.io/Audio2Text/'], ['Download for Windows', `${A2T}/releases/latest`]],
       results: [
         { v: '25 s', l: 'Text from a 47-minute video (measured)' },
-        { v: '0', l: 'Timeouts (180 runs)' },
+        { v: '0', l: 'Timeouts; 141 of 180 runs complete' },
         { v: '~2 min', l: 'An hour of audio on an ordinary CPU' },
         { stat: 'downloads', l: 'Installer downloads' },
       ],

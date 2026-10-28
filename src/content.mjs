@@ -15,7 +15,7 @@ export const content = {
     path: '/',
     // What a WeChat chat shows when the link is shared: his name and his headline, then the thesis.
     title: '秦徐俊 · 我用 AI 做东西，也把做法分享出来',
-    description: '我导演的 AI 短片《来不及爱你》，三个打开就能用的作品，还有我推荐的六本书、AI 教程和健身计划。',
+    description: '我导演的 AI 短片《来不及爱你》，三个作品，还有我推荐的六本书、AI 教程和健身计划。',
     skip: '跳到正文',
     switchLabel: 'English',
     switchLang: 'en',
@@ -40,7 +40,7 @@ export const content = {
     // v21: the thesis the three works share. Each one then says, under 「靠得住，是因为」, how it keeps that promise.
     // v23: a headline that states a fact the three stories prove (each starts from his own problem).
     workHeadline: '三个作品，都从我自己的问题开始',
-    workLine: '都在线上，打开就能用',
+    workLine: '作品网站和使用方式，都在这里',
     // The button names the product, never 「官网」 (v20: readers did not know what 官网 meant here).
     open: (name) => (/^[A-Za-z]/.test(name) ? `打开 ${name}` : `打开${name}`),
     readCase: '怎么做的',
@@ -233,7 +233,7 @@ export const content = {
     lang: 'en',
     path: '/en/',
     title: 'Qin Xujun · I build things with AI, and share how I do it',
-    description: 'An AI short film I directed, three works ready to open, and the books, AI course and training plan I recommend.',
+    description: 'An AI short film I directed, three projects, and the books, AI course and training plan I recommend.',
     skip: 'Skip to content',
     switchLabel: '中文',
     switchLang: 'zh-CN',
@@ -252,7 +252,7 @@ export const content = {
 
     workTitle: 'Work',
     workHeadline: 'Three works, each started with a problem of my own',
-    workLine: 'All live, ready to open',
+    workLine: 'Explore each project and how to use it',
     open: (name) => `Open ${name}`,
     readCase: 'How it was made',
     whyLabel: 'Why I built it',
