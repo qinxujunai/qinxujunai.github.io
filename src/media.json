@@ -103,16 +103,16 @@
   },
   "site-prod-wanxiang": {
     "1040": {
-      "src": "/assets/media/site-prod-wanxiang-1040.webp",
+      "src": "/assets/media/wanxiang-result-clean-1040.webp",
       "w": 1040,
-      "h": 697,
-      "kb": 32
+      "h": 731,
+      "kb": 41
     },
-    "2040": {
-      "src": "/assets/media/site-prod-wanxiang-2040.webp",
-      "w": 2040,
-      "h": 1368,
-      "kb": 80
+    "1280": {
+      "src": "/assets/media/wanxiang-result-clean-1280.webp",
+      "w": 1280,
+      "h": 900,
+      "kb": 60
     }
   },
   "site-prod-wanxiang-card": {
