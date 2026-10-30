@@ -614,9 +614,7 @@ export const CASES = [
     slug: 'wanxiang',
     kind: 'product',
     image: { key: 'site-wanxiang', mobile: 'site-wanxiang-m' },
-    // Home page picture: the app's result page from a real run (v24, 2026-10-23): a 52-second China News Service clip
-    // (Wikimedia Commons, CC BY 3.0) uploaded to the app in the cloud, transcribed by SenseVoice int8 on CPU in 5.3 s.
-    // The same run as Audio2Text's site demo (Audio2Text showcase/README.md).
+    // Real Bilibili podcast result; the home-page sequence replays the flow with a shortened wait.
     // v26.11 (2026-10-24): the home page shows the whole result page of a real run, on phones too (he: show the real
     // effect, 「让人一眼看得到效果」). v24 cropped one card of it on phones (a fragment); v26.1–26.10 showed the website.
     shot: 'site-prod-wanxiang',
@@ -629,7 +627,7 @@ export const CASES = [
       line: '贴一个链接，拿回一篇文字',
       note: 'Windows 版 · B 站、小宇宙、公众号已验证 · 本机处理不用显卡',
       why: '能读字幕就不转写；AI 校对只提建议，原文一个字不动',
-      shotAlt: '万象成文处理一段 52 秒中文视频的结果：左边是转写出的正文，右边是可以播放和下载的视频',
+      shotAlt: '万象成文处理翁家翌访谈的结果：左边是转写出的正文，右边是视频画面',
       // His WeChat post the night he started (2026) and his answer (2026-10-21).
       story: '我想把一期两个小时的小宇宙播客转成文字，拿去跟 AI 聊。试了几个小程序，要么太长转不动，要么太贵。我不会写代码，那天晚上，还是按下了 Win+R。',
       imageAlt: '万象成文的网站：把视频、播客和图文，直接变成可用的文字与媒体。',
@@ -764,7 +762,7 @@ export const CASES = [
       line: 'Paste a link. Get the text back',
       note: 'For Windows · Tested on Bilibili, Xiaoyuzhou and WeChat articles · Runs locally, no GPU',
       why: 'If there are subtitles it skips transcription; AI proofreading only suggests, and the original is never touched',
-      shotAlt: 'Wanxiang after a 52-second Mandarin video (in Chinese): the transcribed text on the left, the playable video on the right',
+      shotAlt: 'Wanxiang processing a Mandarin podcast: transcribed text on the left and the video on the right',
       story: 'I wanted to turn a two-hour podcast episode into text so I could discuss it with an AI. The apps I tried either couldn’t handle the length or cost too much. I couldn’t code. That night I pressed Win+R anyway.',
       imageAlt: 'The Wanxiang website (in Chinese): turn videos, podcasts and articles into usable text and media.',
       facts: [

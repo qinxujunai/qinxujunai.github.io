@@ -5,7 +5,7 @@
 - 中文：https://qinxujunai.github.io/
 - English：https://qinxujunai.github.io/en/
 
-**我用 AI 做东西，也把做法分享出来。** 首屏是他导演的 AI 短片《来不及爱你》；下面是三个打开就能用的作品，每个作品还有一页讲怎么做的；然后是做法、三件事（阅读、学技能、健身）、经历、结尾的信和名片。规则、页面结构和每一版为什么这样改，见 [AGENTS.md](AGENTS.md) 和 [CLAUDE.md](CLAUDE.md)。
+**我用 AI 做东西，也把做法分享出来。** 首屏是他导演的 AI 短片《来不及爱你》；下面是三个打开就能用的作品，每个作品还有一页讲怎么做的；然后是做法、三件事（阅读、学技能、健身）、结尾的信和名片。规则、页面结构和每一版为什么这样改，见 [AGENTS.md](AGENTS.md) 和 [CLAUDE.md](CLAUDE.md)。
 
 ## 影片
 
@@ -16,7 +16,7 @@
 ## 页面
 | 页面 | 地址 |
 |---|---|
-| 首页：影片 · 作品 · 做法 · 三件事 · 经历 · 结尾的信 · 名片 | `/`、`/en/` |
+| 首页：影片 · 作品 · 做法 · 三件事 · 结尾的信 · 名片 | `/`、`/en/` |
 | VoiceFlow：离线语音输入 | `/work/voiceflow/` |
 | AI Signal：每天十点的 AI 简报 | `/work/ai-signal/` |
 | 万象成文：贴一个链接，拿回全部文字 | `/work/wanxiang/` |
@@ -35,7 +35,7 @@ src/media.json         图片清单（scripts/media.mjs 生成）
 src/signature.svg      签名与印章（scripts/signature.mjs 生成）
 assets/site.css        样式（构建时内联）
 assets/site.js         交互：主题、签名收进导航、影片播放与备用地址、书架、计数、逐字点亮、名片
-assets/media/          WebP 图片
+assets/media/          WebP 图片及万象成文演示视频（静音循环，进入视口后加载）
 assets/card-*.png      可保存的名片（scripts/icons.mjs 生成）
 copy.lock.json         文案锁定：所有页面看得见的字（npm run lock 生成）
 scripts/build.mjs      生成全部页面和 sitemap
