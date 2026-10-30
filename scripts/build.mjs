@@ -16,7 +16,7 @@ const argv = process.argv.slice(2);
 const argOf = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
 const PROFILE_FILE = argOf('--profile');
 const OUT = path.resolve(argOf('--out') || '.');
-const PROFILE = PROFILE_FILE ? (await import(path.resolve(PROFILE_FILE))).default : null;
+const PROFILE = PROFILE_FILE ? (await import((await import('node:url')).pathToFileURL(path.resolve(PROFILE_FILE)).href)).default : null;
 if (PROFILE) for (const lang of ['zh', 'en']) Object.assign(content[lang], PROFILE[lang] || {});
 const SITE = PROFILE?.site || PUBLIC_SITE;
 // The job site is shared by link only: never indexed.
@@ -287,11 +287,12 @@ const dots = (c, s) => bare(s).split(' · ').map((x) => `<span class="clause">${
 // With href, the picture is a link to the project's page on this site; it never leads off the site.
 function frame(c, { key, alt, href, label, first = false, whole = false }) {
   const tag = href ? 'a' : 'div';
+  const demo = key === 'site-prod-wanxiang' && href;
   // A product at work is shown a little smaller than a whole website, so it fits one screen with its name.
-  return `<${tag} class="frame${key.startsWith('site-prod-') ? ' prod' : ''}"${href ? ` href="${href}"` : ''}>
+  return `${demo ? '<div class="wanxiang-preview">' : ''}<${tag} class="frame${key.startsWith('site-prod-') ? ' prod' : ''}"${href ? ` href="${href}"` : ''}>
 ${href ? `<span class="visually-hidden">${esc(label)}</span>` : ''}
-<span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: whole ? '' : `${key}-card`, cls: 'frame-img', eager: first })}</span>
-</${tag}>`;
+<span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: whole ? '' : `${key}-card`, cls: 'frame-img', eager: first })}${demo ? '<video class="wanxiang-preview-video" data-src="/assets/media/wanxiang-preview-once-v7.mp4" muted playsinline loop preload="none" aria-hidden="true"></video>' : ''}</span>
+</${tag}>${demo ? `<button class="wanxiang-preview-toggle" type="button" hidden>${c.lang === 'en' ? 'Play demo' : '播放演示'}</button></div>` : ''}`;
 }
 
 // One project, two levels of text above the picture (name, one plain line), the rest below it

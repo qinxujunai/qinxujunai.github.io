@@ -7,6 +7,35 @@
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var canObserve = 'IntersectionObserver' in window;
 
+  // The recording is optional: the still remains useful without motion or data.
+  var demo = document.querySelector('.wanxiang-preview-video');
+  var demoToggle = document.querySelector('.wanxiang-preview-toggle');
+  if (demo && demoToggle) {
+    var userPaused = !!(still || (navigator.connection && navigator.connection.saveData));
+    var demoVisible = false, demoLoading = false, english = root.lang === 'en';
+    demoToggle.hidden = false;
+    var labelDemo = function () { demoToggle.textContent = demo.paused && !(demoLoading && !userPaused) ? (english ? 'Play demo' : '播放演示') : (english ? 'Pause demo' : '暂停演示'); };
+    var showDemo = function () { if (demoVisible && !userPaused && !document.hidden) demo.play().then(function () { demo.classList.add('is-playing'); }).catch(function () { userPaused = true; labelDemo(); }); };
+    var loadDemo = function () {
+      if (demo.src) { showDemo(); return; }
+      if (demoLoading) return;
+      demoLoading = true; labelDemo();
+      fetch(demo.dataset.src).then(function (r) { if (!r.ok) throw new Error('demo unavailable'); return r.blob(); }).then(function (blob) { demoLoading = false; demo.src = URL.createObjectURL(blob); showDemo(); labelDemo(); }).catch(function () { demoLoading = false; userPaused = true; labelDemo(); });
+    };
+    demo.addEventListener('play', labelDemo);
+    demo.addEventListener('pause', labelDemo);
+    demoToggle.addEventListener('click', function () { userPaused = !userPaused; if (userPaused) { demo.pause(); labelDemo(); } else { demoVisible = true; loadDemo(); } });
+    document.addEventListener('visibilitychange', function () { if (document.hidden) demo.pause(); else if (!userPaused) loadDemo(); });
+    if (!canObserve) { demoVisible = true; if (!userPaused) loadDemo(); }
+    if (canObserve) {
+    new IntersectionObserver(function (entries) {
+      demoVisible = entries[0].isIntersecting;
+      if (!demoVisible) { demo.pause(); return; }
+      if (!userPaused) loadDemo();
+    }, { threshold: 0.25 }).observe(demo);
+    }
+  }
+
   // Theme
   var toggle = document.querySelector('[data-theme-toggle]');
   if (toggle) {

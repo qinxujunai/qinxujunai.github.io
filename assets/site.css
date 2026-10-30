@@ -1,6 +1,4 @@
-/* 秦徐俊 · personal site, in the visual language of apple.com:
-   a slim blurred local nav, centered full-width tiles in white / light grey / black,
-   system type set large and tight, blue text links with chevrons, one blue pill for the main action. */
+/* 秦徐俊 · personal site */
 
 :root {
   color-scheme: light;
@@ -1813,6 +1811,13 @@ main {
   width: 100%;
 }
 
+.wanxiang-preview { width: min(100%, 840px); position: relative; }
+.wanxiang-preview .frame { width: 100%; }
+.wanxiang-preview-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; }
+.wanxiang-preview-video.is-playing { opacity: 1; }
+.wanxiang-preview-toggle { position: absolute; right: 12px; bottom: 12px; z-index: 2; min-height: 44px; padding: 0 14px; border: 0; border-radius: 999px; background: rgba(255,255,255,.94); color: #333; cursor: pointer; font: inherit; font-size: 12px; }
+.wanxiang-preview-toggle:focus-visible { outline: 2px solid #0071e3; outline-offset: 3px; }
+
 .case-frame {
   display: flex;
   justify-content: center;
@@ -2426,9 +2431,7 @@ main {
   color: var(--ink);
 }
 
-/* Hover (apple.com.cn, measured 2026-10-24): only things that are clickable as a whole respond, and only to a
-   mouse. They grow by a few pixels (Apple's cards: 0.5–1.6 %), 0.3 s ease-out: no lift, no shadow, no tilt.
-   Large pictures take the smaller factor so every tile grows by about the same few pixels. */
+/* Mouse hover: clickable tiles scale subtly; larger pictures use a smaller factor. */
 a.frame,
 .signal-card,
 .things a,
@@ -2814,8 +2817,8 @@ html:not(.js) .book + .book {
 .flap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  background: var(--paper);
 }
 
 .js .book.opening .page-l {
