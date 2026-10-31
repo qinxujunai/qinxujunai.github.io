@@ -33,7 +33,7 @@ export const CASES = [
       // v21: shown on the home page as 「靠得住，是因为」.
       why: '边说边出的字只是预览，最后的文字只认完整录音；剪贴板没核对过，就不算送达',
       // Why he built it, in his words (his answer, 2026-10-21). Shown on the home page under the picture.
-      story: '我常对着 AI 一说就是十几分钟。用过的输入法，网一卡，整段话就没了；最后几句常常出不来；光标不在输入框，说完的话直接消失。所以我做了一个全在本机跑的：说到最后一个字，就出来最后一个字。',
+      story: '我常对着 AI 一说就是十几分钟。用过的输入法，网一卡，整段话就没了；最后几句常常出不来；光标不在输入框，说完的话直接消失。所以我做了一个全在本机跑的工具，终稿识别会覆盖完整录音。',
       imageAlt: 'VoiceFlow 的网站：让想法成文。按一下，说出你的话。',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
@@ -50,13 +50,13 @@ export const CASES = [
       ],
       sections: [
         {
-          h: '说到最后一个字，就出来最后一个字',
+          h: '终稿识别覆盖完整录音',
           nav: '起因',
           p: [
             // His answer, 2026-10-21.
             '我用语音跟 AI 聊天、做开发，一说就是五六分钟，甚至十几分钟。',
             '试过的工具各有各的好：国外有能用 AI 校对的，要付费；国内的输入法识别得很好。但我碰到三个问题。第一，说完一结束，网一卡，整段话就没了。第二，最后几句常常识别不出来，可我要的是完整：说到最后一个字，就得出来最后一个字。第三，光标不在输入框里，说完的话直接消失。',
-            '所以我想要一个全在本机跑的：没有网络延迟，说的每句话都完整落下；光标不在输入框，也先留在剪贴板，保证一个字都不丢。',
+            '所以我想要一个全在本机跑的工具：终稿识别处理完整录音，并尝试将结果复制到剪贴板、保存到本地历史。识别或保存可能失败，部分应用需要手动粘贴。',
           ],
         },
         {
@@ -177,7 +177,7 @@ export const CASES = [
       line: 'Press F2, speak, and the words land at your cursor',
       note: 'Voice typing for Windows · Offline after install · Free, open source',
       why: 'The words you see while speaking are only a preview; the final text trusts the full recording alone, and nothing counts as delivered until the clipboard checks out',
-      story: 'I often talk to an AI for ten minutes or more at a time. With the voice input I used, one network hiccup and the whole passage was gone; the last few sentences often never appeared; if the cursor wasn’t in a text box, everything I said simply vanished. So I built one that runs entirely on my own computer: when I say the last word, the last word appears.',
+      story: 'I often talk to an AI for ten minutes or more at a time. With the voice input I used, one network hiccup and the whole passage was gone; the last few sentences often never appeared; if the cursor wasn’t in a text box, everything I said simply vanished. So I built a tool that runs on my own computer and recognizes the complete recording for the final transcript.',
       imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
       facts: [
         ['Role', 'Solo: product, design, engineering, release'],
@@ -194,12 +194,12 @@ export const CASES = [
       ],
       sections: [
         {
-          h: 'When I say the last word, the last word appears',
+          h: 'Final recognition processes the complete recording',
           nav: 'Why',
           p: [
             'I talk to AI by voice while I chat and build, often for five or six minutes at a time, sometimes more than ten.',
             'The tools I tried each had strengths: one from abroad could clean up text with AI, for a fee; the voice input on Chinese phones and PCs recognised speech well. But I kept hitting three problems. First, when I stopped, one network hiccup and the whole passage was gone. Second, the last few sentences often never appeared, when what I needed was all of it: the last word I say should be the last word on screen. Third, if the cursor wasn’t in a text box, everything I said simply vanished.',
-            'So I wanted one that runs entirely on my own computer: no network delay, every sentence landing in full, and if there’s no text box, the words wait on the clipboard so not one is lost.',
+            'So I wanted a tool that runs on my own computer: final recognition processes the full recording and tries to copy the result to the clipboard and save it in local history. Recognition or saving can fail, and some apps need a manual paste.',
           ],
         },
         {

@@ -40,7 +40,7 @@ async function open({ path = '/', width = 390, height = 844, ua = WECHAT_IOS, sc
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('request', (r) => { if (new URL(r.url()).origin !== ORIGIN && !r.url().startsWith('data:')) foreign.push(r.url()); });
-  page.on('request', (r) => { const u = new URL(r.url()); if (/\.mp4$/i.test(u.pathname) && !(u.origin === ORIGIN && u.pathname === '/assets/media/wanxiang-preview-once-v7.mp4')) errors.push(`unexpected video download on personal site: ${r.url()}`); });
+  page.on('request', (r) => { const u = new URL(r.url()); if (/\.mp4$/i.test(u.pathname) && !(u.origin === ORIGIN && u.pathname === '/assets/media/wanxiang-preview-v12.mp4')) errors.push(`unexpected video download on personal site: ${r.url()}`); });
   page.on('response', (r) => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
   return { ctx, page, errors, foreign };
 }

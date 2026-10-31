@@ -2804,7 +2804,10 @@ html:not(.js) .book + .book {
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 50%;
+  width: auto;
+  max-width: 50%;
+  aspect-ratio: var(--cover-ratio);
+  z-index: 2;
   display: block;
   border-radius: 2px 14px 14px 2px;
   overflow: hidden;
@@ -2840,7 +2843,7 @@ html:not(.js) .book + .book {
 }
 
 @keyframes page-r-in {
-  0%, 20% { opacity: 0.2; }
+  0%, 50% { opacity: 0; }
   100% { opacity: 1; }
 }
 
@@ -2848,7 +2851,9 @@ html:not(.js) .book + .book {
 @media (max-width: 833px) {
   .js .book.opening .flap {
     left: 0;
-    width: 100%;
+    bottom: 0;
+    width: auto;
+    max-width: 100%;
     border-radius: 6px 14px 14px 6px;
   }
 
