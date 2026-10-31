@@ -117,7 +117,7 @@
     });
   });
 
-  // VoiceFlow capsule: confirmed characters appear at a fixed 48 ms rhythm, as in the product.
+  // Illustrative preview: reveal characters smoothly and speed up under backlog.
   var typed = document.querySelector('.typed');
   if (typed && !still && canObserve) {
     var lines = [];
@@ -132,7 +132,7 @@
         typed.classList.toggle('long', typed.scrollLeft > 0);
         capsule.classList.add('listening');
         pos++;
-        timer = setTimeout(step, 48);
+        timer = setTimeout(step, Math.max(17, 48 - Math.min(31, (chars.length - pos) * 2)));
       } else {
         capsule.classList.remove('listening');
         timer = setTimeout(function () { line = (line + 1) % lines.length; pos = 0; step(); }, 1800);

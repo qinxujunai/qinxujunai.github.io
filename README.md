@@ -19,7 +19,7 @@
 | 首页：影片 · 作品 · 做法 · 三件事 · 结尾的信 · 名片 | `/`、`/en/` |
 | VoiceFlow：离线语音输入 | `/work/voiceflow/` |
 | AI Signal：每天十点的 AI 简报 | `/work/ai-signal/` |
-| 万象成文：贴一个链接，拿回全部文字 | `/work/wanxiang/` |
+| 万象成文：贴一个链接，拿回一篇文字 | `/work/wanxiang/` |
 | 找不到页面 | `/404.html` |
 
 所有页面都有中英两版，支持深色和浅色，不依赖框架。外部请求只有一种：点了播放之后，从当前方案（腾讯云或 Cloudflare R2）拿视频。
@@ -35,7 +35,7 @@ src/media.json         图片清单（scripts/media.mjs 生成）
 src/signature.svg      签名与印章（scripts/signature.mjs 生成）
 assets/site.css        样式（构建时内联）
 assets/site.js         交互：主题、签名收进导航、影片播放与备用地址、书架、计数、逐字点亮、名片
-assets/media/          WebP 图片及万象成文演示视频（静音循环，进入视口后加载）
+assets/media/          WebP 图片及万象成文演示视频（静音循环，进入视口后加载；处理等待已剪短，播放点击为演示提示）
 assets/card-*.png      可保存的名片（scripts/icons.mjs 生成）
 copy.lock.json         文案锁定：所有页面看得见的字（npm run lock 生成）
 scripts/build.mjs      生成全部页面和 sitemap
