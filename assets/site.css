@@ -2184,7 +2184,7 @@ main {
 .case-demo .capsule { width: min(100%, 312px); max-width: 312px; height: 40px; padding: 0 12px; gap: 8px; border-radius: 20px; font-size: 15px; }
 .motion .case-demo .capsule { width: 86px; transition: width .2s ease, opacity .2s ease; }
 .motion .case-demo .capsule.is-delivered { opacity: 0; }
-.demo-paste { position: absolute; top: 51px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #f5f5f7; font-size: 15px; pointer-events: none; }
+.demo-paste { position: absolute; top: 51px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--ink); font-size: 15px; pointer-events: none; }
 .case-demo .typed { flex: 1; text-overflow: clip; direction: rtl; unicode-bidi: plaintext; }
 .case-demo .hint { margin-top: 40px; }
 .case-demo.is-starting kbd { background: #5e5e63; color: #fff; }

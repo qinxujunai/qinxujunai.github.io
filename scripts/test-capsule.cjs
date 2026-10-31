@@ -19,6 +19,18 @@ const assert = require('node:assert/strict');
     console.log(`${width}: grows and delivers without overflow`);
     await page.close();
   }
+  for (const path of ['/work/voiceflow/', '/en/work/voiceflow/']) for (const scheme of ['light', 'dark']) {
+    const page = await browser.newPage({ viewport: { width: 390, height: 900 }, colorScheme: scheme });
+    await page.goto(new URL(path, process.argv[2] || 'http://127.0.0.1:4179/').href);
+    await page.locator('.case-demo').scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => !!document.querySelector('.demo-paste').textContent);
+    const colors = await page.locator('.demo-paste').evaluate(e => ({ text: getComputedStyle(e).color, background: getComputedStyle(e.closest('.case-head')).backgroundColor }));
+    const luminance = s => { const c = s.match(/\d+/g).slice(0, 3).map(x => Number(x) / 255).map(x => x <= .04045 ? x / 12.92 : ((x + .055) / 1.055) ** 2.4); return .2126*c[0]+.7152*c[1]+.0722*c[2]; };
+    const a = luminance(colors.text), b = luminance(colors.background);
+    assert((Math.max(a,b)+.05)/(Math.min(a,b)+.05) >= 4.5, `${path} ${scheme}: insufficient contrast ${JSON.stringify(colors)}`);
+    console.log(`${path} ${scheme}: delivery text contrast passed`);
+    await page.close();
+  }
   const page = await browser.newPage({ reducedMotion: 'reduce' });
   await page.goto(process.argv[2] || 'http://127.0.0.1:4179/');
   assert((await page.locator('.demo-link .typed').textContent()).length > 0);
