@@ -1122,8 +1122,6 @@ main {
   margin: 40px auto 0;
 }
 
-/* v27.14: Apple Card restraint. A matte black card in card proportions; the signature is the only mark,
-   one line of contact, the QR code small. No sheen, one soft shadow, a hairline edge. */
 .namecard {
   position: relative;
   display: grid;
@@ -1136,7 +1134,6 @@ main {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 24px 48px -26px rgba(0, 0, 0, 0.5);
 }
 
-/* The tilt toward the pointer is desktop only; on phones a 3D layer would clip the soft shadow into a visible box. */
 @media (hover: hover) and (pointer: fine) {
   .namecard-stage { perspective: 1200px; }
   .namecard {
@@ -1152,7 +1149,8 @@ main {
 
 .nc-sig {
   height: 52px;
-  align-self: flex-start; /* intrinsic width, so its ink lines up with the text below (stretched, it centred itself) */
+  max-width: 100%;
+  align-self: flex-start;
   width: auto;
   fill: #f5f5f7;
   overflow: visible;
@@ -1161,6 +1159,7 @@ main {
 .nc-qr {
   flex: none;
 }
+.namecard .qr { width: 120px; height: 120px; }
 
 .qr {
   width: 96px;
@@ -2053,9 +2052,10 @@ main {
   display: none;
 }
 
-/* The VoiceFlow demo now lives on its project page, under the website window. */
 .case-demo {
-  position: static;
+  position: relative;
+  left: auto;
+  bottom: auto;
   width: min(92%, 460px);
   margin: 40px auto 0;
   transform: none;
@@ -2103,7 +2103,7 @@ main {
 /* Name card: signature and one line on the left, the QR code on the right. */
 .nc-card-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) 120px;
   gap: 16px;
   align-items: end;
 }
@@ -2181,6 +2181,15 @@ main {
 .demo-link .case-demo {
   margin: 0 auto;
 }
+.case-demo .capsule { width: min(100%, 312px); max-width: 312px; height: 40px; padding: 0 12px; gap: 8px; border-radius: 20px; font-size: 15px; }
+.motion .case-demo .capsule { width: 86px; transition: width .2s ease, opacity .2s ease; }
+.motion .case-demo .capsule.is-delivered { opacity: 0; }
+.demo-paste { position: absolute; top: 51px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #f5f5f7; font-size: 15px; pointer-events: none; }
+.case-demo .typed { flex: 1; text-overflow: clip; direction: rtl; unicode-bidi: plaintext; }
+.case-demo .hint { margin-top: 40px; }
+.case-demo.is-starting kbd { background: #5e5e63; color: #fff; }
+.demo-paste:not(:empty) { width: min(90%, 312px); white-space: normal; line-height: 1.35; text-align: center; }
+.case-demo .caret { display: none; }
 
 /* Case pages: the story first; how it is built folds into one place a click away. */
 .sec-shot {
@@ -2249,16 +2258,7 @@ main {
     width: 100%;
   }
 
-  .demo-link .capsule {
-    height: 64px;
-    padding: 0 26px;
-    border-radius: 32px;
-    font-size: 19px;
-  }
-
-  .demo-link .caret {
-    height: 22px;
-  }
+  .demo-link .demo-paste { top: 57px; }
 }
 
 /* v23: his film in the first screen. One black screen, the key art, a play disc; tap and it plays here. */
@@ -2779,13 +2779,13 @@ html:not(.js) .book + .book {
   .page-l {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-end;
+    justify-content: center;
     border-bottom: 0;
     border-right: 1px solid var(--fold);
   }
 
   .pl-cover {
-    width: 120px;
+    width: 150px;
   }
 
   .book h3 {
@@ -2793,8 +2793,6 @@ html:not(.js) .book + .book {
   }
 }
 
-/* The cover: shown only while a book is being opened (JS adds .opening on a tap). It lies closed over the right
-   page, then swings open to the left around the spine; the left page appears as it lands. */
 .flap {
   display: none;
 }

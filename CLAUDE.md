@@ -355,6 +355,11 @@
 - 书架翻页封面使用各自的比例并限制在书面内，需覆盖手机、平板和桌面验收。AI Signal 数据继续由原有定时任务更新，发布前需重新对齐远端。
 - 预览前核对端口所服务的目录、HTML 与素材版本；不要把旧预览地址当成当前候选。
 
+## 2026-10-31 胶囊、书架与名片
+
+- 首页及作品页的 VoiceFlow 演示以示意流程呈现：F2、胶囊展开、预览、完成后显示输入结果；它不是实时录音。减少动态或关闭脚本时保留静态内容。
+- 书页左侧封面放大并垂直居中，保留真实版本；名片二维码放大以改善扫码，签名为主角，不加反光或职位。
+
 ## 工作环境备忘
 - 影片视频放在腾讯云上海和 Cloudflare R2，现在用腾讯云（v27.21）；换方案、换文件见 docs/film-hosting.md。密钥不进仓库，需要时让他新建，用完删除。
 - 源素材不进仓库：头像、截图、照片原图、字体包都放在会话临时目录里。重建图片要先准备源目录，见 `scripts/media.mjs` 顶部。
@@ -362,3 +367,6 @@
   `node scripts/signature.mjs <fonts-dir> <NotoSerifSC-Bold.otf> final`
 - Playwright 和 Chromium 的路径：云端是 `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`；在他电脑上没有这个路径时，`qa.mjs`、`icons.mjs`、`capture-sites.cjs` 自动改用 Playwright 自带的浏览器（先 `npx playwright install chromium`）。
 - 在他电脑上接着做：`git pull` 拿 GitHub 最新代码（GitHub 为准），`npm install`，改完按 AGENTS.md「完成的定义」验证。提交作者设成 `qinxujunai` 和他 GitHub 账号的 noreply 邮箱（`git config user.name`、`git config user.email`），不加 Co-Authored-By 之类的署名。
+# 2026-10-31：课程展示与事实边界
+
+用户同意将 easy-vibe 标题收窄为 AI 编程；之后认为零基础课程截图破坏视觉效果，2026-11-01 恢复原官网标志展示。AI Signal 首页写每日一期，保留计划十点的说明。VoiceFlow 历史延迟与测试数量标明版本、日期及粘贴指令边界；1% 复利说明仅为数学示意。结尾原文保留。

@@ -44,9 +44,9 @@ export const CASES = [
       links: [['打开 VoiceFlow', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
-        { v: '427 ms', l: '说完到文字送出（95% 的情况）' },
-        { v: '829 项', l: '自动化测试' },
-        { v: '16 次', l: '正式发布' },
+        { v: '427 ms', l: '0–10 秒录音至发出粘贴指令，v0.3.1 测试第 95 百分位' },
+        { v: '829 项', l: 'v0.3.10 自动化测试（2026-10-22）' },
+        { v: '16 次', l: '截至 2026-10-22 的正式发布' },
       ],
       sections: [
         {
@@ -68,8 +68,8 @@ export const CASES = [
           // VoiceFlow docs/release-performance-evidence-2026-08-11.md (v0.3.1, 95th percentile, 20 samples per bucket).
           metrics: [
             { v: '6 ms', l: '按下 F2，胶囊出现', g: 'v0.3.1 实测' },
-            { v: '427 ms', l: '10 秒的话，说完到文字送出', g: '95% 的情况' },
-            { v: '541 ms', l: '两分钟的话，说完到文字送出', g: '95% 的情况' },
+            { v: '427 ms', l: '0–10 秒录音，停止到发出粘贴指令', g: 'v0.3.1 · 第 95 百分位' },
+            { v: '541 ms', l: '两分钟录音，停止到发出粘贴指令', g: 'v0.3.1 · 第 95 百分位' },
           ],
         },
         {
@@ -128,12 +128,12 @@ export const CASES = [
           p: ['v0.3.1 在发布机上实测（Windows 11 · Ryzen 7 5800H）。每一档 20 个样本，数字是 95% 的情况都能做到的值：'],
           metrics: [
             { v: '6 ms', l: '按下 F2 到第一帧反馈', g: '门槛 ≤ 50 ms' },
-            { v: '427 ms', l: '10 秒内的录音，说完到送出文字', g: '门槛 ≤ 500 ms' },
-            { v: '541 ms', l: '两分钟的录音，说完到送出文字', g: '门槛 ≤ 2.5 s' },
+            { v: '427 ms', l: '10 秒内的录音，停止到发出粘贴指令', g: '门槛 ≤ 500 ms' },
+            { v: '541 ms', l: '两分钟录音，停止到发出粘贴指令', g: '门槛 ≤ 2.5 s' },
             { v: '1,024 MB', l: '安装后私有内存（v0.3.1）', g: '早期 1,324.6 MB' },
           ],
           list: [
-            '829 项自动化测试，v0.3.3 时是 396 项。',
+            'v0.3.10 于 2026 年 10 月 22 日通过 829 项自动化测试；v0.3.3 时是 396 项。',
             '500 次录音生命周期，10,000 组随机的开始、停止、取消、退出序列，50,000 个异常文本模糊用例。',
             '从 v0.3.2 起，每个版本都附一份发布与验证记录。',
             '用户提过的 12 条反馈，每条都写下结论和理由：采纳、按门槛暂缓，或者拒绝。',
@@ -188,9 +188,9 @@ export const CASES = [
       links: [['Open VoiceFlow', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
-        { v: '427 ms', l: 'From stopping to text sent (95% of cases)' },
-        { v: '829', l: 'Automated tests' },
-        { v: '16', l: 'Releases' },
+        { v: '427 ms', l: 'Stop to paste dispatch, 0–10 s clips; v0.3.1, 95th percentile' },
+        { v: '829', l: 'Tests on v0.3.10 (22 Oct 2026)' },
+        { v: '16', l: 'Releases as of 22 Oct 2026' },
       ],
       sections: [
         {
@@ -210,8 +210,8 @@ export const CASES = [
           ],
           metrics: [
             { v: '6 ms', l: 'F2 to the capsule on screen', g: 'Measured on v0.3.1' },
-            { v: '427 ms', l: 'Ten seconds of speech, stop to text sent', g: '95% of cases' },
-            { v: '541 ms', l: 'Two minutes of speech, stop to text sent', g: '95% of cases' },
+            { v: '427 ms', l: '0–10 s clips, stop to paste dispatch', g: 'v0.3.1 · 95th percentile' },
+            { v: '541 ms', l: 'Two-minute clips, stop to paste dispatch', g: 'v0.3.1 · 95th percentile' },
           ],
         },
         {
@@ -270,12 +270,12 @@ export const CASES = [
           p: ['Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H). 20 samples per bucket; each number holds in 95% of cases:'],
           metrics: [
             { v: '6 ms', l: 'F2 to first feedback', g: 'Gate ≤ 50 ms' },
-            { v: '427 ms', l: 'Clips under 10 s, stopping to text sent', g: 'Gate ≤ 500 ms' },
-            { v: '541 ms', l: 'Two-minute clips, stopping to text sent', g: 'Gate ≤ 2.5 s' },
+            { v: '427 ms', l: 'Clips under 10 s, stop to paste dispatch', g: 'Gate ≤ 500 ms' },
+            { v: '541 ms', l: 'Two-minute clips, stop to paste dispatch', g: 'Gate ≤ 2.5 s' },
             { v: '1,024 MB', l: 'Private memory after install (v0.3.1)', g: 'Earlier 1,324.6 MB' },
           ],
           list: [
-            '829 automated tests, up from 396 at v0.3.3.',
+            '829 automated tests passed for v0.3.10 on 22 Oct 2026, up from 396 at v0.3.3.',
             '500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.',
             'Since v0.3.2, every release ships with a release and verification record.',
             'Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.',
@@ -332,7 +332,7 @@ export const CASES = [
       title: '每天上午一期，几分钟读完当天的 AI。',
       sub: '每天读一遍 X、Hacker News、论文和实验室博客，只留下值得看的，计划在北京时间 10:00 发出。',
       card: '它替我读 X、Hacker News、论文和各家博客，只留下值得看的。',
-      line: '每天十点，值得看的 AI 消息，一页读完',
+      line: '每天一期，值得看的 AI 消息，一页读完',
       note: '计划每天北京时间 10:00 发出 · 每条都附原文 · 往期都能翻',
       why: '模型只能写编号，链接和数字由程序填回，编不出一个假链接',
       shotAlt: 'AI Signal 10 月 23 日那期：标题「OpenAI 估值目标下调至 1.25 万亿美元」，下面是 30 秒读完的三条',
@@ -471,7 +471,7 @@ export const CASES = [
       title: 'One issue each morning: the day’s AI in a few minutes.',
       sub: 'Every day it reads X, Hacker News, papers and lab blogs, keeps what’s worth reading, and aims to send it at 10:00 Beijing time.',
       card: 'It reads X, Hacker News, papers and lab blogs for me, and keeps what’s worth reading.',
-      line: 'Every day at 10:00, the AI news worth reading, on one page',
+      line: 'One daily issue, the AI news worth reading, on one page',
       note: 'Scheduled for 10:00 Beijing time daily · Every item links to its source · Full archive',
       why: 'The model may only cite item numbers; code fills in every link and number, so it cannot invent one',
       shotAlt: 'The 23 Oct issue of AI Signal (in Chinese): the headline, then three items to read in 30 seconds',
