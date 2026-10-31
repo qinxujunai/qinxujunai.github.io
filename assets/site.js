@@ -1,5 +1,3 @@
-// Theme, contact hint, the VoiceFlow capsule, tile reveals, the name card and nav tracking.
-// The signature is started by a tiny inline script in the hero (see scripts/build.mjs).
 (function () {
   window.qxjReady = true;
   var root = document.documentElement;
@@ -7,7 +5,6 @@
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var canObserve = 'IntersectionObserver' in window;
 
-  // The recording is optional: the still remains useful without motion or data.
   var demo = document.querySelector('.wanxiang-preview-video');
   var demoToggle = document.querySelector('.wanxiang-preview-toggle');
   if (demo && demoToggle) {
@@ -65,9 +62,6 @@
   if (target && text !== null) { target.textContent = text; target.hidden = !text; } // phones: no hint until a tap
   var save = document.querySelector('[data-qr-save]');
   if (save && where !== 'phone') save.hidden = true;
-  // Outside WeChat on a phone: one tap copies his WeChat ID and opens WeChat (no app can add a personal
-  // contact from a browser). Shown only when the ID is set in src/content.mjs.
-  // On a computer the same control only copies the ID, as a quiet text link.
   var copy = document.querySelector('[data-wechat-id]');
   if (copy && where !== 'wechat') {
     copy.hidden = false;
@@ -117,30 +111,35 @@
     });
   });
 
-  // Illustrative preview: reveal characters smoothly and speed up under backlog.
   var typed = document.querySelector('.typed');
   if (typed && !still && canObserve) {
     var lines = [];
     try { lines = JSON.parse(typed.getAttribute('data-lines')) || []; } catch (e) {}
-    var capsule = typed.parentNode;
+    var capsule = typed.parentNode, demoBox = capsule.parentNode;
+    var pasted = demoBox.querySelector('.demo-paste');
+    var measure = document.createElement('canvas').getContext('2d');
     var line = 0, pos = 0, timer = null, running = false;
+    var startCapsule = function () { demoBox.classList.add('is-starting'); pos = 0; if (pasted) pasted.textContent = ''; capsule.classList.remove('is-delivered'); typed.textContent = ''; capsule.style.width = '86px'; timer = setTimeout(step, 550); };
     var step = function () {
+      demoBox.classList.remove('is-starting');
       var chars = Array.from(lines[line]);
       if (pos <= chars.length) {
-        typed.textContent = chars.slice(0, pos).join('');
+        var shown = chars.slice(0, pos);
+        if (measure) { measure.font = getComputedStyle(typed).font; while (shown.length && measure.measureText(shown.join('')).width > 250) shown.shift(); capsule.style.width = Math.min(312, demoBox.clientWidth, Math.max(86, measure.measureText(shown.join('')).width + 62)) + 'px'; }
+        typed.textContent = shown.join('');
         typed.scrollLeft = typed.scrollWidth;
-        typed.classList.toggle('long', typed.scrollLeft > 0);
+        typed.classList.toggle('long', shown.length < Math.min(pos, chars.length));
         capsule.classList.add('listening');
         pos++;
         timer = setTimeout(step, Math.max(17, 48 - Math.min(31, (chars.length - pos) * 2)));
       } else {
-        capsule.classList.remove('listening');
-        timer = setTimeout(function () { line = (line + 1) % lines.length; pos = 0; step(); }, 1800);
+        capsule.classList.remove('listening'); demoBox.classList.add('is-starting');
+        timer = setTimeout(function () { demoBox.classList.remove('is-starting'); capsule.classList.add('is-delivered'); if (pasted) pasted.textContent = lines[line]; timer = setTimeout(function () { line = (line + 1) % lines.length; startCapsule(); }, 1800); }, 650);
       }
     };
     new IntersectionObserver(function (entries) {
       var visible = entries[0].isIntersecting;
-      if (visible && !running) { running = true; step(); }
+      if (visible && !running) { running = true; startCapsule(); }
       if (!visible && running) { running = false; clearTimeout(timer); }
     }, { threshold: 0.4 }).observe(capsule);
   }
@@ -152,7 +151,6 @@
     return;
   }
 
-  // Tiles settle in once as they enter the viewport.
   var revealObserver = new IntersectionObserver(function (entries) {
     for (var e = 0; e < entries.length; e++) {
       if (entries[e].isIntersecting) {

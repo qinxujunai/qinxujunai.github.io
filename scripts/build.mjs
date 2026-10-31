@@ -3,6 +3,7 @@
 // No runtime dependencies: the output is plain HTML that GitHub Pages serves from main.
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 // The script URL carries a hash of its content, so a page never runs with a stale cached script (2026-10-24).
 const JS_VERSION = (await import('node:crypto')).createHash('sha256').update(fs.readFileSync('assets/site.js')).digest('hex').slice(0, 10);
 import { content, SITE as PUBLIC_SITE, GITHUB, VIBECODING, FILM } from '../src/content.mjs';
@@ -94,11 +95,12 @@ const css = read('assets/site.css')
 function img(key, alt, { sizes = '(min-width: 1024px) 560px, 100vw', eager = false, cls = '', mobile = '', priority = '' } = {}) {
   const set = Object.values(media[key]).sort((a, b) => a.w - b.w);
   const base = set[0];
-  const tag = `<img${cls ? ` class="${cls}"` : ''} src="${base.src}" srcset="${set.map((s) => `${s.src} ${s.w}w`).join(', ')}" sizes="${sizes}" width="${base.w}" height="${base.h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : priority ? ` fetchpriority="${priority}"` : ' loading="lazy"'} decoding="async">`;
+  const assetUrl = (asset) => key === 'site-easyvibe' ? `${asset.src}?v=${createHash('sha256').update(fs.readFileSync(new URL(`..${asset.src}`, import.meta.url))).digest('hex').slice(0, 10)}` : asset.src;
+  const tag = `<img${cls ? ` class="${cls}"` : ''} src="${assetUrl(base)}" srcset="${set.map((s) => `${assetUrl(s)} ${s.w}w`).join(', ')}" sizes="${sizes}" width="${base.w}" height="${base.h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : priority ? ` fetchpriority="${priority}"` : ' loading="lazy"'} decoding="async">`;
   if (!mobile) return tag;
   // Phones get a closer crop so interface text stays readable.
   const m = Object.values(media[mobile])[0];
-  return `<picture><source media="(max-width: 733px)" srcset="${m.src}" width="${m.w}" height="${m.h}">${tag}</picture>`;
+  return `<picture><source media="(max-width: 733px)" srcset="${assetUrl(m)}" width="${m.w}" height="${m.h}">${tag}</picture>`;
 }
 
 // Runs before first paint so the theme never flashes.
@@ -347,6 +349,7 @@ function voiceflowDemo(c) {
   return `<div class="demo case-demo" aria-hidden="true">
 <kbd>${esc(f.key)}</kbd>
 <div class="capsule"><span class="bars"><i></i><i></i><i></i></span><span class="typed" data-lines="${esc(JSON.stringify(f.lines))}">${esc(f.lines[0])}</span><span class="caret"></span></div>
+<span class="demo-paste" aria-hidden="true"></span>
 <p class="hint">${esc(f.hint)}</p>
 </div>`;
 }
@@ -396,7 +399,7 @@ function share(c) {
 ${s.viewNote ? `<p class="said">${clauses(c, bare(s.viewNote), true)}</p>` : ''}
 </div>
 <ol class="principles">
-${s.principles.map(([k, h, q]) => `<li class="reveal"><p class="pr-k">${T(c, k)}</p><h3>${T(c, h)}</h3><p class="pr-q">“${T(c, q)}”</p></li>`).join('\n')}
+${s.principles.map(([k, h, q, note]) => `<li class="reveal"><p class="pr-k">${T(c, k)}</p><h3>${T(c, h)}</h3><p class="pr-q">“${T(c, q)}”</p>${note ? `<p class="pr-q">${T(c, note)}</p>` : ''}</li>`).join('\n')}
 </ol>
 </section>`;
 }
