@@ -38,7 +38,7 @@
       "src": "/assets/media/site-wanxiang-2080.webp",
       "w": 2080,
       "h": 696,
-      "kb": 23
+      "kb": 24
     }
   },
   "site-ai-signal": {
@@ -60,7 +60,7 @@
       "src": "/assets/media/site-voiceflow-card-1080.webp",
       "w": 1080,
       "h": 1440,
-      "kb": 36
+      "kb": 32
     }
   },
   "site-wanxiang-card": {
@@ -68,7 +68,7 @@
       "src": "/assets/media/site-wanxiang-card-1080.webp",
       "w": 1080,
       "h": 1468,
-      "kb": 35
+      "kb": 33
     }
   },
   "site-ai-signal-card": {
