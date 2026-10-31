@@ -61,7 +61,7 @@ export const content = {
       viewNote: '',
       principles: [
         ['行动', '想法要做出来，才有价值', '2026 年 3 月的时候，我对代码一无所知。但慢慢地，我可以用它来解决工作日常遇到的问题，可以搭建自己的网站，实现自己想呈现的东西。'],
-        ['复利', '每天进步 1%，一年是 37 倍', '看书，阅读，健身这些长期主义的事情……不是那种正反馈来得非常快的，但是做一天有一天的收获。'],
+        ['复利', '每天进步 1%，一年是 37 倍', '看书，阅读，健身这些长期主义的事情……不是那种正反馈来得非常快的，但是做一天有一天的收获。', '这是固定增长的数学示意，实际成长不会每天等速。'],
         ['过程', '过程本身就是奖励', '如果做一件事情需要靠自律跟意志力，那大概率是做不下去的。……不让自己连续两天不去做一件事情。'],
       ],
     },
@@ -128,7 +128,7 @@ export const content = {
       ],
       skill: {
         title: '学技能',
-        headline: '学 AI，我推荐 easy-vibe',
+        headline: '学 AI 编程，我推荐 easy-vibe',
         vibecoding: '我也写了一份：用 AI 做产品的方法',
         vibeNote: '6 章 · 约 10 分钟',
         vibeLink: '开始阅读',
@@ -272,7 +272,7 @@ export const content = {
       viewNote: '',
       principles: [
         ['Action', 'An idea is worth something once it is made', 'In March 2026 I knew nothing about code. Little by little I used it to solve problems at work, then to build my own website and make what I wanted to show.'],
-        ['Compounding', '1% a day is 37 times in a year', 'Reading, exercise, the long-haul things … the reward doesn’t come quickly, but every day put in is a day gained.'],
+        ['Compounding', '1% a day is 37 times in a year', 'Reading, exercise, the long-haul things … the reward doesn’t come quickly, but every day put in is a day gained.', 'A mathematical illustration of constant growth; real progress is not uniform.'],
         ['Process', 'The process itself is the reward', 'If something takes self-discipline and willpower, it probably won’t last. … Just never skip it two days in a row.'],
       ],
     },
@@ -316,7 +316,7 @@ export const content = {
       ],
       skill: {
         title: 'Learning a skill',
-        headline: 'To learn AI, I recommend easy-vibe',
+        headline: 'To learn AI coding, I recommend easy-vibe',
         vibecoding: 'I wrote one too: how I build products with AI',
         vibeNote: '6 chapters · about 10 minutes · in Chinese',
         vibeLink: 'Start reading',

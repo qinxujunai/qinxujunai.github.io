@@ -34,7 +34,7 @@ src/signal.json        当天这期 AI Signal（自动更新）
 src/media.json         图片清单（scripts/media.mjs 生成）
 src/signature.svg      签名与印章（scripts/signature.mjs 生成）
 assets/site.css        样式（构建时内联）
-assets/site.js         交互：主题、签名收进导航、影片播放与备用地址、书架、计数、逐字点亮、名片
+assets/site.js         交互：主题、签名收进导航、影片播放与备用地址、VoiceFlow 示意、书架、计数、逐字点亮、名片
 assets/media/          WebP 图片及万象成文演示视频（静音循环，进入视口后加载；处理等待已剪短，播放点击为演示提示）
 assets/card-*.png      可保存的名片（scripts/icons.mjs 生成）
 copy.lock.json         文案锁定：所有页面看得见的字（npm run lock 生成）
