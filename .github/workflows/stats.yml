@@ -43,8 +43,8 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "qinxujunai"
+          git config user.email "266454737+qinxujunai@users.noreply.github.com"
           git add src/stats.json src/signal.json src/film-hosts.json index.html en work sitemap.xml
           git commit -m "更新首页数据"
           git push
