@@ -153,6 +153,8 @@ export const CASES = [
             ['2026.10.21', 'v0.3.9：设置只留一个保存入口，词典可以搜索、批量删除、撤销；822 项测试'],
             // VoiceFlow v0.3.10 (released 2026-10-22; docs/release-notes-0.3.10.md).
             ['2026.10.22', 'v0.3.10：设置界面按系统设置的样子重做；识别中的字逐个淡入，终稿原地替换草稿；829 项测试'],
+            // VoiceFlow v0.3.11 (released 2026-10-28; docs/release-notes-0.3.11.md, 862 tests in AGENTS.md handoff log).
+            ['2026.10.28', 'v0.3.11：说话停顿时先在后台识别，停下后出字更快；长句接缝不再重复字；胶囊展开更平滑；862 项测试'],
           ],
         },
         {
@@ -294,6 +296,7 @@ export const CASES = [
             ['2026.10.11', 'v0.3.8: native capsule'],
             ['2026.10.21', 'v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests'],
             ['2026.10.22', 'v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests'],
+            ['2026.10.28', 'v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests'],
           ],
         },
         {
@@ -725,6 +728,9 @@ export const CASES = [
             ['之后', '一遍遍地改，直到稳定可用'],
             // Audio2Text v2.3.0, released 2026-10-23.
             ['2026.10.23', 'v2.3.0：AI 校对、显卡加速、处理时显示还要多久；视频先出文字，原视频后台补齐'],
+            // Audio2Text v2.3.1 (2026-10-27, docs/platform-benchmark-20261027.md) and v2.3.2 (2026-10-28, docs/project-status.md).
+            ['2026.10.27', 'v2.3.1：抓取组件 yt-dlp 更新；同一批 60 条链接重跑三轮，结果和 2.3.0 相同'],
+            ['2026.10.28', 'v2.3.2：结果页可以手动生成 AI 摘要，附上原文依据，单独保存，不改原文'],
           ],
         },
         {
@@ -735,7 +741,7 @@ export const CASES = [
             '2026-10-21：5 个平台、60 条链接，各跑 3 轮。180 次里 137 次完整拿到结果，4 次超时，所以 2.3 那时没有发布。',
             '2026-10-22，改完后用同一批链接重跑 3 轮：141 次完整，0 次超时。B 站 57/57、公众号 30/30、小宇宙 27/30、抖音 24/30、小红书 3/33；失败全部留在分母里。',
             '准确率：在公开语料 ASCEND（香港的中英双语对话，人工标注）上，显卡版 SenseVoice 的普通话字错误率 9.31%、英文词错误率 23.34%、中英混说 15.52%（5,735 段，各跑 3 轮）。',
-            'v2.3.0 的安装包先在他的电脑上、再在一台全新的 Windows 上验收；发布的就是验收过的同一个文件，从它的网站下载后核对 SHA-256 一致。',
+            '从 v2.3.0 起，每一版安装包都先在他的电脑上、再在一台全新的 Windows 上验收；发布的就是验收过的同一个文件，从它的网站下载后核对 SHA-256 一致。',
             '每个平台的状态都公开写在说明页，标明最近一次验证的日期，不当作永久承诺。',
             '安装包、运行包和发布产物都提供 SHA-256；GitHub Actions 同时生成 SBOM 和构建来源证明。',
           ],
@@ -855,6 +861,8 @@ export const CASES = [
             ['Step 3', 'Pull images and text from Xiaohongshu and other platforms too, without their watermarks'],
             ['Since', 'Rework it again and again until it was stable'],
             ['2026.10.23', 'v2.3.0: AI proofreading, GPU acceleration, an estimate of the time left; video text first, the original in the background'],
+            ['2026.10.27', 'v2.3.1: yt-dlp updated; the same 60 links rerun three times, with the same results as 2.3.0'],
+            ['2026.10.28', 'v2.3.2: an AI summary on request, with the source passages, saved separately from it'],
           ],
         },
         {
@@ -865,7 +873,7 @@ export const CASES = [
             '2026-10-21: five platforms, 60 links, three rounds each. 137 of 180 runs delivered in full and 4 timed out, so 2.3 was held back.',
             '2026-10-22, after the fixes, the same links over three rounds: 141 delivered in full, no timeouts. Bilibili 57/57, WeChat 30/30, Xiaoyuzhou 27/30, Douyin 24/30, Xiaohongshu 3/33; every failure stays in the count.',
             'Accuracy: on the public ASCEND corpus (hand-transcribed Hong Kong conversations in Chinese and English), the GPU build of SenseVoice scored a Mandarin character error rate of 9.31%, an English word error rate of 23.34% and 15.52% on mixed speech (5,735 clips, three rounds each).',
-            'The v2.3.0 installer was accepted on his own PC and then on a clean Windows machine; the file released is that same file, and a download from the website matches its SHA-256.',
+            'From v2.3.0 on, every installer is accepted on his own PC and then on a clean Windows machine; the file released is that same file, and a download from the website matches its SHA-256.',
             'Each platform’s status is published with the date of its last check, not as a permanent promise.',
             'Installers, runtime packs and release files all carry SHA-256; GitHub Actions also produces an SBOM and build provenance.',
           ],
