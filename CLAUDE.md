@@ -43,6 +43,8 @@
 
 ## 决策记录
 
+- 2026-11-02（Claude）：AGENTS.md 第 3 行和 `docs/commit-map-2026-11-02.txt` 第 1 行写着「版本标签仍指向改写前的提交」，但本仓库没有版本标签（`git ls-remote --tags` 为 0），删掉这句。只改文档，页面不变，用 `npm run ship` 上线。他电脑上的 Node 版 playwright 装在本仓库上一级目录（clean）的 `node_modules`，见「工作环境备忘」。
+
 - 2026-11-02（Claude）：他说线上全部改完，让我读一遍仓库更新认知。核对到的现状：VoiceFlow v0.3.11（2026-10-28，冻结 `dfde0e2`，862 项测试，停顿时后台先识别、长句接缝修复、胶囊居中与平滑展开）；万象成文 v2.3.1（2026-10-27，yt-dlp 更新，三轮 141/180 与 2.3.0 相同）和 v2.3.2（2026-10-28，结果页手动 AI 摘要，附原文依据、单独保存）；AI Signal 改为「计划 10:00」、不保证每天一定发出；公开仓库历史已做隐私清理（见 AGENTS.md 顶部）；[已移除]与简历只在私有仓库维护，本仓库不写任何经历细节。作品页「历程」补上这三版，万象成文「验证」改为「从 v2.3.0 起每一版」都在两台机器验收，更新了 copy.lock.json。
 
 - 2026-11-02：公开仓库的中英文历史中含不应公开的财务信息，已在保留当前页面内容的前提下清理两个公开分支。旧工作区仍可能带有旧历史，先保留并审查改动，不能把旧历史合回；缓存清理状态需独立核实。
@@ -350,7 +352,7 @@
 - 源素材不进仓库：头像、截图、照片原图、字体包都放在会话临时目录里。重建图片要先准备源目录，见 `scripts/media.mjs` 顶部。
 - 签名需要 @fontsource/ma-shan-zheng 的 woff 和 NotoSerifSC-Bold.otf：
   `node scripts/signature.mjs <fonts-dir> <NotoSerifSC-Bold.otf> final`
-- Playwright 和 Chromium 的路径：云端是 `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`；在他电脑上没有这个路径时，`qa.mjs`、`icons.mjs`、`capture-sites.cjs` 自动改用 Playwright 自带的浏览器（先 `npx playwright install chromium`）。
+- Playwright 和 Chromium 的路径：云端是 `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`；在他电脑上没有这个路径时，`qa.mjs`、`icons.mjs`、`capture-sites.cjs` 自动改用 Playwright 自带的浏览器（先 `npx playwright install chromium`）。他电脑上（2026-11-02 起）Node 版 playwright 1.64.1 装在本仓库上一级目录 `E:\01_Projects\clean\node_modules`，不属于任何仓库；脚本里的 `require('playwright')` 会向上找到它。在 Windows 上 `bash` 可能指向 WSL，ship 要在 Git Bash 里运行。
 - 在他电脑上接着做：`git pull` 拿 GitHub 最新代码（GitHub 为准），`npm install`，改完按 AGENTS.md「完成的定义」验证。提交作者设成 `qinxujunai` 和他 GitHub 账号的 noreply 邮箱（`git config user.name`、`git config user.email`），不加 Co-Authored-By 之类的署名。
 # 2026-10-31：课程展示与事实边界
 
