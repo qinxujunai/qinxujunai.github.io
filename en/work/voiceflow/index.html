@@ -60,12 +60,6 @@
 
 <span class="frame-view"><picture><source media="(max-width: 733px)" srcset="/assets/media/site-voiceflow-card-1080.webp" width="1080" height="1440"><img class="frame-img" src="/assets/media/site-voiceflow-1040.webp" srcset="/assets/media/site-voiceflow-1040.webp 1040w, /assets/media/site-voiceflow-2080.webp 2080w" sizes="1040px" width="1040" height="504" alt="The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean." loading="lazy" decoding="async"></picture></span>
 </div></div>
-<div class="demo case-demo" aria-hidden="true">
-<kbd>F2</kbd>
-<div class="capsule"><span class="bars"><i></i><i></i><i></i></span><span class="typed" data-lines="[&quot;Compare the costs and risks of these two proposals, then recommend an approach.&quot;,&quot;Share the plan with the team at ten.&quot;,&quot;The proposal is ready. Let’s go over it tomorrow.&quot;]">Compare the costs and risks of these two proposals, then recommend an approach.</span><span class="caret"></span></div>
-<span class="demo-paste" aria-hidden="true"></span>
-<p class="hint">Press to start, press again to finish</p>
-</div>
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
 <h2 class="visually-hidden" id="results-title">Key results</h2>
@@ -93,6 +87,7 @@
 <p>I talk to AI by voice while I chat and build, often for five or six minutes at a time, sometimes more than ten.</p>
 <p>The tools I tried each had strengths: one from abroad could clean up text with AI, for a fee; the voice input on Chinese phones and PCs recognised speech well. But I kept hitting three problems. First, when I stopped, one network hiccup and the whole passage was gone. Second, the last few sentences often never appeared, when what I needed was all of it: the last word I say should be the last word on screen. Third, if the cursor wasn’t in a text box, everything I said simply vanished.</p>
 <p>So I wanted a tool that runs on my own computer: final recognition processes the full recording and tries to copy the result to the clipboard and save it in local history. Recognition or saving can fail, and some apps need a manual paste.</p>
+<p>The development build is testing hold-to-speak with F2 or right Ctrl, alongside tap-to-toggle. The current public download uses tap-to-toggle.</p>
 </section>
 <section class="case-sec" id="s2" aria-labelledby="s2-title">
 <h2 id="s2-title">Speed and accuracy, split between two models</h2>
@@ -137,7 +132,7 @@
 </section>
 <section class="case-sec" id="s9" aria-labelledby="s9-title">
 <h2 id="s9-title">Timeline</h2>
-<ol class="timeline"><li><span class="when">2026.05.23</span><span>First commit</span></li><li><span class="when">2026.07.04</span><span>v0.1.0 released</span></li><li><span class="when">2026.07.28</span><span>v0.2.0: a written answer to all 12 pieces of user feedback</span></li><li><span class="when">2026.08.10</span><span>v0.3.0: recoverable sessions; the clipboard is verified before delivery</span></li><li><span class="when">2026.08.25</span><span>v0.3.2: three supervised workers; evidence with every release</span></li><li><span class="when">2026.10.11</span><span>v0.3.8: native capsule</span></li><li><span class="when">2026.10.21</span><span>v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests</span></li><li><span class="when">2026.10.22</span><span>v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests</span></li><li><span class="when">2026.10.28</span><span>v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests</span></li></ol>
+<ol class="timeline"><li><span class="when">2026.05.23</span><span>First commit</span></li><li><span class="when">2026.07.04</span><span>v0.1.0 released</span></li><li><span class="when">2026.07.28</span><span>v0.2.0: a written answer to all 12 pieces of user feedback</span></li><li><span class="when">2026.08.10</span><span>v0.3.0: recoverable sessions; the clipboard is verified before delivery</span></li><li><span class="when">2026.08.25</span><span>v0.3.2: three supervised workers; evidence with every release</span></li><li><span class="when">2026.10.11</span><span>v0.3.8: native capsule</span></li><li><span class="when">2026.10.21</span><span>v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests</span></li><li><span class="when">2026.10.22</span><span>v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests</span></li><li><span class="when">2026.10.28</span><span>v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests</span></li><li><span class="when">2026.11.03</span><span>Development build: hold F2 or right Ctrl to speak and release to stop; tap to toggle still works. Long-form punctuation and term restoration are being refined. Not yet in the public release</span></li></ol>
 </section>
 </details>
 <section class="case-sec" id="s10" aria-labelledby="s10-title">

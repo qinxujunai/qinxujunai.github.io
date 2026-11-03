@@ -57,6 +57,7 @@ export const CASES = [
             '我用语音跟 AI 聊天、做开发，一说就是五六分钟，甚至十几分钟。',
             '试过的工具各有各的好：国外有能用 AI 校对的，要付费；国内的输入法识别得很好。但我碰到三个问题。第一，说完一结束，网一卡，整段话就没了。第二，最后几句常常识别不出来，可我要的是完整：说到最后一个字，就得出来最后一个字。第三，光标不在输入框里，说完的话直接消失。',
             '所以我想要一个全在本机跑的工具：终稿识别处理完整录音，并尝试将结果复制到剪贴板、保存到本地历史。识别或保存可能失败，部分应用需要手动粘贴。',
+            '正在验证的开发版支持按住 F2 或右 Ctrl 说话、松开结束，也保留轻按切换。正式下载版目前仍使用轻按切换。',
           ],
         },
         {
@@ -155,6 +156,7 @@ export const CASES = [
             ['2026.10.22', 'v0.3.10：设置界面按系统设置的样子重做；识别中的字逐个淡入，终稿原地替换草稿；829 项测试'],
             // VoiceFlow v0.3.11 (released 2026-10-28; docs/release-notes-0.3.11.md, 862 tests in AGENTS.md handoff log).
             ['2026.10.28', 'v0.3.11：说话停顿时先在后台识别，停下后出字更快；长句接缝不再重复字；胶囊展开更平滑；862 项测试'],
+            ['2026.11.03', '开发版：按住 F2 或右 Ctrl 说话，松开结束；轻按仍可切换。长句标点和术语还原继续打磨，尚未包含在正式下载版中'],
           ],
         },
         {
@@ -202,6 +204,7 @@ export const CASES = [
             'I talk to AI by voice while I chat and build, often for five or six minutes at a time, sometimes more than ten.',
             'The tools I tried each had strengths: one from abroad could clean up text with AI, for a fee; the voice input on Chinese phones and PCs recognised speech well. But I kept hitting three problems. First, when I stopped, one network hiccup and the whole passage was gone. Second, the last few sentences often never appeared, when what I needed was all of it: the last word I say should be the last word on screen. Third, if the cursor wasn’t in a text box, everything I said simply vanished.',
             'So I wanted a tool that runs on my own computer: final recognition processes the full recording and tries to copy the result to the clipboard and save it in local history. Recognition or saving can fail, and some apps need a manual paste.',
+            'The development build is testing hold-to-speak with F2 or right Ctrl, alongside tap-to-toggle. The current public download uses tap-to-toggle.',
           ],
         },
         {
@@ -297,6 +300,7 @@ export const CASES = [
             ['2026.10.21', 'v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests'],
             ['2026.10.22', 'v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests'],
             ['2026.10.28', 'v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests'],
+            ['2026.11.03', 'Development build: hold F2 or right Ctrl to speak and release to stop; tap to toggle still works. Long-form punctuation and term restoration are being refined. Not yet in the public release'],
           ],
         },
         {
