@@ -669,7 +669,6 @@ ${caseNav(c, cs, t, casePath(o, cs.slug))}
 <p class="sub">${clauses(c, bare(t.sub), 'list')}</p>
 ${t.links.length > 1 ? `<p class="cta">${t.links.slice(1).map(([label, href]) => `<a class="more-link" href="${href}" ${ext}>${esc(label)}${outward}<span class="visually-hidden"> ${esc(t.name)}</span></a>`).join('')}</p>` : ''}
 ${cs.image ? `<div class="case-frame">${frame(c, { key: cs.image.key, alt: t.imageAlt })}</div>` : ''}
-${cs.slug === 'voiceflow' ? voiceflowDemo(c) : ''}
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
 <h2 class="visually-hidden" id="results-title">${L.results}</h2>
