@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>VoiceFlow: Press a key, talk, and the words appear at your cursor · Qin Xujun</title>
+<title>VoiceFlow: Hold a key, talk, let go, and the words appear at your cursor · Qin Xujun</title>
 <meta name="description" content="Voice typing for Windows that runs entirely on the device: no internet, no account.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
@@ -18,7 +18,7 @@
 <link rel="alternate" hreflang="en" href="https://qinxujunai.github.io/en/work/voiceflow/">
 <link rel="alternate" hreflang="x-default" href="https://qinxujunai.github.io/work/voiceflow/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="VoiceFlow: Press a key, talk, and the words appear at your cursor · Qin Xujun">
+<meta property="og:title" content="VoiceFlow: Hold a key, talk, let go, and the words appear at your cursor · Qin Xujun">
 <meta property="og:description" content="Voice typing for Windows that runs entirely on the device: no internet, no account.">
 <meta property="og:url" content="https://qinxujunai.github.io/en/work/voiceflow/">
 <meta property="og:image" content="https://qinxujunai.github.io/og.png">
@@ -27,7 +27,7 @@
 <meta itemprop="image" content="https://qinxujunai.github.io/share.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="Qin Xujun">
-<script src="/assets/site.js?v=1ef3cf9a71" defer></script>
+<script src="/assets/site.js?v=f02f074eb1" defer></script>
 </head>
 <body class="case-page">
 <a class="skip" href="#main">Skip to content</a>
@@ -53,12 +53,12 @@
 <article class="case" aria-labelledby="case-title">
 <header class="tile plain case-head" id="top">
 <p class="eyebrow">VoiceFlow · How it was made</p>
-<h1 id="case-title">Press a key, talk, and the words appear at your cursor</h1>
+<h1 id="case-title">Hold a key, talk, let go, and the words appear at your cursor</h1>
 <p class="sub">Voice typing for Windows that runs entirely on the device: no internet, no account</p>
 <p class="cta"><a class="more-link" href="https://github.com/qinxujunai/VoiceFlow/releases/latest" rel="noopener"><span class="lt">Download for Windows</span><span class="chev out" aria-hidden="true">↗</span><span class="visually-hidden"> VoiceFlow</span></a></p>
 <div class="case-frame"><div class="frame">
 
-<span class="frame-view"><picture><source media="(max-width: 733px)" srcset="/assets/media/site-voiceflow-card-1080.webp" width="1080" height="1440"><img class="frame-img" src="/assets/media/site-voiceflow-1040.webp" srcset="/assets/media/site-voiceflow-1040.webp 1040w, /assets/media/site-voiceflow-2080.webp 2080w" sizes="1040px" width="1040" height="504" alt="The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean." loading="lazy" decoding="async"></picture></span>
+<span class="frame-view"><picture><source media="(max-width: 733px)" srcset="/assets/media/site-voiceflow-card-1080.webp" width="1080" height="1440"><img class="frame-img" src="/assets/media/site-voiceflow-1040.webp" srcset="/assets/media/site-voiceflow-1040.webp 1040w, /assets/media/site-voiceflow-2080.webp 2080w" sizes="1040px" width="1040" height="504" alt="The VoiceFlow website (in Chinese): let ideas take shape. Hold to speak, let go to write." loading="lazy" decoding="async"></picture></span>
 </div></div>
 </header>
 <section class="tile dark results" aria-labelledby="results-title">
@@ -66,7 +66,7 @@
 <dl class="facts">
 <div><dt>GitHub stars</dt><dd data-count="124"><!--live-->124<!--/live--></dd></div>
 <div><dt>Stop to paste dispatch, 0–10 s clips; v0.3.1, 95th percentile</dt><dd>427 ms</dd></div>
-<div><dt>Tests on v0.3.10 (22 Oct 2026)</dt><dd>829</dd></div>
+<div><dt>Tests on v0.3.12 (3 Nov 2026)</dt><dd>926</dd></div>
 <div><dt>Releases as of 22 Oct 2026</dt><dd>16</dd></div>
 </dl>
 <p class="footnote"><!--live-->GitHub numbers refresh every six hours, last on <span class="nw">2026-11-06</span><!--/live--></p>
@@ -87,7 +87,7 @@
 <p>I talk to AI by voice while I chat and build, often for five or six minutes at a time, sometimes more than ten.</p>
 <p>The tools I tried each had strengths: one from abroad could clean up text with AI, for a fee; the voice input on Chinese phones and PCs recognised speech well. But I kept hitting three problems. First, when I stopped, one network hiccup and the whole passage was gone. Second, the last few sentences often never appeared, when what I needed was all of it: the last word I say should be the last word on screen. Third, if the cursor wasn’t in a text box, everything I said simply vanished.</p>
 <p>So I wanted a tool that runs on my own computer: final recognition processes the full recording and tries to copy the result to the clipboard and save it in local history. Recognition or saving can fail, and some apps need a manual paste.</p>
-<p>The development build is testing hold-to-speak with F2 or right Ctrl, alongside tap-to-toggle. The current public download uses tap-to-toggle.</p>
+<p>Since v0.3.12, hold F2 or right Ctrl to speak and release to stop; tap-to-toggle still works.</p>
 </section>
 <section class="case-sec" id="s2" aria-labelledby="s2-title">
 <h2 id="s2-title">Speed and accuracy, split between two models</h2>
@@ -127,12 +127,12 @@
 <h2 id="s8-title">Evidence</h2>
 <p>Measured for v0.3.1 on the release machine (Windows 11, Ryzen 7 5800H). 20 samples per bucket; each number holds in 95% of cases:</p>
 <ul class="metrics"><li><span class="m-v">6 ms</span><span class="m-l">F2 to first feedback</span><span class="m-g">Gate ≤ 50 ms</span></li><li><span class="m-v">427 ms</span><span class="m-l">Clips under 10 s, stop to paste dispatch</span><span class="m-g">Gate ≤ 500 ms</span></li><li><span class="m-v">541 ms</span><span class="m-l">Two-minute clips, stop to paste dispatch</span><span class="m-g">Gate ≤ 2.5 s</span></li><li><span class="m-v">1,024 MB</span><span class="m-l">Private memory after install (v0.3.1)</span><span class="m-g">Earlier 1,324.6 MB</span></li></ul>
-<ul class="bullets"><li>829 automated tests passed for v0.3.10 on 22 Oct 2026, up from 396 at v0.3.3.</li><li>500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.</li><li>Since v0.3.2, every release ships with a release and verification record.</li><li>Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.</li></ul>
+<ul class="bullets"><li>926 automated tests passed for v0.3.12 on 3 Nov 2026, up from 396 at v0.3.3.</li><li>500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.</li><li>Since v0.3.2, every release ships with a release and verification record.</li><li>Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.</li></ul>
 <p>This is evidence about latency and mechanics, not accuracy. The project’s rule: no accuracy claims without enough authorized real speech.</p>
 </section>
 <section class="case-sec" id="s9" aria-labelledby="s9-title">
 <h2 id="s9-title">Timeline</h2>
-<ol class="timeline"><li><span class="when">2026.05.23</span><span>First commit</span></li><li><span class="when">2026.07.04</span><span>v0.1.0 released</span></li><li><span class="when">2026.07.28</span><span>v0.2.0: a written answer to all 12 pieces of user feedback</span></li><li><span class="when">2026.08.10</span><span>v0.3.0: recoverable sessions; the clipboard is verified before delivery</span></li><li><span class="when">2026.08.25</span><span>v0.3.2: three supervised workers; evidence with every release</span></li><li><span class="when">2026.10.11</span><span>v0.3.8: native capsule</span></li><li><span class="when">2026.10.21</span><span>v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests</span></li><li><span class="when">2026.10.22</span><span>v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests</span></li><li><span class="when">2026.10.28</span><span>v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests</span></li><li><span class="when">2026.11.03</span><span>Development build: hold F2 or right Ctrl to speak and release to stop; tap to toggle still works. Long-form punctuation and term restoration are being refined. Not yet in the public release</span></li></ol>
+<ol class="timeline"><li><span class="when">2026.05.23</span><span>First commit</span></li><li><span class="when">2026.07.04</span><span>v0.1.0 released</span></li><li><span class="when">2026.07.28</span><span>v0.2.0: a written answer to all 12 pieces of user feedback</span></li><li><span class="when">2026.08.10</span><span>v0.3.0: recoverable sessions; the clipboard is verified before delivery</span></li><li><span class="when">2026.08.25</span><span>v0.3.2: three supervised workers; evidence with every release</span></li><li><span class="when">2026.10.11</span><span>v0.3.8: native capsule</span></li><li><span class="when">2026.10.21</span><span>v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests</span></li><li><span class="when">2026.10.22</span><span>v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests</span></li><li><span class="when">2026.10.28</span><span>v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests</span></li><li><span class="when">2026.11.03</span><span>v0.3.12: hold F2 or right Ctrl to speak and release to stop, and tap to toggle still works; the capsule fades once the paste is sent; no stray full stops where long dictation is joined, and split dictionary terms are restored; 926 tests</span></li></ol>
 </section>
 </details>
 <section class="case-sec" id="s10" aria-labelledby="s10-title">

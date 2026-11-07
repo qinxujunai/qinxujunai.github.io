@@ -120,8 +120,8 @@
     var measure = document.createElement('canvas').getContext('2d');
     var line = 0, pos = 0, timer = null, running = false;
     var startCapsule = function () { demoBox.classList.add('is-starting'); pos = 0; if (pasted) pasted.textContent = ''; capsule.classList.remove('is-delivered'); typed.textContent = ''; capsule.style.width = '86px'; timer = setTimeout(step, 550); };
+    // Hold to talk (v0.3.12): F2 goes down at the start, stays down while the capsule writes, and comes up at the end.
     var step = function () {
-      demoBox.classList.remove('is-starting');
       var chars = Array.from(lines[line]);
       if (pos <= chars.length) {
         var shown = chars.slice(0, pos);
@@ -133,8 +133,8 @@
         pos++;
         timer = setTimeout(step, Math.max(17, 48 - Math.min(31, (chars.length - pos) * 2)));
       } else {
-        capsule.classList.remove('listening'); demoBox.classList.add('is-starting');
-        timer = setTimeout(function () { demoBox.classList.remove('is-starting'); capsule.classList.add('is-delivered'); if (pasted) pasted.textContent = lines[line]; timer = setTimeout(function () { line = (line + 1) % lines.length; startCapsule(); }, 1800); }, 650);
+        capsule.classList.remove('listening'); demoBox.classList.remove('is-starting');
+        timer = setTimeout(function () { capsule.classList.add('is-delivered'); if (pasted) pasted.textContent = lines[line]; timer = setTimeout(function () { line = (line + 1) % lines.length; startCapsule(); }, 1800); }, 650);
       }
     };
     new IntersectionObserver(function (entries) {
