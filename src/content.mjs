@@ -48,7 +48,7 @@ export const content = {
     openSite: (name) => `打开 ${name} 的网站`,
     flagship: {
       key: 'F2',
-      hint: '按一下开始，再按一下完成',
+      hint: '按住说话，松开就输入',
       lines: ['请比较这两份方案的成本与风险，再给出你的建议。', '明早十点，把方案同步给团队。', '这周的方案已经整理好了，明天一起看看。'],
       facts: { stars: 'GitHub Star', downloads: '次下载', forks: 'Fork', version: '最新版本' },
       factsNote: (date) => `数据每 6 小时从 GitHub 自动更新，最近一次 ${date}`,
@@ -259,7 +259,7 @@ export const content = {
     openSite: (name) => `Open the ${name} website`,
     flagship: {
       key: 'F2',
-      hint: 'Press to start, press again to finish',
+      hint: 'Hold to speak, release to insert',
       lines: ['Compare the costs and risks of these two proposals, then recommend an approach.', 'Share the plan with the team at ten.', 'The proposal is ready. Let’s go over it tomorrow.'],
       facts: { stars: 'GitHub stars', downloads: 'Downloads', forks: 'Forks', version: 'Latest release' },
       factsNote: (date) => `Pulled from GitHub every six hours, last on ${date}`,

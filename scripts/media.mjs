@@ -46,7 +46,8 @@ async function emit(name, input, { width, widths, crop, quality = 74, square = f
     img = square ? img.resize(w, w, { fit: 'cover', position: 'attention' }) : img.resize({ width: Math.min(w, meta.width) });
     await img.webp({ quality, effort: 6 }).toFile(file);
     const m = await sharp(file).metadata();
-    out[w] = { src: `/${file}`, w: m.width, h: m.height, kb: Math.round(fs.statSync(file).size / 1024) };
+    // Always forward slashes in the manifest: path.join gives backslashes on Windows, and the pages and checks need URLs.
+    out[w] = { src: `/${file.split(path.sep).join('/')}`, w: m.width, h: m.height, kb: Math.round(fs.statSync(file).size / 1024) };
   }
   manifest[name] = out;
   console.log(name, Object.values(out).map((o) => `${o.w}x${o.h} ${o.kb}KB`).join(', '));
@@ -72,7 +73,8 @@ const SITES = {
   // It is the site's first screen exactly as built: from the top (its own nav included) down to the
   // blank space before its first picture or next section. Never a fixed ratio: a fixed 16:10 cut
   // through 万象成文's hero and its demo (v19).
-  voiceflow: { d: { height: 620 }, card: { top: 0, height: 520 } },
+  // 2026-11-03: its first screen is mostly large text, which quality 58 softened; 80 keeps the edges sharp.
+  voiceflow: { d: { height: 620, quality: 80 }, card: { top: 0, height: 520 } },
   // v26.9 (2026-10-24): back to the site's first screen only. v26.1 ran down to the demo, which made one long picture
   // with a 「播放演示」 button that does nothing in a screenshot (he: two big blocks for one project).
   wanxiang: { d: { height: 428 }, card: { top: 0, height: 530 } },
@@ -95,7 +97,7 @@ for (const [name, crop] of Object.entries(SITES)) {
   const w = Math.round((c.width || 1280) * k);
   const left = Math.round((c.left || 0) * k);
   // Wide screens: the page from the top to a section edge, scrolled inside the window.
-  await emit(`site-${name}`, file, { widths: [1040, 2080].map((x) => Math.min(x, w)), quality: 58, crop: { left, top: Math.round((c.top || 0) * k), width: w, height: Math.min(Math.round(c.height * k), meta.height - Math.round((c.top || 0) * k)) } });
+  await emit(`site-${name}`, file, { widths: [1040, 2080].map((x) => Math.min(x, w)), quality: c.quality || 58, crop: { left, top: Math.round((c.top || 0) * k), width: w, height: Math.min(Math.round(c.height * k), meta.height - Math.round((c.top || 0) * k)) } });
   // Phones: the site's own phone first screen, 1080px wide so it stays sharp on 3x screens.
   const cfile = find(new RegExp(`^site-${name}-c\\.`));
   const kc = (await sharp(cfile).metadata()).width / 390;

@@ -18,13 +18,13 @@
       "src": "/assets/media/site-voiceflow-1040.webp",
       "w": 1040,
       "h": 504,
-      "kb": 12
+      "kb": 15
     },
     "2080": {
       "src": "/assets/media/site-voiceflow-2080.webp",
       "w": 2080,
       "h": 1008,
-      "kb": 27
+      "kb": 36
     }
   },
   "site-wanxiang": {
@@ -60,7 +60,7 @@
       "src": "/assets/media/site-voiceflow-card-1080.webp",
       "w": 1080,
       "h": 1440,
-      "kb": 32
+      "kb": 37
     }
   },
   "site-wanxiang-card": {

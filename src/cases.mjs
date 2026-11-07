@@ -12,8 +12,9 @@ export const CASES = [
   // docs/model-strategy.md, docs/feedback-review-2026-07-28.md, docs/release-performance-evidence-2026-08-11.md,
   // docs/resource-profile-2026-07-28.md, docs/release-evidence-0.3.2/0.3.3/0.3.8.md,
   // docs/release-notes-0.3.9.md, docs/release-validation-0.3.9.md (822 tests, 2026-10-21),
-  // docs/release-notes-0.3.10.md, docs/release-validation-0.3.10.md (829 tests; released 2026-10-22, tag c9df2cc), git tags (16),
-  // requirements.lock (PySide6 6.11.1).
+  // docs/release-notes-0.3.10.md, docs/release-validation-0.3.10.md (829 tests; released 2026-10-22, tag c9df2cc),
+  // docs/release-notes-0.3.12.md, docs/release-validation-0.3.12.md (926 tests; released 2026-11-03, tag fb1312c),
+  // git tags (16 by 2026-10-22), requirements.lock (PySide6 6.11.1).
   {
     slug: 'voiceflow',
     kind: 'product',
@@ -23,18 +24,18 @@ export const CASES = [
     zh: {
       name: 'VoiceFlow',
       kind: '',
-      title: '按一下，说话，文字就出现在光标处。',
+      title: '按住说话，松开，文字就出现在光标处。',
       sub: 'Windows 上的语音输入，全程在本机，不联网，不用登录。',
       card: 'Windows 上的语音输入，全部在自己的电脑上完成。',
       // Home page: one plain line (what it does for you) above the picture, plain facts below it.
-      line: '按 F2 说话，字直接打在光标处',
+      line: '按住 F2 说话，字直接打在光标处',
       note: 'Windows 语音输入 · 装好后断网也能用 · 免费开源',
       // The judgement behind it, for the home page (from the sections below).
       // v21: shown on the home page as 「靠得住，是因为」.
       why: '边说边出的字只是预览，最后的文字只认完整录音；剪贴板没核对过，就不算送达',
       // Why he built it, in his words (his answer, 2026-10-21). Shown on the home page under the picture.
       story: '我常对着 AI 一说就是十几分钟。用过的输入法，网一卡，整段话就没了；最后几句常常出不来；光标不在输入框，说完的话直接消失。所以我做了一个全在本机跑的工具，终稿识别会覆盖完整录音。',
-      imageAlt: 'VoiceFlow 的网站：让想法成文。按一下，说出你的话。',
+      imageAlt: 'VoiceFlow 的网站：让想法成文。按住说话，松开成文。',
       facts: [
         ['角色', '独立开发：产品、设计、工程、发布'],
         ['时间', '2026.05 起'],
@@ -45,7 +46,7 @@ export const CASES = [
       results: [
         { stat: 'stars', l: 'GitHub Star' },
         { v: '427 ms', l: '0–10 秒录音至发出粘贴指令，v0.3.1 测试第 95 百分位' },
-        { v: '829 项', l: 'v0.3.10 自动化测试（2026-10-22）' },
+        { v: '926 项', l: 'v0.3.12 自动化测试（2026-11-03）' },
         { v: '16 次', l: '截至 2026-10-22 的正式发布' },
       ],
       sections: [
@@ -57,7 +58,7 @@ export const CASES = [
             '我用语音跟 AI 聊天、做开发，一说就是五六分钟，甚至十几分钟。',
             '试过的工具各有各的好：国外有能用 AI 校对的，要付费；国内的输入法识别得很好。但我碰到三个问题。第一，说完一结束，网一卡，整段话就没了。第二，最后几句常常识别不出来，可我要的是完整：说到最后一个字，就得出来最后一个字。第三，光标不在输入框里，说完的话直接消失。',
             '所以我想要一个全在本机跑的工具：终稿识别处理完整录音，并尝试将结果复制到剪贴板、保存到本地历史。识别或保存可能失败，部分应用需要手动粘贴。',
-            '正在验证的开发版支持按住 F2 或右 Ctrl 说话、松开结束，也保留轻按切换。正式下载版目前仍使用轻按切换。',
+            '从 v0.3.12 起，按住 F2 或右 Ctrl 说话、松开结束，也保留轻按切换。',
           ],
         },
         {
@@ -134,7 +135,7 @@ export const CASES = [
             { v: '1,024 MB', l: '安装后私有内存（v0.3.1）', g: '早期 1,324.6 MB' },
           ],
           list: [
-            'v0.3.10 于 2026 年 10 月 22 日通过 829 项自动化测试；v0.3.3 时是 396 项。',
+            'v0.3.12 于 2026 年 11 月 3 日通过 926 项自动化测试；v0.3.3 时是 396 项。',
             '500 次录音生命周期，10,000 组随机的开始、停止、取消、退出序列，50,000 个异常文本模糊用例。',
             '从 v0.3.2 起，每个版本都附一份发布与验证记录。',
             '用户提过的 12 条反馈，每条都写下结论和理由：采纳、按门槛暂缓，或者拒绝。',
@@ -156,7 +157,8 @@ export const CASES = [
             ['2026.10.22', 'v0.3.10：设置界面按系统设置的样子重做；识别中的字逐个淡入，终稿原地替换草稿；829 项测试'],
             // VoiceFlow v0.3.11 (released 2026-10-28; docs/release-notes-0.3.11.md, 862 tests in AGENTS.md handoff log).
             ['2026.10.28', 'v0.3.11：说话停顿时先在后台识别，停下后出字更快；长句接缝不再重复字；胶囊展开更平滑；862 项测试'],
-            ['2026.11.03', '开发版：按住 F2 或右 Ctrl 说话，松开结束；轻按仍可切换。长句标点和术语还原继续打磨，尚未包含在正式下载版中'],
+            // VoiceFlow v0.3.12 (released 2026-11-03; docs/release-notes-0.3.12.md, 926 tests in docs/release-validation-0.3.12.md).
+            ['2026.11.03', 'v0.3.12：按住 F2 或右 Ctrl 说话，松开结束，轻按仍可切换；粘贴发出后胶囊直接收起；长句分段处不再多出句号，词库术语能还原拆开的写法；926 项测试'],
           ],
         },
         {
@@ -175,14 +177,14 @@ export const CASES = [
     en: {
       name: 'VoiceFlow',
       kind: '',
-      title: 'Press a key, talk, and the words appear at your cursor.',
+      title: 'Hold a key, talk, let go, and the words appear at your cursor.',
       sub: 'Voice typing for Windows that runs entirely on the device: no internet, no account.',
       card: 'Voice typing for Windows, entirely on your own computer.',
-      line: 'Press F2, speak, and the words land at your cursor',
+      line: 'Hold F2, speak, and the words land at your cursor',
       note: 'Voice typing for Windows · Offline after install · Free, open source',
       why: 'The words you see while speaking are only a preview; the final text trusts the full recording alone, and nothing counts as delivered until the clipboard checks out',
       story: 'I often talk to an AI for ten minutes or more at a time. With the voice input I used, one network hiccup and the whole passage was gone; the last few sentences often never appeared; if the cursor wasn’t in a text box, everything I said simply vanished. So I built a tool that runs on my own computer and recognizes the complete recording for the final transcript.',
-      imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Press once, say what you mean.',
+      imageAlt: 'The VoiceFlow website (in Chinese): let ideas take shape. Hold to speak, let go to write.',
       facts: [
         ['Role', 'Solo: product, design, engineering, release'],
         ['When', 'Since May 2026'],
@@ -193,7 +195,7 @@ export const CASES = [
       results: [
         { stat: 'stars', l: 'GitHub stars' },
         { v: '427 ms', l: 'Stop to paste dispatch, 0–10 s clips; v0.3.1, 95th percentile' },
-        { v: '829', l: 'Tests on v0.3.10 (22 Oct 2026)' },
+        { v: '926', l: 'Tests on v0.3.12 (3 Nov 2026)' },
         { v: '16', l: 'Releases as of 22 Oct 2026' },
       ],
       sections: [
@@ -204,7 +206,7 @@ export const CASES = [
             'I talk to AI by voice while I chat and build, often for five or six minutes at a time, sometimes more than ten.',
             'The tools I tried each had strengths: one from abroad could clean up text with AI, for a fee; the voice input on Chinese phones and PCs recognised speech well. But I kept hitting three problems. First, when I stopped, one network hiccup and the whole passage was gone. Second, the last few sentences often never appeared, when what I needed was all of it: the last word I say should be the last word on screen. Third, if the cursor wasn’t in a text box, everything I said simply vanished.',
             'So I wanted a tool that runs on my own computer: final recognition processes the full recording and tries to copy the result to the clipboard and save it in local history. Recognition or saving can fail, and some apps need a manual paste.',
-            'The development build is testing hold-to-speak with F2 or right Ctrl, alongside tap-to-toggle. The current public download uses tap-to-toggle.',
+            'Since v0.3.12, hold F2 or right Ctrl to speak and release to stop; tap-to-toggle still works.',
           ],
         },
         {
@@ -280,7 +282,7 @@ export const CASES = [
             { v: '1,024 MB', l: 'Private memory after install (v0.3.1)', g: 'Earlier 1,324.6 MB' },
           ],
           list: [
-            '829 automated tests passed for v0.3.10 on 22 Oct 2026, up from 396 at v0.3.3.',
+            '926 automated tests passed for v0.3.12 on 3 Nov 2026, up from 396 at v0.3.3.',
             '500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.',
             'Since v0.3.2, every release ships with a release and verification record.',
             'Twelve pieces of user feedback, each with a written decision and reason: adopted, deferred behind a gate, or declined.',
@@ -300,7 +302,7 @@ export const CASES = [
             ['2026.10.21', 'v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests'],
             ['2026.10.22', 'v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests'],
             ['2026.10.28', 'v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests'],
-            ['2026.11.03', 'Development build: hold F2 or right Ctrl to speak and release to stop; tap to toggle still works. Long-form punctuation and term restoration are being refined. Not yet in the public release'],
+            ['2026.11.03', 'v0.3.12: hold F2 or right Ctrl to speak and release to stop, and tap to toggle still works; the capsule fades once the paste is sent; no stray full stops where long dictation is joined, and split dictionary terms are restored; 926 tests'],
           ],
         },
         {
