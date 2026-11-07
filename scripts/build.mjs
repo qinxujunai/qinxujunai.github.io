@@ -304,14 +304,14 @@ function capsuleLink(c, href, name) {
   return `<a class="demo-link" href="${href}"><span class="visually-hidden">${esc(`${c.readCase} ${name}`)}</span>${voiceflowDemo(c)}</a>`;
 }
 
-// AI Signal at work: today's issue as live text, not a screenshot, so it is never out of date (v24).
+// AI Signal at work: the most recently fetched issue; its date remains visible if an update fails.
 // The issue is in Chinese on both language versions, so the card is marked lang="zh-CN".
 // 「10 月 24 日 周六」: spaced like every other number on the site (AI Signal's own label is unspaced).
 const cnDate = (iso) => {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
   if (!m) return '';
   const day = '日一二三四五六'[new Date(Date.UTC(+m[1], m[2] - 1, +m[3])).getUTCDay()];
-  return `${+m[2]} 月 ${+m[3]} 日 周${day}`;
+  return `${m[1]} 年 ${+m[2]} 月 ${+m[3]} 日 周${day}`;
 };
 
 function signalCard(c, href, name) {
@@ -401,6 +401,7 @@ ${s.viewNote ? `<p class="said">${clauses(c, bare(s.viewNote), true)}</p>` : ''}
 <ol class="principles">
 ${s.principles.map(([k, h, q, note]) => `<li class="reveal"><p class="pr-k">${T(c, k)}</p><h3>${T(c, h)}</h3><p class="pr-q">“${T(c, q)}”</p>${note ? `<p class="pr-q">${T(c, note)}</p>` : ''}</li>`).join('\n')}
 </ol>
+<p class="practice-example"><a class="more-link" href="${casePath(c, 'voiceflow')}"><span class="lt">${esc(s.example)}</span>${chevron}</a></p>
 </section>`;
 }
 

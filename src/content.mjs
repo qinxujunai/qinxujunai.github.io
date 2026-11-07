@@ -59,6 +59,7 @@ export const content = {
       // v26 (2026-10-24): his own words, docs/his-words-2026-10-24.md. Quoted verbatim; 「……」 marks a cut.
       view: '每天做的事，都是在为想成为的自己投票',
       viewNote: '',
+      example: '看看 VoiceFlow 是怎么做出来的',
       principles: [
         ['行动', '想法要做出来，才有价值', '2026 年 3 月的时候，我对代码一无所知。但慢慢地，我可以用它来解决工作日常遇到的问题，可以搭建自己的网站，实现自己想呈现的东西。'],
         ['复利', '每天进步 1%，一年是 37 倍', '看书，阅读，健身这些长期主义的事情……不是那种正反馈来得非常快的，但是做一天有一天的收获。', '这是固定增长的数学示意，实际成长不会每天等速。'],
@@ -180,14 +181,13 @@ export const content = {
     contactHeadline: '欢迎交流',
     contactLead: '聊 AI，聊产品，聊正在做的事',
     // v27 (2026-10-24): the ending, written from his words (docs/his-words-2026-10-24.md 「结尾想说的话」), at his request
-    // (「用顶级文笔……不要生搬硬套」). No graduation year (privacy), no employer names for the teaching years (his choice:
-    // 「按你的想法」), no 「你」 at the reader (v26.11). It replaces the ai.vibecoding manifesto under the card (his choice).
+    // (「用顶级文笔……不要生搬硬套」). No career history or graduation year; no 「你」 at the reader.
     letter: {
       title: '天行健，君子以自强不息',
       body: [
-        '刚毕业的时候，我还没有接触过 AI。大学那几年常常迷茫，也曾向当时觉得最权威的人求教，却没有等到回音。后来，我做过老师，做过内容运营，尝试过许多事，才渐渐明白：答案不在别人那里，而在每一天所做的事情里。',
-        '所以每当迷茫，我便去做三件事：阅读，学一门技能，锻炼身体。上班路上听一段长视频，下班路上听一期播客；想不通的事，就和 Claude、ChatGPT 慢慢聊。读过的书、听过的话，终会一点点沉淀为自己的经验。',
-        '我始终相信真诚，守住自己的能量边界，也相信时间的复利。日拱一卒无有尽，功不唐捐终入海。人生没有白走的路，每一步都算数。',
+        '大学时，我也曾迷茫，向自己觉得有答案的人求教，却没有等到回音。后来尝试过许多事，慢慢明白：有些答案要在行动中寻找。',
+        '迷茫的时候，我会读书、学一门技能、锻炼身体。路上听视频和播客，想不通的事，就和 Claude、ChatGPT 慢慢聊。读过的书、听过的话、做过的事，一点点成为自己的经验。',
+        '我相信真诚，也珍惜自己的能量。比起急着给自己一个定义，我更想把时间花在想做的事情上。日拱一卒，无有尽；功不唐捐，终入海。',
       ],
     },
     cardLabel: '秦徐俊的名片',
@@ -270,6 +270,7 @@ export const content = {
       // His words (2026-10-24), translated.
       view: 'What I do each day is a vote for who I want to become',
       viewNote: '',
+      example: 'See how I made VoiceFlow',
       principles: [
         ['Action', 'An idea is worth something once it is made', 'In March 2026 I knew nothing about code. Little by little I used it to solve problems at work, then to build my own website and make what I wanted to show.'],
         ['Compounding', '1% a day is 37 times in a year', 'Reading, exercise, the long-haul things … the reward doesn’t come quickly, but every day put in is a day gained.', 'A mathematical illustration of constant growth; real progress is not uniform.'],
@@ -365,9 +366,9 @@ export const content = {
     letter: {
       title: 'As heaven moves on, ceaselessly, so the noble keep striving',
       body: [
-        'When I graduated, I had not yet touched AI. My university years were often uncertain; I asked the people I thought had the answers, and no reply came. Since then I have taught, run content, and tried many things, and slowly I understood: the answer is not with anyone else. It is in what we do each day.',
-        'So whenever I feel lost, I do three things: read, learn a skill, and train. A long video on the way to work, a podcast on the way home; whatever I cannot work out, I talk through slowly with Claude or ChatGPT. The books read and the words heard settle, little by little, into experience of my own.',
-        'I still believe in sincerity, in guarding my own energy, and in the compounding of time. Small steps, taken every day, are never wasted. No road walked is a wasted road; every step counts.',
+        'At university, I often felt lost. I asked people I thought had the answers, but heard nothing back. After trying many things, I slowly understood that some answers are found by doing.',
+        'When I feel lost, I read, learn a skill and exercise. I listen to videos and podcasts on the way, and talk through difficult questions with Claude and ChatGPT. What I read, hear and do gradually becomes my own experience.',
+        'I believe in sincerity and in protecting my energy. Rather than rushing to define myself, I would rather spend my time on the things I want to do. One small step each day, without end; no effort is made in vain.',
       ],
     },
     cardLabel: 'Qin Xujun’s card',

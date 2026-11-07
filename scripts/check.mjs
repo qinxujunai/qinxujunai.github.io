@@ -50,6 +50,9 @@ const rules = [
   [/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|cn|net|org|io)\b/, 'email address'],
   [/\d{1,2}\s*-\s*\d{1,2}\s*K\b/i, 'salary range'],
   [/期望薪资|\d{2}\s*岁/, 'salary or age'],
+  [new RegExp(['新', '东方'].join('') + '|' + ['学', '而思'].join('')), 'private career reference'],
+  [/我做过老师|我做过内容运营|I have taught, run content/i, 'personal career reference'],
+  [/(?:19|20)?\d{2}\s*年\s*(?:刚|才)?毕业|(?:graduated|graduation)\s+(?:in\s+)?(?:19|20)\d{2}/i, 'graduation year'],
 ];
 const allowEmail = /noreply@anthropic\.com/;
 for (const f of files) {

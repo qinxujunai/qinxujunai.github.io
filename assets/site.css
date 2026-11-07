@@ -2575,6 +2575,10 @@ a.frame,
   color: var(--body);
 }
 
+.practice-example {
+  margin-top: 22px;
+}
+
 @media (min-width: 834px) {
   .people {
     grid-template-columns: repeat(3, 1fr);
