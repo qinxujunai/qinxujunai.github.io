@@ -14,7 +14,8 @@ export const CASES = [
   // docs/release-notes-0.3.9.md, docs/release-validation-0.3.9.md (822 tests, 2026-10-21),
   // docs/release-notes-0.3.10.md, docs/release-validation-0.3.10.md (829 tests; released 2026-10-22, tag c9df2cc),
   // docs/release-notes-0.3.12.md, docs/release-validation-0.3.12.md (926 tests; released 2026-11-03, tag fb1312c),
-  // git tags (16 by 2026-10-22), requirements.lock (PySide6 6.11.1).
+  // GitHub Releases page, counted 2026-11-07 with gh: 15 stable releases published by 2026-11-03 (17 entries incl. 2 pre-releases;
+  // 18 version tags, v0.3.5 has no Release), requirements.lock (PySide6 6.11.1).
   {
     slug: 'voiceflow',
     kind: 'product',
@@ -47,7 +48,7 @@ export const CASES = [
         { stat: 'stars', l: 'GitHub Star' },
         { v: '427 ms', l: '0–10 秒录音至发出粘贴指令，v0.3.1 测试第 95 百分位' },
         { v: '926 项', l: 'v0.3.12 自动化测试（2026-11-03）' },
-        { v: '16 次', l: '截至 2026-10-22 的正式发布' },
+        { v: '15 次', l: '截至 2026-11-03 的正式发布' },
       ],
       sections: [
         {
@@ -158,7 +159,7 @@ export const CASES = [
             // VoiceFlow v0.3.11 (released 2026-10-28; docs/release-notes-0.3.11.md, 862 tests in AGENTS.md handoff log).
             ['2026.10.28', 'v0.3.11：说话停顿时先在后台识别，停下后出字更快；长句接缝不再重复字；胶囊展开更平滑；862 项测试'],
             // VoiceFlow v0.3.12 (released 2026-11-03; docs/release-notes-0.3.12.md, 926 tests in docs/release-validation-0.3.12.md).
-            ['2026.11.03', 'v0.3.12：按住 F2 或右 Ctrl 说话，松开结束，轻按仍可切换；粘贴发出后胶囊直接收起；长句分段处不再多出句号，词库术语能还原拆开的写法；926 项测试'],
+            ['2026.11.03', 'v0.3.12：按住 F2 或右 Ctrl 说话，松开结束，轻按仍可切换；粘贴发出后胶囊直接收起；长句分段处少出多余的句号，词库术语能还原拆开的写法；926 项测试'],
           ],
         },
         {
@@ -196,7 +197,7 @@ export const CASES = [
         { stat: 'stars', l: 'GitHub stars' },
         { v: '427 ms', l: 'Stop to paste dispatch, 0–10 s clips; v0.3.1, 95th percentile' },
         { v: '926', l: 'Tests on v0.3.12 (3 Nov 2026)' },
-        { v: '16', l: 'Releases as of 22 Oct 2026' },
+        { v: '15', l: 'Stable releases as of 3 Nov 2026' },
       ],
       sections: [
         {
@@ -302,7 +303,7 @@ export const CASES = [
             ['2026.10.21', 'v0.3.9: one Save button in settings; a dictionary you can search, bulk-delete and undo; 822 tests'],
             ['2026.10.22', 'v0.3.10: settings redesigned after the system Settings app; words fade in as they’re recognised, and the final text replaces the draft in place; 829 tests'],
             ['2026.10.28', 'v0.3.11: recognition starts during a pause, so text arrives sooner after stopping; no repeated words at long-recording seams; a smoother capsule; 862 tests'],
-            ['2026.11.03', 'v0.3.12: hold F2 or right Ctrl to speak and release to stop, and tap to toggle still works; the capsule fades once the paste is sent; no stray full stops where long dictation is joined, and split dictionary terms are restored; 926 tests'],
+            ['2026.11.03', 'v0.3.12: hold F2 or right Ctrl to speak and release to stop, and tap to toggle still works; the capsule fades once the paste is sent; fewer stray full stops where long dictation is joined, and split dictionary terms are restored; 926 tests'],
           ],
         },
         {
