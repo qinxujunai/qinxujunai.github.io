@@ -1,6 +1,7 @@
 // Refreshes src/stats.json with live GitHub numbers for the projects that ship a Windows installer.
 // Runs in GitHub Actions (.github/workflows/stats.yml) with GITHUB_TOKEN; locally it falls back to shields.io.
-// Only writes the file when a number actually changed, so the scheduled job commits nothing on quiet days.
+// Writes the file when a number changed. A check-only update (the 「checked」 date) waits until after 02:00 UTC, when
+// AI Signal has sent (10:00 Beijing): the same run also brings the new issue, so it adds no commit of its own.
 //
 // "downloads" counts installer downloads only (*.exe). Checksums, notices and the runtime packs an app
 // fetches for itself on first run (万象成文's ffmpeg and model zips) are not people installing it.
@@ -57,8 +58,14 @@ for (const [slug, repo] of Object.entries(REPOS)) {
     const okValue = k === 'version' ? typeof v === 'string' && /^v?\d+(\.\d+)+$/.test(v.trim()) : Number.isSafeInteger(v) && v >= 0;
     if (!okValue) throw new Error(`bad value for ${slug}.${k}: ${JSON.stringify(v)}`);
   }
+  // 「updated」 is the day a number last changed; 「checked」 is the last day the numbers were read successfully.
+  // The page footnote shows 「checked」, so a quiet week does not read as a broken refresh.
+  const today = new Date().toISOString().slice(0, 10);
   if (!old || KEYS.some((k) => old[k] !== next[k])) {
-    current[slug] = { ...next, updated: new Date().toISOString().slice(0, 10) };
+    current[slug] = { ...next, updated: today, checked: today };
+    changed = true;
+  } else if (old.checked !== today && new Date().getUTCHours() >= 2) {
+    current[slug] = { ...old, checked: today };
     changed = true;
   }
   console.log(slug, JSON.stringify(current[slug]));

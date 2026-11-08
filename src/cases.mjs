@@ -46,7 +46,8 @@ export const CASES = [
       links: [['打开 VoiceFlow', 'https://qinxujunai.github.io/VoiceFlow/'], ['下载 Windows 版', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub Star' },
-        { v: '427 ms', l: '0–10 秒录音至发出粘贴指令，v0.3.1 测试第 95 百分位' },
+        // v0.3.12: VoiceFlow docs/release-validation-0.3.12.md (same measurement script as v0.3.1, 2026-11-03).
+        { v: '391 ms', l: '0–10 秒录音至发出粘贴指令，v0.3.12 测试第 95 百分位' },
         { v: '926 项', l: 'v0.3.12 自动化测试（2026-11-03）' },
         { v: '15 次', l: '截至 2026-11-03 的正式发布' },
       ],
@@ -68,11 +69,13 @@ export const CASES = [
           p: [
             '边说边出字，需要一个流式小模型，可它不够准；准的模型，要等完整的录音。VoiceFlow 两个都用：小模型让你看着字一个个出来，停下的那一刻，SenseVoice 读完整段录音写出终稿，原地替换草稿。预览永远盖不掉终稿。',
           ],
-          // VoiceFlow docs/release-performance-evidence-2026-08-11.md (v0.3.1, 95th percentile, 20 samples per bucket).
+          // 6 ms: VoiceFlow docs/release-performance-evidence-2026-08-11.md (v0.3.1, not re-measured since).
+          // 391 / 493 ms: docs/release-validation-0.3.12.md, same script and buckets, re-measured 2026-11-03 for v0.3.12
+          // (390.7 ms for 0–10 s, 493.3 ms for 120 s, P95; other builds were running, so the figures are conservative).
           metrics: [
             { v: '6 ms', l: '按下 F2，胶囊出现', g: 'v0.3.1 实测' },
-            { v: '427 ms', l: '0–10 秒录音，停止到发出粘贴指令', g: 'v0.3.1 · 第 95 百分位' },
-            { v: '541 ms', l: '两分钟录音，停止到发出粘贴指令', g: 'v0.3.1 · 第 95 百分位' },
+            { v: '391 ms', l: '0–10 秒录音，停止到发出粘贴指令', g: 'v0.3.12 · 第 95 百分位' },
+            { v: '493 ms', l: '两分钟录音，停止到发出粘贴指令', g: 'v0.3.12 · 第 95 百分位' },
           ],
         },
         {
@@ -136,6 +139,7 @@ export const CASES = [
             { v: '1,024 MB', l: '安装后私有内存（v0.3.1）', g: '早期 1,324.6 MB' },
           ],
           list: [
+            'v0.3.12 发布前用同一套测量重测（2026 年 11 月 3 日）：10 秒内的录音 391 ms，两分钟录音 493 ms；当时机器上还在跑别的构建，数字偏保守。',
             'v0.3.12 于 2026 年 11 月 3 日通过 926 项自动化测试；v0.3.3 时是 396 项。',
             '500 次录音生命周期，10,000 组随机的开始、停止、取消、退出序列，50,000 个异常文本模糊用例。',
             '从 v0.3.2 起，每个版本都附一份发布与验证记录。',
@@ -195,7 +199,7 @@ export const CASES = [
       links: [['Open VoiceFlow', 'https://qinxujunai.github.io/VoiceFlow/?lang=en'], ['Download for Windows', `${VF}/releases/latest`]],
       results: [
         { stat: 'stars', l: 'GitHub stars' },
-        { v: '427 ms', l: 'Stop to paste dispatch, 0–10 s clips; v0.3.1, 95th percentile' },
+        { v: '391 ms', l: 'Stop to paste dispatch, 0–10 s clips; v0.3.12, 95th percentile' },
         { v: '926', l: 'Tests on v0.3.12 (3 Nov 2026)' },
         { v: '15', l: 'Stable releases as of 3 Nov 2026' },
       ],
@@ -218,8 +222,8 @@ export const CASES = [
           ],
           metrics: [
             { v: '6 ms', l: 'F2 to the capsule on screen', g: 'Measured on v0.3.1' },
-            { v: '427 ms', l: '0–10 s clips, stop to paste dispatch', g: 'v0.3.1 · 95th percentile' },
-            { v: '541 ms', l: 'Two-minute clips, stop to paste dispatch', g: 'v0.3.1 · 95th percentile' },
+            { v: '391 ms', l: '0–10 s clips, stop to paste dispatch', g: 'v0.3.12 · 95th percentile' },
+            { v: '493 ms', l: 'Two-minute clips, stop to paste dispatch', g: 'v0.3.12 · 95th percentile' },
           ],
         },
         {
@@ -283,6 +287,7 @@ export const CASES = [
             { v: '1,024 MB', l: 'Private memory after install (v0.3.1)', g: 'Earlier 1,324.6 MB' },
           ],
           list: [
+            'Re-measured with the same script before v0.3.12 shipped (3 Nov 2026): 391 ms for clips under 10 s, 493 ms for two-minute clips; other builds were running on the machine, so the figures are conservative.',
             '926 automated tests passed for v0.3.12 on 3 Nov 2026, up from 396 at v0.3.3.',
             '500 recording lifecycles, 10,000 random start, stop, cancel and exit sequences, 50,000 malformed-text fuzz cases.',
             'Since v0.3.2, every release ships with a release and verification record.',
@@ -358,8 +363,9 @@ export const CASES = [
       links: [['打开 AI Signal', 'https://qinxujunai.github.io/ai-signal/'], ['今天这期', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11 类', l: '信源' },
-        { v: '10:00', l: '计划发送时间（北京时间）' },
-        // 10-23 issue: Send step 10:00:00–10:00:03 Beijing (run 39870655280).
+        // ai-signal git log: the daily 「AI Signal <date>」 web-edition commit, made right after the send. 10-23 to 11-08:
+        // 16 of 17 at 10:00:03–10:00:04 Beijing; 11-03 at 10:14:00 (no scheduled run started that morning). Checked 2026-11-08.
+        { v: '16 / 17 天', l: '10:00 准时发出，截至 2026-11-08' },
         { v: '0 条', l: '模型自己写的链接' },
         // scripts/prepare-digest.js keeps data/seen.json for 60 days.
         { v: '60 天', l: '发过的内容不再重复' },
@@ -385,9 +391,10 @@ export const CASES = [
           h: '每天计划在 10:00 发出',
           nav: '发送时间',
           p: [
-            'GitHub 的定时任务高峰期会晚好几个小时：10-22 定在 09:41 的任务，14:32 才开始跑。现在从凌晨四点起每 20 分钟排一次队，第一个启动的认领当天，09:35 读完、编好，等到 10:00:00 发出；其余的看到已经发过，就自己退出。',
-            // ai-signal Actions run 39870655280 (Send step 02:00:00–02:00:03 UTC).
-            '10-23 那期：10:00:00 开始发送，10:00:03 发完。',
+            // ai-signal CLAUDE.md 「不许回退的决定」 and CHANGELOG 2026-11-07 (闹钟: scripts/relay.js, environment daily-wake).
+            'GitHub 的定时任务常常晚几个小时，有时整个上午一次都不启动：10-22 定在 09:41 的任务，14:32 才开始跑。所以每天发完，就用 GitHub 的等待计时器给第二天定一个约 08:10 的闹钟；凌晨四点起每 20 分钟一次的排队留作后备。谁先启动谁认领当天，09:35 读完、编好，等到 10:00:00 发出；其余的看到已经发过，就自己退出。',
+            // ai-signal git log, see the results bar above.
+            '10 月 23 日到 11 月 8 日的 17 天里，16 天在 10:00 发出；11 月 3 日上午的排队一次都没启动，晚到 10:14。闹钟是 11 月 7 日加上的。',
           ],
         },
         {
@@ -409,7 +416,7 @@ export const CASES = [
           h: '架构',
           tech: true,
           flow: [
-            { t: '排队', n: ['北京时间 04:07 到 09:47，每 20 分钟排一次', '第一个启动的任务认领当天，其余看到就退出'] },
+            { t: '唤醒', n: ['前一天发完，给今天定好约 08:10 的闹钟', '后备：北京时间 04:07 到 09:47，每 20 分钟排一次', '谁先启动谁认领当天，其余看到就退出'] },
             { t: '收集 · 09:35', n: ['X 上的 builder、播客（follow-builders）', 'OpenAI、Anthropic、DeepMind、Google AI、Qwen 等官方博客', 'Hacker News、Techmeme、Reddit（经 AINews 汇总）', '论文热榜、Hugging Face 热门模型、GitHub 今日趋势、Product Hunt', '量子位、36氪', '去掉 60 天内发过的'] },
             { t: '编号', n: ['每条素材一个编号：H3、R1、M2…'] },
             { t: '编辑 · DeepSeek', n: ['按「三问」挑选，多来源合并', '只输出 JSON，只能引用编号'] },
@@ -432,7 +439,8 @@ export const CASES = [
               ['每天发布一期网页版', '既是存档，也让定时任务不会因为 60 天无活动被暂停', '只发邮件，不留痕迹'],
               ['去掉 👍 / 👎 和追踪像素', '接收反馈的服务早已返回 404，留着就是坏链接', '假装有反馈回路'],
               ['Hacker News 改用 Algolia，按整词匹配', '旧做法只看首页 30 条，按子串匹配，「said」也会被当成 AI', '首页接口'],
-              ['凌晨起每 20 分钟排一次，先认领再等到 10:00', '只用 GitHub 就能吃下几个小时的延迟，不用另租服务器', '外部定时服务去触发'],
+              // ai-signal CLAUDE.md: of 22 scheduled runs a day only 3–5 start; the wait timer wakes on time without holding a machine.
+              ['前一天定闹钟，凌晨排队作后备', '定时任务每天排 22 次，只启动 3 到 5 次；GitHub 的等待计时器到点就醒，等待时不占机器，不用另租服务器', '外部定时服务去触发'],
               ['Reddit 经 AINews 的每日汇总', '直接请求被 403；AINews 每天整理 Reddit 热帖，带讨论热度', '登录 Reddit 接口，要管账号和密钥'],
               ['用 DeepSeek 的 flash 模型，开着深度思考', 'chat 模型 2026-07-24 已经退役；flash 是现在的版本，开着深度思考，想清楚再挑', '关掉深度思考，换更快的回答'],
             ],
@@ -446,8 +454,9 @@ export const CASES = [
             '链接和数字全部来自原始数据；模型引用了不存在的编号，这条就不会出现。',
             '模型无响应时照样发出一期，按来源热度排序，并在邮件里写明；某个信源挂了，页脚会写出来。',
             '发过的链接记录 60 天，下一期不会重复。',
-            '8 组自动测试：各信源的解析、热度、北京时间的计算、配色上限，以及网站和 RSS；每次提交都在云端跑一遍。',
-            '准点：2026-10-23 那期，北京时间 10:00:00 开始发送，10:00:03 发完；同一早上排队的另一次运行看到已发，自动退出，没有重复发（GitHub 运行记录）。',
+            // ai-signal scripts: `npm test`, 22 passed on 2026-11-08 (core.test.js, relay.test.js).
+            '22 项自动测试：各信源的解析、热度、北京时间的计算、配色上限、网站和 RSS，以及闹钟；改动代码的提交都在云端跑一遍。',
+            '准点：10 月 23 日到 11 月 8 日的 17 天里，16 天在 10:00 发出，只有 11 月 3 日晚到 10:14；同一早上排队的其他运行看到已发，自动退出，没有重复发（GitHub 运行记录和每天的网页版提交）。',
           ],
         },
         {
@@ -460,6 +469,9 @@ export const CASES = [
             ['2026.10.20', 'v3：重写信源、编辑方式和排版，恢复每日发送'],
             ['2026.10.22', 'v4：10:00 整送达；加入 Techmeme、Reddit、热门模型、Product Hunt、Anthropic、Qwen、36氪；版式改成白底黑字，只留链接一种颜色'],
             ['2026.10.23', 'v4.1：有了自己的网站，打开先看到它是什么和今天这期的要点；加上 RSS、开源许可和版本发布'],
+            // ai-signal CHANGELOG 2026-11-03 and 2026-11-07.
+            ['2026.11.03', '更正第 15 期对一项研究结果和投资人估值判断的说法，更正说明留在那期网页上'],
+            ['2026.11.07', '前一天定闹钟，10:00 不再只靠定时任务；修好 Reddit 信源，读不出时会报错；网站首页重做'],
           ],
         },
         {
@@ -467,8 +479,10 @@ export const CASES = [
           nav: '还差什么',
           list: [
             '推文和播客仍依赖第三方的 follow-builders feed，它一停，这两类就会断。',
-            '准点靠 GitHub 在早上把十几次排队里的任意一次及时启动；一次都没轮上，那天就由 10 点以后的补发兜底，会晚。',
-            'Reddit 依赖 AINews 的汇总，它哪天停更，社区这一栏就会空。',
+            '准点靠前一天设好的闹钟；闹钟没设上，就退回凌晨排队，那天可能晚。',
+            // ai-signal CHANGELOG 2026-11-07 (parser read 0 posts without an error). Counted in ai-signal docs/archive:
+            // reddit.com links per issue, 10-23: 11; 10-24 to 11-07: 0 except 10-26 (1); 11-08: 12. Its own docs say 「11 天」, which is wrong.
+            'Reddit 依赖 AINews 的汇总：AINews 10 月下旬改了写法，10 月 24 日到 11 月 7 日的 15 期里，这一栏只出现过 1 条，当时没有发现。现在读不出会报错，但它停更，这一栏仍会空。',
             '没有读者反馈回路；编辑标准只能靠人读了再改。',
             '模型可能引错编号：链接是真的，但不一定配对。第一期里也还有「正面挑战」「标志性」这类编辑标准不允许的评语。',
           ],
@@ -496,7 +510,7 @@ export const CASES = [
       links: [['Open AI Signal', 'https://qinxujunai.github.io/ai-signal/'], ['Today’s issue', 'https://qinxujunai.github.io/ai-signal/latest/']],
       results: [
         { v: '11', l: 'Source types' },
-        { v: '10:00', l: 'Scheduled send time (Beijing)' },
+        { v: '16 of 17', l: 'Days sent at 10:00, as of 8 Nov 2026' },
         { v: '0', l: 'Links written by the model' },
         { v: '60 days', l: 'Before anything repeats' },
       ],
@@ -520,8 +534,8 @@ export const CASES = [
           h: 'Scheduled for 10:00 each day',
           nav: 'Send time',
           p: [
-            'GitHub’s scheduler runs hours late at busy times: on 22 Oct the 09:41 job started at 14:32. Now a run is queued every 20 minutes from 4 a.m.; the first to start claims the day, reads and edits at 09:35, and sends at 10:00:00. The others see it has gone out and stop.',
-            'The 23 Oct issue began sending at 10:00:00 and finished at 10:00:03.',
+            'GitHub’s scheduler often runs hours late, and some mornings never starts at all: on 22 Oct the 09:41 job started at 14:32. So after each send, a GitHub wait timer sets an alarm for about 08:10 the next day; runs queued every 20 minutes from 4 a.m. stay as a backup. Whichever starts first claims the day, reads and edits at 09:35, and sends at 10:00:00. The others see it has gone out and stop.',
+            'Of the 17 days from 23 Oct to 8 Nov, 16 went out at 10:00; on 3 Nov no queued run started that morning, and the issue went out at 10:14. The alarm was added on 7 Nov.',
           ],
         },
         {
@@ -543,7 +557,7 @@ export const CASES = [
           h: 'How it’s built',
           tech: true,
           flow: [
-            { t: 'Queue', n: ['A run every 20 minutes from 04:07 to 09:47 Beijing', 'The first to start claims the day; the rest stop'] },
+            { t: 'Wake', n: ['After each send, an alarm is set for about 08:10 the next day', 'Backup: a run every 20 minutes from 04:07 to 09:47 Beijing', 'Whichever starts first claims the day; the rest stop'] },
             { t: 'Collect · 09:35', n: ['Builders on X and podcasts (follow-builders)', 'OpenAI, Anthropic, DeepMind, Google AI, Qwen and other lab blogs', 'Hacker News, Techmeme, Reddit (via AINews)', 'HF Daily Papers and trending models, GitHub Trending, Product Hunt', 'QbitAI, 36Kr', 'Drop anything sent in the last 60 days'] },
             { t: 'Number', n: ['Every item gets an ID: H3, R1, M2…'] },
             { t: 'Edit · DeepSeek', n: ['Select by three questions, merge sources', 'JSON only, IDs only'] },
@@ -566,7 +580,7 @@ export const CASES = [
               ['Publish a web edition every day', 'It is the archive, and it keeps the schedule from being paused after 60 quiet days', 'Email only, no trace'],
               ['Remove 👍 / 👎 and the tracking pixel', 'The feedback service had been returning 404; keeping them meant broken links', 'Pretending there is a feedback loop'],
               ['Hacker News through Algolia, whole-word matching', 'The old code read 30 front-page stories and matched substrings, so “said” counted as AI', 'The front-page API'],
-              ['Queue from before dawn every 20 minutes; claim first, then wait for 10:00', 'GitHub alone absorbs hours of delay, with no server to rent', 'An external scheduler triggering the run'],
+              ['An alarm set the day before, with runs queued from before dawn as backup', 'Of 22 scheduled runs a day only 3 to 5 start; a GitHub wait timer wakes on time without holding a machine, with no server to rent', 'An external scheduler triggering the run'],
               ['Reddit through AINews’ daily recap', 'Direct requests get a 403; AINews collects the hottest threads every day, with their activity', 'Logging in to Reddit’s API, with an account and keys to manage'],
               ['DeepSeek’s flash model, with thinking on', 'The chat model was retired on 2026-07-24; flash replaces it, and with thinking on it thinks before it picks', 'Thinking off, for faster answers'],
             ],
@@ -580,8 +594,8 @@ export const CASES = [
             'Every link and number comes from the raw data; an item that cites an unknown ID never appears.',
             'If the model is down, an issue still goes out, ranked by source signal and labelled as such; a failed source is named in the footer.',
             'Sent links are remembered for 60 days, so nothing repeats.',
-            'Eight groups of automated tests (source parsing, signal strength, Beijing-time arithmetic, the colour limit, the website and RSS) run in the cloud on every commit.',
-            'On time: the 23 Oct issue began sending at 10:00:00 Beijing time and finished at 10:00:03; another queued run that morning saw it had gone out and stopped, so nothing was sent twice (GitHub run log).',
+            '22 automated tests (source parsing, signal strength, Beijing-time arithmetic, the colour limit, the website and RSS, and the alarm) run in the cloud on every commit that changes the code.',
+            'On time: of the 17 days from 23 Oct to 8 Nov, 16 went out at 10:00 Beijing time and only 3 Nov was late, at 10:14; other runs queued that morning saw the issue had gone out and stopped, so nothing was sent twice (GitHub run log and the daily web-edition commits).',
           ],
         },
         {
@@ -594,6 +608,8 @@ export const CASES = [
             ['2026.10.20', 'v3: new sources, editing and layout; daily sends restored'],
             ['2026.10.22', 'v4: on the hour at 10:00; Techmeme, Reddit, trending models, Product Hunt, Anthropic, Qwen and 36Kr added; black on white, one colour for links'],
             ['2026.10.23', 'v4.1: a website of its own that opens with what it is and today’s key points; RSS, an open-source licence and versioned releases'],
+            ['2026.11.03', 'Issue 15’s account of a study’s result and of investors’ valuation views corrected, with the correction left visible on that issue’s page'],
+            ['2026.11.07', 'An alarm set the day before, so 10:00 no longer rests on the scheduler alone; the Reddit source fixed, and it now reports when it reads nothing; a new homepage'],
           ],
         },
         {
@@ -601,8 +617,8 @@ export const CASES = [
           nav: 'Still missing',
           list: [
             'Posts and podcasts still depend on the third-party follow-builders feed.',
-            'Punctuality depends on GitHub starting any one of a dozen morning runs in time; if none does, the late backups after 10:00 send it, late.',
-            'Reddit depends on the AINews recap; if it stops, the community section goes empty.',
+            'Punctuality rests on the alarm set the day before; if it is not set, the queued morning runs take over and that day may be late.',
+            'Reddit depends on the AINews recap: AINews changed its markup in late October, and across the 15 issues from 24 Oct to 7 Nov the section carried a single post before anyone noticed. A failed read is now reported, but if the recap stops, the section still goes empty.',
             'There is no reader feedback loop; the editorial brief improves only when someone reads and edits it.',
             'The model can cite the wrong ID: the link is real but may not match the item. The first issue still had phrases the brief forbids, like “a head-on challenge”.',
           ],
@@ -652,7 +668,9 @@ export const CASES = [
         { v: '25 秒', l: '47 分钟视频出文字（实测）' },
         { v: '0 次', l: '超时；180 次中 141 次完整' },
         { v: '约 2 分钟', l: '普通 CPU 转写 1 小时音频' },
-        { stat: 'downloads', l: '次安装包下载' },
+        // Replaces the installer download count (2026-11-08): 19 downloads says little about whether it works.
+        // docs/platform-benchmark-20261022.md: B 站, 小宇宙, 抖音, 公众号, 小红书; 60 links × 3 rounds.
+        { v: '5 个', l: '平台，60 条链接各跑 3 轮' },
       ],
       sections: [
         {
@@ -789,7 +807,7 @@ export const CASES = [
         { v: '25 s', l: 'Text from a 47-minute video (measured)' },
         { v: '0', l: 'Timeouts; 141 of 180 runs complete' },
         { v: '~2 min', l: 'An hour of audio on an ordinary CPU' },
-        { stat: 'downloads', l: 'Installer downloads' },
+        { v: '5', l: 'Platforms; 60 links, three runs each' },
       ],
       sections: [
         {

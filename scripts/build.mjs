@@ -9,10 +9,11 @@ const JS_VERSION = (await import('node:crypto')).createHash('sha256').update(fs.
 import { content, SITE as PUBLIC_SITE, GITHUB, VIBECODING, FILM } from '../src/content.mjs';
 import { CASES } from '../src/cases.mjs';
 
-// Two sites from one codebase (2026-10-26). With no arguments this builds the public personal site in place.
-// `--profile <file> --out <dir>` builds the job-application site: the same pages plus his 经历 and a title under
-// his name, which live only in that private profile file (a private repository), so the public repo never
-// carries them. The profile's default export: { site, zh: {...}, en: {...} }, merged over src/content.mjs.
+// With no arguments this builds the site in place. `--profile <file> --out <dir>` builds a copy into <dir> with a
+// profile file layered on top. Its default export may set: site (canonical origin), zh / en (merged over
+// src/content.mjs), keep (extra words that must not break), css (appended to the stylesheet), navSections (the nav's
+// section ids), afterName(c, h) and beforeContact(c, h) (HTML for the home page; h holds the text helpers below),
+// unlisted (noindex everywhere, robots.txt refuses crawlers, no sitemap).
 const argv = process.argv.slice(2);
 const argOf = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
 const PROFILE_FILE = argOf('--profile');
@@ -20,8 +21,7 @@ const OUT = path.resolve(argOf('--out') || '.');
 const PROFILE = PROFILE_FILE ? (await import((await import('node:url')).pathToFileURL(path.resolve(PROFILE_FILE)).href)).default : null;
 if (PROFILE) for (const lang of ['zh', 'en']) Object.assign(content[lang], PROFILE[lang] || {});
 const SITE = PROFILE?.site || PUBLIC_SITE;
-// The job site is shared by link only: never indexed.
-const PRIVATE = Boolean(PROFILE);
+const UNLISTED = Boolean(PROFILE?.unlisted);
 
 const read = (f) => fs.readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
 const stats = JSON.parse(read('src/stats.json'));
@@ -34,18 +34,13 @@ const esc = (s) =>
 
 // Chinese lines may only break between words: segment with ICU and mark break points with <wbr>,
 // then CSS (word-break: keep-all) forbids breaks anywhere else. Names and fixed phrases stay whole.
+// Only words that appear on these pages (pruned 2026-11-08: 80 were left over from earlier versions). A profile
+// build adds its own through `keep`.
 const KEEP = [
-  '按 F2 说话，文字直接打在光标处', '最后 4 张是实拍', 'AI 视频工具',
-  '文章链接', '写成了一个网站', '零基础也能读', '值得看的', '一页读完', '里面的文字', '文字直接打在光标处',
-  '让 AI 负责拆解、生成与验证', '让人守住目标、边界与品味', '用自然语言', '创造可运行的作品',
-  '云南妙妙屋', '几分钟读完', '先读读我的方法', '我是秦徐俊', '做 AI 产品', '内容和运营', '人为什么会用它', '先立边界', '约 18 分钟读完', '读完就能动手', '做 AI 产品', '为什么会用', '一个东西', '剪贴板没核对过', '不算送达', '完整录音', '链接由代码回填', '写不出假链接', '不用显卡', '人台照', '模特图', '也会用 AI 做画面', '开场片', '信息流广告', '涨粉', '人台照', 'AI 模特图', '上身图',
-  'AI 进化得越快', '我们越需要慢下来',
-  'Jack 叔叔', 'easy-vibe', 'ai.vibecoding', '凯圣王', '谭成义', '三分化', '杰克叔叔', '鲁大魔', '天行健', '日拱一卒', '功不唐捐', 'ChatGPT', '能量边界', '学技能', '内容运营',
-  '秦徐俊', '[已移除]', '[已移除]', '[已移除]', '[已移除]', '[已移除]', '[已移除]', '[已移除]', '[已移除]',
-  '[已移除]', '[已移除]', '万象成文', '小宇宙', '小红书', '公众号', '飞书', '能用的 AI', '用 AI 解决真实的问题', 'AI 问数', 'AI 赋能课程',
-  '智能体', '上下文', '自然语言', '许愿池', '爆款案例', '信息流', '回款率', '采购评估', '招投标', '剪贴板', '终稿', '离线',
-  '受监督', '子进程', '原生绘制', '浏览器验收', '构建自愈', '原子修改', '计划闸门', '上下文装载', '访谈对话', '想用 AI',
-  '我用 AI 做东西', '也把想法分享出来', '都能直接用', '到能用的 AI', '光标处', '每天在用', '再让 AI 动手', '第一行代码', '创造者', '无需登录', '不声明完成', '都跑', '一个字都不丢', '逐字回读', '再把概率压成确定性', '终极浪漫', '数据智能', '数据平台', '智能分析', '[已移除]', '乡村英才计划', '未来星计划', '冒烟测试', '代码签名', '安全提示',
+  '值得看的', '一页读完', '让 AI 负责拆解、生成与验证', '让人守住目标、边界与品味', '几分钟读完', '不算送达', '完整录音', '不用显卡', 'Jack 叔叔', 'easy-vibe',
+  'ai.vibecoding', '凯圣王', '谭成义', '三分化', '鲁大魔', '天行健', '日拱一卒', '功不唐捐', 'ChatGPT', '学技能', '秦徐俊', '万象成文', '小宇宙', '小红书',
+  '公众号', '剪贴板', '终稿', '离线', '受监督', '子进程', '原生绘制', '我用 AI 做东西', '光标处', '无需登录', '逐字回读', '冒烟测试', '代码签名', '安全提示',
+  ...(PROFILE?.keep || []),
 ];
 const segmenter = new Intl.Segmenter('zh', { granularity: 'word' });
 const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -84,7 +79,7 @@ const chevron = '<span class="chev" aria-hidden="true">›</span>';
 const outward = '<span class="chev out" aria-hidden="true">↗</span>';
 
 // The stylesheet is inlined so the first screen needs no extra round trip on slow networks.
-const css = read('assets/site.css')
+const css = (read('assets/site.css') + (PROFILE?.css || ''))
   .replace(/\/\*[\s\S]*?\*\//g, '')
   .replace(/\s+/g, ' ')
   .replace(/\s*([{}:;,>])\s*/g, '$1')
@@ -137,7 +132,7 @@ const casePath = (c, slug) => `${c.path}work/${slug}/`;
 const caseOf = (slug) => CASES.find((x) => x.slug === slug);
 
 function head(c, { url, alt, title, description = c.description, noindex: hide = false, preload = [] }) {
-  const noindex = hide || PRIVATE;
+  const noindex = hide || UNLISTED;
   const zhUrl = alt?.zh;
   const enUrl = alt?.en;
   return `<!doctype html>
@@ -183,7 +178,7 @@ function nav(c, { switchHref, onHome }) {
 <div class="nav-inner">
 <a class="nav-sig" href="${onHome ? '#top' : home(c)}" aria-label="${esc(c.name)} · ${esc(c.home)}">${onHome ? signatureRef('sig-mini', { seal: false }) : signature('sig-mini')}</a>
 <nav class="nav-links" aria-label="${esc(c.navLabel)}">
-${(c.nav.path ? ['work', 'share', 'three', 'path', 'contact'] : SECTIONS).map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a>`).join('\n')}
+${(PROFILE?.navSections || SECTIONS).map((id) => `<a href="${base}#${id}" data-nav="${id}">${c.nav[id]}</a>`).join('\n')}
 </nav>
 <div class="nav-tools">
 <a href="${switchHref}" hreflang="${c.switchLang}" lang="${c.switchLang}">${c.switchLabel}</a>
@@ -245,7 +240,7 @@ ${img('avatar', c.portraitAlt, { sizes: '72px', eager: true, cls: 'avatar rise' 
 <div class="sig-line">${signature('sig')}</div>
 <script>${sigStart}</script>
 <p class="visually-hidden">${esc(c.name)}</p>
-${c.heroRole ? `<p class="hero-role rise" style="--d:.4s">${T(c, c.heroRole)}</p>` : ''}
+${PROFILE?.afterName ? PROFILE.afterName(c, HELP) : ''}
 <h1 id="hero-title" class="rise" style="--d:.5s">${heroTitle(c)}</h1>
 <p class="sub rise" style="--d:.65s">${clauses(c, bare(c.now), 'list')}</p>
 <p class="cta rise" style="--d:.8s"><a class="pill pill-lg" href="#contact">${c.addWechat}</a><a class="more-link" href="#work">${c.seeWork}${chevron}</a></p>
@@ -305,6 +300,9 @@ function capsuleLink(c, href, name) {
 }
 
 // AI Signal at work: the most recently fetched issue; its date remains visible if an update fails.
+// The built card is whatever issue the scheduled job last fetched; assets/site.js swaps in a newer one when the page
+// opens (data-date is the issue it holds), because GitHub's schedule often runs hours late and a copy built with
+// --profile elsewhere is not rebuilt every day.
 // The issue is in Chinese on both language versions, so the card is marked lang="zh-CN".
 // 「10 月 24 日 周六」: spaced like every other number on the site (AI Signal's own label is unspaced).
 const cnDate = (iso) => {
@@ -317,7 +315,7 @@ const cnDate = (iso) => {
 function signalCard(c, href, name) {
   const s = signal;
   const zh = { lang: 'zh-CN' };
-  return `<a class="signal-card" href="${href}" lang="zh-CN"><span class="visually-hidden" lang="${c.lang}">${esc(`${c.readCase} ${name}`)}</span>
+  return `<a class="signal-card" href="${href}" lang="zh-CN" data-date="${esc(s.date)}"><span class="visually-hidden" lang="${c.lang}">${esc(`${c.readCase} ${name}`)}</span>
 <span class="sc-when">第 ${s.number} 期 · ${esc(cnDate(s.date) || s.dateLabel)}</span>
 <span class="sc-head">${T(zh, s.headline)}</span>
 ${s.intro ? `<span class="sc-intro">${T(zh, s.intro)}</span>` : ''}
@@ -401,7 +399,6 @@ ${s.viewNote ? `<p class="said">${clauses(c, bare(s.viewNote), true)}</p>` : ''}
 <ol class="principles">
 ${s.principles.map(([k, h, q, note]) => `<li class="reveal"><p class="pr-k">${T(c, k)}</p><h3>${T(c, h)}</h3><p class="pr-q">“${T(c, q)}”</p>${note ? `<p class="pr-q">${T(c, note)}</p>` : ''}</li>`).join('\n')}
 </ol>
-<p class="practice-example"><a class="more-link" href="${casePath(c, 'voiceflow')}"><span class="lt">${esc(s.example)}</span>${chevron}</a></p>
 </section>`;
 }
 
@@ -517,20 +514,6 @@ function fitness(c) {
 </section>`;
 }
 
-function journey(c) {
-  return `<section class="tile soft" id="path" aria-labelledby="path-title">
-<div class="reveal">
-<p class="eyebrow">${c.pathTitle}</p>
-<h2 id="path-title">${lines(c, bare(c.pathHeadline))}</h2>
-<p class="sub">${clauses(c, bare(c.pathLine), true)}</p>
-</div>
-<ol class="path reveal${c.journey.some((p) => /\d{4}\.\d/.test(p.when)) ? ' months' : ''}">
-${c.journey.map((p) => `<li${p.light ? ' class="light"' : ''}><span class="when">${esc(p.when)}</span><div><h3>${T(c, p.role)}</h3>${p.org ? `<p class="org">${T(c, p.org)}</p>` : ''}${p.desc ? `<p class="what">${T(c, p.desc)}</p>` : ''}</div></li>`).join('\n')}
-</ol>
-${c.resume ? `<p class="cta reveal"><a class="more-link" href="${c.resume.href}" download="${esc(c.resume.file)}">${c.resume.label}${chevron}</a></p>` : ''}
-</section>`;
-}
-
 // The ending: a thank-you, one action, and his own last line. The card carries his name once (the
 // signature), one line, and the QR code as a real image WeChat can long-press; it is not wrapped in a link.
 // Outside WeChat, phones get "copy my WeChat ID and open WeChat" when the ID is set, else "save the card".
@@ -584,7 +567,7 @@ ${three(c)}
 ${books(c)}
 ${skill(c)}
 ${fitness(c)}
-${c.journey ? journey(c) : ''}
+${PROFILE?.beforeContact ? PROFILE.beforeContact(c, HELP) : ''}
 ${contact(c)}
 </main>
 </body>
@@ -676,10 +659,10 @@ ${cs.image ? `<div class="case-frame">${frame(c, { key: cs.image.key, alt: t.ima
 <dl class="facts">
 ${t.results.map((r) => {
   const v = r.stat ? statValue(cs.slug, r.stat) : r.v;
-  return `<div><dt>${T(c, r.l)}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${r.stat ? LIVE(statText(v)) : statText(v)}</dd></div>`;
+  return `<div><dt>${dates(T(c, r.l))}</dt><dd${typeof v === 'number' ? ` data-count="${v}"` : ''}>${r.stat ? LIVE(statText(v)) : statText(v)}</dd></div>`;
 }).join('\n')}
 </dl>
-${live ? `<p class="footnote">${LIVE(dates(T(c, L.liveNote(stats[cs.slug].updated))))}</p>` : ''}
+${live ? `<p class="footnote">${LIVE(dates(T(c, L.liveNote(stats[cs.slug].checked || stats[cs.slug].updated))))}</p>` : ''}
 </section>
 <div class="case-body">
 <aside class="case-facts" aria-labelledby="facts-title">
@@ -742,6 +725,8 @@ const write = (rel, html) => {
   fs.writeFileSync(file, html);
   pages.push(file);
 };
+// Text helpers a profile's afterName / beforeContact can use, so its sections typeset like the rest of the page.
+const HELP = { T, esc, bare, lines, clauses, chevron };
 write('index.html', homePage(content.zh));
 write('en/index.html', homePage(content.en));
 for (const cs of CASES) {
@@ -751,11 +736,12 @@ for (const cs of CASES) {
 write('404.html', notFound());
 
 const pairs = [['/', '/en/'], ...CASES.map((cs) => [casePath(content.zh, cs.slug), casePath(content.en, cs.slug)])];
-if (PRIVATE) {
-  // The job site: copy the static files beside the pages, block crawlers, no sitemap.
+if (PROFILE) {
+  // A profile build: copy the static files beside the pages; unlisted ones refuse crawlers and get no sitemap.
   for (const f of ['assets', 'favicon.svg', 'apple-touch-icon.png', 'og.png', 'share.png']) fs.cpSync(new URL(`../${f}`, import.meta.url), path.join(OUT, f), { recursive: true });
-  fs.writeFileSync(path.join(OUT, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
-} else fs.writeFileSync(
+  if (UNLISTED) fs.writeFileSync(path.join(OUT, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
+}
+if (!PROFILE) fs.writeFileSync(
   'sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">

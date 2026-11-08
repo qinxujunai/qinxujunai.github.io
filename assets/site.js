@@ -54,6 +54,29 @@
     if (mq.addEventListener) mq.addEventListener('change', follow);
   } catch (e) {}
 
+  // AI Signal card (2026-11-08): the built card is hours behind on most days (GitHub starts the refresh late) and a
+  // copy on another domain is not rebuilt daily, so show the issue AI Signal published at 10:00 if it is newer. Only over
+  // https, never on a local preview; any failure keeps the built issue. Text only, never HTML.
+  var sc = document.querySelector('.signal-card[data-date]');
+  if (sc && location.protocol === 'https:' && window.fetch) {
+    fetch(location.hostname === 'qinxujunai.github.io' ? '/ai-signal/latest.json' : 'https://qinxujunai.github.io/ai-signal/latest.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        var n = d ? [d.number, d.scanned, d.picked, d.minutes] : [];
+        var whole = function (x) { return typeof x === 'number' && x >= 0 && Math.floor(x) === x; };
+        if (!d || !/^\d{4}-\d\d-\d\d$/.test(d.date) || !(d.date > sc.dataset.date) || typeof d.headline !== 'string' || !d.headline || n.length !== 4 || !n.every(whole) || !n[0]) return;
+        var m = d.date.split('-');
+        var put = function (k, t) { var el = sc.querySelector('.sc-' + k); if (el) { el.textContent = t || ''; el.hidden = !t; } };
+        put('when', '第 ' + n[0] + ' 期 · ' + m[0] + ' 年 ' + +m[1] + ' 月 ' + +m[2] + ' 日 周' + '日一二三四五六'[new Date(Date.UTC(+m[0], m[1] - 1, +m[2])).getUTCDay()]);
+        put('head', d.headline);
+        put('intro', typeof d.intro === 'string' ? d.intro : '');
+        put('meta', '从 ' + n[1] + ' 条新内容里选了 ' + n[2] + ' 条 · 约 ' + n[3] + ' 分钟读完');
+        var items = sc.querySelectorAll('.sc-item'), t = Array.isArray(d.tldr) ? d.tldr : [];
+        for (var i = 0; i < items.length; i++) { var ok = typeof t[i] === 'string' && t[i]; items[i].style.display = ok ? '' : 'none'; if (ok) items[i].lastChild.textContent = t[i]; }
+        sc.dataset.date = d.date;
+      })['catch'](function () {});
+  }
+
   // Contact: WeChat can long-press the image; other phones save it and scan from the album.
   var ua = navigator.userAgent;
   var where = /MicroMessenger/i.test(ua) ? 'wechat' : /Android|iPhone|iPad|iPod|Mobile/i.test(ua) ? 'phone' : 'desktop';
@@ -296,7 +319,7 @@
     for (var e = 0; e < entries.length; e++) if (entries[e].isIntersecting) setCurrent(entries[e].target.id);
   }, { rootMargin: '-40% 0px -55% 0px' });
   // Home: the nav's sections. Case pages: the sections in the product bar.
-  var tracked = ['top', 'work', 'share', 'books', 'path', 'contact'];
+  var tracked = ['top', 'work', 'share', 'books', 'contact'];
   for (var n = 0; n < navLinks.length; n++) tracked.push(navLinks[n].getAttribute('data-nav'));
   tracked.forEach(function (id) {
     var el = document.getElementById(id);

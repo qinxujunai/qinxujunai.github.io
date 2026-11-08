@@ -39,8 +39,8 @@ if ! curl -s "http://127.0.0.1:$port/" | cmp -s - index.html; then
   echo "the server on :$port is not serving this folder; stop it or free the port, then ship again (nothing pushed)" >&2
   exit 1
 fi
-if ! npm run -s qa || ! node scripts/test-player.cjs "http://127.0.0.1:$port/" '[data-film-play]'; then
-  echo "browser QA or the player test failed: nothing pushed (the commit is local)" >&2
+if ! npm run -s qa || ! node scripts/test-player.cjs "http://127.0.0.1:$port/" '[data-film-play]' || ! node scripts/test-signal-card.cjs; then
+  echo "browser QA, the player test or the AI Signal card test failed: nothing pushed (the commit is local)" >&2
   exit 1
 fi
 bash scripts/push.sh "$branch"

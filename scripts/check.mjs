@@ -50,8 +50,6 @@ const rules = [
   [/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|cn|net|org|io)\b/, 'email address'],
   [/\d{1,2}\s*-\s*\d{1,2}\s*K\b/i, 'salary range'],
   [/期望薪资|\d{2}\s*岁/, 'salary or age'],
-  [new RegExp(['新', '东方'].join('') + '|' + ['学', '而思'].join('')), 'private career reference'],
-  [/我做过老师|我做过内容运营|I have taught, run content/i, 'personal career reference'],
   [/(?:19|20)?\d{2}\s*年\s*(?:刚|才)?毕业|(?:graduated|graduation)\s+(?:in\s+)?(?:19|20)\d{2}/i, 'graduation year'],
 ];
 const allowEmail = /noreply@anthropic\.com/;
@@ -64,6 +62,28 @@ for (const f of files) {
 }
 if (fs.readdirSync('.').some((f) => /resume|简历|cv\.(pdf|docx?)$/i.test(f))) fail('a resume file is in the repository root');
 ok(`privacy scan over ${files.length} files`);
+
+// 3.1 Work history (2026-11-08): no employer, client or career phrase in any public file. The public site went without 经历 on
+// 2026-10-26, yet names stayed behind in a build word list and in docs. Names are kept here only as truncated SHA-256
+// hashes, so this list names none (the originals are kept outside this repository). Content
+// that changes on its own (the day's AI Signal issue, GitHub numbers) is skipped: news may name a bank.
+{
+  const { createHash } = await import('node:crypto');
+  const NAMES = [[4, 'a3e0c3db09735010'], [4, '5ac77b016b70a052'], [4, '0ed2fc3d4cef6624'], [4, '0a895bbfa90d5a07'], [2, '8fc8b350966cf58a'], [4, '87eaaaac9ac70849'], [3, '6196293ad68e2e62'], [4, '2cd625031f910f4e'], [4, 'e7e901fd1d79de18'], [4, '646ed1c833d68b2a'], [2, '0ce898abc91403c4'], [3, '2266404e01cef907'], [4, '1831f94f5c76fdfd'], [6, '6f81c35246921da1'], [6, '2603e5c0b205dd9c'], [4, 'cd4894588d2e7270'], [4, 'dabc435bb8d406e9'], [3, 'ee1de0e635eaf50c'],
+    // Two schools he once interviewed with, and two career phrases (were plain-text rules above until 2026-11-08).
+    [3, '4ccac1e33312c8ea'], [3, '4305738287193c0e'], [5, '02d5593de524fba7'], [7, 'c4514736bf75ff21']];
+  const want = new Set(NAMES.map(([n, h]) => `${n}:${h}`));
+  const lens = [...new Set(NAMES.map(([n]) => n))];
+  const hits = [];
+  for (const f of files.filter((x) => !/^src\/(signal|stats)\.json$/.test(x))) {
+    const t = fs.readFileSync(f, 'utf8').replace(/<!--live-->[\s\S]*?<!--\/live-->/g, '').replace(/<wbr>|\s/g, '');
+    const runs = t.match(/[㐀-鿿]{2,}/g) || [];
+    for (const r of runs) for (const n of lens) for (let i = 0; i + n <= r.length; i++) {
+      if (want.has(`${n}:${createHash('sha256').update(r.slice(i, i + n)).digest('hex').slice(0, 16)}`)) hits.push(`${f}: ${r.slice(Math.max(0, i - 4), i + n + 4)}`);
+    }
+  }
+  hits.length ? fail(`employer or client names in public files:\n  ${hits.join('\n  ')}`) : ok('work history: no employer or client names in public files');
+}
 
 // 4. Same-origin resources only (links to other sites are fine; loading from them is not)
 const exists = (url) => {
@@ -97,7 +117,9 @@ const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
 const heavy = PAGES.filter((f) => gz(f) > 29);
 heavy.length ? fail(`over 29KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 29KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
 // v26.6: the domestic film line, WeChat copy buttons and the book opening. The first screen keeps its own budget.
-const budget = { 'assets/site.css': 55, 'assets/site.js': 17 }; // Demo playback controls add under 1KB; the first-screen budget remains unchanged.
+// site.js 17 → 19KB (2026-11-08): the AI Signal card swaps in the day's issue when the page opens (about 1.8KB with
+// its comments). site.css was checked the same day: no unused selectors to remove. The first-screen budget is unchanged.
+const budget = { 'assets/site.css': 55, 'assets/site.js': 19 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
