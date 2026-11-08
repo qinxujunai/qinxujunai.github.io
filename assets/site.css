@@ -3151,3 +3151,13 @@ html:not(.js) .book + .book {
 .person .value + .book-k {
   margin-top: 18px;
 }
+
+/* Off-screen sections skip style and layout until they come near the screen (2026-11-08): the long home page cost about
+   0.5 s of blocked main thread on mid-range phones while loading. The browser keeps each section's real size once seen. */
+@supports (content-visibility: auto) {
+  .home .show,
+  .home main > .tile:not(.hero) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1000px;
+  }
+}

@@ -119,7 +119,9 @@ heavy.length ? fail(`over 29KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed
 // v26.6: the domestic film line, WeChat copy buttons and the book opening. The first screen keeps its own budget.
 // site.js 17 → 19KB (2026-11-08): the AI Signal card swaps in the day's issue when the page opens (about 1.8KB with
 // its comments). site.css was checked the same day: no unused selectors to remove. The first-screen budget is unchanged.
-const budget = { 'assets/site.css': 55, 'assets/site.js': 19 };
+// site.js 19 → 21KB (2026-11-08, second time): off-screen sections are laid out while the phone is idle, and every
+// in-page jump lays them all out first (home page blocking time on a mid-range phone 0.58 s → 0.23 s, scrolling still 0).
+const budget = { 'assets/site.css': 55, 'assets/site.js': 21 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }

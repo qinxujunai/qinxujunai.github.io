@@ -77,6 +77,20 @@
       })['catch'](function () {});
   }
 
+  // Sections below the first screen skip layout at first (site.css, content-visibility). Once the page has loaded, lay
+  // them out one at a time while the phone is idle, so scrolling down later never waits for them.
+  if ('contentVisibility' in root.style) {
+    var later = [].slice.call(document.querySelectorAll('.home .show, .home main > .tile:not(.hero)'));
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 200); };
+    var layOut = function () { var el = later.shift(); if (!el) return; el.style.contentVisibility = 'visible'; idle(layOut, { timeout: 1500 }); };
+    window.addEventListener('load', function () { idle(layOut, { timeout: 1500 }); });
+    // A jump within the page needs every section's real height first, or it lands short or long.
+    var layAll = function () { var any = later.length; while (later.length) later.shift().style.contentVisibility = 'visible'; return any; };
+    document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href^="#"]'); if (a) layAll(); }, true);
+    window.addEventListener('hashchange', function () { var t = document.getElementById(location.hash.slice(1)); if (layAll() && t) t.scrollIntoView(); });
+    if (location.hash) layAll();
+  }
+
   // Contact: WeChat can long-press the image; other phones save it and scan from the album.
   var ua = navigator.userAgent;
   var where = /MicroMessenger/i.test(ua) ? 'wechat' : /Android|iPhone|iPad|iPod|Mobile/i.test(ua) ? 'phone' : 'desktop';
