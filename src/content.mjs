@@ -141,6 +141,8 @@ export const content = {
     // published digests (panewslab.com/zh/articles/01a12034-cb1d-7627-8e1f-52e048809ac1, me.news/contents/319519, read
     // 2026-11-09): 「先自由，后财富」, 「肌肉是你身体的银行账户」, 「别人说什么不重要，自己认定对的就充分执行」. The podcast is the
     // ximalaya album he chose (98108036, uploaded by 野马书馆; its intro is 「一个90后如何实现财富自由。」), share tracking removed.
+    // The podcast reason's middle line sums up public descriptions of the show (「先自由，后财富」, 「财富是对价值观的不妥协」), not a
+    // full listen. 「身体有一票否决权」 and 「不知道自己不知道」 are his own words (WeChat Moments, docs/his-words-2026-11-09.md).
     // Covers saved locally (assets/media/talk-1.webp from Bilibili, talk-2.webp from ximalaya), so the page makes no outside request.
     // 2026-11-09 (later): his story rewritten in his words (stereotypes first, then the book and the podcast), and his request
     // to add 孙宇晨's book as the shelf's second.
@@ -150,8 +152,8 @@ export const content = {
       why: '我为什么推荐',
       keys: '里面讲了',
       list: [
-        { t: '对话孙宇晨：年轻人如何抓住 AI 时代的机会？', meta: '邵艾伦 × 孙宇晨 · 四个多小时 · 2026 年 10 月', ratio: 'wide', why: '以前提到孙宇晨，我先想到的是那些刻板印象。无意中刷到这期访谈，听他讲了四个多小时，大受震撼。因为它，我认识了邵艾伦，在他和 Jack 叔叔的直播里，听他推荐改变他人生的《微小的优势》；也重新认识了孙宇晨，读了他的书，听了他的播客。四个小时，换来了两本书和一个播客。很难想象，如果没刷到它，这些都不会发生。', keys: [['孙学', '先自由，后财富：像给操作系统升级一样，升级对财富和自己的认知'], ['薄肌', '抗阻训练、吃对、管好健康：肌肉是身体的银行账户'], ['黄毛', '自己认定对的事，就充分执行，不被外面的声音带走']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: '去 B 站看' },
-        { t: '财富自由革命之路', meta: '孙宇晨主讲 · 喜马拉雅', ratio: 'square', why: '读完他的书，又找来他的播客听，越听越觉得有意思。', about: '节目简介：「一个 90 后如何实现财富自由。」', url: 'https://www.ximalaya.com/album/98108036', go: '去喜马拉雅听' },
+        { t: '对话孙宇晨：年轻人如何抓住 AI 时代的机会？', meta: '邵艾伦 × 孙宇晨 · 四个多小时 · 2026 年 10 月', ratio: 'wide', why: '以前提到孙宇晨，我先想到的是那些刻板印象。无意中刷到这期访谈，听他讲了四个多小时，大受震撼。因为它，我认识了邵艾伦，在他和 Jack 叔叔的直播里，听他推荐改变他人生的《微小的优势》；也重新认识了孙宇晨，读了他的书，听了他的播客。四个小时，换来了两本书和一个播客。很多事本不会发生，最可怕的，是不知道自己不知道。', keys: [['孙学', '先自由，后财富：像给操作系统升级一样，升级对财富和自己的认知'], ['薄肌', '抗阻训练、吃对、管好健康：肌肉是身体的银行账户'], ['黄毛', '自己认定对的事，就充分执行，不被外面的声音带走']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: '去 B 站看' },
+        { t: '财富自由革命之路', meta: '孙宇晨主讲 · 喜马拉雅', ratio: 'square', why: '读完他的书，又找来他的播客。他把财富自由讲成了一套价值观：先想清楚要什么，再谈怎么赚。越听越觉得有意思。', about: '节目简介：「一个 90 后如何实现财富自由。」', url: 'https://www.ximalaya.com/album/98108036', go: '去喜马拉雅听' },
       ],
     },
 
@@ -190,7 +192,7 @@ export const content = {
         ep: '第 1 集 · 训练计划 · 21 分钟',
         desc: '先讲动作怎么选、周期怎么排、为什么这样设计，再一天一天带着练，用第三视角指出常见的错误。',
         whyLabel: '为什么是这一套',
-        why: '计划、跟练、名词，一套里都讲到了，新手不用再东拼西凑。截至 2026 年 10 月，合集在抖音有 3800 多万次播放、近 90 万次收藏。',
+        why: '身体有一票否决权，所以要练对。计划、跟练、名词，一套里都讲到了，新手不用再东拼西凑。截至 2026 年 10 月，合集在抖音有 3800 多万次播放、近 90 万次收藏。',
         go: '从第 1 集看起',
         url: 'https://www.iesdouyin.com/share/video/7623732958012198179/',
       },
@@ -354,8 +356,8 @@ export const content = {
       why: 'Why I recommend it',
       keys: 'What it covers',
       list: [
-        { t: 'Sun Yuchen on how young people can seize the AI era (in Chinese)', meta: 'Alan Shao × Sun Yuchen · over four hours · Oct 2026', ratio: 'wide', why: 'His name used to bring stereotypes to mind. Then I came across this interview by chance, four hours of him talking, and it stayed with me. Through it I found Alan Shao, and in his livestream with Jack I heard him recommend the book that changed his life: The Slight Edge. I also saw Sun Yuchen anew, read his book and listened to his podcast. Four hours gave me two books and a podcast. Had I not come across it, none of this would have happened.', keys: [['Sun-ology', 'freedom first, wealth after: upgrade how you think about money and yourself, like upgrading an operating system'], ['Lean muscle', 'resistance training, eating right, managing your health: muscle is the body’s bank account'], ['Bleached hair', 'once you are sure something is right, carry it out fully and tune out the noise']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: 'Watch on Bilibili' },
-        { t: 'The Revolution to Financial Freedom (in Chinese)', meta: 'Hosted by Sun Yuchen · Ximalaya', ratio: 'square', why: 'After his book I found his podcast, and the more I listened, the more interesting it got.', about: 'Its own description: “How someone born in the 90s reached financial freedom.”', url: 'https://www.ximalaya.com/album/98108036', go: 'Listen on Ximalaya' },
+        { t: 'Sun Yuchen on how young people can seize the AI era (in Chinese)', meta: 'Alan Shao × Sun Yuchen · over four hours · Oct 2026', ratio: 'wide', why: 'His name used to bring stereotypes to mind. Then I came across this interview by chance, four hours of him talking, and it stayed with me. Through it I found Alan Shao, and in his livestream with Jack I heard him recommend the book that changed his life: The Slight Edge. I also saw Sun Yuchen anew, read his book and listened to his podcast. Four hours gave me two books and a podcast. So much would never have happened, and the scariest part is not knowing what you don’t know.', keys: [['Sun-ology', 'freedom first, wealth after: upgrade how you think about money and yourself, like upgrading an operating system'], ['Lean muscle', 'resistance training, eating right, managing your health: muscle is the body’s bank account'], ['Bleached hair', 'once you are sure something is right, carry it out fully and tune out the noise']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: 'Watch on Bilibili' },
+        { t: 'The Revolution to Financial Freedom (in Chinese)', meta: 'Hosted by Sun Yuchen · Ximalaya', ratio: 'square', why: 'After his book I found his podcast. He treats financial freedom as a set of values: first be clear about what you want, then talk about how to earn. The more I listened, the more interesting it got.', about: 'Its own description: “How someone born in the 90s reached financial freedom.”', url: 'https://www.ximalaya.com/album/98108036', go: 'Listen on Ximalaya' },
       ],
     },
 
@@ -386,7 +388,7 @@ export const content = {
         ep: 'Episode 1 · The plan · 21 min',
         desc: 'First how to choose the lifts, how to plan the cycle and why it is designed this way; then a full day at a time, with common mistakes shown from a third camera.',
         whyLabel: 'Why this one',
-        why: 'The plan, the follow-along sessions and the vocabulary are all in one series, so a beginner doesn’t have to piece things together. As of October 2026 it has more than 38 million plays and nearly 900,000 saves on Douyin.',
+        why: 'The body has a veto over everything else, so train it right. The plan, the follow-along sessions and the vocabulary are all in one series, so a beginner doesn’t have to piece things together. As of October 2026 it has more than 38 million plays and nearly 900,000 saves on Douyin.',
         go: 'Start with episode 1',
         url: 'https://www.iesdouyin.com/share/video/7623732958012198179/',
       },
