@@ -117,8 +117,9 @@ const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
 // 2026-11-09: +1KB for the interview and podcast cards in 阅读 (both languages); css 55 → 56KB for their styles. The first
 // screen keeps its budget.
 // 2026-11-09 (later): 30 → 31KB: two more books and fuller 「书里说」 for every book (he asked for each book's core idea).
-const heavy = PAGES.filter((f) => gz(f) > 31);
-heavy.length ? fail(`over 31KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 31KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
+// 2026-11-09 (third): 31 → 32KB: the shelf holds ten books (his cap). The first screen keeps its 40KB budget.
+const heavy = PAGES.filter((f) => gz(f) > 32);
+heavy.length ? fail(`over 32KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 32KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
 // v26.6: the domestic film line, WeChat copy buttons and the book opening. The first screen keeps its own budget.
 // site.js 17 → 19KB (2026-11-08): the AI Signal card swaps in the day's issue when the page opens (about 1.8KB with
 // its comments). site.css was checked the same day: no unused selectors to remove. The first-screen budget is unchanged.

@@ -408,9 +408,9 @@ ${s.principles.map(([k, h, q, note]) => `<li class="reveal"><p class="pr-k">${T(
 // book (pattern: Codrops' 3D Book Showcase, Apple Books): its cover swings open to the left over a two-page spread,
 // title page on the left, his words on the right. Without JS
 // every book shows in full; with JS the covers become tabs and one book is open at a time.
-// Cover heights at 300px wide (assets/media/book-1…8.webp, in list order), so each keeps its own proportions.
+// Cover heights at 300px wide (assets/media/book-1…10.webp, in list order), so each keeps its own proportions.
 // `wr` is the book's link (WeChat Read unless the book sets its own label in `go`); without `wr` there is no button.
-const BOOK_H = [448, 425, 433, 440, 435, 445, 440, 406];
+const BOOK_H = [448, 425, 432, 433, 400, 432, 406, 440, 440, 445];
 function books(c) {
   const b = c.books;
   const id = (i) => `book-${i + 1}`;

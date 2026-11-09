@@ -2514,9 +2514,9 @@ a.frame,
   }
 }
 
-/* Centred only where the whole shelf fits (8 covers at 192px tall ≈ 1220px); narrower screens scroll it like a phone. Raise this
-   when a book is added. */
-@media (min-width: 1260px) {
+/* Centred only where the whole shelf fits (10 covers at 168px tall ≈ 1370px); narrower screens scroll it like a phone. The
+   shelf holds ten books at most (his rule, 2026-11-09): adding one means taking one out. */
+@media (min-width: 1400px) {
   .shelf {
     justify-content: center;
     width: auto;
@@ -2552,7 +2552,7 @@ a.frame,
 
 @media (min-width: 834px) {
   .cover img {
-    height: 192px;
+    height: 168px;
   }
 }
 
