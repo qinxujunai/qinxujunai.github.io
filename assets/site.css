@@ -2515,9 +2515,9 @@ a.frame,
   }
 }
 
-/* Centred only where the whole shelf fits (7 covers ≈ 1056px); narrower screens scroll it like a phone. Raise this
+/* Centred only where the whole shelf fits (8 covers ≈ 1210px); narrower screens scroll it like a phone. Raise this
    when a book is added. */
-@media (min-width: 1100px) {
+@media (min-width: 1260px) {
   .shelf {
     justify-content: center;
     width: auto;
@@ -2862,45 +2862,31 @@ html:not(.js) .book + .book {
   background: var(--card);
 }
 
-/* 阅读, last: one interview, one podcast (2026-11-09). Artwork first, full bleed at 16:9; the square podcast cover sits
-   centred on its own background colour, as Apple Podcasts shows it. */
+/* 阅读, last: one interview, one podcast (2026-11-09). Like the creator and fitness cards: a small artwork on top, the words
+   below. Both artworks are 135px tall. */
 .talk {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  padding: 28px 26px 18px;
   border-radius: 22px;
   background: var(--card);
 }
 
 .talk-art {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: var(--art);
+  align-self: flex-start;
+  width: 240px;
+  height: 135px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-.talk-art img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.talk-art.square img {
-  width: 46%;
-  border-radius: 6px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-}
-
-.talk-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 22px 26px 18px;
+.talk-art.square {
+  width: 135px;
 }
 
 .talk h3 {
+  margin-top: 20px;
   font-size: 21px;
   line-height: 1.3;
   color: var(--ink);
@@ -2940,22 +2926,14 @@ html:not(.js) .book + .book {
   margin-bottom: 0;
 }
 
-/* Wide screens: one card per row, artwork left, so each card is only as tall as its own text. */
-@media (min-width: 834px) {
-  .talk {
-    flex-direction: row;
-  }
+.talks {
+  max-width: 680px; /* one column at reading width: the two cards differ in length, side by side one would sit half empty */
+}
 
-  /* The artwork panel runs the card's full height; the picture sits centred on its own colour. */
-  .talk-art {
-    flex: none;
-    width: 46%;
-    aspect-ratio: auto;
-  }
-
-  .talk-body {
-    padding: 26px 32px 18px;
-  }
+.talk-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 /* 阅读, after the shelf: the people he listens to. */

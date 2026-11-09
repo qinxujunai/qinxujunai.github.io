@@ -70,7 +70,7 @@ export const content = {
     // and published notes (认知觉醒's order is 改变量 > 行动量 > 思考量 > 学习量; 小狗钱钱's 金鹅账户 and the 50% rule).
     // Covers (v26.2, 2026-10-24, his request: 「真正用这本书最权威的封面」): the mainland edition most rated on Douban
     // (book.douban.com subject 3608208, 26369699, 35193035). v26.3: 人性的弱点, 小狗钱钱, 非暴力沟通 are the editions
-    // he read, from his photos (subject 27048361, 35295592, 35519608): he only recommends what he has read. Shown for identification, as any bookshop or review does; files in assets/media/book-1…7.webp, in list order.
+    // he read, from his photos (subject 27048361, 35295592, 35519608): he only recommends what he has read. Shown for identification, as any bookshop or review does; files in assets/media/book-1…8.webp, in list order.
     books: {
       title: '阅读',
       // v27.4: no 「改变人生」 (his words: 「我没有说『改变我人生的六本书』，真的不要夸张。就是推荐六本我看过的好书」).
@@ -95,6 +95,11 @@ export const content = {
         // download (copyright); 闲鱼 was rejected as off-tone. `mine` is cut from his WeChat Moments post (docs/his-words-2026-11-09.md);
         // `core` is checked against the book's introduction.
         { t: '微小的优势', wr: 'https://www.amazon.com/dp/1626340463', go: '在亚马逊看英文原书', wrNote: '', a: '杰夫·奥尔森', ed: '英文原书 The Slight Edge', mine: '只读完开头，我就把它放在了第一位。所有微小的事，短期都看不到任何区别，但随着时间拉长，会形成极厚的护城河。', core: '成功和失败的差别，不在一次大动作，而在每天那些简单、容易被忽略的小事：存一点钱、锻炼几分钟、读十页书。做起来容易，不做也容易。长期重复下去，复利会把差距拉开。作者把这叫「微小的优势」。' },
+        // 2026-11-09, his request: second on the shelf. He found 孙宇晨 through the interview in 「一期访谈，一个播客」 below, then
+        // read this book (「我觉得他的书有价值」). The edition and cover are WeChat Read's (bookId 3300192100; the cover carries
+        // 九州出版社's mark and the ISBN 9787510850660 is a 九州 number, though WeChat Read lists 江苏凤凰文艺). `core` quotes
+        // the book's own intro there; `mine` is his story from 2026-11-09 (docs/his-words-2026-11-09.md).
+        { t: '这世界既残酷也温柔', wr: 'https://weread.qq.com/web/bookDetail/c7f32200813abb18ag0101be', wrNote: '', a: '孙宇晨', ed: '九州出版社', mine: '以前提到孙宇晨，我先想到的是那些刻板印象。听完那四个小时的对话，又读了这本书，才知道他是怎么从一无所有走过来的。', core: '「这是最残酷的时代，只要稍稍懈怠一点，就会前功尽弃。这是最温柔的时代，只要稍稍坚持一下，就会脱颖而出。」孙宇晨写自己从一无所有到财富自由的经历：在互联网时代，任何人都可以靠个人奋斗走出来。' },
         { t: '牧羊少年奇幻之旅', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: '保罗·柯艾略', ed: '南海出版公司 · 丁文林 译', mine: '真心想要一件事时，整个宇宙都会来帮忙。每当恐惧、不知道该往哪里走，我都会想起这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
         { t: '人性的弱点', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: '微信读书上是陶曚译本', a: '戴尔·卡耐基', ed: '中国友谊出版公司 · 亦言 译（全集，完整全译本）', mine: '发自内心地关心别人，真正地换位思考。说到底，真诚永远是最重要的。', core: '真诚地关心别人，从对方的角度看事情，真心让对方觉得自己重要。卡耐基讲的都是这几件事，前提是真诚，不是技巧。' },
         { t: '小狗钱钱', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: '微信读书上是王钟欣、余茜译本', a: '博多·舍费尔', ed: '中信出版集团 · 文燚 译', mine: '想走向财务自由，这是我会推荐的第一本理财书。', core: '一只会说话的狗教女孩吉娅理财：帮人照顾狗挣到第一笔钱，因为她喜欢狗，别人才愿意付钱；收入的一半存进「金鹅账户」，只存不花，让它慢慢生出收入。' },
@@ -134,14 +139,16 @@ export const content = {
     // 2026-11-09): 「先自由，后财富」, 「肌肉是你身体的银行账户」, 「别人说什么不重要，自己认定对的就充分执行」. The podcast is the
     // ximalaya album he chose (98108036, uploaded by 野马书馆; its intro is 「一个90后如何实现财富自由。」), share tracking removed.
     // Covers saved locally (assets/media/talk-1.webp from Bilibili, talk-2.webp from ximalaya), so the page makes no outside request.
+    // 2026-11-09 (later): his story rewritten in his words (stereotypes first, then the book and the podcast), and his request
+    // to add 孙宇晨's book as the shelf's second.
     talks: {
       headline: '一期访谈，一个播客',
-      line: '《微小的优势》，就是从这期访谈一路找到的',
+      line: '书架上的前两本，都是从这期访谈找到的',
       why: '我为什么推荐',
       keys: '里面讲了',
       list: [
-        { t: '对话孙宇晨：年轻人如何抓住 AI 时代的机会？', meta: '邵艾伦 × 孙宇晨 · 四个多小时 · 2026 年 10 月', ratio: 'wide', bg: '#101319', why: '无意中刷到这期访谈，看完大受震撼。因为它，我认识了邵艾伦；在他和 Jack 叔叔的直播里，听他说改变他人生的一本书是《微小的优势》。很难想象，如果没看过这本书，我会变成什么样。', keys: [['孙学', '先自由，后财富：像给操作系统升级一样，升级对财富和自己的认知'], ['薄肌', '抗阻训练、吃对、管好健康：肌肉是身体的银行账户'], ['黄毛', '自己认定对的事，就充分执行，不被外面的声音带走']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: '去 B 站看' },
-        { t: '财富自由革命之路', meta: '孙宇晨主讲 · 喜马拉雅', ratio: 'square', bg: '#fcf8ec', why: '看完那场对话，想知道孙宇晨是怎么想的，就找来他的播客听。', about: '节目简介：「一个 90 后如何实现财富自由。」', url: 'https://www.ximalaya.com/album/98108036', go: '去喜马拉雅听' },
+        { t: '对话孙宇晨：年轻人如何抓住 AI 时代的机会？', meta: '邵艾伦 × 孙宇晨 · 四个多小时 · 2026 年 10 月', ratio: 'wide', why: '以前提到孙宇晨，我先想到的是那些刻板印象。无意中刷到这期访谈，听他讲了四个多小时，大受震撼。因为它，我认识了邵艾伦，在他和 Jack 叔叔的直播里，听他推荐改变他人生的《微小的优势》；也重新认识了孙宇晨，读了他的书，听了他的播客。四个小时，换来了两本书和一个播客。很难想象，如果没刷到它，这些都不会发生。', keys: [['孙学', '先自由，后财富：像给操作系统升级一样，升级对财富和自己的认知'], ['薄肌', '抗阻训练、吃对、管好健康：肌肉是身体的银行账户'], ['黄毛', '自己认定对的事，就充分执行，不被外面的声音带走']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: '去 B 站看' },
+        { t: '财富自由革命之路', meta: '孙宇晨主讲 · 喜马拉雅', ratio: 'square', why: '读完他的书，又找来他的播客听，越听越觉得有意思。', about: '节目简介：「一个 90 后如何实现财富自由。」', url: 'https://www.ximalaya.com/album/98108036', go: '去喜马拉雅听' },
       ],
     },
 
@@ -316,6 +323,7 @@ export const content = {
       core: 'What the book says',
       list: [
         { t: 'The Slight Edge', wr: 'https://www.amazon.com/dp/1626340463', go: 'See it on Amazon', wrNote: '', a: 'Jeff Olson', ed: 'Turning Simple Disciplines into Massive Success & Happiness', mine: 'I had only read the opening when I put it first. Small things make no visible difference in the short run, but over time they become a very deep moat.', core: 'Success and failure are not decided by one big move but by simple, easy-to-overlook things done every day: saving a little, exercising a few minutes, reading ten pages. They are easy to do and just as easy not to do. Repeated over years, compounding pulls the two apart. The author calls this the slight edge.' },
+        { t: 'This World Is Both Cruel and Gentle (这世界既残酷也温柔)', wr: 'https://weread.qq.com/web/bookDetail/c7f32200813abb18ag0101be', wrNote: '', a: 'Sun Yuchen (Justin Sun)', ed: 'Chinese edition: Jiuzhou Press', mine: 'His name used to bring stereotypes to mind. After that four-hour conversation and this book, I understood how he came up from nothing.', core: '“This is the cruellest of times: slack off a little and you lose everything. This is the gentlest of times: hold on a little longer and you stand out.” Sun writes about going from nothing to financial freedom: in the internet age, anyone can make their way by their own effort.' },
         { t: 'The Alchemist', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: 'Paulo Coelho', ed: 'Chinese edition: Nanhai, tr. Ding Wenlin', mine: 'When you truly want something, the whole universe comes to help. Whenever I am afraid or unsure of the way, I think of this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
         { t: 'How to Win Friends and Influence People', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: 'On WeChat Read: the Tao Meng translation', a: 'Dale Carnegie', ed: 'Chinese edition: China Friendship, tr. Yi Yan (complete)', mine: 'Care about people from the heart, and truly see things from their side. In the end, sincerity matters most.', core: 'Be genuinely interested in other people, see things from their point of view, and make them feel important, sincerely. Sincerity first, technique second.' },
         { t: 'A Dog Named Money', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: 'On WeChat Read: the Wang Zhongxin and Yu Qian translation', a: 'Bodo Schäfer', ed: 'Chinese edition: CITIC, tr. Wen Yi', mine: 'For the road to financial freedom, this is the first money book I would recommend.', core: 'A talking dog teaches a girl named Kira about money: she earns her first income looking after a dog, because she loves dogs; half of what she earns goes into a “goose” account that is never spent, so it can lay eggs.' },
@@ -339,12 +347,12 @@ export const content = {
 
     talks: {
       headline: 'One interview, one podcast',
-      line: 'This interview is how I found The Slight Edge',
+      line: 'The first two books on my shelf both came from this interview',
       why: 'Why I recommend it',
       keys: 'What it covers',
       list: [
-        { t: 'Sun Yuchen on how young people can seize the AI era (in Chinese)', meta: 'Alan Shao × Sun Yuchen · over four hours · Oct 2026', ratio: 'wide', bg: '#101319', why: 'I came across this interview by chance and it stayed with me. Through it I found Alan Shao; in his livestream with Jack, I heard him name the book that changed his life: The Slight Edge. I can hardly imagine who I would be without that book.', keys: [['Sun-ology', 'freedom first, wealth after: upgrade how you think about money and yourself, like upgrading an operating system'], ['Lean muscle', 'resistance training, eating right, managing your health: muscle is the body’s bank account'], ['Bleached hair', 'once you are sure something is right, carry it out fully and tune out the noise']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: 'Watch on Bilibili' },
-        { t: 'The Revolution to Financial Freedom (in Chinese)', meta: 'Hosted by Sun Yuchen · Ximalaya', ratio: 'square', bg: '#fcf8ec', why: 'After that conversation I wanted to know how Sun Yuchen thinks, so I went to his podcast.', about: 'Its own description: “How someone born in the 90s reached financial freedom.”', url: 'https://www.ximalaya.com/album/98108036', go: 'Listen on Ximalaya' },
+        { t: 'Sun Yuchen on how young people can seize the AI era (in Chinese)', meta: 'Alan Shao × Sun Yuchen · over four hours · Oct 2026', ratio: 'wide', why: 'His name used to bring stereotypes to mind. Then I came across this interview by chance, four hours of him talking, and it stayed with me. Through it I found Alan Shao, and in his livestream with Jack I heard him recommend the book that changed his life: The Slight Edge. I also saw Sun Yuchen anew, read his book and listened to his podcast. Four hours gave me two books and a podcast. Had I not come across it, none of this would have happened.', keys: [['Sun-ology', 'freedom first, wealth after: upgrade how you think about money and yourself, like upgrading an operating system'], ['Lean muscle', 'resistance training, eating right, managing your health: muscle is the body’s bank account'], ['Bleached hair', 'once you are sure something is right, carry it out fully and tune out the noise']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: 'Watch on Bilibili' },
+        { t: 'The Revolution to Financial Freedom (in Chinese)', meta: 'Hosted by Sun Yuchen · Ximalaya', ratio: 'square', why: 'After his book I found his podcast, and the more I listened, the more interesting it got.', about: 'Its own description: “How someone born in the 90s reached financial freedom.”', url: 'https://www.ximalaya.com/album/98108036', go: 'Listen on Ximalaya' },
       ],
     },
 

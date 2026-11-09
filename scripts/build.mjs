@@ -408,9 +408,9 @@ ${s.principles.map(([k, h, q, note]) => `<li class="reveal"><p class="pr-k">${T(
 // book (pattern: Codrops' 3D Book Showcase, Apple Books): its cover swings open to the left over a two-page spread,
 // title page on the left, his words on the right. Without JS
 // every book shows in full; with JS the covers become tabs and one book is open at a time.
-// Cover heights at 300px wide (assets/media/book-1…7.webp, in list order), so each keeps its own proportions.
+// Cover heights at 300px wide (assets/media/book-1…8.webp, in list order), so each keeps its own proportions.
 // `wr` is the book's link (WeChat Read unless the book sets its own label in `go`); without `wr` there is no button.
-const BOOK_H = [448, 433, 440, 435, 445, 440, 406];
+const BOOK_H = [448, 425, 433, 440, 435, 445, 440, 406];
 function books(c) {
   const b = c.books;
   const id = (i) => `book-${i + 1}`;
@@ -437,13 +437,13 @@ ${c.talks ? talks(c) : ''}
 </section>`;
 }
 
-// 2026-11-09: one interview and one podcast, under the creators in 阅读 (Apple TV / Podcasts pattern: the artwork leads, one
-// line of facts, then his reason). The artwork is not a link (images never leave this site); the text button does.
+// 2026-11-09: one interview and one podcast, under the creators in 阅读. Same pattern as the creator and fitness cards: a
+// small artwork on top (both 135px tall), then the title, one line of facts and his reason. His words lead, not the picture. The artwork is not a link (images never leave this site); the text button does.
 function talks(c) {
   const t = c.talks;
   const art = (k, i) => k.ratio === 'square'
-    ? `<div class="talk-art square" style="--art: ${k.bg}"><img src="/assets/media/talk-${i + 1}.webp" width="600" height="600" alt="" loading="lazy" decoding="async"></div>`
-    : `<div class="talk-art" style="--art: ${k.bg}"><img src="/assets/media/talk-${i + 1}.webp" width="1040" height="585" alt="" loading="lazy" decoding="async"></div>`;
+    ? `<img class="talk-art square" src="/assets/media/talk-${i + 1}.webp" width="600" height="600" alt="" loading="lazy" decoding="async">`
+    : `<img class="talk-art" src="/assets/media/talk-${i + 1}.webp" width="1040" height="585" alt="" loading="lazy" decoding="async">`;
   const card = (k, i) => `<li class="talk reveal">${art(k, i)}<div class="talk-body"><h3>${T(c, k.t)}</h3><p class="handle">${T(c, k.meta)}</p><p class="book-k">${esc(t.why)}</p><p class="person-why">“${T(c, k.why)}”</p>${k.keys ? `<p class="book-k">${esc(t.keys)}</p><ul class="talk-keys">${k.keys.map(([a, b]) => `<li><b>${T(c, a)}</b> ${T(c, b)}</li>`).join('')}</ul>` : ''}${k.about ? `<p class="who">${T(c, k.about)}</p>` : ''}<p class="person-go"><a href="${k.url}" ${ext}>${esc(k.go)}${outward}<span class="visually-hidden"> ${esc(k.t)}</span></a></p></div></li>`;
   return `<div class="listen" id="talks">
 <h3 class="listen-title">${clauses(c, bare(t.headline), true)}</h3>
