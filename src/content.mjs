@@ -15,7 +15,7 @@ export const content = {
     path: '/',
     // What a WeChat chat shows when the link is shared: his name and his headline, then the thesis.
     title: '秦徐俊 · 我用 AI 做东西，也把做法分享出来',
-    description: '我导演的 AI 短片《来不及爱你》，三个作品，还有我推荐的六本书、AI 教程和健身计划。',
+    description: '我导演的 AI 短片《来不及爱你》，三个作品，还有我推荐的书、AI 教程和健身计划。',
     skip: '跳到正文',
     switchLabel: 'English',
     switchLang: 'en',
@@ -70,12 +70,14 @@ export const content = {
     // and published notes (认知觉醒's order is 改变量 > 行动量 > 思考量 > 学习量; 小狗钱钱's 金鹅账户 and the 50% rule).
     // Covers (v26.2, 2026-10-24, his request: 「真正用这本书最权威的封面」): the mainland edition most rated on Douban
     // (book.douban.com subject 3608208, 26369699, 35193035). v26.3: 人性的弱点, 小狗钱钱, 非暴力沟通 are the editions
-    // he read, from his photos (subject 27048361, 35295592, 35519608): he only recommends what he has read. Shown for identification, as any bookshop or review does; files in assets/media/book-1…6.webp.
+    // he read, from his photos (subject 27048361, 35295592, 35519608): he only recommends what he has read. Shown for identification, as any bookshop or review does; files in assets/media/book-1…7.webp, in list order.
     books: {
       title: '阅读',
       // v27.4: no 「改变人生」 (his words: 「我没有说『改变我人生的六本书』，真的不要夸张。就是推荐六本我看过的好书」).
       // 「从头读完」 is his: 「我推荐的每一本书，都是我真正意义上从头到尾看完过的，我才会去推荐」.
-      headline: '六本书，每一本都从头读完过',
+      // 2026-11-09: the shelf keeps growing and the first book is still being read, so no count and no 「从头读完」
+      // (his request: 「我可能后续也会持续的把我看过的书都迭代在这里，所以说法你要自己稍微斟酌一下」).
+      headline: '我推荐的书，会一直更新',
       line: '点开一本，看看书里讲什么、我读到了什么',
       mine: '我的体会',
       // v27.5: each book opens on WeChat Read (his choice A, 2026-10-24). URLs from WeChat Read bookIds, encoded as in
@@ -84,6 +86,13 @@ export const content = {
       read: '在微信读书打开',
       core: '书里说',
       list: [
+        // 2026-11-09, his request: first on the shelf, before 牧羊少年, though he has only read the opening (「甚至我只看完
+        // 开头，但我为什么把它放在第一位？我觉得它甚至会改变我的人生」). No official Chinese edition found (Douban has only
+        // the English book, subject 25823905; WeChat Read search for the title, English title and author found nothing,
+        // 2026-11-09), so no button. He reads a Chinese e-book of The Slight Edge; the cover is that e-book's own. He chose
+        // not to offer the file for download (copyright). `mine` is cut from his WeChat Moments post (docs/his-words-2026-11-09.md);
+        // `core` is checked against the book's introduction.
+        { t: '微小的优势', wr: '', wrNote: '正在读 · 暂无正式中文版', light: true, a: '杰夫·奥尔森', ed: '英文原书 The Slight Edge · 中文电子版', mine: '只读完开头，我就把它放在了第一位。所有微小的事，短期都看不到任何区别，但随着时间拉长，会形成极厚的护城河。', core: '成功和失败的差别，不在一次大动作，而在每天那些简单、容易被忽略的小事：存一点钱、锻炼几分钟、读十页书。做起来容易，不做也容易。长期重复下去，复利会把差距拉开。作者把这叫「微小的优势」。' },
         { t: '牧羊少年奇幻之旅', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: '保罗·柯艾略', ed: '南海出版公司 · 丁文林 译', mine: '真心想要一件事时，整个宇宙都会来帮忙。每当恐惧、不知道该往哪里走，我都会想起这本书。', core: '牧羊少年圣地亚哥为了一个反复出现的梦，卖掉羊群，穿过沙漠去找宝藏。书里最有名的一句：当你真心渴望某样东西，整个宇宙都会联合起来帮你。' },
         { t: '人性的弱点', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: '微信读书上是陶曚译本', a: '戴尔·卡耐基', ed: '中国友谊出版公司 · 亦言 译（全集，完整全译本）', mine: '发自内心地关心别人，真正地换位思考。说到底，真诚永远是最重要的。', core: '真诚地关心别人，从对方的角度看事情，真心让对方觉得自己重要。卡耐基讲的都是这几件事，前提是真诚，不是技巧。' },
         { t: '小狗钱钱', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: '微信读书上是王钟欣、余茜译本', a: '博多·舍费尔', ed: '中信出版集团 · 文燚 译', mine: '想走向财务自由，这是我会推荐的第一本理财书。', core: '一只会说话的狗教女孩吉娅理财：帮人照顾狗挣到第一笔钱，因为她喜欢狗，别人才愿意付钱；收入的一半存进「金鹅账户」，只存不花，让它慢慢生出收入。' },
@@ -122,7 +131,7 @@ export const content = {
       headline: '迷茫的时候，我会做三件事',
       // v27.1: the three things right under the headline (his words: 「那哪三件事情呢？直接放出来啊」).
       items: [
-        { id: 'books', icon: 'book', name: '阅读', line: '六本书 · 三位博主' },
+        { id: 'books', icon: 'book', name: '阅读', line: '推荐的书 · 三位博主' },
         { id: 'skill', icon: 'spark', name: '学技能', line: '学 AI' },
         { id: 'fitness', icon: 'weight', name: '健身', line: '三分化训练' },
       ],
@@ -278,12 +287,13 @@ export const content = {
 
     books: {
       title: 'Reading',
-      headline: 'Six books, each read cover to cover',
+      headline: 'Books I recommend, updated as I read',
       line: 'Open one to see what it says and what I took from it',
       mine: 'What I took from it',
       read: 'Open in WeChat Read',
       core: 'What the book says',
       list: [
+        { t: 'The Slight Edge', wr: '', wrNote: 'Reading now · no official Chinese edition yet', light: true, a: 'Jeff Olson', ed: 'Read as a Chinese e-book', mine: 'I had only read the opening when I put it first. Small things make no visible difference in the short run, but over time they become a very deep moat.', core: 'Success and failure are not decided by one big move but by simple, easy-to-overlook things done every day: saving a little, exercising a few minutes, reading ten pages. They are easy to do and just as easy not to do. Repeated over years, compounding pulls the two apart. The author calls this the slight edge.' },
         { t: 'The Alchemist', wr: 'https://weread.qq.com/web/bookDetail/7c932dd05b71537c9f3404d', wrNote: '', a: 'Paulo Coelho', ed: 'Chinese edition: Nanhai, tr. Ding Wenlin', mine: 'When you truly want something, the whole universe comes to help. Whenever I am afraid or unsure of the way, I think of this book.', core: 'Santiago, a shepherd, sells his flock to chase a recurring dream of treasure across the desert. Its best-known line: when you want something, all the universe conspires in helping you to achieve it.' },
         { t: 'How to Win Friends and Influence People', wr: 'https://weread.qq.com/web/bookDetail/a233272057f7dda23713095', wrNote: 'On WeChat Read: the Tao Meng translation', a: 'Dale Carnegie', ed: 'Chinese edition: China Friendship, tr. Yi Yan (complete)', mine: 'Care about people from the heart, and truly see things from their side. In the end, sincerity matters most.', core: 'Be genuinely interested in other people, see things from their point of view, and make them feel important, sincerely. Sincerity first, technique second.' },
         { t: 'A Dog Named Money', wr: 'https://weread.qq.com/web/bookDetail/ea232e205c3023ea2c96525', wrNote: 'On WeChat Read: the Wang Zhongxin and Yu Qian translation', a: 'Bodo Schäfer', ed: 'Chinese edition: CITIC, tr. Wen Yi', mine: 'For the road to financial freedom, this is the first money book I would recommend.', core: 'A talking dog teaches a girl named Kira about money: she earns her first income looking after a dog, because she loves dogs; half of what she earns goes into a “goose” account that is never spent, so it can lay eggs.' },
@@ -309,7 +319,7 @@ export const content = {
       title: 'Three things',
       headline: 'When I feel lost, I do three things',
       items: [
-        { id: 'books', icon: 'book', name: 'Reading', line: 'Six books · three creators' },
+        { id: 'books', icon: 'book', name: 'Reading', line: 'Books · three creators' },
         { id: 'skill', icon: 'spark', name: 'A skill', line: 'Learn AI' },
         { id: 'fitness', icon: 'weight', name: 'Fitness', line: 'A training plan' },
       ],

@@ -403,13 +403,15 @@ ${s.principles.map(([k, h, q, note]) => `<li class="reveal"><p class="pr-k">${T(
 </section>`;
 }
 
-// 书架 (v26): the six books that changed him. Tap a cover and it opens: his line first (what it changed for
+// 书架 (v26): the books he recommends (six until 2026-11-09; the list keeps growing). Tap a cover and it opens: his line first (what it changed for
 // him), then what the book itself says. Covers are the real mainland editions (v26.2). v26.4: the book opens like a
 // book (pattern: Codrops' 3D Book Showcase, Apple Books): its cover swings open to the left over a two-page spread,
 // title page on the left, his words on the right. Without JS
 // every book shows in full; with JS the covers become tabs and one book is open at a time.
-// Cover heights at 300px wide (assets/media/book-1…6.webp), so each keeps its own proportions.
-const BOOK_H = [433, 440, 435, 445, 440, 406];
+// Cover heights at 300px wide (assets/media/book-1…7.webp, in list order), so each keeps its own proportions.
+// A book without a WeChat Read edition has no `wr`: no button, only its `wrNote`. `light` marks a white cover, which gets a
+// hairline so it does not melt into the page.
+const BOOK_H = [450, 433, 440, 435, 445, 440, 406];
 function books(c) {
   const b = c.books;
   const id = (i) => `book-${i + 1}`;
@@ -420,10 +422,10 @@ function books(c) {
 <p class="sub">${clauses(c, bare(b.line), true)}</p>
 </div>
 <div class="shelf" role="tablist" aria-label="${esc(b.headline)}" data-shelf>
-${b.list.map((k, i) => `<button type="button" class="cover" role="tab" id="${id(i)}-tab" aria-controls="${id(i)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><span class="visually-hidden">${T(c, k.t)}</span></button>`).join('\n')}
+${b.list.map((k, i) => `<button type="button" class="cover${k.light ? ' light' : ''}" role="tab" id="${id(i)}-tab" aria-controls="${id(i)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><span class="visually-hidden">${T(c, k.t)}</span></button>`).join('\n')}
 </div>
 <div class="book-panels">
-${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><div class="spread"><div class="page page-l"><img class="pl-cover" src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span><span class="book-ed">${T(c, k.ed)}</span></h3></div><div class="page page-r"><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p><p class="book-go"><a href="${k.wr}" ${ext}>${esc(b.read)}${outward}<span class="visually-hidden"> ${esc(k.t)}</span></a>${k.wrNote ? `<span class="book-wr">${T(c, k.wrNote)}</span>` : ''}</p></div><div class="flap" style="--cover-ratio: 300 / ${BOOK_H[i]}" aria-hidden="true"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"></div></div></div>`).join('\n')}
+${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-labelledby="${id(i)}-tab" tabindex="0"><div class="spread"><div class="page page-l"><img class="pl-cover${k.light ? ' light' : ''}" src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"><h3>${T(c, k.t)}<span class="book-a">${T(c, k.a)}</span><span class="book-ed">${T(c, k.ed)}</span></h3></div><div class="page page-r"><p class="book-k">${esc(b.mine)}</p><p class="book-mine">“${T(c, k.mine)}”</p><p class="book-k">${esc(b.core)}</p><p class="book-core">${T(c, k.core)}</p><p class="book-go">${k.wr ? `<a href="${k.wr}" ${ext}>${esc(b.read)}${outward}<span class="visually-hidden"> ${esc(k.t)}</span></a>` : ''}${k.wrNote ? `<span class="book-wr">${T(c, k.wrNote)}</span>` : ''}</p></div><div class="flap${k.light ? ' light' : ''}" style="--cover-ratio: 300 / ${BOOK_H[i]}" aria-hidden="true"><img src="/assets/media/book-${i + 1}.webp" width="300" height="${BOOK_H[i]}" alt="" loading="lazy" decoding="async"></div></div></div>`).join('\n')}
 </div>
 <div class="listen" id="follow">
 <h3 class="listen-title">${clauses(c, bare(c.follow.headline), true)}</h3>

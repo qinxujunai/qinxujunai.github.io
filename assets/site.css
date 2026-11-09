@@ -2508,12 +2508,27 @@ a.frame,
   .shelf {
     grid-auto-columns: 132px;
     gap: 22px;
+  }
+}
+
+/* Centred only where the whole shelf fits (7 covers ≈ 1056px); narrower screens scroll it like a phone. Raise this
+   when a book is added. */
+@media (min-width: 1100px) {
+  .shelf {
     justify-content: center;
     width: auto;
     margin: 48px auto 0;
     padding: 18px 0 24px;
     overflow: visible;
   }
+}
+
+/* A white cover gets a hairline so it does not melt into the page. */
+.cover.light img,
+.pl-cover.light,
+.flap.light img {
+  outline: 1px solid var(--hairline);
+  outline-offset: -1px;
 }
 
 .cover {
