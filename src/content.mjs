@@ -66,42 +66,25 @@ export const content = {
       ],
     },
 
-    // v26: six books that changed him (his list and his words, 2026-10-24). 「书里说」 is checked against the books
-    // and published notes (认知觉醒's order is 改变量 > 行动量 > 思考量 > 学习量; 小狗钱钱's 金鹅账户 and the 50% rule).
-    // Covers (v26.2, 2026-10-24, his request: 「真正用这本书最权威的封面」): the mainland edition most rated on Douban
-    // (book.douban.com subject 3608208, 26369699, 35193035). v26.3: 人性的弱点, 小狗钱钱, 非暴力沟通 are the editions
-    // he read, from his photos (subject 27048361, 35295592, 35519608): he only recommends what he has read. Shown for identification, as any bookshop or review does; files in assets/media/book-1…8.webp, in list order.
+    // 阅读: ten books at most, his rule (2026-11-09): 「我只保留 10 本，我后面如果加一本，我就必须把里面的一本给踢出去」.
+    // The order is his, left to right by priority. `mine` is his words, lightly edited with his consent; `core` is the
+    // book's central idea. Every cover is the edition he read (his WeChat Read shelf, screenshots 2026-11-09, or his photos
+    // on 2026-10-24); files are assets/media/book-1…10.webp in list order, heights in BOOK_H (scripts/build.mjs).
+    // Links are WeChat Read pages, the URL derived from the bookId as in malinkang/weread2notion (MIT), each opened and
+    // checked: 微小的优势 → Amazon (no Chinese edition; ISBN 9781626340466) · 被讨厌的勇气 25615385 · 这世界既残酷也温柔
+    // 3300192100 · 牧羊少年 749907 · 穷查理宝典 837932 · 纳瓦尔宝典 44026191 · 人性的弱点 522205 (陶曚 tr.; his 亦言
+    // edition is not there) · 小狗钱钱 798755 (王钟欣、余茜 tr.; his 文燚 edition is not there) · 非暴力沟通 3300060305 ·
+    // 思考致富 629424. Sources for 「书里说」: the books themselves where he sent them (微小的优势 epub), WeChat Read's
+    // own introductions, Douban (这世界既残酷也温柔, subject 26984629 and its reviews). His words: docs/his-words-2026-10-24.md
+    // and docs/his-words-2026-11-09.md. Taken off the shelf, his call: 认知觉醒, 高效能人士的七个习惯 (2026-11-09).
     books: {
       title: '阅读',
-      // v27.4: no 「改变人生」 (his words: 「我没有说『改变我人生的六本书』，真的不要夸张。就是推荐六本我看过的好书」).
-      // 「从头读完」 is his: 「我推荐的每一本书，都是我真正意义上从头到尾看完过的，我才会去推荐」.
-      // 2026-11-09 (later): ten books at most, his rule: 「我只保留 10 本，我后面如果加一本，我就必须把里面的一本给踢出去」.
-      // 2026-11-09: the shelf keeps growing and the first book is still being read, so no 「从头读完」
-      // (his request: 「我可能后续也会持续的把我看过的书都迭代在这里，所以说法你要自己稍微斟酌一下」).
       headline: '我只推荐十本书',
       line: '想加一本，就得先撤下一本',
       mine: '我的体会',
-      // v27.5: each book opens on WeChat Read (his choice A, 2026-10-24). URLs from WeChat Read bookIds, encoded as in
-      // malinkang/weread2notion (MIT): 749907, 522205 (陶曚 译; his 亦言 edition is not on WeChat Read), 798755 (王钟欣 余茜 译;
-      // his 文燚 edition is not there), 3300060305, 25615385, 33628204. Each page checked in a browser on 2026-10-24.
       read: '在微信读书打开',
       core: '书里说',
       list: [
-        // 2026-11-09, his request: first on the shelf, before 牧羊少年, though he has only read the opening (「甚至我只看完
-        // 开头，但我为什么把它放在第一位？我觉得它甚至会改变我的人生」). No official Chinese edition found (Douban has only
-        // the English book, subject 25823905; WeChat Read search for the title, English title and author found nothing,
-        // 2026-11-09). He reads a Chinese e-book of The Slight Edge (the 2013 edition with the happiness chapter). Cover: the
-        // English original he sent (his choice after discussion: the e-book's own cover was a generated placeholder). The
-        // link is that edition on Amazon (ISBN 9781626340466, title checked 2026-11-09). He chose not to offer the file for
-        // download (copyright); 闲鱼 was rejected as off-tone. `mine` is cut from his WeChat Moments post (docs/his-words-2026-11-09.md);
-        // `core` is checked against the book's introduction.
-        // 2026-11-09, his request: second on the shelf. He found 孙宇晨 through the interview in 「一期访谈，一个播客」 below, then
-        // read this book (「我觉得他的书有价值」). The edition and cover are WeChat Read's (bookId 3300192100; the cover carries
-        // 九州出版社's mark and the ISBN 9787510850660 is a 九州 number, though WeChat Read lists 江苏凤凰文艺). `core` quotes
-        // the line two Douban reviewers quote (「这世界比你想象的残酷，也比你想象的温柔」) and sums up the contrarian ideas readers single
-        // out (table of contents: 「不结婚不买房不买车」「我为什么从不找一份稳定的工作」「拥抱不确定性」; book.douban.com subject 26984629
-        // and reviews 17000390, 8470768, read 2026-11-09). `mine` (his correction: say what it means for the reader, 「让我意识到很多
-        // 原来没有想到的点」「敢于说那些在别人看来大逆不道」的话, not how he came up) is written from those, in his voice.
         { t: '微小的优势', wr: 'https://www.amazon.com/dp/1626340463', go: '在亚马逊看英文原书', wrNote: '', a: '杰夫·奥尔森', ed: '英文原书 The Slight Edge', mine: '以前有人问我，哪一本书能改变一个人的一生，我总是答不上来。这本书才读了一小部分，我已经有答案了。微小的事，短期看不出任何区别；时间拉长，却会成为极厚的护城河，因为谁来，都得花一样的时间。', core: '成功和失败之间没有决定性的跳跃，只有每天简单到容易被忽略的小事：存一点钱、锻炼几分钟、读十页书。做起来容易，不做也一样容易；时间会把它们复利成两种人生。' },
         { t: '被讨厌的勇气', wr: 'https://weread.qq.com/web/bookDetail/8b9329607186dc198b9bdab', wrNote: '', a: '岸见一郎　古贺史健', ed: '机械工业出版社 · 渠海霞 译', mine: '怎么做是自己的事，谁承担结果，谁就负责；别人怎么想，是别人的课题。', core: '阿德勒说，人的烦恼都来自人际关系。解法是「课题分离」：不干涉别人的课题，也不让别人干涉自己的。所以书里说，自由就是被别人讨厌。' },
         { t: '这世界既残酷也温柔', wr: 'https://weread.qq.com/web/bookDetail/c7f32200813abb18ag0101be', wrNote: '', a: '孙宇晨', ed: '九州出版社', mine: '最大的收获是换个角度看问题。不是每句话都认同，但它让我意识到，很多以前觉得理所当然的事，其实可以重新想一想。', core: '「这世界比你想象的残酷，也比你想象的温柔。」孙宇晨写他二十多岁时对财富、工作和生活的看法：年轻时先争取独立，拥抱不确定性，不急着把人生过成一种固定的样子。' },
