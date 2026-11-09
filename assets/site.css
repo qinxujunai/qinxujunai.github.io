@@ -1764,7 +1764,11 @@ main {
 .wanxiang-preview .frame { width: 100%; }
 .wanxiang-preview-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; }
 .wanxiang-preview-video.is-playing { opacity: 1; }
-.wanxiang-preview-toggle { position: absolute; right: 12px; bottom: 12px; z-index: 2; min-height: 44px; padding: 0 14px; border: 0; border-radius: 999px; background: rgba(255,255,255,.94); color: #333; cursor: pointer; font: inherit; font-size: 12px; }
+.wanxiang-preview-toggle{position:absolute;right:12px;bottom:12px;z-index:2;min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border:0;border-radius:99px;background:#1d1d1fb8;color:#fff;cursor:pointer;font:inherit;font-size:13px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.wanxiang-preview-toggle[hidden]{display:none}
+@media (hover:hover){.wanxiang-preview-toggle:hover{background:#1d1d1fdb}}
+.demo-icon{border:6px solid transparent;border-right:0;border-left:9px solid}
+[aria-pressed=true]>.demo-icon{width:9px;height:11px;border:solid;border-width:0 3px}
 .wanxiang-preview-toggle:focus-visible { outline: 2px solid #0071e3; outline-offset: 3px; }
 
 .case-frame {

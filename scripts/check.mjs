@@ -125,7 +125,8 @@ heavy.length ? fail(`over 32KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed
 // its comments). site.css was checked the same day: no unused selectors to remove. The first-screen budget is unchanged.
 // site.js 19 → 21KB (2026-11-08, second time): off-screen sections are laid out while the phone is idle, and every
 // in-page jump lays them all out first (home page blocking time on a mid-range phone 0.58 s → 0.23 s, scrolling still 0).
-const budget = { 'assets/site.css': 56, 'assets/site.js': 21 };
+// 2026-11-09: css 56 → 57KB: the 万象成文 demo button now matches the 万象成文 site's dark pill with a play/pause icon.
+const budget = { 'assets/site.css': 57, 'assets/site.js': 21 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }

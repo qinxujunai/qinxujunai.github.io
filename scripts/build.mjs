@@ -290,7 +290,7 @@ function frame(c, { key, alt, href, label, first = false, whole = false }) {
   return `${demo ? '<div class="wanxiang-preview">' : ''}<${tag} class="frame${key.startsWith('site-prod-') ? ' prod' : ''}"${href ? ` href="${href}"` : ''}>
 ${href ? `<span class="visually-hidden">${esc(label)}</span>` : ''}
 <span class="frame-view">${img(key, alt, { sizes: '1040px', mobile: whole ? '' : `${key}-card`, cls: 'frame-img', eager: first })}${demo ? '<video class="wanxiang-preview-video" data-src="/assets/media/wanxiang-preview-v12.mp4" muted playsinline loop preload="none" aria-hidden="true"></video>' : ''}</span>
-</${tag}>${demo ? `<button class="wanxiang-preview-toggle" type="button" hidden>${c.lang === 'en' ? 'Play demo' : '播放演示'}</button></div>` : ''}`;
+</${tag}>${demo ? `<button class="wanxiang-preview-toggle" type="button" aria-pressed="false" hidden><span class="demo-icon" aria-hidden="true"></span><span class="demo-label">${c.lang === 'en' ? 'Play demo' : '播放演示'}</span></button></div>` : ''}`;
 }
 
 // One project, two levels of text above the picture (name, one plain line), the rest below it

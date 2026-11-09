@@ -11,7 +11,8 @@
     var userPaused = !!(still || (navigator.connection && navigator.connection.saveData));
     var demoVisible = false, demoLoading = false, english = root.lang === 'en';
     demoToggle.hidden = false;
-    var labelDemo = function () { demoToggle.textContent = demo.paused && !(demoLoading && !userPaused) ? (english ? 'Play demo' : '播放演示') : (english ? 'Pause demo' : '暂停演示'); };
+    var demoLabel = demoToggle.querySelector('.demo-label');
+    var labelDemo = function () { var on = !(demo.paused && !(demoLoading && !userPaused)); demoLabel.textContent = on ? (english ? 'Pause demo' : '暂停演示') : (english ? 'Play demo' : '播放演示'); demoToggle.setAttribute('aria-pressed', on ? 'true' : 'false'); };
     var showDemo = function () { if (demoVisible && !userPaused && !document.hidden) demo.play().then(function () { demo.classList.add('is-playing'); }).catch(function () { userPaused = true; labelDemo(); }); };
     var loadDemo = function () {
       if (demo.src) { showDemo(); return; }
