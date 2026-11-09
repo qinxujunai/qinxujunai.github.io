@@ -410,7 +410,7 @@ ${s.principles.map(([k, h, q, note]) => `<li class="reveal"><p class="pr-k">${T(
 // every book shows in full; with JS the covers become tabs and one book is open at a time.
 // Cover heights at 300px wide (assets/media/book-1…10.webp, in list order), so each keeps its own proportions.
 // `wr` is the book's link (WeChat Read unless the book sets its own label in `go`); without `wr` there is no button.
-const BOOK_H = [448, 425, 433, 432, 440, 445, 440, 432, 432, 435];
+const BOOK_H = [448, 440, 425, 433, 432, 432, 440, 435, 445, 432];
 function books(c) {
   const b = c.books;
   const id = (i) => `book-${i + 1}`;
