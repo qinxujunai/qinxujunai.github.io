@@ -2523,14 +2523,6 @@ a.frame,
   }
 }
 
-/* A white cover gets a hairline so it does not melt into the page. */
-.cover.light img,
-.pl-cover.light,
-.flap.light img {
-  outline: 1px solid var(--hairline);
-  outline-offset: -1px;
-}
-
 .cover {
   position: relative;
   display: block;
