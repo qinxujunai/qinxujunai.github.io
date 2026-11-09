@@ -2869,8 +2869,8 @@ html:not(.js) .book + .book {
   background: var(--card);
 }
 
-/* 阅读, last: one interview, one podcast (2026-11-09). Like the creator and fitness cards: a small artwork on top, the words
-   below. Both artworks are 135px tall. */
+/* 阅读, last: one interview, one podcast (2026-11-09). Built like the fitness card: on phones the artwork sits on top, on
+   wider screens it sits left of the words. */
 .talk {
   display: flex;
   flex-direction: column;
@@ -2934,7 +2934,29 @@ html:not(.js) .book + .book {
 }
 
 .talks {
-  max-width: 680px; /* one column at reading width: the two cards differ in length, side by side one would sit half empty */
+  max-width: 760px; /* the fitness card's width */
+}
+
+/* Wide screens: the fitness card's layout. Artwork in a 200px column on the left, the words start level with its top; all
+   three cards (fitness, interview, podcast) share the same left column, so their text lines up. */
+@media (min-width: 734px) {
+  .talk {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 36px;
+    align-items: start;
+    padding: 36px 40px 24px;
+  }
+
+  .talk-art,
+  .talk-art.square {
+    width: 200px;
+    height: auto;
+  }
+
+  .talk h3 {
+    margin-top: 0;
+  }
 }
 
 .talk-body {
