@@ -125,6 +125,26 @@ export const content = {
       ],
     },
 
+    // 2026-11-09: in 阅读, under the creators: one interview and one podcast he picked (his links). His story: he came across this
+    // interview (邵艾伦's official Bilibili account 邵艾伦Alan, published 2026-10-09, 「聊了四个多小时」 per its description), got to
+    // know 邵艾伦, heard him recommend The Slight Edge in a livestream with Jack 叔叔, and found the book (now first on the shelf).
+    // Then he looked up 孙宇晨 and his podcast. He does not want to look like he takes sides on 孙宇晨, so the cards carry ideas,
+    // not verdicts. The three keywords are the ones on the video's own cover (孙学 薄肌 黄毛); their one-line meanings follow the
+    // published digests (panewslab.com/zh/articles/01a12034-cb1d-7627-8e1f-52e048809ac1, me.news/contents/319519, read
+    // 2026-11-09): 「先自由，后财富」, 「肌肉是你身体的银行账户」, 「别人说什么不重要，自己认定对的就充分执行」. The podcast is the
+    // ximalaya album he chose (98108036, uploaded by 野马书馆; its intro is 「一个90后如何实现财富自由。」), share tracking removed.
+    // Covers saved locally (assets/media/talk-1.webp from Bilibili, talk-2.webp from ximalaya), so the page makes no outside request.
+    talks: {
+      headline: '一期访谈，一个播客',
+      line: '《微小的优势》，就是从这期访谈一路找到的',
+      why: '我为什么推荐',
+      keys: '里面讲了',
+      list: [
+        { t: '对话孙宇晨：年轻人如何抓住 AI 时代的机会？', meta: '邵艾伦 × 孙宇晨 · 四个多小时 · 2026 年 10 月', ratio: 'wide', bg: '#101319', why: '无意中刷到这期访谈，看完大受震撼。因为它，我认识了邵艾伦；在他和 Jack 叔叔的直播里，听他说改变他人生的一本书是《微小的优势》。很难想象，如果没看过这本书，我会变成什么样。', keys: [['孙学', '先自由，后财富：像给操作系统升级一样，升级对财富和自己的认知'], ['薄肌', '抗阻训练、吃对、管好健康：肌肉是身体的银行账户'], ['黄毛', '自己认定对的事，就充分执行，不被外面的声音带走']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: '去 B 站看' },
+        { t: '财富自由革命之路', meta: '孙宇晨主讲 · 喜马拉雅', ratio: 'square', bg: '#fcf8ec', why: '看完那场对话，想知道孙宇晨是怎么想的，就找来他的播客听。', about: '节目简介：「一个 90 后如何实现财富自由。」', url: 'https://www.ximalaya.com/album/98108036', go: '去喜马拉雅听' },
+      ],
+    },
+
     // v27 (2026-10-24): 「三件事」. His words: 「每天当你迷茫不知道做什么，就做三件事情：健身、阅读、交朋友。挑一件事情，再学技能」
     // and 「这三块的最佳时间，我已经放给大家了」 (docs/his-words-2026-10-24.md). The line came to him from 杰克叔叔 (his reason
     // for recommending Jack), so Jack's card opens the section. Order is his: books, then AI, then fitness.
@@ -133,7 +153,7 @@ export const content = {
       headline: '迷茫的时候，我会做三件事',
       // v27.1: the three things right under the headline (his words: 「那哪三件事情呢？直接放出来啊」).
       items: [
-        { id: 'books', icon: 'book', name: '阅读', line: '推荐的书 · 三位博主' },
+        { id: 'books', icon: 'book', name: '阅读', line: '书 · 博主 · 播客' },
         { id: 'skill', icon: 'spark', name: '学技能', line: '学 AI' },
         { id: 'fitness', icon: 'weight', name: '健身', line: '三分化训练' },
       ],
@@ -317,11 +337,22 @@ export const content = {
       ],
     },
 
+    talks: {
+      headline: 'One interview, one podcast',
+      line: 'This interview is how I found The Slight Edge',
+      why: 'Why I recommend it',
+      keys: 'What it covers',
+      list: [
+        { t: 'Sun Yuchen on how young people can seize the AI era (in Chinese)', meta: 'Alan Shao × Sun Yuchen · over four hours · Oct 2026', ratio: 'wide', bg: '#101319', why: 'I came across this interview by chance and it stayed with me. Through it I found Alan Shao; in his livestream with Jack, I heard him name the book that changed his life: The Slight Edge. I can hardly imagine who I would be without that book.', keys: [['Sun-ology', 'freedom first, wealth after: upgrade how you think about money and yourself, like upgrading an operating system'], ['Lean muscle', 'resistance training, eating right, managing your health: muscle is the body’s bank account'], ['Bleached hair', 'once you are sure something is right, carry it out fully and tune out the noise']], url: 'https://www.bilibili.com/video/BV1fcHD6cEw3/', go: 'Watch on Bilibili' },
+        { t: 'The Revolution to Financial Freedom (in Chinese)', meta: 'Hosted by Sun Yuchen · Ximalaya', ratio: 'square', bg: '#fcf8ec', why: 'After that conversation I wanted to know how Sun Yuchen thinks, so I went to his podcast.', about: 'Its own description: “How someone born in the 90s reached financial freedom.”', url: 'https://www.ximalaya.com/album/98108036', go: 'Listen on Ximalaya' },
+      ],
+    },
+
     three: {
       title: 'Three things',
       headline: 'When I feel lost, I do three things',
       items: [
-        { id: 'books', icon: 'book', name: 'Reading', line: 'Books · three creators' },
+        { id: 'books', icon: 'book', name: 'Reading', line: 'Books · creators · podcasts' },
         { id: 'skill', icon: 'spark', name: 'A skill', line: 'Learn AI' },
         { id: 'fitness', icon: 'weight', name: 'Fitness', line: 'A training plan' },
       ],

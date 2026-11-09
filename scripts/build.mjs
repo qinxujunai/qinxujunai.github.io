@@ -52,8 +52,8 @@ function zhText(s) {
   return out
     .replace(/(\d[\d.,]*[%+]?)<wbr> <wbr>(?=[一-鿿A-Za-z])/g, '$1 ') // "3 小时", "10.5 万元"
     .replace(/(\d)<wbr>([–\-./:→])/g, '$1$2').replace(/([–\-./:])<wbr>(\d)/g, '$1$2') // "2026-10-19", "0–10"
-    .replace(/<wbr>([，。、；：！？）」』”])/g, '$1')
-    .replace(/([（「『“])<wbr>/g, '$1')
+    .replace(/<wbr>([，。、；：！？）」』”》])/g, '$1')
+    .replace(/([（「『“《])<wbr>/g, '$1') // 2026-11-09: 《》 added; 「《」 was left at line ends
     .replace(/<wbr>(\s)<wbr>/g, '$1')
     .replace(/(\d[\d.]*)(?:<wbr>)?%/g, '<span class="nw">$1%</span>'); // "40%" never splits from its number
 }
@@ -433,7 +433,25 @@ ${b.list.map((k, i) => `<div class="book" role="tabpanel" id="${id(i)}" aria-lab
 ${c.follow.list.map((k, i) => person(c, k, i)).join('\n')}
 </ul>
 </div>
+${c.talks ? talks(c) : ''}
 </section>`;
+}
+
+// 2026-11-09: one interview and one podcast, under the creators in 阅读 (Apple TV / Podcasts pattern: the artwork leads, one
+// line of facts, then his reason). The artwork is not a link (images never leave this site); the text button does.
+function talks(c) {
+  const t = c.talks;
+  const art = (k, i) => k.ratio === 'square'
+    ? `<div class="talk-art square" style="--art: ${k.bg}"><img src="/assets/media/talk-${i + 1}.webp" width="600" height="600" alt="" loading="lazy" decoding="async"></div>`
+    : `<div class="talk-art" style="--art: ${k.bg}"><img src="/assets/media/talk-${i + 1}.webp" width="1040" height="585" alt="" loading="lazy" decoding="async"></div>`;
+  const card = (k, i) => `<li class="talk reveal">${art(k, i)}<div class="talk-body"><h3>${T(c, k.t)}</h3><p class="handle">${T(c, k.meta)}</p><p class="book-k">${esc(t.why)}</p><p class="person-why">“${T(c, k.why)}”</p>${k.keys ? `<p class="book-k">${esc(t.keys)}</p><ul class="talk-keys">${k.keys.map(([a, b]) => `<li><b>${T(c, a)}</b> ${T(c, b)}</li>`).join('')}</ul>` : ''}${k.about ? `<p class="who">${T(c, k.about)}</p>` : ''}<p class="person-go"><a href="${k.url}" ${ext}>${esc(k.go)}${outward}<span class="visually-hidden"> ${esc(k.t)}</span></a></p></div></li>`;
+  return `<div class="listen" id="talks">
+<h3 class="listen-title">${clauses(c, bare(t.headline), true)}</h3>
+<p class="sub">${clauses(c, bare(t.line), true)}</p>
+<ul class="talks">
+${t.list.map(card).join('\n')}
+</ul>
+</div>`;
 }
 
 // v27 (2026-10-24): 三件事: the headline, then the three things themselves (v27.1, his words: 「那哪三件事情呢？直接放出来啊」),

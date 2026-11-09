@@ -114,14 +114,16 @@ import zlib from 'node:zlib';
 const kb = (f) => fs.statSync(f).size / 1024;
 const gz = (f) => zlib.gzipSync(fs.readFileSync(f)).length / 1024;
 // v26 (2026-10-24): +2KB for the bookshelf and the three principles; v26.5 +2KB for 我推荐. The first screen has its own budget below.
-const heavy = PAGES.filter((f) => gz(f) > 29);
-heavy.length ? fail(`over 29KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 29KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
+// 2026-11-09: +1KB for the interview and podcast cards in 阅读 (both languages); css 55 → 56KB for their styles. The first
+// screen keeps its budget.
+const heavy = PAGES.filter((f) => gz(f) > 30);
+heavy.length ? fail(`over 30KB gzipped: ${heavy.map((f) => `${f} ${gz(f).toFixed(1)}KB`).join(', ')}`) : ok(`every page ≤ 30KB gzipped (home ${gz('index.html').toFixed(1)}KB, ${kb('index.html').toFixed(0)}KB raw)`);
 // v26.6: the domestic film line, WeChat copy buttons and the book opening. The first screen keeps its own budget.
 // site.js 17 → 19KB (2026-11-08): the AI Signal card swaps in the day's issue when the page opens (about 1.8KB with
 // its comments). site.css was checked the same day: no unused selectors to remove. The first-screen budget is unchanged.
 // site.js 19 → 21KB (2026-11-08, second time): off-screen sections are laid out while the phone is idle, and every
 // in-page jump lays them all out first (home page blocking time on a mid-range phone 0.58 s → 0.23 s, scrolling still 0).
-const budget = { 'assets/site.css': 55, 'assets/site.js': 21 };
+const budget = { 'assets/site.css': 56, 'assets/site.js': 21 };
 for (const [f, max] of Object.entries(budget)) {
   kb(f) <= max ? ok(`${f} ${kb(f).toFixed(1)}KB ≤ ${max}KB`) : fail(`${f} is ${kb(f).toFixed(1)}KB, budget ${max}KB`);
 }
