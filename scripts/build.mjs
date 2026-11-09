@@ -12,7 +12,8 @@ import { CASES } from '../src/cases.mjs';
 // With no arguments this builds the site in place. `--profile <file> --out <dir>` builds a copy into <dir> with a
 // profile file layered on top. Its default export may set: site (canonical origin), zh / en (merged over
 // src/content.mjs), keep (extra words that must not break), css (appended to the stylesheet), navSections (the nav's
-// section ids), afterName(c, h) and beforeContact(c, h) (HTML for the home page; h holds the text helpers below),
+// section ids), afterName(c, h), afterWork(c, h) and beforeContact(c, h) (HTML for the home page; h holds the text
+// helpers below),
 // unlisted (noindex everywhere, robots.txt refuses crawlers, no sitemap).
 const argv = process.argv.slice(2);
 const argOf = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
@@ -562,6 +563,7 @@ ${nav(c, { switchHref: o.path, onHome: true })}
 <main id="main">
 ${hero(c)}
 ${work(c)}
+${PROFILE?.afterWork ? PROFILE.afterWork(c, HELP) : ''}
 ${share(c)}
 ${three(c)}
 ${books(c)}
@@ -725,7 +727,7 @@ const write = (rel, html) => {
   fs.writeFileSync(file, html);
   pages.push(file);
 };
-// Text helpers a profile's afterName / beforeContact can use, so its sections typeset like the rest of the page.
+// Text helpers a profile's afterName / afterWork / beforeContact can use, so its sections typeset like the rest of the page.
 const HELP = { T, esc, bare, lines, clauses, chevron };
 write('index.html', homePage(content.zh));
 write('en/index.html', homePage(content.en));

@@ -57,6 +57,8 @@ html {
   background: var(--page);
   scroll-behavior: smooth;
   scroll-padding-top: 52px;
+  /* No rubber-band past the ends: the page ends on a grey or black tile, and the bounce showed a white strip below it. */
+  overscroll-behavior-y: none;
 }
 
 body {
