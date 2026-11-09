@@ -336,7 +336,7 @@ ${shot === 'capsule' ? capsuleLink(c, caseUrl, name) : shot === 'signal' ? LIVE(
 ${story ? `<blockquote class="story"><p class="story-label">${esc(c.whyLabel)}</p><p>${T(c, story)}</p></blockquote>` : ''}
 <div class="show-foot">
 ${note ? `<p class="show-note">${dots(c, note)}</p>` : ''}
-<p class="cta">${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}<a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${outward}<span class="visually-hidden"> ${esc(name)}</span></a></p>
+<p class="cta"><a class="more-link" href="${site}" ${ext}>${esc(siteLabel)}${outward}<span class="visually-hidden"> ${esc(name)}</span></a>${caseUrl ? `<a class="more-link" href="${caseUrl}">${c.readCase}${chevron}<span class="visually-hidden"> ${esc(name)}</span></a>` : ''}</p>
 </div>
 </div>
 </article>`;

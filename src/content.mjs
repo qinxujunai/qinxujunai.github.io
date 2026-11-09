@@ -148,7 +148,7 @@ export const content = {
     // to add 孙宇晨's book as the shelf's second.
     talks: {
       headline: '一期访谈，一个播客',
-      line: '书架上的前两本，都是从这期访谈找到的',
+      line: '书架上有两本书，就是从这期访谈找到的',
       why: '我为什么推荐',
       keys: '里面讲了',
       list: [
@@ -352,7 +352,7 @@ export const content = {
 
     talks: {
       headline: 'One interview, one podcast',
-      line: 'The first two books on my shelf both came from this interview',
+      line: 'Two of the books on my shelf came from this interview',
       why: 'Why I recommend it',
       keys: 'What it covers',
       list: [
