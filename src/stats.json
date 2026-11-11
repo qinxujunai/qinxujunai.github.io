@@ -1,11 +1,11 @@
 {
   "voiceflow": {
-    "stars": 162,
+    "stars": 163,
     "forks": 15,
-    "downloads": 400,
+    "downloads": 401,
     "version": "v0.3.12",
-    "updated": "2026-11-10",
-    "checked": "2026-11-10"
+    "updated": "2026-11-11",
+    "checked": "2026-11-11"
   },
   "wanxiang": {
     "stars": 1,
@@ -13,6 +13,6 @@
     "downloads": 19,
     "version": "v2.3.2",
     "updated": "2026-10-28",
-    "checked": "2026-11-10"
+    "checked": "2026-11-11"
   }
 }
